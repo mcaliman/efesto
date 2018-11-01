@@ -1,0 +1,3 @@
+IFIF!B1 = 2.0
+IFIF!C1 = TRUE
+IFIF!A1 = IF(IFIF!B1>1,0,IF(IFIF!C1,"Hello","Bye"))

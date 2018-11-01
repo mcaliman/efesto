@@ -1,0 +1,65 @@
+/*
+ * Efesto - Excel Formula Extractor System and Topological Ordering algorithm.
+ * Copyright (C) 2017 Massimo Caliman mcaliman@caliman.biz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * If AGPL Version 3.0 terms are incompatible with your use of
+ * Efesto, alternative license terms are available from Massimo Caliman
+ * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
+ */
+
+package efesto.parsers;
+
+import excel.grammar.Start;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public final class StartList extends ArrayList<Start> implements List<Start> {
+
+    public StartList(int initialCapacity) {
+        super(initialCapacity);
+    }
+
+    public StartList() {
+    }
+
+    public StartList(Collection<? extends Start> c) {
+        super(c);
+    }
+
+    @Override
+    public boolean add(Start object) {
+        if (!contains(object)) return super.add(object);
+        return true;
+    }
+
+    public boolean singleton() {
+        return this != null && this.size() == 1;
+    }
+
+    public boolean test(int index, String text) {
+        return this.get(index).test(text);
+    }
+
+    public boolean test(int offset, String... text) {
+        if (this == null || size() == 0) return false;
+        boolean test = true;
+        for (int i = 0; i < text.length; i++)
+            test &= this.test(i + offset, text[i]);
+        return test;
+    }
+}
