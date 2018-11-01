@@ -2,8 +2,6 @@
 
 Excel Formula Extractor System and Topological Ordering algorithm.
 
-## Using in your project
-TODO
 
 ## Background
 Based on personal revision of Excel grammar published in the paper 
