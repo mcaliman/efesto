@@ -27,14 +27,14 @@ import excel.grammar.Start;
 /**
  * @author Massimo Caliman
  */
-public final class ERRORREF extends ReferenceItem {
+public final class ERROR_REF extends ReferenceItem {
 
-    public ERRORREF() {
+    public ERROR_REF() {
         super("#REF");
         System.err.println("ERROR-REF Reference error literal #REF!");
     }
 
-    public ERRORREF(String value) {
+    public ERROR_REF(String value) {
         super(value);
         System.err.println("ERROR-REF Reference error literal #REF!");
     }
@@ -44,7 +44,7 @@ public final class ERRORREF extends ReferenceItem {
 
     }
 
-    private String format(ERRORREF e) {
+    private String format(ERROR_REF e) {
         StringBuilder buff = new StringBuilder();
         if (true) buff.append(varname(e)).append(" = ");
         buff.append(e.toString());

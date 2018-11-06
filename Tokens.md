@@ -1,109 +1,60 @@
-# Tokens
+# Tokens 
 
-## Priorities
+| Token                  | Description                          |
+| :---                   | :---                                 |              
+| BOOL                   | Boolean literal                      |
+| CELL                   | Cell reference                       |
+| DDECALL                | Dynamic Data Exchange link           | 
+| ERROR                  | Error literal                        | 
+| ERROR_REF              | Reference error literal              | 
+| EXCEL_FUNCTION         | Excel built-in function              | 
+| FILE                   | External file reference using number | 
+| FILENAME               | External file reference using name   | 
+| FILEPATH               | Windows file path                    | 
+| HORIZONTAL_RANGE       | Range of rows                        | 
+| MULTIPLE_SHEETS        | Multiple sheet references            |  
+| NAME                   | User Defined Name                    |  
+| NAME_PREFIXED          | User defined name which starts with a string that could be another token  |  
+| NUMBER                 | An integer, floating point or scientific notation number literal |  
+| REF_FUNCTION           | Excel built-in reference function  |
+| REF_FUNCTION_COND      | Excel built-in conditional reference function  |  
+| RESERVED_NAME          | An Excel reserved name  |  
+| SHEET                  | The name of a worksheet  |  
+| SHEET_QUOTED           | Quoted worksheet name    |    
+| STRING                 | String literal |    
+| SR_COLUMN              | Structured reference column  |    
+| UDF                    | User Defined Function |    
+| VERTICAL_RANGE         | Range of columns |    
 
-| Token                  | Priority | 
-| :---                   | :---     | 
-| SHEET                  | 5        |
-| SHEET_QUOTED           | 5        |
-| FILE                   | 5        |
-| EXCEL_FUNCTION         | 5        |
-| REF_FUNCTION           | 5        |
-| REF_FUNCTION_COND      | 5        |
-| UDF                    | 4        |
-| NAME_PREFIXED          | 3        |
-| CELL                   | 2        |
-| MULTIPLE_SHEETS        | 1        |
-| BOOL                   | 0        |
-| NUMBER                 | 0        | 
-| STRING                 | 0        |
-| DDECALL                | 0        |
-| ERROR                  | 0        |
-| ERROR-REF              | 0        |
-| FILEPATH               | 0        |
-| HORIZONTAL_RANGE       | 0        |
-| VERTICAL_RANGE         | 0        |
-| FILENAME               | -1       |            
-| RESERVED_NAME          | -1       |
-| NAME                   | -2       |
-| SR_COLUMN              | -3       |
-
-
-                  
-
-* BOOL 
-    * Description: Boolean literal 
-    * Contents: TRUE | FALSE 
-* CELL 
-    * Cell reference 
-    * $? [A-Z]+ $? [0-9]+ 
-* DDECALL 
-    * Dynamic Data Exchange link 
-    * ’ ([^ ’] | ”)+ ’ 
-* ERROR 
-    * Error literal 
-    * '#NULL!' | '#DIV/0!' | '#VALUE!' | '#NAME?' | '#NUM!' | '#N/A' 
-* ERROR_REF 
-    * Reference error literal 
-    * '#REF!'
-* EXCEL_FUNCTION 
-    * Excel built-in function 
-    * (Any entry from the function list3) \( 
-* FILE 
-    * External file reference using number 
-    * \[ [0-9]+ \] 
-* FILENAME 
-    * External file reference using name 
-    * \[ 4+ \] 
-* FILEPATH 
-    * Windows file path 
-    * [A-Z] : \\ (4+ \\)* 
-* HORIZONTAL_RANGE 
-    * Range of rows 
-    * $? [0-9]+ : $? [0-9]+ 
-* MULTIPLE_SHEETS 
-    * Multiple sheet references 
-    * ((2+ : 2+)|( ’ (3 | ”)+ : (3 | ”)+ ’ )) ! 
-* NAME 
-    * User Defined Name 
-    * [A-Z_\\][A-Z0-9\\_.1]* 
-* NAME_PREFIXED 
-    * User defined name which starts with a string that could be another token 
-    * (TRUE | FALSE | [A-Z]+[0-9]+) [A-Z0-9_.1]+ 
-* NUMBER 
-    * An integer, floating point or scientific notation number literal 
-    * [0-9]+ ,? [0-9]* (e [0-9]+)? 
-* REF_FUNCTION 
-    * Excel built-in reference function 
-    * (INDEX | OFFSET | INDIRECT)\( 
-* REF_FUNCTION_COND 
-    * Excel built-in conditional reference function 
-    * (IF | CHOOSE)\( 
-* RESERVED_NAME 
-    * An Excel reserved name 
-    * _xlnm\. [A-Z_]+ 
-* SHEET 
-    * The name of a worksheet 
-    * 2+ ! 
-* SHEET_QUOTED 
-    * Quoted worksheet name 
-    * 3+ ’ ! 
-* STRING 
-    * String literal 
-    * " ([^ "] | "")* " 
-* SR_COLUMN 
-    * Structured reference column 
-    * \[ [A-Z0-9\\_.1]+ \] 
-* UDF 
-    * User Defined Function 
-    * (_xll\.)? [A-Z_\][A-Z0-9_\\.1]* ( 
-* VERTICAL_RANGE 
-    * Range of columns 
-    * $? [A-Z]+ : $? [A-Z]+ 
+* BOOL ::=  TRUE | FALSE 
+* CELL ::= REGEXP $? [A-Z]+ $? [0-9]+ 
+* DDECALL ::= REGEXP ' ([^ '] | ")+ '
+* ERROR ::= '#NULL!' | '#DIV/0!' | '#VALUE!' | '#NAME?' | '#NUM!' | '#N/A' 
+* ERROR_REF ::= '#REF!'
+* EXCEL_FUNCTION ::=  Any entry from the function list
+* FILE ::= REGEXP \[ [0-9]+ \] 
+* FILENAME ::= \[ 4+ \] 
+* FILEPATH ::= REGEXP [A-Z] : \\ (RegExp_4+ \\)* 
+* HORIZONTAL_RANGE ::= REGEXP $? [0-9]+ : $? [0-9]+ 
+* MULTIPLE_SHEETS ::= REGEXP ((RegExp_2+ : RegExp_2+)|( ' (RegExp_3 | ")+ : (RegExp_3 | ")+ '' )) ! 
+* NAME ::= REGEXP [A-Z_\\][A-Z0-9\\_.RegExp_1]* 
+* NAME_PREFIXED ::= REGEXP (TRUE | FALSE | [A-Z]+[0-9]+) [A-Z0-9_.RegExp_1]+ 
+* NUMBER ::= REGEXP [0-9]+ ,? [0-9]* (e [0-9]+)? 
+* REF_FUNCTION ::= INDEX | OFFSET | INDIRECT 
+* REF_FUNCTION_COND ::= IF | CHOOSE
+* RESERVED_NAME ::= REGEXP _xlnm\. [A-Z_]+ 
+* SHEET ::= RegExp_2+ ! 
+* SHEET_QUOTED ::= RegExp_3+ ' ! 
+* STRING ::= " ([^ "] | "")* " 
+* SR_COLUMN ::= REGEXP \[ [A-Z0-9\\_.RegExp_1]+ \] 
+* UDF ::= REGEXP (_xll\.)? [A-Z_\][A-Z0-9_\\.RegExp_1]*  
+* VERTICAL_RANGE ::= REGEXP $? [A-Z]+ : $? [A-Z]+ 
     
 # Placeholder character 
+
 Placeholder for Specification
-* 1 Extended characters Non-control Unicode characters x80 and up
-* 2 Sheet characters Any character except ’ * [ ] \ : / ? ( ) ; { } # " = < > & + - * / ^ % , ␣
-* 3 Enclosed sheet characters Any character except ’ * [ ] \ : / ?
-* 4 Filename characters Any character except " * [ ] \ : / ? < > j    
+
+* RegExp_1 : Extended characters Non-control Unicode characters x80 and up
+* RegExp_2 : Sheet characters Any character except ' * [ ] \ : / ? ( ) ; { } # " = < > & + - * / ^ % , ␣
+* RegExp_3 : Enclosed sheet characters Any character except ' * [ ] \ : / ?
+* RegExp_4 : Filename characters Any character except " * [ ] \ : / ? < > |    

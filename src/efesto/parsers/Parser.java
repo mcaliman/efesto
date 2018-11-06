@@ -554,7 +554,7 @@ public final class Parser extends AbstractParser {
     @Override
     protected void parseRefError(String text) {
         //ERROR-REF is terminal! ERROR-REF Reference error literal #REF!
-        ERRORREF ref = new ERRORREF();
+        ERROR_REF ref = new ERROR_REF();
         setOwnProperty(ref);
         stack.push(ref);
         err(text, formulaRow, formulaColumn);

@@ -25,6 +25,7 @@ package excel.grammar;
 /**
  * @author Massimo Caliman
  */
+@Deprecated
 public abstract class Argument extends Formula {
 
 }
