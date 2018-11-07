@@ -22,7 +22,7 @@
 
 package excel.test;
 
-import efesto.internals.HelperInternal;
+import excel.parser.internal.HelperInternal;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -20,37 +20,46 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package efesto.internals;
+package excel.parser;
 
-import org.apache.poi.ss.formula.EvaluationCell;
-import org.apache.poi.ss.formula.EvaluationSheet;
-import org.apache.poi.ss.formula.FormulaParseException;
-import org.apache.poi.ss.formula.ptg.Ptg;
-import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
+import excel.grammar.Start;
 
-public class FormulaTokensInternal {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+public final class StartList extends ArrayList<Start> implements List<Start> {
 
-    private final XSSFEvaluationWorkbook ew;
-    private final EvaluationSheet es;
-
-    public FormulaTokensInternal(XSSFEvaluationWorkbook ew, EvaluationSheet es) {
-        this.ew = ew;
-        this.es = es;
+    public StartList(int initialCapacity) {
+        super(initialCapacity);
     }
 
-    public Ptg[] getFormulaTokens(int row, int column) {
-        EvaluationCell evalCell = es.getCell(row, column);
-        Ptg[] ptgs = null;
-        try {
-            ptgs = ew.getFormulaTokens(evalCell);
-        } catch (FormulaParseException e) {
-            err("" + e.getMessage(), row, column);
-        }
-        return ptgs;
+    public StartList() {
     }
 
-    private void err(String string, int row, int column) {
-        System.err.println(string + " row:" + row + " col:" + column);
+    public StartList(Collection<? extends Start> c) {
+        super(c);
+    }
+
+    @Override
+    public boolean add(Start object) {
+        if (!contains(object)) return super.add(object);
+        return true;
+    }
+
+    public boolean singleton() {
+        return this != null && this.size() == 1;
+    }
+
+    public boolean test(int index, String text) {
+        return this.get(index).test(text);
+    }
+
+    public boolean test(int offset, String... text) {
+        if (this == null || size() == 0) return false;
+        boolean test = true;
+        for (int i = 0; i < text.length; i++)
+            test &= this.test(i + offset, text[i]);
+        return test;
     }
 }

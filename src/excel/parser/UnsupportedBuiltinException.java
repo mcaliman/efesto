@@ -1,3 +1,4 @@
+
 /*
  * Efesto - Excel Formula Extractor System and Topological Ordering algorithm.
  * Copyright (C) 2017 Massimo Caliman mcaliman@caliman.biz
@@ -20,36 +21,14 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package excel.test;
+package excel.parser;
 
-import excel.parser.BuiltinFactory;
-import excel.parser.UnsupportedBuiltinException;
-import org.junit.jupiter.api.Test;
+public final class UnsupportedBuiltinException extends Exception {
 
-import static org.junit.jupiter.api.Assertions.fail;
-
-public class ExcelBuiltInExcelFunctionFactoryTest {
-
-    public ExcelBuiltInExcelFunctionFactoryTest() {
+    public UnsupportedBuiltinException() {
     }
 
-    @Test
-    public void testCreate() {
-        System.out.println("create");
-        try {
-            BuiltinFactory factory = new BuiltinFactory();
-            factory.create(2, "INDEX");
-            Object function = factory.getBuiltInFunction();
-            System.out.println("function:" + function);
-            Object[] args = factory.getArgs();
-
-            for (int i = 0; i < args.length; i++) {
-                Object arg = args[i];
-                System.out.println("args[" + i + "]=" + arg);
-            }
-        } catch (UnsupportedBuiltinException e) {
-            fail(e.getMessage());
-        }
+    public UnsupportedBuiltinException(String msg) {
+        super(msg);
     }
-
 }

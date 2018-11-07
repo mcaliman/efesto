@@ -20,7 +20,7 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package efesto.graphs;
+package excel.graph;
 
 import excel.grammar.Start;
 

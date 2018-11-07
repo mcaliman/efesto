@@ -20,14 +20,14 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package efesto.graphs;
+package excel.graph;
 
-import efesto.parsers.StartList;
 import excel.grammar.Formula;
 import excel.grammar.Start;
 import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
 import excel.grammar.formula.functioncall.binary.Binary;
 import excel.grammar.formula.reference.RangeReference;
+import excel.parser.StartList;
 
 import java.util.*;
 

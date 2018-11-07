@@ -14,7 +14,12 @@
 | MULTIPLE_SHEETS        | 1        |
 | BOOL                   | 0        |
 | NUMBER                 | 0        | 
-| STRING                 | 0        |
+
+| INT                    | 0        |
+| FLOAT                  | 0        |
+
+| TEXT                   | 0        |
+
 | DDECALL                | 0        |
 | ERROR                  | 0        |
 | ERROR_REF              | 0        |

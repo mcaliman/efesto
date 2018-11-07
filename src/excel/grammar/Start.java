@@ -22,7 +22,7 @@
 
 package excel.grammar;
 
-import efesto.internals.HelperInternal;
+import excel.parser.internal.HelperInternal;
 
 /**
  * @author Massimo Caliman

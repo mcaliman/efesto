@@ -20,46 +20,10 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package efesto.parsers;
+package excel;
 
-import excel.grammar.Start;
+public interface Transpilable {
+    String transpile();
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-public final class StartList extends ArrayList<Start> implements List<Start> {
-
-    public StartList(int initialCapacity) {
-        super(initialCapacity);
-    }
-
-    public StartList() {
-    }
-
-    public StartList(Collection<? extends Start> c) {
-        super(c);
-    }
-
-    @Override
-    public boolean add(Start object) {
-        if (!contains(object)) return super.add(object);
-        return true;
-    }
-
-    public boolean singleton() {
-        return this != null && this.size() == 1;
-    }
-
-    public boolean test(int index, String text) {
-        return this.get(index).test(text);
-    }
-
-    public boolean test(int offset, String... text) {
-        if (this == null || size() == 0) return false;
-        boolean test = true;
-        for (int i = 0; i < text.length; i++)
-            test &= this.test(i + offset, text[i]);
-        return test;
-    }
+    String transpile(boolean var);
 }

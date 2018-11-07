@@ -20,7 +20,7 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package efesto.internals;
+package excel.parser.internal;
 
 public class HelperInternal {
 

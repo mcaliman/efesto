@@ -1,4 +1,3 @@
-
 /*
  * Efesto - Excel Formula Extractor System and Topological Ordering algorithm.
  * Copyright (C) 2017 Massimo Caliman mcaliman@caliman.biz
@@ -21,14 +20,37 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package efesto.parsers;
+package excel.parser.internal;
 
-public final class UnsupportedBuiltinException extends Exception {
+import org.apache.poi.ss.formula.EvaluationCell;
+import org.apache.poi.ss.formula.EvaluationSheet;
+import org.apache.poi.ss.formula.FormulaParseException;
+import org.apache.poi.ss.formula.ptg.Ptg;
+import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 
-    public UnsupportedBuiltinException() {
+public class FormulaTokensInternal {
+
+
+    private final XSSFEvaluationWorkbook ew;
+    private final EvaluationSheet es;
+
+    public FormulaTokensInternal(XSSFEvaluationWorkbook ew, EvaluationSheet es) {
+        this.ew = ew;
+        this.es = es;
     }
 
-    public UnsupportedBuiltinException(String msg) {
-        super(msg);
+    public Ptg[] getFormulaTokens(int row, int column) {
+        EvaluationCell evalCell = es.getCell(row, column);
+        Ptg[] ptgs = null;
+        try {
+            ptgs = ew.getFormulaTokens(evalCell);
+        } catch (FormulaParseException e) {
+            err("" + e.getMessage(), row, column);
+        }
+        return ptgs;
+    }
+
+    private void err(String string, int row, int column) {
+        System.err.println(string + " row:" + row + " col:" + column);
     }
 }

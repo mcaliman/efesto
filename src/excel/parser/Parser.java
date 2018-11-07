@@ -20,11 +20,8 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package efesto.parsers;
+package excel.parser;
 
-import efesto.graphs.StartGraph;
-import efesto.internals.AbstractParser;
-import efesto.internals.HelperInternal;
 import excel.grammar.Formula;
 import excel.grammar.Grammar;
 import excel.grammar.Metadata;
@@ -41,6 +38,9 @@ import excel.grammar.formula.functioncall.unary.Minus;
 import excel.grammar.formula.functioncall.unary.Plus;
 import excel.grammar.formula.reference.*;
 import excel.grammar.formula.reference.referencefunction.OFFSET;
+import excel.graph.StartGraph;
+import excel.parser.internal.AbstractParser;
+import excel.parser.internal.HelperInternal;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import java.io.File;
