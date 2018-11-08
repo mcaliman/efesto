@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class PERMUT extends ExcelBuiltInFunction {
+public class PERMUT extends EXCEL_FUNCTION {
 
     public PERMUT(Formula... args) {
         this.args = args;

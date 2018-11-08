@@ -26,11 +26,11 @@ import excel.grammar.Formula;
 import excel.grammar.Start;
 import excel.grammar.formula.reference.CELL;
 
-public abstract class ExcelBuiltInFunction extends ExcelFunction {
+public abstract class EXCEL_FUNCTION extends ExcelFunction {
 
     protected Formula[] args;
 
-    public ExcelBuiltInFunction(Formula... args) {
+    public EXCEL_FUNCTION(Formula... args) {
         this.args = args;
     }
 
@@ -47,7 +47,7 @@ public abstract class ExcelBuiltInFunction extends ExcelFunction {
         return format(this, address);
     }
 
-    private String format(ExcelBuiltInFunction e, boolean address) {
+    private String format(EXCEL_FUNCTION e, boolean address) {
         StringBuilder buff = new StringBuilder();
         if (address) buff.append(varname(e)).append(" = ");
         buff.append(e.getClass().getSimpleName());

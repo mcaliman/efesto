@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class OCT2HEX extends ExcelBuiltInFunction {
+public class OCT2HEX extends EXCEL_FUNCTION {
 
     public OCT2HEX(Formula... args) {
         this.args = args;

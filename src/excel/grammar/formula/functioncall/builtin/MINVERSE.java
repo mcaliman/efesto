@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class MINVERSE extends ExcelBuiltInFunction {
+public class MINVERSE extends EXCEL_FUNCTION {
 
     public MINVERSE(Formula... args) {
         this.args = args;

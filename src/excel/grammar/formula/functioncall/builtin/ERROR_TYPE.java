@@ -23,9 +23,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class ERROR_TYPE extends ExcelBuiltInFunction {
+public class ERROR_TYPE extends EXCEL_FUNCTION {
 
     public ERROR_TYPE(Formula... args) {
         this.args = args;

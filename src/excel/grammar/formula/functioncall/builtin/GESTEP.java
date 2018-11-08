@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class GESTEP extends ExcelBuiltInFunction {
+public class GESTEP extends EXCEL_FUNCTION {
 
     public GESTEP(Formula... args) {
         this.args = args;

@@ -22,7 +22,7 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
 /**
  * FV, one of the financial functions, calculates the future value of an
@@ -46,7 +46,7 @@ import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
  * 1 and indicates when payments are due. If type is omitted, it is assumed to
  * be 0.
  */
-public class FV extends ExcelBuiltInFunction {
+public class FV extends EXCEL_FUNCTION {
 
     public FV(Formula... args) {
         this.args = args;

@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class REPLACEB extends ExcelBuiltInFunction {
+public class REPLACEB extends EXCEL_FUNCTION {
 
     public REPLACEB(Formula... args) {
         this.args = args;

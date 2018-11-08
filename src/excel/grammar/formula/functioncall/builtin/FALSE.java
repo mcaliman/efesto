@@ -23,9 +23,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class FALSE extends ExcelBuiltInFunction {
+public class FALSE extends EXCEL_FUNCTION {
 
     public FALSE(Formula... args) {
         this.args = args;

@@ -24,7 +24,7 @@ package excel.graph;
 
 import excel.grammar.Formula;
 import excel.grammar.Start;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 import excel.grammar.formula.functioncall.binary.Binary;
 import excel.grammar.formula.reference.RangeReference;
 import excel.parser.StartList;
@@ -80,7 +80,7 @@ public class StartGraph {
         addEdge(left, range);
     }
 
-    public void add(ExcelBuiltInFunction function) {
+    public void add(EXCEL_FUNCTION function) {
         Formula[] args = function.getArgs();
         for (Formula arg : args)
             addNode(arg);

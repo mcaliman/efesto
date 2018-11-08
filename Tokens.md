@@ -21,9 +21,7 @@
 | RESERVED_NAME          | An Excel reserved name  |  
 | SHEET                  | The name of a worksheet  |  
 | SHEET_QUOTED           | Quoted worksheet name    |    
-
 | TEXT                   | String literal |    
-
 | SR_COLUMN              | Structured reference column  |    
 | UDF                    | User Defined Function |    
 | VERTICAL_RANGE         | Range of columns |    
@@ -35,25 +33,21 @@
 * ERROR_REF ::= '#REF!'
 * EXCEL_FUNCTION ::=  Any entry from the function list
 * FILE ::= REGEXP \[ [0-9]+ \] 
-* FILENAME ::= \[ 4+ \] 
+* FILENAME ::= \[ RegExp_4+ \] 
 * FILEPATH ::= REGEXP [A-Z] : \\ (RegExp_4+ \\)* 
 * HORIZONTAL_RANGE ::= REGEXP $? [0-9]+ : $? [0-9]+ 
 * MULTIPLE_SHEETS ::= REGEXP ((RegExp_2+ : RegExp_2+)|( ' (RegExp_3 | ")+ : (RegExp_3 | ")+ '' )) ! 
 * NAME ::= REGEXP [A-Z_\\][A-Z0-9\\_.RegExp_1]* 
 * NAME_PREFIXED ::= REGEXP (TRUE | FALSE | [A-Z]+[0-9]+) [A-Z0-9_.RegExp_1]+ 
-
 * NUMBER ::= REGEXP [0-9]+ ,? [0-9]* (e [0-9]+)? 
-  INT::= REGEXP [0-9]+
-  FLOAT ::= REGEXP [0-9]+ ,? [0-9]* (e [0-9]+)?
-  
+* INT::= REGEXP [0-9]+
+* FLOAT ::= REGEXP [0-9]+ ,? [0-9]* (e [0-9]+)?  
 * REF_FUNCTION ::= INDEX | OFFSET | INDIRECT 
 * REF_FUNCTION_COND ::= IF | CHOOSE
 * RESERVED_NAME ::= REGEXP _xlnm\. [A-Z_]+ 
 * SHEET ::= RegExp_2+ ! 
 * SHEET_QUOTED ::= RegExp_3+ ' ! 
-
 * TEXT ::= " ([^ "] | "")* " 
-
 * SR_COLUMN ::= REGEXP \[ [A-Z0-9\\_.RegExp_1]+ \] 
 * UDF ::= REGEXP (_xll\.)? [A-Z_\][A-Z0-9_\\.RegExp_1]*  
 * VERTICAL_RANGE ::= REGEXP $? [A-Z]+ : $? [A-Z]+ 

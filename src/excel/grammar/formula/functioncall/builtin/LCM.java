@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class LCM extends ExcelBuiltInFunction {
+public class LCM extends EXCEL_FUNCTION {
 
     public LCM(Formula... args) {
         this.args = args;

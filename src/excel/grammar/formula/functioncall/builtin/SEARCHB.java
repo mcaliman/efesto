@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class SEARCHB extends ExcelBuiltInFunction {
+public class SEARCHB extends EXCEL_FUNCTION {
 
     public SEARCHB(Formula... args) {
         this.args = args;

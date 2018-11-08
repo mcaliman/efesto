@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class SQL_REQUEST extends ExcelBuiltInFunction {
+public class SQL_REQUEST extends EXCEL_FUNCTION {
 
     public SQL_REQUEST(Formula... args) {
         this.args = args;

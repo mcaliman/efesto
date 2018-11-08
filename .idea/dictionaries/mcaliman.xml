@@ -2,6 +2,18 @@
   <dictionary name="mcaliman">
     <words>
       <w>accrint</w>
+      <w>accrintm</w>
+      <w>acos</w>
+      <w>acosh</w>
+      <w>amordegrc</w>
+      <w>amorlinc</w>
+      <w>asin</w>
+      <w>asinh</w>
+      <w>atan</w>
+      <w>atanh</w>
+      <w>avedev</w>
+      <w>averagea</w>
+      <w>averageif</w>
       <w>caliman</w>
       <w>cloujre</w>
       <w>countif</w>

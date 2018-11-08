@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class LOGNORMDIST extends ExcelBuiltInFunction {
+public class LOGNORMDIST extends EXCEL_FUNCTION {
 
     public LOGNORMDIST(Formula... args) {
         this.args = args;

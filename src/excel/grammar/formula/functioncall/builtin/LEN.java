@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class LEN extends ExcelBuiltInFunction {
+public class LEN extends EXCEL_FUNCTION {
 
     public LEN(Formula... args) {
         this.args = args;

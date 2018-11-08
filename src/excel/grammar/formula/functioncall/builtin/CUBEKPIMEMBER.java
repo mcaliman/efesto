@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class CUBEKPIMEMBER extends ExcelBuiltInFunction {
+public class CUBEKPIMEMBER extends EXCEL_FUNCTION {
 
     public CUBEKPIMEMBER(Formula... args) {
         this.args = args;

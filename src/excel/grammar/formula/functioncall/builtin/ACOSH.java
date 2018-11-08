@@ -22,12 +22,12 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
 /**
  * @author Massimo Caliman
  */
-public class ACOSH extends ExcelBuiltInFunction {
+public class ACOSH extends EXCEL_FUNCTION {
 
     public ACOSH(Formula... args) {
         this.args = args;

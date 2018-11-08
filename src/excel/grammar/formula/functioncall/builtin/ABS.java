@@ -23,7 +23,7 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
 /**
  * Returns the absolute value of a number. The absolute value of a number is the number without its sign. The ABS function syntax
@@ -33,7 +33,7 @@ import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
  *
  * @author mcaliman
  */
-public class ABS extends ExcelBuiltInFunction {
+public class ABS extends EXCEL_FUNCTION {
 
     public ABS(Formula... args) {
         this.args = args;

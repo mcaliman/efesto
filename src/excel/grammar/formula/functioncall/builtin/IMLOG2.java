@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class IMLOG2 extends ExcelBuiltInFunction {
+public class IMLOG2 extends EXCEL_FUNCTION {
 
     public IMLOG2(Formula... args) {
         this.args = args;

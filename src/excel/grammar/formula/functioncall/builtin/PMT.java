@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class PMT extends ExcelBuiltInFunction {
+public class PMT extends EXCEL_FUNCTION {
 
     public PMT(Formula... args) {
         this.args = args;

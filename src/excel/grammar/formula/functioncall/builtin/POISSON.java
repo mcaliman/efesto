@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class POISSON extends ExcelBuiltInFunction {
+public class POISSON extends EXCEL_FUNCTION {
 
     public POISSON(Formula... args) {
         this.args = args;

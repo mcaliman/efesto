@@ -24,7 +24,7 @@ package excel.grammar.formula.reference.conditionalreferencefunction;
 
 import excel.grammar.Formula;
 
-public class IF extends ConditionalReferenceFunction {
+public class IF extends REF_FUNCTION_COND {
 
     public IF(Formula... args) {
         this.args = args;

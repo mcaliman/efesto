@@ -22,12 +22,12 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
 /**
  * @author Massimo Caliman
  */
-public class ADDRESS extends ExcelBuiltInFunction {
+public class ADDRESS extends EXCEL_FUNCTION {
 
     public ADDRESS(Formula... args) {
         this.args = args;

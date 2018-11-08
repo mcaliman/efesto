@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class SUMPRODUCT extends ExcelBuiltInFunction {
+public class SUMPRODUCT extends EXCEL_FUNCTION {
 
     public SUMPRODUCT(Formula... args) {
         this.args = args;

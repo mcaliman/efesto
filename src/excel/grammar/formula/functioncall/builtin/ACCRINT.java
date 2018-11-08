@@ -23,12 +23,12 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
 /**
  * @author Massimo Caliman
  */
-public class ACCRINT extends ExcelBuiltInFunction {
+public class ACCRINT extends EXCEL_FUNCTION {
 
     public ACCRINT(Formula... args) {
         this.args = args;

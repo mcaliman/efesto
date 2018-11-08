@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class TRANSPOSE extends ExcelBuiltInFunction {
+public class TRANSPOSE extends EXCEL_FUNCTION {
 
     public TRANSPOSE(Formula... args) {
         this.args = args;

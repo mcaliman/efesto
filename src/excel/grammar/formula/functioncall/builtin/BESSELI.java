@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class BESSELI extends ExcelBuiltInFunction {
+public class BESSELI extends EXCEL_FUNCTION {
 
     public BESSELI(Formula... args) {
         this.args = args;

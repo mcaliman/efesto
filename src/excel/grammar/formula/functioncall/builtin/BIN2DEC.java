@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class BIN2DEC extends ExcelBuiltInFunction {
+public class BIN2DEC extends EXCEL_FUNCTION {
 
     public BIN2DEC(Formula... args) {
         this.args = args;

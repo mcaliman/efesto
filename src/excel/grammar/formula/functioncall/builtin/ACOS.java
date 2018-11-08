@@ -23,12 +23,12 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
 /**
  * @author Massimo Caliman
  */
-public class ACOS extends ExcelBuiltInFunction {
+public class ACOS extends EXCEL_FUNCTION {
 
     public ACOS(Formula... args) {
         this.args = args;

@@ -23,9 +23,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class AND extends ExcelBuiltInFunction {
+public class AND extends EXCEL_FUNCTION {
 
     public AND(Formula... args) {
         this.args = args;

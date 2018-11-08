@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class AMORLINC extends ExcelBuiltInFunction {
+public class AMORLINC extends EXCEL_FUNCTION {
 
     public AMORLINC(Formula... args) {
         this.args = args;

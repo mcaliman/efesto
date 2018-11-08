@@ -23,7 +23,7 @@ package excel.grammar.formula.reference.conditionalreferencefunction;
 
 import excel.grammar.Formula;
 
-public class CHOOSE extends ConditionalReferenceFunction {
+public class CHOOSE extends REF_FUNCTION_COND {
 
     public CHOOSE(Formula... args) {
         this.args = args;

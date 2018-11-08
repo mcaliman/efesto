@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class OCT2DEC extends ExcelBuiltInFunction {
+public class OCT2DEC extends EXCEL_FUNCTION {
 
     public OCT2DEC(Formula... args) {
         this.args = args;

@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class CORREL extends ExcelBuiltInFunction {
+public class CORREL extends EXCEL_FUNCTION {
 
     public CORREL(Formula... args) {
         this.args = args;

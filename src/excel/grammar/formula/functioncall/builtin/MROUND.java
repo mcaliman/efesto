@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class MROUND extends ExcelBuiltInFunction {
+public class MROUND extends EXCEL_FUNCTION {
 
     public MROUND(Formula... args) {
         this.args = args;

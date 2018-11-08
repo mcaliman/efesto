@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class ZTEST extends ExcelBuiltInFunction {
+public class ZTEST extends EXCEL_FUNCTION {
 
     public ZTEST(Formula... args) {
         this.args = args;

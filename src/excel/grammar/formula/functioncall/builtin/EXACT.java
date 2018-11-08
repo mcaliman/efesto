@@ -23,9 +23,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class EXACT extends ExcelBuiltInFunction {
+public class EXACT extends EXCEL_FUNCTION {
 
     public EXACT(Formula... args) {
         this.args = args;

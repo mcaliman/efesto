@@ -22,7 +22,7 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
 /**
  * CEILING function
@@ -56,7 +56,7 @@ import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
  * If number is negative, and significance is positive, the value is rounded up
  * towards zero.
  */
-public class CEILING extends ExcelBuiltInFunction {
+public class CEILING extends EXCEL_FUNCTION {
 
     public CEILING(Formula... args) {
         this.args = args;

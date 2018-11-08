@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class PRICEDISC extends ExcelBuiltInFunction {
+public class PRICEDISC extends EXCEL_FUNCTION {
 
     public PRICEDISC(Formula... args) {
         this.args = args;

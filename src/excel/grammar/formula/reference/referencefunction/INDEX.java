@@ -24,7 +24,7 @@ package excel.grammar.formula.reference.referencefunction;
 
 import excel.grammar.Formula;
 
-public class INDEX extends ReferenceFunction {
+public class INDEX extends REFERENCE_FUNCTION {
 
     public INDEX(Formula... args) {
         this.args = args;

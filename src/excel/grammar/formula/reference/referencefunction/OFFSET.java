@@ -23,7 +23,7 @@ package excel.grammar.formula.reference.referencefunction;
 
 import excel.grammar.Formula;
 
-public class OFFSET extends ReferenceFunction {
+public class OFFSET extends REFERENCE_FUNCTION {
 
     public OFFSET(Formula... args) {
         this.args = args;

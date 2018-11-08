@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class ODDFPRICE extends ExcelBuiltInFunction {
+public class ODDFPRICE extends EXCEL_FUNCTION {
 
     public ODDFPRICE(Formula... args) {
         this.args = args;

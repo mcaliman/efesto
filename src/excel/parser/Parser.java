@@ -30,7 +30,7 @@ import excel.grammar.formula.ConstantArray;
 import excel.grammar.formula.ParenthesisFormula;
 import excel.grammar.formula.Reference;
 import excel.grammar.formula.constant.*;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 import excel.grammar.formula.functioncall.PercentFormula;
 import excel.grammar.formula.functioncall.binary.*;
 import excel.grammar.formula.functioncall.builtin.SUM;
@@ -609,7 +609,7 @@ public final class Parser extends AbstractParser {
     protected void builtInFunction(int arity, String name) {
         try {
             if (arity == 0) {
-                ExcelBuiltInFunction builtinFunction = grammar.builtinFunction(name);
+                EXCEL_FUNCTION builtinFunction = grammar.builtinFunction(name);
                 stack.push(builtinFunction);
                 return;
             }
@@ -620,7 +620,7 @@ public final class Parser extends AbstractParser {
         BuiltinFactory factory = new BuiltinFactory();
         try {
             factory.create(arity, name);
-            ExcelBuiltInFunction builtinFunction = (ExcelBuiltInFunction) factory.getBuiltInFunction();
+            EXCEL_FUNCTION builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
             Start[] args = factory.getArgs();
             for (int i = arity - 1; i >= 0; i--) if (!stack.empty()) args[i] = stack.pop();
             setOwnProperty(builtinFunction);

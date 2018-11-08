@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class CUMPRINC extends ExcelBuiltInFunction {
+public class CUMPRINC extends EXCEL_FUNCTION {
 
     public CUMPRINC(Formula... args) {
         this.args = args;

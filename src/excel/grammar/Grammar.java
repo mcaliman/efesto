@@ -24,7 +24,7 @@ package excel.grammar;
 
 import excel.grammar.formula.Reference;
 import excel.grammar.formula.constant.*;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 import excel.grammar.formula.functioncall.PercentFormula;
 import excel.grammar.formula.functioncall.binary.*;
 import excel.grammar.formula.functioncall.unary.Minus;
@@ -151,10 +151,10 @@ public final class Grammar {
         return new CELL(row, column, rowRelative, columnRelative);
     }
 
-    public ExcelBuiltInFunction builtinFunction(String name) throws UnsupportedBuiltinException {
+    public EXCEL_FUNCTION builtinFunction(String name) throws UnsupportedBuiltinException {
         BuiltinFactory factory = new BuiltinFactory();
         factory.create(0, name);
-        return (ExcelBuiltInFunction) factory.getBuiltInFunction();
+        return (EXCEL_FUNCTION) factory.getBuiltInFunction();
     }
 
     public RangeReference rangeReference(int firstRow, int firstColumn,

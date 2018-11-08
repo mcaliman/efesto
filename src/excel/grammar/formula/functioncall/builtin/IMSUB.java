@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class IMSUB extends ExcelBuiltInFunction {
+public class IMSUB extends EXCEL_FUNCTION {
 
     public IMSUB(Formula... args) {
         this.args = args;

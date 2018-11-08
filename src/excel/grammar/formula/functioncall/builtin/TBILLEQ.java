@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class TBILLEQ extends ExcelBuiltInFunction {
+public class TBILLEQ extends EXCEL_FUNCTION {
 
     public TBILLEQ(Formula... args) {
         this.args = args;

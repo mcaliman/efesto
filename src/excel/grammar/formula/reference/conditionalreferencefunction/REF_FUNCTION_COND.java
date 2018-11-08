@@ -20,9 +20,10 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package excel.grammar.formula.reference.referencefunction;
+package excel.grammar.formula.reference.conditionalreferencefunction;
 
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public abstract class ReferenceFunction extends ExcelBuiltInFunction {
+public abstract class REF_FUNCTION_COND extends EXCEL_FUNCTION {
 }
+

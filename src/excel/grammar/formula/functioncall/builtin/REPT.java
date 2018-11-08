@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class REPT extends ExcelBuiltInFunction {
+public class REPT extends EXCEL_FUNCTION {
 
     public REPT(Formula... args) {
         this.args = args;

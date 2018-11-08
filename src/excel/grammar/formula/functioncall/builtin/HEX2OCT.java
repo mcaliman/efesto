@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class HEX2OCT extends ExcelBuiltInFunction {
+public class HEX2OCT extends EXCEL_FUNCTION {
 
     public HEX2OCT(Formula... args) {
         this.args = args;

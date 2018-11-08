@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class INTERCEPT extends ExcelBuiltInFunction {
+public class INTERCEPT extends EXCEL_FUNCTION {
 
     public INTERCEPT(Formula... args) {
         this.args = args;

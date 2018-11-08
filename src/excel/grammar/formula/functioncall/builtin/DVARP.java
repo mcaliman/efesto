@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class DVARP extends ExcelBuiltInFunction {
+public class DVARP extends EXCEL_FUNCTION {
 
     public DVARP(Formula... args) {
         this.args = args;

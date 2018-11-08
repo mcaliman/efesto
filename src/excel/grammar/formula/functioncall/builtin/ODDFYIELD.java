@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class ODDFYIELD extends ExcelBuiltInFunction {
+public class ODDFYIELD extends EXCEL_FUNCTION {
 
     public ODDFYIELD(Formula... args) {
         this.args = args;

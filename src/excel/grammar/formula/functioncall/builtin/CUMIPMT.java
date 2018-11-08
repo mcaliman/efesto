@@ -22,9 +22,9 @@
 package excel.grammar.formula.functioncall.builtin;
 
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.ExcelBuiltInFunction;
+import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
-public class CUMIPMT extends ExcelBuiltInFunction {
+public class CUMIPMT extends EXCEL_FUNCTION {
 
     public CUMIPMT(Formula... args) {
         this.args = args;

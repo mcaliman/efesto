@@ -23,7 +23,7 @@ package excel.grammar.formula.reference.referencefunction;
 
 import excel.grammar.Formula;
 
-public class INDIRECT extends ReferenceFunction {
+public class INDIRECT extends REFERENCE_FUNCTION {
 
     public INDIRECT(Formula... args) {
         this.args = args;
