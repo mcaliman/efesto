@@ -438,7 +438,7 @@ Impl.note: abstract class Argument extends Formula
     YIELD(⟨Arguments⟩) | 
     YIELDDISC(⟨Arguments⟩) | 
     YIELDMAT(⟨Arguments⟩) | 
-    ZTEST(⟨Arguments⟩) | 
+    ZTEST(⟨Arguments⟩)  
 ```
 
 
