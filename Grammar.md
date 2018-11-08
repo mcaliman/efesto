@@ -1,26 +1,31 @@
 # Pseudo BNF Grammar
 
-* ⟨Start⟩ ::= = ⟨Formula⟩ | ⟨ArrayFormula⟩ | ⟨Metadata⟩ 
-* ⟨ArrayFormula⟩ ::= {= ⟨Formula⟩ }
-* ⟨Formula⟩ ::= ⟨Constant⟩ | ⟨Reference⟩ | ⟨FunctionCall⟩ | ⟨ParenthesisFormula⟩ | ⟨ConstantArray⟩ | RESERVED_NAME
-* ⟨ParenthesisFormula⟩ ::= ( ⟨Formula⟩ )
-* ⟨Constant⟩ ::= INT | FLOAT | TEXT | BOOL | DATETIME | ERROR  
-* ⟨FunctionCall⟩ ::=  ⟨EXCEL_FUNCTION⟩ | ⟨Unary⟩ | ⟨PercentFormula⟩ | ⟨Binary⟩
-
+```
+⟨Start⟩ ::= = ⟨Formula⟩ | ⟨ArrayFormula⟩ | ⟨Metadata⟩ 
+⟨ArrayFormula⟩ ::= {= ⟨Formula⟩ }
+⟨Formula⟩ ::= ⟨Constant⟩ | ⟨Reference⟩ | ⟨FunctionCall⟩ | ⟨ParenthesisFormula⟩ | ⟨ConstantArray⟩ | RESERVED_NAME
+⟨ParenthesisFormula⟩ ::= ( ⟨Formula⟩ )
+⟨Constant⟩ ::= INT | FLOAT | TEXT | BOOL | DATETIME | ERROR  
+⟨FunctionCall⟩ ::=  ⟨EXCEL_FUNCTION⟩ | ⟨Unary⟩ | ⟨PercentFormula⟩ | ⟨Binary⟩
+```
 -- todo begin
 ⟨Arguments⟩ ::= ϵ | ⟨Argument⟩ { , ⟨Argument⟩ }
 ⟨Argument⟩ ::= ⟨Formula⟩ | ϵ
 Impl.note: abstract class Argument extends Formula
 -- todo end
 
+```
 ⟨Unary⟩ = ⟨Plus⟩  | ⟨Minus⟩ 
 ⟨Plus⟩  ::= + ⟨Formula⟩ 
 ⟨Minus⟩ ::= - ⟨Formula⟩ 
-
+```
+```
 ⟨Binary⟩    ::= ⟨Add⟩ | ⟨Sub⟩ | ⟨Mult⟩ | ⟨Divide⟩ | ⟨Lt⟩ | ⟨Gt⟩ | ⟨Eq⟩ | ⟨Leq⟩ | ⟨GtEq⟩ | ⟨Neq⟩ 
 | ⟨Concat⟩
 | ⟨Power⟩
+```
 
+```
 ⟨Add⟩      ::= ⟨Formula⟩ +  ⟨Formula⟩
 ⟨Sub⟩      ::= ⟨Formula⟩ -  ⟨Formula⟩
 ⟨Mult⟩     ::= ⟨Formula⟩ *  ⟨Formula⟩
@@ -31,12 +36,18 @@ Impl.note: abstract class Argument extends Formula
 ⟨Leq⟩      ::= ⟨Formula⟩ <= ⟨Formula⟩
 ⟨GtEq⟩     ::= ⟨Formula⟩ >= ⟨Formula⟩
 ⟨Neq⟩      ::= ⟨Formula⟩ <> ⟨Formula⟩
+```
 
+```
 ⟨Concat⟩ ::= ⟨Formula⟩ & ⟨Formula⟩
 ⟨Power⟩ ::= ⟨Formula⟩ ^ ⟨Formula⟩
+```
 
+```
 ⟨PercentFormula⟩ ::= ⟨Formula⟩ %
+```
 
+```
 ⟨Reference⟩ ::= 
 ⟨ReferenceItem⟩
 | ⟨RangeReference⟩
@@ -46,13 +57,19 @@ Impl.note: abstract class Argument extends Formula
 | ⟨PrefixReferenceItem⟩
 | ⟨Prefix⟩ UDF* ⟨Arguments⟩ ) (notImp.)  
 | ⟨DynamicDataExchange⟩(notImp.)
+```
 
+```
 ⟨RangeReference⟩ ::= ⟨Reference⟩ : ⟨Reference⟩ 
 ⟨Intersection⟩# ::= ⟨Reference⟩ ' ' ⟨Reference⟩       //Implemented as "Binary"
 ⟨Union⟩ ::= ⟨Reference⟩# | ⟨Reference⟩ , ⟨Union⟩     //Implemented as "Binary"
+```
 
+```
 ⟨PrefixReferenceItem⟩# ::= ⟨Prefix⟩ ⟨ReferenceItem⟩  
+```
 
+```
 ⟨ReferenceItem⟩ ::= CELL
 | ⟨NamedRange⟩
 //| ⟨StructuredReference⟩
@@ -60,18 +77,26 @@ Impl.note: abstract class Argument extends Formula
 //| VERTICAL_RANGE
 //| HORIZONTAL_RANGE
 | UDF(⟨Arguments⟩) | ERROR_REF | ⟨REFERENCE_FUNCTION⟩ | ⟨REF_FUNCTION_COND⟩  
-  
+```
+
+```  
  ⟨REFERENCE_FUNCTION⟩ ::= INDEX(⟨Arguments⟩) | OFFSET(⟨Arguments⟩) | INDIRECT(⟨Arguments⟩)  
  ⟨REF_FUNCTION_COND⟩  ::= IF(⟨Arguments⟩) | CHOOSE(⟨Arguments⟩) //Not.Correctly implemented, inherits from Function (not ReferenceItem) 
- 
+```
+
+``` 
 ⟨NamedRange⟩ ::= ⟨Name⟩
 ⟨Name⟩ ::= NAME | NAME_PREFIXED 
- 
+```
+
+``` 
 ⟨File⟩   ::= FILE  | FILENAME | FILEPATH FILENAME 
 ⟨Prefix⟩ ::= SHEET | 'SHEET_QUOTED | ⟨File⟩SHEET | '⟨File⟩SHEET_QUOTED | FILE! | MULTIPLE_SHEETS | ⟨File⟩MULTIPLE_SHEETS
+```
 
 ## Excel built-in function
 
+```
 ⟨EXCEL_FUNCTION⟩ ::= 
     ABS(⟨Arguments⟩) | 
     ACCRINT(⟨Arguments⟩) | 
@@ -414,6 +439,6 @@ Impl.note: abstract class Argument extends Formula
     YIELDDISC(⟨Arguments⟩) | 
     YIELDMAT(⟨Arguments⟩) | 
     ZTEST(⟨Arguments⟩) | 
-
+```
 
 
