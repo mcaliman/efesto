@@ -24,9 +24,10 @@ package excel.grammar.formula.functioncall;
 
 import excel.grammar.Formula;
 import excel.grammar.Start;
+import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.reference.CELL;
 
-public abstract class EXCEL_FUNCTION extends ExcelFunction {
+public abstract class EXCEL_FUNCTION extends FunctionCall {
 
     protected Formula[] args;
 

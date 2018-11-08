@@ -1,11 +1,11 @@
 # Pseudo BNF Grammar
 
-⟨Start⟩ ::= = ⟨Formula⟩ | ⟨ArrayFormula⟩ | ⟨Metadata⟩ 
-⟨ArrayFormula⟩ ::= {= ⟨Formula⟩ }
-⟨Formula⟩ ::= ⟨Constant⟩ | ⟨Reference⟩ | ⟨FunctionCall⟩ | ⟨ParenthesisFormula⟩ | ⟨ConstantArray⟩ | RESERVED_NAME
-⟨ParenthesisFormula⟩ ::= ( ⟨Formula⟩ )
-⟨Constant⟩ ::= INT | FLOAT | TEXT | BOOL | DATETIME | ERROR  
-⟨FunctionCall⟩ ::=  ⟨EXCEL_FUNCTION⟩ | ⟨Unary⟩ | ⟨PercentFormula⟩ | ⟨Binary⟩
+* ⟨Start⟩ ::= = ⟨Formula⟩ | ⟨ArrayFormula⟩ | ⟨Metadata⟩ 
+* ⟨ArrayFormula⟩ ::= {= ⟨Formula⟩ }
+* ⟨Formula⟩ ::= ⟨Constant⟩ | ⟨Reference⟩ | ⟨FunctionCall⟩ | ⟨ParenthesisFormula⟩ | ⟨ConstantArray⟩ | RESERVED_NAME
+* ⟨ParenthesisFormula⟩ ::= ( ⟨Formula⟩ )
+* ⟨Constant⟩ ::= INT | FLOAT | TEXT | BOOL | DATETIME | ERROR  
+* ⟨FunctionCall⟩ ::=  ⟨EXCEL_FUNCTION⟩ | ⟨Unary⟩ | ⟨PercentFormula⟩ | ⟨Binary⟩
 
 -- todo begin
 ⟨Arguments⟩ ::= ϵ | ⟨Argument⟩ { , ⟨Argument⟩ }
