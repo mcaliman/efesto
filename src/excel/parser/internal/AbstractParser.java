@@ -103,7 +103,7 @@ public abstract class AbstractParser {
     protected String formulaText;
     protected int formulaColumn;
     protected int formulaRow;
-    protected String formulaRaw;
+    //protected String formulaRaw;
     protected int currentSheetIndex;
     protected String currentSheetName;
     protected String fileName;
@@ -154,7 +154,6 @@ public abstract class AbstractParser {
         this.company = extendedProperties.getUnderlyingProperties().getCompany();
         this.template = extendedProperties.getUnderlyingProperties().getTemplate();
         this.manager = extendedProperties.getUnderlyingProperties().getManager();
-
         this.evaluationWorkbook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
         //System.out.println("Parse...");
     }
@@ -286,11 +285,11 @@ public abstract class AbstractParser {
         parseArray(tokens);
     }
 
-    private void parseArea3DPtg(Area3DPtg t) {
+    /*private void parseArea3DPtg(Area3DPtg t) {
         String area = t.format2DRefAsString();
         int externSheetIndex = t.getExternSheetIndex();
         parseArea3D(externSheetIndex, area);
-    }
+    }*/
 
     /**
      * Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
@@ -484,7 +483,7 @@ public abstract class AbstractParser {
 
     protected abstract void parseAdd();
 
-    protected abstract void parseArea3D(int externSheetIndex, String area);
+    //protected abstract void parseArea3D(int externSheetIndex, String area);
 
     protected abstract void parseArea3D(int FirstRow, int FirstColumn, int LastRow, int LastColumn, List<Object> list, String sheetName, int sheetIndex, String area);
 

@@ -20,31 +20,23 @@ Impl.note: abstract class Argument extends Formula
 ⟨Minus⟩ ::= - ⟨Formula⟩ 
 ```
 ```
-⟨Binary⟩    ::= ⟨Add⟩ | ⟨Sub⟩ | ⟨Mult⟩ | ⟨Divide⟩ | ⟨Lt⟩ | ⟨Gt⟩ | ⟨Eq⟩ | ⟨Leq⟩ | ⟨GtEq⟩ | ⟨Neq⟩ 
-| ⟨Concat⟩
-| ⟨Power⟩
+⟨Binary⟩   ::= ⟨Add⟩ | ⟨Sub⟩ | ⟨Mult⟩ | ⟨Divide⟩ | ⟨Lt⟩ | ⟨Gt⟩ | ⟨Eq⟩ | ⟨Leq⟩ | ⟨GtEq⟩ | ⟨Neq⟩  | ⟨Concat⟩ | ⟨Power⟩
+⟨Add⟩      ::= ⟨Formula⟩+⟨Formula⟩
+⟨Sub⟩      ::= ⟨Formula⟩-⟨Formula⟩
+⟨Mult⟩     ::= ⟨Formula⟩*⟨Formula⟩
+⟨Divide⟩   ::= ⟨Formula⟩/⟨Formula⟩
+⟨Lt⟩       ::= ⟨Formula⟩<⟨Formula⟩
+⟨Gt⟩       ::= ⟨Formula⟩>⟨Formula⟩
+⟨Eq⟩       ::= ⟨Formula⟩=⟨Formula⟩
+⟨Leq⟩      ::= ⟨Formula⟩<=⟨Formula⟩
+⟨GtEq⟩     ::= ⟨Formula⟩>=⟨Formula⟩
+⟨Neq⟩      ::= ⟨Formula⟩<>⟨Formula⟩
+⟨Concat⟩ ::= ⟨Formula⟩&⟨Formula⟩
+⟨Power⟩  ::= ⟨Formula⟩^⟨Formula⟩
 ```
 
 ```
-⟨Add⟩      ::= ⟨Formula⟩ +  ⟨Formula⟩
-⟨Sub⟩      ::= ⟨Formula⟩ -  ⟨Formula⟩
-⟨Mult⟩     ::= ⟨Formula⟩ *  ⟨Formula⟩
-⟨Divide⟩   ::= ⟨Formula⟩ /  ⟨Formula⟩
-⟨Lt⟩       ::= ⟨Formula⟩ <  ⟨Formula⟩
-⟨Gt⟩       ::= ⟨Formula⟩ >  ⟨Formula⟩
-⟨Eq⟩       ::= ⟨Formula⟩ =  ⟨Formula⟩
-⟨Leq⟩      ::= ⟨Formula⟩ <= ⟨Formula⟩
-⟨GtEq⟩     ::= ⟨Formula⟩ >= ⟨Formula⟩
-⟨Neq⟩      ::= ⟨Formula⟩ <> ⟨Formula⟩
-```
-
-```
-⟨Concat⟩ ::= ⟨Formula⟩ & ⟨Formula⟩
-⟨Power⟩ ::= ⟨Formula⟩ ^ ⟨Formula⟩
-```
-
-```
-⟨PercentFormula⟩ ::= ⟨Formula⟩ %
+⟨PercentFormula⟩ ::= ⟨Formula⟩%
 ```
 
 ```

@@ -170,24 +170,21 @@ public final class Parser extends AbstractParser {
      * @param extSheetIndex extern sheet index
      * @param area
      */
-    @Override
+    /*@Override
     protected void parseArea3D(int extSheetIndex, String area) {
         PrefixReferenceItem ref = grammar.prefixReferenceItem(extSheetIndex, area);
         stack.push(ref);
-    }
+    }*/
 
     // TODO: Area3DPxg Title: XSSF Area 3D Reference (Sheet + Area)
     @Override
     protected void parseArea3D(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> list, String sheetName, int sheetIndex, String area) {
         PrefixReferenceItem ref = grammar.prefixReferenceItem(sheetName, sheetIndex, area);
         ref.add(list);
-
         ref.setFirstRow(firstRow);
         ref.setFirstColumn(firstColumn);
-
         ref.setLastRow(lastRow);
         ref.setLastColumn(lastColumn);
-
         unordered.add(ref);
         stack.push(ref);
     }
@@ -253,36 +250,21 @@ public final class Parser extends AbstractParser {
 
     /**
      * <code>
-     *
-     * <ReferenceItem> ::= CELL | <NamedRange> | <StructuredReference> | VERTICAL-RANGE | HORIZONTAL-RANGE | UDF <Arguments> ')' |
-     * ERROR-REF
-     * <p>
-     * NAMED-RANGE Named range [A-Z_][A-Z0-9_.]* -2 NAMED-RANGE-PREFIXED Named range which starts with a string that could be
-     * another token (TRUE | FALSE | [A-Z]+[0-9]+) [A-Z0-9_.]+ 3
-     *
-     * <NamedRange> ::= NAMED-RANGE| NAMED-RANGE-PREFIXED
+     * ⟨NamedRange⟩ ::= ⟨Name⟩
+     * ⟨Name⟩ ::= NAME | NAME_PREFIXED
      * </code>
      */
     @Override
     protected void parseName(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> cells, String name, String sheetName) {
-
-        //ReferenceItem ref = new ReferenceItem(name);
         NamedRange ref = new NamedRange(name);
         ref.setSheetIndex(currentSheetIndex);
         ref.setSheetName(sheetName);
         ref.setFirstRow(firstRow);
         ref.setFirstColumn(firstColumn);
-
         ref.setLastRow(lastRow);
         ref.setLastColumn(lastColumn);
-
         ref.setAsArea();
         ref.add(cells);
-
-        /*
-        for (Object v : cells) {
-            ref.addval(v);
-        }*/
         stack.push(ref);
     }
 
@@ -600,8 +582,6 @@ public final class Parser extends AbstractParser {
         //is area not a cell with ref to area
         ref.setAsArea();
         ref.add(list);
-        //for (Object object : list)
-        //    ref.addval(object);
         graph.addNode(ref);
         stack.push(ref);
     }
