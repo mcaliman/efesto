@@ -157,26 +157,13 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseArray(Object[][] array) {
+    protected void parse_ConstantArray(Object[][] array) {
         ConstantArray term = new ConstantArray(array);
         setOwnProperty(term);
         stack.push(term);
     }
 
-    // TODO: Area3DPtg Title: Area 3D Ptg - 3D reference (Sheet + Area)
-
-
-    /**
-     * @param extSheetIndex extern sheet index
-     * @param area
-     */
-    /*@Override
-    protected void parseArea3D(int extSheetIndex, String area) {
-        PrefixReferenceItem ref = grammar.prefixReferenceItem(extSheetIndex, area);
-        stack.push(ref);
-    }*/
-
-    // TODO: Area3DPxg Title: XSSF Area 3D Reference (Sheet + Area)
+    //Used
     @Override
     protected void parseArea3D(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> list, String sheetName, int sheetIndex, String area) {
         PrefixReferenceItem ref = grammar.prefixReferenceItem(sheetName, sheetIndex, area);
@@ -189,6 +176,7 @@ public final class Parser extends AbstractParser {
         stack.push(ref);
     }
 
+    //Used
     @Override
     protected void parseUDF(String arguments, int formulaRow, int formulaColumn) {
         UDF udf = new UDF(arguments);
@@ -197,6 +185,7 @@ public final class Parser extends AbstractParser {
         stack.push(udf);
     }
 
+    //Used
     @Override
     protected void sum() {
         Start args = stack.pop();
@@ -237,25 +226,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseNameX(String text) {
-        ReferenceItem ref = new ReferenceItem(text);
-        stack.push(ref);
-    }
-
-    /*@Override
-    protected void parseNameXPxg_(String text) {
-        ReferenceItem ref = new ReferenceItem(text);
-        stack.push(ref);
-    }*/
-
-    /**
-     * <code>
-     * ⟨NamedRange⟩ ::= ⟨Name⟩
-     * ⟨Name⟩ ::= NAME | NAME_PREFIXED
-     * </code>
-     */
-    @Override
-    protected void parseName(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> cells, String name, String sheetName) {
+    protected void parseNamedRange(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> cells, String name, String sheetName) {
         NamedRange ref = new NamedRange(name);
         ref.setSheetIndex(currentSheetIndex);
         ref.setSheetName(sheetName);
@@ -268,50 +239,45 @@ public final class Parser extends AbstractParser {
         stack.push(ref);
     }
 
-    /*
-     * <code>
-     * <Formula> ::= '(' <Formula> ')' | ...
-     * </code>
-     */
     @Override
-    protected void parseParenthesis() {
+    protected void parseParenthesisFormula() {
         Start obj = stack.pop();
         ParenthesisFormula formula = new ParenthesisFormula((Formula) obj);
         setOwnProperty(formula);
         stack.push(formula);
     }
 
+    /* CONSTANTS TERMS BEGIN */
 
     @Override
-    protected void parseNumber(Double value) {
+    protected void _FLOAT(Double value) {
         FLOAT term = grammar.number(value);
         graph.addNode(term);
         stack.push(term);
     }
-
     @Override
-    protected void parseInt(Integer value) {
+    protected void _INT(Integer value) {
         INT term = grammar.number(value);
         graph.addNode(term);
         stack.push(term);
     }
 
     @Override
-    protected void parseString(String text) {
+    protected void parseTEXT(String text) {
         TEXT term = grammar.text(text);
         graph.addNode(term);
         stack.push(term);
     }
 
     @Override
-    protected void parseBool(Boolean value) {
+    protected void parseBOOL(Boolean value) {
         BOOL term = grammar.bool(value);
         graph.addNode(term);
         stack.push(term);
     }
 
     @Override
-    protected void parseErr(String text) {
+    protected void parseERROR(String text) {
         ERROR term = grammar.error(text);
         setOwnProperty(term);
         err(term.toString(), formulaRow, formulaColumn);
@@ -319,31 +285,34 @@ public final class Parser extends AbstractParser {
         stack.push(term);
     }
 
+    /* CONSTANTS TERMS END */
 
+    /* UNARY OP BEGIN */
     @Override
-    protected void parseUnaryPlus() {
+    protected void parsePlus() {
         Start expr = stack.pop();
         Plus formula = grammar.plus(expr);
-
         formula.setSheetName(currentSheetName);
         formula.setSheetIndex(currentSheetIndex);
-
         graph.addNode(formula);
         stack.push(formula);
     }
 
     @Override
-    protected void parseUnaryMinus() {
+    protected void parseMinus() {
         Start expr = stack.pop();
         Minus formula = grammar.minus(expr);
         setOwnProperty(formula);
         graph.addNode(formula);
         stack.push(formula);
     }
+    /* UNARY OP END */
 
+
+    /* BINARY OP BEGIN */
 
     @Override
-    protected void parseEqual() {
+    protected void parse_Eq() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Eq op = grammar.eq(lExpr, rExpr);
@@ -353,7 +322,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseLessThan() {
+    protected void parse_Lt() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Lt op = grammar.lt(lExpr, rExpr);
@@ -363,7 +332,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseGreaterThan() {
+    protected void parse_Gt() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Gt op = grammar.gt(lExpr, rExpr);
@@ -373,7 +342,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseLessEqual() {
+    protected void parse_Leq() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Leq op = grammar.leq(lExpr, rExpr);
@@ -383,7 +352,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseGreaterEqual() {
+    protected void parse_GtEq() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         GtEq op = grammar.gteq(lExpr, rExpr);
@@ -391,9 +360,8 @@ public final class Parser extends AbstractParser {
         graph.add(op);
         stack.push(op);
     }
-
     @Override
-    protected void parseNotEqual() {
+    protected void parse_Neq() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Neq op = grammar.neq(lExpr, rExpr);
@@ -403,7 +371,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseConcat() {
+    protected void parse_Concat() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Concat op = grammar.concat(lExpr, rExpr);
@@ -413,7 +381,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseAdd() {
+    protected void parse_Add() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Add op = grammar.add(lExpr, rExpr);
@@ -423,7 +391,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseSubtract() {
+    protected void parse_Sub() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Sub op = grammar.subtrac(lExpr, rExpr);
@@ -433,7 +401,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseMultiply() {
+    protected void parse_Mult() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Mult op = grammar.multiply(lExpr, rExpr);
@@ -443,7 +411,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseDivide() {
+    protected void parse_Divide() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Divide op = grammar.divide(lExpr, rExpr);
@@ -453,7 +421,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parsePower() {
+    protected void parse_Power() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Power op = grammar.power(lExpr, rExpr);
@@ -462,24 +430,10 @@ public final class Parser extends AbstractParser {
         stack.push(op);
     }
 
-    /**
-     * <code>
-     * TODO: complete & test. intersection operator (a single
-     * whitespace).References can also be ranges, which are collections of
-     * cells.
-     *
-     * <Reference> ::= <ReferenceItem>
-     * | <Reference> ':' <Reference>
-     * | <Reference> ' ' <Reference>
-     * | '(' <Union> ')' | '(' <Reference> ')' | <Prefix> <ReferenceItem>
-     * | <Prefix> UDF <Arguments> ')' | <DynamicDataExchange>
-     *
-     * <Intersection> := <Reference> ' ' <Reference>
-     *
-     * </code>
-     */
+    /* BINARY OP END */
+
     @Override
-    protected void parseIntersection() {
+    protected void _Intersection() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Intersection op = grammar.intersection(lExpr, rExpr);
@@ -488,10 +442,8 @@ public final class Parser extends AbstractParser {
         stack.push(op);
     }
 
-    //<Union> ::= <Reference> { ',' <Reference⟩> }
-    //TODO: complete & test. the union operator , (a comma)  
     @Override
-    protected void parseUnion() {
+    protected void _Union() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Union op = grammar.union(lExpr, rExpr);
@@ -500,18 +452,20 @@ public final class Parser extends AbstractParser {
         stack.push(op);
     }
 
-    //<FunctionCall> ::= <ExcelFunction> <Arguments> ')' | <UnOpPrefix> <Formula> | <Formula> '%' | <Formula> <BinaryOp> <Formula>
-
-    /**
-     * %
-     * <Formula> '%'
-     */
     @Override
-    protected void parsePercent() {
+    protected void _PercentFormula() {
         PercentFormula formula = grammar.percentFormula(stack.pop());
         setOwnProperty(formula);
         graph.addNode(formula);
         stack.push(formula);
+    }
+
+    @Override
+    protected void _ERROR_REF(String text) {
+        ERROR_REF ref = new ERROR_REF();
+        setOwnProperty(ref);
+        stack.push(ref);
+        err(text, formulaRow, formulaColumn);
     }
 
     @Override
@@ -528,32 +482,13 @@ public final class Parser extends AbstractParser {
         stack.push(ref);
     }
 
-    //Not used in xlsx
-    //@Override
-    //protected void parseRef3DPtg(String sheetName, String area) {
-    //    stack.push(new PrefixReferenceItem(sheetName, area));
-    //}
-    @Override
-    protected void parseRefError(String text) {
-        //ERROR-REF is terminal! ERROR-REF Reference error literal #REF!
-        ERROR_REF ref = new ERROR_REF();
-        setOwnProperty(ref);
-        stack.push(ref);
-        err(text, formulaRow, formulaColumn);
-    }
-
-    @Override
-    protected void parseRefN(String text) {
-        stack.push(new ReferenceItem(text));
-    }
-
     @Override
     protected void parseTbl(String text) {
         stack.push(new ReferenceItem(text));
     }
 
     @Override
-    protected void parseRef(int ri, int ci, boolean rowRelative, boolean colRelative, boolean rowNotNull, Object value, String comment) {
+    protected void parse_CELL(int ri, int ci, boolean rowRelative, boolean colRelative, boolean rowNotNull, Object value, String comment) {
         CELL ref = grammar.cell(ri, ci, rowRelative, colRelative);
         ref.setComment(comment);
         setOwnProperty(ref);
@@ -563,7 +498,6 @@ public final class Parser extends AbstractParser {
         }
         stack.push(ref);
     }
-
 
     @Override
     protected void parseAreaN(List<Object> list, int firstRow, int firstColumn, boolean isFirstRowRelative, boolean isFirstColRelative, int lastRow, int lastColumn, boolean isLastRowRelative, boolean isLastColRelative) {
