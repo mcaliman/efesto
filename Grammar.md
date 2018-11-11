@@ -8,11 +8,19 @@
 ⟨Constant⟩ ::= INT | FLOAT | TEXT | BOOL | DATETIME | ERROR  
 ⟨FunctionCall⟩ ::=  ⟨EXCEL_FUNCTION⟩ | ⟨Unary⟩ | ⟨PercentFormula⟩ | ⟨Binary⟩
 ```
--- todo begin
+
+## Functions arguments
+
+```
 ⟨Arguments⟩ ::= ϵ | ⟨Argument⟩ { , ⟨Argument⟩ }
 ⟨Argument⟩ ::= ⟨Formula⟩ | ϵ
-Impl.note: abstract class Argument extends Formula
--- todo end
+```
+
+Implemented as varargs of Formula
+
+```
+EXCEL_FUNCTION(Formula... args)
+```
 
 ```
 ⟨Unary⟩ = ⟨Plus⟩  | ⟨Minus⟩ 
