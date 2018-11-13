@@ -27,7 +27,6 @@ import excel.grammar.formula.Reference;
 /**
  * @author Massimo Caliman
  */
-@Deprecated
 public final class UDF extends Reference {
 
     private final String arguments;

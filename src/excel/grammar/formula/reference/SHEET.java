@@ -30,7 +30,6 @@ package excel.grammar.formula.reference;
  *
  * @author Massimo Caliman
  */
-@Deprecated
 public final class SHEET extends Prefix {
 
     private final String name;

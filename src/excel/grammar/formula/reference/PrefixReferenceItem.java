@@ -29,7 +29,8 @@ import excel.grammar.formula.Reference;
  */
 public final class PrefixReferenceItem extends Reference {
 
-    private final String sheetName;
+    private Prefix prefix;
+
     private final String reference;
 
     private int firstRow;
@@ -37,31 +38,26 @@ public final class PrefixReferenceItem extends Reference {
     private int lastRow;
     private int lastColumn;
 
-    public PrefixReferenceItem(String sheetName, String reference) {
-        this.sheetName = sheetName;
+    public PrefixReferenceItem(Prefix prefix, String reference) {
+        this.prefix = prefix;
         this.reference = reference;
     }
 
     @Override
     public String toString() {
-        return sheetName + "!" + reference;
+        return prefix.toString() + "!" + reference;
     }
 
     public String toString(boolean address) {
-        return format(this, address);
-    }
-
-    private String format(PrefixReferenceItem prefixReferenceItem, boolean address) {
         StringBuilder buff = new StringBuilder();
-        if (address && !prefixReferenceItem.isArea()) buff.append((prefixReferenceItem).getAddr()).append(" = ");
-        buff.append(prefixReferenceItem.getSheetName()).append("!").append(prefixReferenceItem.getReference());
+        if (address && !this.isArea()) buff.append((this).getAddr()).append(" = ");
+        buff.append(this.prefix.toString()).append("!").append(this.getReference());
         if (address) {
-            String values = prefixReferenceItem.values();
+            String values = this.values();
             buff.append(" = ").append(values);
         }
         return buff.toString();
     }
-
 
     public String getSheetName() {
         return sheetName;

@@ -28,9 +28,11 @@ package excel.grammar.formula.reference;
 public final class FILE extends Prefix {
 
     private final int ext;
+    private String sheetName;
 
-    public FILE(int ext) {
+    public FILE(int ext, String sheetName) {
         this.ext = ext;
+        this.sheetName = sheetName;
     }
 
     public boolean isTerminal() {
@@ -39,7 +41,7 @@ public final class FILE extends Prefix {
 
     @Override
     public String toString() {
-        return "[" + ext + "]";
+        return "[" + ext + "]" + sheetName;
     }
 
 }

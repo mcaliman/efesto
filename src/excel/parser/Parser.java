@@ -522,7 +522,7 @@ public final class Parser extends AbstractParser {
     @Override
     protected void parseArea3D(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> list, String sheetName, int sheetIndex, String area) {
         SHEET tSHEET = new SHEET(sheetName);
-        PrefixReferenceItem ref = new PrefixReferenceItem(tSHEET.toString(), area);
+        PrefixReferenceItem ref = new PrefixReferenceItem(tSHEET, area);
         ref.setSheetIndex(sheetIndex);
         ref.setSheetName(sheetName);
         ref.setAsArea();
@@ -541,14 +541,14 @@ public final class Parser extends AbstractParser {
     protected void parseRef3D(int extWorkbookNumber, String sheet, String cellref) {
         //External references: External references are normally in the form [File]Sheet!Cell
         if (extWorkbookNumber > 0) {
-            FILE tFILE = new FILE(extWorkbookNumber);
-            PrefixReferenceItem ref = new PrefixReferenceItem(tFILE.toString() + sheet, cellref);
+            FILE tFILE = new FILE(extWorkbookNumber, sheet);
+            PrefixReferenceItem ref = new PrefixReferenceItem(tFILE, cellref);
             setOwnProperty(ref);
             graph.addNode(ref);
             stack.push(ref);
         } else {
             SHEET tSHEET = new SHEET(sheet);
-            PrefixReferenceItem ref = new PrefixReferenceItem(tSHEET.toString(), cellref);
+            PrefixReferenceItem ref = new PrefixReferenceItem(tSHEET, cellref);
             setOwnProperty(ref);
             graph.addNode(ref);
             stack.push(ref);
