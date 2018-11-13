@@ -26,8 +26,8 @@ package excel.grammar;
  * @author Massimo Caliman
  */
 public final class Metadata extends Start {
-    private String name;
-    private Object value;
+    private final String name;
+    private final Object value;
 
     public Metadata(String name, Object value) {
         this.name = name;

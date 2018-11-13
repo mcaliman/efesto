@@ -36,7 +36,7 @@ public final class CELL extends ReferenceItem {
 
     private Object value;
 
-    public CELL(int row, int column, boolean rowrelative, boolean columnrelative) {
+    public CELL(int row, int column) {
         this.row = row;
         this.column = column;
     }

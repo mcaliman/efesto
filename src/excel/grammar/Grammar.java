@@ -148,7 +148,7 @@ public final class Grammar {
     }
 
     public CELL cell(int row, int column, boolean rowRelative, boolean columnRelative) {
-        return new CELL(row, column, rowRelative, columnRelative);
+        return new CELL(row, column);
     }
 
     public EXCEL_FUNCTION builtinFunction(String name) throws UnsupportedBuiltinException {
@@ -161,8 +161,8 @@ public final class Grammar {
                                          boolean isFirstRowRelative,
                                          boolean isFirstColRelative,
                                          int lastRow, int lastColumn, boolean isLastRowRelative, boolean isLastColRelative) {
-        CELL firstCell = new CELL(firstRow, firstColumn, isFirstRowRelative, isFirstColRelative);
-        CELL lastCell = new CELL(lastRow, lastColumn, isLastRowRelative, isLastColRelative);
+        CELL firstCell = new CELL(firstRow, firstColumn);
+        CELL lastCell = new CELL(lastRow, lastColumn);
         return new RangeReference(firstCell, lastCell);
     }
 

@@ -28,13 +28,13 @@ import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
 
 final class ErrInternal {
 
-    public final static String ERROR_NULL_INTERSECTION = "#NULL!";
-    public final static String ERROR_DIV_ZERO = "#DIV/0!";
-    public final static String ERROR_VALUE_INVALID = "#VALUE!";
-    public final static String ERROR_REF_INVALID = "#REF!";
-    public final static String ERROR_NAME_INVALID = "#NAME?";
-    public final static String ERROR_NUM_ERROR = "#NUM!";
-    public final static String ERROR_N_A = "#N/A";
+    private final static String ERROR_NULL_INTERSECTION = "#NULL!";
+    private final static String ERROR_DIV_ZERO = "#DIV/0!";
+    private final static String ERROR_VALUE_INVALID = "#VALUE!";
+    private final static String ERROR_REF_INVALID = "#REF!";
+    private final static String ERROR_NAME_INVALID = "#NAME?";
+    private final static String ERROR_NUM_ERROR = "#NUM!";
+    private final static String ERROR_N_A = "#N/A";
 
     private final ErrPtg t;
 

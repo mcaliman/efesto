@@ -31,7 +31,6 @@ public abstract class Start {
 
     private int row;
     private int column;
-    private Class type;
 
     private String comment;
 
@@ -43,7 +42,7 @@ public abstract class Start {
     }
 
     public void setType(Class type) {
-        this.type = type;
+        Class type1 = type;
     }
 
     public String getComment() {

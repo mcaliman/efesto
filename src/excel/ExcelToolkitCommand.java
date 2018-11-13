@@ -71,10 +71,6 @@ public class ExcelToolkitCommand implements ToolkitCommand {
             System.out.println("" + start.getClass().getSimpleName() + " : " + start.toString(true));
     }
 
-    public void transpiler() {
-
-    }
-
     public StartList getStartList() {
         return parser.getList();
     }

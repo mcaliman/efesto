@@ -33,7 +33,7 @@ package excel.grammar.formula.reference;
 @Deprecated
 public final class SHEET extends Prefix {
 
-    private String name;
+    private final String name;
 
     public SHEET(String name) {
         this.name = name;

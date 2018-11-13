@@ -29,7 +29,7 @@ import excel.grammar.Start;
  * @author Massimo Caliman
  */
 public class ConstantArray extends Formula {
-    private Object[][] array;
+    private final Object[][] array;
 
     public ConstantArray(Object[][] array) {
         this.array = array;

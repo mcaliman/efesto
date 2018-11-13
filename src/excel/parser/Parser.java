@@ -151,7 +151,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected Start parseFormulaPost(Start start, int row, int column) {
+    protected Start parseFormulaPost(Start start) {
         if (!stack.empty()) start = stack.pop();
         return start;
     }
@@ -167,7 +167,7 @@ public final class Parser extends AbstractParser {
 
     //Used
     @Override
-    protected void _UDF(String arguments, int formulaRow, int formulaColumn) {
+    protected void _UDF(String arguments) {
         UDF udf = new UDF(arguments);
         setOwnProperty(udf);
         unordered.add(udf);

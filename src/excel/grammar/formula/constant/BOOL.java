@@ -71,8 +71,4 @@ public final class BOOL extends Constant {
         return value != null && value ? "TRUE" : "FALSE";
     }
 
-    public Boolean getValue() {
-        return value;
-    }
-
 }

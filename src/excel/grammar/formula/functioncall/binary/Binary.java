@@ -35,8 +35,8 @@ import excel.grammar.formula.reference.CELL;
 public abstract class Binary extends FunctionCall {
 
     private final String op;
-    private Formula lFormula;
-    private Formula rFormula;
+    private final Formula lFormula;
+    private final Formula rFormula;
 
     Binary(Formula lFormula, String op, Formula rFormula) {
         this.lFormula = lFormula;
@@ -55,14 +55,6 @@ public abstract class Binary extends FunctionCall {
 
     }
 
-    public String getValue() {
-        return operandTo(lFormula) + op + operandTo(rFormula);
-    }
-
-    public String getOp() {
-        return op;
-    }
-
 
     public Start getlFormula() {
         return lFormula;
@@ -76,12 +68,12 @@ public abstract class Binary extends FunctionCall {
 
     private String operandTo(Start operand) {
         if (operand instanceof CELL) return operand.getAddr();
-        else if (operand instanceof ParenthesisFormula) return format((ParenthesisFormula) operand, false);
+        else if (operand instanceof ParenthesisFormula) return format((ParenthesisFormula) operand);
         else if (operand instanceof Unary) return ((Unary) operand).getUnOpPrefix() + operand.getAddr();
         else return operand.toString();
     }
 
-    private String format(ParenthesisFormula start, boolean address) {
+    private String format(ParenthesisFormula start) {
         if (start.getFormula() instanceof Binary) return "(" + start.getFormula().toString(false) + ")";
         else return "(" + start.getFormula().getAddr(true) + ")";
     }

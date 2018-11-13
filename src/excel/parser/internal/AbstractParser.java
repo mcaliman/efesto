@@ -86,7 +86,7 @@ public abstract class AbstractParser {
     private final Workbook workbook;
 
     public boolean verbose = false;
-    protected boolean errors = false;
+    protected final boolean errors = false;
     public boolean metadata = false;
 
     protected Class internalFormulaResultTypeClass;
@@ -95,8 +95,6 @@ public abstract class AbstractParser {
     protected int currentSheetIndex;
     protected String currentSheetName;
     protected String fileName;
-
-    protected String author;
 
     private Sheet sheet;
     private EvaluationSheet evaluationSheet;
@@ -169,7 +167,7 @@ public abstract class AbstractParser {
         if (formulaPtgs == null) {
             System.err.println("ptgs empty or null for address " + formulaAddress);
             err("ptgs empty or null for address " + formulaAddress, formulaRow, formulaColumn);
-            _UDF(formulaText, formulaRow, formulaColumn);
+            _UDF(formulaText);
             return;
         }
         Start start = parse(formulaPtgs, formulaRow, formulaColumn);
@@ -177,14 +175,14 @@ public abstract class AbstractParser {
         parseFormula(start);
     }
 
-    protected abstract void _UDF(String arguments, int formulaRow, int formulaColumn);
+    protected abstract void _UDF(String arguments);
 
     private Start parse(Ptg[] ptgs, int row, int column) {
         Start start = null;
         parseFormulaInit();
         if (Ptg.doesFormulaReferToDeletedCell(ptgs)) doesFormulaReferToDeletedCell(row, column);
         for (Ptg ptg : ptgs) parse(ptg, row, column);
-        start = parseFormulaPost(start, row, column);
+        start = parseFormulaPost(start);
         return start;
     }
 
@@ -214,7 +212,7 @@ public abstract class AbstractParser {
                 new WhatIf(p, lessEqualPtg, t -> _Leq()),
                 new WhatIf(p, lessThanPtg, t -> _Lt()),
                 new WhatIf(p, memErrPtg, (Ptg t) -> parseMemErrPtg((MemErrPtg) t)),
-                new WhatIf(p, missingArgPtg, (Ptg t) -> parseMissingArgPtg((MissingArgPtg) t, row, column)),
+                new WhatIf(p, missingArgPtg, (Ptg t) -> parseMissingArgPtg(row, column)),
                 new WhatIf(p, multiplyPtg, t -> _Mult()),
                 new WhatIf(p, namePtg, (Ptg t) -> parseNamePtg((NamePtg) t)),
                 new WhatIf(p, notEqualPtg, t -> _Neq()),
@@ -362,7 +360,7 @@ public abstract class AbstractParser {
         err("DeletedRef3DPtg: " + t.toString(), formulaRow, formulaColumn);
     }
 
-    private void parseMissingArgPtg(MissingArgPtg t, int row, int column) {
+    private void parseMissingArgPtg(int row, int column) {
         parseMissingArguments(row, column);
     }
 
@@ -452,7 +450,7 @@ public abstract class AbstractParser {
 
     protected abstract void parseFormulaInit();
 
-    protected abstract Start parseFormulaPost(Start start, int row, int column);
+    protected abstract Start parseFormulaPost(Start start);
 
     // 3DPxg is XSSF
     // 3DPtg is HSSF

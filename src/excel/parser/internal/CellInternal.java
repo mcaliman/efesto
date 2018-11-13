@@ -38,7 +38,7 @@ import static org.apache.poi.ss.usermodel.Cell.*;
 class CellInternal {
 
     private final Cell cell;
-    private String comment;
+    private final String comment;
 
     public CellInternal(Cell cell) {
         this.cell = cell;
