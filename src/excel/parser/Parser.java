@@ -521,7 +521,8 @@ public final class Parser extends AbstractParser {
     //Sheet2!A1:B1 (Sheet + AREA/RANGE)
     @Override
     protected void parseArea3D(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> list, String sheetName, int sheetIndex, String area) {
-        PrefixReferenceItem ref = new PrefixReferenceItem(sheetName, area);
+        SHEET tSHEET = new SHEET(sheetName);
+        PrefixReferenceItem ref = new PrefixReferenceItem(tSHEET.toString(), area);
         ref.setSheetIndex(sheetIndex);
         ref.setSheetName(sheetName);
         ref.setAsArea();
