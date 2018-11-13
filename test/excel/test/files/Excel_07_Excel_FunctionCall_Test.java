@@ -27,10 +27,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class Excel_07_Excel_FunctionCall_Test {
+class Excel_07_Excel_FunctionCall_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/07-FunctionCall.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/07-FunctionCall.vb");

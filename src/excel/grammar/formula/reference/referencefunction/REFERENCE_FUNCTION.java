@@ -27,5 +27,5 @@ import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 /**
  * @author Massimo Caliman
  */
-public abstract class REFERENCE_FUNCTION extends EXCEL_FUNCTION {
+abstract class REFERENCE_FUNCTION extends EXCEL_FUNCTION {
 }

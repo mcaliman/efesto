@@ -31,10 +31,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_08_BinOp_Test {
+class Excel_08_BinOp_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/08-BinOp.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/08-BinaryOp.vb");

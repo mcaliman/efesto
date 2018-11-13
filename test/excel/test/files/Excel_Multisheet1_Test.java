@@ -30,10 +30,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_Multisheet1_Test {
+class Excel_Multisheet1_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/multisheet-1.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/multisheet-1.vb");

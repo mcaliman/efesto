@@ -29,13 +29,13 @@ import excel.parser.internal.HelperInternal;
  */
 public abstract class Start {
 
-    protected int row;
-    protected int column;
-    protected Class type;
+    private int row;
+    private int column;
+    private Class type;
 
-    protected String comment;
+    private String comment;
 
-    protected int sheetIndex;
+    private int sheetIndex;
     protected String sheetName;
 
     public boolean isTerminal() {

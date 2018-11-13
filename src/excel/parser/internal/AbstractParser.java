@@ -86,62 +86,50 @@ public abstract class AbstractParser {
     private final Workbook workbook;
 
     public boolean verbose = false;
-    public boolean errors = false;
+    protected boolean errors = false;
     public boolean metadata = false;
 
     protected Class internalFormulaResultTypeClass;
-    protected String formulaAddress;
-    protected String formulaText;
     protected int formulaColumn;
     protected int formulaRow;
     protected int currentSheetIndex;
     protected String currentSheetName;
     protected String fileName;
 
-    protected String creator;
-    protected String description;
-    protected String keywords;
-    protected String title;
-    protected String subject;
-    protected String category;
     protected String author;
-    protected String company;
-    protected String template;
-    protected String manager;
-    protected String comment;
 
     private Sheet sheet;
     private EvaluationSheet evaluationSheet;
     private XSSFEvaluationWorkbook evaluationWorkbook;
 
-    public AbstractParser(File file) throws InvalidFormatException, IOException {
+    protected AbstractParser(File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
         this.fileName = file.getName();
     }
 
-    public AbstractParser(Workbook workbook) {
+    private AbstractParser(Workbook workbook) {
         this.workbook = workbook;
         XSSFWorkbook xssfWorkbook = (XSSFWorkbook) this.workbook;
         POIXMLProperties props = xssfWorkbook.getProperties();
         POIXMLProperties.CoreProperties coreProperties = props.getCoreProperties();
-        this.creator = coreProperties.getCreator(); //get document creator
-        this.description = coreProperties.getDescription(); //set Description
-        this.keywords = coreProperties.getKeywords(); //set keywords
-        this.title = coreProperties.getTitle(); //Title of the document
-        this.subject = coreProperties.getSubject(); //Subject
-        this.category = coreProperties.getCategory(); //cate
+        String creator = coreProperties.getCreator();
+        String description = coreProperties.getDescription();
+        String keywords = coreProperties.getKeywords();
+        String title = coreProperties.getTitle();
+        String subject = coreProperties.getSubject();
+        String category = coreProperties.getCategory();
         POIXMLProperties.CustomProperties customProperties = props.getCustomProperties();
         customProperties.getProperty("Author");
         //List<CTProperty> list = customProperties.getUnderlyingProperties().getPropertyList();
         POIXMLProperties.ExtendedProperties extendedProperties = props.getExtendedProperties();
-        this.company = extendedProperties.getUnderlyingProperties().getCompany();
-        this.template = extendedProperties.getUnderlyingProperties().getTemplate();
-        this.manager = extendedProperties.getUnderlyingProperties().getManager();
+        String company = extendedProperties.getUnderlyingProperties().getCompany();
+        String template = extendedProperties.getUnderlyingProperties().getTemplate();
+        String manager = extendedProperties.getUnderlyingProperties().getManager();
         this.evaluationWorkbook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
         //System.out.println("Parse...");
     }
 
-    public void verbose(String text) {
+    protected void verbose(String text) {
         if (this.verbose) System.out.println(text);
     }
 
@@ -170,12 +158,12 @@ public abstract class AbstractParser {
     private void parseFormula(Cell cell) {
         verbose("Cell:" + cell.getClass().getSimpleName() + " " + cell.toString() + " " + cell.getCellType());
         CellInternal excelCell = new CellInternal(cell);
-        comment = excelCell.getComment();
+        String comment = excelCell.getComment();
         formulaColumn = cell.getColumnIndex();
         formulaRow = cell.getRowIndex();
         internalFormulaResultTypeClass = excelCell.internalFormulaResultType();
-        formulaAddress = HelperInternal.cellAddress(formulaRow, formulaColumn);
-        formulaText = cell.getCellFormula();
+        String formulaAddress = HelperInternal.cellAddress(formulaRow, formulaColumn);
+        String formulaText = cell.getCellFormula();
         FormulaTokensInternal tokens = new FormulaTokensInternal(this.evaluationWorkbook, this.evaluationSheet);
         Ptg[] formulaPtgs = tokens.getFormulaTokens(formulaRow, formulaColumn);
         if (formulaPtgs == null) {
@@ -374,7 +362,7 @@ public abstract class AbstractParser {
         err("DeletedRef3DPtg: " + t.toString(), formulaRow, formulaColumn);
     }
 
-    protected void parseMissingArgPtg(MissingArgPtg t, int row, int column) {
+    private void parseMissingArgPtg(MissingArgPtg t, int row, int column) {
         parseMissingArguments(row, column);
     }
 
@@ -474,7 +462,7 @@ public abstract class AbstractParser {
         final Predicate<Ptg> predicate;
         final Consumer<Ptg> consumer;
 
-        public WhatIf(Ptg ptg, Predicate<Ptg> predicate, Consumer<Ptg> consumer) {
+        WhatIf(Ptg ptg, Predicate<Ptg> predicate, Consumer<Ptg> consumer) {
             this.ptg = ptg;
             this.predicate = predicate;
             this.consumer = consumer;

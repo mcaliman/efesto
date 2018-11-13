@@ -35,7 +35,7 @@ import static org.apache.poi.ss.usermodel.Cell.*;
 /**
  * @author mcaliman
  */
-public class CellInternal {
+class CellInternal {
 
     private final Cell cell;
     private String comment;

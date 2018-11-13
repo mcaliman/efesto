@@ -34,11 +34,11 @@ import excel.grammar.formula.reference.CELL;
  */
 public abstract class Binary extends FunctionCall {
 
-    protected final String op;
-    protected Formula lFormula;
-    protected Formula rFormula;
+    private final String op;
+    private Formula lFormula;
+    private Formula rFormula;
 
-    public Binary(Formula lFormula, String op, Formula rFormula) {
+    Binary(Formula lFormula, String op, Formula rFormula) {
         this.lFormula = lFormula;
         this.op = op;
         this.rFormula = rFormula;
@@ -74,14 +74,14 @@ public abstract class Binary extends FunctionCall {
     }
 
 
-    protected String operandTo(Start operand) {
+    private String operandTo(Start operand) {
         if (operand instanceof CELL) return operand.getAddr();
         else if (operand instanceof ParenthesisFormula) return format((ParenthesisFormula) operand, false);
         else if (operand instanceof Unary) return ((Unary) operand).getUnOpPrefix() + operand.getAddr();
         else return operand.toString();
     }
 
-    protected String format(ParenthesisFormula start, boolean address) {
+    private String format(ParenthesisFormula start, boolean address) {
         if (start.getFormula() instanceof Binary) return "(" + start.getFormula().toString(false) + ")";
         else return "(" + start.getFormula().getAddr(true) + ")";
     }

@@ -30,10 +30,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_12_String_COUNTIF_Test {
+class Excel_12_String_COUNTIF_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/12-String-COUNTIF.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/12-String-COUNTIF.vb");

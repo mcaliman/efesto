@@ -29,13 +29,13 @@ import excel.grammar.Start;
  * @author Massimo Caliman
  */
 public class ConstantArray extends Formula {
-    Object[][] array;
+    private Object[][] array;
 
     public ConstantArray(Object[][] array) {
         this.array = array;
     }
 
-    public Object[][] getArray() {
+    private Object[][] getArray() {
         return array;
     }
 
@@ -49,7 +49,7 @@ public class ConstantArray extends Formula {
         return format(this);
     }
 
-    protected String format(ConstantArray e) {
+    private String format(ConstantArray e) {
         Object[][] array = e.getArray();
         StringBuilder str = new StringBuilder();
         str.append(varname(e)).append(" = ");
@@ -63,7 +63,7 @@ public class ConstantArray extends Formula {
         return str.toString();
     }
 
-    protected String varname(Start start) {
+    private String varname(Start start) {
         return start.getAddr();
     }
 }

@@ -29,10 +29,10 @@ import org.junit.jupiter.api.Test;
 /**
  * @author mcaliman
  */
-public class Excel_RealComplex4Test {
+class Excel_RealComplex4Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         long t = System.currentTimeMillis();
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(false);

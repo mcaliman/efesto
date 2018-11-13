@@ -27,10 +27,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class Excel_903_TerminalsFormulas_Test {
+class Excel_903_TerminalsFormulas_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         //long t = System.currentTimeMillis();
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/903-terminals-formulas.xlsx");
         toolkitCommand.execute();

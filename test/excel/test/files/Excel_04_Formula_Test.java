@@ -30,10 +30,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_04_Formula_Test {
+class Excel_04_Formula_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/04-formula.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/04-formula.vb");

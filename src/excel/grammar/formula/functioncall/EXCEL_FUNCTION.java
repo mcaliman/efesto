@@ -31,7 +31,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
 
     protected Formula[] args;
 
-    public EXCEL_FUNCTION(Formula... args) {
+    protected EXCEL_FUNCTION(Formula... args) {
         this.args = args;
     }
 

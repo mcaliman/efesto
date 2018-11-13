@@ -32,10 +32,10 @@ public final class PrefixReferenceItem extends Reference {
     private final String sheetName;
     private final String reference;
 
-    int firstRow;
-    int firstColumn;
-    int lastRow;
-    int lastColumn;
+    private int firstRow;
+    private int firstColumn;
+    private int lastRow;
+    private int lastColumn;
 
     public PrefixReferenceItem(String sheetName, String reference) {
         this.sheetName = sheetName;
@@ -67,19 +67,19 @@ public final class PrefixReferenceItem extends Reference {
         return sheetName;
     }
 
-    public String getReference() {
+    private String getReference() {
         return reference;
     }
 
-    boolean horizzontal_range() {
+    private boolean horizzontal_range() {
         return firstRow == lastRow && firstColumn != lastColumn;
     }
 
-    boolean vertical_range() {
+    private boolean vertical_range() {
         return firstColumn == lastColumn && firstRow != lastRow;
     }
 
-    public String values() {
+    private String values() {
         if (vals == null || vals.isEmpty()) return "[]";
 
         if (horizzontal_range() || vertical_range()) {

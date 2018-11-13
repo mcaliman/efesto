@@ -28,7 +28,7 @@ import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 
-public class FormulaTokensInternal {
+class FormulaTokensInternal {
 
 
     private final XSSFEvaluationWorkbook ew;

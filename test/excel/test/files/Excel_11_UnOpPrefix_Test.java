@@ -30,13 +30,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_11_UnOpPrefix_Test {
+class Excel_11_UnOpPrefix_Test {
 
     /**
      * @throws Exception
      */
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/11-UnOpPrefix.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/11-UnOpPrefix.vb");

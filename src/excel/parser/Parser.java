@@ -462,7 +462,7 @@ public final class Parser extends AbstractParser {
         builtInFunction(arity, name);
     }
 
-    protected void builtInFunction(int arity, String name) {
+    private void builtInFunction(int arity, String name) {
         try {
             if (arity == 0) {
                 EXCEL_FUNCTION builtinFunction = grammar.builtinFunction(name);

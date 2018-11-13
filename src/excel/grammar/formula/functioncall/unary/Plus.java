@@ -41,7 +41,7 @@ public final class Plus extends Unary {
         return format(this, address);
     }
 
-    protected String format(Plus formula, boolean addr) {
+    private String format(Plus formula, boolean addr) {
         StringBuilder buff = new StringBuilder();
         if (addr) buff.append(formula.getAddr(true)).append(" = ");
         Start expr = formula.getFormula();
@@ -52,7 +52,7 @@ public final class Plus extends Unary {
         return varname(formula) + " = " + formula.getUnOpPrefix() + expr.toString();
     }
 
-    protected String varname(Start start) {
+    private String varname(Start start) {
         return start.getAddr();
     }
 }

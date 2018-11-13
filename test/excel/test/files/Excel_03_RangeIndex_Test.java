@@ -30,10 +30,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_03_RangeIndex_Test {
+class Excel_03_RangeIndex_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/03-range-index.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/03-range-index.vb");

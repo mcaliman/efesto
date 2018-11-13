@@ -30,16 +30,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author mcaliman
  */
-public class ExcelHelperTest {
+class ExcelHelperTest {
 
-    public ExcelHelperTest() {
+    ExcelHelperTest() {
     }
 
     /**
      * Test of columnAsLetter method, of class ExcelHelper.
      */
     @Test
-    public void testColumnAsLetter() {
+    void testColumnAsLetter() {
         System.out.println("columnAsLetter");
 
         assertEquals("A", HelperInternal.columnAsLetter(0));
@@ -50,7 +50,7 @@ public class ExcelHelperTest {
      * Test of cellAddress method, of class ExcelHelper.
      */
     @Test
-    public void testCellAddress_int_int() {
+    void testCellAddress_int_int() {
         System.out.println("cellAddress(row,col)");
 
         assertEquals("A1", HelperInternal.cellAddress(0, 0));
@@ -61,7 +61,7 @@ public class ExcelHelperTest {
      * Test of cellAddress method, of class ExcelHelper.
      */
     @Test
-    public void testCellAddress_3args() {
+    void testCellAddress_3args() {
         System.out.println("cellAddress(row,col,sheetname)");
 
         String result = HelperInternal.cellAddress(0, 0, "Sheet");

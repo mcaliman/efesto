@@ -22,7 +22,7 @@
 
 package excel.graph;
 
-public class Edge {
+class Edge {
 
     private final Node src;
     private final Node dest;

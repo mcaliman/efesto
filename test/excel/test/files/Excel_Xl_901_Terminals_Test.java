@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_Xl_901_Terminals_Test {
+class Excel_Xl_901_Terminals_Test {
     /**
      * A1 = TRUE
      * A2 = 1,838226
@@ -40,7 +40,7 @@ public class Excel_Xl_901_Terminals_Test {
      * @throws Exception
      */
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         long t = System.currentTimeMillis();
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/901-terminals.xlsx");
         toolkitCommand.execute();

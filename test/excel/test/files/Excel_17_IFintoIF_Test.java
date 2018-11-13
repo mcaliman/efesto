@@ -27,10 +27,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class Excel_17_IFintoIF_Test {
+class Excel_17_IFintoIF_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/17-IF-into-IF.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/17-IF-into-IF.vb");

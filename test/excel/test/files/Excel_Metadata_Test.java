@@ -25,10 +25,10 @@ package excel.test.files;
 import excel.ExcelToolkitCommand;
 import org.junit.jupiter.api.Test;
 
-public class Excel_Metadata_Test {
+class Excel_Metadata_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/metadata.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/metadata.vb");

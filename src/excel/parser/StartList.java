@@ -51,7 +51,7 @@ public final class StartList extends ArrayList<Start> implements List<Start> {
         return this != null && this.size() == 1;
     }
 
-    public boolean test(int index, String text) {
+    private boolean test(int index, String text) {
         return this.get(index).test(text);
     }
 

@@ -31,10 +31,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_05_Reference_Test {
+class Excel_05_Reference_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/05-reference.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/05-reference.vb");

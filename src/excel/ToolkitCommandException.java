@@ -21,7 +21,7 @@
  */
 package excel;
 
-public class ToolkitCommandException extends Exception {
+class ToolkitCommandException extends Exception {
 
     /**
      * Creates a new instance of <code>ExcelToolkitCommandException</code> without detail message.

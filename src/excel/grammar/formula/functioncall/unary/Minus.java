@@ -41,7 +41,7 @@ public final class Minus extends Unary {
         return format(this, address);
     }
 
-    protected String format(Minus formula, boolean addr) {
+    private String format(Minus formula, boolean addr) {
         StringBuilder buff = new StringBuilder();
         if (addr) buff.append(varname(formula)).append(" = ");
         Start expr = formula.getFormula();
@@ -53,7 +53,7 @@ public final class Minus extends Unary {
 
     }
 
-    protected String varname(Start start) {
+    private String varname(Start start) {
         return start.getAddr();
     }
 }

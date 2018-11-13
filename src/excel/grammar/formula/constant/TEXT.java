@@ -38,7 +38,7 @@ public final class TEXT extends Constant {
         this.value = value;
     }
 
-    public final static String format(String str) {
+    public static String format(String str) {
         if (str == null) return "";
         return "\"" + str + "\"";
     }

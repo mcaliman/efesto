@@ -21,7 +21,7 @@
  */
 package excel;
 
-public interface ToolkitCommand {
+interface ToolkitCommand {
 
     void execute();
 

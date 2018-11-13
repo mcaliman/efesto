@@ -30,10 +30,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_10_Prefix_Test {
+class Excel_10_Prefix_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/10-Prefix.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/10-Prefix.vb");

@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_15_Others_FUN_Test {
+class Excel_15_Others_FUN_Test {
     /**
      * D7 = (2*(B29))/(1+B29)
      * Foglio1!D7 = (2*(Foglio1!B29))/(1+Foglio1!B29)
@@ -37,7 +37,7 @@ public class Excel_15_Others_FUN_Test {
      * @throws Exception
      */
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/15-Others-FUN.xlsx");
         toolkitCommand.execute();
         toolkitCommand.print();

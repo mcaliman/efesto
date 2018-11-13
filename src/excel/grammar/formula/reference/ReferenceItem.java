@@ -29,18 +29,18 @@ import excel.grammar.formula.Reference;
  */
 public class ReferenceItem extends Reference {
 
-    public String value;
+    String value;
 
-    int firstRow;
-    int firstColumn;
-    int lastRow;
-    int lastColumn;
+    private int firstRow;
+    private int firstColumn;
+    private int lastRow;
+    private int lastColumn;
 
 
-    public ReferenceItem() {
+    ReferenceItem() {
     }
 
-    public ReferenceItem(String value) {
+    ReferenceItem(String value) {
         this.value = value;
     }
 
@@ -69,20 +69,20 @@ public class ReferenceItem extends Reference {
     }
 
 
-    public String getReferenceItemValue() {
+    private String getReferenceItemValue() {
         return value;
     }
 
 
-    boolean horizzontal_range() {
+    private boolean horizzontal_range() {
         return firstRow == lastRow && firstColumn != lastColumn;
     }
 
-    boolean vertical_range() {
+    private boolean vertical_range() {
         return firstColumn == lastColumn && firstRow != lastRow;
     }
 
-    public String values() {
+    private String values() {
         if (horizzontal_range() || vertical_range()) {
             StringBuilder buff = new StringBuilder();
             buff.append("[ ");

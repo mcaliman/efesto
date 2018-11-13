@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_09_Expr_Test {
+class Excel_09_Expr_Test {
 
     /**
      * Expr!A1=100
@@ -39,7 +39,7 @@ public class Excel_09_Expr_Test {
      * @throws Exception
      */
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/09-Expr.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/09-Expr.vb");

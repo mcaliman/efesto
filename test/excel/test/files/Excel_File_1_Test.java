@@ -27,10 +27,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class Excel_File_1_Test {
+class Excel_File_1_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/file-1.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/file-1.vb");

@@ -28,10 +28,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class Excel_HORIZONTAL_RANGE_Test {
+class Excel_HORIZONTAL_RANGE_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/HORIZONTAL_RANGE.xlsx", options);

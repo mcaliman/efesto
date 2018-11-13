@@ -40,7 +40,7 @@ public class HelperInternal {
         return (letter + (row + 1));
     }
 
-    public static String cellAddress(final int row, final int column, boolean rowrelative, boolean columnrelative) {
+    private static String cellAddress(final int row, final int column, boolean rowrelative, boolean columnrelative) {
         String letter = columnAsLetter(column);
         return (letter + (row + 1));
     }

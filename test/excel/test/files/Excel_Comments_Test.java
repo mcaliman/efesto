@@ -33,10 +33,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_Comments_Test {
+class Excel_Comments_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setMetadata(true);
         options.setVerbose(false);

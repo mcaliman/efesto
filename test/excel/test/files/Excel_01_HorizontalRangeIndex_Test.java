@@ -30,10 +30,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class Excel_01_HorizontalRangeIndex_Test {
+class Excel_01_HorizontalRangeIndex_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/01-horizontal-range-index.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/01-horizontal-range-index.vb");

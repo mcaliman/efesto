@@ -26,7 +26,7 @@ import org.apache.poi.ss.formula.ptg.ErrPtg;
 
 import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
 
-public final class ErrInternal {
+final class ErrInternal {
 
     public final static String ERROR_NULL_INTERSECTION = "#NULL!";
     public final static String ERROR_DIV_ZERO = "#DIV/0!";

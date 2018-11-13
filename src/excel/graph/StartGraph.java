@@ -33,7 +33,7 @@ import java.util.*;
 
 public class StartGraph {
 
-    protected final HashMap<Start, Node> graph;
+    private final HashMap<Start, Node> graph;
 
     public StartGraph() {
         this.graph = new HashMap<>();

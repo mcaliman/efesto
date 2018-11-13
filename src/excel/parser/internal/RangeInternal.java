@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * @author mcaliman
  */
-public class RangeInternal {
+class RangeInternal {
 
     private final static SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
     private final Workbook workbook;

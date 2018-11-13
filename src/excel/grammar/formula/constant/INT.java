@@ -37,7 +37,7 @@ public final class INT extends Constant {
         this.value = value;
     }
 
-    public final static String format(Integer integer) {
+    public static String format(Integer integer) {
         if (integer == null) return "";
         return integer.toString();
     }

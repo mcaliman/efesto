@@ -38,15 +38,15 @@ public final class RangeReference extends Reference {
         this.reference2 = reference2;
     }
 
-    boolean horizzontal_range() {
+    private boolean horizzontal_range() {
         return reference1.getRow() == reference2.getRow() && reference1.getColumn() != reference2.getColumn();
     }
 
-    boolean vertical_range() {
+    private boolean vertical_range() {
         return reference1.getColumn() == reference2.getColumn() && reference1.getRow() != reference2.getRow();
     }
 
-    public String values() {
+    private String values() {
         try {
             if (horizzontal_range() || vertical_range()) {
                 StringBuilder buff = new StringBuilder();

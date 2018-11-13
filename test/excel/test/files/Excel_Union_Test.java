@@ -28,10 +28,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class Excel_Union_Test {
+class Excel_Union_Test {
 
     @Test
-    public void testTest() throws Exception {
+    void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/Union.xlsx", options);

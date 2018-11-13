@@ -40,7 +40,7 @@ public final class DATETIME extends Constant {
         this.value = value;
     }
 
-    public final static String format(final Date date) {
+    public static String format(final Date date) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         return format.format(date);
     }

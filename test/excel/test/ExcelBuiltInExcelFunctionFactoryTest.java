@@ -28,13 +28,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class ExcelBuiltInExcelFunctionFactoryTest {
+class ExcelBuiltInExcelFunctionFactoryTest {
 
-    public ExcelBuiltInExcelFunctionFactoryTest() {
+    ExcelBuiltInExcelFunctionFactoryTest() {
     }
 
     @Test
-    public void testCreate() {
+    void testCreate() {
         System.out.println("create");
         try {
             BuiltinFactory factory = new BuiltinFactory();
