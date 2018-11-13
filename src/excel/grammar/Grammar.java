@@ -166,22 +166,22 @@ public final class Grammar {
         return new RangeReference(firstCell, lastCell);
     }
 
-    public PrefixReferenceItem prefixReferenceItem(int externSheetIndex, String area) {
+    /*public PrefixReferenceItem prefixReferenceItem(int externSheetIndex, String area) {
         return new PrefixReferenceItem(externSheetIndex + "", area);
-    }
+    }*/
 
-    public PrefixReferenceItem prefixReferenceItem(String sheetName, int sheetIndex, String area) {
+    /*public PrefixReferenceItem prefixReferenceItem(String sheetName, int sheetIndex, String area) {
         PrefixReferenceItem ref = new PrefixReferenceItem(sheetName, area);
         ref.setSheetIndex(sheetIndex);
         ref.setSheetName(sheetName);
         ref.setAsArea();
         return ref;
-    }
+    }*/
 
-    public PrefixReferenceItem prefixReferenceItem(int extWorkbookNumber, String sheet, String area) {
+    /*public PrefixReferenceItem prefixReferenceItem(int extWorkbookNumber, String sheet, String area) {
         if (extWorkbookNumber > 0) sheet = "[" + extWorkbookNumber + "]" + sheet;
         return new PrefixReferenceItem(sheet, area);
-    }
+    }*/
 
     public Reference as_reference(Start args) {
         if (args instanceof RangeReference) return (RangeReference) args;

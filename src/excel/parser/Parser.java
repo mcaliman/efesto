@@ -521,7 +521,16 @@ public final class Parser extends AbstractParser {
     //Sheet2!A1:B1 (Sheet + AREA/RANGE)
     @Override
     protected void parseArea3D(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> list, String sheetName, int sheetIndex, String area) {
-        PrefixReferenceItem ref = grammar.prefixReferenceItem(sheetName, sheetIndex, area);
+        //PrefixReferenceItem ref = grammar.prefixReferenceItem(sheetName, sheetIndex, area);
+
+        PrefixReferenceItem ref = new PrefixReferenceItem(sheetName, area);
+        ref.setSheetIndex(sheetIndex);
+        ref.setSheetName(sheetName);
+        ref.setAsArea();
+
+
+
+
         ref.add(list);
         ref.setFirstRow(firstRow);
         ref.setFirstColumn(firstColumn);
@@ -534,12 +543,25 @@ public final class Parser extends AbstractParser {
     //Used
     //Sheet2!A1 (Sheet + CELL)
     @Override
-    protected void parseRef3D(int externalFileReference, String sheet, String cellref) {
-        PrefixReferenceItem ref = grammar.prefixReferenceItem(externalFileReference, sheet, cellref);
-        setOwnProperty(ref);
-        graph.addNode(ref);
-        stack.push(ref);
+    protected void parseRef3D(int extWorkbookNumber, String sheet, String cellref) {
+        //External references: External references are normally in the form [File]Sheet!Cell
+        if (extWorkbookNumber > 0) {
+            sheet = "[" + extWorkbookNumber + "]" + sheet;
+            FILE tFILE = new FILE(extWorkbookNumber);
+            PrefixReferenceItem ref = new PrefixReferenceItem(sheet, cellref);
+            setOwnProperty(ref);
+            graph.addNode(ref);
+            stack.push(ref);
+        } else {
+            SHEET tSHEET = new SHEET(sheet);
+            PrefixReferenceItem ref = new PrefixReferenceItem(sheet, cellref);
+            setOwnProperty(ref);
+            graph.addNode(ref);
+            stack.push(ref);
+        }
+
     }
+
 
     //Used
 
