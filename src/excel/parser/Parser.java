@@ -80,10 +80,10 @@ public final class Parser extends AbstractParser {
         err(address + " does formula refer to deleted cell", row, column);
     }
 
-    private void unmanaged(String text) {
+    /*private void unmanaged(String text) {
         System.err.println("unmanaged!" + text);
         throw new RuntimeException("unmanaged!" + text);
-    }
+    }*/
 
     @Override
     protected void err(String string, int row, int column) {
@@ -156,29 +156,18 @@ public final class Parser extends AbstractParser {
         return start;
     }
 
+    //Used
     @Override
-    protected void parse_ConstantArray(Object[][] array) {
+    protected void _ConstantArray(Object[][] array) {
         ConstantArray term = new ConstantArray(array);
         setOwnProperty(term);
         stack.push(term);
     }
 
-    //Used
-    @Override
-    protected void parseArea3D(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> list, String sheetName, int sheetIndex, String area) {
-        PrefixReferenceItem ref = grammar.prefixReferenceItem(sheetName, sheetIndex, area);
-        ref.add(list);
-        ref.setFirstRow(firstRow);
-        ref.setFirstColumn(firstColumn);
-        ref.setLastRow(lastRow);
-        ref.setLastColumn(lastColumn);
-        unordered.add(ref);
-        stack.push(ref);
-    }
 
     //Used
     @Override
-    protected void parseUDF(String arguments, int formulaRow, int formulaColumn) {
+    protected void _UDF(String arguments, int formulaRow, int formulaColumn) {
         UDF udf = new UDF(arguments);
         setOwnProperty(udf);
         unordered.add(udf);
@@ -187,7 +176,7 @@ public final class Parser extends AbstractParser {
 
     //Used
     @Override
-    protected void sum() {
+    protected void _SUM() {
         Start args = stack.pop();
         if (args instanceof Reference) {
             Reference ref = grammar.as_reference(args);
@@ -210,23 +199,9 @@ public final class Parser extends AbstractParser {
         stack.push(sum);
     }
 
+    //Used
     @Override
-    protected void parseExp() {
-        unmanaged("parseExp");
-    }
-
-    @Override
-    protected void parseMemArea() {
-        unmanaged("parseMemArea");
-    }
-
-    @Override
-    protected void parseMemFunc() {
-        unmanaged("parseMemFunc");
-    }
-
-    @Override
-    protected void parseNamedRange(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> cells, String name, String sheetName) {
+    protected void _NamedRange(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> cells, String name, String sheetName) {
         NamedRange ref = new NamedRange(name);
         ref.setSheetIndex(currentSheetIndex);
         ref.setSheetName(sheetName);
@@ -239,15 +214,14 @@ public final class Parser extends AbstractParser {
         stack.push(ref);
     }
 
+    //Used
     @Override
-    protected void parseParenthesisFormula() {
+    protected void _ParenthesisFormula() {
         Start obj = stack.pop();
         ParenthesisFormula formula = new ParenthesisFormula((Formula) obj);
         setOwnProperty(formula);
         stack.push(formula);
     }
-
-    /* CONSTANTS TERMS BEGIN */
 
     @Override
     protected void _FLOAT(Double value) {
@@ -255,6 +229,7 @@ public final class Parser extends AbstractParser {
         graph.addNode(term);
         stack.push(term);
     }
+
     @Override
     protected void _INT(Integer value) {
         INT term = grammar.number(value);
@@ -263,21 +238,21 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseTEXT(String text) {
+    protected void _TEXT(String text) {
         TEXT term = grammar.text(text);
         graph.addNode(term);
         stack.push(term);
     }
 
     @Override
-    protected void parseBOOL(Boolean value) {
+    protected void _BOOL(Boolean value) {
         BOOL term = grammar.bool(value);
         graph.addNode(term);
         stack.push(term);
     }
 
     @Override
-    protected void parseERROR(String text) {
+    protected void _ERROR(String text) {
         ERROR term = grammar.error(text);
         setOwnProperty(term);
         err(term.toString(), formulaRow, formulaColumn);
@@ -285,11 +260,9 @@ public final class Parser extends AbstractParser {
         stack.push(term);
     }
 
-    /* CONSTANTS TERMS END */
 
-    /* UNARY OP BEGIN */
     @Override
-    protected void parsePlus() {
+    protected void _Plus() {
         Start expr = stack.pop();
         Plus formula = grammar.plus(expr);
         formula.setSheetName(currentSheetName);
@@ -299,20 +272,17 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseMinus() {
+    protected void _Minus() {
         Start expr = stack.pop();
         Minus formula = grammar.minus(expr);
         setOwnProperty(formula);
         graph.addNode(formula);
         stack.push(formula);
     }
-    /* UNARY OP END */
 
-
-    /* BINARY OP BEGIN */
 
     @Override
-    protected void parse_Eq() {
+    protected void _Eq() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Eq op = grammar.eq(lExpr, rExpr);
@@ -322,7 +292,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parse_Lt() {
+    protected void _Lt() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Lt op = grammar.lt(lExpr, rExpr);
@@ -332,7 +302,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parse_Gt() {
+    protected void _Gt() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Gt op = grammar.gt(lExpr, rExpr);
@@ -342,7 +312,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parse_Leq() {
+    protected void _Leq() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Leq op = grammar.leq(lExpr, rExpr);
@@ -352,7 +322,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parse_GtEq() {
+    protected void _GtEq() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         GtEq op = grammar.gteq(lExpr, rExpr);
@@ -360,8 +330,9 @@ public final class Parser extends AbstractParser {
         graph.add(op);
         stack.push(op);
     }
+
     @Override
-    protected void parse_Neq() {
+    protected void _Neq() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Neq op = grammar.neq(lExpr, rExpr);
@@ -371,7 +342,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parse_Concat() {
+    protected void _Concat() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Concat op = grammar.concat(lExpr, rExpr);
@@ -381,7 +352,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parse_Add() {
+    protected void _Add() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Add op = grammar.add(lExpr, rExpr);
@@ -391,7 +362,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parse_Sub() {
+    protected void _Sub() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Sub op = grammar.subtrac(lExpr, rExpr);
@@ -401,7 +372,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parse_Mult() {
+    protected void _Mult() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Mult op = grammar.multiply(lExpr, rExpr);
@@ -411,7 +382,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parse_Divide() {
+    protected void _Divide() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Divide op = grammar.divide(lExpr, rExpr);
@@ -421,7 +392,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parse_Power() {
+    protected void _Power() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
         Power op = grammar.power(lExpr, rExpr);
@@ -430,7 +401,6 @@ public final class Parser extends AbstractParser {
         stack.push(op);
     }
 
-    /* BINARY OP END */
 
     @Override
     protected void _Intersection() {
@@ -469,26 +439,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseRange(String text) {
-        TEXT start = grammar.text(text);
-        stack.push(start);
-    }
-
-    @Override
-    protected void parseRef3D(int externalFileReference, String sheet, String area) {
-        PrefixReferenceItem ref = grammar.prefixReferenceItem(externalFileReference, sheet, area);
-        setOwnProperty(ref);
-        graph.addNode(ref);
-        stack.push(ref);
-    }
-
-    @Override
-    protected void parseTbl(String text) {
-        stack.push(new ReferenceItem(text));
-    }
-
-    @Override
-    protected void parse_CELL(int ri, int ci, boolean rowRelative, boolean colRelative, boolean rowNotNull, Object value, String comment) {
+    protected void _CELL(int ri, int ci, boolean rowRelative, boolean colRelative, boolean rowNotNull, Object value, String comment) {
         CELL ref = grammar.cell(ri, ci, rowRelative, colRelative);
         ref.setComment(comment);
         setOwnProperty(ref);
@@ -499,25 +450,16 @@ public final class Parser extends AbstractParser {
         stack.push(ref);
     }
 
+    //Used
     @Override
-    protected void parseAreaN(List<Object> list, int firstRow, int firstColumn, boolean isFirstRowRelative, boolean isFirstColRelative, int lastRow, int lastColumn, boolean isLastRowRelative, boolean isLastColRelative) {
-        RangeReference ref = grammar.rangeReference(firstRow, firstColumn, isFirstRowRelative, isFirstColRelative, lastRow, lastColumn, isLastRowRelative, isLastColRelative);
-        setOwnProperty(ref);
-        ref.add(list);
-        if (this.unordered.add(ref))
-            graph.add(ref);
-        stack.push(ref);
+    protected void parseFunc(String name, int arity) {
+        builtInFunction(arity, name);
     }
 
+    //Used (unique with parseFunc)
     @Override
-    protected void parseArea(List<Object> list, int firstRow, int firstColumn, boolean isFirstRowRelative, boolean isFirstColRelative, int lastRow, int lastColumn, boolean isLastRowRelative, boolean isLastColRelative) {
-        RangeReference ref = grammar.rangeReference(firstRow, firstColumn, isFirstRowRelative, isFirstColRelative, lastRow, lastColumn, isLastRowRelative, isLastColRelative);
-        setOwnProperty(ref);
-        //is area not a cell with ref to area
-        ref.setAsArea();
-        ref.add(list);
-        graph.addNode(ref);
-        stack.push(ref);
+    protected void parseFuncVar(String name, int arity) {
+        builtInFunction(arity, name);
     }
 
     protected void builtInFunction(int arity, String name) {
@@ -569,19 +511,48 @@ public final class Parser extends AbstractParser {
         }
     }
 
-    @Override
-    protected void parseFunc(String name, int arity) {
-        builtInFunction(arity, name);
-    }
-
-    @Override
-    protected void parseFuncVar(String name, int arity) {
-        builtInFunction(arity, name);
-
-    }
-
     public StartList getList() {
         return ordered;
     }
 
+// BEGIN
+
+    //Used
+    //Sheet2!A1:B1 (Sheet + AREA/RANGE)
+    @Override
+    protected void parseArea3D(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> list, String sheetName, int sheetIndex, String area) {
+        PrefixReferenceItem ref = grammar.prefixReferenceItem(sheetName, sheetIndex, area);
+        ref.add(list);
+        ref.setFirstRow(firstRow);
+        ref.setFirstColumn(firstColumn);
+        ref.setLastRow(lastRow);
+        ref.setLastColumn(lastColumn);
+        unordered.add(ref);
+        stack.push(ref);
+    }
+
+    //Used
+    //Sheet2!A1 (Sheet + CELL)
+    @Override
+    protected void parseRef3D(int externalFileReference, String sheet, String cellref) {
+        PrefixReferenceItem ref = grammar.prefixReferenceItem(externalFileReference, sheet, cellref);
+        setOwnProperty(ref);
+        graph.addNode(ref);
+        stack.push(ref);
+    }
+
+    //Used
+
+    @Override
+    protected void _RangeReference(List<Object> list, int firstRow, int firstColumn, boolean isFirstRowRelative, boolean isFirstColRelative, int lastRow, int lastColumn, boolean isLastRowRelative, boolean isLastColRelative) {
+        RangeReference ref = grammar.rangeReference(firstRow, firstColumn, isFirstRowRelative, isFirstColRelative, lastRow, lastColumn, isLastRowRelative, isLastColRelative);
+        setOwnProperty(ref);
+        //is area not a cell with ref to area
+        ref.setAsArea();
+        ref.add(list);
+        graph.addNode(ref);
+        stack.push(ref);
+    }
+
+// END
 }
