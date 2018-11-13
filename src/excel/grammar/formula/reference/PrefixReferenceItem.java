@@ -37,12 +37,10 @@ public final class PrefixReferenceItem extends Reference {
     int lastRow;
     int lastColumn;
 
-
     public PrefixReferenceItem(String sheetName, String reference) {
         this.sheetName = sheetName;
         this.reference = reference;
     }
-
 
     @Override
     public String toString() {
