@@ -45,13 +45,13 @@ public final class PrefixReferenceItem extends Reference {
 
     @Override
     public String toString() {
-        return prefix.toString() + "!" + reference;
+        return prefix.toString() + reference;
     }
 
     public String toString(boolean address) {
         StringBuilder buff = new StringBuilder();
         if (address && !this.isArea()) buff.append((this).getAddr()).append(" = ");
-        buff.append(this.prefix.toString()).append("!").append(this.getReference());
+        buff.append(this.prefix.toString()).append(this.getReference());
         if (address) {
             String values = this.values();
             buff.append(" = ").append(values);
