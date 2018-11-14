@@ -25,7 +25,6 @@ package excel.grammar.formula.reference;
 /**
  * @author Massimo Caliman
  */
-@Deprecated
 public class Prefix extends ReferenceItem {
 
 }
