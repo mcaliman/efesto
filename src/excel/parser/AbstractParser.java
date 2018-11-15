@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -343,7 +344,7 @@ public abstract class AbstractParser {
             }
         }
         String name = evaluationWorkbook.getNameText(t);
-        _NamedRange(range.getFirstRow(), range.getFirstColumn(), range.getLastRow(), range.getLastColumn(), range.getValues(), name, range.getSheetName());
+        _NamedRange(Objects.requireNonNull(range).getFirstRow(), range.getFirstColumn(), range.getLastRow(), range.getLastColumn(), range.getValues(), name, range.getSheetName());
     }
 
 

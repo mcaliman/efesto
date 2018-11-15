@@ -5,7 +5,10 @@
       <w>accrintm</w>
       <w>acos</w>
       <w>acosh</w>
+      <w>addr</w>
       <w>affero</w>
+      <w>agpl</w>
+      <w>aivaloglou</w>
       <w>amordegrc</w>
       <w>amorlinc</w>
       <w>asin</w>
@@ -15,25 +18,222 @@
       <w>avedev</w>
       <w>averagea</w>
       <w>averageif</w>
+      <w>averageifs</w>
+      <w>bahttext</w>
+      <w>besseli</w>
+      <w>besselj</w>
+      <w>besselk</w>
+      <w>bessely</w>
+      <w>betadist</w>
+      <w>betainv</w>
+      <w>binomdist</w>
       <w>caliman</w>
       <w>cellref</w>
       <w>cels</w>
+      <w>chidist</w>
+      <w>chiinv</w>
+      <w>chitest</w>
+      <w>cicla</w>
       <w>cloujre</w>
+      <w>combin</w>
+      <w>correl</w>
+      <w>counta</w>
+      <w>countblank</w>
       <w>countif</w>
+      <w>countifs</w>
+      <w>coupdaybs</w>
+      <w>coupdays</w>
+      <w>coupdaysnc</w>
+      <w>coupncd</w>
+      <w>coupnum</w>
+      <w>couppcd</w>
+      <w>covar</w>
+      <w>critbinom</w>
+      <w>cubekpimember</w>
+      <w>cubemember</w>
+      <w>cubememberproperty</w>
+      <w>cuberankedmember</w>
+      <w>cubeset</w>
+      <w>cubesetcount</w>
+      <w>cubevalue</w>
+      <w>cumipmt</w>
+      <w>cumprinc</w>
+      <w>datasets</w>
+      <w>datevalue</w>
+      <w>daverage</w>
+      <w>dcount</w>
+      <w>dcounta</w>
+      <w>ddecall</w>
+      <w>devsq</w>
+      <w>dget</w>
+      <w>dmax</w>
+      <w>dmin</w>
+      <w>dollarde</w>
+      <w>dollarfr</w>
+      <w>doub</w>
+      <w>dproduct</w>
       <w>dquote</w>
+      <w>dstdev</w>
+      <w>dstdevp</w>
+      <w>dsum</w>
+      <w>dvar</w>
+      <w>dvarp</w>
+      <w>edateeffect</w>
       <w>efesto</w>
+      <w>efthimia</w>
+      <w>eomonth</w>
+      <w>erfc</w>
+      <w>euroconvert</w>
+      <w>expondist</w>
+      <w>factdouble</w>
+      <w>fdist</w>
+      <w>felienne</w>
+      <w>finto</w>
+      <w>finv</w>
+      <w>fisherinv</w>
       <w>foglio</w>
+      <w>ftest</w>
+      <w>fvschedule</w>
+      <w>gammadist</w>
+      <w>gammainv</w>
+      <w>gammaln</w>
+      <w>geomean</w>
+      <w>gestep</w>
+      <w>getl</w>
+      <w>getpivotdata</w>
+      <w>getr</w>
       <w>gteq</w>
+      <w>harmean</w>
+      <w>hermans</w>
+      <w>hlookup</w>
+      <w>hoepelman</w>
+      <w>horizzontal</w>
       <w>hssf</w>
+      <w>hypgeomdist</w>
+      <w>iferror</w>
+      <w>iffalse</w>
+      <w>ifif</w>
+      <w>iftrue</w>
+      <w>imabs</w>
+      <w>imargument</w>
+      <w>imconjugate</w>
+      <w>imcos</w>
+      <w>imdiv</w>
+      <w>imexp</w>
+      <w>imln</w>
+      <w>imlog</w>
+      <w>impower</w>
+      <w>improduct</w>
+      <w>imreal</w>
+      <w>imsin</w>
+      <w>imsqrt</w>
+      <w>imsub</w>
+      <w>imsum</w>
+      <w>intrate</w>
+      <w>ipmt</w>
+      <w>isblank</w>
+      <w>iserror</w>
+      <w>isna</w>
+      <w>isnumber</w>
+      <w>ispmt</w>
+      <w>kahn</w>
+      <w>leftb</w>
+      <w>lenb</w>
+      <w>lformula</w>
+      <w>linest</w>
+      <w>logest</w>
+      <w>loginv</w>
+      <w>lognormdist</w>
+      <w>maxa</w>
+      <w>mdeterm</w>
+      <w>mduration</w>
+      <w>midb</w>
+      <w>minverse</w>
+      <w>mirr</w>
+      <w>mmult</w>
+      <w>mround</w>
       <w>mult</w>
+      <w>multinomial</w>
       <w>multisheet</w>
+      <w>negbinomdist</w>
+      <w>networkdays</w>
+      <w>nonnumeric</w>
+      <w>normdist</w>
+      <w>norminv</w>
+      <w>normsdist</w>
+      <w>normsinv</w>
+      <w>nper</w>
+      <w>oddfprice</w>
+      <w>oddfyield</w>
+      <w>oddlprice</w>
+      <w>oddlyield</w>
+      <w>opological</w>
+      <w>ormula</w>
+      <w>percentrank</w>
+      <w>permut</w>
+      <w>ppmt</w>
+      <w>pricedisc</w>
+      <w>pricemat</w>
       <w>ptgs</w>
+      <w>randbetween</w>
+      <w>rdering</w>
+      <w>replaceb</w>
+      <w>rept</w>
+      <w>rformula</w>
+      <w>rightb</w>
+      <w>rounddown</w>
+      <w>searchb</w>
+      <w>seriessum</w>
+      <w>sheetname</w>
       <w>sheetnamne</w>
+      <w>sinh</w>
+      <w>slist</w>
+      <w>sqrtpi</w>
       <w>squote</w>
+      <w>stdev</w>
+      <w>stdeva</w>
+      <w>stdevp</w>
+      <w>stdevpa</w>
+      <w>steyx</w>
       <w>subtrac</w>
+      <w>sumif</w>
+      <w>sumifs</w>
+      <w>sumproduct</w>
+      <w>sumsq</w>
+      <w>sumx</w>
+      <w>sumxmy</w>
+      <w>tanh</w>
+      <w>tbilleq</w>
+      <w>tbillprice</w>
+      <w>tbillyield</w>
+      <w>tdist</w>
+      <w>timevalue</w>
+      <w>tinv</w>
       <w>transpiler</w>
+      <w>trimmean</w>
+      <w>trunc</w>
+      <w>ttest</w>
+      <w>vals</w>
+      <w>vara</w>
+      <w>varname</w>
+      <w>varp</w>
+      <w>varpa</w>
+      <w>vlookup</w>
+      <w>weeknum</w>
+      <w>weibull</w>
+      <w>xcel</w>
+      <w>xirr</w>
+      <w>xlnm</w>
+      <w>xlsm</w>
       <w>xlsx</w>
+      <w>xnpv</w>
       <w>xssf</w>
+      <w>xtractor</w>
+      <w>yearfrac</w>
+      <w>yielddisc</w>
+      <w>yieldmat</w>
+      <w>ystem</w>
+      <w>ztest</w>
     </words>
   </dictionary>
 </component>

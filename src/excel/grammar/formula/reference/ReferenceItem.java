@@ -40,6 +40,7 @@ public class ReferenceItem extends Reference {
     ReferenceItem() {
     }
 
+    @SuppressWarnings("SameParameterValue")
     ReferenceItem(String value) {
         this.value = value;
     }

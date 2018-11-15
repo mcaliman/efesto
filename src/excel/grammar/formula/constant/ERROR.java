@@ -51,7 +51,7 @@ public final class ERROR extends Constant {
     }
 
     private String format(ERROR e) {
-        StringBuilder buff = new StringBuilder();
+        @SuppressWarnings("StringBufferReplaceableByString") StringBuilder buff = new StringBuilder();
         buff.append(varname(e)).append(" = ");
         buff.append(e.toString());
         return buff.toString();
