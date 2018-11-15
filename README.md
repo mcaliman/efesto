@@ -1,6 +1,6 @@
 # Efesto  
 
-Excel Formula Extractor System and Topological Ordering algorithm.
+**E**xcel **F**ormula **E**xtractor **S**ystem and **T**opological **O**rdering algorithm.
 
 
 ## Background
