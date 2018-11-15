@@ -5,6 +5,7 @@
       <w>accrintm</w>
       <w>acos</w>
       <w>acosh</w>
+      <w>affero</w>
       <w>amordegrc</w>
       <w>amorlinc</w>
       <w>asin</w>
@@ -15,18 +16,24 @@
       <w>averagea</w>
       <w>averageif</w>
       <w>caliman</w>
+      <w>cellref</w>
+      <w>cels</w>
       <w>cloujre</w>
       <w>countif</w>
       <w>dquote</w>
       <w>efesto</w>
       <w>foglio</w>
       <w>gteq</w>
+      <w>hssf</w>
       <w>mult</w>
       <w>multisheet</w>
+      <w>ptgs</w>
+      <w>sheetnamne</w>
       <w>squote</w>
       <w>subtrac</w>
       <w>transpiler</w>
       <w>xlsx</w>
+      <w>xssf</w>
     </words>
   </dictionary>
 </component>

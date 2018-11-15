@@ -209,8 +209,7 @@ public abstract class AbstractParser {
         parseFormulaInit();
         if (Ptg.doesFormulaReferToDeletedCell(ptgs)) doesFormulaReferToDeletedCell(row, column);
         for (Ptg ptg : ptgs) parse(ptg, row, column);
-        Start start = parseFormulaPost();
-        return start;
+        return parseFormulaPost();
     }
 
     private void parse(Ptg p, int row, int column) {

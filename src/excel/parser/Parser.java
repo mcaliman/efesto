@@ -78,11 +78,6 @@ public final class Parser extends AbstractParser {
         err(address + " does formula refer to deleted cell", row, column);
     }
 
-    /*private void unmanaged(String text) {
-        System.err.println("unmanaged!" + text);
-        throw new RuntimeException("unmanaged!" + text);
-    }*/
-
     @Override
     void err(String string, int row, int column) {
         super.err(string, row, column);
