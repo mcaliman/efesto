@@ -76,7 +76,7 @@ public final class PrefixReferenceItem extends Reference {
     }
 
     private String values() {
-        if (vals == null || vals.isEmpty()) return "[]";
+        if (vals.isEmpty()) return "[]";
 
         if (horizzontal_range() || vertical_range()) {
             StringBuilder buff = new StringBuilder();

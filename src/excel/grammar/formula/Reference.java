@@ -38,8 +38,4 @@ public abstract class Reference extends Formula {
         vals.addAll(values);
     }
 
-    public List<Object> getVals() {
-        return vals;
-    }
-
 }

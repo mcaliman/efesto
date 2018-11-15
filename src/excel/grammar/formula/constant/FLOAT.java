@@ -46,10 +46,6 @@ public final class FLOAT extends Constant {
         return true;
     }
 
-    public Double getValue() {
-        return value;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;

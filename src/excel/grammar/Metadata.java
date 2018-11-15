@@ -34,14 +34,6 @@ public final class Metadata extends Start {
         this.value = value;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
     @Override
     public String toString() {
         if (emptyName(name) || emptyValue(value)) return "''";

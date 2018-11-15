@@ -47,10 +47,6 @@ public final class TEXT extends Constant {
         return true;
     }
 
-    public String getValue() {
-        return value;
-    }
-
     @Override
     public int hashCode() {
         int hash = 5;

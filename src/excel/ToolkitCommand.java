@@ -23,6 +23,4 @@ package excel;
 
 interface ToolkitCommand {
 
-    void execute();
-
 }

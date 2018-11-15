@@ -25,20 +25,11 @@ package excel.parser;
 import excel.grammar.Start;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public final class StartList extends ArrayList<Start> implements List<Start> {
 
-    public StartList(int initialCapacity) {
-        super(initialCapacity);
-    }
-
     public StartList() {
-    }
-
-    public StartList(Collection<? extends Start> c) {
-        super(c);
     }
 
     @Override

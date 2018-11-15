@@ -46,10 +46,6 @@ public final class INT extends Constant {
         return true;
     }
 
-    public Integer getValue() {
-        return value;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;

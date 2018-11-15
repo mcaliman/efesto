@@ -34,11 +34,6 @@ public final class ERROR_REF extends ReferenceItem {
         System.err.println("ERROR-REF Reference error literal #REF!");
     }
 
-    public ERROR_REF(String value) {
-        super(value);
-        System.err.println("ERROR-REF Reference error literal #REF!");
-    }
-
     public String toString(boolean addr) {
         return format(this);
 
