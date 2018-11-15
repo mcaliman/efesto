@@ -28,9 +28,6 @@ package excel.grammar.formula.reference;
 
 public class NamedRange extends ReferenceItem {
 
-    public NamedRange() {
-    }
-
     public NamedRange(String value) {
         this.value = value;
     }

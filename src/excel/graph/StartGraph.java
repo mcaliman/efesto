@@ -26,7 +26,6 @@ import excel.grammar.Formula;
 import excel.grammar.Start;
 import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 import excel.grammar.formula.functioncall.binary.Binary;
-import excel.grammar.formula.reference.RangeReference;
 import excel.parser.StartList;
 
 import java.util.*;
@@ -68,16 +67,6 @@ public class StartGraph {
         addNode(operation);
         addEdge(right, operation);
         addEdge(left, operation);
-    }
-
-    public void add(RangeReference range) {
-        Start left = range.getReference1();
-        Start right = range.getReference2();
-        addNode(right);
-        addNode(left);
-        addNode(range);
-        addEdge(right, range);
-        addEdge(left, range);
     }
 
     public void add(EXCEL_FUNCTION function) {

@@ -107,6 +107,18 @@ public abstract class AbstractParser {
     private Sheet sheet;
     private EvaluationSheet evaluationSheet;
 
+    //TODO
+    protected final String creator;
+    protected final String description;
+    protected final String keywords;
+    protected final String title;
+    protected final String subject;
+    protected final String category;
+
+    protected final String company;
+    protected final String template;
+    protected final String manager;
+
     AbstractParser(File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
         this.fileName = file.getName();
@@ -117,19 +129,19 @@ public abstract class AbstractParser {
         XSSFWorkbook xssfWorkbook = (XSSFWorkbook) this.workbook;
         POIXMLProperties props = xssfWorkbook.getProperties();
         POIXMLProperties.CoreProperties coreProperties = props.getCoreProperties();
-        String creator = coreProperties.getCreator();
-        String description = coreProperties.getDescription();
-        String keywords = coreProperties.getKeywords();
-        String title = coreProperties.getTitle();
-        String subject = coreProperties.getSubject();
-        String category = coreProperties.getCategory();
+        this.creator = coreProperties.getCreator();
+        this.description = coreProperties.getDescription();
+        this.keywords = coreProperties.getKeywords();
+        this.title = coreProperties.getTitle();
+        this.subject = coreProperties.getSubject();
+        this.category = coreProperties.getCategory();
         POIXMLProperties.CustomProperties customProperties = props.getCustomProperties();
         customProperties.getProperty("Author");
         //List<CTProperty> list = customProperties.getUnderlyingProperties().getPropertyList();
         POIXMLProperties.ExtendedProperties extendedProperties = props.getExtendedProperties();
-        String company = extendedProperties.getUnderlyingProperties().getCompany();
-        String template = extendedProperties.getUnderlyingProperties().getTemplate();
-        String manager = extendedProperties.getUnderlyingProperties().getManager();
+        this.company = extendedProperties.getUnderlyingProperties().getCompany();
+        this.template = extendedProperties.getUnderlyingProperties().getTemplate();
+        this.manager = extendedProperties.getUnderlyingProperties().getManager();
         this.evaluationWorkbook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
         //System.out.println("Parse...");
     }
