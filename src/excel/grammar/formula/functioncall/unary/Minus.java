@@ -24,7 +24,6 @@ package excel.grammar.formula.functioncall.unary;
 
 import excel.grammar.Formula;
 import excel.grammar.Grammar;
-import excel.grammar.Start;
 import excel.grammar.formula.reference.CELL;
 
 /**
@@ -38,21 +37,13 @@ public final class Minus extends Unary {
 
     @Override
     public String toString(boolean address) {
-        return format(this, address);
-    }
-
-    private String format(Minus formula, boolean addr) {
         StringBuilder buff = new StringBuilder();
-        if (addr) buff.append(varname(formula)).append(" = ");
-        Start expr = formula.getFormula();
-        if (expr instanceof CELL) {
-            buff.append(formula.getUnOpPrefix()).append(((CELL) expr).getValue());
+        if (address) buff.append(getAddr()).append(" = ");
+        if (this.formula instanceof CELL) {
+            buff.append(this.getUnOpPrefix()).append(((CELL) this.formula).getValue());
             return buff.toString();
-        }//TODO complete
-        return varname(formula) + " = " + formula.getUnOpPrefix() + expr.toString();
+        }
+        return getAddr() + " = " + this.getUnOpPrefix() + this.formula.toString();
     }
 
-    private String varname(Start start) {
-        return start.getAddr();
-    }
 }
