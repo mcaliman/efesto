@@ -47,7 +47,7 @@ public final class ERROR_REF extends ReferenceItem {
     }
 
     private String varname(Start start) {
-        return start.getAddr();
+        return start.getAddress();
     }
 
 }

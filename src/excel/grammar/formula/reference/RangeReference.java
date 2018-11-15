@@ -87,7 +87,7 @@ public final class RangeReference extends Reference {
 
     @Override
     public String toString() {
-        return "" + this.reference1.getAddr() + ":" + this.reference2.getAddr();
+        return "" + this.reference1.getAddress() + ":" + this.reference2.getAddress();
     }
 
     @Override
@@ -117,7 +117,7 @@ public final class RangeReference extends Reference {
     }
 
     private String varname(Start start) {
-        return start.getAddr();
+        return start.getAddress();
     }
 
     private CELL getReference1() {

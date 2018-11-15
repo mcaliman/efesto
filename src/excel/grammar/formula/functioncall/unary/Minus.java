@@ -37,13 +37,13 @@ public final class Minus extends Unary {
 
     @Override
     public String toString(boolean address) {
-        StringBuilder buff = new StringBuilder();
-        if (address) buff.append(getAddr()).append(" = ");
+        StringBuilder text = new StringBuilder();
+        if (address) text.append(getAddress(true)).append(" = ");
         if (this.formula instanceof CELL) {
-            buff.append(this.getUnOpPrefix()).append(((CELL) this.formula).getValue());
-            return buff.toString();
+            text.append(this.getUnOpPrefix()).append(((CELL) this.formula).getValue());
+            return text.toString();
         }
-        return getAddr() + " = " + this.getUnOpPrefix() + this.formula.toString();
+        return getAddress() + " = " + this.unOpPrefix + this.formula.toString();
     }
 
 }

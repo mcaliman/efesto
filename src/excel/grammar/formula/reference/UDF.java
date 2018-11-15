@@ -42,7 +42,7 @@ public final class UDF extends Reference {
 
     public String toString(boolean address) {
         StringBuilder buff = new StringBuilder();
-        if (address) buff.append(this.getAddr()).append(" = ");
+        if (address) buff.append(this.getAddress()).append(" = ");
         buff.append(this.toString());
         return buff.toString();
     }

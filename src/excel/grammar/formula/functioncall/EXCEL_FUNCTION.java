@@ -61,12 +61,12 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
     }
 
     private String varname(Start start) {
-        return start.getAddr();
+        return start.getAddress();
     }
 
     private String argToString(Formula operand) {
         if (operand == null) return "Missing Arg!";
-        else if (operand instanceof CELL) return operand.getAddr();
+        else if (operand instanceof CELL) return operand.getAddress();
         else return operand.toString(false);
     }
 

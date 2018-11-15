@@ -50,7 +50,7 @@ public abstract class Binary extends FunctionCall {
     }
 
     public String toString(boolean address) {
-        if (address) return this.getAddr(true) + " = " + operandTo(lFormula) + op + operandTo(rFormula);
+        if (address) return this.getAddress(true) + " = " + operandTo(lFormula) + op + operandTo(rFormula);
         else return operandTo(lFormula) + op + operandTo(rFormula);
 
     }
@@ -67,14 +67,14 @@ public abstract class Binary extends FunctionCall {
 
 
     private String operandTo(Start operand) {
-        if (operand instanceof CELL) return operand.getAddr();
+        if (operand instanceof CELL) return operand.getAddress();
         else if (operand instanceof ParenthesisFormula) return format((ParenthesisFormula) operand);
-        else if (operand instanceof Unary) return ((Unary) operand).getUnOpPrefix() + operand.getAddr();
+        else if (operand instanceof Unary) return ((Unary) operand).getUnOpPrefix() + operand.getAddress();
         else return operand.toString();
     }
 
     private String format(ParenthesisFormula start) {
         if (start.getFormula() instanceof Binary) return "(" + start.getFormula().toString(false) + ")";
-        else return "(" + start.getFormula().getAddr(true) + ")";
+        else return "(" + start.getFormula().getAddress(true) + ")";
     }
 }

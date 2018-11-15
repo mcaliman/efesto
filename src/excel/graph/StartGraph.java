@@ -52,7 +52,7 @@ public class StartGraph {
 
     public void addEdge(Start x, Start y) {
         if (x.isTerminal() || y.isTerminal()) return;
-        if (x.getAddr().equalsIgnoreCase(y.getAddr())) return;
+        if (x.getAddress().equalsIgnoreCase(y.getAddress())) return;
         Node u = graph.get(x);
         Node v = graph.get(y);
         Edge edge = new Edge(u, v);

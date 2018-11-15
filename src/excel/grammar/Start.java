@@ -41,10 +41,6 @@ public abstract class Start {
         return false;
     }
 
-    /*public void setType(Class type) {
-        Class type1 = type;
-    }*/
-
     public String getComment() {
         return comment;
     }
@@ -69,7 +65,6 @@ public abstract class Start {
         this.column = column;
     }
 
-
     public void setSheetIndex(int sheetIndex) {
         this.sheetIndex = sheetIndex;
     }
@@ -82,11 +77,11 @@ public abstract class Start {
         this.sheetName = sheetName;
     }
 
-    public String getAddr() {
+    public String getAddress() {
         return AbstractParser.HelperInternal.cellAddress(getRow(), getColumn(), sheetName);
     }
 
-    public String getAddr(boolean sheet) {
+    public String getAddress(boolean sheet) {
         return sheet ? AbstractParser.HelperInternal.cellAddress(getRow(), getColumn(), sheetName) : AbstractParser.HelperInternal.cellAddress(getRow(), getColumn());
     }
 
@@ -119,7 +114,7 @@ public abstract class Start {
         final Start that = (Start) obj;
         if (this.row == -1 || that.row == -1)
             return (this.column == that.column && this.row == that.row && this.sheetIndex == that.sheetIndex);
-        else return this.getAddr().equalsIgnoreCase(that.getAddr());
+        else return this.getAddress().equalsIgnoreCase(that.getAddress());
     }
 
     @Override

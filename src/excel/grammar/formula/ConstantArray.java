@@ -63,6 +63,6 @@ public class ConstantArray extends Formula {
     }
 
     private String varname(Start start) {
-        return start.getAddr();
+        return start.getAddress();
     }
 }

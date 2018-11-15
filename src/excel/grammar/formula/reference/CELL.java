@@ -71,11 +71,11 @@ public final class CELL extends ReferenceItem {
 
     private String format(CELL e) {
         Object value = e.getValue();
-        if (value instanceof String) return e.getAddr() + " = " + TEXT.format((String) value);
-        else if (value instanceof Boolean) return e.getAddr() + " = " + BOOL.format((Boolean) value);
-        else if (value instanceof Integer) return e.getAddr() + " = " + INT.format((Integer) value);
-        else if (value instanceof Double) return e.getAddr() + " = " + FLOAT.format((Double) value);
-        else if (value instanceof Date) return e.getAddr() + " = " + DATETIME.format((Date) value);
+        if (value instanceof String) return e.getAddress() + " = " + TEXT.format((String) value);
+        else if (value instanceof Boolean) return e.getAddress() + " = " + BOOL.format((Boolean) value);
+        else if (value instanceof Integer) return e.getAddress() + " = " + INT.format((Integer) value);
+        else if (value instanceof Double) return e.getAddress() + " = " + FLOAT.format((Double) value);
+        else if (value instanceof Date) return e.getAddress() + " = " + DATETIME.format((Date) value);
         return e.toString();
     }
 

@@ -58,6 +58,6 @@ public final class ERROR extends Constant {
     }
 
     private String varname(Start start) {
-        return start.getAddr();
+        return start.getAddress();
     }
 }

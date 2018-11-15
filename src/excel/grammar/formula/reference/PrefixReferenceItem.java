@@ -50,7 +50,7 @@ public final class PrefixReferenceItem extends Reference {
 
     public String toString(boolean address) {
         StringBuilder buff = new StringBuilder();
-        if (address && !this.isArea()) buff.append((this).getAddr()).append(" = ");
+        if (address && !this.isArea()) buff.append((this).getAddress()).append(" = ");
         buff.append(this.prefix.toString()).append(this.getReference());
         if (address) {
             String values = this.values();
