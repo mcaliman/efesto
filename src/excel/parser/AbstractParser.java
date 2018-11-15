@@ -108,15 +108,24 @@ public abstract class AbstractParser {
     private EvaluationSheet evaluationSheet;
 
     //TODO
+    @SuppressWarnings("WeakerAccess")
     protected final String creator;
+    @SuppressWarnings("WeakerAccess")
     protected final String description;
+    @SuppressWarnings("WeakerAccess")
     protected final String keywords;
+    @SuppressWarnings("WeakerAccess")
     protected final String title;
+    @SuppressWarnings("WeakerAccess")
     protected final String subject;
+    @SuppressWarnings("WeakerAccess")
     protected final String category;
 
+    @SuppressWarnings("WeakerAccess")
     protected final String company;
+    @SuppressWarnings("WeakerAccess")
     protected final String template;
+    @SuppressWarnings("WeakerAccess")
     protected final String manager;
 
     AbstractParser(File file) throws InvalidFormatException, IOException {

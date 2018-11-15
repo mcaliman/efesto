@@ -120,11 +120,11 @@ public final class RangeReference extends Reference {
         return start.getAddr();
     }
 
-    public CELL getReference1() {
+    private CELL getReference1() {
         return reference1;
     }
 
-    public CELL getReference2() {
+    private CELL getReference2() {
         return reference2;
     }
 
