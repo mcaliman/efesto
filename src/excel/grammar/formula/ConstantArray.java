@@ -23,7 +23,6 @@
 package excel.grammar.formula;
 
 import excel.grammar.Formula;
-import excel.grammar.Start;
 
 /**
  * @author Massimo Caliman
@@ -35,34 +34,22 @@ public class ConstantArray extends Formula {
         this.array = array;
     }
 
-    private Object[][] getArray() {
-        return array;
-    }
-
     @Override
     public String toString() {
-        return format(this);
+        StringBuilder str = new StringBuilder();
+        str.append(this.getAddress()).append(" = ");
+        str.append('{');
+        for (Object[] internal : array) {
+            str.append(internal[0]).append(',');
+        }
+        if (str.charAt(str.length() - 1) == ',') str.deleteCharAt(str.length() - 1);
+        str.append('}');
+        return str.toString();
     }
 
     @Override
     public String toString(boolean address) {
-        return format(this);
+        return toString();
     }
 
-    private String format(ConstantArray e) {
-        Object[][] array = e.getArray();
-        StringBuilder str = new StringBuilder();
-        str.append(varname(e)).append(" = ");
-        str.append("{");
-        for (Object[] internal : array) {
-            str.append(internal[0]).append(",");
-        }
-        if (str.charAt(str.length() - 1) == ',') str.deleteCharAt(str.length() - 1);
-        str.append("}");
-        return str.toString();
-    }
-
-    private String varname(Start start) {
-        return start.getAddress();
-    }
 }

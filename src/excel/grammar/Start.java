@@ -88,7 +88,7 @@ public abstract class Start {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 53 * hash + this.row;
+        hash = 53 * hash + row;
         hash = 53 * hash + this.column;
         hash = 53 * hash + this.sheetIndex;
         return hash;

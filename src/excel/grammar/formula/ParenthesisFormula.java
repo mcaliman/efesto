@@ -38,7 +38,7 @@ public final class ParenthesisFormula extends Formula {
 
     @Override
     public String toString() {
-        return "(" + formula + ')';
+        return '(' + formula.toString() + ')';
     }
 
     public String toString(boolean address) {
