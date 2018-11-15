@@ -52,10 +52,6 @@ public abstract class Unary extends FunctionCall {
         return unOpPrefix;
     }
 
-    public void setUnOpPrefix(String unOpPrefix) {
-        this.unOpPrefix = unOpPrefix;
-    }
-
     Formula getFormula() {
         return formula;
     }

@@ -28,7 +28,7 @@ package excel.grammar.formula.reference;
 public final class FILE extends Prefix {
 
     private final int ext;
-    private String sheetName;
+    private final String sheetName;
 
     public FILE(int ext, String sheetName) {
         this.ext = ext;

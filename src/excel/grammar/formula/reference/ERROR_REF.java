@@ -46,7 +46,7 @@ public final class ERROR_REF extends ReferenceItem {
 
     private String format(ERROR_REF e) {
         StringBuilder buff = new StringBuilder();
-        if (true) buff.append(varname(e)).append(" = ");
+        buff.append(varname(e)).append(" = ");
         buff.append(e.toString());
         return e.toString();
     }

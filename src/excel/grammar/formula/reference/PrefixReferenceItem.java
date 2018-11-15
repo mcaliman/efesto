@@ -29,7 +29,7 @@ import excel.grammar.formula.Reference;
  */
 public final class PrefixReferenceItem extends Reference {
 
-    private Prefix prefix;
+    private final Prefix prefix;
 
     private final String reference;
 

@@ -53,7 +53,7 @@ public final class ERROR extends Constant {
     private String format(ERROR e) {
         //return e.toString();
         StringBuilder buff = new StringBuilder();
-        if (true) buff.append(varname(e)).append(" = ");
+        buff.append(varname(e)).append(" = ");
         buff.append(e.toString());
         return buff.toString();
     }

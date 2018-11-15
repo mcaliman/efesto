@@ -22,7 +22,7 @@
 
 package excel.test;
 
-import excel.parser.internal.HelperInternal;
+import excel.parser.AbstractParser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,8 +42,8 @@ class ExcelHelperTest {
     void testColumnAsLetter() {
         System.out.println("columnAsLetter");
 
-        assertEquals("A", HelperInternal.columnAsLetter(0));
-        assertEquals("B", HelperInternal.columnAsLetter(1));
+        assertEquals("A", AbstractParser.HelperInternal.columnAsLetter(0));
+        assertEquals("B", AbstractParser.HelperInternal.columnAsLetter(1));
     }
 
     /**
@@ -53,7 +53,7 @@ class ExcelHelperTest {
     void testCellAddress_int_int() {
         System.out.println("cellAddress(row,col)");
 
-        assertEquals("A1", HelperInternal.cellAddress(0, 0));
+        assertEquals("A1", AbstractParser.HelperInternal.cellAddress(0, 0));
 
     }
 
@@ -64,7 +64,7 @@ class ExcelHelperTest {
     void testCellAddress_3args() {
         System.out.println("cellAddress(row,col,sheetname)");
 
-        String result = HelperInternal.cellAddress(0, 0, "Sheet");
+        String result = AbstractParser.HelperInternal.cellAddress(0, 0, "Sheet");
         System.out.println(result);
         assertEquals("Sheet!A1", result);
     }

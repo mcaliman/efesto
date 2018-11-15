@@ -28,12 +28,10 @@ import excel.grammar.Grammar;
 /**
  * @author Massimo Caliman
  */
-@Deprecated
 public final class Union extends Binary {
 
     public Union(Formula lFormula, Formula rFormula) {
         super(lFormula, Grammar.union, rFormula);
     }
-
 
 }

@@ -22,7 +22,7 @@
 
 package excel.grammar;
 
-import excel.parser.internal.HelperInternal;
+import excel.parser.AbstractParser;
 
 /**
  * @author Massimo Caliman
@@ -41,9 +41,9 @@ public abstract class Start {
         return false;
     }
 
-    public void setType(Class type) {
+    /*public void setType(Class type) {
         Class type1 = type;
-    }
+    }*/
 
     public String getComment() {
         return comment;
@@ -83,11 +83,11 @@ public abstract class Start {
     }
 
     public String getAddr() {
-        return HelperInternal.cellAddress(getRow(), getColumn(), sheetName);
+        return AbstractParser.HelperInternal.cellAddress(getRow(), getColumn(), sheetName);
     }
 
     public String getAddr(boolean sheet) {
-        return sheet ? HelperInternal.cellAddress(getRow(), getColumn(), sheetName) : HelperInternal.cellAddress(getRow(), getColumn());
+        return sheet ? AbstractParser.HelperInternal.cellAddress(getRow(), getColumn(), sheetName) : AbstractParser.HelperInternal.cellAddress(getRow(), getColumn());
     }
 
     @Override

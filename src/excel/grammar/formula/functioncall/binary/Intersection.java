@@ -28,7 +28,6 @@ import excel.grammar.Grammar;
 /**
  * @author Massimo Caliman
  */
-@Deprecated
 public final class Intersection extends Binary {
 
     public Intersection(Formula lFormula, Formula rFormula) {

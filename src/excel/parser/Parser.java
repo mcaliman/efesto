@@ -39,8 +39,6 @@ import excel.grammar.formula.functioncall.unary.Plus;
 import excel.grammar.formula.reference.*;
 import excel.grammar.formula.reference.referencefunction.OFFSET;
 import excel.graph.StartGraph;
-import excel.parser.internal.AbstractParser;
-import excel.parser.internal.HelperInternal;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import java.io.File;
@@ -86,7 +84,7 @@ public final class Parser extends AbstractParser {
     }*/
 
     @Override
-    protected void err(String string, int row, int column) {
+    void err(String string, int row, int column) {
         super.err(string, row, column);
         if (errors) {
             String address = currentSheetName + "!" + HelperInternal.cellAddress(row, column);
@@ -142,7 +140,7 @@ public final class Parser extends AbstractParser {
         start.setRow(formulaRow);
         start.setSheetIndex(currentSheetIndex);
         start.setSheetName(currentSheetName);
-        start.setType(internalFormulaResultTypeClass);
+        //start.setType(internalFormulaResultTypeClass);
     }
 
     @Override
@@ -439,8 +437,8 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void _CELL(int ri, int ci, boolean rowRelative, boolean colRelative, boolean rowNotNull, Object value, String comment) {
-        CELL ref = grammar.cell(ri, ci, rowRelative, colRelative);
+    protected void _CELL(int ri, int ci, boolean rowNotNull, Object value, String comment) {
+        CELL ref = grammar.cell(ri, ci);
         ref.setComment(comment);
         setOwnProperty(ref);
         if (rowNotNull) {
@@ -560,8 +558,8 @@ public final class Parser extends AbstractParser {
     //Used
 
     @Override
-    protected void _RangeReference(List<Object> list, int firstRow, int firstColumn, boolean isFirstRowRelative, boolean isFirstColRelative, int lastRow, int lastColumn, boolean isLastRowRelative, boolean isLastColRelative) {
-        RangeReference ref = grammar.rangeReference(firstRow, firstColumn, isFirstRowRelative, isFirstColRelative, lastRow, lastColumn, isLastRowRelative, isLastColRelative);
+    protected void _RangeReference(List<Object> list, int firstRow, int firstColumn, int lastRow, int lastColumn) {
+        RangeReference ref = grammar.rangeReference(firstRow, firstColumn, lastRow, lastColumn);
         setOwnProperty(ref);
         //is area not a cell with ref to area
         ref.setAsArea();

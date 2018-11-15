@@ -23,18 +23,4 @@ package excel;
 
 class ToolkitCommandException extends Exception {
 
-    /**
-     * Creates a new instance of <code>ExcelToolkitCommandException</code> without detail message.
-     */
-    public ToolkitCommandException() {
-    }
-
-    /**
-     * Constructs an instance of <code>ExcelToolkitCommandException</code> with the specified detail message.
-     *
-     * @param msg the detail message.
-     */
-    public ToolkitCommandException(String msg) {
-        super(msg);
-    }
 }

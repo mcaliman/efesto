@@ -20,26 +20,35 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package excel.parser.internal;
+package excel.parser;
 
 import excel.grammar.Start;
 import org.apache.poi.POIXMLProperties;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.SpreadsheetVersion;
+import org.apache.poi.ss.formula.EvaluationCell;
 import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.EvaluationSheet;
+import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
+import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
+import static org.apache.poi.ss.usermodel.Cell.*;
 
 public abstract class AbstractParser {
 
@@ -86,21 +95,20 @@ public abstract class AbstractParser {
     private final Workbook workbook;
 
     public boolean verbose = false;
-    protected final boolean errors = false;
+    final boolean errors = false;
     public boolean metadata = false;
-
-    protected Class internalFormulaResultTypeClass;
-    protected int formulaColumn;
-    protected int formulaRow;
-    protected int currentSheetIndex;
-    protected String currentSheetName;
-    protected String fileName;
+    private final XSSFEvaluationWorkbook evaluationWorkbook;
+    int formulaColumn;
+    int formulaRow;
+    int currentSheetIndex;
+    String currentSheetName;
+    String fileName;
 
     private Sheet sheet;
     private EvaluationSheet evaluationSheet;
-    private XSSFEvaluationWorkbook evaluationWorkbook;
+    private Class internalFormulaResultTypeClass;
 
-    protected AbstractParser(File file) throws InvalidFormatException, IOException {
+    AbstractParser(File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
         this.fileName = file.getName();
     }
@@ -127,15 +135,15 @@ public abstract class AbstractParser {
         //System.out.println("Parse...");
     }
 
-    protected void verbose(String text) {
+    void verbose(String text) {
         if (this.verbose) System.out.println(text);
     }
 
-    protected void err(String string, int row, int column) {
+    void err(String string, int row, int column) {
 
     }
 
-    public void parse() {
+    void parse() {
         for (Sheet sht : this.workbook) {
             this.sheet = sht;
             this.currentSheetIndex = this.workbook.getSheetIndex(this.sheet);
@@ -282,12 +290,9 @@ public abstract class AbstractParser {
         _RangeReference(range.getValues(),
                 range.getFirstRow(),
                 range.getFirstColumn(),
-                range.isFirstRowRelative(),
-                range.isFirstColumnRelative(),
                 range.getLastRow(),
-                range.getLastColumn(),
-                range.isLastRowRelative(),
-                range.isLastColumnRelative());
+                range.getLastColumn()
+        );
     }
 
     private void parseErrPtg(ErrPtg t) {
@@ -340,7 +345,7 @@ public abstract class AbstractParser {
             value = excelType.valueOf();
             comment = excelType.getComment();
         }
-        _CELL(ri, ci, rowRelative, colRelative, rowNotNull, value, comment);
+        _CELL(ri, ci, rowNotNull, value, comment);
     }
 
     private void parseRefErrorPtg(RefErrorPtg t) {
@@ -388,7 +393,7 @@ public abstract class AbstractParser {
 
     protected abstract void _SUM();
 
-    protected abstract void _RangeReference(List<Object> list, int firstRow, int firstColumn, boolean isFirstRowRelative, boolean isFirstColRelative, int lastRow, int lastColumn, boolean isLastRowRelative, boolean isLastColRelative);
+    protected abstract void _RangeReference(List<Object> list, int firstRow, int firstColumn, int lastRow, int lastColumn);
 
     protected abstract void _BOOL(Boolean bool);
 
@@ -434,7 +439,7 @@ public abstract class AbstractParser {
 
     protected abstract void _ERROR_REF(String text);
 
-    protected abstract void _CELL(int ri, int ci, boolean rowRelative, boolean colRelative, boolean rowNotNull, Object value, String comment);
+    protected abstract void _CELL(int ri, int ci, boolean rowNotNull, Object value, String comment);
 
     protected abstract void _TEXT(String string);
 
@@ -464,6 +469,375 @@ public abstract class AbstractParser {
             this.ptg = ptg;
             this.predicate = predicate;
             this.consumer = consumer;
+        }
+    }
+
+    static final class ErrInternal {
+
+        private final static String ERROR_NULL_INTERSECTION = "#NULL!";
+        private final static String ERROR_DIV_ZERO = "#DIV/0!";
+        private final static String ERROR_VALUE_INVALID = "#VALUE!";
+        private final static String ERROR_REF_INVALID = "#REF!";
+        private final static String ERROR_NAME_INVALID = "#NAME?";
+        private final static String ERROR_NUM_ERROR = "#NUM!";
+        private final static String ERROR_N_A = "#N/A";
+
+        private final ErrPtg t;
+
+        ErrInternal(ErrPtg t) {
+            this.t = t;
+        }
+
+        String text() {
+            if (t == NULL_INTERSECTION) return ERROR_NULL_INTERSECTION;
+            else if (t == DIV_ZERO) return ERROR_DIV_ZERO;
+            else if (t == VALUE_INVALID) return ERROR_VALUE_INVALID;
+            else if (t == REF_INVALID) return ERROR_REF_INVALID;
+            else if (t == NAME_INVALID) return ERROR_NAME_INVALID;
+            else if (t == NUM_ERROR) return ERROR_NUM_ERROR;
+            else if (t == N_A) return ERROR_N_A;
+            else return "FIXME!";
+        }
+    }
+
+    public static class HelperInternal {
+
+
+        static String reference(final int firstRow, final int firstCol, boolean isFirstRowRel, boolean isFirstColRel,
+                                int lastRow, int lastCol, boolean isLastRowRel, boolean isLastColRel
+        ) {
+            return cellAddress(firstRow, firstCol) + ":" + HelperInternal.cellAddress(lastRow, lastCol);
+        }
+
+        public static String columnAsLetter(final int column) {
+            return org.apache.poi.ss.util.CellReference.convertNumToColString(column);
+        }
+
+        public static String cellAddress(final int row, final int column) {
+            String letter = columnAsLetter(column);
+            return (letter + (row + 1));
+        }
+
+        /*private static String cellAddress(final int row, final int column) {
+            String letter = columnAsLetter(column);
+            return (letter + (row + 1));
+        }*/
+
+        public static String cellAddress(final int row, final int column, final String sheetName) {
+            StringBuilder buffer = new StringBuilder();
+            if (sheetName != null)
+                buffer.append(sheetName).append("!");
+            buffer.append(cellAddress(row, column));
+            return buffer.toString();
+        }
+
+    }
+
+    /**
+     * @author mcaliman
+     */
+    class RangeInternal {
+
+        private final /*static*/ SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+        private final Workbook workbook;
+        private final Sheet sheet;
+
+        private final int firstRow;
+        private final int firstColumn;
+
+        private final boolean firstRowRelative;
+        private final boolean firstColumnRelative;
+
+        private final int lastRow;
+        private final int lastColumn;
+
+        private final boolean lastRowRelative;
+        private final boolean lastColumnRelative;
+
+        private List<Object> values;
+
+        private String sheetName;
+
+        public RangeInternal(Workbook workbook, Sheet sheet, AreaNPtg t) {
+            firstRow = t.getFirstRow();
+            firstColumn = t.getFirstColumn();
+
+            firstRowRelative = t.isFirstRowRelative();
+            firstColumnRelative = t.isFirstColRelative();
+
+            lastRow = t.getLastRow();
+            lastColumn = t.getLastColumn();
+
+            lastRowRelative = t.isLastRowRelative();
+            lastColumnRelative = t.isLastColRelative();
+            this.workbook = workbook;
+            this.sheet = sheet;
+            init();
+        }
+
+        RangeInternal(Workbook workbook, Sheet sheet, AreaPtg t) {
+            firstRow = t.getFirstRow();
+            firstColumn = t.getFirstColumn();
+
+            firstRowRelative = t.isFirstRowRelative();
+            firstColumnRelative = t.isFirstColRelative();
+
+            lastRow = t.getLastRow();
+            lastColumn = t.getLastColumn();
+
+            lastRowRelative = t.isLastRowRelative();
+            lastColumnRelative = t.isLastColRelative();
+            this.workbook = workbook;
+            this.sheet = sheet;
+            init();
+        }
+
+        RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
+            firstRow = t.getFirstRow();
+            firstColumn = t.getFirstColumn();
+            sheetName = sheetnamne;
+            firstRowRelative = t.isFirstRowRelative();
+            firstColumnRelative = t.isFirstColRelative();
+
+            lastRow = t.getLastRow();
+            lastColumn = t.getLastColumn();
+
+            lastRowRelative = t.isLastRowRelative();
+            lastColumnRelative = t.isLastColRelative();
+            this.workbook = workbook;
+            this.sheet = null;
+            String refs = HelperInternal.reference(firstRow, firstColumn, firstRowRelative, firstColumnRelative, lastRow, lastColumn, lastRowRelative, lastColumnRelative);
+
+            //List<Cell> cells = range(refs);
+
+            AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
+            List<Cell> cells = fromRange(area);
+
+
+            values = new ArrayList<>();
+            for (Cell cell : cells)
+                if (cell != null) {
+                    CellInternal excelType = new CellInternal(cell);
+                    values.add(excelType.valueOf());
+                }
+        }
+
+        private void init() {
+
+            String refs = HelperInternal.reference(firstRow, firstColumn, firstRowRelative, firstColumnRelative, lastRow, lastColumn, lastRowRelative, lastColumnRelative);
+
+            List<Cell> cells = range(refs);
+            values = new ArrayList<>();
+            for (Cell cell : cells)
+                if (cell != null) {
+                    CellInternal excelType = new CellInternal(cell);
+                    values.add(excelType.valueOf());
+                }
+        }
+
+        private List<Cell> range(String refs) {
+            AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
+            return fromRange(area);
+        }
+
+        private List<Cell> fromRange(AreaReference area) {
+            List<Cell> cells = new ArrayList<>();
+            org.apache.poi.ss.util.CellReference[] cels = area.getAllReferencedCells();
+            for (org.apache.poi.ss.util.CellReference cel : cels) {
+                XSSFSheet ss = (XSSFSheet) workbook.getSheet(cel.getSheetName());
+                Row r = ss.getRow(cel.getRow());
+                if (r == null) continue;
+                Cell c = r.getCell(cel.getCol());
+                cells.add(c);
+            }
+            return cells;
+        }
+
+        int getFirstRow() {
+            return firstRow;
+        }
+
+        int getFirstColumn() {
+            return firstColumn;
+        }
+
+        boolean isFirstRowRelative() {
+            return firstRowRelative;
+        }
+
+        boolean isFirstColumnRelative() {
+            return firstColumnRelative;
+        }
+
+        int getLastRow() {
+            return lastRow;
+        }
+
+        int getLastColumn() {
+            return lastColumn;
+        }
+
+        boolean isLastRowRelative() {
+            return lastRowRelative;
+        }
+
+        boolean isLastColumnRelative() {
+            return lastColumnRelative;
+        }
+
+        List<Object> getValues() {
+            return values;
+        }
+
+        String getSheetName() {
+            return sheetName;
+        }
+    }
+
+    /**
+     * @author mcaliman
+     */
+    class CellInternal {
+
+        private final Cell cell;
+        private final String comment;
+
+        CellInternal(Cell cell) {
+            this.cell = cell;
+            Comment cellComment = this.cell.getCellComment();
+            comment = comment(cellComment);
+            CellStyle style = this.cell.getCellStyle();
+            String format = style.getDataFormatString();
+        }
+
+        String getComment() {
+            return comment;
+        }
+
+        private String comment(Comment comment) {
+            if (comment == null) return null;
+            RichTextString text = comment.getString();
+            if (text == null) return null;
+            return text.getString();
+
+        }
+
+        public Class type() {
+            if (this.cell == null) return null;
+            else if (isDate()) return Date.class;
+            else if (isNumeric()) return Double.class;
+            else if (isBoolean()) return Boolean.class;
+            else if (isString()) return String.class;
+            else return Object.class;
+        }
+
+        Object valueOf() {
+            if (cell == null) return null;
+            if (isDataType(cell))
+                return cell.getDateCellValue();
+            switch (cell.getCellType()) {
+                case CELL_TYPE_STRING:
+                    return cell.getStringCellValue();
+                case CELL_TYPE_NUMERIC:
+                    return cell.getNumericCellValue();
+                case CELL_TYPE_BOOLEAN:
+                    return cell.getBooleanCellValue();
+                case CELL_TYPE_BLANK:
+                    return cell.getStringCellValue();
+                case CELL_TYPE_FORMULA:
+                    if (cell.toString() != null && cell.toString().equalsIgnoreCase("true")) {
+                        return true;
+                    }
+                    if (cell.toString() != null && cell.toString().equalsIgnoreCase("false")) {
+                        return false;
+                    }
+
+                    return cell.toString();
+                default:
+                    return null;
+            }
+        }
+
+        private boolean isDate() {
+            return this.cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(this.cell);
+        }
+
+        private boolean isString() {
+            return this.cell.getCellType() == CELL_TYPE_STRING;
+        }
+
+        private boolean isNumeric() {
+            return this.cell.getCellType() == CELL_TYPE_NUMERIC;
+        }
+
+        private boolean isBoolean() {
+            return this.cell.getCellType() == CELL_TYPE_BOOLEAN;
+        }
+
+        private Class typeOf(Cell c) {
+            if (c == null) return null;
+            if (isDataType(c)) return Date.class;
+            switch (c.getCellType()) {
+                case CELL_TYPE_STRING:
+                    return String.class;
+                case CELL_TYPE_NUMERIC:
+                    return Double.class;
+                case CELL_TYPE_BOOLEAN:
+                    return Boolean.class;
+                default:
+                    return Object.class;
+            }
+        }
+
+        private boolean isDataType(Cell c) {
+            return c.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(c);
+        }
+
+        Class internalFormulaResultType() {
+            int type = cell.getCachedFormulaResultType();
+            if (isDataType(cell))
+                return Date.class;
+            return internalFormulaResultType(type);
+        }
+
+        private Class internalFormulaResultType(int type) {
+            switch (type) {
+                case CELL_TYPE_STRING:
+                    return String.class;
+                case CELL_TYPE_NUMERIC:
+                    return Double.class;
+                case CELL_TYPE_BOOLEAN:
+                    return Boolean.class;
+                default:
+                    return Object.class;
+            }
+        }
+
+    }
+
+    class FormulaTokensInternal {
+
+        private final XSSFEvaluationWorkbook ew;
+        private final EvaluationSheet es;
+
+        FormulaTokensInternal(XSSFEvaluationWorkbook ew, EvaluationSheet es) {
+            this.ew = ew;
+            this.es = es;
+        }
+
+        Ptg[] getFormulaTokens(int row, int column) {
+            EvaluationCell evalCell = es.getCell(row, column);
+            Ptg[] ptgs = null;
+            try {
+                ptgs = ew.getFormulaTokens(evalCell);
+            } catch (FormulaParseException e) {
+                err("" + e.getMessage(), row, column);
+            }
+            return ptgs;
+        }
+
+        private void err(String string, int row, int column) {
+            System.err.println(string + " row:" + row + " col:" + column);
         }
     }
 }

@@ -25,9 +25,6 @@ package excel.parser;
 
 public final class UnsupportedBuiltinException extends Exception {
 
-    public UnsupportedBuiltinException() {
-    }
-
     public UnsupportedBuiltinException(String msg) {
         super(msg);
     }

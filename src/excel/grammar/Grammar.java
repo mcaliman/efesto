@@ -147,7 +147,7 @@ public final class Grammar {
         return new Minus((Formula) expr);
     }
 
-    public CELL cell(int row, int column, boolean rowRelative, boolean columnRelative) {
+    public CELL cell(int row, int column) {
         return new CELL(row, column);
     }
 
@@ -157,15 +157,11 @@ public final class Grammar {
         return (EXCEL_FUNCTION) factory.getBuiltInFunction();
     }
 
-    public RangeReference rangeReference(int firstRow, int firstColumn,
-                                         boolean isFirstRowRelative,
-                                         boolean isFirstColRelative,
-                                         int lastRow, int lastColumn, boolean isLastRowRelative, boolean isLastColRelative) {
+    public RangeReference rangeReference(int firstRow, int firstColumn, int lastRow, int lastColumn) {
         CELL firstCell = new CELL(firstRow, firstColumn);
         CELL lastCell = new CELL(lastRow, lastColumn);
         return new RangeReference(firstCell, lastCell);
     }
-
 
     public Reference as_reference(Start args) {
         if (args instanceof RangeReference) return (RangeReference) args;
