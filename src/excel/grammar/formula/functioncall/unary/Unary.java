@@ -30,8 +30,8 @@ import excel.grammar.formula.FunctionCall;
  */
 public abstract class Unary extends FunctionCall {
 
-    private final Formula formula;
-    private final String unOpPrefix;
+    protected final Formula formula;
+    protected final String unOpPrefix;
 
     Unary(String unOpPrefix, Formula formula) {
         this.unOpPrefix = unOpPrefix;
@@ -41,11 +41,6 @@ public abstract class Unary extends FunctionCall {
     @Override
     public String toString() {
         return unOpPrefix + " " + formula.toString();
-    }
-
-    @Override
-    public String toString(boolean address) {
-        return "err";
     }
 
     public String getUnOpPrefix() {

@@ -50,7 +50,6 @@ public final class Minus extends Unary {
             return buff.toString();
         }//TODO complete
         return varname(formula) + " = " + formula.getUnOpPrefix() + expr.toString();
-
     }
 
     private String varname(Start start) {
