@@ -43,7 +43,7 @@ public final class ERROR_REF extends ReferenceItem {
         StringBuilder buff = new StringBuilder();
         buff.append(varname(e)).append(" = ");
         buff.append(e.toString());
-        return e.toString();
+        return buff.toString();
     }
 
     private String varname(Start start) {
