@@ -120,7 +120,6 @@ public abstract class AbstractParser {
     protected final String subject;
     @SuppressWarnings("WeakerAccess")
     protected final String category;
-
     @SuppressWarnings("WeakerAccess")
     protected final String company;
     @SuppressWarnings("WeakerAccess")
@@ -187,6 +186,7 @@ public abstract class AbstractParser {
         String comment = excelCell.getComment();
         formulaColumn = cell.getColumnIndex();
         formulaRow = cell.getRowIndex();
+        //noinspection unused
         Class internalFormulaResultTypeClass = excelCell.internalFormulaResultType();
         String formulaAddress = HelperInternal.cellAddress(formulaRow, formulaColumn);
         String formulaText = cell.getCellFormula();
@@ -206,11 +206,10 @@ public abstract class AbstractParser {
     protected abstract void _UDF(String arguments);
 
     private Start parse(Ptg[] ptgs, int row, int column) {
-        Start start = null;
         parseFormulaInit();
         if (Ptg.doesFormulaReferToDeletedCell(ptgs)) doesFormulaReferToDeletedCell(row, column);
         for (Ptg ptg : ptgs) parse(ptg, row, column);
-        start = parseFormulaPost(start);
+        Start start = parseFormulaPost();
         return start;
     }
 
@@ -353,8 +352,6 @@ public abstract class AbstractParser {
     private void parseRefPtg(RefPtg t) {
         int ri = t.getRow();
         int ci = t.getColumn();
-        boolean rowRelative = t.isRowRelative();
-        boolean colRelative = t.isColRelative();
         Row row = sheet.getRow(t.getRow());
         boolean rowNotNull = (row != null);
         Object value = null;
@@ -475,7 +472,7 @@ public abstract class AbstractParser {
 
     protected abstract void parseFormulaInit();
 
-    protected abstract Start parseFormulaPost(Start start);
+    protected abstract Start parseFormulaPost();
 
     // 3DPxg is XSSF
     // 3DPtg is HSSF
@@ -523,8 +520,8 @@ public abstract class AbstractParser {
     public static class HelperInternal {
 
 
-        static String reference(final int firstRow, final int firstCol, boolean isFirstRowRel, boolean isFirstColRel,
-                                int lastRow, int lastCol, boolean isLastRowRel, boolean isLastColRel
+        static String reference(final int firstRow, final int firstCol,
+                                int lastRow, int lastCol
         ) {
             return cellAddress(firstRow, firstCol) + ":" + HelperInternal.cellAddress(lastRow, lastCol);
         }
@@ -565,14 +562,8 @@ public abstract class AbstractParser {
         private final int firstRow;
         private final int firstColumn;
 
-        private final boolean firstRowRelative;
-        private final boolean firstColumnRelative;
-
         private final int lastRow;
         private final int lastColumn;
-
-        private final boolean lastRowRelative;
-        private final boolean lastColumnRelative;
 
         private List<Object> values;
 
@@ -582,14 +573,9 @@ public abstract class AbstractParser {
             firstRow = t.getFirstRow();
             firstColumn = t.getFirstColumn();
 
-            firstRowRelative = t.isFirstRowRelative();
-            firstColumnRelative = t.isFirstColRelative();
-
             lastRow = t.getLastRow();
             lastColumn = t.getLastColumn();
 
-            lastRowRelative = t.isLastRowRelative();
-            lastColumnRelative = t.isLastColRelative();
             this.workbook = workbook;
             this.sheet = sheet;
             init();
@@ -599,17 +585,14 @@ public abstract class AbstractParser {
             firstRow = t.getFirstRow();
             firstColumn = t.getFirstColumn();
             sheetName = sheetnamne;
-            firstRowRelative = t.isFirstRowRelative();
-            firstColumnRelative = t.isFirstColRelative();
+
 
             lastRow = t.getLastRow();
             lastColumn = t.getLastColumn();
 
-            lastRowRelative = t.isLastRowRelative();
-            lastColumnRelative = t.isLastColRelative();
             this.workbook = workbook;
             this.sheet = null;
-            String refs = HelperInternal.reference(firstRow, firstColumn, firstRowRelative, firstColumnRelative, lastRow, lastColumn, lastRowRelative, lastColumnRelative);
+            String refs = HelperInternal.reference(firstRow, firstColumn, lastRow, lastColumn);
 
             AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
             List<Cell> cells = fromRange(area);
@@ -623,7 +606,7 @@ public abstract class AbstractParser {
         }
 
         private void init() {
-            String refs = HelperInternal.reference(firstRow, firstColumn, firstRowRelative, firstColumnRelative, lastRow, lastColumn, lastRowRelative, lastColumnRelative);
+            String refs = HelperInternal.reference(firstRow, firstColumn, lastRow, lastColumn);
             List<Cell> cells = range(refs);
             values = new ArrayList<>();
             for (Cell cell : cells)

@@ -51,7 +51,6 @@ public final class ERROR extends Constant {
     }
 
     private String format(ERROR e) {
-        //return e.toString();
         StringBuilder buff = new StringBuilder();
         buff.append(varname(e)).append(" = ");
         buff.append(e.toString());

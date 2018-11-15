@@ -149,7 +149,8 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected Start parseFormulaPost(Start start) {
+    protected Start parseFormulaPost() {
+        Start start = null;
         if (!stack.empty()) start = stack.pop();
         return start;
     }

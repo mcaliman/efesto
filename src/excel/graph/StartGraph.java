@@ -89,7 +89,7 @@ public class StartGraph {
         Collection<Node> nodes = this.graph.values();
         List<Edge> edges = this.edges();
         for (Node v : nodes)
-            if (!hasIncomingEdges(v, edges))
+            if (notHasIncomingEdges(v, edges))
                 queue.add(v);
         while (!queue.isEmpty()) {
             Node v = queue.poll();
@@ -101,7 +101,7 @@ public class StartGraph {
                 this.removeEdge(s.value(), t.value());
                 Node end = e.dest();
                 List<Edge> edges1 = this.edges();
-                if (!hasIncomingEdges(end, edges1))
+                if (notHasIncomingEdges(end, edges1))
                     queue.add(end);
             }
         }
@@ -126,10 +126,10 @@ public class StartGraph {
         return results;
     }
 
-    private boolean hasIncomingEdges(Node v, List<Edge> allEdges) {
+    private boolean notHasIncomingEdges(Node v, List<Edge> allEdges) {
         for (Edge edge : allEdges)
-            if (edge.dest().equals(v)) return true;
-        return false;
+            if (edge.dest().equals(v)) return false;
+        return true;
     }
 
     private List<Edge> outgoingEdges(Node v) {

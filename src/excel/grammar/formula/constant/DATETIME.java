@@ -36,6 +36,7 @@ public final class DATETIME extends Constant {
     //TODO use LocalDate LocalTime LocalDateTime!
     private final Date value;
 
+    @SuppressWarnings("unused")
     public DATETIME(Date value) {
         this.value = value;
     }
