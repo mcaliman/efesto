@@ -106,7 +106,6 @@ public abstract class AbstractParser {
 
     private Sheet sheet;
     private EvaluationSheet evaluationSheet;
-    private Class internalFormulaResultTypeClass;
 
     AbstractParser(File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
@@ -167,7 +166,7 @@ public abstract class AbstractParser {
         String comment = excelCell.getComment();
         formulaColumn = cell.getColumnIndex();
         formulaRow = cell.getRowIndex();
-        internalFormulaResultTypeClass = excelCell.internalFormulaResultType();
+        Class internalFormulaResultTypeClass = excelCell.internalFormulaResultType();
         String formulaAddress = HelperInternal.cellAddress(formulaRow, formulaColumn);
         String formulaText = cell.getCellFormula();
         FormulaTokensInternal tokens = new FormulaTokensInternal(this.evaluationWorkbook, this.evaluationSheet);
@@ -538,7 +537,7 @@ public abstract class AbstractParser {
      */
     class RangeInternal {
 
-        private final /*static*/ SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+        private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
         private final Workbook workbook;
         private final Sheet sheet;
 
@@ -557,23 +556,6 @@ public abstract class AbstractParser {
         private List<Object> values;
 
         private String sheetName;
-
-        public RangeInternal(Workbook workbook, Sheet sheet, AreaNPtg t) {
-            firstRow = t.getFirstRow();
-            firstColumn = t.getFirstColumn();
-
-            firstRowRelative = t.isFirstRowRelative();
-            firstColumnRelative = t.isFirstColRelative();
-
-            lastRow = t.getLastRow();
-            lastColumn = t.getLastColumn();
-
-            lastRowRelative = t.isLastRowRelative();
-            lastColumnRelative = t.isLastColRelative();
-            this.workbook = workbook;
-            this.sheet = sheet;
-            init();
-        }
 
         RangeInternal(Workbook workbook, Sheet sheet, AreaPtg t) {
             firstRow = t.getFirstRow();
@@ -608,11 +590,8 @@ public abstract class AbstractParser {
             this.sheet = null;
             String refs = HelperInternal.reference(firstRow, firstColumn, firstRowRelative, firstColumnRelative, lastRow, lastColumn, lastRowRelative, lastColumnRelative);
 
-            //List<Cell> cells = range(refs);
-
             AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
             List<Cell> cells = fromRange(area);
-
 
             values = new ArrayList<>();
             for (Cell cell : cells)
@@ -623,9 +602,7 @@ public abstract class AbstractParser {
         }
 
         private void init() {
-
             String refs = HelperInternal.reference(firstRow, firstColumn, firstRowRelative, firstColumnRelative, lastRow, lastColumn, lastRowRelative, lastColumnRelative);
-
             List<Cell> cells = range(refs);
             values = new ArrayList<>();
             for (Cell cell : cells)
@@ -661,28 +638,12 @@ public abstract class AbstractParser {
             return firstColumn;
         }
 
-        boolean isFirstRowRelative() {
-            return firstRowRelative;
-        }
-
-        boolean isFirstColumnRelative() {
-            return firstColumnRelative;
-        }
-
         int getLastRow() {
             return lastRow;
         }
 
         int getLastColumn() {
             return lastColumn;
-        }
-
-        boolean isLastRowRelative() {
-            return lastRowRelative;
-        }
-
-        boolean isLastColumnRelative() {
-            return lastColumnRelative;
         }
 
         List<Object> getValues() {
@@ -702,6 +663,7 @@ public abstract class AbstractParser {
         private final Cell cell;
         private final String comment;
 
+        @SuppressWarnings("unused")
         CellInternal(Cell cell) {
             this.cell = cell;
             Comment cellComment = this.cell.getCellComment();
@@ -722,16 +684,7 @@ public abstract class AbstractParser {
 
         }
 
-        public Class type() {
-            if (this.cell == null) return null;
-            else if (isDate()) return Date.class;
-            else if (isNumeric()) return Double.class;
-            else if (isBoolean()) return Boolean.class;
-            else if (isString()) return String.class;
-            else return Object.class;
-        }
-
-        Object valueOf() {
+        private Object valueOf() {
             if (cell == null) return null;
             if (isDataType(cell))
                 return cell.getDateCellValue();
@@ -751,41 +704,9 @@ public abstract class AbstractParser {
                     if (cell.toString() != null && cell.toString().equalsIgnoreCase("false")) {
                         return false;
                     }
-
                     return cell.toString();
                 default:
                     return null;
-            }
-        }
-
-        private boolean isDate() {
-            return this.cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(this.cell);
-        }
-
-        private boolean isString() {
-            return this.cell.getCellType() == CELL_TYPE_STRING;
-        }
-
-        private boolean isNumeric() {
-            return this.cell.getCellType() == CELL_TYPE_NUMERIC;
-        }
-
-        private boolean isBoolean() {
-            return this.cell.getCellType() == CELL_TYPE_BOOLEAN;
-        }
-
-        private Class typeOf(Cell c) {
-            if (c == null) return null;
-            if (isDataType(c)) return Date.class;
-            switch (c.getCellType()) {
-                case CELL_TYPE_STRING:
-                    return String.class;
-                case CELL_TYPE_NUMERIC:
-                    return Double.class;
-                case CELL_TYPE_BOOLEAN:
-                    return Boolean.class;
-                default:
-                    return Object.class;
             }
         }
 

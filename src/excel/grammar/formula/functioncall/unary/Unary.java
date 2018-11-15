@@ -31,7 +31,7 @@ import excel.grammar.formula.FunctionCall;
 public abstract class Unary extends FunctionCall {
 
     private final Formula formula;
-    private String unOpPrefix;
+    private final String unOpPrefix;
 
     Unary(String unOpPrefix, Formula formula) {
         this.unOpPrefix = unOpPrefix;
