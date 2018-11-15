@@ -48,7 +48,7 @@ public final class StartList extends ArrayList<Start> implements List<Start> {
     }
 
     public boolean singleton() {
-        return this != null && this.size() == 1;
+        return this.size() == 1;
     }
 
     private boolean test(int index, String text) {
@@ -56,7 +56,7 @@ public final class StartList extends ArrayList<Start> implements List<Start> {
     }
 
     public boolean test(int offset, String... text) {
-        if (this == null || size() == 0) return false;
+        if (size() == 0) return false;
         boolean test = true;
         for (int i = 0; i < text.length; i++)
             test &= this.test(i + offset, text[i]);
