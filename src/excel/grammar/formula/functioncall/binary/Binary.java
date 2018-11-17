@@ -50,11 +50,11 @@ public abstract class Binary extends FunctionCall {
     }
 
     public String toString(boolean address) {
-        if (address) return this.getAddress(true) + " = " + operandTo(lFormula) + op + operandTo(rFormula);
-        else return operandTo(lFormula) + op + operandTo(rFormula);
+        return address?
+                getAddress(true) + " = " + operandTo(lFormula) + op + operandTo(rFormula):
+                operandTo(lFormula) + op + operandTo(rFormula);
 
     }
-
 
     public Start getlFormula() {
         return lFormula;
