@@ -22,7 +22,6 @@
 
 package excel.grammar.formula.reference;
 
-import excel.grammar.Start;
 import excel.grammar.formula.Reference;
 
 /**
@@ -93,16 +92,14 @@ public final class RangeReference extends Reference {
     @Override
     public String toString(boolean address) {
         StringBuilder buff = new StringBuilder();
-        if(address){
+        if (address) {
             if (!sameAddr(reference1) && getColumn() != -1 && getRow() != -1) buff.append(getAddress()).append(" = ");
-            if (sheetName != null && sheetName.trim().length() > 0) buff.append(sheetName).append("!");
+            buff.append(sheetName).append("!");
             buff.append(reference1.getAddress()).append(":").append(reference2.getAddress());
             buff.append(" = ").append(values());
             return buff.toString();
-        }else{
-            if (sheetName != null && sheetName.trim().length() > 0) buff.append(sheetName).append("!");
-            buff.append(reference1.getAddress()).append(":").append(reference2.getAddress());
-            return buff.toString();
+        } else {
+            return sheetName + "!" + reference1.getAddress() + ":" + reference2.getAddress();
         }
     }
 
