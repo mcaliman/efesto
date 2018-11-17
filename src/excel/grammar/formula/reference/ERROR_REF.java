@@ -22,8 +22,6 @@
 
 package excel.grammar.formula.reference;
 
-import excel.grammar.Start;
-
 /**
  * @author Massimo Caliman
  */
@@ -35,18 +33,8 @@ public final class ERROR_REF extends ReferenceItem {
     }
 
     public String toString(boolean addr) {
-        return format(this);
+        return getAddress() + " = " + toString();
 
-    }
-
-    private String format(ERROR_REF e) {
-        String buff = varname(e) + " = " +
-                e.toString();
-        return buff;
-    }
-
-    private String varname(Start start) {
-        return start.getAddress();
     }
 
 }

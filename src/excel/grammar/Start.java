@@ -29,13 +29,11 @@ import excel.parser.AbstractParser;
  */
 public abstract class Start {
 
+    protected String sheetName;
     private int row;
     private int column;
-
     private String comment;
-
     private int sheetIndex;
-    protected String sheetName;
 
     public boolean isTerminal() {
         return false;

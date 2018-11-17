@@ -53,6 +53,26 @@ import static org.apache.poi.ss.usermodel.Cell.*;
 
 public abstract class AbstractParser {
 
+    //TODO
+    @SuppressWarnings("WeakerAccess")
+    protected final String creator;
+    @SuppressWarnings("WeakerAccess")
+    protected final String description;
+    @SuppressWarnings("WeakerAccess")
+    protected final String keywords;
+    @SuppressWarnings("WeakerAccess")
+    protected final String title;
+    @SuppressWarnings("WeakerAccess")
+    protected final String subject;
+    @SuppressWarnings("WeakerAccess")
+    protected final String category;
+    @SuppressWarnings("WeakerAccess")
+    protected final String company;
+    @SuppressWarnings("WeakerAccess")
+    protected final String template;
+    @SuppressWarnings("WeakerAccess")
+    protected final String manager;
+    final boolean errors = false;
     private final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
     private final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
     private final Predicate<Ptg> area3DPxg = (Ptg t) -> t instanceof Area3DPxg;
@@ -94,39 +114,16 @@ public abstract class AbstractParser {
     private final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
     private final Workbook workbook;
-
-    public boolean verbose = false;
-    final boolean errors = false;
-    public boolean metadata = false;
     private final XSSFEvaluationWorkbook evaluationWorkbook;
+    public boolean verbose = false;
+    public boolean metadata = false;
     int formulaColumn;
     int formulaRow;
     int currentSheetIndex;
     String currentSheetName;
     String fileName;
-
     private Sheet sheet;
     private EvaluationSheet evaluationSheet;
-
-    //TODO
-    @SuppressWarnings("WeakerAccess")
-    protected final String creator;
-    @SuppressWarnings("WeakerAccess")
-    protected final String description;
-    @SuppressWarnings("WeakerAccess")
-    protected final String keywords;
-    @SuppressWarnings("WeakerAccess")
-    protected final String title;
-    @SuppressWarnings("WeakerAccess")
-    protected final String subject;
-    @SuppressWarnings("WeakerAccess")
-    protected final String category;
-    @SuppressWarnings("WeakerAccess")
-    protected final String company;
-    @SuppressWarnings("WeakerAccess")
-    protected final String template;
-    @SuppressWarnings("WeakerAccess")
-    protected final String manager;
 
     AbstractParser(File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
@@ -348,7 +345,6 @@ public abstract class AbstractParser {
     }
 
 
-
     private void parseRefPtg(RefPtg t) {
         int ri = t.getRow();
         int ci = t.getColumn();
@@ -474,21 +470,6 @@ public abstract class AbstractParser {
 
     protected abstract Start parseFormulaPost();
 
-    // 3DPxg is XSSF
-    // 3DPtg is HSSF
-    class WhatIf {
-
-        final Ptg ptg;
-        final Predicate<Ptg> predicate;
-        final Consumer<Ptg> consumer;
-
-        WhatIf(Ptg ptg, Predicate<Ptg> predicate, Consumer<Ptg> consumer) {
-            this.ptg = ptg;
-            this.predicate = predicate;
-            this.consumer = consumer;
-        }
-    }
-
     static final class ErrInternal {
 
         private final static String ERROR_NULL_INTERSECTION = "#NULL!";
@@ -548,6 +529,21 @@ public abstract class AbstractParser {
             return buffer.toString();
         }
 
+    }
+
+    // 3DPxg is XSSF
+    // 3DPtg is HSSF
+    class WhatIf {
+
+        final Ptg ptg;
+        final Predicate<Ptg> predicate;
+        final Consumer<Ptg> consumer;
+
+        WhatIf(Ptg ptg, Predicate<Ptg> predicate, Consumer<Ptg> consumer) {
+            this.ptg = ptg;
+            this.predicate = predicate;
+            this.consumer = consumer;
+        }
     }
 
     /**

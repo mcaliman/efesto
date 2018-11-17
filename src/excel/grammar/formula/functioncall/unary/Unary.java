@@ -40,7 +40,7 @@ public abstract class Unary extends FunctionCall {
 
     @Override
     public String toString() {
-        return unOpPrefix + " " + formula.toString();
+        return unOpPrefix + formula.toString();
     }
 
     public String getUnOpPrefix() {
