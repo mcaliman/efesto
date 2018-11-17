@@ -49,11 +49,15 @@ public final class PrefixReferenceItem extends Reference {
     }
 
     public String toString(boolean address) {
-        StringBuilder buff = new StringBuilder();
-        if (address && !this.isArea()) buff.append((this).getAddress()).append(" = ");
-        buff.append(prefix.toString()).append(this.reference);
-        if (address) buff.append(" = ").append(values());
-        return buff.toString();
+        if (address) {
+            String buff = "";
+            if (!isArea())
+                buff += getAddress() + " = ";
+            buff += prefix.toString() + reference + " = " + values();
+            return buff;
+        } else {
+            return prefix + reference;
+        }
     }
 
     public String getSheetName() {
