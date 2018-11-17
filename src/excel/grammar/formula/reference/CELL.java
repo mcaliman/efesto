@@ -61,22 +61,17 @@ public final class CELL extends ReferenceItem {
 
     @Override
     public String toString() {
-        return format(this);
+        if (value instanceof String) return getAddress() + " = " + TEXT.format((String) value);
+        else if (value instanceof Boolean) return getAddress() + " = " + BOOL.format((Boolean) value);
+        else if (value instanceof Integer) return getAddress() + " = " + INT.format((Integer) value);
+        else if (value instanceof Double) return getAddress() + " = " + FLOAT.format((Double) value);
+        else if (value instanceof Date) return getAddress() + " = " + DATETIME.format((Date) value);
+        return toString();
     }
 
     @Override
     public String toString(boolean address) {
         return toString();
-    }
-
-    private String format(CELL e) {
-        Object value = e.getValue();
-        if (value instanceof String) return e.getAddress() + " = " + TEXT.format((String) value);
-        else if (value instanceof Boolean) return e.getAddress() + " = " + BOOL.format((Boolean) value);
-        else if (value instanceof Integer) return e.getAddress() + " = " + INT.format((Integer) value);
-        else if (value instanceof Double) return e.getAddress() + " = " + FLOAT.format((Double) value);
-        else if (value instanceof Date) return e.getAddress() + " = " + DATETIME.format((Date) value);
-        return e.toString();
     }
 
 }
