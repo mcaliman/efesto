@@ -24,6 +24,7 @@ package excel.grammar.formula.functioncall.unary;
 
 import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
+import excel.grammar.formula.reference.CELL;
 
 /**
  * @author Massimo Caliman
@@ -42,6 +43,21 @@ public abstract class Unary extends FunctionCall {
     public String toString() {
         return unOpPrefix + formula.toString();
     }
+
+    @Override
+    public String toString(boolean address) {
+        //NEW
+        StringBuilder text = new StringBuilder();
+        if (address) text.append(getAddress(true)).append(" = ");
+        if (formula instanceof CELL) {
+            text.append(unOpPrefix).append(((CELL) formula).getValue());
+            return text.toString();
+        }else {
+            return getAddress() + " = " + unOpPrefix + formula.toString();
+        }
+    }
+
+
 
     public String getUnOpPrefix() {
         return unOpPrefix;

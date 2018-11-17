@@ -35,15 +35,4 @@ public final class Plus extends Unary {
         super(Grammar.plus, expr);
     }
 
-    @Override
-    public String toString(boolean address) {
-        StringBuilder text = new StringBuilder();
-        if (address) text.append(getAddress(true)).append(" = ");
-        if (this.formula instanceof CELL) {
-            text.append(this.unOpPrefix).append(((CELL) this.formula).getValue());
-            return text.toString();
-        }
-        return getAddress() + " = " + this.unOpPrefix + this.formula.toString();
-    }
-
 }
