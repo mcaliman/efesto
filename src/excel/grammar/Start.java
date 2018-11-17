@@ -92,7 +92,7 @@ public abstract class Start {
         return hash;
     }
 
-    public boolean isArea() {
+    protected boolean isArea() {
         return this.row == -1 && this.column == -1;
     }
 

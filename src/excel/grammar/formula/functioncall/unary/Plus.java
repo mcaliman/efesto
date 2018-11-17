@@ -24,7 +24,6 @@ package excel.grammar.formula.functioncall.unary;
 
 import excel.grammar.Formula;
 import excel.grammar.Grammar;
-import excel.grammar.formula.reference.CELL;
 
 /**
  * @author Massimo Caliman

@@ -64,9 +64,11 @@ public final class PrefixReferenceItem extends Reference {
         return sheetName;
     }
 
-    private String getReference() {
-        return reference;
-    }
+// --Commented out by Inspection START (17/11/2018 12:20):
+//    private String getReference() {
+//        return reference;
+//    }
+// --Commented out by Inspection STOP (17/11/2018 12:20)
 
     private boolean horizzontal_range() {
         return firstRow == lastRow && firstColumn != lastColumn;
