@@ -50,15 +50,15 @@ public final class PrefixReferenceItem extends Reference {
      */
     @Override
     public String toString() {
-        return prefix.toString() + reference;
+        return prefix + reference;
     }
 
     public String toString(boolean address) {
-        return address ? ifIsNotArea() + prefix.toString() + reference + " = " + values() : toString();
+        return address ? ifIsNotArea() + prefix + reference + " = " + values() : toString();
 
     }
 
-    String ifIsNotArea() {
+    private String ifIsNotArea() {
         return !isArea() ? getAddress() + " = " : "";
     }
 
@@ -73,10 +73,9 @@ public final class PrefixReferenceItem extends Reference {
     private boolean vertical_range() {
         return firstColumn == lastColumn && firstRow != lastRow;
     }
-
+    //@TODO simplify
     private String values() {
         if (vals.isEmpty()) return "[]";
-
         if (horizzontal_range() || vertical_range()) {
             StringBuilder buff = new StringBuilder();
             buff.append("[ ");
