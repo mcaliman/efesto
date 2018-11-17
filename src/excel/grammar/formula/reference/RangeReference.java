@@ -87,7 +87,7 @@ public final class RangeReference extends Reference {
 
     @Override
     public String toString() {
-        return "" + this.reference1.getAddress() + ":" + this.reference2.getAddress();
+        return reference1.getAddress() + ':' + reference2.getAddress();
     }
 
     @Override
@@ -99,25 +99,15 @@ public final class RangeReference extends Reference {
     private String format(RangeReference e, boolean address) {
         CELL ref1 = e.getReference1();
         CELL ref2 = e.getReference2();
-        String addr1 = varname(ref1);
-        String addr2 = varname(ref2);
+        String addr1 = ref1.getAddress();
+        String addr2 = ref2.getAddress();
         StringBuilder buff = new StringBuilder();
-        if (address && !e.sameAddr(ref1) && e.getColumn() != -1 && e.getRow() != -1)
-            buff.append(varname(e)).append(" = ");
-
+        if (address && !e.sameAddr(ref1) && e.getColumn() != -1 && e.getRow() != -1) buff.append(e.getAddress()).append(" = ");
         String sheetName = e.getSheetName();
         if (sheetName != null && sheetName.trim().length() > 0) buff.append(sheetName).append("!");
-
         buff.append(addr1).append(":").append(addr2);
-        if (address) {
-            String values = e.values();
-            buff.append(" = ").append(values);
-        }
+        if (address) buff.append(" = ").append(e.values());
         return buff.toString();
-    }
-
-    private String varname(Start start) {
-        return start.getAddress();
     }
 
     private CELL getReference1() {
