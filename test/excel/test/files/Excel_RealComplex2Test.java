@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author mcaliman
  */
+@SuppressWarnings("UnusedAssignment")
 class Excel_RealComplex2Test {
 
     @Test

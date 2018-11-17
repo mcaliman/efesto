@@ -40,10 +40,9 @@ public final class ERROR_REF extends ReferenceItem {
     }
 
     private String format(ERROR_REF e) {
-        StringBuilder buff = new StringBuilder();
-        buff.append(varname(e)).append(" = ");
-        buff.append(e.toString());
-        return buff.toString();
+        String buff = varname(e) + " = " +
+                e.toString();
+        return buff;
     }
 
     private String varname(Start start) {
