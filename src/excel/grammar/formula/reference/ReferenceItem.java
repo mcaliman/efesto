@@ -36,7 +36,6 @@ public class ReferenceItem extends Reference {
     private int lastRow;
     private int lastColumn;
 
-
     ReferenceItem() {
     }
 
@@ -44,7 +43,6 @@ public class ReferenceItem extends Reference {
     ReferenceItem(String value) {
         this.value = value;
     }
-
 
     @Override
     public String toString() {
@@ -56,7 +54,7 @@ public class ReferenceItem extends Reference {
                 sheetName + "!" + value + " = " + values() :
                 sheetName + "!" + value;
     }
-    
+
     private boolean horizzontal_range() {
         return firstRow == lastRow && firstColumn != lastColumn;
     }

@@ -42,7 +42,13 @@ public final class ParenthesisFormula extends Formula {
     }
 
     public String toString(boolean address) {
-        return formula instanceof Binary ? formula.toString(false) : formula.toString();
+        return  isBinary() ?
+                formula.toString(false) :
+                formula.toString();
+    }
+
+    private boolean isBinary(){
+        return formula instanceof Binary;
     }
 
     public Formula getFormula() {

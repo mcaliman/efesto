@@ -47,7 +47,7 @@ public abstract class Start {
         this.comment = comment;
     }
 
-    public int getRow() {
+    protected int getRow() {
         return row;
     }
 
@@ -55,7 +55,7 @@ public abstract class Start {
         this.row = row;
     }
 
-    public int getColumn() {
+    protected int getColumn() {
         return column;
     }
 
