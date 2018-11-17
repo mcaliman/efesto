@@ -92,30 +92,12 @@ public final class RangeReference extends Reference {
 
     @Override
     public String toString(boolean address) {
-        return format(this, address);
-    }
-
-
-    private String format(RangeReference e, boolean address) {
-        CELL ref1 = e.getReference1();
-        CELL ref2 = e.getReference2();
-        String addr1 = ref1.getAddress();
-        String addr2 = ref2.getAddress();
         StringBuilder buff = new StringBuilder();
-        if (address && !e.sameAddr(ref1) && e.getColumn() != -1 && e.getRow() != -1) buff.append(e.getAddress()).append(" = ");
-        String sheetName = e.getSheetName();
+        if (address && !sameAddr(reference1) && getColumn() != -1 && getRow() != -1) buff.append(getAddress()).append(" = ");
         if (sheetName != null && sheetName.trim().length() > 0) buff.append(sheetName).append("!");
-        buff.append(addr1).append(":").append(addr2);
-        if (address) buff.append(" = ").append(e.values());
+        buff.append(reference1.getAddress()).append(":").append(reference2.getAddress());
+        if (address) buff.append(" = ").append(values());
         return buff.toString();
-    }
-
-    private CELL getReference1() {
-        return reference1;
-    }
-
-    private CELL getReference2() {
-        return reference2;
     }
 
 }
