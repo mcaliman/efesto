@@ -43,32 +43,28 @@ public final class PrefixReferenceItem extends Reference {
         this.reference = reference;
     }
 
+    /**
+     * If not address required
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return prefix.toString() + reference;
     }
 
     public String toString(boolean address) {
-        if (address) {
-            String buff = "";
-            if (!isArea())
-                buff += getAddress() + " = ";
-            buff += prefix.toString() + reference + " = " + values();
-            return buff;
-        } else {
-            return prefix + reference;
-        }
+        return address ? ifIsNotArea() + prefix.toString() + reference + " = " + values() : toString();
+
+    }
+
+    String ifIsNotArea() {
+        return !isArea() ? getAddress() + " = " : "";
     }
 
     public String getSheetName() {
         return sheetName;
     }
-
-// --Commented out by Inspection START (17/11/2018 12:20):
-//    private String getReference() {
-//        return reference;
-//    }
-// --Commented out by Inspection STOP (17/11/2018 12:20)
 
     private boolean horizzontal_range() {
         return firstRow == lastRow && firstColumn != lastColumn;
