@@ -45,6 +45,18 @@ public final class RangeReference extends Reference {
         return reference1.getColumn() == reference2.getColumn() && reference1.getRow() != reference2.getRow();
     }
 
+    @Override
+    public String toString() {
+        return reference1.getAddress() + ':' + reference2.getAddress();
+    }
+
+    @Override
+    public String toString(boolean address) {
+        return address ?
+                sheetName + "!" + reference1.getAddress() + ":" + reference2.getAddress() + " = " + values() :
+                sheetName + "!" + reference1.getAddress() + ":" + reference2.getAddress();
+    }
+
     private String values() {
         try {
             if (horizzontal_range() || vertical_range()) {
@@ -60,7 +72,6 @@ public final class RangeReference extends Reference {
                 buff.append(" ]");
                 return buff.toString();
             } else {
-
                 StringBuilder buff = new StringBuilder();
                 buff.append("[");
                 int index = 0;
@@ -82,18 +93,6 @@ public final class RangeReference extends Reference {
         } catch (IndexOutOfBoundsException e) {
             return "IndexOutOfBoundsException";
         }
-    }
-
-    @Override
-    public String toString() {
-        return reference1.getAddress() + ':' + reference2.getAddress();
-    }
-
-    @Override
-    public String toString(boolean address) {
-        return address ?
-                sheetName + "!" + reference1.getAddress() + ":" + reference2.getAddress() + " = " + values() :
-                sheetName + "!" + reference1.getAddress() + ":" + reference2.getAddress();
     }
 
 }

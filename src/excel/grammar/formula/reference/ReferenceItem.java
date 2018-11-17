@@ -52,29 +52,11 @@ public class ReferenceItem extends Reference {
     }
 
     public String toString(boolean address) {
-        return format(this, address);
+        return address ?
+                sheetName + "!" + value + " = " + values() :
+                sheetName + "!" + value;
     }
-
-    private String format(ReferenceItem referenceItem, boolean address) {
-        StringBuilder buff = new StringBuilder();
-        if (address) {
-            if (this.sheetName != null && this.sheetName.length() > 0) buff.append(sheetName).append("!");
-            buff.append(referenceItem.getReferenceItemValue());
-            buff.append(" = ");
-            buff.append(referenceItem.values());
-        } else {
-            if (this.sheetName != null && this.sheetName.length() > 0) buff.append(sheetName).append("!");
-            buff.append(referenceItem.getReferenceItemValue());
-        }
-        return buff.toString();
-    }
-
-
-    private String getReferenceItemValue() {
-        return value;
-    }
-
-
+    
     private boolean horizzontal_range() {
         return firstRow == lastRow && firstColumn != lastColumn;
     }
