@@ -279,7 +279,7 @@ public final class Parser extends AbstractParser {
     protected void _Eq() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Eq op = grammar.eq(lExpr, rExpr);
+        Eq op = new Eq((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -289,7 +289,7 @@ public final class Parser extends AbstractParser {
     protected void _Lt() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Lt op = grammar.lt(lExpr, rExpr);
+        Lt op = new Lt((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -299,7 +299,7 @@ public final class Parser extends AbstractParser {
     protected void _Gt() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Gt op = grammar.gt(lExpr, rExpr);
+        Gt op = new Gt((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -309,7 +309,7 @@ public final class Parser extends AbstractParser {
     protected void _Leq() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Leq op = grammar.leq(lExpr, rExpr);
+        Leq op = new Leq((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -319,7 +319,7 @@ public final class Parser extends AbstractParser {
     protected void _GtEq() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        GtEq op = grammar.gteq(lExpr, rExpr);
+        GtEq op = new GtEq((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -329,7 +329,7 @@ public final class Parser extends AbstractParser {
     protected void _Neq() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Neq op = grammar.neq(lExpr, rExpr);
+        Neq op = new Neq((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -339,7 +339,7 @@ public final class Parser extends AbstractParser {
     protected void _Concat() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Concat op = grammar.concat(lExpr, rExpr);
+        Concat op = new Concat((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -349,7 +349,7 @@ public final class Parser extends AbstractParser {
     protected void _Add() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Add op = grammar.add(lExpr, rExpr);
+        Add op = new Add((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -359,7 +359,7 @@ public final class Parser extends AbstractParser {
     protected void _Sub() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Sub op = grammar.subtrac(lExpr, rExpr);
+        Sub op = new Sub((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -369,7 +369,7 @@ public final class Parser extends AbstractParser {
     protected void _Mult() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Mult op = grammar.multiply(lExpr, rExpr);
+        Mult op =  new Mult((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -379,7 +379,7 @@ public final class Parser extends AbstractParser {
     protected void _Divide() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Divide op = grammar.divide(lExpr, rExpr);
+        Divide op = new Divide((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -389,7 +389,7 @@ public final class Parser extends AbstractParser {
     protected void _Power() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Power op = grammar.power(lExpr, rExpr);
+        Power op = new Power((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -400,7 +400,7 @@ public final class Parser extends AbstractParser {
     protected void _Intersection() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Intersection op = grammar.intersection(lExpr, rExpr);
+        Intersection op = new Intersection((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -410,7 +410,7 @@ public final class Parser extends AbstractParser {
     protected void _Union() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Union op = grammar.union(lExpr, rExpr);
+        Union op =new Union((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -418,7 +418,7 @@ public final class Parser extends AbstractParser {
 
     @Override
     protected void _PercentFormula() {
-        PercentFormula formula = grammar.percentFormula(stack.pop());
+        PercentFormula formula = new PercentFormula((Formula) stack.pop());
         setOwnProperty(formula);
         graph.addNode(formula);
         stack.push(formula);
@@ -434,7 +434,7 @@ public final class Parser extends AbstractParser {
 
     @Override
     protected void _CELL(int ri, int ci, boolean rowNotNull, Object value, String comment) {
-        CELL ref = grammar.cell(ri, ci);
+        CELL ref = new CELL(ri, ci);
         ref.setComment(comment);
         setOwnProperty(ref);
         if (rowNotNull) {
@@ -555,13 +555,19 @@ public final class Parser extends AbstractParser {
 
     @Override
     protected void _RangeReference(List<Object> list, int firstRow, int firstColumn, int lastRow, int lastColumn) {
-        RangeReference ref = grammar.rangeReference(firstRow, firstColumn, lastRow, lastColumn);
+        RangeReference ref = rangeReference(firstRow, firstColumn, lastRow, lastColumn);
         setOwnProperty(ref);
         //is area not a cell with ref to area
         ref.setAsArea();
         ref.add(list);
         graph.addNode(ref);
         stack.push(ref);
+    }
+
+    private RangeReference rangeReference(int firstRow, int firstColumn, int lastRow, int lastColumn) {
+        CELL firstCell = new CELL(firstRow, firstColumn);
+        CELL lastCell = new CELL(lastRow, lastColumn);
+        return new RangeReference(firstCell, lastCell);
     }
 
 // END

@@ -38,85 +38,7 @@ import excel.parser.UnsupportedBuiltinException;
 
 public final class Grammar {
 
-    private final static String plus = "+";
-    private final static String minus = "-";
-    private final static String concat = "&";
-    private final static String add = "+";
-    private final static String sub = "-";
-    private final static String multiply = "*";
-    private final static String div = "/";
-    private final static String power = "^";
-    private final static String intersection = " ";
-    private final static String union = ",";
-    private final static String percent = "%";
-    private final static String eq = "=";
-    private final static String lt = "<";
-    private final static String gt = ">";
-    private final static String leq = "<=";
-    private final static String gteq = ">=";
-    private final static String neq = "<>";
-
     public Grammar() {
-    }
-
-    public Eq eq(Start lExpr, Start rExpr) {
-        return new Eq((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public Lt lt(Start lExpr, Start rExpr) {
-        return new Lt((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public Gt gt(Start lExpr, Start rExpr) {
-        return new Gt((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public Leq leq(Start lExpr, Start rExpr) {
-        return new Leq((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public GtEq gteq(Start lExpr, Start rExpr) {
-        return new GtEq((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public Neq neq(Start lExpr, Start rExpr) {
-        return new Neq((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public Concat concat(Start lExpr, Start rExpr) {
-        return new Concat((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public Add add(Start lExpr, Start rExpr) {
-        return new Add((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public Sub subtrac(Start lExpr, Start rExpr) {
-        return new Sub((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public Mult multiply(Start lExpr, Start rExpr) {
-        return new Mult((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public Divide divide(Start lExpr, Start rExpr) {
-        return new Divide((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public Power power(Start lExpr, Start rExpr) {
-        return new Power((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public Intersection intersection(Start lExpr, Start rExpr) {
-        return new Intersection((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public Union union(Start lExpr, Start rExpr) {
-        return new Union((Formula) lExpr, (Formula) rExpr);
-    }
-
-    public PercentFormula percentFormula(Start formula) {
-        return new PercentFormula((Formula) formula);
     }
 
     public TEXT text(String value) {
@@ -157,11 +79,6 @@ public final class Grammar {
         return (EXCEL_FUNCTION) factory.getBuiltInFunction();
     }
 
-    public RangeReference rangeReference(int firstRow, int firstColumn, int lastRow, int lastColumn) {
-        CELL firstCell = new CELL(firstRow, firstColumn);
-        CELL lastCell = new CELL(lastRow, lastColumn);
-        return new RangeReference(firstCell, lastCell);
-    }
 
     public Reference as_reference(Start args) {
         if (args instanceof RangeReference) return (RangeReference) args;
