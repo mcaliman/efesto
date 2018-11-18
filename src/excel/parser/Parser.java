@@ -191,7 +191,7 @@ public final class Parser extends AbstractParser {
         stack.push(sum);
     }
 
-    Reference as_reference(Start args) {
+    private Reference as_reference(Start args) {
         if (args instanceof RangeReference) return (RangeReference) args;
         else if (args instanceof ReferenceItem) return (ReferenceItem) args;
         else if (args instanceof PrefixReferenceItem) return (PrefixReferenceItem) args;
