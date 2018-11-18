@@ -42,12 +42,12 @@ public final class ParenthesisFormula extends Formula {
     }
 
     public String toString(boolean address) {
-        return  isBinary() ?
+        return isBinary() ?
                 formula.toString(false) :
                 formula.toString();
     }
 
-    private boolean isBinary(){
+    private boolean isBinary() {
         return formula instanceof Binary;
     }
 

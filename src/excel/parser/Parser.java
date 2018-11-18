@@ -23,7 +23,6 @@
 package excel.parser;
 
 import excel.grammar.Formula;
-import excel.grammar.Grammar;
 import excel.grammar.Metadata;
 import excel.grammar.Start;
 import excel.grammar.formula.ConstantArray;
@@ -56,11 +55,10 @@ public final class Parser extends AbstractParser {
     private StartList ordered;
     private StartGraph graph;
     private Stack<Start> stack;
-    private Grammar grammar;
+
 
     public Parser(String filename) throws IOException, InvalidFormatException {
         super(new File(filename));
-        grammar = new Grammar();
         unordered = new StartList();
         ordered = new StartList();
         graph = new StartGraph();
@@ -173,7 +171,7 @@ public final class Parser extends AbstractParser {
     protected void _SUM() {
         Start args = stack.pop();
         if (args instanceof Reference) {
-            Reference ref = grammar.as_reference(args);
+            Reference ref = as_reference(args);
             ref.setSheetIndex(currentSheetIndex);
             ref.setSheetName(currentSheetName);
             ref.setAsArea();
@@ -191,6 +189,13 @@ public final class Parser extends AbstractParser {
         unordered.add(sum);
         graph.add(sum);
         stack.push(sum);
+    }
+
+    Reference as_reference(Start args) {
+        if (args instanceof RangeReference) return (RangeReference) args;
+        else if (args instanceof ReferenceItem) return (ReferenceItem) args;
+        else if (args instanceof PrefixReferenceItem) return (PrefixReferenceItem) args;
+        else return null;
     }
 
     //Used
@@ -219,35 +224,35 @@ public final class Parser extends AbstractParser {
 
     @Override
     protected void _FLOAT(Double value) {
-        FLOAT term = grammar.number(value);
+        FLOAT term = new FLOAT(value);
         graph.addNode(term);
         stack.push(term);
     }
 
     @Override
     protected void _INT(Integer value) {
-        INT term = grammar.number(value);
+        INT term = new INT(value);
         graph.addNode(term);
         stack.push(term);
     }
 
     @Override
     protected void _TEXT(String text) {
-        TEXT term = grammar.text(text);
+        TEXT term = new TEXT(text);
         graph.addNode(term);
         stack.push(term);
     }
 
     @Override
     protected void _BOOL(Boolean value) {
-        BOOL term = grammar.bool(value);
+        BOOL term = new BOOL(value);
         graph.addNode(term);
         stack.push(term);
     }
 
     @Override
     protected void _ERROR(String text) {
-        ERROR term = grammar.error(text);
+        ERROR term = new ERROR(text);
         setOwnProperty(term);
         err(term.toString(), formulaRow, formulaColumn);
         graph.addNode(term);
@@ -258,7 +263,7 @@ public final class Parser extends AbstractParser {
     @Override
     protected void _Plus() {
         Start expr = stack.pop();
-        Plus formula = grammar.plus(expr);
+        Plus formula = new Plus((Formula) expr);
         formula.setSheetName(currentSheetName);
         formula.setSheetIndex(currentSheetIndex);
         graph.addNode(formula);
@@ -268,7 +273,7 @@ public final class Parser extends AbstractParser {
     @Override
     protected void _Minus() {
         Start expr = stack.pop();
-        Minus formula = grammar.minus(expr);
+        Minus formula = new Minus((Formula) expr);
         setOwnProperty(formula);
         graph.addNode(formula);
         stack.push(formula);
@@ -369,7 +374,7 @@ public final class Parser extends AbstractParser {
     protected void _Mult() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Mult op =  new Mult((Formula) lExpr, (Formula) rExpr);
+        Mult op = new Mult((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -410,7 +415,7 @@ public final class Parser extends AbstractParser {
     protected void _Union() {
         Start rExpr = stack.pop();
         Start lExpr = stack.pop();
-        Union op =new Union((Formula) lExpr, (Formula) rExpr);
+        Union op = new Union((Formula) lExpr, (Formula) rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
@@ -459,7 +464,7 @@ public final class Parser extends AbstractParser {
     private void builtInFunction(int arity, String name) {
         try {
             if (arity == 0) {
-                EXCEL_FUNCTION builtinFunction = grammar.builtinFunction(name);
+                EXCEL_FUNCTION builtinFunction = builtinFunction(name);
                 stack.push(builtinFunction);
                 return;
             }
@@ -503,6 +508,12 @@ public final class Parser extends AbstractParser {
         } catch (UnsupportedBuiltinException e) {
             err("Unsupported Excel ExcelFunction: " + name + " " + e, formulaRow, formulaColumn);
         }
+    }
+
+    private EXCEL_FUNCTION builtinFunction(String name) throws UnsupportedBuiltinException {
+        BuiltinFactory factory = new BuiltinFactory();
+        factory.create(0, name);
+        return (EXCEL_FUNCTION) factory.getBuiltInFunction();
     }
 
     public StartList getList() {

@@ -73,6 +73,7 @@ public final class PrefixReferenceItem extends Reference {
     private boolean vertical_range() {
         return firstColumn == lastColumn && firstRow != lastRow;
     }
+
     //@TODO simplify
     private String values() {
         if (vals.isEmpty()) return "[]";

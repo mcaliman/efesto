@@ -48,7 +48,7 @@ public abstract class Unary extends FunctionCall {
     public String toString(boolean address) {
         if (formula instanceof CELL) {
             return address ?
-                    getAddress(true) + " = " + unOpPrefix + ((CELL) formula).getValue():
+                    getAddress(true) + " = " + unOpPrefix + ((CELL) formula).getValue() :
                     unOpPrefix + ((CELL) formula).getValue();
         } else {
             return getAddress() + " = " + unOpPrefix + formula.toString();

@@ -23,7 +23,6 @@
 package excel.grammar.formula.functioncall.binary;
 
 import excel.grammar.Formula;
-import excel.grammar.Grammar;
 
 /**
  * @author Massimo Caliman
