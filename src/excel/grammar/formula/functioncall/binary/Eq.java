@@ -31,7 +31,7 @@ import excel.grammar.Grammar;
 public final class Eq extends Binary {
 
     public Eq(Formula lFormula, Formula rFormula) {
-        super(lFormula, Grammar.eq, rFormula);
+        super(lFormula, "=", rFormula);
     }
 
 }

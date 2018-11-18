@@ -31,7 +31,7 @@ import excel.grammar.Grammar;
 public final class Add extends Binary {
 
     public Add(Formula lFormula, Formula rFormula) {
-        super(lFormula, Grammar.add, rFormula);
+        super(lFormula, "+", rFormula);
     }
 
 }

@@ -38,23 +38,23 @@ import excel.parser.UnsupportedBuiltinException;
 
 public final class Grammar {
 
-    public final static String plus = "+";
-    public final static String minus = "-";
-    public final static String concat = "&";
-    public final static String add = "+";
-    public final static String sub = "-";
-    public final static String multiply = "*";
-    public final static String div = "/";
-    public final static String power = "^";
-    public final static String intersection = " ";
-    public final static String union = ",";
-    public final static String percent = "%";
-    public final static String eq = "=";
-    public final static String lt = "<";
-    public final static String gt = ">";
-    public final static String leq = "<=";
-    public final static String gteq = ">=";
-    public final static String neq = "<>";
+    private final static String plus = "+";
+    private final static String minus = "-";
+    private final static String concat = "&";
+    private final static String add = "+";
+    private final static String sub = "-";
+    private final static String multiply = "*";
+    private final static String div = "/";
+    private final static String power = "^";
+    private final static String intersection = " ";
+    private final static String union = ",";
+    private final static String percent = "%";
+    private final static String eq = "=";
+    private final static String lt = "<";
+    private final static String gt = ">";
+    private final static String leq = "<=";
+    private final static String gteq = ">=";
+    private final static String neq = "<>";
 
     public Grammar() {
     }

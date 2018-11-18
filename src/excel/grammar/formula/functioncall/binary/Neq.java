@@ -31,7 +31,7 @@ import excel.grammar.Grammar;
 public final class Neq extends Binary {
 
     public Neq(Formula lFormula, Formula rFormula) {
-        super(lFormula, Grammar.neq, rFormula);
+        super(lFormula, "<>", rFormula);
     }
 
 

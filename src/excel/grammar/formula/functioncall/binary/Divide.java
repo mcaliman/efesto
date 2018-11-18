@@ -31,7 +31,7 @@ import excel.grammar.Grammar;
 public final class Divide extends Binary {
 
     public Divide(Formula lFormula, Formula rFormula) {
-        super(lFormula, Grammar.div, rFormula);
+        super(lFormula, "/", rFormula);
     }
 
 }

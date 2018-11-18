@@ -31,7 +31,7 @@ import excel.grammar.Grammar;
 public final class GtEq extends Binary {
 
     public GtEq(Formula lFormula, Formula rFormula) {
-        super(lFormula, Grammar.gteq, rFormula);
+        super(lFormula, ">=", rFormula);
     }
 
 

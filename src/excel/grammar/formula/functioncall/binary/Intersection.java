@@ -31,7 +31,7 @@ import excel.grammar.Grammar;
 public final class Intersection extends Binary {
 
     public Intersection(Formula lFormula, Formula rFormula) {
-        super(lFormula, Grammar.intersection, rFormula);
+        super(lFormula, " ", rFormula);
     }
 
 

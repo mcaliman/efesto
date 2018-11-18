@@ -31,7 +31,7 @@ import excel.grammar.Grammar;
 public final class Concat extends Binary {
 
     public Concat(Formula lFormula, Formula rFormula) {
-        super(lFormula, Grammar.concat, rFormula);
+        super(lFormula, "&", rFormula);
     }
 
 }

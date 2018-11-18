@@ -31,7 +31,7 @@ import excel.grammar.Grammar;
 public final class Mult extends Binary {
 
     public Mult(Formula lFormula, Formula rFormula) {
-        super(lFormula, Grammar.multiply, rFormula);
+        super(lFormula, "*", rFormula);
     }
 
 }

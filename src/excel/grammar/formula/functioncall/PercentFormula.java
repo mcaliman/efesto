@@ -39,7 +39,7 @@ public final class PercentFormula extends FunctionCall {
 
     @Override
     public String toString() {
-        return formula.toString() + Grammar.percent;
+        return formula.toString() + "%";
     }
 
     @Override

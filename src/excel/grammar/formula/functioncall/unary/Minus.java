@@ -31,7 +31,7 @@ import excel.grammar.Grammar;
 public final class Minus extends Unary {
 
     public Minus(Formula expr) {
-        super(Grammar.minus, expr);
+        super("-", expr);
     }
 
 }

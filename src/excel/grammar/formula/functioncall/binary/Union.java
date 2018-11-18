@@ -31,7 +31,7 @@ import excel.grammar.Grammar;
 public final class Union extends Binary {
 
     public Union(Formula lFormula, Formula rFormula) {
-        super(lFormula, Grammar.union, rFormula);
+        super(lFormula, ",", rFormula);
     }
 
 }

@@ -31,7 +31,7 @@ import excel.grammar.Grammar;
 public final class Power extends Binary {
 
     public Power(Formula lformula, Formula rformula) {
-        super(lformula, Grammar.power, rformula);
+        super(lformula, "^", rformula);
     }
 
 }
