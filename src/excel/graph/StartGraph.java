@@ -140,7 +140,13 @@ public class StartGraph {
     }
 
     private boolean notEquals(Node u, Start start) {
-        return u != null && !u.value().toString().equals(start.toString());
+        Start start1 = u.value();
+        //return u != null && !u.value().toString().equals(start.toString());
+        //return u != null && !start1.toString().equals(start.toString());
+        return u!=null && notEquals(start1,start);
+    }
+    private boolean notEquals(Start start1, Start start) {
+        return !start1.toString().equals(start.toString());
     }
 
 }

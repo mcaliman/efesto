@@ -43,12 +43,17 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
 
     @Override
     public String toString() {
-        return toString(true);
+        return  getAddress() + " = " +  getName() + "(" + argumentsToString() + ")" ;
     }
 
     public String toString(boolean address) {
-        return address ? getAddress() + " = " + getClass().getSimpleName() + "(" + argumentsToString() + ")" :
-                getClass().getSimpleName() + "(" + argumentsToString() + ")";
+        return address ?
+                getAddress() + " = " +  getName() + "(" + argumentsToString() + ")" :
+                getName() + "(" + argumentsToString() + ")";
+    }
+
+    private String getName(){
+        return getClass().getSimpleName();
     }
 
     private String argumentsToString() {
@@ -60,9 +65,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
     }
 
     private String argumentToString(Formula operand) {
-        if (operand == null) return "Missing Arg!";
-        else if (operand instanceof CELL_REFERENCE) return operand.getAddress();
-        else return operand.toString(false);
+        return operand instanceof CELL_REFERENCE? operand.getAddress(): operand.toString(false);
     }
 
 }

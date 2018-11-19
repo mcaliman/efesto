@@ -64,7 +64,7 @@ public final class CELL_REFERENCE extends ReferenceItem {
         else if (value instanceof Integer) return getAddress() + " = " + format((Integer) value);
         else if (value instanceof Double) return getAddress() + " = " + format((Double) value);
         else if (value instanceof Date) return getAddress() + " = " + format((Date) value);
-        return toString();
+        return value.toString();//NEW ADDED!
     }
 
     @Override
