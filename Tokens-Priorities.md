@@ -10,16 +10,13 @@
 | REF_FUNCTION_COND      | 5        |
 | UDF                    | 4        |
 | NAME_PREFIXED          | 3        |
-| CELL                   | 2        |
+| CELL_REFERENCE         | 2        |
 | MULTIPLE_SHEETS        | 1        |
 | BOOL                   | 0        |
 | NUMBER                 | 0        | 
-
 | INT                    | 0        |
 | FLOAT                  | 0        |
-
 | TEXT                   | 0        |
-
 | DDECALL                | 0        |
 | ERROR                  | 0        |
 | ERROR_REF              | 0        |

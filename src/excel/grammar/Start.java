@@ -24,6 +24,9 @@ package excel.grammar;
 
 import excel.parser.AbstractParser;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @author Massimo Caliman
  */
@@ -34,6 +37,31 @@ public abstract class Start {
     private int column;
     private String comment;
     private int sheetIndex;
+
+    public static String format(String str) {
+        if (str == null) return "";
+        return "\"" + str + "\"";
+    }
+
+    public static String format(Boolean bool) {
+        if (bool == null) return "";
+        return bool ? "TRUE" : "FALSE";
+    }
+
+    public static String format(Integer integer) {
+        if (integer == null) return "";
+        return integer.toString();
+    }
+
+    public static String format(Double doub) {
+        if (doub == null) return "";
+        return doub.toString();
+    }
+
+    public static String format(final Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.format(date);
+    }
 
     public boolean isTerminal() {
         return false;
@@ -67,7 +95,7 @@ public abstract class Start {
         this.sheetIndex = sheetIndex;
     }
 
-    public String getSheetName() {
+    private String getSheetName() {
         return sheetName;
     }
 
@@ -101,7 +129,7 @@ public abstract class Start {
         this.row = -1;
     }
 
-    public boolean sameAddr(Object obj) {
+    private boolean sameAddr(Object obj) {
         final Start that = (Start) obj;
         return this.column == that.column && this.row == that.row && this.sheetIndex == that.sheetIndex;
     }

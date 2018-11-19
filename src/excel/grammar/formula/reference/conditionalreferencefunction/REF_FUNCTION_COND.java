@@ -23,7 +23,9 @@
 package excel.grammar.formula.reference.conditionalreferencefunction;
 
 import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
-
+/**
+ * @author Massimo Caliman
+ */
 abstract class REF_FUNCTION_COND extends EXCEL_FUNCTION {
 }
 

@@ -3,7 +3,7 @@
 | Token                  | Description                          |
 | :---                   | :---                                 |              
 | BOOL                   | Boolean literal                      |
-| CELL                   | Cell reference                       |
+| CELL_REFERENCE         | Cell reference                       |
 | DDECALL                | Dynamic Data Exchange link           | 
 | ERROR                  | Error literal                        | 
 | ERROR_REF              | Reference error literal              | 
@@ -27,7 +27,7 @@
 | VERTICAL_RANGE         | Range of columns |    
 
 * BOOL ::=  TRUE | FALSE 
-* CELL ::= REGEXP $? [A-Z]+ $? [0-9]+ 
+* CELL_REFERENCE ::= REGEXP $? [A-Z]+ $? [0-9]+ 
 * DDECALL ::= REGEXP ' ([^ '] | ")+ '
 * ERROR ::= '#NULL!' | '#DIV/0!' | '#VALUE!' | '#NAME?' | '#NUM!' | '#N/A' 
 * ERROR_REF ::= '#REF!'

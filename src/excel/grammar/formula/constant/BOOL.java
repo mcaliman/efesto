@@ -37,10 +37,6 @@ public final class BOOL extends Constant {
         this.value = value;
     }
 
-    public static String format(Boolean bool) {
-        if (bool == null) return "";
-        return bool ? "TRUE" : "FALSE";
-    }
 
     public boolean isTerminal() {
         return true;

@@ -93,7 +93,6 @@ public class ReferenceItem extends Reference {
                 buff.deleteCharAt(buff.length() - 1);
                 buff.append("]");
             }
-
             buff.append("]");
             return buff.toString();
         }

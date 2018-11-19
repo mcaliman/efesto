@@ -23,7 +23,9 @@
 package excel.grammar.formula.reference.conditionalreferencefunction;
 
 import excel.grammar.Formula;
-
+/**
+ * @author Massimo Caliman
+ */
 public class IF extends REF_FUNCTION_COND {
 
     public IF(Formula... args) {

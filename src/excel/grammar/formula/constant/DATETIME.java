@@ -24,7 +24,6 @@ package excel.grammar.formula.constant;
 
 import excel.grammar.formula.Constant;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -39,11 +38,6 @@ public final class DATETIME extends Constant {
     @SuppressWarnings("unused")
     public DATETIME(Date value) {
         this.value = value;
-    }
-
-    public static String format(final Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        return format.format(date);
     }
 
     public boolean isTerminal() {

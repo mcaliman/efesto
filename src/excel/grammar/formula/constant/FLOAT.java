@@ -37,10 +37,6 @@ public final class FLOAT extends Constant {
         this.value = value;
     }
 
-    public static String format(Double doub) {
-        if (doub == null) return "";
-        return doub.toString();
-    }
 
     public boolean isTerminal() {
         return true;

@@ -25,7 +25,7 @@ package excel.grammar.formula.functioncall;
 import excel.grammar.Formula;
 import excel.grammar.Start;
 import excel.grammar.formula.FunctionCall;
-import excel.grammar.formula.reference.CELL;
+import excel.grammar.formula.reference.CELL_REFERENCE;
 
 public abstract class EXCEL_FUNCTION extends FunctionCall {
 
@@ -66,7 +66,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
 
     private String argToString(Formula operand) {
         if (operand == null) return "Missing Arg!";
-        else if (operand instanceof CELL) return operand.getAddress();
+        else if (operand instanceof CELL_REFERENCE) return operand.getAddress();
         else return operand.toString(false);
     }
 

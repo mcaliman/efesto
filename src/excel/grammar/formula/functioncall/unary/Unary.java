@@ -24,7 +24,7 @@ package excel.grammar.formula.functioncall.unary;
 
 import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
-import excel.grammar.formula.reference.CELL;
+import excel.grammar.formula.reference.CELL_REFERENCE;
 
 /**
  * @author Massimo Caliman
@@ -46,10 +46,10 @@ public abstract class Unary extends FunctionCall {
 
     @Override
     public String toString(boolean address) {
-        if (formula instanceof CELL) {
+        if (formula instanceof CELL_REFERENCE) {
             return address ?
-                    getAddress(true) + " = " + unOpPrefix + ((CELL) formula).getValue() :
-                    unOpPrefix + ((CELL) formula).getValue();
+                    getAddress(true) + " = " + unOpPrefix + ((CELL_REFERENCE) formula).getValue() :
+                    unOpPrefix + ((CELL_REFERENCE) formula).getValue();
         } else {
             return getAddress() + " = " + unOpPrefix + formula.toString();
         }
@@ -60,7 +60,7 @@ public abstract class Unary extends FunctionCall {
         return unOpPrefix;
     }
 
-    Formula getFormula() {
+    private Formula getFormula() {
         return formula;
     }
 

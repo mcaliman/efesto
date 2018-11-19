@@ -27,7 +27,7 @@ import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 /**
  * FV, one of the financial functions, calculates the future value of an
  * investment based on a constant interest rate. You can use FV with either
- * periodic, constant payments, or a single lump _SUM payment.
+ * periodic, constant payments, or a single lump sum payment.
  * <p>
  * Syntax FV(rate,nper,pmt,[pv],[type]) For a more complete description of the
  * arguments in FV and for more information on annuity functions, see PV.
@@ -40,7 +40,7 @@ import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
  * principal and interest but no other fees or taxes. If pmt is omitted, you
  * must include the pv argument.
  * <p>
- * Pv Optional. The present value, or the lump-_SUM amount that a series of
+ * Pv Optional. The present value, or the lump-sum amount that a series of
  * future payments is worth right now. If pv is omitted, it is assumed to be 0
  * (zero), and you must include the pmt argument. Type Optional. The number 0 or
  * 1 and indicates when payments are due. If type is omitted, it is assumed to

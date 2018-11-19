@@ -56,7 +56,6 @@ public final class Parser extends AbstractParser {
     private StartGraph graph;
     private Stack<Start> stack;
 
-
     public Parser(String filename) throws IOException, InvalidFormatException {
         super(new File(filename));
         unordered = new StartList();
@@ -148,438 +147,532 @@ public final class Parser extends AbstractParser {
         return start;
     }
 
-    //Used
+    // TERMINAL AND NON TERMINAL BEGIN
+
+    /**
+     * ConstantArray
+     *
+     * @param array
+     */
     @Override
-    protected void _ConstantArray(Object[][] array) {
-        ConstantArray term = new ConstantArray(array);
+    protected void ConstantArray(Object[][] array) {
+        var term = new ConstantArray(array);
         setOwnProperty(term);
         stack.push(term);
     }
 
-
-    //Used
+    /**
+     * Used
+     *
+     * @param arguments
+     */
     @Override
-    protected void _UDF(String arguments) {
-        UDF udf = new UDF(arguments);
-        setOwnProperty(udf);
-        unordered.add(udf);
-        stack.push(udf);
+    protected void UDF(String arguments) {
+        var term = new UDF(arguments);
+        setOwnProperty(term);
+        unordered.add(term);
+        stack.push(term);
     }
 
-    //Used
+    /**
+     * Used
+     *
+     * @param firstRow
+     * @param firstColumn
+     * @param lastRow
+     * @param lastColumn
+     * @param cells
+     * @param name
+     * @param sheetName
+     */
     @Override
-    protected void _SUM() {
-        Start args = stack.pop();
-        if (args instanceof Reference) {
-            Reference ref = as_reference(args);
-            ref.setSheetIndex(currentSheetIndex);
-            ref.setSheetName(currentSheetName);
-            ref.setAsArea();
-            unordered.add(ref);
-        } else if (args instanceof OFFSET) {
-            OFFSET ref = (OFFSET) args;
-            ref.setSheetIndex(currentSheetIndex);
-            ref.setSheetName(currentSheetName);
-            ref.setAsArea();
-            unordered.add(ref);
-        } else
-            err("Not RangeReference " + args.getClass().getSimpleName() + " " + args.toString(), formulaRow, formulaColumn);
-        SUM sum = new SUM((Formula) args);
-        setOwnProperty(sum);
-        unordered.add(sum);
-        graph.add(sum);
-        stack.push(sum);
+    protected void namedRange(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> cells, String name, String sheetName) {
+        var term = new NamedRange(name);
+        term.setSheetIndex(currentSheetIndex);
+        term.setSheetName(sheetName);
+        term.setFirstRow(firstRow);
+        term.setFirstColumn(firstColumn);
+        term.setLastRow(lastRow);
+        term.setLastColumn(lastColumn);
+        term.setAsArea();
+        term.add(cells);
+        stack.push(term);
     }
 
-    private Reference as_reference(Start args) {
-        if (args instanceof RangeReference) return (RangeReference) args;
-        else if (args instanceof ReferenceItem) return (ReferenceItem) args;
-        else if (args instanceof PrefixReferenceItem) return (PrefixReferenceItem) args;
-        else return null;
+    /**
+     * Used
+     */
+    @Override
+    protected void ParenthesisFormula() {
+        var formula = (Formula) stack.pop();
+        var term = new ParenthesisFormula(formula);
+        setOwnProperty(term);
+        stack.push(term);
     }
 
-    //Used
+    /**
+     * Used
+     *
+     * @param value
+     */
     @Override
-    protected void _NamedRange(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> cells, String name, String sheetName) {
-        NamedRange ref = new NamedRange(name);
-        ref.setSheetIndex(currentSheetIndex);
-        ref.setSheetName(sheetName);
-        ref.setFirstRow(firstRow);
-        ref.setFirstColumn(firstColumn);
-        ref.setLastRow(lastRow);
-        ref.setLastColumn(lastColumn);
-        ref.setAsArea();
-        ref.add(cells);
-        stack.push(ref);
-    }
-
-    //Used
-    @Override
-    protected void _ParenthesisFormula() {
-        Start obj = stack.pop();
-        ParenthesisFormula formula = new ParenthesisFormula((Formula) obj);
-        setOwnProperty(formula);
-        stack.push(formula);
-    }
-
-    @Override
-    protected void _FLOAT(Double value) {
-        FLOAT term = new FLOAT(value);
+    protected void FLOAT(Double value) {
+        var term = new FLOAT(value);
         graph.addNode(term);
         stack.push(term);
     }
 
+    /**
+     * Used
+     *
+     * @param value
+     */
     @Override
-    protected void _INT(Integer value) {
-        INT term = new INT(value);
+    protected void INT(Integer value) {
+        var term = new INT(value);
         graph.addNode(term);
         stack.push(term);
     }
 
+    /**
+     * Used
+     *
+     * @param value
+     */
     @Override
-    protected void _TEXT(String text) {
-        TEXT term = new TEXT(text);
-        graph.addNode(term);
-        stack.push(term);
-    }
-
-    @Override
-    protected void _BOOL(Boolean value) {
+    protected void BOOL(Boolean value) {
         BOOL term = new BOOL(value);
         graph.addNode(term);
         stack.push(term);
     }
 
+    /**
+     * Used
+     *
+     * @param text
+     */
     @Override
-    protected void _ERROR(String text) {
-        ERROR term = new ERROR(text);
+    protected void TEXT(String text) {
+        var term = new TEXT(text);
+        graph.addNode(term);
+        stack.push(term);
+    }
+
+    /**
+     * Used
+     *
+     * @param text
+     */
+    @Override
+    protected void ERROR(String text) {
+        var term = new ERROR(text);
         setOwnProperty(term);
         err(term.toString(), formulaRow, formulaColumn);
         graph.addNode(term);
         stack.push(term);
     }
 
-
+    /**
+     * +
+     */
     @Override
-    protected void _Plus() {
-        Start expr = stack.pop();
-        Plus formula = new Plus((Formula) expr);
-        formula.setSheetName(currentSheetName);
-        formula.setSheetIndex(currentSheetIndex);
-        graph.addNode(formula);
-        stack.push(formula);
+    protected void Plus() {
+        var formula = (Formula) stack.pop();
+        var term = new Plus(formula);
+        term.setSheetName(currentSheetName);
+        term.setSheetIndex(currentSheetIndex);
+        graph.addNode(term);
+        stack.push(term);
     }
 
+    /**
+     * -
+     */
     @Override
-    protected void _Minus() {
-        Start expr = stack.pop();
-        Minus formula = new Minus((Formula) expr);
-        setOwnProperty(formula);
-        graph.addNode(formula);
-        stack.push(formula);
+    protected void Minus() {
+        var formula = (Formula) stack.pop();
+        var term = new Minus(formula);
+        setOwnProperty(term);
+        graph.addNode(term);
+        stack.push(term);
     }
 
-
+    /**
+     * =
+     */
     @Override
-    protected void _Eq() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Eq op = new Eq((Formula) lExpr, (Formula) rExpr);
+    protected void Eq() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var term = new Eq(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
+    }
+
+    /**
+     * <
+     */
+    @Override
+    protected void Lt() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var op = new Lt(lExpr, rExpr);
         setOwnProperty(op);
         graph.add(op);
         stack.push(op);
     }
 
+    /**
+     * >
+     */
     @Override
-    protected void _Lt() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Lt op = new Lt((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void gt() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var term = new Gt(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
     }
 
+    /**
+     * <=
+     */
     @Override
-    protected void _Gt() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Gt op = new Gt((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void leq() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var term = new Leq(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
     }
 
+    /**
+     * >=
+     */
     @Override
-    protected void _Leq() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Leq op = new Leq((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void gtEq() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        GtEq term = new GtEq(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
     }
 
+    /**
+     * <>
+     */
     @Override
-    protected void _GtEq() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        GtEq op = new GtEq((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void neq() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var term = new Neq(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
     }
 
+    /**
+     * &
+     */
     @Override
-    protected void _Neq() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Neq op = new Neq((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void concat() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var term = new Concat(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
     }
 
+    /**
+     * F+F
+     */
     @Override
-    protected void _Concat() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Concat op = new Concat((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void add() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var term = new Add(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
     }
 
+    /**
+     * F-F
+     */
     @Override
-    protected void _Add() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Add op = new Add((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void sub() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var term = new Sub(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
     }
 
+    /**
+     * F*F
+     */
     @Override
-    protected void _Sub() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Sub op = new Sub((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void mult() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var term = new Mult(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
     }
 
+    /**
+     * F/F
+     */
     @Override
-    protected void _Mult() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Mult op = new Mult((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void div() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var term = new Divide(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
     }
 
+    /**
+     * F^F
+     */
     @Override
-    protected void _Divide() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Divide op = new Divide((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
-    }
-
-    @Override
-    protected void _Power() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Power op = new Power((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void power() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var term = new Power(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
     }
 
 
+    /**
+     * F F
+     */
     @Override
-    protected void _Intersection() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Intersection op = new Intersection((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void intersection() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var term = new Intersection(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
     }
 
+    /**
+     * F,F
+     */
     @Override
-    protected void _Union() {
-        Start rExpr = stack.pop();
-        Start lExpr = stack.pop();
-        Union op = new Union((Formula) lExpr, (Formula) rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void union() {
+        var rExpr = (Formula) stack.pop();
+        var lExpr = (Formula) stack.pop();
+        var term = new Union(lExpr, rExpr);
+        setOwnProperty(term);
+        graph.add(term);
+        stack.push(term);
     }
 
+    /**
+     * F%
+     */
     @Override
-    protected void _PercentFormula() {
-        PercentFormula formula = new PercentFormula((Formula) stack.pop());
-        setOwnProperty(formula);
-        graph.addNode(formula);
-        stack.push(formula);
+    protected void percentFormula() {
+        var formula = (Formula) stack.pop();
+        var term = new PercentFormula(formula);
+        setOwnProperty(term);
+        graph.addNode(term);
+        stack.push(term);
     }
 
+    /**
+     * #REF
+     *
+     * @param text
+     */
     @Override
-    protected void _ERROR_REF(String text) {
-        ERROR_REF ref = new ERROR_REF();
-        setOwnProperty(ref);
-        stack.push(ref);
+    protected void ERROR_REF(String text) {
+        var term = new ERROR_REF();
+        setOwnProperty(term);
+        stack.push(term);
         err(text, formulaRow, formulaColumn);
     }
 
+    /**
+     * CELLREF
+     *
+     * @param ri
+     * @param ci
+     * @param rowNotNull
+     * @param value
+     * @param comment
+     */
     @Override
-    protected void _CELL(int ri, int ci, boolean rowNotNull, Object value, String comment) {
-        CELL ref = new CELL(ri, ci);
-        ref.setComment(comment);
-        setOwnProperty(ref);
+    protected void CELL_REFERENCE(int ri, int ci, boolean rowNotNull, Object value, String comment) {
+        var term = new CELL_REFERENCE(ri, ci);
+        term.setComment(comment);
+        setOwnProperty(term);
         if (rowNotNull) {
-            ref.setValue(value);
-            this.unordered.add(ref);
+            term.setValue(value);
+            this.unordered.add(term);
         }
-        stack.push(ref);
+        stack.push(term);
     }
 
-    //Used
+    /**
+     * Used
+     * Sheet2!A1:B1 (Sheet + AREA/RANGE)
+     *
+     * @param firstRow
+     * @param firstColumn
+     * @param lastRow
+     * @param lastColumn
+     * @param list
+     * @param sheetName
+     * @param sheetIndex
+     * @param area
+     */
     @Override
-    protected void parseFunc(String name, int arity) {
-        builtInFunction(arity, name);
+    protected void parseArea3D(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> list, String sheetName, int sheetIndex, String area) {
+        var tSHEET = new SHEET(sheetName);
+        var term = new PrefixReferenceItem(tSHEET, area);
+        term.setSheetIndex(sheetIndex);
+        term.setSheetName(sheetName);
+        term.setAsArea();
+        term.add(list);
+        term.setFirstRow(firstRow);
+        term.setFirstColumn(firstColumn);
+        term.setLastRow(lastRow);
+        term.setLastColumn(lastColumn);
+        unordered.add(term);
+        stack.push(term);
     }
 
-    //Used (unique with parseFunc)
+    /**
+     * Used
+     * Sheet2!A1 (Sheet + CELL_REFERENCE)
+     *
+     * @param extWorkbookNumber
+     * @param sheet
+     * @param cellref
+     */
     @Override
-    protected void parseFuncVar(String name, int arity) {
-        builtInFunction(arity, name);
+    protected void parseRef3D(int extWorkbookNumber, String sheet, String cellref) {
+        //External references: External references are normally in the form [File]Sheet!Cell
+        if (extWorkbookNumber > 0) {
+            var tFILE = new FILE(extWorkbookNumber, sheet);
+            var term = new PrefixReferenceItem(tFILE, cellref);
+            setOwnProperty(term);
+            graph.addNode(term);
+            stack.push(term);
+        } else {
+            var tSHEET = new SHEET(sheet);
+            var term = new PrefixReferenceItem(tSHEET, cellref);
+            setOwnProperty(term);
+            graph.addNode(term);
+            stack.push(term);
+        }
     }
 
-    private void builtInFunction(int arity, String name) {
+    /**
+     * Used
+     *
+     * @param list
+     * @param firstRow
+     * @param firstColumn
+     * @param lastRow
+     * @param lastColumn
+     */
+    @Override
+    protected void rangeReference(List<Object> list, int firstRow, int firstColumn, int lastRow, int lastColumn) {
+        CELL_REFERENCE lCELL = new CELL_REFERENCE(firstRow, firstColumn);
+        CELL_REFERENCE rCELL = new CELL_REFERENCE(lastRow, lastColumn);
+        var term = new RangeReference(lCELL, rCELL);
+        setOwnProperty(term);
+        term.setAsArea();//is area not a cell with ref to area
+        term.add(list);
+        graph.addNode(term);
+        stack.push(term);
+    }
+
+    /**
+     * SUM(Arguments)
+     */
+    @Override
+    protected void sum() {
+        var args = stack.pop();
+        if (args instanceof Reference || args instanceof OFFSET) {
+            args.setSheetIndex(currentSheetIndex);
+            args.setSheetName(currentSheetName);
+            args.setAsArea();
+            unordered.add(args);
+        } else {
+            err("Not RangeReference " + args.getClass().getSimpleName() + " " + args.toString(), formulaRow, formulaColumn);
+        }
+        var term = new SUM((Formula) args);
+        setOwnProperty(term);
+        unordered.add(term);
+        graph.add(term);
+        stack.push(term);
+    }
+
+
+    /**
+     * @param name
+     * @param arity
+     * @param externalFunction
+     */
+    @Override
+    protected void parseFunc(String name, int arity, boolean externalFunction) {
         try {
-            if (arity == 0) {
-                EXCEL_FUNCTION builtinFunction = builtinFunction(name);
-                stack.push(builtinFunction);
-                return;
-            }
+            if (arity == 0) builtinFunction(name);
+            else builtInFunction(arity, name);
         } catch (UnsupportedBuiltinException e) {
             err("Unsupported Excel ExcelFunction: " + name + " " + e, formulaRow, formulaColumn);
         }
+    }
 
-        BuiltinFactory factory = new BuiltinFactory();
-        try {
-            factory.create(arity, name);
-            EXCEL_FUNCTION builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
-            Start[] args = factory.getArgs();
-            for (int i = arity - 1; i >= 0; i--) if (!stack.empty()) args[i] = stack.pop();
-            setOwnProperty(builtinFunction);
-            graph.addNode(builtinFunction);
-            for (Start arg : args) {
-                if (arg instanceof RangeReference) {
-                    if (unordered.add(arg)) {
-                        graph.addNode(arg);
-                        graph.addEdge(arg, builtinFunction);
-                    }
-                } else if (arg instanceof CELL) {
-                    if (unordered.add(arg)) {
-                        graph.addNode(arg);
-                        graph.addEdge(arg, builtinFunction);
-                    }
-                } else if (arg instanceof PrefixReferenceItem) {
-                    if (unordered.add(arg)) {
-                        graph.addNode(arg);
-                        graph.addEdge(arg, builtinFunction);
-                    }
+    // TERMINAL AND NON TERMINAL END
 
-                } else if (arg instanceof ReferenceItem) {
-                    if (unordered.add(arg)) {
-                        graph.addNode(arg);
-                        graph.addEdge(arg, builtinFunction);
-                    }
+    /**
+     * @param arity
+     * @param name
+     */
+    private void builtInFunction(int arity, String name) throws UnsupportedBuiltinException {
+        var factory = new BuiltinFactory();
+        factory.create(arity, name);
+        var builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
+        Start[] args = factory.getArgs();
+        for (int i = arity - 1; i >= 0; i--) if (!stack.empty()) args[i] = stack.pop();
+
+        setOwnProperty(builtinFunction);
+        graph.addNode(builtinFunction);
+        for (Start arg : args) {
+            if (arg instanceof RangeReference || arg instanceof CELL_REFERENCE || arg instanceof PrefixReferenceItem || arg instanceof ReferenceItem) {
+                if (unordered.add(arg)) {
+                    graph.addNode(arg);
+                    graph.addEdge(arg, builtinFunction);
                 }
             }
-            stack.push(builtinFunction);
-        } catch (UnsupportedBuiltinException e) {
-            err("Unsupported Excel ExcelFunction: " + name + " " + e, formulaRow, formulaColumn);
         }
+        stack.push(builtinFunction);
     }
 
-    private EXCEL_FUNCTION builtinFunction(String name) throws UnsupportedBuiltinException {
+    private void builtinFunction(String name) throws UnsupportedBuiltinException {
         BuiltinFactory factory = new BuiltinFactory();
         factory.create(0, name);
-        return (EXCEL_FUNCTION) factory.getBuiltInFunction();
+        var builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
+        stack.push(builtinFunction);
     }
 
     public StartList getList() {
         return ordered;
     }
-
-// BEGIN
-
-    //Used
-    //Sheet2!A1:B1 (Sheet + AREA/RANGE)
-    @Override
-    protected void parseArea3D(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> list, String sheetName, int sheetIndex, String area) {
-        SHEET tSHEET = new SHEET(sheetName);
-        PrefixReferenceItem ref = new PrefixReferenceItem(tSHEET, area);
-        ref.setSheetIndex(sheetIndex);
-        ref.setSheetName(sheetName);
-        ref.setAsArea();
-        ref.add(list);
-        ref.setFirstRow(firstRow);
-        ref.setFirstColumn(firstColumn);
-        ref.setLastRow(lastRow);
-        ref.setLastColumn(lastColumn);
-        unordered.add(ref);
-        stack.push(ref);
-    }
-
-    //Used
-    //Sheet2!A1 (Sheet + CELL)
-    @Override
-    protected void parseRef3D(int extWorkbookNumber, String sheet, String cellref) {
-        //External references: External references are normally in the form [File]Sheet!Cell
-        if (extWorkbookNumber > 0) {
-            FILE tFILE = new FILE(extWorkbookNumber, sheet);
-            PrefixReferenceItem ref = new PrefixReferenceItem(tFILE, cellref);
-            setOwnProperty(ref);
-            graph.addNode(ref);
-            stack.push(ref);
-        } else {
-            SHEET tSHEET = new SHEET(sheet);
-            PrefixReferenceItem ref = new PrefixReferenceItem(tSHEET, cellref);
-            setOwnProperty(ref);
-            graph.addNode(ref);
-            stack.push(ref);
-        }
-
-    }
-
-
-    //Used
-
-    @Override
-    protected void _RangeReference(List<Object> list, int firstRow, int firstColumn, int lastRow, int lastColumn) {
-        RangeReference ref = rangeReference(firstRow, firstColumn, lastRow, lastColumn);
-        setOwnProperty(ref);
-        //is area not a cell with ref to area
-        ref.setAsArea();
-        ref.add(list);
-        graph.addNode(ref);
-        stack.push(ref);
-    }
-
-    private RangeReference rangeReference(int firstRow, int firstColumn, int lastRow, int lastColumn) {
-        CELL firstCell = new CELL(firstRow, firstColumn);
-        CELL lastCell = new CELL(lastRow, lastColumn);
-        return new RangeReference(firstCell, lastCell);
-    }
-
-// END
 }

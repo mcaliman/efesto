@@ -38,10 +38,6 @@ public final class TEXT extends Constant {
         this.value = value;
     }
 
-    public static String format(String str) {
-        if (str == null) return "";
-        return "\"" + str + "\"";
-    }
 
     public boolean isTerminal() {
         return true;

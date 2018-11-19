@@ -27,7 +27,7 @@ import excel.grammar.Start;
 import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.ParenthesisFormula;
 import excel.grammar.formula.functioncall.unary.Unary;
-import excel.grammar.formula.reference.CELL;
+import excel.grammar.formula.reference.CELL_REFERENCE;
 
 /**
  * @author Massimo Caliman
@@ -53,28 +53,29 @@ public abstract class Binary extends FunctionCall {
         return address ?
                 getAddress(true) + " = " + operandTo(lFormula) + op + operandTo(rFormula) :
                 operandTo(lFormula) + op + operandTo(rFormula);
-
     }
 
     public Start getlFormula() {
         return lFormula;
     }
 
-
     public Formula getrFormula() {
         return rFormula;
     }
 
-
     private String operandTo(Start operand) {
-        if (operand instanceof CELL) return operand.getAddress();
-        else if (operand instanceof ParenthesisFormula) return format((ParenthesisFormula) operand);
-        else if (operand instanceof Unary) return ((Unary) operand).getUnOpPrefix() + operand.getAddress();
-        else return operand.toString();
+        if (operand instanceof CELL_REFERENCE) {
+            return operand.getAddress();
+        } else if (operand instanceof ParenthesisFormula) {
+            return format((ParenthesisFormula) operand);
+        } else if (operand instanceof Unary) {
+            return ((Unary) operand).getUnOpPrefix() + operand.getAddress();
+        } else {
+            return operand.toString();
+        }
     }
 
-    private String format(ParenthesisFormula start) {
-        if (start.getFormula() instanceof Binary) return "(" + start.getFormula().toString(false) + ")";
-        else return "(" + start.getFormula().getAddress(true) + ")";
+    private String format(ParenthesisFormula operand) {
+        return operand.getFormula() instanceof Binary?"(" + operand.getFormula().toString(false) + ")":"(" + operand.getFormula().getAddress(true) + ")";
     }
 }

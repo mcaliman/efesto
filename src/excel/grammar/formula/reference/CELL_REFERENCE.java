@@ -22,21 +22,19 @@
 
 package excel.grammar.formula.reference;
 
-import excel.grammar.formula.constant.*;
-
 import java.util.Date;
 
 /**
  * @author mcaliman
  */
-public final class CELL extends ReferenceItem {
+public final class CELL_REFERENCE extends ReferenceItem {
 
     private final int row;
     private final int column;
 
     private Object value;
 
-    public CELL(int row, int column) {
+    public CELL_REFERENCE(int row, int column) {
         this.row = row;
         this.column = column;
     }
@@ -61,11 +59,11 @@ public final class CELL extends ReferenceItem {
 
     @Override
     public String toString() {
-        if (value instanceof String) return getAddress() + " = " + TEXT.format((String) value);
-        else if (value instanceof Boolean) return getAddress() + " = " + BOOL.format((Boolean) value);
-        else if (value instanceof Integer) return getAddress() + " = " + INT.format((Integer) value);
-        else if (value instanceof Double) return getAddress() + " = " + FLOAT.format((Double) value);
-        else if (value instanceof Date) return getAddress() + " = " + DATETIME.format((Date) value);
+        if (value instanceof String) return getAddress() + " = " + format((String) value);
+        else if (value instanceof Boolean) return getAddress() + " = " + format((Boolean) value);
+        else if (value instanceof Integer) return getAddress() + " = " + format((Integer) value);
+        else if (value instanceof Double) return getAddress() + " = " + format((Double) value);
+        else if (value instanceof Date) return getAddress() + " = " + format((Date) value);
         return toString();
     }
 

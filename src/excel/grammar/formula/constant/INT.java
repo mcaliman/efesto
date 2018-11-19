@@ -37,10 +37,6 @@ public final class INT extends Constant {
         this.value = value;
     }
 
-    public static String format(Integer integer) {
-        if (integer == null) return "";
-        return integer.toString();
-    }
 
     public boolean isTerminal() {
         return true;

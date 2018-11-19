@@ -23,9 +23,9 @@ EXCEL_FUNCTION(Formula... args)
 ```
 
 ```
-⟨Unary⟩ = ⟨Plus⟩  | ⟨Minus⟩ 
-⟨Plus⟩  ::= + ⟨Formula⟩ 
-⟨Minus⟩ ::= - ⟨Formula⟩ 
+⟨Unary⟩ ::=  ⟨Plus⟩ | ⟨Minus⟩ 
+⟨Plus⟩  ::= +⟨Formula⟩ 
+⟨Minus⟩ ::= -⟨Formula⟩ 
 ```
 ```
 ⟨Binary⟩   ::= ⟨Add⟩ | ⟨Sub⟩ | ⟨Mult⟩ | ⟨Divide⟩ | ⟨Lt⟩ | ⟨Gt⟩ | ⟨Eq⟩ | ⟨Leq⟩ | ⟨GtEq⟩ | ⟨Neq⟩  | ⟨Concat⟩ | ⟨Power⟩
@@ -39,8 +39,8 @@ EXCEL_FUNCTION(Formula... args)
 ⟨Leq⟩      ::= ⟨Formula⟩<=⟨Formula⟩
 ⟨GtEq⟩     ::= ⟨Formula⟩>=⟨Formula⟩
 ⟨Neq⟩      ::= ⟨Formula⟩<>⟨Formula⟩
-⟨Concat⟩ ::= ⟨Formula⟩&⟨Formula⟩
-⟨Power⟩  ::= ⟨Formula⟩^⟨Formula⟩
+⟨Concat⟩   ::= ⟨Formula⟩&⟨Formula⟩
+⟨Power⟩    ::= ⟨Formula⟩^⟨Formula⟩
 ```
 
 ```
@@ -70,7 +70,7 @@ EXCEL_FUNCTION(Formula... args)
 ```
 
 ```
-⟨ReferenceItem⟩ ::= CELL
+⟨ReferenceItem⟩ ::= CELL_REFERENCE
 | ⟨NamedRange⟩
 //| ⟨StructuredReference⟩
 | 
