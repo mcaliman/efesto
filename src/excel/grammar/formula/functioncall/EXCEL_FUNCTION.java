@@ -23,10 +23,12 @@
 package excel.grammar.formula.functioncall;
 
 import excel.grammar.Formula;
-import excel.grammar.Start;
 import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.reference.CELL_REFERENCE;
 
+/**
+ * @author Massimo Caliman
+ */
 public abstract class EXCEL_FUNCTION extends FunctionCall {
 
     protected Formula[] args;
@@ -45,26 +47,21 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
     }
 
     public String toString(boolean address) {
-        return format(this, address);
+        if (address)
+            return getAddress() + " = " + getClass().getSimpleName() + "(" + argumentsToString() + ")";
+        else
+            return getClass().getSimpleName() + "(" + argumentsToString() + ")";
     }
 
-    private String format(EXCEL_FUNCTION e, boolean address) {
+    private String argumentsToString() {
         StringBuilder buff = new StringBuilder();
-        if (address) buff.append(varname(e)).append(" = ");
-        buff.append(e.getClass().getSimpleName());
-        buff.append("(");
-        Formula[] args = e.getArgs();
-        for (Formula arg : args) buff.append(argToString(arg)).append(",");
+        Formula[] args = getArgs();
+        for (Formula arg : args) buff.append(argumentToString(arg)).append(",");
         if (buff.charAt(buff.length() - 1) == ',') buff.deleteCharAt(buff.length() - 1);
-        buff.append(")");
         return buff.toString();
     }
 
-    private String varname(Start start) {
-        return start.getAddress();
-    }
-
-    private String argToString(Formula operand) {
+    private String argumentToString(Formula operand) {
         if (operand == null) return "Missing Arg!";
         else if (operand instanceof CELL_REFERENCE) return operand.getAddress();
         else return operand.toString(false);
