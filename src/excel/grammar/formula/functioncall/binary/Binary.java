@@ -63,11 +63,13 @@ public abstract class Binary extends FunctionCall {
         return rFormula;
     }
 
-    private String operandTo(Start operand) {
+    private String operandTo(Formula operand) {
         if (operand instanceof CELL_REFERENCE) {
             return operand.getAddress();
         } else if (operand instanceof ParenthesisFormula) {
-            return format((ParenthesisFormula) operand);
+            return ((ParenthesisFormula)operand).getFormula() instanceof Binary?
+                    "(" + ((ParenthesisFormula)operand).getFormula().toString(false) + ")":
+                    "(" + ((ParenthesisFormula)operand).getFormula().getAddress(true) + ")";
         } else if (operand instanceof Unary) {
             return ((Unary) operand).getUnOpPrefix() + operand.getAddress();
         } else {
@@ -75,7 +77,4 @@ public abstract class Binary extends FunctionCall {
         }
     }
 
-    private String format(ParenthesisFormula operand) {
-        return operand.getFormula() instanceof Binary?"(" + operand.getFormula().toString(false) + ")":"(" + operand.getFormula().getAddress(true) + ")";
-    }
 }
