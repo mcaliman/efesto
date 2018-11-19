@@ -23,7 +23,6 @@
 package excel.grammar.formula.reference;
 
 /**
- *
  * @author Massimo Caliman
  */
 public class NamedRange extends ReferenceItem {

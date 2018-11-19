@@ -22,6 +22,7 @@
 package excel.grammar.formula.reference.conditionalreferencefunction;
 
 import excel.grammar.Formula;
+
 /**
  * @author Massimo Caliman
  */

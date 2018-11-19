@@ -34,7 +34,7 @@ public final class ERROR_REF extends ReferenceItem {
 
     public ERROR_REF() {
         super("#REF");
-        LOG.log(Level.SEVERE,"ERROR-REF Reference error literal #REF!");
+        LOG.log(Level.SEVERE, "ERROR-REF Reference error literal #REF!");
     }
 
     public String toString(boolean addr) {

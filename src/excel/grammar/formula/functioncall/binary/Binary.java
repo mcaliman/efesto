@@ -67,9 +67,9 @@ public abstract class Binary extends FunctionCall {
         if (operand instanceof CELL_REFERENCE) {
             return operand.getAddress();
         } else if (operand instanceof ParenthesisFormula) {
-            return ((ParenthesisFormula)operand).getFormula() instanceof Binary?
-                    "(" + ((ParenthesisFormula)operand).getFormula().toString(false) + ")":
-                    "(" + ((ParenthesisFormula)operand).getFormula().getAddress(true) + ")";
+            return ((ParenthesisFormula) operand).getFormula() instanceof Binary ?
+                    "(" + ((ParenthesisFormula) operand).getFormula().toString(false) + ")" :
+                    "(" + ((ParenthesisFormula) operand).getFormula().getAddress(true) + ")";
         } else if (operand instanceof Unary) {
             return ((Unary) operand).getUnOpPrefix() + operand.getAddress();
         } else {

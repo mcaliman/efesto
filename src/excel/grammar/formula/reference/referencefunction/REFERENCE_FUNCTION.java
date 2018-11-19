@@ -25,7 +25,6 @@ package excel.grammar.formula.reference.referencefunction;
 import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 
 /**
- *
  * @author Massimo Caliman
  */
 abstract class REFERENCE_FUNCTION extends EXCEL_FUNCTION {

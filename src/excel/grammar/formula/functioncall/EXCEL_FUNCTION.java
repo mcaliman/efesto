@@ -47,7 +47,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
     }
 
     public String toString(boolean address) {
-        return address?getAddress() + " = " + getClass().getSimpleName() + "(" + argumentsToString() + ")":
+        return address ? getAddress() + " = " + getClass().getSimpleName() + "(" + argumentsToString() + ")" :
                 getClass().getSimpleName() + "(" + argumentsToString() + ")";
     }
 
