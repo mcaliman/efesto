@@ -22,7 +22,6 @@
 
 package excel.grammar.formula.constant;
 
-import excel.grammar.Start;
 import excel.grammar.formula.Constant;
 
 /**
@@ -42,22 +41,12 @@ public final class ERROR extends Constant {
 
     @Override
     public String toString() {
-        return this.text;
+        return text;
     }
 
     @Override
     public String toString(boolean address) {
-        return format(this);
+        return getAddress() + " = " + text;
     }
 
-    private String format(ERROR e) {
-        @SuppressWarnings("StringBufferReplaceableByString") StringBuilder buff = new StringBuilder();
-        buff.append(varname(e)).append(" = ");
-        buff.append(e.toString());
-        return buff.toString();
-    }
-
-    private String varname(Start start) {
-        return start.getAddress();
-    }
 }
