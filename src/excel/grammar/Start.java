@@ -38,27 +38,27 @@ public abstract class Start {
     private String comment;
     private int sheetIndex;
 
-    public static String format(String str) {
+    protected static String format(String str) {
         if (str == null) return "";
         return "\"" + str + "\"";
     }
 
-    public static String format(Boolean bool) {
+    protected static String format(Boolean bool) {
         if (bool == null) return "";
         return bool ? "TRUE" : "FALSE";
     }
 
-    public static String format(Integer integer) {
+    protected static String format(Integer integer) {
         if (integer == null) return "";
         return integer.toString();
     }
 
-    public static String format(Double doub) {
+    protected static String format(Double doub) {
         if (doub == null) return "";
         return doub.toString();
     }
 
-    public static String format(final Date date) {
+    protected static String format(final Date date) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         return format.format(date);
     }

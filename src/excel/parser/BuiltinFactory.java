@@ -38,7 +38,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public final class BuiltinFactory {
+final class BuiltinFactory {
 
     private static final Logger LOG = Logger.getLogger(BuiltinFactory.class.getName());
     private static final Map<String, Class> clazzMap = new HashMap<>();

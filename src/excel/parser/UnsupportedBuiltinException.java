@@ -23,7 +23,7 @@
 
 package excel.parser;
 
-public final class UnsupportedBuiltinException extends Exception {
+final class UnsupportedBuiltinException extends Exception {
 
     public UnsupportedBuiltinException(String msg) {
         super(msg);
