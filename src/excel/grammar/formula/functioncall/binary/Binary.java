@@ -46,19 +46,13 @@ public abstract class Binary extends FunctionCall {
 
     @Override
     public String toString() {
-        return toString(true);
+        return getAddress(true) + " = " + operandTo(lFormula) + op + operandTo(rFormula);
     }
 
     public String toString(boolean address) {
-        return address ? getRvalue() + " = " + getLvalue() : getLvalue();
-    }
-
-    private String getRvalue() {
-        return getAddress(true);
-    }
-
-    private String getLvalue() {
-        return operandTo(lFormula) + op + operandTo(rFormula);
+        return address ?
+                getAddress(true) + " = " + operandTo(lFormula) + op + operandTo(rFormula) :
+                operandTo(lFormula) + op + operandTo(rFormula);
     }
 
     public Start getlFormula() {
@@ -73,14 +67,18 @@ public abstract class Binary extends FunctionCall {
         if (operand instanceof CELL_REFERENCE) {
             return operand.getAddress();
         } else if (operand instanceof ParenthesisFormula) {
-            return ((ParenthesisFormula) operand).getFormula() instanceof Binary ?
-                    "(" + ((ParenthesisFormula) operand).getFormula().toString(false) + ")" :
-                    "(" + ((ParenthesisFormula) operand).getFormula().getAddress(true) + ")";
+            return operandTo((ParenthesisFormula) operand);
         } else if (operand instanceof Unary) {
             return ((Unary) operand).getUnOpPrefix() + operand.getAddress();
         } else {
             return operand.toString();
         }
+    }
+
+    private String operandTo(ParenthesisFormula operand){
+        return operand.getFormula() instanceof Binary ?
+                "(" + operand.getFormula().toString(false) + ")" :
+                "(" + operand.getFormula().getAddress(true) + ")";
     }
 
 }

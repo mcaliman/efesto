@@ -65,6 +65,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
     }
 
     private String argumentToString(Formula operand) {
+        if(operand==null) return "Missing";
         return operand instanceof CELL_REFERENCE? operand.getAddress(): operand.toString(false);
     }
 

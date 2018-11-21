@@ -1,3 +1,6 @@
+'' Text File: test/903-terminals-formulas.vb
+'' Excel File: 903-terminals-formulas.xlsx
+'' Elapsed Time (Parsing+Topological Sort): 0 s. or 0 min.
 Foglio1!A1 = TRUE
 Foglio1!A2 = 1.838226
 Foglio1!A3 = 24.0

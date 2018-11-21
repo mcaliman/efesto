@@ -1,3 +1,6 @@
+'' Text File: test/14-Boolean.vb
+'' Excel File: 14-Boolean.xlsx
+'' Elapsed Time (Parsing+Topological Sort): 0 s. or 0 min.
 Boolean!A3 = 1.0
 Boolean!A4 = TRUE
 Boolean!A5 = "IFTRUE"

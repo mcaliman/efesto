@@ -71,15 +71,15 @@ public final class Parser extends AbstractParser {
 
     @Override
     protected void doesFormulaReferToDeletedCell(int row, int column) {
-        String address = currentSheetName + "!" + HelperInternal.cellAddress(row, column);
+        var address = currentSheetName + "!" + HelperInternal.cellAddress(row, column);
         err(address + " does formula refer to deleted cell", row, column);
     }
 
     @Override
-    void err(String string, int row, int column) {
+    protected void err(String string, int row, int column) {
         super.err(string, row, column);
         if (errors) {
-            String address = currentSheetName + "!" + HelperInternal.cellAddress(row, column);
+            var address = currentSheetName + "!" + HelperInternal.cellAddress(row, column);
             System.err.println(address + " ERROR: " + string);
         }
     }
@@ -205,9 +205,9 @@ public final class Parser extends AbstractParser {
     @Override
     protected void ParenthesisFormula() {
         var formula = (Formula) stack.pop();
-        var term = new ParenthesisFormula(formula);
-        setOwnProperty(term);
-        stack.push(term);
+        var parFormula = new ParenthesisFormula(formula);
+        setOwnProperty(parFormula);
+        stack.push(parFormula);
     }
 
     /**
@@ -241,7 +241,7 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void BOOL(Boolean value) {
-        BOOL term = new BOOL(value);
+        var term = new BOOL(value);
         graph.addNode(term);
         stack.push(term);
     }
@@ -298,94 +298,94 @@ public final class Parser extends AbstractParser {
     }
 
     /**
-     * =
+     * F=F
      */
     @Override
-    protected void Eq() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var term = new Eq(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+    protected void eq() {
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var eq = new Eq(lFormula, rFormula);
+        setOwnProperty(eq);
+        graph.add(eq);
+        stack.push(eq);
     }
 
     /**
-     * <
+     * F<F
      */
     @Override
-    protected void Lt() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var op = new Lt(lExpr, rExpr);
-        setOwnProperty(op);
-        graph.add(op);
-        stack.push(op);
+    protected void lt() {
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var lt = new Lt(lFormula, rFormula);
+        setOwnProperty(lt);
+        graph.add(lt);
+        stack.push(lt);
     }
 
     /**
-     * >
+     * F>F
      */
     @Override
     protected void gt() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var term = new Gt(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var gt = new Gt(lFormula, rFormula);
+        setOwnProperty(gt);
+        graph.add(gt);
+        stack.push(gt);
     }
 
     /**
-     * <=
+     * F<=F
      */
     @Override
     protected void leq() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var term = new Leq(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var leq = new Leq(lFormula, rFormula);
+        setOwnProperty(leq);
+        graph.add(leq);
+        stack.push(leq);
     }
 
     /**
-     * >=
+     * F>=F
      */
     @Override
-    protected void gtEq() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        GtEq term = new GtEq(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+    protected void gteq() {
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        GtEq gteq = new GtEq(lFormula, rFormula);
+        setOwnProperty(gteq);
+        graph.add(gteq);
+        stack.push(gteq);
     }
 
     /**
-     * <>
+     * F<>F
      */
     @Override
     protected void neq() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var term = new Neq(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var neq = new Neq(lFormula, rFormula);
+        setOwnProperty(neq);
+        graph.add(neq);
+        stack.push(neq);
     }
 
     /**
-     * &
+     * F&F
      */
     @Override
     protected void concat() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var term = new Concat(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var concat = new Concat(lFormula, rFormula);
+        setOwnProperty(concat);
+        graph.add(concat);
+        stack.push(concat);
     }
 
     /**
@@ -393,12 +393,12 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void add() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var term = new Add(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var add = new Add(lFormula, rFormula);
+        setOwnProperty(add);
+        graph.add(add);
+        stack.push(add);
     }
 
     /**
@@ -406,12 +406,12 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void sub() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var term = new Sub(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var sub = new Sub(lFormula, rFormula);
+        setOwnProperty(sub);
+        graph.add(sub);
+        stack.push(sub);
     }
 
     /**
@@ -419,12 +419,12 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void mult() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var term = new Mult(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var mult = new Mult(lFormula, rFormula);
+        setOwnProperty(mult);
+        graph.add(mult);
+        stack.push(mult);
     }
 
     /**
@@ -432,12 +432,12 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void div() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var term = new Divide(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var div = new Divide(lFormula, rFormula);
+        setOwnProperty(div);
+        graph.add(div);
+        stack.push(div);
     }
 
     /**
@@ -445,12 +445,12 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void power() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var term = new Power(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var power = new Power(lFormula, rFormula);
+        setOwnProperty(power);
+        graph.add(power);
+        stack.push(power);
     }
 
 
@@ -459,12 +459,12 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void intersection() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var term = new Intersection(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var intersection = new Intersection(lFormula, rFormula);
+        setOwnProperty(intersection);
+        graph.add(intersection);
+        stack.push(intersection);
     }
 
     /**
@@ -472,12 +472,12 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void union() {
-        var rExpr = (Formula) stack.pop();
-        var lExpr = (Formula) stack.pop();
-        var term = new Union(lExpr, rExpr);
-        setOwnProperty(term);
-        graph.add(term);
-        stack.push(term);
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var union = new Union(lFormula, rFormula);
+        setOwnProperty(union);
+        graph.add(union);
+        stack.push(union);
     }
 
     /**
@@ -486,10 +486,10 @@ public final class Parser extends AbstractParser {
     @Override
     protected void percentFormula() {
         var formula = (Formula) stack.pop();
-        var term = new PercentFormula(formula);
-        setOwnProperty(term);
-        graph.addNode(term);
-        stack.push(term);
+        var percentFormula = new PercentFormula(formula);
+        setOwnProperty(percentFormula);
+        graph.addNode(percentFormula);
+        stack.push(percentFormula);
     }
 
     /**
@@ -499,9 +499,9 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void ERROR_REF(String text) {
-        var term = new ERROR_REF();
-        setOwnProperty(term);
-        stack.push(term);
+        var error = new ERROR_REF();
+        setOwnProperty(error);
+        stack.push(error);
         err(text, formulaRow, formulaColumn);
     }
 

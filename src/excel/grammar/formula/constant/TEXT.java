@@ -38,7 +38,6 @@ public final class TEXT extends Constant {
         this.value = value;
     }
 
-
     public boolean isTerminal() {
         return true;
     }
@@ -69,6 +68,6 @@ public final class TEXT extends Constant {
 
     @Override
     public String toString(boolean address) {
-        return toString();
+        return '"' + value + '"';
     }
 }

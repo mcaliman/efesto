@@ -37,7 +37,6 @@ public final class BOOL extends Constant {
         this.value = value;
     }
 
-
     public boolean isTerminal() {
         return true;
     }

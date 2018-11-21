@@ -53,25 +53,58 @@ import static org.apache.poi.ss.usermodel.Cell.*;
 
 public abstract class AbstractParser {
 
-    //TODO
-    @SuppressWarnings("WeakerAccess")
     protected final String creator;
-    @SuppressWarnings("WeakerAccess")
     protected final String description;
-    @SuppressWarnings("WeakerAccess")
     protected final String keywords;
-    @SuppressWarnings("WeakerAccess")
     protected final String title;
-    @SuppressWarnings("WeakerAccess")
     protected final String subject;
-    @SuppressWarnings("WeakerAccess")
     protected final String category;
-    @SuppressWarnings("WeakerAccess")
     protected final String company;
-    @SuppressWarnings("WeakerAccess")
     protected final String template;
-    @SuppressWarnings("WeakerAccess")
     protected final String manager;
+
+    protected String fileName;
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public String getTemplate() {
+        return template;
+    }
+
+    public String getManager() {
+        return manager;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
     final boolean errors = false;
     private final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
     private final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
@@ -121,7 +154,7 @@ public abstract class AbstractParser {
     int formulaRow;
     int currentSheetIndex;
     String currentSheetName;
-    String fileName;
+
     private Sheet sheet;
     private EvaluationSheet evaluationSheet;
 
@@ -225,16 +258,16 @@ public abstract class AbstractParser {
                 new WhatIf(p, deletedArea3DPtg, (Ptg t) -> parseDeletedArea3DPtg((DeletedArea3DPtg) t)),
                 new WhatIf(p, deletedRef3DPtg, (Ptg t) -> parseDeletedRef3DPtg((DeletedRef3DPtg) t)),
                 new WhatIf(p, dividePtg, t -> div()),
-                new WhatIf(p, equalPtg, t -> Eq()),
+                new WhatIf(p, equalPtg, t -> eq()),
                 new WhatIf(p, errPtg, (Ptg t) -> parseErrPtg((ErrPtg) t)),
                 new WhatIf(p, funcPtg, (Ptg t) -> parseFuncPtg((FuncPtg) t)),
                 new WhatIf(p, funcVarPtg, (Ptg t) -> parseFuncVarPtg((FuncVarPtg) t)),
-                new WhatIf(p, greaterEqualPtg, t -> gtEq()),
+                new WhatIf(p, greaterEqualPtg, t -> gteq()),
                 new WhatIf(p, greaterThanPtg, t -> gt()),
                 new WhatIf(p, intersectionPtg, t -> intersection()),
                 new WhatIf(p, intPtg, t -> INT(((IntPtg) t).getValue())),
                 new WhatIf(p, lessEqualPtg, t -> leq()),
-                new WhatIf(p, lessThanPtg, t -> Lt()),
+                new WhatIf(p, lessThanPtg, t -> lt()),
                 new WhatIf(p, memErrPtg, (Ptg t) -> parseMemErrPtg((MemErrPtg) t)),
                 new WhatIf(p, missingArgPtg, (Ptg t) -> parseMissingArgPtg(row, column)),
                 new WhatIf(p, multiplyPtg, t -> mult()),
@@ -410,13 +443,13 @@ public abstract class AbstractParser {
 
     protected abstract void div();
 
-    protected abstract void Eq();
+    protected abstract void eq();
 
     protected abstract void ERROR(String text);
 
     protected abstract void parseFunc(String name, int arity, boolean externalFunction);
 
-    protected abstract void gtEq();
+    protected abstract void gteq();
 
     protected abstract void gt();
 
@@ -426,7 +459,7 @@ public abstract class AbstractParser {
 
     protected abstract void leq();
 
-    protected abstract void Lt();
+    protected abstract void lt();
 
     protected abstract void mult();
 
