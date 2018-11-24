@@ -76,7 +76,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void err(String string, int row, int column) {
+    void err(String string, int row, int column) {
         super.err(string, row, column);
         if (errors) {
             var address = currentSheetName + "!" + HelperInternal.cellAddress(row, column);
@@ -419,6 +419,7 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void mult() {
+        if(stack.empty()) return;
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var mult = new Mult(lFormula, rFormula);

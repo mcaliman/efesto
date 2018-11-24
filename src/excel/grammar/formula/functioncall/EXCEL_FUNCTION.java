@@ -57,8 +57,9 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
     }
 
     private String argumentsToString() {
-        StringBuilder buff = new StringBuilder();
+        var buff = new StringBuilder();
         Formula[] args = getArgs();
+        if(args==null || args.length==0) return "Missing";
         for (Formula arg : args) buff.append(argumentToString(arg)).append(",");
         if (buff.charAt(buff.length() - 1) == ',') buff.deleteCharAt(buff.length() - 1);
         return buff.toString();

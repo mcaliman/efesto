@@ -53,17 +53,17 @@ import static org.apache.poi.ss.usermodel.Cell.*;
 
 public abstract class AbstractParser {
 
-    protected final String creator;
-    protected final String description;
-    protected final String keywords;
-    protected final String title;
-    protected final String subject;
-    protected final String category;
-    protected final String company;
-    protected final String template;
-    protected final String manager;
+    private final String creator;
+    private final String description;
+    private final String keywords;
+    private final String title;
+    private final String subject;
+    private final String category;
+    private final String company;
+    private final String template;
+    private final String manager;
 
-    protected String fileName;
+    String fileName;
 
     public String getCreator() {
         return creator;
@@ -163,9 +163,16 @@ public abstract class AbstractParser {
         this.fileName = file.getName();
     }
 
+    protected boolean workbookProtectionPresent;
+
+    public boolean isWorkbookProtectionPresent() {
+        return workbookProtectionPresent;
+    }
+
     private AbstractParser(Workbook workbook) {
         this.workbook = workbook;
         XSSFWorkbook xssfWorkbook = (XSSFWorkbook) this.workbook;
+        workbookProtectionPresent = xssfWorkbook.validateWorkbookPassword("password");
         POIXMLProperties props = xssfWorkbook.getProperties();
         POIXMLProperties.CoreProperties coreProperties = props.getCoreProperties();
         this.creator = coreProperties.getCreator();
@@ -196,6 +203,7 @@ public abstract class AbstractParser {
     void parse() {
         for (Sheet sht : this.workbook) {
             this.sheet = sht;
+            this.workbookProtectionPresent = workbookProtectionPresent ||  ((XSSFSheet)sheet).validateSheetPassword("password");
             this.currentSheetIndex = this.workbook.getSheetIndex(this.sheet);
             this.currentSheetName = this.sheet.getSheetName();
             this.evaluationSheet = this.evaluationWorkbook.getSheet(this.currentSheetIndex);
@@ -221,6 +229,7 @@ public abstract class AbstractParser {
         Class internalFormulaResultTypeClass = excelCell.internalFormulaResultType();
         String formulaAddress = HelperInternal.cellAddress(formulaRow, formulaColumn);
         String formulaText = cell.getCellFormula();
+        verbose(formulaAddress + " = " + formulaText);
         FormulaTokensInternal tokens = new FormulaTokensInternal(this.evaluationWorkbook, this.evaluationSheet);
         Ptg[] formulaPtgs = tokens.getFormulaTokens(formulaRow, formulaColumn);
         if (formulaPtgs == null) {
@@ -230,8 +239,10 @@ public abstract class AbstractParser {
             return;
         }
         Start start = parse(formulaPtgs, formulaRow, formulaColumn);
-        start.setComment(comment);
-        parseFormula(start);
+        if(start!=null) {
+            start.setComment(comment);
+            parseFormula(start);
+        }
     }
 
     protected abstract void UDF(String arguments);
@@ -244,8 +255,8 @@ public abstract class AbstractParser {
     }
 
     private void parse(Ptg p, int row, int column) {
-        //verbose("parse: " + p.getClass().getSimpleName());
-        Stream<WhatIf> stream = Stream.of(
+        verbose("parse: " + p.getClass().getSimpleName());
+        try (Stream<WhatIf> stream = Stream.of(
                 new WhatIf(p, arrayPtg, (Ptg t) -> parseArrayPtg((ArrayPtg) t)),
                 new WhatIf(p, addPtg, (Ptg t) -> add()),
                 new WhatIf(p, area3DPxg, (Ptg t) -> parseArea3DPxg((Area3DPxg) t)),
@@ -286,8 +297,14 @@ public abstract class AbstractParser {
                 new WhatIf(p, unaryPlusPtg, (Ptg t) -> Plus()),
                 new WhatIf(p, unionPtg, t -> union()),
                 new WhatIf(p, unknownPtg, (Ptg t) -> parseUnknownPtg((UnknownPtg) t))
-        );
-        stream.filter((WhatIf t) -> t.predicate.test(t.ptg)).forEach(t -> t.consumer.accept(t.ptg));
+        )) {
+            stream.filter((WhatIf t) -> t.predicate.test(t.ptg)).forEach(t -> t.consumer.accept(t.ptg));
+        }catch (Exception e){
+            System.err.println("parse: " + p.getClass().getSimpleName());
+            System.err.println( this.currentSheetName + "row:"+row+"column:"+column + e.getMessage());
+            e.printStackTrace();
+            //System.exit(-1);
+        }
     }
 
 

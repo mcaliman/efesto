@@ -95,9 +95,11 @@ public abstract class Start {
         this.sheetIndex = sheetIndex;
     }
 
-    private String getSheetName() {
-        return sheetName;
-    }
+// --Commented out by Inspection START (23/11/2018 08:30):
+//    private String getSheetName() {
+//        return sheetName;
+//    }
+// --Commented out by Inspection STOP (23/11/2018 08:30)
 
     public void setSheetName(String sheetName) {
         this.sheetName = sheetName;
@@ -129,10 +131,12 @@ public abstract class Start {
         this.row = -1;
     }
 
-    private boolean sameAddr(Object obj) {
-        final Start that = (Start) obj;
-        return this.column == that.column && this.row == that.row && this.sheetIndex == that.sheetIndex;
-    }
+// --Commented out by Inspection START (23/11/2018 08:31):
+//    private boolean sameAddr(Object obj) {
+//        final Start that = (Start) obj;
+//        return this.column == that.column && this.row == that.row && this.sheetIndex == that.sheetIndex;
+//    }
+// --Commented out by Inspection STOP (23/11/2018 08:31)
 
     @Override
     public boolean equals(final Object obj) {

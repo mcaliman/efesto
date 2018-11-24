@@ -62,9 +62,11 @@ public final class PrefixReferenceItem extends Reference {
         return !isArea() ? getAddress() + " = " : "";
     }
 
-    public String getSheetName() {
-        return sheetName;
-    }
+// --Commented out by Inspection START (23/11/2018 08:30):
+//    public String getSheetName() {
+//        return sheetName;
+//    }
+// --Commented out by Inspection STOP (23/11/2018 08:30)
 
     private boolean horizzontal_range() {
         return firstRow == lastRow && firstColumn != lastColumn;

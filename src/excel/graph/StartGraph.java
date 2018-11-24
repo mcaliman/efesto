@@ -35,18 +35,18 @@ public class StartGraph {
     private final HashMap<Start, Node> graph;
 
     public StartGraph() {
-        this.graph = new HashMap<>();
+        graph = new HashMap<>();
     }
 
     public void addNode(Start start) {
         if (start.isTerminal()) return;
-        Node u = this.graph.get(start);
+        Node u = graph.get(start);
         if (u == null) {
             u = new Node(start);
-            this.graph.put(start, u);
+            graph.put(start, u);
         } else if (notEquals(u, start)) {
             u.setValue(start);
-            this.graph.put(start, u);
+            graph.put(start, u);
         }
     }
 
@@ -60,8 +60,8 @@ public class StartGraph {
     }
 
     public void add(Binary operation) {
-        Start left = operation.getlFormula();
-        Start right = operation.getrFormula();
+        var left = operation.getlFormula();
+        var right = operation.getrFormula();
         addNode(right);
         addNode(left);
         addNode(operation);
@@ -84,10 +84,10 @@ public class StartGraph {
      * @return
      */
     public StartList topologicalSort() {
-        StartList result = new StartList();
+        var result = new StartList();
         Queue<Node> queue = new ArrayDeque<>();
-        Collection<Node> nodes = this.graph.values();
-        List<Edge> edges = this.edges();
+        Collection<Node> nodes = graph.values();
+        List<Edge> edges = edges();
         for (Node v : nodes)
             if (notHasIncomingEdges(v, edges))
                 queue.add(v);
@@ -98,14 +98,14 @@ public class StartGraph {
             for (Edge e : outgoingEdges) {
                 Node s = e.src();
                 Node t = e.dest();
-                this.removeEdge(s.value(), t.value());
+                removeEdge(s.value(), t.value());
                 Node end = e.dest();
                 List<Edge> edges1 = this.edges();
                 if (notHasIncomingEdges(end, edges1))
                     queue.add(end);
             }
         }
-        if (!this.edges().isEmpty()) {
+        if (!edges().isEmpty()) {
             System.err.println("error when sort!. this.edges().size()=" + this.edges().size());
             return result;
         }
@@ -120,14 +120,13 @@ public class StartGraph {
 
     private List<Edge> edges() {
         List<Edge> results = new ArrayList<>();
-        Collection<Node> nodes = this.graph.values();
-        for (Node node : nodes)
-            results.addAll(node.edges());
+        Collection<Node> nodes = graph.values();
+        for (var node : nodes) results.addAll(node.edges());
         return results;
     }
 
     private boolean notHasIncomingEdges(Node v, List<Edge> allEdges) {
-        for (Edge edge : allEdges)
+        for (var edge : allEdges)
             if (edge.dest().equals(v)) return false;
         return true;
     }
@@ -141,9 +140,7 @@ public class StartGraph {
 
     private boolean notEquals(Node u, Start start) {
         Start start1 = u.value();
-        //return u != null && !u.value().toString().equals(start.toString());
-        //return u != null && !start1.toString().equals(start.toString());
-        return u!=null && notEquals(start1,start);
+        return  Objects.nonNull(u) && notEquals(start1,start);
     }
     private boolean notEquals(Start start1, Start start) {
         return !start1.toString().equals(start.toString());

@@ -23,7 +23,6 @@
 package excel.grammar.formula.functioncall.binary;
 
 import excel.grammar.Formula;
-import excel.grammar.Start;
 import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.ParenthesisFormula;
 import excel.grammar.formula.functioncall.unary.Unary;
@@ -55,7 +54,7 @@ public abstract class Binary extends FunctionCall {
                 operandTo(lFormula) + op + operandTo(rFormula);
     }
 
-    public Start getlFormula() {
+    public Formula getlFormula() {
         return lFormula;
     }
 

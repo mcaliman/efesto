@@ -62,8 +62,8 @@ public class ExcelToolkitCommand implements ToolkitCommand {
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
 
             writer.write("'' Text File: " + filename + '\n');
-            writer.write("'' Excel File: " + parser.getFileName() + '\n');
-            writer.write("'' Elapsed Time (Parsing+Topological Sort): " + (elapsed / 1000 + " s. or " + (elapsed / 1000 / 60) + " min.") + '\n');
+            writer.write("'' Excel File: " + parser.getFileName() + (parser.isWorkbookProtectionPresent()?" (Protection Present!)" : "(Protection Not Present!)" )+ '\n');
+            writer.write("'' Elapsed Time (parsing + topological sort): " + (elapsed / 1000 + " s. or " + (elapsed / 1000 / 60) + " min.") + '\n');
             //writer.write("'' creator:" + parser.getCreator()+'\n');
             //writer.write("'' description:"+ parser.getDescription()+'\n');
             //writer.write("'' keywords:"+parser.getKeywords()+'\n');
