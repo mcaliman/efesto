@@ -33,7 +33,7 @@ class Excel_RealComplex2Test {
 
     @Test
     void testTest() throws Exception {
-        if (true) {
+        if (false) {
             long t = System.currentTimeMillis();
             ToolkitOptions options = new ToolkitOptions();
             options.setMetadata(false);
