@@ -24,47 +24,5 @@ package excel.grammar.formula.constant;
 
 import excel.grammar.formula.Constant;
 
-import java.util.Objects;
-
-/**
- * @author Massimo Caliman
- */
-public final class INT extends Number {
-
-    private final Integer value;
-
-    public INT(Integer value) {
-        this.value = value;
-    }
-
-
-    public boolean isTerminal() {
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 11 * hash + Objects.hashCode(this.value);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
-        final INT other = (INT) obj;
-        return Objects.equals(this.value, other.value);
-    }
-
-    @Override
-    public String toString() {
-        return value.toString();
-    }
-
-    @Override
-    public String toString(boolean address) {
-        return toString();
-    }
+public abstract class Number extends Constant {
 }

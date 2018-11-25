@@ -29,7 +29,7 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
-public final class FLOAT extends Constant {
+public final class FLOAT extends Number {
 
     private final Double value;
 
