@@ -12,9 +12,9 @@
 * SHEET =Sheet1!B1 
 
 * Reference:Reference =SUM(A5:A22) 
-* UnOpPrefixi =+B11+1 
-* STRING =COUNTIF(B$4:B$46,">=90") 
-* NamedRange =SUM(freq) 
+* UnOpPrefix =+B11+1 
+* STRING = COUNTIF(B$4:B$46,">=90") 
+* NamedRange = SUM(freq) 
 * BOOL =IF(AND(R11=1,R14=TRUE),G19,0) 
 * FILE =[11]Sheet1!C5 
 * REFERENCE-FUNCTION =SUM(J9:INDEX(J9:J41,B43)) 
