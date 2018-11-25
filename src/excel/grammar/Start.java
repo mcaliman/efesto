@@ -32,6 +32,8 @@ import java.util.Date;
  */
 public abstract class Start {
 
+    private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+
     protected String sheetName;
     private int row;
     private int column;
@@ -39,8 +41,7 @@ public abstract class Start {
     private int sheetIndex;
 
     protected static String format(String str) {
-        if (str == null) return "";
-        return "\"" + str + "\"";
+        return str == null ? "" : "\"" + str + "\"";
     }
 
     protected static String format(Boolean bool) {
@@ -48,19 +49,16 @@ public abstract class Start {
         return bool ? "TRUE" : "FALSE";
     }
 
-    protected static String format(Integer integer) {
-        if (integer == null) return "";
-        return integer.toString();
+    protected static String format(final Integer integer) {
+        return integer == null ? "" : integer.toString();
     }
 
-    protected static String format(Double doub) {
-        if (doub == null) return "";
-        return doub.toString();
+    protected static String format(final Double doub) {
+        return doub == null ? "" : doub.toString();
     }
 
     protected static String format(final Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        return format.format(date);
+        return date == null ? "" : DATE_FORMAT.format(date);
     }
 
     public boolean isTerminal() {
@@ -94,12 +92,6 @@ public abstract class Start {
     public void setSheetIndex(int sheetIndex) {
         this.sheetIndex = sheetIndex;
     }
-
-// --Commented out by Inspection START (23/11/2018 08:30):
-//    private String getSheetName() {
-//        return sheetName;
-//    }
-// --Commented out by Inspection STOP (23/11/2018 08:30)
 
     public void setSheetName(String sheetName) {
         this.sheetName = sheetName;

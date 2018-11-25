@@ -23,6 +23,8 @@
 package excel.grammar.formula.constant;
 
 import excel.grammar.formula.Constant;
-
+/**
+ * @author Massimo Caliman
+ */
 public abstract class Number extends Constant {
 }

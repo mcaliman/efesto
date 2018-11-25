@@ -60,11 +60,4 @@ public abstract class Unary extends FunctionCall {
         return unOpPrefix;
     }
 
-// --Commented out by Inspection START (23/11/2018 08:31):
-//    private Formula getFormula() {
-//        return formula;
-//    }
-// --Commented out by Inspection STOP (23/11/2018 08:31)
-
-
 }
