@@ -25,6 +25,8 @@ package excel.grammar.formula.functioncall.binary;
 import excel.grammar.Formula;
 
 /**
+ * ⟨Intersection⟩# ::= ⟨Reference⟩ ' ' ⟨Reference⟩
+ *
  * @author Massimo Caliman
  */
 public final class Intersection extends Binary {
@@ -32,6 +34,5 @@ public final class Intersection extends Binary {
     public Intersection(Formula lFormula, Formula rFormula) {
         super(lFormula, " ", rFormula);
     }
-
 
 }

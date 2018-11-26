@@ -23,7 +23,6 @@
 package excel.parser;
 
 import excel.grammar.Formula;
-import excel.grammar.Metadata;
 import excel.grammar.Start;
 import excel.grammar.formula.ConstantArray;
 import excel.grammar.formula.ParenthesisFormula;
@@ -66,12 +65,12 @@ public final class Parser extends AbstractParser {
 
     @Override
     protected void parseMissingArguments(int row, int column) {
-        err("Missing ExcelFunction Arguments for cell: " + HelperInternal.cellAddress(row, column, currentSheetName), row, column);
+        err("Missing ExcelFunction Arguments for cell: " + Start.cellAddress(row, column, currentSheetName), row, column);
     }
 
     @Override
     protected void doesFormulaReferToDeletedCell(int row, int column) {
-        var address = currentSheetName + "!" + HelperInternal.cellAddress(row, column);
+        var address = currentSheetName + "!" + Start.cellAddress(row, column);
         err(address + " does formula refer to deleted cell", row, column);
     }
 
@@ -79,7 +78,7 @@ public final class Parser extends AbstractParser {
     void err(String string, int row, int column) {
         super.err(string, row, column);
         if (errors) {
-            var address = currentSheetName + "!" + HelperInternal.cellAddress(row, column);
+            var address = currentSheetName + "!" + Start.cellAddress(row, column);
             System.err.println(address + " ERROR: " + string);
         }
     }
@@ -89,7 +88,6 @@ public final class Parser extends AbstractParser {
         super.parse();
         verbose("** topological sorting beginning...");
         sort();
-        metadata();
     }
 
 
@@ -102,23 +100,6 @@ public final class Parser extends AbstractParser {
         ordered = graph.topologicalSort();
     }
 
-    private void metadata() {
-        if (metadata) {
-            ordered.add(0, new Metadata("filename", fileName));
-            //this.ordered.add(1, new Metadata("creator", this.creator));
-            //this.ordered.add(2, new Metadata("description", this.description));
-            //this.ordered.add(3, new Metadata("keywords", this.keywords));
-            //this.ordered.add(4, new Metadata("title", this.title));
-            //this.ordered.add(5, new Metadata("subject", this.subject));
-            //this.ordered.add(6, new Metadata("category", this.category));
-            //this.ordered.add(7, new Metadata("author", this.author));
-            //this.ordered.add(8, new Metadata("company", this.company));
-            //this.ordered.add(9, new Metadata("template", this.template));
-            //this.ordered.add(10, new Metadata("template", this.template));
-            //this.ordered.add(11, new Metadata("manager", this.manager));
-            //this.ordered.add(12, new Metadata("", ""));
-        }
-    }
 
     @Override
     public void parseFormula(Start obj) {
@@ -419,7 +400,7 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void mult() {
-        if(stack.empty()) return;
+        if (stack.empty()) return;
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var mult = new Mult(lFormula, rFormula);
@@ -536,16 +517,13 @@ public final class Parser extends AbstractParser {
      * @param lastRow
      * @param lastColumn
      * @param list
-     * @param sheetName
-     * @param sheetIndex
      * @param area
      */
     @Override
-    protected void parseArea3D(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> list, String sheetName, int sheetIndex, String area) {
-        var tSHEET = new SHEET(sheetName);
-        var term = new PrefixReferenceItem(tSHEET, area);
-        term.setSheetIndex(sheetIndex);
-        term.setSheetName(sheetName);
+    protected void parseArea3D(RANGE tRANGE, int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> list, SHEET tSHEET, String area) {
+        var term = new PrefixReferenceItem(tSHEET, area, tRANGE);
+        term.setSheetIndex(tSHEET.getIndex());
+        term.setSheetName(tSHEET.getName());
         term.setAsArea();
         term.add(list);
         term.setFirstRow(firstRow);
@@ -559,46 +537,35 @@ public final class Parser extends AbstractParser {
     /**
      * Used
      * Sheet2!A1 (Sheet + CELL_REFERENCE)
+     * External references: External references are normally in the form [File]Sheet!Cell
      *
-     * @param extWorkbookNumber
-     * @param sheet
      * @param cellref
      */
     @Override
-    protected void parseRef3D(int extWorkbookNumber, String sheet, String cellref) {
-        //External references: External references are normally in the form [File]Sheet!Cell
-        if (extWorkbookNumber > 0) {
-            var tFILE = new FILE(extWorkbookNumber, sheet);
-            var term = new PrefixReferenceItem(tFILE, cellref);
-            setOwnProperty(term);
-            graph.addNode(term);
-            stack.push(term);
-        } else {
-            var tSHEET = new SHEET(sheet);
-            var term = new PrefixReferenceItem(tSHEET, cellref);
-            setOwnProperty(term);
-            graph.addNode(term);
-            stack.push(term);
-        }
+    protected void parseReference(FILE tFILE, String cellref) {
+        var term = new PrefixReferenceItem(tFILE, cellref, null);
+        setOwnProperty(term);
+        graph.addNode(term);
+        stack.push(term);
+    }
+
+    @Override
+    protected void parseReference(SHEET tSHEET, String cellref) {
+        var term = new PrefixReferenceItem(tSHEET, cellref, null);
+        setOwnProperty(term);
+        graph.addNode(term);
+        stack.push(term);
     }
 
     /**
      * Used
-     *
-     * @param list
-     * @param firstRow
-     * @param firstColumn
-     * @param lastRow
-     * @param lastColumn
      */
     @Override
-    protected void rangeReference(List<Object> list, int firstRow, int firstColumn, int lastRow, int lastColumn) {
-        CELL_REFERENCE lCELL = new CELL_REFERENCE(firstRow, firstColumn);
-        CELL_REFERENCE rCELL = new CELL_REFERENCE(lastRow, lastColumn);
-        var term = new RangeReference(lCELL, rCELL);
+    protected void rangeReference(RANGE tRANGE) {
+        var term = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         setOwnProperty(term);
         term.setAsArea();//is area not a cell with ref to area
-        term.add(list);
+        term.add(tRANGE.values()/* list*/);
         graph.addNode(term);
         stack.push(term);
     }

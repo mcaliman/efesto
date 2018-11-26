@@ -22,8 +22,6 @@
 
 package excel.grammar.formula.constant;
 
-import excel.grammar.formula.Constant;
-
 import java.util.Objects;
 
 /**

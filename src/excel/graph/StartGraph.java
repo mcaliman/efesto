@@ -140,8 +140,9 @@ public class StartGraph {
 
     private boolean notEquals(Node u, Start start) {
         Start start1 = u.value();
-        return  Objects.nonNull(u) && notEquals(start1,start);
+        return Objects.nonNull(u) && notEquals(start1, start);
     }
+
     private boolean notEquals(Start start1, Start start) {
         return !start1.toString().equals(start.toString());
     }

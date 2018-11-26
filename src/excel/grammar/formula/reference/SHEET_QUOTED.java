@@ -20,38 +20,14 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package excel.grammar;
+package excel.grammar.formula.reference;
 
 /**
  * @author Massimo Caliman
  */
-public final class Metadata extends Start {
-    private final String name;
-    private final Object value;
+class SHEET_QUOTED extends Prefix {
 
-    public Metadata(String name, Object value) {
-        this.name = name;
-        this.value = value;
+    public SHEET_QUOTED() {
     }
 
-    @Override
-    public String toString() {
-        if (emptyName(name) || emptyValue(value)) return "''";
-        if (emptyValue(value)) return "";
-        return "'' " + name + " : " + value.toString();
-    }
-
-    public String toString(boolean address) {
-        if (emptyName(name) || emptyValue(value)) return "''";
-        if (emptyValue(value)) return "";
-        return "'' " + name + " : " + value.toString();
-    }
-
-    private boolean emptyName(String variable) {
-        return variable == null || variable.trim().length() == 0;
-    }
-
-    private boolean emptyValue(Object value) {
-        return value == null || (value instanceof String && ((String) value).trim().length() == 0);
-    }
 }

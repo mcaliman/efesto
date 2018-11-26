@@ -25,6 +25,16 @@ package excel.grammar.formula.reference;
 import excel.grammar.formula.Reference;
 
 /**
+ * PrefixReferenceItem ::= ⟨Prefix⟩ ⟨ReferenceItem⟩
+ * <p>
+ * ⟨Prefix⟩ ::= SHEET
+ * | ‘’’ SHEET-QUOTED
+ * | ⟨File⟩ SHEET
+ * | ‘’’ ⟨File⟩ SHEET-QUOTED
+ * | FILE ‘!’
+ * | MULTIPLE-SHEETS
+ * | ⟨File⟩ MULTIPLE-SHEETS
+ *
  * @author Massimo Caliman
  */
 public final class PrefixReferenceItem extends Reference {
@@ -33,14 +43,18 @@ public final class PrefixReferenceItem extends Reference {
 
     private final String reference;
 
+    private RANGE tRANGE;
+
     private int firstRow;
     private int firstColumn;
+
     private int lastRow;
     private int lastColumn;
 
-    public PrefixReferenceItem(Prefix prefix, String reference) {
+    public PrefixReferenceItem(Prefix prefix, String reference, RANGE tRANGE) {
         this.prefix = prefix;
         this.reference = reference;
+        this.tRANGE = tRANGE;
     }
 
     /**
@@ -68,18 +82,18 @@ public final class PrefixReferenceItem extends Reference {
 //    }
 // --Commented out by Inspection STOP (23/11/2018 08:30)
 
-    private boolean horizzontal_range() {
+    private boolean is_HORIZONTAL_RANGE() {
         return firstRow == lastRow && firstColumn != lastColumn;
     }
 
-    private boolean vertical_range() {
+    private boolean is_VERTICAL_RANGE() {
         return firstColumn == lastColumn && firstRow != lastRow;
     }
 
     //@TODO simplify
     private String values() {
         if (vals.isEmpty()) return "[]";
-        if (horizzontal_range() || vertical_range()) {
+        if (is_HORIZONTAL_RANGE() || is_VERTICAL_RANGE()) {
             StringBuilder buff = new StringBuilder();
             buff.append("[ ");
             for (Object val : vals)

@@ -24,8 +24,6 @@ package excel.test.files;
 
 import excel.ExcelToolkitCommand;
 import excel.ToolkitOptions;
-import excel.grammar.Start;
-import excel.parser.StartList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -44,9 +42,7 @@ class Excel_Comments_Test {
         toolkitCommand.execute();
         toolkitCommand.print();
         toolkitCommand.writer("test/comments.vb");
-        StartList ordered = toolkitCommand.getStartList();
-        for (Start start : ordered) System.out.println(start.toString(true) + " '' " + start.getComment());
-        boolean correct = toolkitCommand.test(1,
+        boolean correct = toolkitCommand.test(0,
                 "Sheet1!A1 = 1.0",
                 "Sheet1!A2 = Sheet1!A1+1");
         assertTrue(correct);

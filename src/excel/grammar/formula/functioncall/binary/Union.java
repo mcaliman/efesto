@@ -25,6 +25,8 @@ package excel.grammar.formula.functioncall.binary;
 import excel.grammar.Formula;
 
 /**
+ * ⟨Union⟩ ::= ⟨Reference⟩ { ‘,’ ⟨Reference⟩ }
+ *
  * @author Massimo Caliman
  */
 public final class Union extends Binary {

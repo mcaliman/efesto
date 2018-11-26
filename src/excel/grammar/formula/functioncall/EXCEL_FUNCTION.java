@@ -43,31 +43,31 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
 
     @Override
     public String toString() {
-        return  getAddress() + " = " +  getName() + "(" + argumentsToString() + ")" ;
+        return getAddress() + " = " + getName() + "(" + argumentsToString() + ")";
     }
 
     public String toString(boolean address) {
         return address ?
-                getAddress() + " = " +  getName() + "(" + argumentsToString() + ")" :
+                getAddress() + " = " + getName() + "(" + argumentsToString() + ")" :
                 getName() + "(" + argumentsToString() + ")";
     }
 
-    private String getName(){
+    private String getName() {
         return getClass().getSimpleName();
     }
 
     private String argumentsToString() {
         var buff = new StringBuilder();
         Formula[] args = getArgs();
-        if(args==null || args.length==0) return "Missing";
+        if (args == null || args.length == 0) return "Missing";
         for (Formula arg : args) buff.append(argumentToString(arg)).append(",");
         if (buff.charAt(buff.length() - 1) == ',') buff.deleteCharAt(buff.length() - 1);
         return buff.toString();
     }
 
     private String argumentToString(Formula operand) {
-        if(operand==null) return "Missing";
-        return operand instanceof CELL_REFERENCE? operand.getAddress(): operand.toString(false);
+        if (operand == null) return "Missing";
+        return operand instanceof CELL_REFERENCE ? operand.getAddress() : operand.toString(false);
     }
 
 }

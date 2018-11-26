@@ -61,7 +61,8 @@ EXCEL_FUNCTION(Formula... args)
 ```
 
 ```
-⟨RangeReference⟩ ::= ⟨Reference⟩ : ⟨Reference⟩ 
+⟨RangeReference⟩ ::= RANGE
+RANGE::=⟨Reference⟩ : ⟨Reference⟩ 
 ⟨Intersection⟩# ::= ⟨Reference⟩ ' ' ⟨Reference⟩       //Implemented as "Binary"
 ⟨Union⟩ ::= ⟨Reference⟩# | ⟨Reference⟩ , ⟨Union⟩     //Implemented as "Binary"
 ```

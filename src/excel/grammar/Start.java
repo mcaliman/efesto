@@ -22,8 +22,6 @@
 
 package excel.grammar;
 
-import excel.parser.AbstractParser;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -59,6 +57,38 @@ public abstract class Start {
 
     protected static String format(final Date date) {
         return date == null ? "" : DATE_FORMAT.format(date);
+    }
+
+    public static String cellAddress(final int row, final int column, final String sheetName) {
+        StringBuilder buffer = new StringBuilder();
+        if (sheetName != null)
+            buffer.append(sheetName).append("!");
+        buffer.append(cellAddress(row, column));
+        return buffer.toString();
+    }
+
+    public static String cellAddress(final int row, final int column) {
+        String letter = columnAsLetter(column);
+        return (letter + (row + 1));
+    }
+
+    public static String columnAsLetter(int col) {
+        int excelColNum = col + 1;
+        StringBuilder colRef = new StringBuilder(2);
+        int colRemain = excelColNum;
+
+        while (colRemain > 0) {
+            int thisPart = colRemain % 26;
+            if (thisPart == 0) {
+                thisPart = 26;
+            }
+
+            colRemain = (colRemain - thisPart) / 26;
+            char colChar = (char) (thisPart + 64);
+            colRef.insert(0, colChar);
+        }
+
+        return colRef.toString();
     }
 
     public boolean isTerminal() {
@@ -98,12 +128,19 @@ public abstract class Start {
     }
 
     public String getAddress() {
-        return AbstractParser.HelperInternal.cellAddress(getRow(), getColumn(), sheetName);
+        return Start.cellAddress(getRow(), getColumn(), sheetName);
     }
 
     public String getAddress(boolean sheet) {
-        return sheet ? AbstractParser.HelperInternal.cellAddress(getRow(), getColumn(), sheetName) : AbstractParser.HelperInternal.cellAddress(getRow(), getColumn());
+        return sheet ? Start.cellAddress(getRow(), getColumn(), sheetName) : cellAddress(getRow(), getColumn());
     }
+
+// --Commented out by Inspection START (23/11/2018 08:31):
+//    private boolean sameAddr(Object obj) {
+//        final Start that = (Start) obj;
+//        return this.column == that.column && this.row == that.row && this.sheetIndex == that.sheetIndex;
+//    }
+// --Commented out by Inspection STOP (23/11/2018 08:31)
 
     @Override
     public int hashCode() {
@@ -122,13 +159,6 @@ public abstract class Start {
         this.column = -1;
         this.row = -1;
     }
-
-// --Commented out by Inspection START (23/11/2018 08:31):
-//    private boolean sameAddr(Object obj) {
-//        final Start that = (Start) obj;
-//        return this.column == that.column && this.row == that.row && this.sheetIndex == that.sheetIndex;
-//    }
-// --Commented out by Inspection STOP (23/11/2018 08:31)
 
     @Override
     public boolean equals(final Object obj) {

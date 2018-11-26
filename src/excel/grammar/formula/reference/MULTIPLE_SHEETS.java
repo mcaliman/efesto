@@ -20,12 +20,10 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package excel.grammar.formula.constant;
-
-import excel.grammar.formula.Constant;
+package excel.grammar.formula.reference;
 
 /**
  * @author Massimo Caliman
  */
-abstract class Number extends Constant {
+class MULTIPLE_SHEETS extends Prefix {
 }

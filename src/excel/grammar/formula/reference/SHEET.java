@@ -33,9 +33,23 @@ package excel.grammar.formula.reference;
 public final class SHEET extends Prefix {
 
     private final String name;
+    private int index;
 
     public SHEET(String name) {
         this.name = name;
+    }
+
+    public SHEET(String name, int index) {
+        this.name = name;
+        this.index = index;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public String toString() {

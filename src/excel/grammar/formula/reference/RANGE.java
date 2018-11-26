@@ -20,12 +20,40 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package excel.grammar.formula.constant;
+package excel.grammar.formula.reference;
 
-import excel.grammar.formula.Constant;
+import excel.grammar.formula.Reference;
 
-/**
- * @author Massimo Caliman
- */
-abstract class Number extends Constant {
+import java.util.List;
+
+public class RANGE extends Reference {
+
+    private final CELL_REFERENCE first;
+    private final CELL_REFERENCE last;
+
+    public RANGE(CELL_REFERENCE first, CELL_REFERENCE end) {
+        this.first = first;
+        this.last = end;
+    }
+
+    public List<Object> values() {
+        return this.vals;
+    }
+
+    public void add(Object values) {
+        vals.add(values);
+    }
+
+    public CELL_REFERENCE getFirst() {
+        return first;
+    }
+
+    public CELL_REFERENCE getLast() {
+        return last;
+    }
+
+    @Override
+    public String toString(boolean address) {
+        return first.getAddress() + ":" + last.getAddress();
+    }
 }
