@@ -158,25 +158,14 @@ public final class Parser extends AbstractParser {
     /**
      * Used
      *
-     * @param firstRow
-     * @param firstColumn
-     * @param lastRow
-     * @param lastColumn
-     * @param cells
      * @param name
      * @param sheetName
      */
     @Override
-    protected void namedRange(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> cells, String name, String sheetName) {
-        var term = new NamedRange(name);
+    protected void namedRange(RANGE tRANGE, String name, String sheetName) {
+        var term = new NamedRange(name,tRANGE);
         term.setSheetIndex(currentSheetIndex);
         term.setSheetName(sheetName);
-        term.setFirstRow(firstRow);
-        term.setFirstColumn(firstColumn);
-        term.setLastRow(lastRow);
-        term.setLastColumn(lastColumn);
-        term.setAsArea();
-        term.add(cells);
         stack.push(term);
     }
 

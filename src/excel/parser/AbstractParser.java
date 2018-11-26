@@ -391,7 +391,8 @@ public abstract class AbstractParser {
         }
 
         String name = evaluationWorkbook.getNameText(t);
-        namedRange(Objects.requireNonNull(range).getFirstRow(), range.getFirstColumn(), range.getLastRow(), range.getLastColumn(), range.getRANGE().values(), name, range.getSheetName());
+        RANGE tRANGE = range.getRANGE();
+        namedRange(tRANGE, name, range.getSheetName());
     }
 
 
@@ -484,7 +485,7 @@ public abstract class AbstractParser {
 
     protected abstract void mult();
 
-    protected abstract void namedRange(int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> cells, String name, String sheetName);
+    protected abstract void namedRange(RANGE tRANGE, String name, String sheetName);
 
     protected abstract void neq();
 
@@ -582,7 +583,7 @@ public abstract class AbstractParser {
         private final int lastRow;
         private final int lastColumn;
         RANGE tRANGE;
-        private List<Object> values;
+        //private List<Object> values;
         private String sheetName;
 
         RangeInternal(Workbook workbook, Sheet sheet, AreaPtg t) {
@@ -621,11 +622,11 @@ public abstract class AbstractParser {
             AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
             List<Cell> cells = fromRange(area);
 
-            values = new ArrayList<>();
+            //values = new ArrayList<>();
             for (Cell cell : cells)
                 if (cell != null) {
                     CellInternal excelType = new CellInternal(cell);
-                    values.add(excelType.valueOf());
+                    //values.add(excelType.valueOf());
                     tRANGE.add(excelType.valueOf());
                 }
         }
@@ -633,11 +634,11 @@ public abstract class AbstractParser {
         private void init() {
             String refs = tRANGE.toString();
             List<Cell> cells = range(refs);
-            values = new ArrayList<>();
+            //values = new ArrayList<>();
             for (Cell cell : cells)
                 if (cell != null) {
                     CellInternal excelType = new CellInternal(cell);
-                    values.add(excelType.valueOf());
+                    //values.add(excelType.valueOf());
                     tRANGE.add(excelType.valueOf());
                 }
         }
@@ -660,19 +661,19 @@ public abstract class AbstractParser {
             return cells;
         }
 
-        int getFirstRow() {
+        private int getFirstRow() {
             return firstRow;
         }
 
-        int getFirstColumn() {
+        private int getFirstColumn() {
             return firstColumn;
         }
 
-        int getLastRow() {
+        private int getLastRow() {
             return lastRow;
         }
 
-        int getLastColumn() {
+        private int getLastColumn() {
             return lastColumn;
         }
 
