@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -186,31 +187,41 @@ public abstract class AbstractParser {
         String comment = excelCell.getComment();
         colFormula = cell.getColumnIndex();
         rowFormula = cell.getRowIndex();
-        Class internalFormulaResultTypeClass = excelCell.internalFormulaResultType();
+        //Class internalFormulaResultTypeClass = excelCell.internalFormulaResultType();
         String formulaAddress = Start.cellAddress(rowFormula, colFormula);
         String formulaText = cell.getCellFormula();
         verbose(formulaAddress + " = " + formulaText);
-        FormulaTokensInternal tokens = new FormulaTokensInternal(evaluationWorkbook, evaluationSheet);
-        Ptg[] formulaPtgs = tokens.getFormulaTokens(rowFormula, colFormula);
+        Ptg[] formulaPtgs = tokens();
         if (formulaPtgs == null) {
             System.err.println("ptgs empty or null for address " + formulaAddress);
             err("ptgs empty or null for address " + formulaAddress, rowFormula, colFormula);
             UDF(formulaText);
             return;
         }
-        Start start = parse(formulaPtgs, rowFormula, colFormula);
-        if (start != null) {
+        Start start = parse(formulaPtgs);
+        if (Objects.nonNull(start)) {
             start.setComment(comment);
             parseFormula(start);
         }
     }
 
+    Ptg[] tokens(){
+        EvaluationCell evalCell = evaluationSheet.getCell(rowFormula, colFormula);
+        Ptg[] ptgs = null;
+        try {
+            ptgs = evaluationWorkbook.getFormulaTokens(evalCell);
+        } catch (FormulaParseException e) {
+            err("" + e.getMessage(), rowFormula, colFormula);
+        }
+        return ptgs;
+    }
+
     protected abstract void UDF(String arguments);
 
-    private Start parse(Ptg[] ptgs, int row, int column) {
+    private Start parse(Ptg[] ptgs) {
         parseFormulaInit();
-        if (Ptg.doesFormulaReferToDeletedCell(ptgs)) doesFormulaReferToDeletedCell(row, column);
-        for (Ptg ptg : ptgs) parse(ptg, row, column);
+        if (Ptg.doesFormulaReferToDeletedCell(ptgs)) doesFormulaReferToDeletedCell(rowFormula, colFormula);
+        for (Ptg ptg : ptgs) parse(ptg, rowFormula, colFormula);
         return parseFormulaPost();
     }
 
@@ -540,7 +551,6 @@ public abstract class AbstractParser {
         private final int lastRow;
         private final int lastColumn;
         RANGE tRANGE;
-        //private List<Object> values;
         private String sheetName;
 
         RangeInternal(Workbook workbook, Sheet sheet, AreaPtg t) {
@@ -579,11 +589,9 @@ public abstract class AbstractParser {
             AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
             List<Cell> cells = fromRange(area);
 
-            //values = new ArrayList<>();
             for (Cell cell : cells)
                 if (cell != null) {
                     CellInternal excelType = new CellInternal(cell);
-                    //values.add(excelType.valueOf());
                     tRANGE.add(excelType.valueOf());
                 }
         }
@@ -591,11 +599,9 @@ public abstract class AbstractParser {
         private void init() {
             String refs = tRANGE.toString();
             List<Cell> cells = range(refs);
-            //values = new ArrayList<>();
             for (Cell cell : cells)
                 if (cell != null) {
                     CellInternal excelType = new CellInternal(cell);
-                    //values.add(excelType.valueOf());
                     tRANGE.add(excelType.valueOf());
                 }
         }
@@ -724,29 +730,4 @@ public abstract class AbstractParser {
 
     }
 
-    class FormulaTokensInternal {
-
-        private final XSSFEvaluationWorkbook ew;
-        private final EvaluationSheet es;
-
-        FormulaTokensInternal(XSSFEvaluationWorkbook ew, EvaluationSheet es) {
-            this.ew = ew;
-            this.es = es;
-        }
-
-        Ptg[] getFormulaTokens(int row, int column) {
-            EvaluationCell evalCell = es.getCell(row, column);
-            Ptg[] ptgs = null;
-            try {
-                ptgs = ew.getFormulaTokens(evalCell);
-            } catch (FormulaParseException e) {
-                err("" + e.getMessage(), row, column);
-            }
-            return ptgs;
-        }
-
-        private void err(String string, int row, int column) {
-            System.err.println(string + " row:" + row + " col:" + column);
-        }
-    }
 }
