@@ -205,7 +205,7 @@ public abstract class AbstractParser {
         }
     }
 
-    Ptg[] tokens(){
+    private Ptg[] tokens(){
         EvaluationCell evalCell = evaluationSheet.getCell(rowFormula, colFormula);
         Ptg[] ptgs = null;
         try {
