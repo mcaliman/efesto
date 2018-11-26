@@ -41,7 +41,6 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
 
@@ -109,8 +108,8 @@ public final class Parser extends AbstractParser {
     }
 
     private void setOwnProperty(Start start) {
-        start.setColumn(formulaColumn);
-        start.setRow(formulaRow);
+        start.setColumn(colFormula);
+        start.setRow(rowFormula);
         start.setSheetIndex(currentSheetIndex);
         start.setSheetName(currentSheetName);
         //start.setType(internalFormulaResultTypeClass);
@@ -237,7 +236,7 @@ public final class Parser extends AbstractParser {
     protected void ERROR(String text) {
         var term = new ERROR(text);
         setOwnProperty(term);
-        err(term.toString(), formulaRow, formulaColumn);
+        err(term.toString(), rowFormula, colFormula);
         graph.addNode(term);
         stack.push(term);
     }
@@ -473,7 +472,7 @@ public final class Parser extends AbstractParser {
         var error = new ERROR_REF();
         setOwnProperty(error);
         stack.push(error);
-        err(text, formulaRow, formulaColumn);
+        err(text, rowFormula, colFormula);
     }
 
     /**
@@ -571,7 +570,7 @@ public final class Parser extends AbstractParser {
             args.setAsArea();
             unordered.add(args);
         } else {
-            err("Not RangeReference " + args.getClass().getSimpleName() + " " + args.toString(), formulaRow, formulaColumn);
+            err("Not RangeReference " + args.getClass().getSimpleName() + " " + args.toString(), rowFormula, colFormula);
         }
         var term = new SUM((Formula) args);
         setOwnProperty(term);
@@ -592,7 +591,7 @@ public final class Parser extends AbstractParser {
             if (arity == 0) builtinFunction(name);
             else builtInFunction(arity, name);
         } catch (UnsupportedBuiltinException e) {
-            err("Unsupported Excel ExcelFunction: " + name + " " + e, formulaRow, formulaColumn);
+            err("Unsupported Excel ExcelFunction: " + name + " " + e, rowFormula, colFormula);
         }
     }
 

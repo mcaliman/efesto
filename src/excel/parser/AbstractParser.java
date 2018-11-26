@@ -47,7 +47,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -57,7 +56,6 @@ import static org.apache.poi.ss.usermodel.Cell.*;
 
 public abstract class AbstractParser {
 
-    final boolean errors = false;
     private final String creator;
     private final String description;
     private final String keywords;
@@ -111,12 +109,13 @@ public abstract class AbstractParser {
     private final XSSFEvaluationWorkbook evaluationWorkbook;
     public boolean verbose = false;
     public boolean metadata = false;
-    private boolean workbookProtectionPresent;
-    private String fileName;
-    int formulaColumn;
-    int formulaRow;
+    boolean errors = false;
+    int colFormula;
+    int rowFormula;
     int currentSheetIndex;
     String currentSheetName;
+    private boolean workbookProtectionPresent;
+    private String fileName;
     private Sheet sheet;
     private EvaluationSheet evaluationSheet;
 
@@ -138,50 +137,12 @@ public abstract class AbstractParser {
         this.subject = coreProperties.getSubject();
         this.category = coreProperties.getCategory();
         POIXMLProperties.CustomProperties customProperties = props.getCustomProperties();
-        customProperties.getProperty("Author");
-        //List<CTProperty> list = customProperties.getUnderlyingProperties().getPropertyList();
         POIXMLProperties.ExtendedProperties extendedProperties = props.getExtendedProperties();
         this.company = extendedProperties.getUnderlyingProperties().getCompany();
         this.template = extendedProperties.getUnderlyingProperties().getTemplate();
         this.manager = extendedProperties.getUnderlyingProperties().getManager();
         this.evaluationWorkbook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
-        //System.out.println("Parse...");
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getKeywords() {
-        return keywords;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public String getTemplate() {
-        return template;
-    }
-
-    public String getManager() {
-        return manager;
+        System.out.println("Parse...");
     }
 
     public String getFileName() {
@@ -201,16 +162,16 @@ public abstract class AbstractParser {
     }
 
     void parse() {
-        for (Sheet sht : this.workbook) {
-            this.sheet = sht;
-            this.workbookProtectionPresent = workbookProtectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
-            this.currentSheetIndex = this.workbook.getSheetIndex(this.sheet);
-            this.currentSheetName = this.sheet.getSheetName();
-            this.evaluationSheet = this.evaluationWorkbook.getSheet(this.currentSheetIndex);
-            for (Row row : this.sheet)
+        for (Sheet sht : workbook) {
+            sheet = sht;
+            workbookProtectionPresent = workbookProtectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
+            currentSheetIndex = workbook.getSheetIndex(sheet);
+            currentSheetName = sheet.getSheetName();
+            evaluationSheet = evaluationWorkbook.getSheet(currentSheetIndex);
+            for (Row row : sheet)
                 for (Cell cell : row)
                     if (cell != null) parse(cell);
-                    else err("Cell is null.", formulaRow, formulaColumn);
+                    else err("Cell is null.", rowFormula, colFormula);
         }
     }
 
@@ -223,22 +184,21 @@ public abstract class AbstractParser {
         verbose("Cell:" + cell.getClass().getSimpleName() + " " + cell.toString() + " " + cell.getCellType());
         CellInternal excelCell = new CellInternal(cell);
         String comment = excelCell.getComment();
-        formulaColumn = cell.getColumnIndex();
-        formulaRow = cell.getRowIndex();
-        //noinspection unused
+        colFormula = cell.getColumnIndex();
+        rowFormula = cell.getRowIndex();
         Class internalFormulaResultTypeClass = excelCell.internalFormulaResultType();
-        String formulaAddress = Start.cellAddress(formulaRow, formulaColumn);
+        String formulaAddress = Start.cellAddress(rowFormula, colFormula);
         String formulaText = cell.getCellFormula();
         verbose(formulaAddress + " = " + formulaText);
-        FormulaTokensInternal tokens = new FormulaTokensInternal(this.evaluationWorkbook, this.evaluationSheet);
-        Ptg[] formulaPtgs = tokens.getFormulaTokens(formulaRow, formulaColumn);
+        FormulaTokensInternal tokens = new FormulaTokensInternal(evaluationWorkbook, evaluationSheet);
+        Ptg[] formulaPtgs = tokens.getFormulaTokens(rowFormula, colFormula);
         if (formulaPtgs == null) {
             System.err.println("ptgs empty or null for address " + formulaAddress);
-            err("ptgs empty or null for address " + formulaAddress, formulaRow, formulaColumn);
+            err("ptgs empty or null for address " + formulaAddress, rowFormula, colFormula);
             UDF(formulaText);
             return;
         }
-        Start start = parse(formulaPtgs, formulaRow, formulaColumn);
+        Start start = parse(formulaPtgs, rowFormula, colFormula);
         if (start != null) {
             start.setComment(comment);
             parseFormula(start);
@@ -329,8 +289,6 @@ public abstract class AbstractParser {
         String area = t.format2DRefAsString();
         RangeInternal range = new RangeInternal(workbook, t.getSheetName(), t);
         parseArea3D(range.getRANGE(), tSHEET, area);
-
-
     }
 
     /**
@@ -417,15 +375,15 @@ public abstract class AbstractParser {
     }
 
     private void parseMemErrPtg(MemErrPtg t) {
-        err("MemErrPtg: " + t.toString(), formulaRow, formulaColumn);
+        err("MemErrPtg: " + t.toString(), rowFormula, colFormula);
     }
 
     private void parseDeleted3DPxg(Deleted3DPxg t) {
-        err("Deleted3DPxg: " + t.toString(), formulaRow, formulaColumn);
+        err("Deleted3DPxg: " + t.toString(), rowFormula, colFormula);
     }
 
     private void parseDeletedRef3DPtg(DeletedRef3DPtg t) {
-        err("DeletedRef3DPtg: " + t.toString(), formulaRow, formulaColumn);
+        err("DeletedRef3DPtg: " + t.toString(), rowFormula, colFormula);
     }
 
     private void parseMissingArgPtg(int row, int column) {
@@ -433,15 +391,15 @@ public abstract class AbstractParser {
     }
 
     private void parseDeletedArea3DPtg(DeletedArea3DPtg t) {
-        err("DeletedArea3DPtg: " + t.toString(), formulaRow, formulaColumn);
+        err("DeletedArea3DPtg: " + t.toString(), rowFormula, colFormula);
     }
 
     private void parseAreaErrPtg(AreaErrPtg t) {
-        err("AreaErrPtg: " + t.toString(), formulaRow, formulaColumn);
+        err("AreaErrPtg: " + t.toString(), rowFormula, colFormula);
     }
 
     private void parseUnknownPtg(UnknownPtg t) {
-        err("Error Unknown Ptg: " + t.toString(), formulaRow, formulaColumn);
+        err("Error Unknown Ptg: " + t.toString(), rowFormula, colFormula);
     }
 
     protected abstract void parseFormula(Start start);
