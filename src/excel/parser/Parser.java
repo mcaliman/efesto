@@ -509,16 +509,16 @@ public final class Parser extends AbstractParser {
      * @param area
      */
     @Override
-    protected void parseArea3D(RANGE tRANGE, int firstRow, int firstColumn, int lastRow, int lastColumn, List<Object> list, SHEET tSHEET, String area) {
+    protected void parseArea3D(RANGE tRANGE,  SHEET tSHEET, String area) {
         var term = new PrefixReferenceItem(tSHEET, area, tRANGE);
         term.setSheetIndex(tSHEET.getIndex());
         term.setSheetName(tSHEET.getName());
         term.setAsArea();
-        term.add(list);
-        term.setFirstRow(firstRow);
-        term.setFirstColumn(firstColumn);
-        term.setLastRow(lastRow);
-        term.setLastColumn(lastColumn);
+        term.add(tRANGE.values());
+        term.setFirstRow(tRANGE.getFirst().getRow());
+        term.setFirstColumn(tRANGE.getFirst().getColumn());
+        term.setLastRow(tRANGE.getLast().getRow());
+        term.setLastColumn(tRANGE.getLast().getColumn());
         unordered.add(term);
         stack.push(term);
     }

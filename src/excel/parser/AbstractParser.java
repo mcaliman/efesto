@@ -328,8 +328,7 @@ public abstract class AbstractParser {
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
         String area = t.format2DRefAsString();
         RangeInternal range = new RangeInternal(workbook, t.getSheetName(), t);
-        parseArea3D(range.getRANGE(), range.getFirstRow(), range.getFirstColumn(), range.getLastRow(), range.getLastColumn(),
-                range.getRANGE().values(), tSHEET, area);
+        parseArea3D(range.getRANGE(), tSHEET, area);
 
 
     }
@@ -453,7 +452,7 @@ public abstract class AbstractParser {
 
     protected abstract void add();
 
-    protected abstract void parseArea3D(RANGE tRANGE, int FirstRow, int FirstColumn, int LastRow, int LastColumn, List<Object> list, SHEET tSHEET, String area);
+    protected abstract void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area);
 
     protected abstract void sum();
 
