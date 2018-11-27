@@ -23,10 +23,7 @@
 package excel.parser;
 
 import excel.grammar.Start;
-import excel.grammar.formula.reference.CELL_REFERENCE;
-import excel.grammar.formula.reference.FILE;
-import excel.grammar.formula.reference.RANGE;
-import excel.grammar.formula.reference.SHEET;
+import excel.grammar.formula.reference.*;
 import org.apache.poi.POIXMLProperties;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -205,7 +202,7 @@ public abstract class AbstractParser {
         }
     }
 
-    private Ptg[] tokens(){
+    private Ptg[] tokens() {
         EvaluationCell evalCell = evaluationSheet.getCell(rowFormula, colFormula);
         Ptg[] ptgs = null;
         try {
@@ -338,11 +335,13 @@ public abstract class AbstractParser {
     }
 
     private void parseFuncPtg(FuncPtg t) {
-        parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
+        if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
+        else parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
     }
 
     private void parseFuncVarPtg(FuncVarPtg t) {
-        parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
+        if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
+        else parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
     }
 
     private void parseNamePtg(NamePtg t) {
@@ -365,24 +364,23 @@ public abstract class AbstractParser {
 
 
     private void parseRefPtg(RefPtg t) {
-        int ri = t.getRow();
-        int ci = t.getColumn();
-        Row row = sheet.getRow(t.getRow());
-        boolean rowNotNull = (row != null);
+        Row rowObject = sheet.getRow(t.getRow());
         Object value = null;
         String comment = null;
-        if (rowNotNull) {
-            Cell c = row.getCell(ci);
+        if (rowObject != null) {
+            Cell c = rowObject.getCell( t.getColumn());
             CellInternal excelType = new CellInternal(c);
             value = excelType.valueOf();
             comment = excelType.getComment();
         }
-        CELL_REFERENCE(ri, ci, rowNotNull, value, comment);
+        CELL_REFERENCE tCELL_REFERENCE = new CELL_REFERENCE(t.getRow(),  t.getColumn(),comment);
+
+        CELL_REFERENCE(tCELL_REFERENCE, rowObject != null, value);
     }
 
     private void parseRefErrorPtg(RefErrorPtg t) {
-        String text = t.toString();
-        ERROR_REF(text);
+        ERROR_REF term = new ERROR_REF();
+        ERROR_REF(term);
     }
 
     private void parseMemErrPtg(MemErrPtg t) {
@@ -439,6 +437,8 @@ public abstract class AbstractParser {
 
     protected abstract void parseFunc(String name, int arity, boolean externalFunction);
 
+    protected abstract void parseFunc(String name, boolean externalFunction);
+
     protected abstract void gteq();
 
     protected abstract void gt();
@@ -469,9 +469,9 @@ public abstract class AbstractParser {
 
     protected abstract void parseReference(SHEET tSHEET, String area);
 
-    protected abstract void ERROR_REF(String text);
+    protected abstract void ERROR_REF(ERROR_REF ref);
 
-    protected abstract void CELL_REFERENCE(int ri, int ci, boolean rowNotNull, Object value, String comment);
+    protected abstract void CELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value);
 
     protected abstract void TEXT(String string);
 

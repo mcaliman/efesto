@@ -69,17 +69,13 @@ public final class Parser extends AbstractParser {
 
     @Override
     protected void doesFormulaReferToDeletedCell(int row, int column) {
-        var address = currentSheetName + "!" + Start.cellAddress(row, column);
-        err(address + " does formula refer to deleted cell", row, column);
+        err(Start.cellAddress(row, column,currentSheetName) + " does formula refer to deleted cell", row, column);
     }
 
     @Override
     void err(String string, int row, int column) {
         super.err(string, row, column);
-        if (errors) {
-            var address = currentSheetName + "!" + Start.cellAddress(row, column);
-            System.err.println(address + " ERROR: " + string);
-        }
+        if (errors) System.err.println(Start.cellAddress(row, column,currentSheetName) + " ERROR: " + string);
     }
 
     @Override
@@ -247,11 +243,11 @@ public final class Parser extends AbstractParser {
     @Override
     protected void Plus() {
         var formula = (Formula) stack.pop();
-        var term = new Plus(formula);
-        term.setSheetName(currentSheetName);
-        term.setSheetIndex(currentSheetIndex);
-        graph.addNode(term);
-        stack.push(term);
+        var plus = new Plus(formula);
+        plus.setSheetName(currentSheetName);
+        plus.setSheetIndex(currentSheetIndex);
+        graph.addNode(plus);
+        stack.push(plus);
     }
 
     /**
@@ -260,10 +256,10 @@ public final class Parser extends AbstractParser {
     @Override
     protected void Minus() {
         var formula = (Formula) stack.pop();
-        var term = new Minus(formula);
-        setOwnProperty(term);
-        graph.addNode(term);
-        stack.push(term);
+        var minus = new Minus(formula);
+        setOwnProperty(minus);
+        graph.addNode(minus);
+        stack.push(minus);
     }
 
     /**
@@ -325,7 +321,7 @@ public final class Parser extends AbstractParser {
     protected void gteq() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        GtEq gteq = new GtEq(lFormula, rFormula);
+        var gteq = new GtEq(lFormula, rFormula);
         setOwnProperty(gteq);
         graph.add(gteq);
         stack.push(gteq);
@@ -465,35 +461,26 @@ public final class Parser extends AbstractParser {
     /**
      * #REF
      *
-     * @param text
      */
     @Override
-    protected void ERROR_REF(String text) {
-        var error = new ERROR_REF();
+    protected void ERROR_REF(ERROR_REF error) {
+        //var error = new ERROR_REF();
         setOwnProperty(error);
         stack.push(error);
-        err(text, rowFormula, colFormula);
+        err("", rowFormula, colFormula);
     }
 
     /**
      * CELLREF
-     *
-     * @param ri
-     * @param ci
-     * @param rowNotNull
-     * @param value
-     * @param comment
      */
     @Override
-    protected void CELL_REFERENCE(int ri, int ci, boolean rowNotNull, Object value, String comment) {
-        var term = new CELL_REFERENCE(ri, ci);
-        term.setComment(comment);
-        setOwnProperty(term);
+    protected void CELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value) {
+        setOwnProperty(tCELL_REFERENCE);
         if (rowNotNull) {
-            term.setValue(value);
-            this.unordered.add(term);
+            tCELL_REFERENCE.setValue(value);
+            this.unordered.add(tCELL_REFERENCE);
         }
-        stack.push(term);
+        stack.push(tCELL_REFERENCE);
     }
 
     /**
@@ -538,12 +525,12 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void rangeReference(RANGE tRANGE) {
-        var term = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
-        setOwnProperty(term);
-        term.setAsArea();//is area not a cell with ref to area
-        term.add(tRANGE.values()/* list*/);
-        graph.addNode(term);
-        stack.push(term);
+        var rangeReference = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
+        setOwnProperty(rangeReference);
+        rangeReference.setAsArea();//is area not a cell with ref to area
+        rangeReference.add(tRANGE.values());
+        graph.addNode(rangeReference);
+        stack.push(rangeReference);
     }
 
     /**
@@ -568,16 +555,19 @@ public final class Parser extends AbstractParser {
     }
 
 
-    /**
-     * @param name
-     * @param arity
-     * @param externalFunction
-     */
+    @Override
+    protected void parseFunc(String name, boolean externalFunction) {
+        try {
+            builtinFunction(name);
+        } catch (UnsupportedBuiltinException e) {
+            err("Unsupported Excel ExcelFunction: " + name + " " + e, rowFormula, colFormula);
+        }
+    }
+
     @Override
     protected void parseFunc(String name, int arity, boolean externalFunction) {
         try {
-            if (arity == 0) builtinFunction(name);
-            else builtInFunction(arity, name);
+            builtInFunction(arity, name);
         } catch (UnsupportedBuiltinException e) {
             err("Unsupported Excel ExcelFunction: " + name + " " + e, rowFormula, colFormula);
         }
@@ -585,10 +575,6 @@ public final class Parser extends AbstractParser {
 
     // TERMINAL AND NON TERMINAL END
 
-    /**
-     * @param arity
-     * @param name
-     */
     private void builtInFunction(int arity, String name) throws UnsupportedBuiltinException {
         var factory = new BuiltinFactory();
         factory.create(arity, name);
@@ -610,7 +596,7 @@ public final class Parser extends AbstractParser {
     }
 
     private void builtinFunction(String name) throws UnsupportedBuiltinException {
-        BuiltinFactory factory = new BuiltinFactory();
+        var factory = new BuiltinFactory();
         factory.create(0, name);
         var builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
         stack.push(builtinFunction);
