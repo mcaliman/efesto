@@ -464,7 +464,6 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void parseERROR_REF(ERROR_REF error) {
-        //var error = new parseERROR_REF();
         setOwnProperty(error);
         stack.push(error);
         err("", rowFormula, colFormula);

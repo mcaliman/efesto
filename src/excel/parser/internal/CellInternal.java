@@ -32,7 +32,7 @@ import java.util.Date;
 
 import static org.apache.poi.ss.usermodel.Cell.*;
 
-public class CellInternal {
+class CellInternal {
 
     private final Cell cell;
     private final String comment;

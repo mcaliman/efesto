@@ -26,12 +26,8 @@ import excel.grammar.Start;
 import excel.grammar.formula.reference.*;
 import org.apache.poi.POIXMLProperties;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.formula.EvaluationName;
-import org.apache.poi.ss.formula.EvaluationSheet;
-import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
@@ -52,16 +48,6 @@ import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
  * @author Massimo Caliman
  */
 public abstract class AbstractParser {
-
-    private final String creator;
-    private final String description;
-    private final String keywords;
-    private final String title;
-    private final String subject;
-    private final String category;
-    private final String company;
-    private final String template;
-    private final String manager;
 
     private final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
     private final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
@@ -109,9 +95,10 @@ public abstract class AbstractParser {
      */
     private final Workbook book;
     /**
-     * XSSF Evaluation Workbook
+     * (Work)Sheet
      */
-    private final XSSFEvaluationWorkbook evalBook;
+    private Sheet sheet;
+
     public boolean verbose = false;
     public boolean metadata = false;
     protected boolean errors = false;
@@ -131,21 +118,14 @@ public abstract class AbstractParser {
      * Current Sheet Name
      */
     protected String sheetName;
-    /**
-     * (Work)Sheet
-     */
-    private Sheet sheet;
-    /**
-     * EvaluationSheet
-     */
-    private EvaluationSheet evalSheet;
+
     /**
      * (Work)Book Protection Present flag
      */
     private boolean protectionPresent;
     private String fileName;
 
-    Helper helper;
+    private final Helper helper;
 
     protected AbstractParser(File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
@@ -158,21 +138,18 @@ public abstract class AbstractParser {
         protectionPresent = xssfWorkbook.validateWorkbookPassword("password");
         POIXMLProperties props = xssfWorkbook.getProperties();
         POIXMLProperties.CoreProperties coreProperties = props.getCoreProperties();
-        this.creator = coreProperties.getCreator();
-        this.description = coreProperties.getDescription();
-        this.keywords = coreProperties.getKeywords();
-        this.title = coreProperties.getTitle();
-        this.subject = coreProperties.getSubject();
-        this.category = coreProperties.getCategory();
+        String creator = coreProperties.getCreator();
+        String description = coreProperties.getDescription();
+        String keywords = coreProperties.getKeywords();
+        String title = coreProperties.getTitle();
+        String subject = coreProperties.getSubject();
+        String category = coreProperties.getCategory();
         POIXMLProperties.CustomProperties customProperties = props.getCustomProperties();
         POIXMLProperties.ExtendedProperties extendedProperties = props.getExtendedProperties();
-        this.company = extendedProperties.getUnderlyingProperties().getCompany();
-        this.template = extendedProperties.getUnderlyingProperties().getTemplate();
-        this.manager = extendedProperties.getUnderlyingProperties().getManager();
-        this.evalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
-
+        String company = extendedProperties.getUnderlyingProperties().getCompany();
+        String template = extendedProperties.getUnderlyingProperties().getTemplate();
+        String manager = extendedProperties.getUnderlyingProperties().getManager();
         this.helper = new Helper(this.book);
-
         System.out.println("Parse...");
     }
 
@@ -238,10 +215,7 @@ public abstract class AbstractParser {
         String formulaAddress = Start.cellAddress(rowFormula, colFormula);
         String formulaText = cell.getCellFormula();
         verbose(formulaAddress + " = " + formulaText);
-
-
         Ptg[] formulaPtgs = helper.tokens(this.sheet,this.rowFormula,this.colFormula);
-
         if (formulaPtgs == null) {
             System.err.println("ptgs empty or null for address " + formulaAddress);
             err("ptgs empty or null for address " + formulaAddress, rowFormula, colFormula);
@@ -325,7 +299,6 @@ public abstract class AbstractParser {
         protectionPresent = protectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
         sheetIndex = book.getSheetIndex(sheet);
         sheetName = sheet.getSheetName();
-        //evalSheet = evalBook.getSheet(sheetIndex);
     }
 
     private void parseArrayPtg(@NotNull ArrayPtg t) {
@@ -349,10 +322,8 @@ public abstract class AbstractParser {
      * @param t
      */
     private void parseArea3DPxg(@NotNull Area3DPxg t) {
-
         String sheetName = t.getSheetName();
         int sheetIndex = helper.getSheetIndex(sheetName);
-
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
 
         String area = t.format2DRefAsString();
@@ -408,9 +379,11 @@ public abstract class AbstractParser {
     }
 
     private void parseNamePtg(NamePtg t) {
-        EvaluationName evaluationName = evalBook.getName(t);
         RangeInternal range = null;
-        Ptg[] ptgs = evaluationName.getNameDefinition();
+
+        Ptg[] ptgs = helper.getName(t);
+        String name = helper.getNameText(t);
+
         for (Ptg ptg : ptgs) {
             if (ptg != null) {
                 if (ptg instanceof Area3DPxg) {
@@ -420,7 +393,6 @@ public abstract class AbstractParser {
             }
         }
 
-        String name = evalBook.getNameText(t);
         RANGE tRANGE = range.getRANGE();
         parseNamedRange(tRANGE, name, range.getSheetName());
     }
@@ -444,6 +416,8 @@ public abstract class AbstractParser {
         ERROR_REF term = new ERROR_REF();
         parseERROR_REF(term);
     }
+
+    protected abstract void parseERROR_REF(ERROR_REF ref);
 
     private void parseMemErrPtg(@NotNull MemErrPtg t) {
         err("MemErrPtg: " + t.toString(), rowFormula, colFormula);
@@ -529,7 +503,7 @@ public abstract class AbstractParser {
 
     protected abstract void parseReference(SHEET tSHEET, String area);
 
-    protected abstract void parseERROR_REF(ERROR_REF ref);
+
 
     protected abstract void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value);
 

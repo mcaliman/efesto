@@ -37,7 +37,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RangeInternal {
+class RangeInternal {
 
     private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
     private final Workbook workbook;
@@ -48,7 +48,7 @@ public class RangeInternal {
 
     private final int lastRow;
     private final int lastColumn;
-    RANGE tRANGE;
+    final RANGE tRANGE;
     private String sheetName;
 
     RangeInternal(Workbook workbook, Sheet sheet, AreaPtg t) {

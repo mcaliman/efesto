@@ -27,7 +27,7 @@ import org.apache.poi.ss.formula.ptg.Ptg;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class WhatIf {
+class WhatIf {
 
     final Ptg ptg;
     final Predicate<Ptg> predicate;

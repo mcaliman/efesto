@@ -134,19 +134,19 @@ public final class PrefixReferenceItem extends Reference {
         }
     }
 
-    public void setFirstRow(int firstRow) {
+    private void setFirstRow(int firstRow) {
         this.firstRow = firstRow;
     }
 
-    public void setFirstColumn(int firstColumn) {
+    private void setFirstColumn(int firstColumn) {
         this.firstColumn = firstColumn;
     }
 
-    public void setLastRow(int lastRow) {
+    private void setLastRow(int lastRow) {
         this.lastRow = lastRow;
     }
 
-    public void setLastColumn(int lastColumn) {
+    private void setLastColumn(int lastColumn) {
         this.lastColumn = lastColumn;
     }
 }

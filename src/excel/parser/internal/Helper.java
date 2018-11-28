@@ -23,28 +23,39 @@
 package excel.parser.internal;
 
 import excel.grammar.Start;
-import org.apache.poi.ss.formula.EvaluationSheet;
+import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.FormulaParseException;
+import org.apache.poi.ss.formula.ptg.NamePtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class Helper {
+class Helper {
 
-    Workbook workbook;
-    XSSFEvaluationWorkbook evalBook;
+    private final Workbook workbook;
+    final XSSFEvaluationWorkbook evalBook;
 
     public Helper(Workbook workbook) {
         this.workbook = workbook;
         this.evalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
     }
 
-    public int getSheetIndex(String sheetName){
-        int sheetIndex = evalBook.getSheetIndex(sheetName);
-        return sheetIndex;
+    public Ptg[] getName(NamePtg t){
+        EvaluationName evaluationName = evalBook.getName(t);
+        return evaluationName.getNameDefinition();
     }
+
+    public String getNameText(NamePtg t){
+        return evalBook.getNameText(t);
+    }
+
+    public int getSheetIndex(String sheetName){
+        return evalBook.getSheetIndex(sheetName);
+    }
+
+
 
     public  Ptg[] tokens(Sheet sheet, int rowFormula, int colFormula) {
         int sheetIndex = workbook.getSheetIndex(sheet);

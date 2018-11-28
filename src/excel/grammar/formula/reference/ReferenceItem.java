@@ -99,19 +99,19 @@ public class ReferenceItem extends Reference {
     }
 
 
-    public void setFirstRow(int firstRow) {
+    void setFirstRow(int firstRow) {
         this.firstRow = firstRow;
     }
 
-    public void setFirstColumn(int firstColumn) {
+    void setFirstColumn(int firstColumn) {
         this.firstColumn = firstColumn;
     }
 
-    public void setLastRow(int lastRow) {
+    void setLastRow(int lastRow) {
         this.lastRow = lastRow;
     }
 
-    public void setLastColumn(int lastColumn) {
+    void setLastColumn(int lastColumn) {
         this.lastColumn = lastColumn;
     }
 }
