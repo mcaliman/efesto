@@ -23,6 +23,7 @@
 package excel.parser.internal;
 
 import excel.grammar.Start;
+import excel.grammar.formula.constant.ERROR;
 import excel.grammar.formula.reference.*;
 import org.apache.poi.POIXMLProperties;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -99,11 +100,8 @@ public abstract class AbstractParser {
      */
     private Sheet sheet;
 
-    public boolean verbose = false;
-    public boolean metadata = false;
-    protected boolean errors = false;
     /**
-     * Current Formula Colum
+     * Current Formula Column
      */
     protected int colFormula;
     /**
@@ -118,6 +116,12 @@ public abstract class AbstractParser {
      * Current Sheet Name
      */
     protected String sheetName;
+
+
+    public boolean verbose = false;
+    public boolean metadata = false;
+    protected boolean errors = false;
+
 
     /**
      * (Work)Book Protection Present flag
@@ -183,7 +187,9 @@ public abstract class AbstractParser {
      */
     private void parse(@NotNull Sheet sheet) {
         this.sheet = sheet;
-        initSheetData();
+        protectionPresent = protectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
+        sheetIndex = book.getSheetIndex(sheet);
+        sheetName = sheet.getSheetName();
         for (Row row : sheet)
             for (Cell cell : row)
                 if (cell != null) parse(cell);
@@ -295,21 +301,13 @@ public abstract class AbstractParser {
         }
     }
 
-    private void initSheetData() {
-        protectionPresent = protectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
-        sheetIndex = book.getSheetIndex(sheet);
-        sheetName = sheet.getSheetName();
-    }
-
     private void parseArrayPtg(@NotNull ArrayPtg t) {
-        Object[][] tokens = t.getTokenArrayValues();
-        parseConstantArray(tokens);
+        parseConstantArray(t.getTokenArrayValues());
     }
 
     protected abstract void parseConstantArray(Object[][] array);
 
     protected abstract void parseUDF(String arguments);
-
 
 
     /**
@@ -326,10 +324,12 @@ public abstract class AbstractParser {
         int sheetIndex = helper.getSheetIndex(sheetName);
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
 
-        String area = t.format2DRefAsString();
-        RangeInternal range = new RangeInternal(book, t.getSheetName(), t);
+        String area = helper.getArea(t);
+        RangeInternal range = new RangeInternal(book, sheetName, t);
         parseArea3D(range.getRANGE(), tSHEET, area);
     }
+
+    protected abstract void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area);
 
     /**
      * Title: XSSF 3D Reference
@@ -344,19 +344,22 @@ public abstract class AbstractParser {
     private void parseRef3DPxg(@NotNull Ref3DPxg t) {
         int extWorkbookNumber = t.getExternalWorkbookNumber();
 
-        String sheet_ = t.getSheetName();
-        int sheetIndex = helper.getSheetIndex(sheet_);
+        String sheetName = t.getSheetName();
+        int sheetIndex = helper.getSheetIndex(sheetName);
 
-        SHEET tSHEET = new SHEET(sheet_, sheetIndex);
+        SHEET tSHEET = new SHEET(sheetName, sheetIndex);
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
-        String cellref = t.format2DRefAsString();
+        String cellref = helper.getCellRef(t);
         if (extWorkbookNumber > 0) parseReference(tFILE, cellref);
         else parseReference(tSHEET, cellref);
     }
 
+    protected abstract void parseReference(FILE tFILE, String area);
+
     private void parseAttrPtg(@NotNull AttrPtg t) {
         if (t.isSum()) parseSum();
     }
+    protected abstract void parseSum();
 
     private void parseAreaPtg(AreaPtg t) {
         RangeInternal range = new RangeInternal(book, sheet, t);
@@ -364,9 +367,29 @@ public abstract class AbstractParser {
     }
 
     private void parseErrPtg(ErrPtg t) {
-        ErrInternal err = new ErrInternal(t);
-        parseERROR(err.text());
+        String text = "FIXME!";
+
+        String ERROR_NULL_INTERSECTION = "#NULL!";
+        String ERROR_DIV_ZERO = "#DIV/0!";
+        String ERROR_VALUE_INVALID = "#VALUE!";
+        String ERROR_REF_INVALID = "#REF!";
+        String ERROR_NAME_INVALID = "#NAME?";
+        String ERROR_NUM_ERROR = "#NUM!";
+        String ERROR_N_A = "#N/A";
+
+        if (t == NULL_INTERSECTION) text= ERROR_NULL_INTERSECTION;
+        else if (t == DIV_ZERO) text=  ERROR_DIV_ZERO;
+        else if (t == VALUE_INVALID) text=  ERROR_VALUE_INVALID;
+        else if (t == REF_INVALID) text=  ERROR_REF_INVALID;
+        else if (t == NAME_INVALID) text=  ERROR_NAME_INVALID;
+        else if (t == NUM_ERROR) text=  ERROR_NUM_ERROR;
+        else if (t == N_A) text=  ERROR_N_A;
+
+        var term = new ERROR(text);
+        parseERROR(term);
     }
+
+    protected abstract void parseERROR(ERROR t);
 
     private void parseFuncPtg(@NotNull FuncPtg t) {
         if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
@@ -453,9 +476,9 @@ public abstract class AbstractParser {
 
     protected abstract void parseAdd();
 
-    protected abstract void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area);
 
-    protected abstract void parseSum();
+
+
 
     protected abstract void parseRangeReference(RANGE tRANGE);
 
@@ -467,7 +490,7 @@ public abstract class AbstractParser {
 
     protected abstract void parseEq();
 
-    protected abstract void parseERROR(String text);
+
 
     protected abstract void parseFunc(String name, int arity, boolean externalFunction);
 
@@ -499,7 +522,7 @@ public abstract class AbstractParser {
 
     protected abstract void parsePower();
 
-    protected abstract void parseReference(FILE tFILE, String area);
+
 
     protected abstract void parseReference(SHEET tSHEET, String area);
 
@@ -526,36 +549,5 @@ public abstract class AbstractParser {
     protected abstract void parseFormulaInit();
 
     protected abstract Start parseFormulaPost();
-
-    static final class ErrInternal {
-
-        private final static String ERROR_NULL_INTERSECTION = "#NULL!";
-        private final static String ERROR_DIV_ZERO = "#DIV/0!";
-        private final static String ERROR_VALUE_INVALID = "#VALUE!";
-        private final static String ERROR_REF_INVALID = "#REF!";
-        private final static String ERROR_NAME_INVALID = "#NAME?";
-        private final static String ERROR_NUM_ERROR = "#NUM!";
-        private final static String ERROR_N_A = "#N/A";
-
-        private final ErrPtg t;
-
-        ErrInternal(ErrPtg t) {
-            this.t = t;
-        }
-
-        String text() {
-            if (t == NULL_INTERSECTION) return ERROR_NULL_INTERSECTION;
-            else if (t == DIV_ZERO) return ERROR_DIV_ZERO;
-            else if (t == VALUE_INVALID) return ERROR_VALUE_INVALID;
-            else if (t == REF_INVALID) return ERROR_REF_INVALID;
-            else if (t == NAME_INVALID) return ERROR_NAME_INVALID;
-            else if (t == NUM_ERROR) return ERROR_NUM_ERROR;
-            else if (t == N_A) return ERROR_N_A;
-            else return "FIXME!";
-        }
-    }
-
-
-
 
 }

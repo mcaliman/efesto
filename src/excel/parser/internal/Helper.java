@@ -25,8 +25,10 @@ package excel.parser.internal;
 import excel.grammar.Start;
 import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.FormulaParseException;
+import org.apache.poi.ss.formula.ptg.Area3DPxg;
 import org.apache.poi.ss.formula.ptg.NamePtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
+import org.apache.poi.ss.formula.ptg.Ref3DPxg;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
@@ -49,6 +51,14 @@ class Helper {
 
     public String getNameText(NamePtg t){
         return evalBook.getNameText(t);
+    }
+
+    public String getArea(Area3DPxg t){
+        return t.format2DRefAsString();
+    }
+
+    public String getCellRef(Ref3DPxg t){
+        return t.format2DRefAsString();
     }
 
     public int getSheetIndex(String sheetName){

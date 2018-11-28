@@ -224,14 +224,8 @@ public final class Parser extends AbstractParser {
         stack.push(term);
     }
 
-    /**
-     * Used
-     *
-     * @param text
-     */
     @Override
-    protected void parseERROR(String text) {
-        var term = new ERROR(text);
+    protected void parseERROR(ERROR term) {
         setOwnProperty(term);
         err(term.toString(), rowFormula, colFormula);
         graph.addNode(term);
