@@ -20,38 +20,37 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package excel.parser;
+package excel.parser.internal;
 
 import excel.grammar.Start;
 import excel.grammar.formula.reference.*;
 import org.apache.poi.POIXMLProperties;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.SpreadsheetVersion;
-import org.apache.poi.ss.formula.EvaluationCell;
 import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.EvaluationSheet;
 import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Objects;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
-import static org.apache.poi.ss.usermodel.Cell.*;
+import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 
+/**
+ * 3DPxg is XSSF
+ * 3DPtg is HSSF
+ *
+ * @author Massimo Caliman
+ */
 public abstract class AbstractParser {
 
     private final String creator;
@@ -63,6 +62,7 @@ public abstract class AbstractParser {
     private final String company;
     private final String template;
     private final String manager;
+
     private final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
     private final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
     private final Predicate<Ptg> area3DPxg = (Ptg t) -> t instanceof Area3DPxg;
@@ -103,29 +103,59 @@ public abstract class AbstractParser {
     private final Predicate<Ptg> unaryPlusPtg = (Ptg t) -> t instanceof UnaryPlusPtg;
     private final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
-    private final Workbook workbook;
-    private final XSSFEvaluationWorkbook evaluationWorkbook;
+
+    /**
+     * (Work)Book
+     */
+    private final Workbook book;
+    /**
+     * XSSF Evaluation Workbook
+     */
+    private final XSSFEvaluationWorkbook evalBook;
     public boolean verbose = false;
     public boolean metadata = false;
-    boolean errors = false;
-    int colFormula;
-    int rowFormula;
-    int currentSheetIndex;
-    String currentSheetName;
-    private boolean workbookProtectionPresent;
-    private String fileName;
+    protected boolean errors = false;
+    /**
+     * Current Formula Colum
+     */
+    protected int colFormula;
+    /**
+     * Current Formula Row
+     */
+    protected int rowFormula;
+    /**
+     * Current Sheet Index
+     */
+    protected int sheetIndex;
+    /**
+     * Current Sheet Name
+     */
+    protected String sheetName;
+    /**
+     * (Work)Sheet
+     */
     private Sheet sheet;
-    private EvaluationSheet evaluationSheet;
+    /**
+     * EvaluationSheet
+     */
+    private EvaluationSheet evalSheet;
+    /**
+     * (Work)Book Protection Present flag
+     */
+    private boolean protectionPresent;
+    private String fileName;
 
-    AbstractParser(File file) throws InvalidFormatException, IOException {
+    Helper helper;
+
+    protected AbstractParser(File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
         this.fileName = file.getName();
     }
 
     private AbstractParser(Workbook workbook) {
-        this.workbook = workbook;
-        XSSFWorkbook xssfWorkbook = (XSSFWorkbook) this.workbook;
-        workbookProtectionPresent = xssfWorkbook.validateWorkbookPassword("password");
+        this.book = workbook;
+        XSSFWorkbook xssfWorkbook = (XSSFWorkbook) this.book;
+        protectionPresent = xssfWorkbook.validateWorkbookPassword("password");
         POIXMLProperties props = xssfWorkbook.getProperties();
         POIXMLProperties.CoreProperties coreProperties = props.getCoreProperties();
         this.creator = coreProperties.getCreator();
@@ -139,7 +169,10 @@ public abstract class AbstractParser {
         this.company = extendedProperties.getUnderlyingProperties().getCompany();
         this.template = extendedProperties.getUnderlyingProperties().getTemplate();
         this.manager = extendedProperties.getUnderlyingProperties().getManager();
-        this.evaluationWorkbook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
+        this.evalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
+
+        this.helper = new Helper(this.book);
+
         System.out.println("Parse...");
     }
 
@@ -147,37 +180,54 @@ public abstract class AbstractParser {
         return fileName;
     }
 
-    public boolean isWorkbookProtectionPresent() {
-        return workbookProtectionPresent;
+    public boolean isProtectionPresent() {
+        return protectionPresent;
     }
 
-    void verbose(String text) {
+    protected void verbose(String text) {
         if (this.verbose) System.out.println(text);
     }
 
-    void err(String string, int row, int column) {
+    protected void err(String string, int row, int column) {
 
     }
 
-    void parse() {
-        for (Sheet sht : workbook) {
-            sheet = sht;
-            workbookProtectionPresent = workbookProtectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
-            currentSheetIndex = workbook.getSheetIndex(sheet);
-            currentSheetName = sheet.getSheetName();
-            evaluationSheet = evaluationWorkbook.getSheet(currentSheetIndex);
-            for (Row row : sheet)
-                for (Cell cell : row)
-                    if (cell != null) parse(cell);
-                    else err("Cell is null.", rowFormula, colFormula);
-        }
+    /**
+     * Parse (Work)Book.
+     */
+    public void parse() {
+        for (Sheet currentSheet : this.book) parse(currentSheet);
     }
 
+    /**
+     * Parse a single (Work)Sheet
+     *
+     * @param sheet
+     */
+    private void parse(@NotNull Sheet sheet) {
+        this.sheet = sheet;
+        initSheetData();
+        for (Row row : sheet)
+            for (Cell cell : row)
+                if (cell != null) parse(cell);
+                else err("Cell is null.", rowFormula, colFormula);
+    }
+
+    /**
+     * Parse Cell
+     *
+     * @param cell
+     */
     private void parse(Cell cell) {
         if (cell.getCellType() == CELL_TYPE_FORMULA)
             parseFormula(cell);
     }
 
+    /**
+     * Parse Formula Cell
+     *
+     * @param cell
+     */
     private void parseFormula(Cell cell) {
         verbose("Cell:" + cell.getClass().getSimpleName() + " " + cell.toString() + " " + cell.getCellType());
         CellInternal excelCell = new CellInternal(cell);
@@ -188,11 +238,14 @@ public abstract class AbstractParser {
         String formulaAddress = Start.cellAddress(rowFormula, colFormula);
         String formulaText = cell.getCellFormula();
         verbose(formulaAddress + " = " + formulaText);
-        Ptg[] formulaPtgs = tokens();
+
+
+        Ptg[] formulaPtgs = helper.tokens(this.sheet,this.rowFormula,this.colFormula);
+
         if (formulaPtgs == null) {
             System.err.println("ptgs empty or null for address " + formulaAddress);
             err("ptgs empty or null for address " + formulaAddress, rowFormula, colFormula);
-            UDF(formulaText);
+            parseUDF(formulaText);
             return;
         }
         Start start = parse(formulaPtgs);
@@ -202,19 +255,12 @@ public abstract class AbstractParser {
         }
     }
 
-    private Ptg[] tokens() {
-        EvaluationCell evalCell = evaluationSheet.getCell(rowFormula, colFormula);
-        Ptg[] ptgs = null;
-        try {
-            ptgs = evaluationWorkbook.getFormulaTokens(evalCell);
-        } catch (FormulaParseException e) {
-            err("" + e.getMessage(), rowFormula, colFormula);
-        }
-        return ptgs;
-    }
-
-    protected abstract void UDF(String arguments);
-
+    /**
+     * Parse Ptg array
+     *
+     * @param ptgs
+     * @return
+     */
     private Start parse(Ptg[] ptgs) {
         parseFormulaInit();
         if (Ptg.doesFormulaReferToDeletedCell(ptgs)) doesFormulaReferToDeletedCell(rowFormula, colFormula);
@@ -222,64 +268,76 @@ public abstract class AbstractParser {
         return parseFormulaPost();
     }
 
-    private void parse(Ptg p, int row, int column) {
+    private void parse(@NotNull Ptg p, int row, int column) {
         verbose("parse: " + p.getClass().getSimpleName());
         try (Stream<WhatIf> stream = Stream.of(
                 new WhatIf(p, arrayPtg, (Ptg t) -> parseArrayPtg((ArrayPtg) t)),
-                new WhatIf(p, addPtg, (Ptg t) -> add()),
+                new WhatIf(p, addPtg, (Ptg t) -> parseAdd()),
                 new WhatIf(p, area3DPxg, (Ptg t) -> parseArea3DPxg((Area3DPxg) t)),
                 new WhatIf(p, areaErrPtg, (Ptg t) -> parseAreaErrPtg((AreaErrPtg) t)),
                 new WhatIf(p, areaPtg, (Ptg t) -> parseAreaPtg((AreaPtg) t)),
                 new WhatIf(p, attrPtg, (Ptg t) -> parseAttrPtg((AttrPtg) t)),
-                new WhatIf(p, boolPtg, t -> BOOL(((BoolPtg) t).getValue())),
-                new WhatIf(p, concatPtg, t -> concat()),
+                new WhatIf(p, boolPtg, t -> parseBOOL(((BoolPtg) t).getValue())),
+                new WhatIf(p, concatPtg, t -> parseConcat()),
                 new WhatIf(p, deleted3DPxg, (Ptg t) -> parseDeleted3DPxg((Deleted3DPxg) t)),
                 new WhatIf(p, deletedArea3DPtg, (Ptg t) -> parseDeletedArea3DPtg((DeletedArea3DPtg) t)),
                 new WhatIf(p, deletedRef3DPtg, (Ptg t) -> parseDeletedRef3DPtg((DeletedRef3DPtg) t)),
-                new WhatIf(p, dividePtg, t -> div()),
-                new WhatIf(p, equalPtg, t -> eq()),
+                new WhatIf(p, dividePtg, t -> parseDiv()),
+                new WhatIf(p, equalPtg, t -> parseEq()),
                 new WhatIf(p, errPtg, (Ptg t) -> parseErrPtg((ErrPtg) t)),
                 new WhatIf(p, funcPtg, (Ptg t) -> parseFuncPtg((FuncPtg) t)),
                 new WhatIf(p, funcVarPtg, (Ptg t) -> parseFuncVarPtg((FuncVarPtg) t)),
-                new WhatIf(p, greaterEqualPtg, t -> gteq()),
-                new WhatIf(p, greaterThanPtg, t -> gt()),
-                new WhatIf(p, intersectionPtg, t -> intersection()),
-                new WhatIf(p, intPtg, t -> INT(((IntPtg) t).getValue())),
-                new WhatIf(p, lessEqualPtg, t -> leq()),
-                new WhatIf(p, lessThanPtg, t -> lt()),
+                new WhatIf(p, greaterEqualPtg, t -> parseGteq()),
+                new WhatIf(p, greaterThanPtg, t -> parseGt()),
+                new WhatIf(p, intersectionPtg, t -> parseIntersection()),
+                new WhatIf(p, intPtg, t -> parseINT(((IntPtg) t).getValue())),
+                new WhatIf(p, lessEqualPtg, t -> parseLeq()),
+                new WhatIf(p, lessThanPtg, t -> parseLt()),
                 new WhatIf(p, memErrPtg, (Ptg t) -> parseMemErrPtg((MemErrPtg) t)),
                 new WhatIf(p, missingArgPtg, (Ptg t) -> parseMissingArgPtg(row, column)),
-                new WhatIf(p, multiplyPtg, t -> mult()),
+                new WhatIf(p, multiplyPtg, t -> parseMult()),
                 new WhatIf(p, namePtg, (Ptg t) -> parseNamePtg((NamePtg) t)),
-                new WhatIf(p, notEqualPtg, t -> neq()),
-                new WhatIf(p, numberPtg, t -> FLOAT(((NumberPtg) t).getValue())),
-                new WhatIf(p, parenthesisPtg, t -> ParenthesisFormula()),
+                new WhatIf(p, notEqualPtg, t -> parseNeq()),
+                new WhatIf(p, numberPtg, t -> parseFLOAT(((NumberPtg) t).getValue())),
+                new WhatIf(p, parenthesisPtg, t -> parseParenthesisFormula()),
                 new WhatIf(p, percentPtg, t -> percentFormula()),
-                new WhatIf(p, powerPtg, t -> power()),
+                new WhatIf(p, powerPtg, t -> parsePower()),
                 new WhatIf(p, ref3DPxg, (Ptg t) -> parseRef3DPxg((Ref3DPxg) t)),
                 new WhatIf(p, refErrorPtg, (Ptg t) -> parseRefErrorPtg((RefErrorPtg) t)),
                 new WhatIf(p, refPtg, (Ptg t) -> parseRefPtg((RefPtg) t)),
-                new WhatIf(p, stringPtg, (Ptg t) -> TEXT(((StringPtg) t).getValue())),
-                new WhatIf(p, subtractPtg, t -> sub()),
-                new WhatIf(p, unaryMinusPtg, (Ptg t) -> Minus()),
-                new WhatIf(p, unaryPlusPtg, (Ptg t) -> Plus()),
-                new WhatIf(p, unionPtg, t -> union((UnionPtg) t)),
+                new WhatIf(p, stringPtg, (Ptg t) -> parseTEXT(((StringPtg) t).getValue())),
+                new WhatIf(p, subtractPtg, t -> parseSub()),
+                new WhatIf(p, unaryMinusPtg, (Ptg t) -> parseMinus()),
+                new WhatIf(p, unaryPlusPtg, (Ptg t) -> parsePlus()),
+                new WhatIf(p, unionPtg, t -> parseUnion((UnionPtg) t)),
                 new WhatIf(p, unknownPtg, (Ptg t) -> parseUnknownPtg((UnknownPtg) t))
         )) {
             stream.filter((WhatIf t) -> t.predicate.test(t.ptg)).forEach(t -> t.consumer.accept(t.ptg));
         } catch (Exception e) {
             System.err.println("parse: " + p.getClass().getSimpleName());
-            System.err.println(this.currentSheetName + "row:" + row + "column:" + column + e.getMessage());
+            System.err.println(this.sheetName + "row:" + row + "column:" + column + e.getMessage());
             e.printStackTrace();
             //System.exit(-1);
         }
     }
 
-
-    private void parseArrayPtg(ArrayPtg t) {
-        Object[][] tokens = t.getTokenArrayValues();
-        ConstantArray(tokens);
+    private void initSheetData() {
+        protectionPresent = protectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
+        sheetIndex = book.getSheetIndex(sheet);
+        sheetName = sheet.getSheetName();
+        //evalSheet = evalBook.getSheet(sheetIndex);
     }
+
+    private void parseArrayPtg(@NotNull ArrayPtg t) {
+        Object[][] tokens = t.getTokenArrayValues();
+        parseConstantArray(tokens);
+    }
+
+    protected abstract void parseConstantArray(Object[][] array);
+
+    protected abstract void parseUDF(String arguments);
+
+
 
     /**
      * Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
@@ -290,12 +348,15 @@ public abstract class AbstractParser {
      *
      * @param t
      */
-    private void parseArea3DPxg(Area3DPxg t) {
+    private void parseArea3DPxg(@NotNull Area3DPxg t) {
+
         String sheetName = t.getSheetName();
-        int sheetIndex = evaluationWorkbook.getSheetIndex(sheetName);
+        int sheetIndex = helper.getSheetIndex(sheetName);
+
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
+
         String area = t.format2DRefAsString();
-        RangeInternal range = new RangeInternal(workbook, t.getSheetName(), t);
+        RangeInternal range = new RangeInternal(book, t.getSheetName(), t);
         parseArea3D(range.getRANGE(), tSHEET, area);
     }
 
@@ -309,10 +370,12 @@ public abstract class AbstractParser {
      *
      * @param t
      */
-    private void parseRef3DPxg(Ref3DPxg t) {
+    private void parseRef3DPxg(@NotNull Ref3DPxg t) {
         int extWorkbookNumber = t.getExternalWorkbookNumber();
+
         String sheet_ = t.getSheetName();
-        int sheetIndex = evaluationWorkbook.getSheetIndex(sheet_);
+        int sheetIndex = helper.getSheetIndex(sheet_);
+
         SHEET tSHEET = new SHEET(sheet_, sheetIndex);
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
         String cellref = t.format2DRefAsString();
@@ -320,78 +383,77 @@ public abstract class AbstractParser {
         else parseReference(tSHEET, cellref);
     }
 
-    private void parseAttrPtg(AttrPtg t) {
-        if (t.isSum()) sum();
+    private void parseAttrPtg(@NotNull AttrPtg t) {
+        if (t.isSum()) parseSum();
     }
 
     private void parseAreaPtg(AreaPtg t) {
-        RangeInternal range = new RangeInternal(workbook, sheet, t);
-        rangeReference(range.getRANGE());
+        RangeInternal range = new RangeInternal(book, sheet, t);
+        parseRangeReference(range.getRANGE());
     }
 
     private void parseErrPtg(ErrPtg t) {
         ErrInternal err = new ErrInternal(t);
-        ERROR(err.text());
+        parseERROR(err.text());
     }
 
-    private void parseFuncPtg(FuncPtg t) {
+    private void parseFuncPtg(@NotNull FuncPtg t) {
         if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
         else parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
     }
 
-    private void parseFuncVarPtg(FuncVarPtg t) {
+    private void parseFuncVarPtg(@NotNull FuncVarPtg t) {
         if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
         else parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
     }
 
     private void parseNamePtg(NamePtg t) {
-        EvaluationName evaluationName = evaluationWorkbook.getName(t);
+        EvaluationName evaluationName = evalBook.getName(t);
         RangeInternal range = null;
         Ptg[] ptgs = evaluationName.getNameDefinition();
         for (Ptg ptg : ptgs) {
             if (ptg != null) {
                 if (ptg instanceof Area3DPxg) {
                     Area3DPxg area3DPxg = (Area3DPxg) ptg;
-                    range = new RangeInternal(workbook, area3DPxg.getSheetName(), area3DPxg);
+                    range = new RangeInternal(book, area3DPxg.getSheetName(), area3DPxg);
                 }
             }
         }
 
-        String name = evaluationWorkbook.getNameText(t);
+        String name = evalBook.getNameText(t);
         RANGE tRANGE = range.getRANGE();
-        namedRange(tRANGE, name, range.getSheetName());
+        parseNamedRange(tRANGE, name, range.getSheetName());
     }
 
-
-    private void parseRefPtg(RefPtg t) {
+    private void parseRefPtg(@NotNull RefPtg t) {
         Row rowObject = sheet.getRow(t.getRow());
         Object value = null;
         String comment = null;
         if (rowObject != null) {
-            Cell c = rowObject.getCell( t.getColumn());
+            Cell c = rowObject.getCell(t.getColumn());
             CellInternal excelType = new CellInternal(c);
             value = excelType.valueOf();
             comment = excelType.getComment();
         }
-        CELL_REFERENCE tCELL_REFERENCE = new CELL_REFERENCE(t.getRow(),  t.getColumn(),comment);
+        CELL_REFERENCE tCELL_REFERENCE = new CELL_REFERENCE(t.getRow(), t.getColumn(), comment);
 
-        CELL_REFERENCE(tCELL_REFERENCE, rowObject != null, value);
+        parseCELL_REFERENCE(tCELL_REFERENCE, rowObject != null, value);
     }
 
     private void parseRefErrorPtg(RefErrorPtg t) {
         ERROR_REF term = new ERROR_REF();
-        ERROR_REF(term);
+        parseERROR_REF(term);
     }
 
-    private void parseMemErrPtg(MemErrPtg t) {
+    private void parseMemErrPtg(@NotNull MemErrPtg t) {
         err("MemErrPtg: " + t.toString(), rowFormula, colFormula);
     }
 
-    private void parseDeleted3DPxg(Deleted3DPxg t) {
+    private void parseDeleted3DPxg(@NotNull Deleted3DPxg t) {
         err("Deleted3DPxg: " + t.toString(), rowFormula, colFormula);
     }
 
-    private void parseDeletedRef3DPtg(DeletedRef3DPtg t) {
+    private void parseDeletedRef3DPtg(@NotNull DeletedRef3DPtg t) {
         err("DeletedRef3DPtg: " + t.toString(), rowFormula, colFormula);
     }
 
@@ -399,15 +461,15 @@ public abstract class AbstractParser {
         parseMissingArguments(row, column);
     }
 
-    private void parseDeletedArea3DPtg(DeletedArea3DPtg t) {
+    private void parseDeletedArea3DPtg(@NotNull DeletedArea3DPtg t) {
         err("DeletedArea3DPtg: " + t.toString(), rowFormula, colFormula);
     }
 
-    private void parseAreaErrPtg(AreaErrPtg t) {
+    private void parseAreaErrPtg(@NotNull AreaErrPtg t) {
         err("AreaErrPtg: " + t.toString(), rowFormula, colFormula);
     }
 
-    private void parseUnknownPtg(UnknownPtg t) {
+    private void parseUnknownPtg(@NotNull UnknownPtg t) {
         err("Error Unknown Ptg: " + t.toString(), rowFormula, colFormula);
     }
 
@@ -415,77 +477,75 @@ public abstract class AbstractParser {
 
     protected abstract void parseMissingArguments(int row, int column);
 
-    protected abstract void ConstantArray(Object[][] array);
-
-    protected abstract void add();
+    protected abstract void parseAdd();
 
     protected abstract void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area);
 
-    protected abstract void sum();
+    protected abstract void parseSum();
 
-    protected abstract void rangeReference(RANGE tRANGE);
+    protected abstract void parseRangeReference(RANGE tRANGE);
 
-    protected abstract void BOOL(Boolean bool);
+    protected abstract void parseBOOL(Boolean bool);
 
-    protected abstract void concat();
+    protected abstract void parseConcat();
 
-    protected abstract void div();
+    protected abstract void parseDiv();
 
-    protected abstract void eq();
+    protected abstract void parseEq();
 
-    protected abstract void ERROR(String text);
+    protected abstract void parseERROR(String text);
 
     protected abstract void parseFunc(String name, int arity, boolean externalFunction);
 
     protected abstract void parseFunc(String name, boolean externalFunction);
 
-    protected abstract void gteq();
+    protected abstract void parseGteq();
 
-    protected abstract void gt();
+    protected abstract void parseGt();
 
-    protected abstract void intersection();
+    protected abstract void parseIntersection();
 
-    protected abstract void INT(Integer value);
+    protected abstract void parseINT(Integer value);
 
-    protected abstract void leq();
+    protected abstract void parseLeq();
 
-    protected abstract void lt();
+    protected abstract void parseLt();
 
-    protected abstract void mult();
+    protected abstract void parseMult();
 
-    protected abstract void namedRange(RANGE tRANGE, String name, String sheetName);
+    protected abstract void parseNamedRange(RANGE tRANGE, String name, String sheetName);
 
-    protected abstract void neq();
+    protected abstract void parseNeq();
 
-    protected abstract void FLOAT(Double value);
+    protected abstract void parseFLOAT(Double value);
 
-    protected abstract void ParenthesisFormula();
+    protected abstract void parseParenthesisFormula();
 
     protected abstract void percentFormula();
 
-    protected abstract void power();
+    protected abstract void parsePower();
 
     protected abstract void parseReference(FILE tFILE, String area);
 
     protected abstract void parseReference(SHEET tSHEET, String area);
 
-    protected abstract void ERROR_REF(ERROR_REF ref);
+    protected abstract void parseERROR_REF(ERROR_REF ref);
 
-    protected abstract void CELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value);
+    protected abstract void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value);
 
-    protected abstract void TEXT(String string);
+    protected abstract void parseTEXT(String string);
 
-    protected abstract void sub();
+    protected abstract void parseSub();
 
-    protected abstract void Minus();
+    protected abstract void parseMinus();
 
-    protected abstract void Plus();
+    protected abstract void parsePlus();
 
-    private void union(UnionPtg t) {
-        union();
+    private void parseUnion(UnionPtg t) {
+        parseUnion();
     }
 
-    protected abstract void union();
+    protected abstract void parseUnion();
 
     protected abstract void doesFormulaReferToDeletedCell(int row, int column);
 
@@ -521,213 +581,7 @@ public abstract class AbstractParser {
         }
     }
 
-    // 3DPxg is XSSF
-    // 3DPtg is HSSF
-    class WhatIf {
-
-        final Ptg ptg;
-        final Predicate<Ptg> predicate;
-        final Consumer<Ptg> consumer;
-
-        WhatIf(Ptg ptg, Predicate<Ptg> predicate, Consumer<Ptg> consumer) {
-            this.ptg = ptg;
-            this.predicate = predicate;
-            this.consumer = consumer;
-        }
-    }
-
-    /**
-     * @author mcaliman
-     */
-    class RangeInternal {
-
-        private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
-        private final Workbook workbook;
-        private final Sheet sheet;
-
-        private final int firstRow;
-        private final int firstColumn;
-
-        private final int lastRow;
-        private final int lastColumn;
-        RANGE tRANGE;
-        private String sheetName;
-
-        RangeInternal(Workbook workbook, Sheet sheet, AreaPtg t) {
-            firstRow = t.getFirstRow();
-            firstColumn = t.getFirstColumn();
-
-            lastRow = t.getLastRow();
-            lastColumn = t.getLastColumn();
-
-            CELL_REFERENCE first = new CELL_REFERENCE(firstRow, firstColumn);
-            CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
-            tRANGE = new RANGE(first, last);
-
-            this.workbook = workbook;
-            this.sheet = sheet;
-            init();
-        }
-
-        RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
-            firstRow = t.getFirstRow();
-            firstColumn = t.getFirstColumn();
-            sheetName = sheetnamne;
 
 
-            lastRow = t.getLastRow();
-            lastColumn = t.getLastColumn();
-
-            CELL_REFERENCE first = new CELL_REFERENCE(firstRow, firstColumn);
-            CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
-            tRANGE = new RANGE(first, last);
-
-            this.workbook = workbook;
-            this.sheet = null;
-            String refs = tRANGE.toString();
-
-            AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
-            List<Cell> cells = fromRange(area);
-
-            for (Cell cell : cells)
-                if (cell != null) {
-                    CellInternal excelType = new CellInternal(cell);
-                    tRANGE.add(excelType.valueOf());
-                }
-        }
-
-        private void init() {
-            String refs = tRANGE.toString();
-            List<Cell> cells = range(refs);
-            for (Cell cell : cells)
-                if (cell != null) {
-                    CellInternal excelType = new CellInternal(cell);
-                    tRANGE.add(excelType.valueOf());
-                }
-        }
-
-        private List<Cell> range(String refs) {
-            AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
-            return fromRange(area);
-        }
-
-        private List<Cell> fromRange(AreaReference area) {
-            List<Cell> cells = new ArrayList<>();
-            org.apache.poi.ss.util.CellReference[] cels = area.getAllReferencedCells();
-            for (org.apache.poi.ss.util.CellReference cel : cels) {
-                XSSFSheet ss = (XSSFSheet) workbook.getSheet(cel.getSheetName());
-                Row r = ss.getRow(cel.getRow());
-                if (r == null) continue;
-                Cell c = r.getCell(cel.getCol());
-                cells.add(c);
-            }
-            return cells;
-        }
-
-        private int getFirstRow() {
-            return firstRow;
-        }
-
-        private int getFirstColumn() {
-            return firstColumn;
-        }
-
-        private int getLastRow() {
-            return lastRow;
-        }
-
-        private int getLastColumn() {
-            return lastColumn;
-        }
-
-        String getSheetName() {
-            return sheetName;
-        }
-
-        RANGE getRANGE() {
-            return tRANGE;
-        }
-    }
-
-    /**
-     * @author mcaliman
-     */
-    class CellInternal {
-
-        private final Cell cell;
-        private final String comment;
-
-        @SuppressWarnings("unused")
-        CellInternal(Cell cell) {
-            this.cell = cell;
-            Comment cellComment = this.cell.getCellComment();
-            comment = comment(cellComment);
-            CellStyle style = this.cell.getCellStyle();
-            String format = style.getDataFormatString();
-        }
-
-        String getComment() {
-            return comment;
-        }
-
-        private String comment(Comment comment) {
-            if (comment == null) return null;
-            RichTextString text = comment.getString();
-            if (text == null) return null;
-            return text.getString();
-
-        }
-
-        private Object valueOf() {
-            if (cell == null) return null;
-            if (isDataType(cell))
-                return cell.getDateCellValue();
-            switch (cell.getCellType()) {
-                case CELL_TYPE_STRING:
-                    return cell.getStringCellValue();
-                case CELL_TYPE_NUMERIC:
-                    return cell.getNumericCellValue();
-                case CELL_TYPE_BOOLEAN:
-                    return cell.getBooleanCellValue();
-                case CELL_TYPE_BLANK:
-                    return cell.getStringCellValue();
-                case CELL_TYPE_FORMULA:
-                    if (cell.toString() != null && cell.toString().equalsIgnoreCase("true")) {
-                        return true;
-                    }
-                    if (cell.toString() != null && cell.toString().equalsIgnoreCase("false")) {
-                        return false;
-                    }
-                    return cell.toString();
-                default:
-                    return null;
-            }
-        }
-
-        private boolean isDataType(Cell c) {
-            return c.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(c);
-        }
-
-        Class internalFormulaResultType() {
-            int type = cell.getCachedFormulaResultType();
-            if (isDataType(cell))
-                return Date.class;
-            return internalFormulaResultType(type);
-        }
-
-        private Class internalFormulaResultType(int type) {
-            switch (type) {
-                case CELL_TYPE_STRING:
-                    return String.class;
-                case CELL_TYPE_NUMERIC:
-                    return Double.class;
-                case CELL_TYPE_BOOLEAN:
-                    return Boolean.class;
-                default:
-                    return Object.class;
-            }
-        }
-
-    }
 
 }

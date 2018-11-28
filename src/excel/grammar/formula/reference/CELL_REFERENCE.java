@@ -39,7 +39,7 @@ public final class CELL_REFERENCE extends ReferenceItem {
         this.column = column;
     }
 
-    public CELL_REFERENCE(int row, int column,String comment) {
+    public CELL_REFERENCE(int row, int column, String comment) {
         this.row = row;
         this.column = column;
         this.setComment(comment);

@@ -55,7 +55,7 @@ public final class PrefixReferenceItem extends Reference {
         this.prefix = prefix;
         this.reference = reference;
         this.tRANGE = tRANGE;
-        if(this.tRANGE!=null){
+        if (this.tRANGE != null) {
             setAsArea();
             add(tRANGE.values());
             setFirstRow(tRANGE.getFirst().getRow());

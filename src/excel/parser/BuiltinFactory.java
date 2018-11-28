@@ -78,7 +78,7 @@ final class BuiltinFactory {
         clazzMap.put("BINOMDIST", BINOMDIST.class);
         clazzMap.put("CALL", CALL.class);
         clazzMap.put("CEILING", CEILING.class);
-        clazzMap.put("CELL_REFERENCE", CELL.class);
+        clazzMap.put("parseCELL_REFERENCE", CELL.class);
         clazzMap.put("CHAR", CHAR.class);
         clazzMap.put("CHIDIST", CHIDIST.class);
         clazzMap.put("CHIINV", CHIINV.class);
@@ -210,7 +210,7 @@ final class BuiltinFactory {
         clazzMap.put("INDEX", INDEX.class);
         clazzMap.put("INDIRECT", INDIRECT.class);
         clazzMap.put("INFO", INFO.class);
-        clazzMap.put("INT", INT.class);
+        clazzMap.put("parseINT", INT.class);
         clazzMap.put("INTERCEPT", INTERCEPT.class);
         clazzMap.put("INTRATE", INTRATE.class);
         clazzMap.put("IPMT", IPMT.class);

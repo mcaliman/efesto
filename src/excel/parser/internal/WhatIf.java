@@ -20,26 +20,22 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package excel.grammar.formula.reference;
+package excel.parser.internal;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.poi.ss.formula.ptg.Ptg;
 
-/**
- * @author Massimo Caliman
- */
-public final class ERROR_REF extends ReferenceItem {
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
-    private final static Logger LOG = Logger.getLogger(ERROR_REF.class.getName());
+public class WhatIf {
 
-    public ERROR_REF() {
-        super("#REF");
-        LOG.log(Level.SEVERE, "parseERROR-REF Reference error literal #REF!");
+    final Ptg ptg;
+    final Predicate<Ptg> predicate;
+    final Consumer<Ptg> consumer;
+
+    WhatIf(Ptg ptg, Predicate<Ptg> predicate, Consumer<Ptg> consumer) {
+        this.ptg = ptg;
+        this.predicate = predicate;
+        this.consumer = consumer;
     }
-
-    public String toString(boolean addr) {
-        return getAddress() + " = " + toString();
-
-    }
-
 }

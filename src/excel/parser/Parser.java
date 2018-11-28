@@ -37,6 +37,7 @@ import excel.grammar.formula.functioncall.unary.Plus;
 import excel.grammar.formula.reference.*;
 import excel.grammar.formula.reference.referencefunction.OFFSET;
 import excel.graph.StartGraph;
+import excel.parser.internal.AbstractParser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import java.io.File;
@@ -64,18 +65,18 @@ public final class Parser extends AbstractParser {
 
     @Override
     protected void parseMissingArguments(int row, int column) {
-        err("Missing ExcelFunction Arguments for cell: " + Start.cellAddress(row, column, currentSheetName), row, column);
+        err("Missing ExcelFunction Arguments for cell: " + Start.cellAddress(row, column, sheetName), row, column);
     }
 
     @Override
     protected void doesFormulaReferToDeletedCell(int row, int column) {
-        err(Start.cellAddress(row, column,currentSheetName) + " does formula refer to deleted cell", row, column);
+        err(Start.cellAddress(row, column, sheetName) + " does formula refer to deleted cell", row, column);
     }
 
     @Override
-    void err(String string, int row, int column) {
+    protected void err(String string, int row, int column) {
         super.err(string, row, column);
-        if (errors) System.err.println(Start.cellAddress(row, column,currentSheetName) + " ERROR: " + string);
+        if (errors) System.err.println(Start.cellAddress(row, column, sheetName) + " parseERROR: " + string);
     }
 
     @Override
@@ -106,8 +107,8 @@ public final class Parser extends AbstractParser {
     private void setOwnProperty(Start start) {
         start.setColumn(colFormula);
         start.setRow(rowFormula);
-        start.setSheetIndex(currentSheetIndex);
-        start.setSheetName(currentSheetName);
+        start.setSheetIndex(sheetIndex);
+        start.setSheetName(sheetName);
         //start.setType(internalFormulaResultTypeClass);
     }
 
@@ -126,12 +127,12 @@ public final class Parser extends AbstractParser {
     // TERMINAL AND NON TERMINAL BEGIN
 
     /**
-     * ConstantArray
+     * parseConstantArray
      *
      * @param array
      */
     @Override
-    protected void ConstantArray(Object[][] array) {
+    protected void parseConstantArray(Object[][] array) {
         var term = new ConstantArray(array);
         setOwnProperty(term);
         stack.push(term);
@@ -143,7 +144,7 @@ public final class Parser extends AbstractParser {
      * @param arguments
      */
     @Override
-    protected void UDF(String arguments) {
+    protected void parseUDF(String arguments) {
         var term = new UDF(arguments);
         setOwnProperty(term);
         unordered.add(term);
@@ -157,9 +158,9 @@ public final class Parser extends AbstractParser {
      * @param sheetName
      */
     @Override
-    protected void namedRange(RANGE tRANGE, String name, String sheetName) {
-        var term = new NamedRange(name,tRANGE);
-        term.setSheetIndex(currentSheetIndex);
+    protected void parseNamedRange(RANGE tRANGE, String name, String sheetName) {
+        var term = new NamedRange(name, tRANGE);
+        term.setSheetIndex(sheetIndex);
         term.setSheetName(sheetName);
         stack.push(term);
     }
@@ -168,7 +169,7 @@ public final class Parser extends AbstractParser {
      * Used
      */
     @Override
-    protected void ParenthesisFormula() {
+    protected void parseParenthesisFormula() {
         var formula = (Formula) stack.pop();
         var parFormula = new ParenthesisFormula(formula);
         setOwnProperty(parFormula);
@@ -181,7 +182,7 @@ public final class Parser extends AbstractParser {
      * @param value
      */
     @Override
-    protected void FLOAT(Double value) {
+    protected void parseFLOAT(Double value) {
         var term = new FLOAT(value);
         graph.addNode(term);
         stack.push(term);
@@ -193,7 +194,7 @@ public final class Parser extends AbstractParser {
      * @param value
      */
     @Override
-    protected void INT(Integer value) {
+    protected void parseINT(Integer value) {
         var term = new INT(value);
         graph.addNode(term);
         stack.push(term);
@@ -205,7 +206,7 @@ public final class Parser extends AbstractParser {
      * @param value
      */
     @Override
-    protected void BOOL(Boolean value) {
+    protected void parseBOOL(Boolean value) {
         var term = new BOOL(value);
         graph.addNode(term);
         stack.push(term);
@@ -217,7 +218,7 @@ public final class Parser extends AbstractParser {
      * @param text
      */
     @Override
-    protected void TEXT(String text) {
+    protected void parseTEXT(String text) {
         var term = new TEXT(text);
         graph.addNode(term);
         stack.push(term);
@@ -229,7 +230,7 @@ public final class Parser extends AbstractParser {
      * @param text
      */
     @Override
-    protected void ERROR(String text) {
+    protected void parseERROR(String text) {
         var term = new ERROR(text);
         setOwnProperty(term);
         err(term.toString(), rowFormula, colFormula);
@@ -241,11 +242,11 @@ public final class Parser extends AbstractParser {
      * +
      */
     @Override
-    protected void Plus() {
+    protected void parsePlus() {
         var formula = (Formula) stack.pop();
         var plus = new Plus(formula);
-        plus.setSheetName(currentSheetName);
-        plus.setSheetIndex(currentSheetIndex);
+        plus.setSheetName(sheetName);
+        plus.setSheetIndex(sheetIndex);
         graph.addNode(plus);
         stack.push(plus);
     }
@@ -254,7 +255,7 @@ public final class Parser extends AbstractParser {
      * -
      */
     @Override
-    protected void Minus() {
+    protected void parseMinus() {
         var formula = (Formula) stack.pop();
         var minus = new Minus(formula);
         setOwnProperty(minus);
@@ -266,7 +267,7 @@ public final class Parser extends AbstractParser {
      * F=F
      */
     @Override
-    protected void eq() {
+    protected void parseEq() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var eq = new Eq(lFormula, rFormula);
@@ -279,7 +280,7 @@ public final class Parser extends AbstractParser {
      * F<F
      */
     @Override
-    protected void lt() {
+    protected void parseLt() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var lt = new Lt(lFormula, rFormula);
@@ -292,7 +293,7 @@ public final class Parser extends AbstractParser {
      * F>F
      */
     @Override
-    protected void gt() {
+    protected void parseGt() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var gt = new Gt(lFormula, rFormula);
@@ -305,7 +306,7 @@ public final class Parser extends AbstractParser {
      * F<=F
      */
     @Override
-    protected void leq() {
+    protected void parseLeq() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var leq = new Leq(lFormula, rFormula);
@@ -318,7 +319,7 @@ public final class Parser extends AbstractParser {
      * F>=F
      */
     @Override
-    protected void gteq() {
+    protected void parseGteq() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var gteq = new GtEq(lFormula, rFormula);
@@ -331,7 +332,7 @@ public final class Parser extends AbstractParser {
      * F<>F
      */
     @Override
-    protected void neq() {
+    protected void parseNeq() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var neq = new Neq(lFormula, rFormula);
@@ -344,7 +345,7 @@ public final class Parser extends AbstractParser {
      * F&F
      */
     @Override
-    protected void concat() {
+    protected void parseConcat() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var concat = new Concat(lFormula, rFormula);
@@ -357,7 +358,7 @@ public final class Parser extends AbstractParser {
      * F+F
      */
     @Override
-    protected void add() {
+    protected void parseAdd() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var add = new Add(lFormula, rFormula);
@@ -370,7 +371,7 @@ public final class Parser extends AbstractParser {
      * F-F
      */
     @Override
-    protected void sub() {
+    protected void parseSub() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var sub = new Sub(lFormula, rFormula);
@@ -383,7 +384,7 @@ public final class Parser extends AbstractParser {
      * F*F
      */
     @Override
-    protected void mult() {
+    protected void parseMult() {
         if (stack.empty()) return;
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
@@ -397,7 +398,7 @@ public final class Parser extends AbstractParser {
      * F/F
      */
     @Override
-    protected void div() {
+    protected void parseDiv() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var div = new Divide(lFormula, rFormula);
@@ -410,7 +411,7 @@ public final class Parser extends AbstractParser {
      * F^F
      */
     @Override
-    protected void power() {
+    protected void parsePower() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var power = new Power(lFormula, rFormula);
@@ -424,7 +425,7 @@ public final class Parser extends AbstractParser {
      * F F
      */
     @Override
-    protected void intersection() {
+    protected void parseIntersection() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var intersection = new Intersection(lFormula, rFormula);
@@ -437,7 +438,7 @@ public final class Parser extends AbstractParser {
      * F,F
      */
     @Override
-    protected void union() {
+    protected void parseUnion() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var union = new Union(lFormula, rFormula);
@@ -460,11 +461,10 @@ public final class Parser extends AbstractParser {
 
     /**
      * #REF
-     *
      */
     @Override
-    protected void ERROR_REF(ERROR_REF error) {
-        //var error = new ERROR_REF();
+    protected void parseERROR_REF(ERROR_REF error) {
+        //var error = new parseERROR_REF();
         setOwnProperty(error);
         stack.push(error);
         err("", rowFormula, colFormula);
@@ -474,7 +474,7 @@ public final class Parser extends AbstractParser {
      * CELLREF
      */
     @Override
-    protected void CELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value) {
+    protected void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value) {
         setOwnProperty(tCELL_REFERENCE);
         if (rowNotNull) {
             tCELL_REFERENCE.setValue(value);
@@ -486,10 +486,9 @@ public final class Parser extends AbstractParser {
     /**
      * Used
      * Sheet2!A1:B1 (Sheet + AREA/RANGE)
-     *
      */
     @Override
-    protected void parseArea3D(RANGE tRANGE,  SHEET tSHEET, String area) {
+    protected void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area) {
         var term = new PrefixReferenceItem(tSHEET, area, tRANGE);
         term.setSheetIndex(tSHEET.getIndex());
         term.setSheetName(tSHEET.getName());
@@ -499,7 +498,7 @@ public final class Parser extends AbstractParser {
 
     /**
      * Used
-     * Sheet2!A1 (Sheet + CELL_REFERENCE)
+     * Sheet2!A1 (Sheet + parseCELL_REFERENCE)
      * External references: External references are normally in the form [File]Sheet!Cell
      *
      * @param cellref
@@ -524,7 +523,7 @@ public final class Parser extends AbstractParser {
      * Used
      */
     @Override
-    protected void rangeReference(RANGE tRANGE) {
+    protected void parseRangeReference(RANGE tRANGE) {
         var rangeReference = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         setOwnProperty(rangeReference);
         rangeReference.setAsArea();//is area not a cell with ref to area
@@ -537,11 +536,11 @@ public final class Parser extends AbstractParser {
      * SUM(Arguments)
      */
     @Override
-    protected void sum() {
+    protected void parseSum() {
         var args = stack.pop();
         if (args instanceof Reference || args instanceof OFFSET) {
-            args.setSheetIndex(currentSheetIndex);
-            args.setSheetName(currentSheetName);
+            args.setSheetIndex(sheetIndex);
+            args.setSheetName(sheetName);
             args.setAsArea();
             unordered.add(args);
         } else {

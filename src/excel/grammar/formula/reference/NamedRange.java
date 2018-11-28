@@ -27,7 +27,7 @@ package excel.grammar.formula.reference;
  */
 public class NamedRange extends ReferenceItem {
 
-    public NamedRange(String value,RANGE tRANGE) {
+    public NamedRange(String value, RANGE tRANGE) {
         this.value = value;
         setFirstRow(tRANGE.getFirst().getRow());
         setFirstColumn(tRANGE.getFirst().getColumn());
