@@ -213,11 +213,9 @@ public abstract class AbstractParser {
      */
     private void parseFormula(Cell cell) {
         verbose("Cell:" + cell.getClass().getSimpleName() + " " + cell.toString() + " " + cell.getCellType());
-        CellInternal excelCell = new CellInternal(cell);
-        String comment = excelCell.getComment();
+        String comment = Helper.getComment(cell);
         colFormula = cell.getColumnIndex();
         rowFormula = cell.getRowIndex();
-        //Class internalFormulaResultTypeClass = excelCell.internalFormulaResultType();
         String formulaAddress = Start.cellAddress(rowFormula, colFormula);
         String formulaText = cell.getCellFormula();
         verbose(formulaAddress + " = " + formulaText);
@@ -426,9 +424,8 @@ public abstract class AbstractParser {
         String comment = null;
         if (rowObject != null) {
             Cell c = rowObject.getCell(t.getColumn());
-            CellInternal excelType = new CellInternal(c);
-            value = excelType.valueOf();
-            comment = excelType.getComment();
+            value = Helper.valueOf(c);
+            comment = Helper.getComment(c);
         }
         CELL_REFERENCE tCELL_REFERENCE = new CELL_REFERENCE(t.getRow(), t.getColumn(), comment);
 
@@ -525,8 +522,6 @@ public abstract class AbstractParser {
 
 
     protected abstract void parseReference(SHEET tSHEET, String area);
-
-
 
     protected abstract void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value);
 

@@ -89,8 +89,7 @@ class RangeInternal {
 
         for (Cell cell : cells)
             if (cell != null) {
-                CellInternal excelType = new CellInternal(cell);
-                tRANGE.add(excelType.valueOf());
+                tRANGE.add(Helper.valueOf(cell));
             }
     }
 
@@ -99,8 +98,8 @@ class RangeInternal {
         List<Cell> cells = range(refs);
         for (Cell cell : cells)
             if (cell != null) {
-                CellInternal excelType = new CellInternal(cell);
-                tRANGE.add(excelType.valueOf());
+
+                tRANGE.add(Helper.valueOf(cell));
             }
     }
 

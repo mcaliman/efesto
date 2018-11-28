@@ -23,16 +23,21 @@
 package excel.parser.internal;
 
 import excel.grammar.Start;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.Area3DPxg;
 import org.apache.poi.ss.formula.ptg.NamePtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.formula.ptg.Ref3DPxg;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.util.Date;
+
+import static org.apache.poi.ss.usermodel.Cell.*;
+import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 
 class Helper {
 
@@ -43,6 +48,74 @@ class Helper {
         this.workbook = workbook;
         this.evalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
     }
+
+    public static String getComment(Cell cell){
+        Comment cellComment = cell.getCellComment();
+        String comment = comment(cellComment);
+        CellStyle style = cell.getCellStyle();
+        String format = style.getDataFormatString();
+        return comment;
+    }
+
+    private static String comment(Comment comment) {
+        if (comment == null) return null;
+        RichTextString text = comment.getString();
+        if (text == null) return null;
+        return text.getString();
+
+    }
+
+    public static Object valueOf(Cell cell) {
+        if (cell == null) return null;
+        if (Helper.isDataType(cell))
+            return cell.getDateCellValue();
+        switch (cell.getCellType()) {
+            case CELL_TYPE_STRING:
+                return cell.getStringCellValue();
+            case CELL_TYPE_NUMERIC:
+                return cell.getNumericCellValue();
+            case CELL_TYPE_BOOLEAN:
+                return cell.getBooleanCellValue();
+            case CELL_TYPE_BLANK:
+                return cell.getStringCellValue();
+            case CELL_TYPE_FORMULA:
+                if (cell.toString() != null && cell.toString().equalsIgnoreCase("true")) {
+                    return true;
+                }
+                if (cell.toString() != null && cell.toString().equalsIgnoreCase("false")) {
+                    return false;
+                }
+                return cell.toString();
+            default:
+                return null;
+        }
+    }
+
+    public static boolean isDataType(Cell cell) {
+        return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
+    }
+
+    public static Class internalFormulaResultType(Cell cell) {
+        int type = cell.getCachedFormulaResultType();
+        if (Helper.isDataType(cell))
+            return Date.class;
+        return internalFormulaResultType(type);
+    }
+
+
+    public static Class internalFormulaResultType(int type) {
+        switch (type) {
+            case CELL_TYPE_STRING:
+                return String.class;
+            case CELL_TYPE_NUMERIC:
+                return Double.class;
+            case CELL_TYPE_BOOLEAN:
+                return Boolean.class;
+            default:
+                return Object.class;
+        }
+    }
+
 
     public Ptg[] getName(NamePtg t){
         EvaluationName evaluationName = evalBook.getName(t);
