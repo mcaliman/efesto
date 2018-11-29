@@ -43,8 +43,6 @@ public final class PrefixReferenceItem extends Reference {
 
     private final String reference;
 
-    private RANGE tRANGE;
-
     private int firstRow;
     private int firstColumn;
 
@@ -54,8 +52,7 @@ public final class PrefixReferenceItem extends Reference {
     public PrefixReferenceItem(Prefix prefix, String reference, RANGE tRANGE) {
         this.prefix = prefix;
         this.reference = reference;
-        this.tRANGE = tRANGE;
-        if (this.tRANGE != null) {
+        if (tRANGE != null) {
             setAsArea();
             add(tRANGE.values());
             setFirstRow(tRANGE.getFirst().getRow());

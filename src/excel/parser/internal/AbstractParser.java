@@ -23,7 +23,7 @@
 package excel.parser.internal;
 
 import excel.grammar.Start;
-import excel.grammar.formula.constant.ERROR;
+import excel.grammar.formula.constant.*;
 import excel.grammar.formula.reference.*;
 import org.apache.poi.POIXMLProperties;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -95,11 +95,9 @@ public abstract class AbstractParser {
      * (Work)Book
      */
     private final Workbook book;
-    /**
-     * (Work)Sheet
-     */
-    private Sheet sheet;
-
+    private final Helper helper;
+    public boolean verbose = false;
+    public boolean metadata = false;
     /**
      * Current Formula Column
      */
@@ -116,20 +114,16 @@ public abstract class AbstractParser {
      * Current Sheet Name
      */
     protected String sheetName;
-
-
-    public boolean verbose = false;
-    public boolean metadata = false;
     protected boolean errors = false;
-
-
+    /**
+     * (Work)Sheet
+     */
+    private Sheet sheet;
     /**
      * (Work)Book Protection Present flag
      */
     private boolean protectionPresent;
     private String fileName;
-
-    private final Helper helper;
 
     protected AbstractParser(File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
@@ -219,7 +213,7 @@ public abstract class AbstractParser {
         String formulaAddress = Start.cellAddress(rowFormula, colFormula);
         String formulaText = cell.getCellFormula();
         verbose(formulaAddress + " = " + formulaText);
-        Ptg[] formulaPtgs = helper.tokens(this.sheet,this.rowFormula,this.colFormula);
+        Ptg[] formulaPtgs = helper.tokens(this.sheet, this.rowFormula, this.colFormula);
         if (formulaPtgs == null) {
             System.err.println("ptgs empty or null for address " + formulaAddress);
             err("ptgs empty or null for address " + formulaAddress, rowFormula, colFormula);
@@ -255,20 +249,20 @@ public abstract class AbstractParser {
                 new WhatIf(p, areaErrPtg, (Ptg t) -> parseAreaErrPtg((AreaErrPtg) t)),
                 new WhatIf(p, areaPtg, (Ptg t) -> parseAreaPtg((AreaPtg) t)),
                 new WhatIf(p, attrPtg, (Ptg t) -> parseAttrPtg((AttrPtg) t)),
-                new WhatIf(p, boolPtg, t -> parseBOOL(((BoolPtg) t).getValue())),
+                new WhatIf(p, boolPtg, t -> parseBooleanLiteral(((BoolPtg) t).getValue())),
                 new WhatIf(p, concatPtg, t -> parseConcat()),
                 new WhatIf(p, deleted3DPxg, (Ptg t) -> parseDeleted3DPxg((Deleted3DPxg) t)),
                 new WhatIf(p, deletedArea3DPtg, (Ptg t) -> parseDeletedArea3DPtg((DeletedArea3DPtg) t)),
                 new WhatIf(p, deletedRef3DPtg, (Ptg t) -> parseDeletedRef3DPtg((DeletedRef3DPtg) t)),
                 new WhatIf(p, dividePtg, t -> parseDiv()),
                 new WhatIf(p, equalPtg, t -> parseEq()),
-                new WhatIf(p, errPtg, (Ptg t) -> parseErrPtg((ErrPtg) t)),
+                new WhatIf(p, errPtg, (Ptg t) -> parseErrorLiteral((ErrPtg) t)),
                 new WhatIf(p, funcPtg, (Ptg t) -> parseFuncPtg((FuncPtg) t)),
                 new WhatIf(p, funcVarPtg, (Ptg t) -> parseFuncVarPtg((FuncVarPtg) t)),
                 new WhatIf(p, greaterEqualPtg, t -> parseGteq()),
                 new WhatIf(p, greaterThanPtg, t -> parseGt()),
                 new WhatIf(p, intersectionPtg, t -> parseIntersection()),
-                new WhatIf(p, intPtg, t -> parseINT(((IntPtg) t).getValue())),
+                new WhatIf(p, intPtg, t -> parseIntLiteral(((IntPtg) t).getValue())),
                 new WhatIf(p, lessEqualPtg, t -> parseLeq()),
                 new WhatIf(p, lessThanPtg, t -> parseLt()),
                 new WhatIf(p, memErrPtg, (Ptg t) -> parseMemErrPtg((MemErrPtg) t)),
@@ -276,18 +270,18 @@ public abstract class AbstractParser {
                 new WhatIf(p, multiplyPtg, t -> parseMult()),
                 new WhatIf(p, namePtg, (Ptg t) -> parseNamePtg((NamePtg) t)),
                 new WhatIf(p, notEqualPtg, t -> parseNeq()),
-                new WhatIf(p, numberPtg, t -> parseFLOAT(((NumberPtg) t).getValue())),
+                new WhatIf(p, numberPtg, t -> parseFloatLiteral(((NumberPtg) t).getValue())),
                 new WhatIf(p, parenthesisPtg, t -> parseParenthesisFormula()),
                 new WhatIf(p, percentPtg, t -> percentFormula()),
                 new WhatIf(p, powerPtg, t -> parsePower()),
                 new WhatIf(p, ref3DPxg, (Ptg t) -> parseRef3DPxg((Ref3DPxg) t)),
-                new WhatIf(p, refErrorPtg, (Ptg t) -> parseRefErrorPtg((RefErrorPtg) t)),
+                new WhatIf(p, refErrorPtg, (Ptg t) -> parseReferenceErrorLiteral((RefErrorPtg) t)),
                 new WhatIf(p, refPtg, (Ptg t) -> parseRefPtg((RefPtg) t)),
-                new WhatIf(p, stringPtg, (Ptg t) -> parseTEXT(((StringPtg) t).getValue())),
+                new WhatIf(p, stringPtg, (Ptg t) -> parseStringLiteral(((StringPtg) t).getValue())),
                 new WhatIf(p, subtractPtg, t -> parseSub()),
                 new WhatIf(p, unaryMinusPtg, (Ptg t) -> parseMinus()),
                 new WhatIf(p, unaryPlusPtg, (Ptg t) -> parsePlus()),
-                new WhatIf(p, unionPtg, t -> parseUnion((UnionPtg) t)),
+                new WhatIf(p, unionPtg, t -> parseUnion()),
                 new WhatIf(p, unknownPtg, (Ptg t) -> parseUnknownPtg((UnknownPtg) t))
         )) {
             stream.filter((WhatIf t) -> t.predicate.test(t.ptg)).forEach(t -> t.consumer.accept(t.ptg));
@@ -299,14 +293,37 @@ public abstract class AbstractParser {
         }
     }
 
-    private void parseArrayPtg(@NotNull ArrayPtg t) {
-        parseConstantArray(t.getTokenArrayValues());
+
+    private void parseMemErrPtg(@NotNull MemErrPtg t) {
+        err("MemErrPtg: " + t.toString(), rowFormula, colFormula);
+    }
+    private void parseDeleted3DPxg(@NotNull Deleted3DPxg t) {
+        err("Deleted3DPxg: " + t.toString(), rowFormula, colFormula);
+    }
+    private void parseDeletedRef3DPtg(@NotNull DeletedRef3DPtg t) {
+        err("DeletedRef3DPtg: " + t.toString(), rowFormula, colFormula);
+    }
+    private void parseMissingArgPtg(int row, int column) {
+        parseMissingArguments(row, column);
+    }
+    private void parseDeletedArea3DPtg(@NotNull DeletedArea3DPtg t) {
+        err("DeletedArea3DPtg: " + t.toString(), rowFormula, colFormula);
+    }
+    private void parseAreaErrPtg(@NotNull AreaErrPtg t) {
+        err("AreaErrPtg: " + t.toString(), rowFormula, colFormula);
+    }
+    private void parseUnknownPtg(@NotNull UnknownPtg t) {
+        err("Error Unknown Ptg: " + t.toString(), rowFormula, colFormula);
     }
 
-    protected abstract void parseConstantArray(Object[][] array);
+    protected abstract void parseFormula(Start start);
+    protected abstract void parseMissingArguments(int row, int column);
+    protected abstract void doesFormulaReferToDeletedCell(int row, int column);
 
-    protected abstract void parseUDF(String arguments);
+    protected abstract void parseFormulaInit();
+    protected abstract Start parseFormulaPost();
 
+    //region Reference
 
     /**
      * Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
@@ -323,12 +340,10 @@ public abstract class AbstractParser {
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
 
         String area = helper.getArea(t);
-        RangeInternal range = new RangeInternal(book, sheetName, t);
-        parseArea3D(range.getRANGE(), tSHEET, area);
+        //RangeInternal range = new RangeInternal(book, sheetName, t);
+        parseArea3D(helper.getRANGE(sheetName, t), tSHEET, area);
     }
-
     protected abstract void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area);
-
     /**
      * Title: XSSF 3D Reference
      * <p>
@@ -341,70 +356,24 @@ public abstract class AbstractParser {
      */
     private void parseRef3DPxg(@NotNull Ref3DPxg t) {
         int extWorkbookNumber = t.getExternalWorkbookNumber();
-
         String sheetName = t.getSheetName();
         int sheetIndex = helper.getSheetIndex(sheetName);
-
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
         String cellref = helper.getCellRef(t);
         if (extWorkbookNumber > 0) parseReference(tFILE, cellref);
         else parseReference(tSHEET, cellref);
     }
-
     protected abstract void parseReference(FILE tFILE, String area);
-
-    private void parseAttrPtg(@NotNull AttrPtg t) {
-        if (t.isSum()) parseSum();
-    }
-    protected abstract void parseSum();
-
     private void parseAreaPtg(AreaPtg t) {
-        RangeInternal range = new RangeInternal(book, sheet, t);
-        parseRangeReference(range.getRANGE());
+        parseRangeReference(helper.getRANGE(sheet, t));
     }
 
-    private void parseErrPtg(ErrPtg t) {
-        String text = "FIXME!";
-
-        String ERROR_NULL_INTERSECTION = "#NULL!";
-        String ERROR_DIV_ZERO = "#DIV/0!";
-        String ERROR_VALUE_INVALID = "#VALUE!";
-        String ERROR_REF_INVALID = "#REF!";
-        String ERROR_NAME_INVALID = "#NAME?";
-        String ERROR_NUM_ERROR = "#NUM!";
-        String ERROR_N_A = "#N/A";
-
-        if (t == NULL_INTERSECTION) text= ERROR_NULL_INTERSECTION;
-        else if (t == DIV_ZERO) text=  ERROR_DIV_ZERO;
-        else if (t == VALUE_INVALID) text=  ERROR_VALUE_INVALID;
-        else if (t == REF_INVALID) text=  ERROR_REF_INVALID;
-        else if (t == NAME_INVALID) text=  ERROR_NAME_INVALID;
-        else if (t == NUM_ERROR) text=  ERROR_NUM_ERROR;
-        else if (t == N_A) text=  ERROR_N_A;
-
-        var term = new ERROR(text);
-        parseERROR(term);
-    }
-
-    protected abstract void parseERROR(ERROR t);
-
-    private void parseFuncPtg(@NotNull FuncPtg t) {
-        if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
-        else parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
-    }
-
-    private void parseFuncVarPtg(@NotNull FuncVarPtg t) {
-        if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
-        else parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
-    }
-
+    protected abstract void parseRangeReference(RANGE tRANGE);
     private void parseNamePtg(NamePtg t) {
         RangeInternal range = null;
-
         Ptg[] ptgs = helper.getName(t);
         String name = helper.getNameText(t);
-
         for (Ptg ptg : ptgs) {
             if (ptg != null) {
                 if (ptg instanceof Area3DPxg) {
@@ -413,11 +382,11 @@ public abstract class AbstractParser {
                 }
             }
         }
-
         RANGE tRANGE = range.getRANGE();
         parseNamedRange(tRANGE, name, range.getSheetName());
     }
-
+    protected abstract void parseNamedRange(RANGE tRANGE, String name, String sheetName);
+    protected abstract void parseReference(SHEET tSHEET, String area);
     private void parseRefPtg(@NotNull RefPtg t) {
         Row rowObject = sheet.getRow(t.getRow());
         Object value = null;
@@ -428,121 +397,130 @@ public abstract class AbstractParser {
             comment = Helper.getComment(c);
         }
         CELL_REFERENCE tCELL_REFERENCE = new CELL_REFERENCE(t.getRow(), t.getColumn(), comment);
-
         parseCELL_REFERENCE(tCELL_REFERENCE, rowObject != null, value);
     }
+    protected abstract void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value);
 
-    private void parseRefErrorPtg(RefErrorPtg t) {
-        ERROR_REF term = new ERROR_REF();
-        parseERROR_REF(term);
+
+
+    //endregion
+
+    //region Formula
+    private void parseArrayPtg(@NotNull ArrayPtg t) {
+        parseConstantArray(t.getTokenArrayValues());
     }
-
-    protected abstract void parseERROR_REF(ERROR_REF ref);
-
-    private void parseMemErrPtg(@NotNull MemErrPtg t) {
-        err("MemErrPtg: " + t.toString(), rowFormula, colFormula);
+    protected abstract void parseConstantArray(Object[][] array);
+    protected abstract void parseUDF(String arguments);
+    private void parseAttrPtg(@NotNull AttrPtg t) {
+        if (t.isSum()) parseSum();
     }
-
-    private void parseDeleted3DPxg(@NotNull Deleted3DPxg t) {
-        err("Deleted3DPxg: " + t.toString(), rowFormula, colFormula);
+    protected abstract void parseParenthesisFormula();
+    private void parseFuncVarPtg(@NotNull FuncVarPtg t) {
+        if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
+        else parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
     }
-
-    private void parseDeletedRef3DPtg(@NotNull DeletedRef3DPtg t) {
-        err("DeletedRef3DPtg: " + t.toString(), rowFormula, colFormula);
+    private void parseFuncPtg(@NotNull FuncPtg t) {
+        if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
+        else parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
     }
+    protected abstract void parseFunc(String name, int arity, boolean externalFunction);
+    protected abstract void parseFunc(String name, boolean externalFunction);
+    protected abstract void percentFormula();
+    protected abstract void parseSum();
+    //endregion
 
-    private void parseMissingArgPtg(int row, int column) {
-        parseMissingArguments(row, column);
-    }
-
-    private void parseDeletedArea3DPtg(@NotNull DeletedArea3DPtg t) {
-        err("DeletedArea3DPtg: " + t.toString(), rowFormula, colFormula);
-    }
-
-    private void parseAreaErrPtg(@NotNull AreaErrPtg t) {
-        err("AreaErrPtg: " + t.toString(), rowFormula, colFormula);
-    }
-
-    private void parseUnknownPtg(@NotNull UnknownPtg t) {
-        err("Error Unknown Ptg: " + t.toString(), rowFormula, colFormula);
-    }
-
-    protected abstract void parseFormula(Start start);
-
-    protected abstract void parseMissingArguments(int row, int column);
-
+    //region Binary
     protected abstract void parseAdd();
 
+    protected abstract void parseSub();
 
-
-
-
-    protected abstract void parseRangeReference(RANGE tRANGE);
-
-    protected abstract void parseBOOL(Boolean bool);
-
-    protected abstract void parseConcat();
+    protected abstract void parseMult();
 
     protected abstract void parseDiv();
 
+    protected abstract void parsePower();
+
     protected abstract void parseEq();
-
-
-
-    protected abstract void parseFunc(String name, int arity, boolean externalFunction);
-
-    protected abstract void parseFunc(String name, boolean externalFunction);
 
     protected abstract void parseGteq();
 
     protected abstract void parseGt();
 
-    protected abstract void parseIntersection();
-
-    protected abstract void parseINT(Integer value);
-
     protected abstract void parseLeq();
 
     protected abstract void parseLt();
 
-    protected abstract void parseMult();
-
-    protected abstract void parseNamedRange(RANGE tRANGE, String name, String sheetName);
-
     protected abstract void parseNeq();
 
-    protected abstract void parseFLOAT(Double value);
+    protected abstract void parseConcat();
+    //endregion
 
-    protected abstract void parseParenthesisFormula();
-
-    protected abstract void percentFormula();
-
-    protected abstract void parsePower();
-
-
-
-    protected abstract void parseReference(SHEET tSHEET, String area);
-
-    protected abstract void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value);
-
-    protected abstract void parseTEXT(String string);
-
-    protected abstract void parseSub();
-
+    //region Unary
     protected abstract void parseMinus();
 
     protected abstract void parsePlus();
+    //endregion
 
-    private void parseUnion(UnionPtg t) {
-        parseUnion();
-    }
-
+    //region Union & Intersection
     protected abstract void parseUnion();
 
-    protected abstract void doesFormulaReferToDeletedCell(int row, int column);
+    protected abstract void parseIntersection();
+    //endregion
 
-    protected abstract void parseFormulaInit();
+    //region Constants
+    //@todo impl. DATETIME
+    private void parseErrorLiteral(ErrPtg t) {
+        String text;
+        if (t == NULL_INTERSECTION) text = "#NULL!";
+        else if (t == DIV_ZERO) text = "#DIV/0!";
+        else if (t == VALUE_INVALID) text = "#VALUE!";
+        else if (t == REF_INVALID) text = "#REF!";
+        else if (t == NAME_INVALID) text = "#NAME?";
+        else if (t == NUM_ERROR) text = "#NUM!";
+        else if (t == N_A) text = "#N/A";
+        else text = "FIXME!";
 
-    protected abstract Start parseFormulaPost();
+        var term = new ERROR(text);
+        parseErrorLiteral(term);
+    }
 
+    protected abstract void parseErrorLiteral(ERROR t);
+
+    private void parseBooleanLiteral(Boolean bool) {
+        var term = new BOOL(bool);
+        parseBooleanLiteral(term);
+    }
+
+    protected abstract void parseBooleanLiteral(BOOL bool);
+
+    private void parseStringLiteral(String string) {
+        var term = new TEXT(string);
+        parseStringLiteral(term);
+    }
+
+    protected abstract void parseStringLiteral(TEXT term);
+
+    private void parseIntLiteral(Integer value) {
+        var term = new INT(value);
+        parseIntLiteral(term);
+    }
+
+    protected abstract void parseIntLiteral(INT value);
+
+    private void parseFloatLiteral(Double value) {
+        var term = new FLOAT(value);
+        parseFloatLiteral(term);
+    }
+
+    protected abstract void parseFloatLiteral(FLOAT term);
+    //endregion
+
+
+    //region Literals
+    private void parseReferenceErrorLiteral(RefErrorPtg t) {
+        ERROR_REF term = new ERROR_REF();
+        parseReferenceErrorLiteral(term);
+    }
+    protected abstract void parseReferenceErrorLiteral(ERROR_REF term);
+    //endregion
 }

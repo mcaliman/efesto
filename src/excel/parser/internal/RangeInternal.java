@@ -26,20 +26,15 @@ import excel.grammar.formula.reference.CELL_REFERENCE;
 import excel.grammar.formula.reference.RANGE;
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.formula.ptg.Area3DPxg;
-import org.apache.poi.ss.formula.ptg.AreaPtg;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.AreaReference;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 
-import java.util.ArrayList;
 import java.util.List;
 
 class RangeInternal {
 
-    private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
     private final Workbook workbook;
     private final Sheet sheet;
 
@@ -48,26 +43,14 @@ class RangeInternal {
 
     private final int lastRow;
     private final int lastColumn;
-    final RANGE tRANGE;
+    private final RANGE tRANGE;
     private String sheetName;
 
-    RangeInternal(Workbook workbook, Sheet sheet, AreaPtg t) {
-        firstRow = t.getFirstRow();
-        firstColumn = t.getFirstColumn();
+    private Helper helper;
 
-        lastRow = t.getLastRow();
-        lastColumn = t.getLastColumn();
-
-        CELL_REFERENCE first = new CELL_REFERENCE(firstRow, firstColumn);
-        CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
-        tRANGE = new RANGE(first, last);
-
-        this.workbook = workbook;
-        this.sheet = sheet;
-        init();
-    }
 
     RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
+        helper = new Helper(workbook);
         firstRow = t.getFirstRow();
         firstColumn = t.getFirstColumn();
         sheetName = sheetnamne;
@@ -84,8 +67,10 @@ class RangeInternal {
         this.sheet = null;
         String refs = tRANGE.toString();
 
+
+        SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
         AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
-        List<Cell> cells = fromRange(area);
+        List<Cell> cells = helper.fromRange(area);
 
         for (Cell cell : cells)
             if (cell != null) {
@@ -93,49 +78,6 @@ class RangeInternal {
             }
     }
 
-    private void init() {
-        String refs = tRANGE.toString();
-        List<Cell> cells = range(refs);
-        for (Cell cell : cells)
-            if (cell != null) {
-
-                tRANGE.add(Helper.valueOf(cell));
-            }
-    }
-
-    private List<Cell> range(String refs) {
-        AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
-        return fromRange(area);
-    }
-
-    private List<Cell> fromRange(AreaReference area) {
-        List<Cell> cells = new ArrayList<>();
-        org.apache.poi.ss.util.CellReference[] cels = area.getAllReferencedCells();
-        for (org.apache.poi.ss.util.CellReference cel : cels) {
-            XSSFSheet ss = (XSSFSheet) workbook.getSheet(cel.getSheetName());
-            Row r = ss.getRow(cel.getRow());
-            if (r == null) continue;
-            Cell c = r.getCell(cel.getCol());
-            cells.add(c);
-        }
-        return cells;
-    }
-
-    private int getFirstRow() {
-        return firstRow;
-    }
-
-    private int getFirstColumn() {
-        return firstColumn;
-    }
-
-    private int getLastRow() {
-        return lastRow;
-    }
-
-    private int getLastColumn() {
-        return lastColumn;
-    }
 
     String getSheetName() {
         return sheetName;

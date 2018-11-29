@@ -78,7 +78,7 @@ final class BuiltinFactory {
         clazzMap.put("BINOMDIST", BINOMDIST.class);
         clazzMap.put("CALL", CALL.class);
         clazzMap.put("CEILING", CEILING.class);
-        clazzMap.put("parseCELL_REFERENCE", CELL.class);
+        clazzMap.put("CELL_REFERENCE", CELL.class);
         clazzMap.put("CHAR", CHAR.class);
         clazzMap.put("CHIDIST", CHIDIST.class);
         clazzMap.put("CHIINV", CHIINV.class);

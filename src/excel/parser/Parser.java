@@ -76,7 +76,7 @@ public final class Parser extends AbstractParser {
     @Override
     protected void err(String string, int row, int column) {
         super.err(string, row, column);
-        if (errors) System.err.println(Start.cellAddress(row, column, sheetName) + " parseERROR: " + string);
+        if (errors) System.err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
     }
 
     @Override
@@ -176,86 +176,6 @@ public final class Parser extends AbstractParser {
         stack.push(parFormula);
     }
 
-    /**
-     * Used
-     *
-     * @param value
-     */
-    @Override
-    protected void parseFLOAT(Double value) {
-        var term = new FLOAT(value);
-        graph.addNode(term);
-        stack.push(term);
-    }
-
-    /**
-     * Used
-     *
-     * @param value
-     */
-    @Override
-    protected void parseINT(Integer value) {
-        var term = new INT(value);
-        graph.addNode(term);
-        stack.push(term);
-    }
-
-    /**
-     * Used
-     *
-     * @param value
-     */
-    @Override
-    protected void parseBOOL(Boolean value) {
-        var term = new BOOL(value);
-        graph.addNode(term);
-        stack.push(term);
-    }
-
-    /**
-     * Used
-     *
-     * @param text
-     */
-    @Override
-    protected void parseTEXT(String text) {
-        var term = new TEXT(text);
-        graph.addNode(term);
-        stack.push(term);
-    }
-
-    @Override
-    protected void parseERROR(ERROR term) {
-        setOwnProperty(term);
-        err(term.toString(), rowFormula, colFormula);
-        graph.addNode(term);
-        stack.push(term);
-    }
-
-    /**
-     * +
-     */
-    @Override
-    protected void parsePlus() {
-        var formula = (Formula) stack.pop();
-        var plus = new Plus(formula);
-        plus.setSheetName(sheetName);
-        plus.setSheetIndex(sheetIndex);
-        graph.addNode(plus);
-        stack.push(plus);
-    }
-
-    /**
-     * -
-     */
-    @Override
-    protected void parseMinus() {
-        var formula = (Formula) stack.pop();
-        var minus = new Minus(formula);
-        setOwnProperty(minus);
-        graph.addNode(minus);
-        stack.push(minus);
-    }
 
     /**
      * F=F
@@ -416,32 +336,6 @@ public final class Parser extends AbstractParser {
 
 
     /**
-     * F F
-     */
-    @Override
-    protected void parseIntersection() {
-        var rFormula = (Formula) stack.pop();
-        var lFormula = (Formula) stack.pop();
-        var intersection = new Intersection(lFormula, rFormula);
-        setOwnProperty(intersection);
-        graph.add(intersection);
-        stack.push(intersection);
-    }
-
-    /**
-     * F,F
-     */
-    @Override
-    protected void parseUnion() {
-        var rFormula = (Formula) stack.pop();
-        var lFormula = (Formula) stack.pop();
-        var union = new Union(lFormula, rFormula);
-        setOwnProperty(union);
-        graph.add(union);
-        stack.push(union);
-    }
-
-    /**
      * F%
      */
     @Override
@@ -457,7 +351,7 @@ public final class Parser extends AbstractParser {
      * #REF
      */
     @Override
-    protected void parseERROR_REF(ERROR_REF error) {
+    protected void parseReferenceErrorLiteral(ERROR_REF error) {
         setOwnProperty(error);
         stack.push(error);
         err("", rowFormula, colFormula);
@@ -597,4 +491,99 @@ public final class Parser extends AbstractParser {
     public StartList getList() {
         return ordered;
     }
+
+
+//Unary BEGIN
+
+    /**
+     * +
+     */
+    @Override
+    protected void parsePlus() {
+        var formula = (Formula) stack.pop();
+        var plus = new Plus(formula);
+        plus.setSheetName(sheetName);
+        plus.setSheetIndex(sheetIndex);
+        graph.addNode(plus);
+        stack.push(plus);
+    }
+
+    /**
+     * -
+     */
+    @Override
+    protected void parseMinus() {
+        var formula = (Formula) stack.pop();
+        var minus = new Minus(formula);
+        setOwnProperty(minus);
+        graph.addNode(minus);
+        stack.push(minus);
+    }
+//Unary END
+
+
+//Union & Intersection BEGIN
+
+    /**
+     * F F
+     */
+    @Override
+    protected void parseIntersection() {
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var intersection = new Intersection(lFormula, rFormula);
+        setOwnProperty(intersection);
+        graph.add(intersection);
+        stack.push(intersection);
+    }
+
+    /**
+     * F,F
+     */
+    @Override
+    protected void parseUnion() {
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var union = new Union(lFormula, rFormula);
+        setOwnProperty(union);
+        graph.add(union);
+        stack.push(union);
+    }
+//Union & Intersection END
+
+//Constants BEGIN
+
+    @Override
+    protected void parseErrorLiteral(ERROR term) {
+        setOwnProperty(term);
+        err(term.toString(), rowFormula, colFormula);
+        graph.addNode(term);
+        stack.push(term);
+    }
+
+    @Override
+    protected void parseBooleanLiteral(BOOL term) {
+        graph.addNode(term);
+        stack.push(term);
+    }
+
+    @Override
+    protected void parseStringLiteral(TEXT term) {
+        graph.addNode(term);
+        stack.push(term);
+    }
+
+    @Override
+    protected void parseIntLiteral(INT term) {
+        graph.addNode(term);
+        stack.push(term);
+    }
+
+    @Override
+    protected void parseFloatLiteral(FLOAT term) {
+        graph.addNode(term);
+        stack.push(term);
+    }
+
+//Constants END
 }

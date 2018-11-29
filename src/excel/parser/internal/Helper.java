@@ -23,37 +23,40 @@
 package excel.parser.internal;
 
 import excel.grammar.Start;
+import excel.grammar.formula.reference.CELL_REFERENCE;
+import excel.grammar.formula.reference.RANGE;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.FormulaParseException;
-import org.apache.poi.ss.formula.ptg.Area3DPxg;
-import org.apache.poi.ss.formula.ptg.NamePtg;
-import org.apache.poi.ss.formula.ptg.Ptg;
-import org.apache.poi.ss.formula.ptg.Ref3DPxg;
+import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.apache.poi.ss.usermodel.Cell.*;
-import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 
 class Helper {
 
+    private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+
     private final Workbook workbook;
-    final XSSFEvaluationWorkbook evalBook;
+    private final XSSFEvaluationWorkbook evalBook;
 
     public Helper(Workbook workbook) {
         this.workbook = workbook;
         this.evalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
     }
 
-    public static String getComment(Cell cell){
+    public static String getComment(Cell cell) {
         Comment cellComment = cell.getCellComment();
         String comment = comment(cellComment);
-        CellStyle style = cell.getCellStyle();
-        String format = style.getDataFormatString();
         return comment;
     }
 
@@ -91,7 +94,7 @@ class Helper {
         }
     }
 
-    public static boolean isDataType(Cell cell) {
+    private static boolean isDataType(Cell cell) {
         return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
     }
 
@@ -103,7 +106,7 @@ class Helper {
     }
 
 
-    public static Class internalFormulaResultType(int type) {
+    private static Class internalFormulaResultType(int type) {
         switch (type) {
             case CELL_TYPE_STRING:
                 return String.class;
@@ -117,30 +120,47 @@ class Helper {
     }
 
 
-    public Ptg[] getName(NamePtg t){
+    public Ptg[] getName(NamePtg t) {
         EvaluationName evaluationName = evalBook.getName(t);
         return evaluationName.getNameDefinition();
     }
 
-    public String getNameText(NamePtg t){
+    public String getNameText(NamePtg t) {
         return evalBook.getNameText(t);
     }
 
-    public String getArea(Area3DPxg t){
+    public String getArea(Area3DPxg t) {
         return t.format2DRefAsString();
     }
 
-    public String getCellRef(Ref3DPxg t){
+    public String getCellRef(Ref3DPxg t) {
         return t.format2DRefAsString();
     }
 
-    public int getSheetIndex(String sheetName){
+    public int getSheetIndex(String sheetName) {
         return evalBook.getSheetIndex(sheetName);
     }
 
 
+    private List<Cell> range(Sheet sheet, String refs) {
+        AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
+        return fromRange(area);
+    }
 
-    public  Ptg[] tokens(Sheet sheet, int rowFormula, int colFormula) {
+    public List<Cell> fromRange(AreaReference area) {
+        List<Cell> cells = new ArrayList<>();
+        org.apache.poi.ss.util.CellReference[] cels = area.getAllReferencedCells();
+        for (org.apache.poi.ss.util.CellReference cel : cels) {
+            XSSFSheet ss = (XSSFSheet) workbook.getSheet(cel.getSheetName());
+            Row r = ss.getRow(cel.getRow());
+            if (r == null) continue;
+            Cell c = r.getCell(cel.getCol());
+            cells.add(c);
+        }
+        return cells;
+    }
+
+    public Ptg[] tokens(Sheet sheet, int rowFormula, int colFormula) {
         int sheetIndex = workbook.getSheetIndex(sheet);
         var sheetName = sheet.getSheetName();
         var evalSheet = evalBook.getSheet(sheetIndex);
@@ -148,12 +168,60 @@ class Helper {
         try {
             ptgs = evalBook.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
         } catch (FormulaParseException e) {
-            err("" + e.getMessage(),sheetName, rowFormula, colFormula);
+            err("" + e.getMessage(), sheetName, rowFormula, colFormula);
         }
         return ptgs;
     }
 
-    private void err(String string, String sheetName,int row, int column) {
+
+    public RANGE getRANGE(Sheet sheet, AreaPtg t) {
+        var firstRow = t.getFirstRow();
+        var firstColumn = t.getFirstColumn();
+
+        var lastRow = t.getLastRow();
+        var lastColumn = t.getLastColumn();
+
+        CELL_REFERENCE first = new CELL_REFERENCE(firstRow, firstColumn);
+        CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
+        RANGE tRANGE = new RANGE(first, last);
+
+        String refs = tRANGE.toString();
+        List<Cell> cells = range(sheet, refs);
+        for (Cell cell : cells)
+            if (cell != null) {
+                tRANGE.add(Helper.valueOf(cell));
+            }
+        return tRANGE;
+
+    }
+
+    public RANGE getRANGE(String sheetnamne, Area3DPxg t) {
+        var firstRow = t.getFirstRow();
+        var firstColumn = t.getFirstColumn();
+
+        var lastRow = t.getLastRow();
+        var lastColumn = t.getLastColumn();
+
+        CELL_REFERENCE first = new CELL_REFERENCE(firstRow, firstColumn);
+        CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
+        var tRANGE = new RANGE(first, last);
+
+        String refs = tRANGE.toString();
+
+
+        SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+        AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
+        List<Cell> cells = fromRange(area);
+
+        for (Cell cell : cells)
+            if (cell != null) {
+                tRANGE.add(Helper.valueOf(cell));
+            }
+        return tRANGE;
+    }
+
+
+    private void err(String string, String sheetName, int row, int column) {
         System.err.println(Start.cellAddress(row, column, sheetName) + " parse error: " + string);
     }
 }
