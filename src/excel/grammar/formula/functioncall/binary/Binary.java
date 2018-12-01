@@ -28,6 +28,9 @@ import excel.grammar.formula.ParenthesisFormula;
 import excel.grammar.formula.functioncall.unary.Unary;
 import excel.grammar.formula.reference.CELL_REFERENCE;
 
+import static excel.grammar.Grammar.closeparen;
+import static excel.grammar.Grammar.openparen;
+
 /**
  * @author Massimo Caliman
  */
@@ -76,8 +79,8 @@ public abstract class Binary extends FunctionCall {
 
     private String operandTo(ParenthesisFormula operand) {
         return operand.getFormula() instanceof Binary ?
-                "(" + operand.getFormula().toString(false) + ")" :
-                "(" + operand.getFormula().getAddress(true) + ")";
+                openparen + operand.getFormula().toString(false) + closeparen :
+                openparen + operand.getFormula().getAddress(true) + closeparen;
     }
 
 }

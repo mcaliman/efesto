@@ -30,6 +30,9 @@ public class Grammar {
 
     public final static char doublequote = '"';
 
+    public final static char openparen = '(';
+    public final static char closeparen = ')';
+
     public final static String TRUE = "TRUE";
     public final static String FALSE = "FALSE";
 

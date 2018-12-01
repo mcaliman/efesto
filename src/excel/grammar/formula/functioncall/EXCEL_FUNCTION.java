@@ -26,6 +26,9 @@ import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.reference.CELL_REFERENCE;
 
+import static excel.grammar.Grammar.closeparen;
+import static excel.grammar.Grammar.openparen;
+
 /**
  * @author Massimo Caliman
  */
@@ -43,13 +46,13 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
 
     @Override
     public String toString() {
-        return getAddress() + " = " + getName() + "(" + argumentsToString() + ")";
+        return getAddress() + " = " + getName() + openparen + argumentsToString() + closeparen;
     }
 
     public String toString(boolean address) {
         return address ?
-                getAddress() + " = " + getName() + "(" + argumentsToString() + ")" :
-                getName() + "(" + argumentsToString() + ")";
+                getAddress() + " = " + getName() +openparen + argumentsToString() + closeparen :
+                getName() + openparen + argumentsToString() + closeparen;
     }
 
     private String getName() {

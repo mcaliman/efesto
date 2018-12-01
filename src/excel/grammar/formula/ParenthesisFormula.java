@@ -25,6 +25,9 @@ package excel.grammar.formula;
 import excel.grammar.Formula;
 import excel.grammar.formula.functioncall.binary.Binary;
 
+import static excel.grammar.Grammar.closeparen;
+import static excel.grammar.Grammar.openparen;
+
 /**
  * @author Massimo Caliman
  */
@@ -38,8 +41,9 @@ public final class ParenthesisFormula extends Formula {
 
     @Override
     public String toString() {
-        return '(' + formula.toString() + ')';
+        return openparen + formula.toString() + closeparen;
     }
+
 
     public String toString(boolean address) {
         return isBinary() ?
