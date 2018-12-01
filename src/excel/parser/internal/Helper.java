@@ -40,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static excel.grammar.Grammar.FALSE;
+import static excel.grammar.Grammar.TRUE;
 import static excel.grammar.Grammar.exclamationmark;
 import static org.apache.poi.ss.usermodel.Cell.*;
 
@@ -83,10 +85,10 @@ class Helper {
             case CELL_TYPE_BLANK:
                 return cell.getStringCellValue();
             case CELL_TYPE_FORMULA:
-                if (cell.toString() != null && cell.toString().equalsIgnoreCase("true")) {
+                if (cell.toString() != null && cell.toString().equalsIgnoreCase(TRUE)) {
                     return true;
                 }
-                if (cell.toString() != null && cell.toString().equalsIgnoreCase("false")) {
+                if (cell.toString() != null && cell.toString().equalsIgnoreCase(FALSE)) {
                     return false;
                 }
                 return cell.toString();
