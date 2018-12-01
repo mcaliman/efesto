@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static excel.grammar.Grammar.exclamationmark;
 import static org.apache.poi.ss.usermodel.Cell.*;
 
 class Helper {
@@ -143,7 +144,7 @@ class Helper {
 
 
     private List<Cell> range(Sheet sheet, String refs) {
-        AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
+        AreaReference area = new AreaReference(sheet.getSheetName() + exclamationmark + refs, SPREADSHEET_VERSION);
         return fromRange(area);
     }
 
@@ -210,7 +211,7 @@ class Helper {
 
 
         SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
-        AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
+        AreaReference area = new AreaReference(sheetnamne + exclamationmark + refs, SPREADSHEET_VERSION);
         List<Cell> cells = fromRange(area);
 
         for (Cell cell : cells)

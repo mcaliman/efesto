@@ -40,7 +40,7 @@ public abstract class Start {
     private int sheetIndex;
 
     protected static String format(String str) {
-        return str == null ? epsilon : "\"" + str + "\"";
+        return str == null ? epsilon : doublequote + str + doublequote;
     }
 
     protected static String format(Boolean bool) {

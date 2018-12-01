@@ -30,6 +30,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.AreaReference;
+import static excel.grammar.Grammar.exclamationmark;
 
 import java.util.List;
 
@@ -69,7 +70,7 @@ class RangeInternal {
 
 
         SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
-        AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
+        AreaReference area = new AreaReference(sheetnamne + exclamationmark + refs, SPREADSHEET_VERSION);
         List<Cell> cells = helper.fromRange(area);
 
         for (Cell cell : cells)

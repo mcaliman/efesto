@@ -23,6 +23,8 @@
 package excel.grammar.formula.reference;
 
 import excel.grammar.formula.Reference;
+
+import static excel.grammar.Grammar.doublequote;
 import static excel.grammar.Grammar.exclamationmark;
 /**
  * @author Massimo Caliman
@@ -69,7 +71,7 @@ public class ReferenceItem extends Reference {
             buff.append("[ ");
             for (Object val : vals)
                 if (val instanceof String)
-                    buff.append("\"").append(val).append("\" ");
+                    buff.append(doublequote).append(val).append("\" ");
                 else
                     buff.append(val).append(" ");
             if (buff.length() > 1)
@@ -85,7 +87,7 @@ public class ReferenceItem extends Reference {
                 buff.append("[");
                 for (int col = firstColumn; col <= lastColumn; col++) {
                     if (vals.get(index) instanceof String)
-                        buff.append("\"").append(vals.get(index)).append("\" ");
+                        buff.append(doublequote).append(vals.get(index)).append("\" ");
                     else
                         buff.append(vals.get(index)).append(" ");
                     index++;
