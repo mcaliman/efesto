@@ -20,39 +20,11 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package excel.grammar.formula.reference;
-import static excel.grammar.Grammar.exclamationmark;
-/**
- * SHEET The name of a worksheet
- * Priority: 5
- * Sheet characters
- * Any character except ' * [ ] \ : / ? ( ) ; { } # " = < > & + - * / ^ % , ␣
- *
- * @author Massimo Caliman
- */
-public final class SHEET extends Prefix {
+package excel.grammar;
 
-    private final String name;
-    private int index;
+public class Grammar {
 
-    public SHEET(String name) {
-        this.name = name;
-    }
+    public final static String epsilon = "";
 
-    public SHEET(String name, int index) {
-        this.name = name;
-        this.index = index;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public String toString() {
-        return name + exclamationmark;
-    }
+    public final static char exclamationmark = '!';
 }

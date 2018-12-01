@@ -515,7 +515,6 @@ public abstract class AbstractParser {
     protected abstract void parseFloatLiteral(FLOAT term);
     //endregion
 
-
     //region Literals
     private void parseReferenceErrorLiteral(RefErrorPtg t) {
         ERROR_REF term = new ERROR_REF();

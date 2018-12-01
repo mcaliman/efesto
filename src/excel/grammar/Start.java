@@ -24,6 +24,7 @@ package excel.grammar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import static excel.grammar.Grammar.*;
 
 /**
  * @author Massimo Caliman
@@ -39,24 +40,24 @@ public abstract class Start {
     private int sheetIndex;
 
     protected static String format(String str) {
-        return str == null ? "" : "\"" + str + "\"";
+        return str == null ? epsilon : "\"" + str + "\"";
     }
 
     protected static String format(Boolean bool) {
-        if (bool == null) return "";
+        if (bool == null) return epsilon;
         return bool ? "TRUE" : "FALSE";
     }
 
     protected static String format(final Integer integer) {
-        return integer == null ? "" : integer.toString();
+        return integer == null ? epsilon : integer.toString();
     }
 
     protected static String format(final Double doub) {
-        return doub == null ? "" : doub.toString();
+        return doub == null ? epsilon : doub.toString();
     }
 
     protected static String format(final Date date) {
-        return date == null ? "" : DATE_FORMAT.format(date);
+        return date == null ? epsilon : DATE_FORMAT.format(date);
     }
 
     public static String cellAddress(final int row, final int column, final String sheetName) {

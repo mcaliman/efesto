@@ -23,7 +23,7 @@
 package excel.grammar.formula.reference;
 
 import excel.grammar.formula.Reference;
-
+import static excel.grammar.Grammar.epsilon;
 /**
  * PrefixReferenceItem ::= ⟨Prefix⟩ ⟨ReferenceItem⟩
  * <p>
@@ -78,14 +78,8 @@ public final class PrefixReferenceItem extends Reference {
     }
 
     private String ifIsNotArea() {
-        return !isArea() ? getAddress() + " = " : "";
+        return !isArea() ? getAddress() + " = " : epsilon;
     }
-
-// --Commented out by Inspection START (23/11/2018 08:30):
-//    public String getSheetName() {
-//        return sheetName;
-//    }
-// --Commented out by Inspection STOP (23/11/2018 08:30)
 
     private boolean is_HORIZONTAL_RANGE() {
         return firstRow == lastRow && firstColumn != lastColumn;
