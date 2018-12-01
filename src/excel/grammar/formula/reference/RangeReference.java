@@ -23,6 +23,7 @@
 package excel.grammar.formula.reference;
 
 import excel.grammar.formula.Reference;
+import static excel.grammar.Grammar.exclamationmark;
 
 /**
  * @author Massimo Caliman
@@ -53,8 +54,8 @@ public final class RangeReference extends Reference {
     @Override
     public String toString(boolean address) {
         return address ?
-                sheetName + "!" + reference1.getAddress() + ":" + reference2.getAddress() + " = " + values() :
-                sheetName + "!" + reference1.getAddress() + ":" + reference2.getAddress();
+                sheetName + exclamationmark + reference1.getAddress() + ":" + reference2.getAddress() + " = " + values() :
+                sheetName + exclamationmark + reference1.getAddress() + ":" + reference2.getAddress();
     }
 
     private String values() {

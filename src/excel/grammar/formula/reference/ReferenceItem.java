@@ -23,7 +23,7 @@
 package excel.grammar.formula.reference;
 
 import excel.grammar.formula.Reference;
-
+import static excel.grammar.Grammar.exclamationmark;
 /**
  * @author Massimo Caliman
  */
@@ -51,8 +51,8 @@ public class ReferenceItem extends Reference {
 
     public String toString(boolean address) {
         return address ?
-                sheetName + "!" + value + " = " + values() :
-                sheetName + "!" + value;
+                sheetName + exclamationmark + value + " = " + values() :
+                sheetName + exclamationmark + value;
     }
 
     private boolean horizzontal_range() {

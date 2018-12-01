@@ -63,7 +63,7 @@ public abstract class Start {
     public static String cellAddress(final int row, final int column, final String sheetName) {
         StringBuilder buffer = new StringBuilder();
         if (sheetName != null)
-            buffer.append(sheetName).append("!");
+            buffer.append(sheetName).append(exclamationmark);
         buffer.append(cellAddress(row, column));
         return buffer.toString();
     }
