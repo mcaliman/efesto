@@ -26,6 +26,8 @@ import excel.grammar.formula.Reference;
 
 import java.util.List;
 
+import static excel.grammar.Grammar.colon;
+
 public class RANGE extends Reference {
 
     private final CELL_REFERENCE first;
@@ -54,6 +56,6 @@ public class RANGE extends Reference {
 
     @Override
     public String toString(boolean address) {
-        return first.getAddress() + ":" + last.getAddress();
+        return first.getAddress() + colon + last.getAddress();
     }
 }

@@ -24,6 +24,7 @@ package excel.grammar.formula.reference;
 
 import excel.grammar.formula.Reference;
 
+import static excel.grammar.Grammar.colon;
 import static excel.grammar.Grammar.doublequote;
 import static excel.grammar.Grammar.exclamationmark;
 
@@ -50,14 +51,14 @@ public final class RangeReference extends Reference {
 
     @Override
     public String toString() {
-        return reference1.getAddress() + ':' + reference2.getAddress();
+        return reference1.getAddress() + colon + reference2.getAddress();
     }
 
     @Override
     public String toString(boolean address) {
         return address ?
-                sheetName + exclamationmark + reference1.getAddress() + ":" + reference2.getAddress() + " = " + values() :
-                sheetName + exclamationmark + reference1.getAddress() + ":" + reference2.getAddress();
+                sheetName + exclamationmark + reference1.getAddress() + colon + reference2.getAddress() + " = " + values() :
+                sheetName + exclamationmark + reference1.getAddress() + colon + reference2.getAddress();
     }
 
     private String values() {

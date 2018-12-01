@@ -28,6 +28,8 @@ public class Grammar {
 
     public final static char exclamationmark = '!';
 
+    public final static char colon = ':';
+
     public final static char doublequote = '"';
 
     public final static char openparen = '(';
