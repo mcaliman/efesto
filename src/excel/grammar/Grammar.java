@@ -38,6 +38,10 @@ public class Grammar {
     public final static char closesquareparen = ']';
     public final static char opensquareparen = '[';
 
+    public final static String space = " " ;
+
+    public final static String emptylist = "[]";
+
     public final static String TRUE = "TRUE";
     public final static String FALSE = "FALSE";
 

@@ -58,4 +58,5 @@ public class RANGE extends Reference {
     public String toString(boolean address) {
         return first.getAddress() + colon + last.getAddress();
     }
+
 }
