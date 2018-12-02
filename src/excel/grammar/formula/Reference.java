@@ -45,13 +45,8 @@ public abstract class Reference extends Formula {
         if (isHorizzontalOrVerticalRange) {
             StringBuilder buff = new StringBuilder();
             buff.append(opensquareparen).append(space);
-            for (Object val : list)
-                if (val instanceof String)
-                    buff.append(doublequote).append(val).append("\" ");
-                else
-                    buff.append(val).append(space);
-            if (buff.length() > 1)
-                buff.deleteCharAt(buff.length() - 1);
+            for (Object val : list) buff.append(toString(val)).append(space);
+            if (buff.length() > 1) buff.deleteCharAt(buff.length() - 1);
             buff.append(space).append(closesquareparen);
             return buff.toString();
         } else {
@@ -59,12 +54,9 @@ public abstract class Reference extends Formula {
             buff.append(opensquareparen);
             int index = 0;
             for (int row = fRow; row <= lRow; row++) {
-                buff.append("[");
+                buff.append(opensquareparen);
                 for (int col = fCol; col <= lCol; col++) {
-                    if (list.get(index) instanceof String)
-                        buff.append(doublequote).append(list.get(index)).append("\" ");
-                    else
-                        buff.append(list.get(index)).append(space);
+                    buff.append(toString(list.get(index))).append(space);
                     index++;
                 }
                 buff.deleteCharAt(buff.length() - 1);
@@ -75,5 +67,11 @@ public abstract class Reference extends Formula {
         }
     }
 
+    protected String toString(Object value) {
+        if (value instanceof String)
+            return quote(value.toString());
+        else
+            return value.toString();
+    }
 
 }

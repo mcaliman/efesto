@@ -45,4 +45,8 @@ public class Grammar {
     public final static String TRUE = "TRUE";
     public final static String FALSE = "FALSE";
 
+    public final static String quote(String text){
+        return "" + doublequote + text + doublequote;
+    }
+
 }
