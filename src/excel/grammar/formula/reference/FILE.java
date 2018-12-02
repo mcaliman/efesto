@@ -22,6 +22,9 @@
 
 package excel.grammar.formula.reference;
 
+import static excel.grammar.Grammar.closesquareparen;
+import static excel.grammar.Grammar.opensquareparen;
+
 /**
  * @author Massimo Caliman
  */
@@ -42,7 +45,7 @@ public final class FILE extends Prefix {
 
     @Override
     public String toString() {
-        return "[" + ext + "]" + sheet.toString();
+        return "" + opensquareparen + ext + closesquareparen + sheet.toString();
     }
 
 }

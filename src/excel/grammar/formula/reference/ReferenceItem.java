@@ -65,7 +65,7 @@ public class ReferenceItem extends Reference {
         return firstColumn == lastColumn && firstRow != lastRow;
     }
 
-    private String values() {
+    protected String values() {
         if (horizzontal_range() || vertical_range()) {
             StringBuilder buff = new StringBuilder();
             buff.append("[ ");
