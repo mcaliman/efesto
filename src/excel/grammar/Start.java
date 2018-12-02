@@ -24,6 +24,7 @@ package excel.grammar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import static excel.grammar.Grammar.*;
 
 /**
@@ -45,7 +46,7 @@ public abstract class Start {
 
     protected static String format(Boolean bool) {
         if (bool == null) return epsilon;
-        return bool ? TRUE : FALSE ;
+        return bool ? TRUE : FALSE;
     }
 
     protected static String format(final Integer integer) {

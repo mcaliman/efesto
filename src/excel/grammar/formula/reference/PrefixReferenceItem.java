@@ -24,8 +24,8 @@ package excel.grammar.formula.reference;
 
 import excel.grammar.formula.Reference;
 
-import static excel.grammar.Grammar.doublequote;
 import static excel.grammar.Grammar.epsilon;
+
 /**
  * PrefixReferenceItem ::= ⟨Prefix⟩ ⟨ReferenceItem⟩
  * <p>
@@ -91,40 +91,8 @@ public final class PrefixReferenceItem extends Reference {
         return firstColumn == lastColumn && firstRow != lastRow;
     }
 
-    //@TODO simplify
     private String values() {
-        if (vals.isEmpty()) return "[]";
-        if (is_HORIZONTAL_RANGE() || is_VERTICAL_RANGE()) {
-            StringBuilder buff = new StringBuilder();
-            buff.append("[ ");
-            for (Object val : vals)
-                if (val instanceof String)
-                    buff.append(doublequote).append(val).append("\" ");
-                else
-                    buff.append(val).append(" ");
-            if (buff.length() > 1)
-                buff.deleteCharAt(buff.length() - 1);
-            buff.append(" ]");
-            return buff.toString();
-        } else {
-            StringBuilder buff = new StringBuilder();
-            buff.append("[");
-            int index = 0;
-            for (int row = firstRow; row <= lastRow; row++) {
-                buff.append("[");
-                for (int col = firstColumn; col <= lastColumn; col++) {
-                    if (vals.get(index) instanceof String)
-                        buff.append(doublequote).append(vals.get(index)).append("\" ");
-                    else
-                        buff.append(vals.get(index)).append(" ");
-                    index++;
-                }
-                buff.deleteCharAt(buff.length() - 1);
-                buff.append("]");
-            }
-            buff.append("]");
-            return buff.toString();
-        }
+        return values(firstRow, firstColumn, lastRow, lastColumn, vals, (is_HORIZONTAL_RANGE() || is_VERTICAL_RANGE()));
     }
 
     private void setFirstRow(int firstRow) {

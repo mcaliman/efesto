@@ -40,9 +40,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static excel.grammar.Grammar.FALSE;
-import static excel.grammar.Grammar.TRUE;
-import static excel.grammar.Grammar.exclamationmark;
+import static excel.grammar.Grammar.*;
 import static org.apache.poi.ss.usermodel.Cell.*;
 
 class Helper {

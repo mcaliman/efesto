@@ -297,30 +297,39 @@ public abstract class AbstractParser {
     private void parseMemErrPtg(@NotNull MemErrPtg t) {
         err("MemErrPtg: " + t.toString(), rowFormula, colFormula);
     }
+
     private void parseDeleted3DPxg(@NotNull Deleted3DPxg t) {
         err("Deleted3DPxg: " + t.toString(), rowFormula, colFormula);
     }
+
     private void parseDeletedRef3DPtg(@NotNull DeletedRef3DPtg t) {
         err("DeletedRef3DPtg: " + t.toString(), rowFormula, colFormula);
     }
+
     private void parseMissingArgPtg(int row, int column) {
         parseMissingArguments(row, column);
     }
+
     private void parseDeletedArea3DPtg(@NotNull DeletedArea3DPtg t) {
         err("DeletedArea3DPtg: " + t.toString(), rowFormula, colFormula);
     }
+
     private void parseAreaErrPtg(@NotNull AreaErrPtg t) {
         err("AreaErrPtg: " + t.toString(), rowFormula, colFormula);
     }
+
     private void parseUnknownPtg(@NotNull UnknownPtg t) {
         err("Error Unknown Ptg: " + t.toString(), rowFormula, colFormula);
     }
 
     protected abstract void parseFormula(Start start);
+
     protected abstract void parseMissingArguments(int row, int column);
+
     protected abstract void doesFormulaReferToDeletedCell(int row, int column);
 
     protected abstract void parseFormulaInit();
+
     protected abstract Start parseFormulaPost();
 
     //region Reference
@@ -343,7 +352,9 @@ public abstract class AbstractParser {
         //RangeInternal range = new RangeInternal(book, sheetName, t);
         parseArea3D(helper.getRANGE(sheetName, t), tSHEET, area);
     }
+
     protected abstract void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area);
+
     /**
      * Title: XSSF 3D Reference
      * <p>
@@ -364,12 +375,15 @@ public abstract class AbstractParser {
         if (extWorkbookNumber > 0) parseReference(tFILE, cellref);
         else parseReference(tSHEET, cellref);
     }
+
     protected abstract void parseReference(FILE tFILE, String area);
+
     private void parseAreaPtg(AreaPtg t) {
         parseRangeReference(helper.getRANGE(sheet, t));
     }
 
     protected abstract void parseRangeReference(RANGE tRANGE);
+
     private void parseNamePtg(NamePtg t) {
         RangeInternal range = null;
         Ptg[] ptgs = helper.getName(t);
@@ -385,8 +399,11 @@ public abstract class AbstractParser {
         RANGE tRANGE = range.getRANGE();
         parseNamedRange(tRANGE, name, range.getSheetName());
     }
+
     protected abstract void parseNamedRange(RANGE tRANGE, String name, String sheetName);
+
     protected abstract void parseReference(SHEET tSHEET, String area);
+
     private void parseRefPtg(@NotNull RefPtg t) {
         Row rowObject = sheet.getRow(t.getRow());
         Object value = null;
@@ -399,8 +416,8 @@ public abstract class AbstractParser {
         CELL_REFERENCE tCELL_REFERENCE = new CELL_REFERENCE(t.getRow(), t.getColumn(), comment);
         parseCELL_REFERENCE(tCELL_REFERENCE, rowObject != null, value);
     }
-    protected abstract void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value);
 
+    protected abstract void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value);
 
 
     //endregion
@@ -409,23 +426,33 @@ public abstract class AbstractParser {
     private void parseArrayPtg(@NotNull ArrayPtg t) {
         parseConstantArray(t.getTokenArrayValues());
     }
+
     protected abstract void parseConstantArray(Object[][] array);
+
     protected abstract void parseUDF(String arguments);
+
     private void parseAttrPtg(@NotNull AttrPtg t) {
         if (t.isSum()) parseSum();
     }
+
     protected abstract void parseParenthesisFormula();
+
     private void parseFuncVarPtg(@NotNull FuncVarPtg t) {
         if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
         else parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
     }
+
     private void parseFuncPtg(@NotNull FuncPtg t) {
         if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
         else parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
     }
+
     protected abstract void parseFunc(String name, int arity, boolean externalFunction);
+
     protected abstract void parseFunc(String name, boolean externalFunction);
+
     protected abstract void percentFormula();
+
     protected abstract void parseSum();
     //endregion
 
@@ -520,6 +547,7 @@ public abstract class AbstractParser {
         ERROR_REF term = new ERROR_REF();
         parseReferenceErrorLiteral(term);
     }
+
     protected abstract void parseReferenceErrorLiteral(ERROR_REF term);
     //endregion
 }

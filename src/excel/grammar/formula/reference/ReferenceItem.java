@@ -24,10 +24,8 @@ package excel.grammar.formula.reference;
 
 import excel.grammar.formula.Reference;
 
-import java.util.List;
-
-import static excel.grammar.Grammar.doublequote;
 import static excel.grammar.Grammar.exclamationmark;
+
 /**
  * @author Massimo Caliman
  */
@@ -68,7 +66,7 @@ public class ReferenceItem extends Reference {
     }
 
     protected String values() {
-        return values(firstRow,firstColumn, lastRow,lastColumn, vals,(horizzontal_range() || vertical_range()));
+        return values(firstRow, firstColumn, lastRow, lastColumn, vals, (horizzontal_range() || vertical_range()));
     }
 
     void setFirstRow(int firstRow) {
