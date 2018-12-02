@@ -27,6 +27,8 @@ import excel.grammar.Formula;
 import java.util.ArrayList;
 import java.util.List;
 
+import static excel.grammar.Grammar.doublequote;
+
 /**
  * @author Massimo Caliman
  */
@@ -37,5 +39,41 @@ public abstract class Reference extends Formula {
     public void add(List<Object> values) {
         vals.addAll(values);
     }
+
+    protected String values(int fRow,int fCol,int lRow,int lCol, List<Object> list,boolean isHorizzontalOrVerticalRange) {
+        if (isHorizzontalOrVerticalRange) {
+            StringBuilder buff = new StringBuilder();
+            buff.append("[ ");
+            for (Object val : list)
+                if (val instanceof String)
+                    buff.append(doublequote).append(val).append("\" ");
+                else
+                    buff.append(val).append(" ");
+            if (buff.length() > 1)
+                buff.deleteCharAt(buff.length() - 1);
+            buff.append(" ]");
+            return buff.toString();
+        } else {
+            //Cicla per riga
+            StringBuilder buff = new StringBuilder();
+            buff.append("[");
+            int index = 0;
+            for (int row = fRow; row <= lRow; row++) {
+                buff.append("[");
+                for (int col = fCol; col <= lCol; col++) {
+                    if (list.get(index) instanceof String)
+                        buff.append(doublequote).append(list.get(index)).append("\" ");
+                    else
+                        buff.append(list.get(index)).append(" ");
+                    index++;
+                }
+                buff.deleteCharAt(buff.length() - 1);
+                buff.append("]");
+            }
+            buff.append("]");
+            return buff.toString();
+        }
+    }
+
 
 }

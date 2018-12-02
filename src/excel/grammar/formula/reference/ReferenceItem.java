@@ -24,6 +24,8 @@ package excel.grammar.formula.reference;
 
 import excel.grammar.formula.Reference;
 
+import java.util.List;
+
 import static excel.grammar.Grammar.doublequote;
 import static excel.grammar.Grammar.exclamationmark;
 /**
@@ -66,40 +68,8 @@ public class ReferenceItem extends Reference {
     }
 
     protected String values() {
-        if (horizzontal_range() || vertical_range()) {
-            StringBuilder buff = new StringBuilder();
-            buff.append("[ ");
-            for (Object val : vals)
-                if (val instanceof String)
-                    buff.append(doublequote).append(val).append("\" ");
-                else
-                    buff.append(val).append(" ");
-            if (buff.length() > 1)
-                buff.deleteCharAt(buff.length() - 1);
-            buff.append(" ]");
-            return buff.toString();
-        } else {
-            //Cicla per riga
-            StringBuilder buff = new StringBuilder();
-            buff.append("[");
-            int index = 0;
-            for (int row = firstRow; row <= lastRow; row++) {
-                buff.append("[");
-                for (int col = firstColumn; col <= lastColumn; col++) {
-                    if (vals.get(index) instanceof String)
-                        buff.append(doublequote).append(vals.get(index)).append("\" ");
-                    else
-                        buff.append(vals.get(index)).append(" ");
-                    index++;
-                }
-                buff.deleteCharAt(buff.length() - 1);
-                buff.append("]");
-            }
-            buff.append("]");
-            return buff.toString();
-        }
+        return values(firstRow,firstColumn, lastRow,lastColumn, vals,(horizzontal_range() || vertical_range()));
     }
-
 
     void setFirstRow(int firstRow) {
         this.firstRow = firstRow;
