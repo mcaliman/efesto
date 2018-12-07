@@ -23,6 +23,7 @@
 package excel.grammar.formula.reference;
 
 import excel.grammar.formula.Reference;
+import org.jetbrains.annotations.Nullable;
 
 import static excel.grammar.Grammar.exclamationmark;
 
@@ -46,6 +47,7 @@ public class ReferenceItem extends Reference {
         this.value = value;
     }
 
+    @Nullable
     @Override
     public String toString() {
         return value;

@@ -23,6 +23,7 @@
 package excel.parser;
 
 import excel.grammar.Start;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public final class StartList extends ArrayList<Start> implements List<Start> {
         return this.get(index).test(text);
     }
 
-    public boolean test(int offset, String... text) {
+    public boolean test(int offset, @NotNull String... text) {
         if (size() == 0) return false;
         boolean test = true;
         for (int i = 0; i < text.length; i++)

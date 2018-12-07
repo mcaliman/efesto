@@ -25,6 +25,8 @@ package excel.grammar.formula.functioncall;
 import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.reference.CELL_REFERENCE;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static excel.grammar.Grammar.closeparen;
 import static excel.grammar.Grammar.openparen;
@@ -44,11 +46,13 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
         return args;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return getAddress() + " = " + getName() + openparen + argumentsToString() + closeparen;
     }
 
+    @NotNull
     public String toString(boolean address) {
         return address ?
                 getAddress() + " = " + getName() + openparen + argumentsToString() + closeparen :
@@ -68,7 +72,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
         return buff.toString();
     }
 
-    private String argumentToString(Formula operand) {
+    private String argumentToString(@Nullable Formula operand) {
         if (operand == null) return "Missing";
         return operand instanceof CELL_REFERENCE ? operand.getAddress() : operand.toString(false);
     }

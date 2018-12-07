@@ -27,6 +27,7 @@ import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.ParenthesisFormula;
 import excel.grammar.formula.functioncall.unary.Unary;
 import excel.grammar.formula.reference.CELL_REFERENCE;
+import org.jetbrains.annotations.NotNull;
 
 import static excel.grammar.Grammar.closeparen;
 import static excel.grammar.Grammar.openparen;
@@ -46,11 +47,13 @@ public abstract class Binary extends FunctionCall {
         this.rFormula = rFormula;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return getAddress(true) + " = " + operandTo(lFormula) + op + operandTo(rFormula);
     }
 
+    @NotNull
     public String toString(boolean address) {
         return address ?
                 getAddress(true) + " = " + operandTo(lFormula) + op + operandTo(rFormula) :

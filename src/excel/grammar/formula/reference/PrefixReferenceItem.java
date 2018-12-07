@@ -23,6 +23,8 @@
 package excel.grammar.formula.reference;
 
 import excel.grammar.formula.Reference;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static excel.grammar.Grammar.epsilon;
 
@@ -51,7 +53,7 @@ public final class PrefixReferenceItem extends Reference {
     private int lastRow;
     private int lastColumn;
 
-    public PrefixReferenceItem(Prefix prefix, String reference, RANGE tRANGE) {
+    public PrefixReferenceItem(Prefix prefix, String reference, @Nullable RANGE tRANGE) {
         this.prefix = prefix;
         this.reference = reference;
         if (tRANGE != null) {
@@ -79,6 +81,7 @@ public final class PrefixReferenceItem extends Reference {
 
     }
 
+    @NotNull
     private String ifIsNotArea() {
         return !isArea() ? getAddress() + " = " : epsilon;
     }

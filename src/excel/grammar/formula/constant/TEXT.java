@@ -24,6 +24,7 @@
 package excel.grammar.formula.constant;
 
 import excel.grammar.formula.Constant;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -50,7 +51,7 @@ public final class TEXT extends Constant {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@Nullable Object obj) {
         if (this == obj)
             return true;
         if (obj == null)

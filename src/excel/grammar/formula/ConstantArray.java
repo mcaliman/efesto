@@ -23,6 +23,7 @@
 package excel.grammar.formula;
 
 import excel.grammar.Formula;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Massimo Caliman
@@ -34,6 +35,7 @@ public class ConstantArray extends Formula {
         this.array = array;
     }
 
+    @NotNull
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
@@ -47,6 +49,7 @@ public class ConstantArray extends Formula {
         return str.toString();
     }
 
+    @NotNull
     @Override
     public String toString(boolean address) {
         return toString();

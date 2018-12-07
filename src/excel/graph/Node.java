@@ -23,6 +23,8 @@
 package excel.graph;
 
 import excel.grammar.Start;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ import java.util.List;
  */
 public class Node {
 
+    @NotNull
     private final List<Edge> neighbors;
     private Start data;
 
@@ -47,6 +50,7 @@ public class Node {
         return null;
     }
 
+    @NotNull
     public List<Edge> edges() {
         return this.neighbors;
     }
@@ -61,7 +65,7 @@ public class Node {
 
     @Override
     @SuppressWarnings("unchecked")
-    public boolean equals(Object obj) {
+    public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (obj == null) return false;
         if (getClass() != obj.getClass()) return false;

@@ -95,6 +95,7 @@ public abstract class AbstractParser {
      * (Work)Book
      */
     private final Workbook book;
+    @NotNull
     private final Helper helper;
     public boolean verbose = false;
     public boolean metadata = false;
@@ -125,7 +126,7 @@ public abstract class AbstractParser {
     private boolean protectionPresent;
     private String fileName;
 
-    protected AbstractParser(File file) throws InvalidFormatException, IOException {
+    protected AbstractParser(@NotNull File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
         this.fileName = file.getName();
     }
@@ -233,7 +234,7 @@ public abstract class AbstractParser {
      * @param ptgs
      * @return
      */
-    private Start parse(Ptg[] ptgs) {
+    private Start parse(@NotNull Ptg[] ptgs) {
         parseFormulaInit();
         if (Ptg.doesFormulaReferToDeletedCell(ptgs)) doesFormulaReferToDeletedCell(rowFormula, colFormula);
         for (Ptg ptg : ptgs) parse(ptg, rowFormula, colFormula);
@@ -349,7 +350,6 @@ public abstract class AbstractParser {
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
 
         String area = helper.getArea(t);
-        //RangeInternal range = new RangeInternal(book, sheetName, t);
         parseArea3D(helper.getRANGE(sheetName, t), tSHEET, area);
     }
 
@@ -378,29 +378,37 @@ public abstract class AbstractParser {
 
     protected abstract void parseReference(FILE tFILE, String area);
 
-    private void parseAreaPtg(AreaPtg t) {
+    private void parseAreaPtg(@NotNull AreaPtg t) {
         parseRangeReference(helper.getRANGE(sheet, t));
     }
 
     protected abstract void parseRangeReference(RANGE tRANGE);
 
-    private void parseNamePtg(NamePtg t) {
+    private void parseNamePtg(@NotNull NamePtg t) {
         RangeInternal range = null;
         Ptg[] ptgs = helper.getName(t);
         String name = helper.getNameText(t);
+        int sheetIndex = 0;
         for (Ptg ptg : ptgs) {
             if (ptg != null) {
                 if (ptg instanceof Area3DPxg) {
                     Area3DPxg area3DPxg = (Area3DPxg) ptg;
+
                     range = new RangeInternal(book, area3DPxg.getSheetName(), area3DPxg);
+                    sheetIndex = helper.getSheetIndex(area3DPxg.getSheetName());
                 }
             }
         }
         RANGE tRANGE = range.getRANGE();
-        parseNamedRange(tRANGE, name, range.getSheetName());
+
+        NamedRange term = new NamedRange(name, tRANGE);
+        term.setSheetIndex(sheetIndex);
+        term.setSheetName(range.getSheetName());
+
+        parseNamedRange(term);
     }
 
-    protected abstract void parseNamedRange(RANGE tRANGE, String name, String sheetName);
+    protected abstract void parseNamedRange(NamedRange tNamedRange);
 
     protected abstract void parseReference(SHEET tSHEET, String area);
 

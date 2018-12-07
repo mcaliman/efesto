@@ -22,6 +22,8 @@
 
 package excel.grammar.formula.reference;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Date;
 
 /**
@@ -73,6 +75,7 @@ public final class CELL_REFERENCE extends ReferenceItem {
         else return null;
     }
 
+    @Nullable
     @Override
     public String toString(boolean address) {
         return toString();

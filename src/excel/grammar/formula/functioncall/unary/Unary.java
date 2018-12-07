@@ -25,6 +25,7 @@ package excel.grammar.formula.functioncall.unary;
 import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.reference.CELL_REFERENCE;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Massimo Caliman
@@ -39,11 +40,13 @@ public abstract class Unary extends FunctionCall {
         this.formula = formula;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return unOpPrefix + formula.toString();
     }
 
+    @NotNull
     @Override
     public String toString(boolean address) {
         if (formula instanceof CELL_REFERENCE) {

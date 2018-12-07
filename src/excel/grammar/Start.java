@@ -22,6 +22,9 @@
 
 package excel.grammar;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -40,28 +43,31 @@ public abstract class Start {
     private String comment;
     private int sheetIndex;
 
-    protected static String format(String str) {
+    @NotNull
+    protected static String format(@Nullable String str) {
         return str == null ? epsilon : doublequote + str + doublequote;
     }
 
-    protected static String format(Boolean bool) {
+    protected static String format(@Nullable Boolean bool) {
         if (bool == null) return epsilon;
         return bool ? TRUE : FALSE;
     }
 
-    protected static String format(final Integer integer) {
+    @NotNull
+    protected static String format(@Nullable final Integer integer) {
         return integer == null ? epsilon : integer.toString();
     }
 
-    protected static String format(final Double doub) {
+    protected static String format(@Nullable final Double doub) {
         return doub == null ? epsilon : doub.toString();
     }
 
-    protected static String format(final Date date) {
+    @NotNull
+    protected static String format(@Nullable final Date date) {
         return date == null ? epsilon : DATE_FORMAT.format(date);
     }
 
-    public static String cellAddress(final int row, final int column, final String sheetName) {
+    public static String cellAddress(final int row, final int column, @Nullable final String sheetName) {
         StringBuilder buffer = new StringBuilder();
         if (sheetName != null)
             buffer.append(sheetName).append(exclamationmark);
@@ -129,10 +135,12 @@ public abstract class Start {
         this.sheetName = sheetName;
     }
 
+    @NotNull
     public String getAddress() {
         return Start.cellAddress(getRow(), getColumn(), sheetName);
     }
 
+    @NotNull
     public String getAddress(boolean sheet) {
         return sheet ? Start.cellAddress(getRow(), getColumn(), sheetName) : cellAddress(getRow(), getColumn());
     }
@@ -171,11 +179,13 @@ public abstract class Start {
         else return this.getAddress().equalsIgnoreCase(that.getAddress());
     }
 
+    @Nullable
     @Override
     public String toString() {
         return toString(true);
     }
 
+    @Nullable
     public abstract String toString(boolean address);
 
     public boolean test(String text) {

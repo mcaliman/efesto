@@ -22,6 +22,9 @@
 
 package excel.graph;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 class Edge {
 
     private final Node src;
@@ -51,7 +54,7 @@ class Edge {
 
     @Override
     @SuppressWarnings("unchecked")
-    public boolean equals(Object object) {
+    public boolean equals(@Nullable Object object) {
         if (this == object) return true;
         if (object == null) return false;
         if (getClass() != object.getClass()) return false;
@@ -64,6 +67,7 @@ class Edge {
         else return dest.equals(edge.dest);
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "(" + src + " -> " + dest + ")";

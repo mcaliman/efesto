@@ -35,6 +35,8 @@ import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,13 +57,15 @@ class Helper {
         this.evalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
     }
 
+    @Nullable
     public static String getComment(Cell cell) {
         Comment cellComment = cell.getCellComment();
         String comment = comment(cellComment);
         return comment;
     }
 
-    private static String comment(Comment comment) {
+    @Nullable
+    private static String comment(@Nullable Comment comment) {
         if (comment == null) return null;
         RichTextString text = comment.getString();
         if (text == null) return null;
@@ -69,7 +73,8 @@ class Helper {
 
     }
 
-    public static Object valueOf(Cell cell) {
+    @Nullable
+    public static Object valueOf(@Nullable Cell cell) {
         if (cell == null) return null;
         if (Helper.isDataType(cell))
             return cell.getDateCellValue();
@@ -99,6 +104,7 @@ class Helper {
         return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
     }
 
+    @NotNull
     public static Class internalFormulaResultType(Cell cell) {
         int type = cell.getCachedFormulaResultType();
         if (Helper.isDataType(cell))
@@ -107,6 +113,7 @@ class Helper {
     }
 
 
+    @NotNull
     private static Class internalFormulaResultType(int type) {
         switch (type) {
             case CELL_TYPE_STRING:
@@ -121,20 +128,20 @@ class Helper {
     }
 
 
-    public Ptg[] getName(NamePtg t) {
+    public Ptg[] getName(@NotNull NamePtg t) {
         EvaluationName evaluationName = evalBook.getName(t);
         return evaluationName.getNameDefinition();
     }
 
-    public String getNameText(NamePtg t) {
+    public String getNameText(@NotNull NamePtg t) {
         return evalBook.getNameText(t);
     }
 
-    public String getArea(Area3DPxg t) {
+    public String getArea(@NotNull Area3DPxg t) {
         return t.format2DRefAsString();
     }
 
-    public String getCellRef(Ref3DPxg t) {
+    public String getCellRef(@NotNull Ref3DPxg t) {
         return t.format2DRefAsString();
     }
 
@@ -143,12 +150,14 @@ class Helper {
     }
 
 
+    @NotNull
     private List<Cell> range(Sheet sheet, String refs) {
         AreaReference area = new AreaReference(sheet.getSheetName() + exclamationmark + refs, SPREADSHEET_VERSION);
         return fromRange(area);
     }
 
-    public List<Cell> fromRange(AreaReference area) {
+    @NotNull
+    public List<Cell> fromRange(@NotNull AreaReference area) {
         List<Cell> cells = new ArrayList<>();
         org.apache.poi.ss.util.CellReference[] cels = area.getAllReferencedCells();
         for (org.apache.poi.ss.util.CellReference cel : cels) {
@@ -161,7 +170,8 @@ class Helper {
         return cells;
     }
 
-    public Ptg[] tokens(Sheet sheet, int rowFormula, int colFormula) {
+    @Nullable
+    public Ptg[] tokens(@NotNull Sheet sheet, int rowFormula, int colFormula) {
         int sheetIndex = workbook.getSheetIndex(sheet);
         var sheetName = sheet.getSheetName();
         var evalSheet = evalBook.getSheet(sheetIndex);
@@ -175,7 +185,8 @@ class Helper {
     }
 
 
-    public RANGE getRANGE(Sheet sheet, AreaPtg t) {
+    @NotNull
+    public RANGE getRANGE(@NotNull Sheet sheet, @NotNull AreaPtg t) {
         var firstRow = t.getFirstRow();
         var firstColumn = t.getFirstColumn();
 
@@ -196,7 +207,8 @@ class Helper {
 
     }
 
-    public RANGE getRANGE(String sheetnamne, Area3DPxg t) {
+    @NotNull
+    public RANGE getRANGE(String sheetnamne, @NotNull Area3DPxg t) {
         var firstRow = t.getFirstRow();
         var firstColumn = t.getFirstColumn();
 

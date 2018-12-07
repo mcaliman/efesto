@@ -27,18 +27,20 @@ import excel.grammar.Start;
 import excel.grammar.formula.functioncall.EXCEL_FUNCTION;
 import excel.grammar.formula.functioncall.binary.Binary;
 import excel.parser.StartList;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 public class StartGraph {
 
+    @NotNull
     private final HashMap<Start, Node> graph;
 
     public StartGraph() {
         graph = new HashMap<>();
     }
 
-    public void addNode(Start start) {
+    public void addNode(@NotNull Start start) {
         if (start.isTerminal()) return;
         Node u = graph.get(start);
         if (u == null) {
@@ -50,7 +52,7 @@ public class StartGraph {
         }
     }
 
-    public void addEdge(Start x, Start y) {
+    public void addEdge(@NotNull Start x, @NotNull Start y) {
         if (x.isTerminal() || y.isTerminal()) return;
         if (x.getAddress().equalsIgnoreCase(y.getAddress())) return;
         Node u = graph.get(x);
@@ -59,7 +61,7 @@ public class StartGraph {
         u.addEdge(edge);
     }
 
-    public void add(Binary operation) {
+    public void add(@NotNull Binary operation) {
         var left = operation.getlFormula();
         var right = operation.getrFormula();
         addNode(right);
@@ -69,7 +71,7 @@ public class StartGraph {
         addEdge(left, operation);
     }
 
-    public void add(EXCEL_FUNCTION function) {
+    public void add(@NotNull EXCEL_FUNCTION function) {
         Formula[] args = function.getArgs();
         for (Formula arg : args)
             addNode(arg);
@@ -83,6 +85,7 @@ public class StartGraph {
      *
      * @return
      */
+    @NotNull
     public StartList topologicalSort() {
         var result = new StartList();
         Queue<Node> queue = new ArrayDeque<>();
@@ -118,6 +121,7 @@ public class StartGraph {
         u.removeEdgeTo(v);
     }
 
+    @NotNull
     private List<Edge> edges() {
         List<Edge> results = new ArrayList<>();
         Collection<Node> nodes = graph.values();
@@ -131,6 +135,7 @@ public class StartGraph {
         return true;
     }
 
+    @NotNull
     private List<Edge> outgoingEdges(Node v) {
         List<Edge> outgoingEdges = new ArrayList<>();
         List<Edge> edges = edges();
@@ -138,7 +143,7 @@ public class StartGraph {
         return outgoingEdges;
     }
 
-    private boolean notEquals(Node u, Start start) {
+    private boolean notEquals(Node u, @NotNull Start start) {
         Start start1 = u.value();
         return Objects.nonNull(u) && notEquals(start1, start);
     }

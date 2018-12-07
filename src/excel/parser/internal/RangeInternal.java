@@ -30,6 +30,8 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.AreaReference;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -38,6 +40,7 @@ import static excel.grammar.Grammar.exclamationmark;
 class RangeInternal {
 
     private final Workbook workbook;
+    @Nullable
     private final Sheet sheet;
 
     private final int firstRow;
@@ -45,6 +48,7 @@ class RangeInternal {
 
     private final int lastRow;
     private final int lastColumn;
+    @NotNull
     private final RANGE tRANGE;
     private String sheetName;
 
@@ -85,6 +89,7 @@ class RangeInternal {
         return sheetName;
     }
 
+    @NotNull
     RANGE getRANGE() {
         return tRANGE;
     }

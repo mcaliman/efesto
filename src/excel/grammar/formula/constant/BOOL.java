@@ -23,6 +23,7 @@
 package excel.grammar.formula.constant;
 
 import excel.grammar.formula.Constant;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -52,7 +53,7 @@ public final class BOOL extends Constant {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (obj == null) return false;
         if (getClass() != obj.getClass()) return false;

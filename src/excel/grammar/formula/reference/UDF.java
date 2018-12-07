@@ -23,6 +23,7 @@
 package excel.grammar.formula.reference;
 
 import excel.grammar.formula.Reference;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Massimo Caliman
@@ -40,6 +41,7 @@ public final class UDF extends Reference {
         return arguments;
     }
 
+    @NotNull
     public String toString(boolean address) {
         return address ? getAddress() + " = " + arguments : arguments;
     }

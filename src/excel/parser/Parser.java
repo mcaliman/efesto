@@ -39,6 +39,8 @@ import excel.grammar.formula.reference.referencefunction.OFFSET;
 import excel.graph.StartGraph;
 import excel.parser.internal.AbstractParser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,7 +57,7 @@ public final class Parser extends AbstractParser {
     private StartGraph graph;
     private Stack<Start> stack;
 
-    public Parser(String filename) throws IOException, InvalidFormatException {
+    public Parser(@NotNull String filename) throws IOException, InvalidFormatException {
         super(new File(filename));
         unordered = new StartList();
         ordered = new StartList();
@@ -98,7 +100,7 @@ public final class Parser extends AbstractParser {
 
 
     @Override
-    public void parseFormula(Start obj) {
+    public void parseFormula(@NotNull Start obj) {
         if (Objects.isNull(obj)) return;
         setOwnProperty(obj);
         unordered.add(obj);
@@ -117,6 +119,7 @@ public final class Parser extends AbstractParser {
         stack.empty();
     }
 
+    @Nullable
     @Override
     protected Start parseFormulaPost() {
         Start start = null;
@@ -153,16 +156,10 @@ public final class Parser extends AbstractParser {
 
     /**
      * Used
-     *
-     * @param name
-     * @param sheetName
      */
     @Override
-    protected void parseNamedRange(RANGE tRANGE, String name, String sheetName) {
-        var term = new NamedRange(name, tRANGE);
-        term.setSheetIndex(sheetIndex);
-        term.setSheetName(sheetName);
-        stack.push(term);
+    protected void parseNamedRange(NamedRange tNamedRange) {
+        stack.push(tNamedRange);
     }
 
     /**
@@ -351,7 +348,7 @@ public final class Parser extends AbstractParser {
      * #REF
      */
     @Override
-    protected void parseReferenceErrorLiteral(ERROR_REF error) {
+    protected void parseReferenceErrorLiteral(@NotNull ERROR_REF error) {
         setOwnProperty(error);
         stack.push(error);
         err("", rowFormula, colFormula);
@@ -361,7 +358,7 @@ public final class Parser extends AbstractParser {
      * CELLREF
      */
     @Override
-    protected void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value) {
+    protected void parseCELL_REFERENCE(@NotNull CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value) {
         setOwnProperty(tCELL_REFERENCE);
         if (rowNotNull) {
             tCELL_REFERENCE.setValue(value);
@@ -375,7 +372,7 @@ public final class Parser extends AbstractParser {
      * Sheet2!A1:B1 (Sheet + AREA/RANGE)
      */
     @Override
-    protected void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area) {
+    protected void parseArea3D(RANGE tRANGE, @NotNull SHEET tSHEET, String area) {
         var term = new PrefixReferenceItem(tSHEET, area, tRANGE);
         term.setSheetIndex(tSHEET.getIndex());
         term.setSheetName(tSHEET.getName());
@@ -554,7 +551,7 @@ public final class Parser extends AbstractParser {
 //Constants BEGIN
 
     @Override
-    protected void parseErrorLiteral(ERROR term) {
+    protected void parseErrorLiteral(@NotNull ERROR term) {
         setOwnProperty(term);
         err(term.toString(), rowFormula, colFormula);
         graph.addNode(term);
@@ -562,25 +559,25 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseBooleanLiteral(BOOL term) {
+    protected void parseBooleanLiteral(@NotNull BOOL term) {
         graph.addNode(term);
         stack.push(term);
     }
 
     @Override
-    protected void parseStringLiteral(TEXT term) {
+    protected void parseStringLiteral(@NotNull TEXT term) {
         graph.addNode(term);
         stack.push(term);
     }
 
     @Override
-    protected void parseIntLiteral(INT term) {
+    protected void parseIntLiteral(@NotNull INT term) {
         graph.addNode(term);
         stack.push(term);
     }
 
     @Override
-    protected void parseFloatLiteral(FLOAT term) {
+    protected void parseFloatLiteral(@NotNull FLOAT term) {
         graph.addNode(term);
         stack.push(term);
     }

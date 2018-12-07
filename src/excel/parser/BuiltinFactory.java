@@ -30,6 +30,7 @@ import excel.grammar.formula.reference.conditionalreferencefunction.IF;
 import excel.grammar.formula.reference.referencefunction.INDEX;
 import excel.grammar.formula.reference.referencefunction.INDIRECT;
 import excel.grammar.formula.reference.referencefunction.OFFSET;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -422,7 +423,7 @@ final class BuiltinFactory {
             args = new Formula[arity];
             Constructor<?> constructor = clazz.getConstructor(Formula[].class);
             builtInFunction = (Start) constructor.newInstance(new Object[]{args});
-        } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+        } catch (@NotNull NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             LOG.log(Level.SEVERE, null, ex);
             throw new UnsupportedBuiltinException(ex.getMessage());
         }
