@@ -146,6 +146,10 @@ public abstract class Start implements ToFunctional {
         return sheet ? Start.cellAddress(getRow(), getColumn(), sheetName) : cellAddress(getRow(), getColumn());
     }
 
+    public String id(){
+        return sheetName + "" +cellAddress(getRow(), getColumn());
+    }
+
 // --Commented out by Inspection START (23/11/2018 08:31):
 //    private boolean sameAddr(Object obj) {
 //        final Start that = (Start) obj;

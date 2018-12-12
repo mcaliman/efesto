@@ -40,5 +40,7 @@ class Excel_10_Prefix_Test {
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0,
                 "Prefix!A1 = Sheet1!A1 = []"));
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

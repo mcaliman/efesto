@@ -49,6 +49,8 @@ class Excel_Xl_901_Terminals_Test {
         assertTrue(toolkitCommand.test(0, "Foglio1!A5 = 1/0"));
         long elapsed = System.currentTimeMillis() - t;
         System.out.println("elapsed: " + elapsed / 1000 + " s.");
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 
 }

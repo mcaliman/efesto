@@ -43,6 +43,8 @@ class Excel_903_TerminalsFormulas_Test {
                 "Foglio1!A6 = IF(Foglio1!A1,Foglio1!A2,Foglio1!A3)",
                 "Foglio1!A7 = IF(Foglio1!A1,Foglio1!A4,Foglio1!A3)");
         assertTrue(correct);
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 
 }

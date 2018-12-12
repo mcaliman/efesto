@@ -39,5 +39,7 @@ class Excel_UDF_Test {
         toolkitCommand.writer("test/UDF.vb");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0, "SheetUDF!A2 = GetElement(A1,2,\"-\")"));
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

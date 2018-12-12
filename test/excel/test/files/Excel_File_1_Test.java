@@ -36,5 +36,7 @@ class Excel_File_1_Test {
         toolkitCommand.writer("test/file-1.vb");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0, "SrcSheet!A1 = [1]DestSheet!$A$1 = []"));
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

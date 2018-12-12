@@ -39,5 +39,7 @@ class Excel_17_IFintoIF_Test {
                 "IFIF!C1 = TRUE",
                 "IFIF!A1 = IF(IFIF!B1>1,0,IF(IFIF!C1,\"Hello\",\"Bye\"))");
         assertTrue(correct);
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

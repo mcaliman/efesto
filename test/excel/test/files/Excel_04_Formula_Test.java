@@ -39,5 +39,7 @@ class Excel_04_Formula_Test {
         toolkitCommand.writer("test/04-formula.vb");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0, "FORMULA!A1 = 1+2"));
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

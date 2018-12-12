@@ -43,5 +43,7 @@ class Excel_05_Reference_Test {
                 "Reference!A1 = 15.0",
                 "Reference!A2 = 100.0",
                 "Reference!A3 = Reference!A2/Reference!A1"));
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

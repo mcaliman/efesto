@@ -33,5 +33,7 @@ class Excel_Metadata_Test {
         toolkitCommand.execute();
         toolkitCommand.writer("test/metadata.vb");
         toolkitCommand.print();
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

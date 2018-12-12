@@ -44,5 +44,7 @@ class Excel_11_UnOpPrefix_Test {
         assertTrue(toolkitCommand.test(0,
                 "UnOpPrefix!A1 = +13.0",
                 "UnOpPrefix!A2 = +UnOpPrefix!A1+1"));
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

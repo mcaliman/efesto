@@ -50,8 +50,8 @@ class Excel_RealComplex2Test {
             //Elapsed time: 971285 [ms] or 971 [s]. or 16[m].
 
 
-            //System.out.println("Call transpiler.");
-            //toolkitCommand.transpiler();
+            System.out.println("ToFunctional.");
+            toolkitCommand.toFunctional();
         }
 
     }

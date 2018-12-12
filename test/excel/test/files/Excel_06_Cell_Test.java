@@ -39,5 +39,7 @@ class Excel_06_Cell_Test {
         toolkitCommand.writer("test/06-cell.vb");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0, "Cell!A1 = 27.59"));
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

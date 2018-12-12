@@ -46,5 +46,7 @@ class Excel_Comments_Test {
                 "Sheet1!A1 = 1.0",
                 "Sheet1!A2 = Sheet1!A1+1");
         assertTrue(correct);
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

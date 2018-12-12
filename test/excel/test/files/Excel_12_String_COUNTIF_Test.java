@@ -41,5 +41,7 @@ class Excel_12_String_COUNTIF_Test {
         assertTrue(toolkitCommand.test(0,
                 "COUNTIF!C1:E1 = [ 1.0 2.0 3.0 ]",
                 "COUNTIF!B4 = COUNTIF(COUNTIF!C1:E1,\">=2\")"));
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

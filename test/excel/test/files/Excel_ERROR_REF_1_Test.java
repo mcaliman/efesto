@@ -39,5 +39,7 @@ class Excel_ERROR_REF_1_Test {
         toolkitCommand.writer("test/ERROR_REF_1.md");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0, "Foglio1!A1 = #REF!"));
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

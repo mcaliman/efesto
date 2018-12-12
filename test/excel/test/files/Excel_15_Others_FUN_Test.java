@@ -45,5 +45,7 @@ class Excel_15_Others_FUN_Test {
                 "Foglio1!G1 = [1]Sheet1!C5 = []",
                 "Foglio1!B29 = 70.0",
                 "Foglio1!D7 = (2*(Foglio1!B29))/(1+Foglio1!B29)"));
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

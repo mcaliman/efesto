@@ -39,5 +39,7 @@ class Excel_ConstantArray_Test {
         toolkitCommand.writer("test/ConstantArray.vb");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0, "Foglio1!A6 = {1.0,2.0,2.0,4.0,6.0}"));
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

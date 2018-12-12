@@ -22,6 +22,7 @@
 
 package excel.grammar.formula.functioncall.unary;
 
+import excel.ToFunctional;
 import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.reference.CELL_REFERENCE;
@@ -30,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Massimo Caliman
  */
-public abstract class Unary extends FunctionCall {
+public abstract class Unary extends FunctionCall implements ToFunctional {
 
     protected final Formula formula;
     protected final String unOpPrefix;
@@ -58,6 +59,14 @@ public abstract class Unary extends FunctionCall {
         }
     }
 
+    public String toFuctional(){
+        if (formula instanceof CELL_REFERENCE) {
+            return unOpPrefix + ((CELL_REFERENCE) formula).getValue();
+        } else {
+            return unOpPrefix + formula.toString();
+        }
+
+    }
 
     public String getUnOpPrefix() {
         return unOpPrefix;

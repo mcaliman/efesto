@@ -42,5 +42,7 @@ class Excel_01_HorizontalRangeIndex_Test {
                 "HORIZONTAL_RANGE!B1:H1 = [ 0.0 1.0 2.0 3.0 4.0 5.0 6.0 ]",
                 "HORIZONTAL_RANGE!B5 = INDEX(HORIZONTAL_RANGE!B1:H1,3)");
         assertTrue(correct);
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 }

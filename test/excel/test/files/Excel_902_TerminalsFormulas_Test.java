@@ -47,6 +47,8 @@ class Excel_902_TerminalsFormulas_Test {
         assertTrue(correct);
         long elapsed = System.currentTimeMillis() - t;
         System.out.println("elapsed: " + elapsed / 1000 + " s.");
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 
 }

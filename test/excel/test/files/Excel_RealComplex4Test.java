@@ -41,6 +41,8 @@ class Excel_RealComplex4Test {
         toolkitCommand.writer("D:/xl4.vb");
         long elapsed = System.currentTimeMillis() - t;
         System.out.println("Elapsed time: " + elapsed + " [ms] or " + elapsed / 1000 + " [s]. or " + elapsed / 1000 / 60 + "[m].");
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 
 }
