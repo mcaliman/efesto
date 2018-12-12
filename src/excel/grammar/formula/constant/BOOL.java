@@ -34,7 +34,7 @@ import static excel.grammar.Grammar.TRUE;
 /**
  * @author Massimo Caliman
  */
-public final class BOOL extends Constant implements ToFunctional {
+public final class BOOL extends Constant  {
 
     private final Boolean value;
 
