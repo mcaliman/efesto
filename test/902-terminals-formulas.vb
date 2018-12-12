@@ -1,5 +1,5 @@
 '' Text File: test/902-terminals-formulas.vb
-'' Excel File: 902-terminals-formulas.xlsx(Protection Not Present!)
+'' Excel File: 902-terminals-formulas.xlsx
 '' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
 Foglio1!A1 = TRUE
 Foglio1!A5 = "1/0"

@@ -1,5 +1,5 @@
 '' Text File: test/17-IF-into-IF.vb
-'' Excel File: 17-IF-into-IF.xlsx(Protection Not Present!)
+'' Excel File: 17-IF-into-IF.xlsx
 '' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
 IFIF!B1 = 2.0
 IFIF!C1 = TRUE

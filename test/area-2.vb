@@ -1,5 +1,5 @@
 '' Text File: test/area-2.vb
-'' Excel File: area-2.xlsx(Protection Not Present!)
+'' Excel File: area-2.xlsx
 '' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
 Area1!A1:B3 = [[11.0 21.0][12.0 22.0][13.0 23.0]]
 Area2!Area2Name = [[11.0 21.0][12.0 22.0][13.0 23.0][14.0 24.0]]
