@@ -33,5 +33,4 @@ public final class Neq extends Binary {
         super(lFormula, "<>", rFormula);
     }
 
-
 }

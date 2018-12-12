@@ -32,8 +32,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class Unary extends FunctionCall {
 
-    private final Formula formula;
-    private final String unOpPrefix;
+    protected final Formula formula;
+    protected final String unOpPrefix;
 
     Unary(String unOpPrefix, Formula formula) {
         this.unOpPrefix = unOpPrefix;

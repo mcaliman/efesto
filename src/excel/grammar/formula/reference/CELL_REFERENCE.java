@@ -22,6 +22,7 @@
 
 package excel.grammar.formula.reference;
 
+import excel.ToFunctional;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
@@ -29,7 +30,7 @@ import java.util.Date;
 /**
  * @author mcaliman
  */
-public final class CELL_REFERENCE extends ReferenceItem {
+public final class CELL_REFERENCE extends ReferenceItem implements ToFunctional {
 
     private final int row;
     private final int column;
@@ -73,12 +74,28 @@ public final class CELL_REFERENCE extends ReferenceItem {
         else if (value instanceof Double) return getAddress() + " = " + format((Double) value);
         else if (value instanceof Date) return getAddress() + " = " + format((Date) value);
         else return null;
+        /*
+        if (value instanceof String) return  format((String) value);
+        else if (value instanceof Boolean)  return format((Boolean) value);
+        else if (value instanceof Integer) return format((Integer) value);
+        else if (value instanceof Double)  return format((Double) value);
+        else if (value instanceof Date) return  format((Date) value);
+        else return null;*/
     }
 
     @Nullable
     @Override
     public String toString(boolean address) {
         return toString();
+    }
+
+    public String toFuctional() {
+        if (value instanceof String) return  format((String) value);
+        else if (value instanceof Boolean)  return format((Boolean) value);
+        else if (value instanceof Integer) return format((Integer) value);
+        else if (value instanceof Double)  return format((Double) value);
+        else if (value instanceof Date) return  format((Date) value);
+        else return null;
     }
 
 }

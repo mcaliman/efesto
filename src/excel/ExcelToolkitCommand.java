@@ -58,10 +58,8 @@ public class ExcelToolkitCommand implements ToolkitCommand {
     }
 
     public void writer(@NotNull String filename) throws IOException {
-
         StartList list = parser.getList();
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
-
             writer.write("'' Text File: " + filename + '\n');
             writer.write("'' Excel File: " + parser.getFileName() + (parser.isProtectionPresent() ? " (Protection Present!)" : "(Protection Not Present!)") + '\n');
             writer.write("'' Elapsed Time (parsing + topological sort): " + (elapsed / 1000 + " s. or " + (elapsed / 1000 / 60) + " min.") + '\n');
@@ -74,7 +72,6 @@ public class ExcelToolkitCommand implements ToolkitCommand {
             //writer.write("'' company:"+parser.getCompany()+'\n');
             //writer.write("'' template:"+parser.getTemplate()+'\n');
             //writer.write("'' manager:"+parser.getManager()+'\n');
-
             for (Start start : list) {
                 String comment = start.getComment();
                 if (comment != null && comment.trim().length() > 0) writer.write("'' " + comment + "\n");
@@ -88,6 +85,7 @@ public class ExcelToolkitCommand implements ToolkitCommand {
     public void print() {
         for (Start start : getStartList())
             System.out.println("" + start.getClass().getSimpleName() + " : " + start.toString(true));
+            //System.out.println("" + start.getClass().getSimpleName() + " : " + start.getAddress(true) + " = " + start.toString(false));
     }
 
     private StartList getStartList() {
@@ -96,6 +94,17 @@ public class ExcelToolkitCommand implements ToolkitCommand {
 
     public boolean test(int offset, String... text) {
         return getStartList().test(offset, text);
+    }
+
+    public void toFunctional(){
+        for (Start start : getStartList()){
+            //System.out.println("" + start.getClass().getSimpleName() + " : " );
+            if(start instanceof ToFunctional) {
+                System.out.println( start.getSheetName() + start.getAddress(false) + " = " +  ((ToFunctional) start).toFuctional() );
+            }else {
+                System.out.println(start.toString(true));
+            }
+        }
     }
 
 }

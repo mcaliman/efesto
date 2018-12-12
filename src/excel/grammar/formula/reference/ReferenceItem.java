@@ -86,4 +86,5 @@ public class ReferenceItem extends Reference {
     void setLastColumn(int lastColumn) {
         this.lastColumn = lastColumn;
     }
+
 }

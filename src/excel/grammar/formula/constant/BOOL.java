@@ -22,6 +22,7 @@
 
 package excel.grammar.formula.constant;
 
+import excel.ToFunctional;
 import excel.grammar.formula.Constant;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +34,7 @@ import static excel.grammar.Grammar.TRUE;
 /**
  * @author Massimo Caliman
  */
-public final class BOOL extends Constant {
+public final class BOOL extends Constant implements ToFunctional {
 
     private final Boolean value;
 

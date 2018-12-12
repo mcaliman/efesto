@@ -30,4 +30,5 @@ public class CHAR extends EXCEL_FUNCTION {
         this.args = args;
     }
 
+
 }

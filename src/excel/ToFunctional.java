@@ -20,17 +20,15 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package excel.grammar.formula.functioncall.binary;
+package excel;
 
-import excel.grammar.Formula;
+public interface ToFunctional {
 
-/**
- * @author Massimo Caliman
- */
-public final class Lt extends Binary {
-
-    public Lt(Formula lFormula, Formula rFormula) {
-        super(lFormula, "<", rFormula);
+    default String toFuctional() {
+        return "";
     }
 
+    /*default String toVar() {
+        return "";
+    }*/
 }

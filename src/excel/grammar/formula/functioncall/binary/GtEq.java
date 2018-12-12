@@ -33,5 +33,4 @@ public final class GtEq extends Binary {
         super(lFormula, ">=", rFormula);
     }
 
-
 }

@@ -29,4 +29,5 @@ public class INT extends EXCEL_FUNCTION {
     public INT(Formula... args) {
         this.args = args;
     }
+
 }

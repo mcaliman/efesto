@@ -29,4 +29,5 @@ public class MODE extends EXCEL_FUNCTION {
     public MODE(Formula... args) {
         this.args = args;
     }
+
 }

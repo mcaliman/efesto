@@ -29,4 +29,5 @@ public class SUBTOTAL extends EXCEL_FUNCTION {
     public SUBTOTAL(Formula... args) {
         this.args = args;
     }
+
 }

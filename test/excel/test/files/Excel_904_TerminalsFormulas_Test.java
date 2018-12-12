@@ -48,6 +48,8 @@ class Excel_904_TerminalsFormulas_Test {
                 "Foglio1!A3 = Foglio1!A1+Foglio1!A2",
                 "Foglio1!A8 = Foglio1!A1^Foglio1!A2",
                 "Foglio1!A7 = Foglio1!A1&Foglio1!A2"));
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
     }
 
 }

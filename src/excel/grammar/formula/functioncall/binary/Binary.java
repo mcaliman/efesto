@@ -37,9 +37,9 @@ import static excel.grammar.Grammar.openparen;
  */
 public abstract class Binary extends FunctionCall {
 
-    private final String op;
-    private final Formula lFormula;
-    private final Formula rFormula;
+    protected final String op;
+    protected final Formula lFormula;
+    protected final Formula rFormula;
 
     Binary(Formula lFormula, String op, Formula rFormula) {
         this.lFormula = lFormula;

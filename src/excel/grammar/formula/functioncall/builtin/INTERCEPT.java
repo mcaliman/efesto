@@ -29,4 +29,5 @@ public class INTERCEPT extends EXCEL_FUNCTION {
     public INTERCEPT(Formula... args) {
         this.args = args;
     }
+
 }

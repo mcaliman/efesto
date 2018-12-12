@@ -33,5 +33,4 @@ public final class Leq extends Binary {
         super(lFormula, "<=", rFormula);
     }
 
-
 }

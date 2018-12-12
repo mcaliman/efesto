@@ -25,6 +25,9 @@ package excel.grammar.formula.functioncall.binary;
 import excel.grammar.Formula;
 
 /**
+ * Concat   : Formula & Formula
+ * a & b -> (str a b)
+ *
  * @author Massimo Caliman
  */
 public final class Concat extends Binary {

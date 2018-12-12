@@ -188,8 +188,13 @@ public abstract class Start {
     @Nullable
     public abstract String toString(boolean address);
 
+
     public boolean test(String text) {
         return this.toString(true).equals(text);
+        //return  (this.getAddress(true) + " = " + this.toString(false)).equals(text);
     }
 
+    public String getSheetName() {
+        return sheetName;
+    }
 }
