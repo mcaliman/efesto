@@ -100,7 +100,7 @@ public class ExcelToolkitCommand implements ToolkitCommand {
         for (Start start : getStartList()){
             //System.out.println("" + start.getClass().getSimpleName() + " : " );
             if(start instanceof ToFunctional) {
-                System.out.println( start.getSheetName() + start.getAddress(false) + " = " +  ((ToFunctional) start).toFuctional() );
+                System.out.println( start.id() + " = " +  ((ToFunctional) start).toFuctional() );
             }else {
                 System.out.println(start.toString(true));
             }
