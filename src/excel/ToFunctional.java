@@ -25,7 +25,7 @@ package excel;
 public interface ToFunctional {
 
     default String toFuctional() {
-        return "";
+        return toString();
     }
 
     /*default String toVar() {

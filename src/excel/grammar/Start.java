@@ -22,6 +22,7 @@
 
 package excel.grammar;
 
+import excel.ToFunctional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +34,7 @@ import static excel.grammar.Grammar.*;
 /**
  * @author Massimo Caliman
  */
-public abstract class Start {
+public abstract class Start implements ToFunctional {
 
     private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 

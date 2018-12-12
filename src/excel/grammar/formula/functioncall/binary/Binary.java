@@ -22,6 +22,7 @@
 
 package excel.grammar.formula.functioncall.binary;
 
+import excel.ToFunctional;
 import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.ParenthesisFormula;
@@ -35,7 +36,7 @@ import static excel.grammar.Grammar.openparen;
 /**
  * @author Massimo Caliman
  */
-public abstract class Binary extends FunctionCall {
+public abstract class Binary extends FunctionCall implements ToFunctional {
 
     protected final String op;
     protected final Formula lFormula;
@@ -60,6 +61,24 @@ public abstract class Binary extends FunctionCall {
                 operandTo(lFormula) + op + operandTo(rFormula);
     }
 
+    public String toFuctional() {
+        return operandToFuctional(lFormula) + op + operandToFuctional(rFormula) ;
+    }
+
+    protected String operandToFuctional(Formula operand) {
+        if (operand instanceof CELL_REFERENCE) {
+            return operand.getSheetName() + operand.getAddress(false);
+        } else if (operand instanceof ParenthesisFormula) {
+            return ((ParenthesisFormula) operand).toFuctional();//operandTo((ParenthesisFormula) operand);
+        } else if (operand instanceof Unary) {
+            return ((Unary) operand).getUnOpPrefix() + operand.getAddress();
+        } else {
+            return operand.toString();
+        }
+    }
+
+
+
     public Formula getlFormula() {
         return lFormula;
     }
@@ -68,7 +87,7 @@ public abstract class Binary extends FunctionCall {
         return rFormula;
     }
 
-    private String operandTo(Formula operand) {
+    protected String operandTo(Formula operand) {
         if (operand instanceof CELL_REFERENCE) {
             return operand.getAddress();
         } else if (operand instanceof ParenthesisFormula) {
@@ -80,7 +99,7 @@ public abstract class Binary extends FunctionCall {
         }
     }
 
-    private String operandTo(ParenthesisFormula operand) {
+    protected String operandTo(ParenthesisFormula operand) {
         return operand.getFormula() instanceof Binary ?
                 openparen + operand.getFormula().toString(false) + closeparen :
                 openparen + operand.getFormula().getAddress(true) + closeparen;

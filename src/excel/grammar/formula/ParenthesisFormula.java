@@ -22,6 +22,7 @@
 
 package excel.grammar.formula;
 
+import excel.ToFunctional;
 import excel.grammar.Formula;
 import excel.grammar.formula.functioncall.binary.Binary;
 
@@ -31,7 +32,7 @@ import static excel.grammar.Grammar.openparen;
 /**
  * @author Massimo Caliman
  */
-public final class ParenthesisFormula extends Formula {
+public final class ParenthesisFormula extends Formula implements ToFunctional {
 
     private final Formula formula;
 
@@ -44,6 +45,9 @@ public final class ParenthesisFormula extends Formula {
         return openparen + formula.toString() + closeparen;
     }
 
+    public String toFuctional() {
+        return openparen + formula.toFuctional() + closeparen;
+    }
 
     public String toString(boolean address) {
         return isBinary() ?
