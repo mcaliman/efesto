@@ -115,7 +115,7 @@ public abstract class AbstractParser {
      * Current Sheet Name
      */
     protected String sheetName;
-    protected boolean errors = false;
+    protected final boolean errors = false;
     /**
      * (Work)Sheet
      */
@@ -154,10 +154,6 @@ public abstract class AbstractParser {
 
     public String getFileName() {
         return fileName;
-    }
-
-    public boolean isProtectionPresent() {
-        return protectionPresent;
     }
 
     protected void verbose(String text) {

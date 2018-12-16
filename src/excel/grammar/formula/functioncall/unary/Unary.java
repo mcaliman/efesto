@@ -33,8 +33,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class Unary extends FunctionCall implements ToFunctional {
 
-    protected final Formula formula;
-    protected final String unOpPrefix;
+    private final Formula formula;
+    private final String unOpPrefix;
 
     Unary(String unOpPrefix, Formula formula) {
         this.unOpPrefix = unOpPrefix;
@@ -59,7 +59,7 @@ public abstract class Unary extends FunctionCall implements ToFunctional {
         }
     }
 
-    public String toFuctional(){
+    public String toFuctional() {
         if (formula instanceof CELL_REFERENCE) {
             return unOpPrefix + ((CELL_REFERENCE) formula).getValue();
         } else {

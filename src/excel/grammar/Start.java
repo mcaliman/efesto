@@ -132,10 +132,6 @@ public abstract class Start implements ToFunctional {
         this.sheetIndex = sheetIndex;
     }
 
-    public void setSheetName(String sheetName) {
-        this.sheetName = sheetName;
-    }
-
     @NotNull
     public String getAddress() {
         return Start.cellAddress(getRow(), getColumn(), sheetName);
@@ -146,17 +142,10 @@ public abstract class Start implements ToFunctional {
         return sheet ? Start.cellAddress(getRow(), getColumn(), sheetName) : cellAddress(getRow(), getColumn());
     }
 
-    public String id(){
+    public String id() {
         //return sheetName + "" +cellAddress(getRow(), getColumn());
         return cellAddress(getRow(), getColumn());
     }
-
-// --Commented out by Inspection START (23/11/2018 08:31):
-//    private boolean sameAddr(Object obj) {
-//        final Start that = (Start) obj;
-//        return this.column == that.column && this.row == that.row && this.sheetIndex == that.sheetIndex;
-//    }
-// --Commented out by Inspection STOP (23/11/2018 08:31)
 
     @Override
     public int hashCode() {
@@ -166,6 +155,13 @@ public abstract class Start implements ToFunctional {
         hash = 53 * hash + this.sheetIndex;
         return hash;
     }
+
+// --Commented out by Inspection START (23/11/2018 08:31):
+//    private boolean sameAddr(Object obj) {
+//        final Start that = (Start) obj;
+//        return this.column == that.column && this.row == that.row && this.sheetIndex == that.sheetIndex;
+//    }
+// --Commented out by Inspection STOP (23/11/2018 08:31)
 
     protected boolean isArea() {
         return this.row == -1 && this.column == -1;
@@ -194,7 +190,6 @@ public abstract class Start implements ToFunctional {
     @Nullable
     public abstract String toString(boolean address);
 
-
     public boolean test(String text) {
         return this.toString(true).equals(text);
         //return  (this.getAddress(true) + " = " + this.toString(false)).equals(text);
@@ -202,5 +197,9 @@ public abstract class Start implements ToFunctional {
 
     public String getSheetName() {
         return sheetName;
+    }
+
+    public void setSheetName(String sheetName) {
+        this.sheetName = sheetName;
     }
 }

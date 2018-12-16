@@ -60,8 +60,7 @@ class Helper {
     @Nullable
     public static String getComment(Cell cell) {
         Comment cellComment = cell.getCellComment();
-        String comment = comment(cellComment);
-        return comment;
+        return comment(cellComment);
     }
 
     @Nullable
@@ -102,14 +101,6 @@ class Helper {
 
     private static boolean isDataType(Cell cell) {
         return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
-    }
-
-    @NotNull
-    public static Class internalFormulaResultType(Cell cell) {
-        int type = cell.getCachedFormulaResultType();
-        if (Helper.isDataType(cell))
-            return Date.class;
-        return internalFormulaResultType(type);
     }
 
 

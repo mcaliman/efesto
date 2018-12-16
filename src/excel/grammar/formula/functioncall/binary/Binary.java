@@ -38,9 +38,9 @@ import static excel.grammar.Grammar.openparen;
  */
 public abstract class Binary extends FunctionCall implements ToFunctional {
 
-    protected final String op;
-    protected final Formula lFormula;
-    protected final Formula rFormula;
+    private final String op;
+    private final Formula lFormula;
+    private final Formula rFormula;
 
     Binary(Formula lFormula, String op, Formula rFormula) {
         this.lFormula = lFormula;
@@ -62,10 +62,10 @@ public abstract class Binary extends FunctionCall implements ToFunctional {
     }
 
     public String toFuctional() {
-        return operandToFuctional(lFormula) + op + operandToFuctional(rFormula) ;
+        return operandToFuctional(lFormula) + op + operandToFuctional(rFormula);
     }
 
-    protected String operandToFuctional(Formula operand) {
+    private String operandToFuctional(Formula operand) {
         if (operand instanceof CELL_REFERENCE) {
             return operand.id();
         } else if (operand instanceof ParenthesisFormula) {
@@ -78,7 +78,6 @@ public abstract class Binary extends FunctionCall implements ToFunctional {
     }
 
 
-
     public Formula getlFormula() {
         return lFormula;
     }
@@ -87,7 +86,7 @@ public abstract class Binary extends FunctionCall implements ToFunctional {
         return rFormula;
     }
 
-    protected String operandTo(Formula operand) {
+    private String operandTo(Formula operand) {
         if (operand instanceof CELL_REFERENCE) {
             return operand.getAddress();
         } else if (operand instanceof ParenthesisFormula) {
@@ -99,7 +98,7 @@ public abstract class Binary extends FunctionCall implements ToFunctional {
         }
     }
 
-    protected String operandTo(ParenthesisFormula operand) {
+    private String operandTo(ParenthesisFormula operand) {
         return operand.getFormula() instanceof Binary ?
                 openparen + operand.getFormula().toString(false) + closeparen :
                 openparen + operand.getFormula().getAddress(true) + closeparen;

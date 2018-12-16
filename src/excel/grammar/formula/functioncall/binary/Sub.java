@@ -24,9 +24,6 @@ package excel.grammar.formula.functioncall.binary;
 
 import excel.ToFunctional;
 import excel.grammar.Formula;
-import excel.grammar.formula.ParenthesisFormula;
-import excel.grammar.formula.functioncall.unary.Unary;
-import excel.grammar.formula.reference.CELL_REFERENCE;
 
 /**
  * @author Massimo Caliman

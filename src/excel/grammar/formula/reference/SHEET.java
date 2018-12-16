@@ -25,10 +25,6 @@ package excel.grammar.formula.reference;
 import static excel.grammar.Grammar.exclamationmark;
 
 /**
- * SHEET The name of a worksheet
- * Priority: 5
- * Sheet characters
- * Any character except ' * [ ] \ : / ? ( ) ; { } # " = < > & + - * / ^ % , ␣
  *
  * @author Massimo Caliman
  */

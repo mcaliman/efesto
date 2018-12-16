@@ -39,38 +39,26 @@ import static excel.grammar.Grammar.exclamationmark;
 
 class RangeInternal {
 
-    private final Workbook workbook;
-    @Nullable
-    private final Sheet sheet;
-
-    private final int firstRow;
-    private final int firstColumn;
-
-    private final int lastRow;
-    private final int lastColumn;
     @NotNull
     private final RANGE tRANGE;
-    private String sheetName;
-
-    private Helper helper;
+    private final String sheetName;
 
 
     RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
-        helper = new Helper(workbook);
-        firstRow = t.getFirstRow();
-        firstColumn = t.getFirstColumn();
+        Helper helper = new Helper(workbook);
+        int firstRow = t.getFirstRow();
+        int firstColumn = t.getFirstColumn();
         sheetName = sheetnamne;
 
 
-        lastRow = t.getLastRow();
-        lastColumn = t.getLastColumn();
+        int lastRow = t.getLastRow();
+        int lastColumn = t.getLastColumn();
 
         CELL_REFERENCE first = new CELL_REFERENCE(firstRow, firstColumn);
         CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
         tRANGE = new RANGE(first, last);
 
-        this.workbook = workbook;
-        this.sheet = null;
+        Sheet sheet = null;
         String refs = tRANGE.toString();
 
 

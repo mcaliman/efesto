@@ -29,15 +29,6 @@ import org.jetbrains.annotations.Nullable;
 import static excel.grammar.Grammar.epsilon;
 
 /**
- * PrefixReferenceItem ::= ⟨Prefix⟩ ⟨ReferenceItem⟩
- * <p>
- * ⟨Prefix⟩ ::= SHEET
- * | ‘’’ SHEET-QUOTED
- * | ⟨File⟩ SHEET
- * | ‘’’ ⟨File⟩ SHEET-QUOTED
- * | FILE ‘!’
- * | MULTIPLE-SHEETS
- * | ⟨File⟩ MULTIPLE-SHEETS
  *
  * @author Massimo Caliman
  */

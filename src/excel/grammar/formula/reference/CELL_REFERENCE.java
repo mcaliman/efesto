@@ -83,7 +83,7 @@ public final class CELL_REFERENCE extends ReferenceItem implements ToFunctional 
     }
 
     public String toFuctional() {
-        return value!=null? value.toString(): "null" ;
+        return value != null ? value.toString() : "null";
         /*
         if (value instanceof String) return  format((String) value);
         else if (value instanceof Boolean)  return format((Boolean) value);
