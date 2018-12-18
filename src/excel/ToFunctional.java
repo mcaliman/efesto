@@ -24,11 +24,8 @@ package excel;
 
 public interface ToFunctional {
 
-    default String toFuctional() {
+    default String toFunctional() {
         return toString();
     }
 
-    /*default String toVar() {
-        return "";
-    }*/
 }

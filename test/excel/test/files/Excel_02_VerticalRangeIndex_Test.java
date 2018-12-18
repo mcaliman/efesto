@@ -38,11 +38,14 @@ class Excel_02_VerticalRangeIndex_Test {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/02-vertical-range-index.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/02-vertical-range-index.vb");
+        System.out.println("ToFormula.");
+        System.out.println("-------------");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0,
                 "VERTICAL_RANGE!I1:I7 = [ 0.0 1.0 2.0 3.0 4.0 5.0 6.0 ]",
                 "VERTICAL_RANGE!B9 = INDEX(VERTICAL_RANGE!I1:I7,4)"));
         System.out.println("ToFunctional.");
+        System.out.println("-------------");
         toolkitCommand.toFunctional();
     }
 }

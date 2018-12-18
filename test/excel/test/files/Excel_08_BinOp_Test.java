@@ -38,12 +38,15 @@ class Excel_08_BinOp_Test {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/08-BinOp.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/08-BinaryOp.vb");
+        System.out.println("ToFormula.");
+        System.out.println("-------------");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0,
                 "BinOp!B1 = 1.0",
                 "BinOp!B2 = 3.0",
                 "BinOp!B3 = BinOp!B2-BinOp!B1"));
         System.out.println("ToFunctional.");
+        System.out.println("-------------");
         toolkitCommand.toFunctional();
     }
 }

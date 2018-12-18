@@ -23,6 +23,7 @@
 package excel.test.files;
 
 import excel.ExcelToolkitCommand;
+import excel.ToolkitOptions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,13 +35,18 @@ class Excel_10_Prefix_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/10-Prefix.xlsx");
+        ToolkitOptions options = new ToolkitOptions();
+        options.setVerbose(true);
+        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/10-Prefix.xlsx",options);
         toolkitCommand.execute();
         toolkitCommand.writer("test/10-Prefix.vb");
+        System.out.println("ToFormula.");
+        System.out.println("-------------");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0,
                 "Prefix!A1 = Sheet1!A1 = []"));
         System.out.println("ToFunctional.");
+        System.out.println("-------------");
         toolkitCommand.toFunctional();
     }
 }

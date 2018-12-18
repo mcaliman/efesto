@@ -37,12 +37,15 @@ class Excel_03_RangeIndex_Test {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/03-range-index.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/03-range-index.vb");
+        System.out.println("ToFormula.");
+        System.out.println("-------------");
         toolkitCommand.print();
         boolean correct = toolkitCommand.test(0,
                 "RANGE!A1:B6 = [[1.1 1.2][2.1 2.2][3.1 3.2][4.1 4.2][5.1 5.2][6.1 6.2]]",
                 "RANGE!A10 = INDEX(RANGE!A1:B6,2,2)");
         assertTrue(correct);
         System.out.println("ToFunctional.");
+        System.out.println("-------------");
         toolkitCommand.toFunctional();
     }
 }

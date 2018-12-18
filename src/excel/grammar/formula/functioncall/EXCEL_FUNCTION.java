@@ -22,9 +22,11 @@
 
 package excel.grammar.formula.functioncall;
 
+import excel.ToFunctional;
 import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.reference.CELL_REFERENCE;
+import excel.grammar.formula.reference.RangeReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,7 +36,7 @@ import static excel.grammar.Grammar.openparen;
 /**
  * @author Massimo Caliman
  */
-public abstract class EXCEL_FUNCTION extends FunctionCall {
+public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFunctional {
 
     protected Formula[] args;
 
@@ -59,6 +61,11 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
                 getName() + openparen + argumentsToString() + closeparen;
     }
 
+    @Override
+    public String toFunctional() {
+        return  getName() + openparen + argumentsToFunctional() + closeparen;
+    }
+
     private String getName() {
         return getClass().getSimpleName();
     }
@@ -75,6 +82,23 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
     private String argumentToString(@Nullable Formula operand) {
         if (operand == null) return "Missing";
         return operand instanceof CELL_REFERENCE ? operand.getAddress() : operand.toString(false);
+    }
+
+    private String argumentsToFunctional() {
+        var buff = new StringBuilder();
+        Formula[] args = getArgs();
+        if (args == null || args.length == 0) return "Missing";
+        for (Formula arg : args) buff.append(argumentToFunctional(arg)).append(",");
+        if (buff.charAt(buff.length() - 1) == ',') buff.deleteCharAt(buff.length() - 1);
+        return buff.toString();
+    }
+
+    private String argumentToFunctional(@Nullable Formula operand) {
+        if (operand == null) return "Missing";
+        if(operand instanceof RangeReference){
+           return operand.id();
+        }
+        return operand instanceof CELL_REFERENCE ? operand.id() : operand.toFunctional();
     }
 
 }

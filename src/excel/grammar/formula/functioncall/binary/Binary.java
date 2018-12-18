@@ -61,20 +61,27 @@ public abstract class Binary extends FunctionCall implements ToFunctional {
                 operandTo(lFormula) + op + operandTo(rFormula);
     }
 
-    public String toFuctional() {
+    @Override
+    public String toFunctional() {
         return operandToFuctional(lFormula) + op + operandToFuctional(rFormula);
     }
 
     private String operandToFuctional(Formula operand) {
-        if (operand instanceof CELL_REFERENCE) {
+        if (operand instanceof CELL_REFERENCE || operand instanceof Unary) {
+            return operand.id();
+        } else  {
+            return operand.toFunctional();
+        }
+
+        /*if (operand instanceof CELL_REFERENCE) {
             return operand.id();
         } else if (operand instanceof ParenthesisFormula) {
-            return ((ParenthesisFormula) operand).toFuctional();
+            return ((ParenthesisFormula) operand).toFunctional();
         } else if (operand instanceof Unary) {
             return ((Unary) operand).getUnOpPrefix() + operand.id();
         } else {
-            return operand.toFuctional();
-        }
+            return operand.toFunctional();
+        }*/
     }
 
 

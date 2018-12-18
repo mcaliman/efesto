@@ -29,12 +29,15 @@ import org.apache.poi.POIXMLProperties;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -126,13 +129,19 @@ public abstract class AbstractParser {
     private boolean protectionPresent;
     private String fileName;
 
+    protected int counterSheets;
+
+    protected List<Cell> ext ;
+
     protected AbstractParser(@NotNull File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
         this.fileName = file.getName();
+
     }
 
     private AbstractParser(Workbook workbook) {
         this.book = workbook;
+        this.ext = new ArrayList<>();
         XSSFWorkbook xssfWorkbook = (XSSFWorkbook) this.book;
         protectionPresent = xssfWorkbook.validateWorkbookPassword("password");
         POIXMLProperties props = xssfWorkbook.getProperties();
@@ -171,16 +180,22 @@ public abstract class AbstractParser {
         for (Sheet currentSheet : this.book) parse(currentSheet);
     }
 
+    public boolean singleSheet(){
+        return this.counterSheets==1;
+    }
+
     /**
      * Parse a single (Work)Sheet
      *
      * @param sheet
      */
     private void parse(@NotNull Sheet sheet) {
+        this.counterSheets++;
         this.sheet = sheet;
         protectionPresent = protectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
         sheetIndex = book.getSheetIndex(sheet);
         sheetName = sheet.getSheetName();
+        verbose("Parsing sheet-name:"+sheetName);
         for (Row row : sheet)
             for (Cell cell : row)
                 if (cell != null) parse(cell);
@@ -193,8 +208,20 @@ public abstract class AbstractParser {
      * @param cell
      */
     private void parse(Cell cell) {
-        if (cell.getCellType() == CELL_TYPE_FORMULA)
+        if (cell.getCellType() == CELL_TYPE_FORMULA) {
             parseFormula(cell);
+        } else if(this.ext.contains(cell)){
+            /*
+            verbose("Recover loosed cell!");
+            Object obj = helper.valueOf(cell);
+            CELL_REFERENCE cell_reference = new CELL_REFERENCE(cell.getRowIndex(),cell.getColumnIndex());
+            cell_reference.setValue(obj);
+            //cell_reference.setSheetIndex(cell.getSheet().get);
+            cell_reference.setSheetName(cell.getSheet().getSheetName());
+            parseCELL_REFERENCE(cell_reference,true,obj);
+            this.ext.remove(cell);
+            */
+        }
     }
 
     /**
@@ -208,10 +235,11 @@ public abstract class AbstractParser {
         colFormula = cell.getColumnIndex();
         rowFormula = cell.getRowIndex();
         String formulaAddress = Start.cellAddress(rowFormula, colFormula);
-        String formulaText = cell.getCellFormula();
-        verbose(formulaAddress + " = " + formulaText);
+        //String formulaText = cell.getCellFormula();
+        //verbose(formulaAddress + " = " + formulaText);
         Ptg[] formulaPtgs = helper.tokens(this.sheet, this.rowFormula, this.colFormula);
         if (formulaPtgs == null) {
+            String formulaText = cell.getCellFormula();
             System.err.println("ptgs empty or null for address " + formulaAddress);
             err("ptgs empty or null for address " + formulaAddress, rowFormula, colFormula);
             parseUDF(formulaText);
@@ -368,6 +396,14 @@ public abstract class AbstractParser {
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
         String cellref = helper.getCellRef(t);
+        if(this.sheetIndex!=sheetIndex){
+            /*Sheet extSheet = this.book.getSheet(sheetName);
+            CellReference cr = new CellReference(cellref);
+            Row row = extSheet.getRow(cr.getRow());
+            Cell cell = row.getCell(cr.getCol());
+            this.ext.add(cell);
+            verbose("Loosing!!! reference[ext] "+tSHEET.toString()+""+cellref);*/
+        }
         if (extWorkbookNumber > 0) parseReference(tFILE, cellref);
         else parseReference(tSHEET, cellref);
     }

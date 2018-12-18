@@ -39,6 +39,7 @@ public abstract class Start implements ToFunctional {
     private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     protected String sheetName;
+    protected boolean singleSheet;
     private int row;
     private int column;
     private String comment;
@@ -100,6 +101,10 @@ public abstract class Start implements ToFunctional {
         return colRef.toString();
     }
 
+    public void setSingleSheet(boolean singleSheet) {
+        this.singleSheet = singleSheet;
+    }
+
     public boolean isTerminal() {
         return false;
     }
@@ -143,8 +148,7 @@ public abstract class Start implements ToFunctional {
     }
 
     public String id() {
-        //return sheetName + "" +cellAddress(getRow(), getColumn());
-        return cellAddress(getRow(), getColumn());
+        return this.singleSheet ? cellAddress(getRow(), getColumn()) : sheetName + "!" + cellAddress(getRow(), getColumn());
     }
 
     @Override
@@ -155,13 +159,6 @@ public abstract class Start implements ToFunctional {
         hash = 53 * hash + this.sheetIndex;
         return hash;
     }
-
-// --Commented out by Inspection START (23/11/2018 08:31):
-//    private boolean sameAddr(Object obj) {
-//        final Start that = (Start) obj;
-//        return this.column == that.column && this.row == that.row && this.sheetIndex == that.sheetIndex;
-//    }
-// --Commented out by Inspection STOP (23/11/2018 08:31)
 
     protected boolean isArea() {
         return this.row == -1 && this.column == -1;

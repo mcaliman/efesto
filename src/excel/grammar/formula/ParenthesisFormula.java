@@ -45,8 +45,9 @@ public final class ParenthesisFormula extends Formula implements ToFunctional {
         return openparen + formula.toString() + closeparen;
     }
 
-    public String toFuctional() {
-        return openparen + formula.toFuctional() + closeparen;
+    @Override
+    public String toFunctional() {
+        return openparen + formula.toFunctional() + closeparen;
     }
 
     public String toString(boolean address) {

@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
+ *
  * @author Massimo Caliman
  */
 class Excel_01_HorizontalRangeIndex_Test {
@@ -37,12 +38,15 @@ class Excel_01_HorizontalRangeIndex_Test {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/01-horizontal-range-index.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/01-horizontal-range-index.vb");
+        System.out.println("ToFormula.");
+        System.out.println("-------------");
         toolkitCommand.print();
         boolean correct = toolkitCommand.test(0,
                 "HORIZONTAL_RANGE!B1:H1 = [ 0.0 1.0 2.0 3.0 4.0 5.0 6.0 ]",
                 "HORIZONTAL_RANGE!B5 = INDEX(HORIZONTAL_RANGE!B1:H1,3)");
         assertTrue(correct);
         System.out.println("ToFunctional.");
+        System.out.println("-------------");
         toolkitCommand.toFunctional();
     }
 }

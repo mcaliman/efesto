@@ -43,12 +43,15 @@ class Excel_09_Expr_Test {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/09-Expr.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/09-Expr.vb");
+        System.out.println("ToFormula.");
+        System.out.println("-------------");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0,
                 "Expr!A1 = 100.0",
                 "Expr!A2 = (Expr!A1*2)/2"
         ));
-        System.out.println("toFunctional.");
+        System.out.println("ToFunctional.");
+        System.out.println("-------------");
         toolkitCommand.toFunctional();
 
     }

@@ -82,16 +82,9 @@ public final class CELL_REFERENCE extends ReferenceItem implements ToFunctional 
         return toString();
     }
 
-    public String toFuctional() {
+    @Override
+    public String toFunctional() {
         return value != null ? value.toString() : "null";
-        /*
-        if (value instanceof String) return  format((String) value);
-        else if (value instanceof Boolean)  return format((Boolean) value);
-        else if (value instanceof Integer) return format((Integer) value);
-        else if (value instanceof Double)  return format((Double) value);
-        else if (value instanceof Date) return  format((Date) value);
-        else return null;
-        */
     }
 
 }

@@ -38,12 +38,15 @@ class Excel_05_Reference_Test {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/05-reference.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/05-reference.vb");
+        System.out.println("ToFormula.");
+        System.out.println("-------------");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0,
                 "Reference!A1 = 15.0",
                 "Reference!A2 = 100.0",
                 "Reference!A3 = Reference!A2/Reference!A1"));
         System.out.println("ToFunctional.");
+        System.out.println("-------------");
         toolkitCommand.toFunctional();
     }
 }

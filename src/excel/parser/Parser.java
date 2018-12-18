@@ -93,9 +93,15 @@ public final class Parser extends AbstractParser {
         if (unordered.singleton()) {
             ordered = new StartList();
             ordered.add(unordered.get(0));
+            for (Start element : ordered) {
+                element.setSingleSheet(this.singleSheet());
+            }
             return;
         }
         ordered = graph.topologicalSort();
+        for (Start element : ordered) {
+            element.setSingleSheet(this.singleSheet());
+        }
     }
 
 
@@ -111,7 +117,6 @@ public final class Parser extends AbstractParser {
         start.setRow(rowFormula);
         start.setSheetIndex(sheetIndex);
         start.setSheetName(sheetName);
-        //start.setType(internalFormulaResultTypeClass);
     }
 
     @Override

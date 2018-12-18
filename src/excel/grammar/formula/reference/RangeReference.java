@@ -22,6 +22,7 @@
 
 package excel.grammar.formula.reference;
 
+import excel.ToFunctional;
 import excel.grammar.formula.Reference;
 
 import static excel.grammar.Grammar.colon;
@@ -30,7 +31,7 @@ import static excel.grammar.Grammar.exclamationmark;
 /**
  * @author Massimo Caliman
  */
-public final class RangeReference extends Reference {
+public final class RangeReference extends Reference implements ToFunctional {
 
     private final CELL_REFERENCE reference1;
     private final CELL_REFERENCE reference2;
@@ -62,6 +63,18 @@ public final class RangeReference extends Reference {
 
     private String values() {
         return values(reference1.getRow(), reference1.getColumn(), reference2.getRow(), reference2.getColumn(), vals, (horizzontal_range() || vertical_range()));
+    }
+
+    public String id(){
+        return this.singleSheet ?
+                reference1.getAddress() + colon + reference2.getAddress():
+                sheetName + exclamationmark + reference1.getAddress() + colon + reference2.getAddress();
+    }
+
+
+    @Override
+    public String toFunctional() {
+        return values();
     }
 
 }
