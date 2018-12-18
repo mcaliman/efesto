@@ -1,5 +1,6 @@
 '' Text File: test/comments.vb
 '' Excel File: comments.xlsx
+'' Excel Formulas Number: 1
 '' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
 '' this is A1 comment
 Sheet1!A1 = 1.0

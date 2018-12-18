@@ -22,17 +22,19 @@
 
 package excel.grammar.formula.reference;
 
+import excel.ToFunctional;
 import excel.grammar.formula.Reference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static excel.grammar.Grammar.epsilon;
+import static excel.grammar.Grammar.exclamationmark;
 
 /**
  *
  * @author Massimo Caliman
  */
-public final class PrefixReferenceItem extends Reference {
+public final class PrefixReferenceItem extends Reference  implements ToFunctional {
 
     private final Prefix prefix;
 
@@ -69,8 +71,27 @@ public final class PrefixReferenceItem extends Reference {
 
     public String toString(boolean address) {
         return address ? ifIsNotArea() + prefix + reference + " = " + values() : toString();
-
     }
+
+
+    public String id(){
+        return this.singleSheet ?
+                ifIsNotArea(false) + prefix + reference:
+                ifIsNotArea() + prefix + reference
+                ;
+    }
+
+
+    @Override
+    public String toFunctional() {
+        return values();
+    }
+
+    @NotNull
+    private String ifIsNotArea(boolean address) {
+        return !isArea() ? getAddress(address) + " = " : epsilon;
+    }
+
 
     @NotNull
     private String ifIsNotArea() {

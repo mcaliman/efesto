@@ -129,7 +129,9 @@ public abstract class AbstractParser {
     private boolean protectionPresent;
     private String fileName;
 
-    protected int counterSheets;
+    protected int counterSheets = 0;
+
+    protected int counterFormulas;
 
     protected List<Cell> ext ;
 
@@ -161,6 +163,10 @@ public abstract class AbstractParser {
         System.out.println("Parse...");
     }
 
+    public int getCounterFormulas() {
+        return counterFormulas;
+    }
+
     public String getFileName() {
         return fileName;
     }
@@ -177,12 +183,12 @@ public abstract class AbstractParser {
      * Parse (Work)Book.
      */
     public void parse() {
+        this.isSingleSheet = this.book.getNumberOfSheets()==1;
         for (Sheet currentSheet : this.book) parse(currentSheet);
     }
 
-    public boolean singleSheet(){
-        return this.counterSheets==1;
-    }
+    protected boolean isSingleSheet;
+
 
     /**
      * Parse a single (Work)Sheet
@@ -210,6 +216,7 @@ public abstract class AbstractParser {
     private void parse(Cell cell) {
         if (cell.getCellType() == CELL_TYPE_FORMULA) {
             parseFormula(cell);
+            this.counterFormulas++;
         } else if(this.ext.contains(cell)){
             /*
             verbose("Recover loosed cell!");
@@ -248,6 +255,7 @@ public abstract class AbstractParser {
         Start start = parse(formulaPtgs);
         if (Objects.nonNull(start)) {
             start.setComment(comment);
+            start.setSingleSheet(this.isSingleSheet);
             parseFormula(start);
         }
     }
@@ -454,10 +462,11 @@ public abstract class AbstractParser {
             comment = Helper.getComment(c);
         }
         CELL_REFERENCE tCELL_REFERENCE = new CELL_REFERENCE(t.getRow(), t.getColumn(), comment);
-        parseCELL_REFERENCE(tCELL_REFERENCE, rowObject != null, value);
+        tCELL_REFERENCE.setValue(value);
+        parseCELL_REFERENCE(tCELL_REFERENCE);
     }
 
-    protected abstract void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value);
+    protected abstract void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE);
 
 
     //endregion

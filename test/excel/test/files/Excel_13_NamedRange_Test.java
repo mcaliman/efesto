@@ -34,12 +34,15 @@ class Excel_13_NamedRange_Test {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/13-NamedRange.xlsx");
         toolkitCommand.execute();
         toolkitCommand.writer("test/13-NamedRange.vb");
+        System.out.println("ToFormula.");
+        System.out.println("-------------");
         toolkitCommand.print();
         boolean correct = toolkitCommand.test(0,
                 "NamedRange!slist = [ 1.0 2.0 3.0 4.0 5.0 6.0 ]",
                 "NamedRange!A8 = SUM(NamedRange!slist)");
         assertTrue(correct);
         System.out.println("ToFunctional.");
+        System.out.println("-------------");
         toolkitCommand.toFunctional();
     }
 }

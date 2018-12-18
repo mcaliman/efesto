@@ -90,18 +90,13 @@ public final class Parser extends AbstractParser {
 
 
     private void sort() {
+
         if (unordered.singleton()) {
             ordered = new StartList();
             ordered.add(unordered.get(0));
-            for (Start element : ordered) {
-                element.setSingleSheet(this.singleSheet());
-            }
             return;
         }
         ordered = graph.topologicalSort();
-        for (Start element : ordered) {
-            element.setSingleSheet(this.singleSheet());
-        }
     }
 
 
@@ -117,6 +112,7 @@ public final class Parser extends AbstractParser {
         start.setRow(rowFormula);
         start.setSheetIndex(sheetIndex);
         start.setSheetName(sheetName);
+        start.setSingleSheet(this.isSingleSheet);
     }
 
     @Override
@@ -363,12 +359,9 @@ public final class Parser extends AbstractParser {
      * CELLREF
      */
     @Override
-    protected void parseCELL_REFERENCE(@NotNull CELL_REFERENCE tCELL_REFERENCE, boolean rowNotNull, Object value) {
+    protected void parseCELL_REFERENCE(@NotNull CELL_REFERENCE tCELL_REFERENCE) {
         setOwnProperty(tCELL_REFERENCE);
-        if (rowNotNull) {
-            tCELL_REFERENCE.setValue(value);
-            this.unordered.add(tCELL_REFERENCE);
-        }
+        this.unordered.add(tCELL_REFERENCE);
         stack.push(tCELL_REFERENCE);
     }
 

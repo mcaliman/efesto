@@ -67,7 +67,7 @@ public class ReferenceItem extends Reference {
         return firstColumn == lastColumn && firstRow != lastRow;
     }
 
-    private String values() {
+    protected String values() {
         return values(firstRow, firstColumn, lastRow, lastColumn, vals, (horizzontal_range() || vertical_range()));
     }
 

@@ -22,10 +22,16 @@
 
 package excel.grammar.formula.reference;
 
+import excel.ToFunctional;
+import org.jetbrains.annotations.Nullable;
+
+import static excel.grammar.Grammar.colon;
+import static excel.grammar.Grammar.exclamationmark;
+
 /**
  * @author Massimo Caliman
  */
-public class NamedRange extends ReferenceItem {
+public class NamedRange extends ReferenceItem implements ToFunctional {
 
     public NamedRange(String value, RANGE tRANGE) {
         this.value = value;
@@ -35,5 +41,17 @@ public class NamedRange extends ReferenceItem {
         setLastColumn(tRANGE.getLast().getColumn());
         add(tRANGE.values());
         setAsArea();
+    }
+
+    public String id(){
+        return this.singleSheet ?
+                value:
+                sheetName + exclamationmark + value;
+    }
+
+
+    @Override
+    public String toFunctional() {
+        return values();
     }
 }
