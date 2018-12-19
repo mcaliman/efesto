@@ -25,7 +25,6 @@ package excel.grammar.formula.functioncall;
 import excel.ToFunctional;
 import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
-import excel.grammar.formula.functioncall.builtin.SUM;
 import excel.grammar.formula.reference.CELL_REFERENCE;
 import excel.grammar.formula.reference.NamedRange;
 import excel.grammar.formula.reference.RangeReference;
@@ -65,7 +64,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFunctiona
 
     @Override
     public String toFunctional() {
-        return  getName() + openparen + argumentsToFunctional() + closeparen;
+        return getName() + openparen + argumentsToFunctional() + closeparen;
     }
 
     private String getName() {
@@ -98,11 +97,11 @@ public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFunctiona
     private String argumentToFunctional(@Nullable Formula operand) {
         if (operand == null) return "Missing";
         //System.err.println(operand.getClass().getSimpleName());
-        if(operand instanceof RangeReference || operand instanceof NamedRange ){
-           return operand.id();
-        }else if(operand instanceof CELL_REFERENCE){
+        if (operand instanceof RangeReference || operand instanceof NamedRange) {
             return operand.id();
-        }else {
+        } else if (operand instanceof CELL_REFERENCE) {
+            return operand.id();
+        } else {
             return operand.toFunctional();
         }
     }

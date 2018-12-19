@@ -23,9 +23,7 @@
 package excel.grammar.formula.reference;
 
 import excel.ToFunctional;
-import org.jetbrains.annotations.Nullable;
 
-import static excel.grammar.Grammar.colon;
 import static excel.grammar.Grammar.exclamationmark;
 
 /**
@@ -43,9 +41,9 @@ public class NamedRange extends ReferenceItem implements ToFunctional {
         setAsArea();
     }
 
-    public String id(){
+    public String id() {
         return this.singleSheet ?
-                value:
+                value :
                 sheetName + exclamationmark + value;
     }
 

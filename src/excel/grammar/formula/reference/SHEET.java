@@ -25,7 +25,6 @@ package excel.grammar.formula.reference;
 import static excel.grammar.Grammar.exclamationmark;
 
 /**
- *
  * @author Massimo Caliman
  */
 public final class SHEET extends Prefix {

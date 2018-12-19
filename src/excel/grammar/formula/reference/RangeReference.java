@@ -41,6 +41,15 @@ public final class RangeReference extends Reference implements ToFunctional {
         this.reference2 = reference2;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RangeReference that = (RangeReference) o;
+        return that.toString(true).equals(this.toString(true));
+    }
+
     private boolean horizzontal_range() {
         return reference1.getRow() == reference2.getRow() && reference1.getColumn() != reference2.getColumn();
     }
@@ -65,9 +74,9 @@ public final class RangeReference extends Reference implements ToFunctional {
         return values(reference1.getRow(), reference1.getColumn(), reference2.getRow(), reference2.getColumn(), vals, (horizzontal_range() || vertical_range()));
     }
 
-    public String id(){
+    public String id() {
         return this.singleSheet ?
-                reference1.getAddress() + colon + reference2.getAddress():
+                reference1.getAddress() + colon + reference2.getAddress() :
                 sheetName + exclamationmark + reference1.getAddress() + colon + reference2.getAddress();
     }
 

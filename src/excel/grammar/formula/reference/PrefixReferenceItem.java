@@ -28,13 +28,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static excel.grammar.Grammar.epsilon;
-import static excel.grammar.Grammar.exclamationmark;
 
 /**
- *
  * @author Massimo Caliman
  */
-public final class PrefixReferenceItem extends Reference  implements ToFunctional {
+public final class PrefixReferenceItem extends Reference implements ToFunctional {
 
     private final Prefix prefix;
 
@@ -74,9 +72,17 @@ public final class PrefixReferenceItem extends Reference  implements ToFunctiona
     }
 
 
-    public String id(){
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PrefixReferenceItem that = (PrefixReferenceItem) o;
+        return that.toString(true).equals(this.toString(true));
+    }
+
+    public String id() {
         return this.singleSheet ?
-                ifIsNotArea(false) + prefix + reference:
+                ifIsNotArea(false) + prefix + reference :
                 ifIsNotArea() + prefix + reference
                 ;
     }

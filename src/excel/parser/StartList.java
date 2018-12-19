@@ -35,8 +35,14 @@ public final class StartList extends ArrayList<Start> implements List<Start> {
 
     @Override
     public boolean add(Start object) {
-        if (!contains(object)) return super.add(object);
+        if (!contains(object)) {
+            return super.add(object);
+        }
         return true;
+    }
+
+    public boolean contains(Object o) {
+        return indexOf(o) >= 0;
     }
 
     public boolean singleton() {

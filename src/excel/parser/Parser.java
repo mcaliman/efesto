@@ -365,6 +365,15 @@ public final class Parser extends AbstractParser {
         stack.push(tCELL_REFERENCE);
     }
 
+    @Override
+    protected void parseCELL_REFERENCELinked(@NotNull CELL_REFERENCE tCELL_REFERENCE) {
+        setOwnProperty(tCELL_REFERENCE);
+        this.unordered.add(tCELL_REFERENCE);
+        stack.push(tCELL_REFERENCE);
+        graph.addNode(tCELL_REFERENCE);
+    }
+
+
     /**
      * Used
      * Sheet2!A1:B1 (Sheet + AREA/RANGE)

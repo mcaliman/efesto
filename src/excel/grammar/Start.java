@@ -154,7 +154,7 @@ public abstract class Start implements ToFunctional {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 53 * hash + row;
+        hash = 53 * hash + this.row;
         hash = 53 * hash + this.column;
         hash = 53 * hash + this.sheetIndex;
         return hash;
@@ -189,7 +189,6 @@ public abstract class Start implements ToFunctional {
 
     public boolean test(String text) {
         return this.toString(true).equals(text);
-        //return  (this.getAddress(true) + " = " + this.toString(false)).equals(text);
     }
 
     public String getSheetName() {

@@ -53,6 +53,7 @@ import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
  */
 public abstract class AbstractParser {
 
+    protected final boolean errors = false;
     private final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
     private final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
     private final Predicate<Ptg> area3DPxg = (Ptg t) -> t instanceof Area3DPxg;
@@ -93,7 +94,6 @@ public abstract class AbstractParser {
     private final Predicate<Ptg> unaryPlusPtg = (Ptg t) -> t instanceof UnaryPlusPtg;
     private final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
-
     /**
      * (Work)Book
      */
@@ -118,7 +118,10 @@ public abstract class AbstractParser {
      * Current Sheet Name
      */
     protected String sheetName;
-    protected final boolean errors = false;
+    protected int counterSheets = 0;
+    protected int counterFormulas;
+    protected List<Cell> ext;
+    protected boolean isSingleSheet;
     /**
      * (Work)Sheet
      */
@@ -128,12 +131,6 @@ public abstract class AbstractParser {
      */
     private boolean protectionPresent;
     private String fileName;
-
-    protected int counterSheets = 0;
-
-    protected int counterFormulas;
-
-    protected List<Cell> ext ;
 
     protected AbstractParser(@NotNull File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
@@ -183,12 +180,9 @@ public abstract class AbstractParser {
      * Parse (Work)Book.
      */
     public void parse() {
-        this.isSingleSheet = this.book.getNumberOfSheets()==1;
+        this.isSingleSheet = this.book.getNumberOfSheets() == 1;
         for (Sheet currentSheet : this.book) parse(currentSheet);
     }
-
-    protected boolean isSingleSheet;
-
 
     /**
      * Parse a single (Work)Sheet
@@ -201,7 +195,7 @@ public abstract class AbstractParser {
         protectionPresent = protectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
         sheetIndex = book.getSheetIndex(sheet);
         sheetName = sheet.getSheetName();
-        verbose("Parsing sheet-name:"+sheetName);
+        verbose("Parsing sheet-name:" + sheetName);
         for (Row row : sheet)
             for (Cell cell : row)
                 if (cell != null) parse(cell);
@@ -214,18 +208,27 @@ public abstract class AbstractParser {
      * @param cell
      */
     private void parse(Cell cell) {
+        System.err.println("cell(" + cell.getRowIndex() + "," + cell.getColumnIndex() + "):" + cell.toString());
         if (cell.getCellType() == CELL_TYPE_FORMULA) {
             parseFormula(cell);
             this.counterFormulas++;
-        } else if(this.ext.contains(cell)){
-            /*
+        } else if (this.ext.contains(cell)) {
             verbose("Recover loosed cell!");
             Object obj = helper.valueOf(cell);
-            CELL_REFERENCE cell_reference = new CELL_REFERENCE(cell.getRowIndex(),cell.getColumnIndex());
+            CELL_REFERENCE cell_reference = new CELL_REFERENCE(cell.getRowIndex(), cell.getColumnIndex());
             cell_reference.setValue(obj);
-            //cell_reference.setSheetIndex(cell.getSheet().get);
+
             cell_reference.setSheetName(cell.getSheet().getSheetName());
-            parseCELL_REFERENCE(cell_reference,true,obj);
+            cell_reference.setSheetIndex(helper.getSheetIndex(cell.getSheet().getSheetName()));
+            parseCELL_REFERENCELinked(cell_reference);
+            /*
+
+
+
+
+            //cell_reference.setSheetIndex(cell.getSheet().get);
+
+
             this.ext.remove(cell);
             */
         }
@@ -404,13 +407,15 @@ public abstract class AbstractParser {
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
         String cellref = helper.getCellRef(t);
-        if(this.sheetIndex!=sheetIndex){
-            /*Sheet extSheet = this.book.getSheet(sheetName);
-            CellReference cr = new CellReference(cellref);
-            Row row = extSheet.getRow(cr.getRow());
-            Cell cell = row.getCell(cr.getCol());
-            this.ext.add(cell);
-            verbose("Loosing!!! reference[ext] "+tSHEET.toString()+""+cellref);*/
+        if (this.sheetIndex != sheetIndex) {
+            Sheet extSheet = this.book.getSheet(sheetName);
+            if (extSheet != null) {
+                CellReference cr = new CellReference(cellref);
+                Row row = extSheet.getRow(cr.getRow());
+                Cell cell = row.getCell(cr.getCol());
+                this.ext.add(cell);
+                verbose("Loosing!!! reference[ext] " + tSHEET.toString() + "" + cellref);
+            }
         }
         if (extWorkbookNumber > 0) parseReference(tFILE, cellref);
         else parseReference(tSHEET, cellref);
@@ -468,6 +473,7 @@ public abstract class AbstractParser {
 
     protected abstract void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE);
 
+    protected abstract void parseCELL_REFERENCELinked(CELL_REFERENCE tCELL_REFERENCE);
 
     //endregion
 
