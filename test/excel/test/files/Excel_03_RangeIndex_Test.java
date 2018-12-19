@@ -31,7 +31,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Massimo Caliman
  */
 class Excel_03_RangeIndex_Test {
-
+    /**
+     * ToFormula: OK
+     * ToFunctional: OK
+     *
+     * @throws Exception
+     */
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/03-range-index.xlsx");

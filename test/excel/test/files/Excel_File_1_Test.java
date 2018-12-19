@@ -28,7 +28,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_File_1_Test {
-
+    /**
+     * ToFormula: OK
+     * ToFunctional: NO
+     *
+     * @throws Exception
+     */
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/file-1.xlsx");

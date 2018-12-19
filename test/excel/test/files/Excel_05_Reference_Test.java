@@ -32,7 +32,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Massimo Caliman
  */
 class Excel_05_Reference_Test {
-
+    /**
+     * ToFormula: OK
+     * ToFunctional: OK
+     *
+     * @throws Exception
+     */
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/05-reference.xlsx");

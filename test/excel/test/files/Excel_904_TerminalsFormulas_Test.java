@@ -31,7 +31,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Massimo Caliman
  */
 class Excel_904_TerminalsFormulas_Test {
-
+    /**
+     * ToFormula: OK
+     * ToFunctional: OK
+     *
+     * @throws Exception
+     */
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/904-terminals-formulas.xlsx");

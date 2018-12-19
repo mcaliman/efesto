@@ -31,7 +31,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Massimo Caliman
  */
 class Excel_Multisheet1_Test {
-
+    /**
+     * ToFormula: OK
+     * ToFunctional: NO
+     *
+     * @throws Exception
+     */
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/multisheet-1.xlsx");

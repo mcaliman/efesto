@@ -28,7 +28,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_13_NamedRange_Test {
-
+    /**
+     * ToFormula: NO
+     * ToFunctional: NO
+     *
+     * @throws Exception
+     */
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/13-NamedRange.xlsx");

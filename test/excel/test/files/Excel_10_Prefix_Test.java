@@ -33,7 +33,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Massimo Caliman
  */
 class Excel_10_Prefix_Test {
-
+    /**
+     * ToFormula: NO
+     * ToFunctional: NO
+     *
+     * @throws Exception
+     */
     @Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();

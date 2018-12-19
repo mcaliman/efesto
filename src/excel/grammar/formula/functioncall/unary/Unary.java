@@ -64,7 +64,7 @@ public abstract class Unary extends FunctionCall implements ToFunctional {
         if (formula instanceof CELL_REFERENCE) {
             return unOpPrefix + ((CELL_REFERENCE) formula).getValue();
         } else {
-            return unOpPrefix + formula.toString();
+            return unOpPrefix + formula.toFunctional();
         }
 
     }

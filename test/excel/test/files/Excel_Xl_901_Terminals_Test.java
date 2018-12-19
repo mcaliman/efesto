@@ -31,11 +31,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class Excel_Xl_901_Terminals_Test {
     /**
-     * A1 = TRUE
-     * A2 = 1,838226
-     * A3 = 24
-     * A4 = "This is a string"
-     * A5 = 1/0
+     * ToFormula: OK
+     * ToFunctional: OK
      *
      * @throws Exception
      */

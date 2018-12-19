@@ -31,8 +31,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class Excel_15_Others_FUN_Test {
     /**
-     * D7 = (2*(B29))/(1+B29)
-     * Foglio1!D7 = (2*(Foglio1!B29))/(1+Foglio1!B29)
+     * ToFormula: NO
+     * ToFunctional: NO
      *
      * @throws Exception
      */

@@ -1,7 +1,7 @@
 '' Text File: test/902-terminals-formulas.vb
 '' Excel File: 902-terminals-formulas.xlsx
 '' Excel Formulas Number: 4
-'' Elapsed Time (parsing + topological sort): 2 s. or 0 min.
+'' Elapsed Time (parsing + topological sort): 1 s. or 0 min.
 Foglio1!A1 = TRUE
 Foglio1!A5 = "1/0"
 Foglio1!A3 = 24.0

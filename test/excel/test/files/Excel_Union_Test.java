@@ -29,7 +29,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_Union_Test {
-
+    /**
+     * ToFormula: NO
+     * ToFunctional: NO
+     *
+     * @throws Exception
+     */
     @Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
