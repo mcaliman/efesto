@@ -57,7 +57,7 @@ class RangeInternal {
         CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
         tRANGE = new RANGE(first, last);
 
-        Sheet sheet = null;
+
         String refs = tRANGE.toString();
 
 

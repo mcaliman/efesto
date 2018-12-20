@@ -145,7 +145,7 @@ public class StartGraph {
 
     private boolean notEquals(Node u, @NotNull Start start) {
         Start start1 = u.value();
-        return Objects.nonNull(u) && notEquals(start1, start);
+        return notEquals(start1, start);
     }
 
     private boolean notEquals(Start start1, Start start) {

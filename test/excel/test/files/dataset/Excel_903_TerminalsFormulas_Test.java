@@ -41,7 +41,8 @@ class Excel_903_TerminalsFormulas_Test {
         toolkitCommand.execute();
         toolkitCommand.writer("test/903-terminals-formulas.vb");
         toolkitCommand.print();
-        boolean correct = toolkitCommand.test(0, "Foglio1!A1 = TRUE",
+        boolean correct = toolkitCommand.test(0,
+                "Foglio1!A1 = TRUE",
                 "Foglio1!A2 = 1.838226",
                 "Foglio1!A3 = 24.0",
                 "Foglio1!A4 = \"This is a string\"",

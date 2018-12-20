@@ -118,9 +118,9 @@ public abstract class AbstractParser {
      * Current Sheet Name
      */
     protected String sheetName;
-    protected int counterSheets = 0;
-    protected int counterFormulas;
-    protected List<Cell> ext;
+    private int counterSheets = 0;
+    private int counterFormulas;
+    private final List<Cell> ext;
     protected boolean isSingleSheet;
     /**
      * (Work)Sheet
@@ -214,7 +214,7 @@ public abstract class AbstractParser {
             this.counterFormulas++;
         } else if (this.ext.contains(cell)) {
             verbose("Recover loosed cell!");
-            Object obj = helper.valueOf(cell);
+            Object obj = Helper.valueOf(cell);
             CELL_REFERENCE cell_reference = new CELL_REFERENCE(cell.getRowIndex(), cell.getColumnIndex());
             cell_reference.setValue(obj);
 
