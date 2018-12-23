@@ -132,6 +132,15 @@ public abstract class AbstractParser {
     private boolean protectionPresent;
     private String fileName;
 
+    //TODO
+    protected String creator ;
+    protected String description ;
+    protected String keywords ;
+    protected String title ;
+    protected String subject ;
+    protected String category ;
+
+
     protected AbstractParser(@NotNull File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
         this.fileName = file.getName();
@@ -145,12 +154,14 @@ public abstract class AbstractParser {
         protectionPresent = xssfWorkbook.validateWorkbookPassword("password");
         POIXMLProperties props = xssfWorkbook.getProperties();
         POIXMLProperties.CoreProperties coreProperties = props.getCoreProperties();
-        String creator = coreProperties.getCreator();
-        String description = coreProperties.getDescription();
-        String keywords = coreProperties.getKeywords();
-        String title = coreProperties.getTitle();
-        String subject = coreProperties.getSubject();
-        String category = coreProperties.getCategory();
+
+        this.creator = coreProperties.getCreator();
+        this.description = coreProperties.getDescription();
+        this.keywords = coreProperties.getKeywords();
+        this.title = coreProperties.getTitle();
+        this.subject = coreProperties.getSubject();
+        this.category = coreProperties.getCategory();
+
         POIXMLProperties.CustomProperties customProperties = props.getCustomProperties();
         POIXMLProperties.ExtendedProperties extendedProperties = props.getExtendedProperties();
         String company = extendedProperties.getUnderlyingProperties().getCompany();
