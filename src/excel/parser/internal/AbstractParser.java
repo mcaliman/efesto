@@ -144,7 +144,6 @@ public abstract class AbstractParser {
     protected AbstractParser(@NotNull File file) throws InvalidFormatException, IOException {
         this(WorkbookFactory.create(file));
         this.fileName = file.getName();
-
     }
 
     private AbstractParser(Workbook workbook) {
@@ -616,4 +615,28 @@ public abstract class AbstractParser {
 
     protected abstract void parseReferenceErrorLiteral(ERROR_REF term);
     //endregion
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getCategory() {
+        return category;
+    }
 }

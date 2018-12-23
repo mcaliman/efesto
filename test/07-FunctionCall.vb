@@ -2,5 +2,11 @@
 '' Excel File: 07-FunctionCall.xlsx
 '' Excel Formulas Number: 1
 '' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
+'' creator:null
+'' description:null
+'' keywords:null
+'' title:null
+'' subject:null
+'' category:null
 FunctionCall!A1:C1 = [ 1.0 2.0 3.0 ]
 FunctionCall!A2 = SUM(FunctionCall!A1:C1)

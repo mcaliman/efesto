@@ -2,6 +2,12 @@
 '' Excel File: 903-terminals-formulas.xlsx
 '' Excel Formulas Number: 2
 '' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
+'' creator:null
+'' description:null
+'' keywords:null
+'' title:null
+'' subject:null
+'' category:null
 Foglio1!A1 = TRUE
 Foglio1!A2 = 1.838226
 Foglio1!A3 = 24.0

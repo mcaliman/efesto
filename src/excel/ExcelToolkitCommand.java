@@ -64,12 +64,12 @@ public class ExcelToolkitCommand implements ToolkitCommand {
             writer.write("'' Excel File: " + parser.getFileName() + '\n');
             writer.write("'' Excel Formulas Number: " + parser.getCounterFormulas() + '\n');
             writer.write("'' Elapsed Time (parsing + topological sort): " + (elapsed / 1000 + " s. or " + (elapsed / 1000 / 60) + " min.") + '\n');
-            //writer.write("'' creator:" + parser.getCreator()+'\n');
-            //writer.write("'' description:"+ parser.getDescription()+'\n');
-            //writer.write("'' keywords:"+parser.getKeywords()+'\n');
-            //writer.write("'' title:"+parser.getTitle()+'\n');
-            //writer.write("'' subject:"+parser.getSubject()+'\n');
-            //writer.write("'' category:"+parser.getCategory()+'\n');
+            writer.write("'' creator:" + parser.getCreator()+'\n');
+            writer.write("'' description:"+ parser.getDescription()+'\n');
+            writer.write("'' keywords:"+parser.getKeywords()+'\n');
+            writer.write("'' title:"+parser.getTitle()+'\n');
+            writer.write("'' subject:"+parser.getSubject()+'\n');
+            writer.write("'' category:"+parser.getCategory()+'\n');
             //writer.write("'' company:"+parser.getCompany()+'\n');
             //writer.write("'' template:"+parser.getTemplate()+'\n');
             //writer.write("'' manager:"+parser.getManager()+'\n');
