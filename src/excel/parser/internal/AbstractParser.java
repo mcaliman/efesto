@@ -100,6 +100,7 @@ public abstract class AbstractParser {
     private final Workbook book;
     @NotNull
     private final Helper helper;
+    private final List<Cell> ext;
     public boolean verbose = false;
     public boolean metadata = false;
     /**
@@ -118,10 +119,16 @@ public abstract class AbstractParser {
      * Current Sheet Name
      */
     protected String sheetName;
+    protected boolean isSingleSheet;
+    //TODO
+    protected String creator;
+    protected String description;
+    protected String keywords;
+    protected String title;
+    protected String subject;
+    protected String category;
     private int counterSheets = 0;
     private int counterFormulas;
-    private final List<Cell> ext;
-    protected boolean isSingleSheet;
     /**
      * (Work)Sheet
      */
@@ -131,14 +138,6 @@ public abstract class AbstractParser {
      */
     private boolean protectionPresent;
     private String fileName;
-
-    //TODO
-    protected String creator ;
-    protected String description ;
-    protected String keywords ;
-    protected String title ;
-    protected String subject ;
-    protected String category ;
 
 
     protected AbstractParser(@NotNull File file) throws InvalidFormatException, IOException {
