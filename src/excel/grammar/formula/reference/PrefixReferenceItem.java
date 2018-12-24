@@ -82,15 +82,15 @@ public final class PrefixReferenceItem extends Reference implements ToFunctional
 
     public String id() {
         return this.singleSheet ?
-                ifIsNotArea(false) + prefix + reference :
-                ifIsNotArea() + prefix + reference
+                (!isArea() ? getAddress(false) : epsilon) :
+                (!isArea() ? getAddress(true) : epsilon)
                 ;
     }
 
 
     @Override
     public String toFunctional() {
-        return values();
+        return prefix + reference;//values();
     }
 
     @NotNull

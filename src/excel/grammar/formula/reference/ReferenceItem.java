@@ -32,7 +32,7 @@ import static excel.grammar.Grammar.exclamationmark;
  */
 public class ReferenceItem extends Reference {
 
-    String value;
+    protected String value;
 
     private int firstRow;
     private int firstColumn;
