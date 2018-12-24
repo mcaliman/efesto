@@ -51,5 +51,9 @@ class Excel_Date_Cell_1_Test {
                 "Foglio1!A2 = DAY(Foglio1!A1)"));
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(0,
+                "A1 = 01/02/2018",
+                "A2 = DAY(A1)"
+        ));
     }
 }

@@ -40,5 +40,6 @@ class Excel_Metadata_Test {
         toolkitCommand.print();
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
+
     }
 }

@@ -51,5 +51,12 @@ class Excel_15_Others_FUN_Test {
         System.out.println("ToFunctional.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0,
+                "G1 = [1]Sheet1!C5",
+                "B29 = 70.0",
+                "D7 = (2*(B29))/(1+B29)"
+        ));
+
     }
 }

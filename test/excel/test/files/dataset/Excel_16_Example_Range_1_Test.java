@@ -49,5 +49,10 @@ class Excel_16_Example_Range_1_Test {
         System.out.println("ToFunctional.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0,
+                "D3:H3 = [ 0.0 1.0 2.0 3.0 4.0 ]",
+                "D7 = INDEX(D3:H3,2)"
+        ));
     }
 }

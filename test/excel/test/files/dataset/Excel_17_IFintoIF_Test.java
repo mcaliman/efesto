@@ -50,5 +50,11 @@ class Excel_17_IFintoIF_Test {
         System.out.println("ToFunctional.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0,
+                "B1 = 2.0",
+                "C1 = TRUE",
+                "A1 = IF(B1>1,0,IF(C1,\"Hello\",\"Bye\"))"
+        ));
     }
 }

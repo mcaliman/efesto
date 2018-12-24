@@ -52,5 +52,12 @@ class Excel_03_RangeIndex_Test {
         System.out.println("ToFunctional.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0,
+                "A1:B6 = [[1.1 1.2][2.1 2.2][3.1 3.2][4.1 4.2][5.1 5.2][6.1 6.2]]",
+                "A10 = INDEX(A1:B6,2,2)"
+        ));
+
+
     }
 }

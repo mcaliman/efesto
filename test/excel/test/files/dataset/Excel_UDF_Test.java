@@ -46,5 +46,8 @@ class Excel_UDF_Test {
         assertTrue(toolkitCommand.test(0, "SheetUDF!A2 = GetElement(A1,2,\"-\")"));
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0, "A2 = GetElement(A1,2,\"-\")"
+        ));
     }
 }

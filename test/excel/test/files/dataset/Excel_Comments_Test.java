@@ -53,5 +53,10 @@ class Excel_Comments_Test {
         assertTrue(correct);
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0,
+                "A1 = 1.0",
+                "A2 = A1+1"
+        ));
     }
 }

@@ -44,5 +44,8 @@ class Excel_File_1_Test {
         assertTrue(toolkitCommand.test(0, "SrcSheet!A1 = [1]DestSheet!$A$1 = []"));
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0, "A1 = [1]DestSheet!$A$1"
+        ));
     }
 }

@@ -55,6 +55,17 @@ class Excel_904_TerminalsFormulas_Test {
                 "Foglio1!A7 = Foglio1!A1&Foglio1!A2"));
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0,
+                "A2 = 20.0",
+                "A1 = 10.0",
+                "A4 = A1-A2",
+                "A5 = A1*A2",
+                "A6 = A1/A2",
+                "A3 = A1+A2",
+                "A8 = A1^A2",
+                "A7 = A1&A2"
+        ));
     }
 
 }

@@ -49,5 +49,8 @@ class Excel_04_Formula_Test {
         System.out.println("ToFunctional.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0, "A1 = 1+2"
+        ));
     }
 }

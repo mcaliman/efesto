@@ -52,5 +52,13 @@ class Excel_14_Boolean_Test {
         System.out.println("ToFunctional.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0,
+                "A3 = 1.0",
+                "A4 = TRUE",
+                "A5 = \"IFTRUE\"",
+                "A6 = \"IFFALSE\"",
+                "A1 = IF(AND(A3=1,A4=TRUE),A5,A6)"
+        ));
     }
 }

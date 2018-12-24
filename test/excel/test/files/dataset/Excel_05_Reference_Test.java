@@ -53,5 +53,11 @@ class Excel_05_Reference_Test {
         System.out.println("ToFunctional.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0,
+                "A1 = 15.0",
+                "A2 = 100.0",
+                "A3 = A2/A1"
+        ));
     }
 }

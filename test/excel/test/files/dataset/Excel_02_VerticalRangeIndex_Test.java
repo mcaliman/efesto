@@ -52,5 +52,8 @@ class Excel_02_VerticalRangeIndex_Test {
         System.out.println("ToFunctional.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(0,
+                "I1:I7 = [ 0.0 1.0 2.0 3.0 4.0 5.0 6.0 ]",
+                "B9 = INDEX(I1:I7,4)"));
     }
 }

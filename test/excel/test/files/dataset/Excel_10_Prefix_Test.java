@@ -56,5 +56,8 @@ class Excel_10_Prefix_Test {
         System.out.println("ToFunctional.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(0,
+                "Sheet1!A1 = 78.0",
+                "Prefix!A1 = Sheet1!A1"));
     }
 }

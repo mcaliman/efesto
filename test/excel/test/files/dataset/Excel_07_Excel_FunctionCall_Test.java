@@ -48,5 +48,10 @@ class Excel_07_Excel_FunctionCall_Test {
         System.out.println("ToFunctional.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0,
+                "A1:C1 = [ 1.0 2.0 3.0 ]",
+                "A2 = SUM(A1:C1)"
+        ));
     }
 }

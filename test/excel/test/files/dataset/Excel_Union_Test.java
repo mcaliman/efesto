@@ -50,5 +50,10 @@ class Excel_Union_Test {
                         "Foglio1!A5 = SUM(Foglio1!A1:B2,Foglio1!C2:C3)"));
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(0,
+                "A1:B2 = [[1.0 2.0][3.0 5.0]]",
+                "C2:C3 = [ 6.0 8.0 ]",
+                "A5 = SUM(A1:B2,C2:C3)"
+        ));
     }
 }

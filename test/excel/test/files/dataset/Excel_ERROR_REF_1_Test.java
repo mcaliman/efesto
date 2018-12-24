@@ -42,10 +42,13 @@ class Excel_ERROR_REF_1_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/ERROR_REF_1.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/ERROR_REF_1.md");
+        toolkitCommand.writer("test/ERROR_REF_1.vb");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0, "Foglio1!A1 = #REF!"));
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0, "A1 = #REF!"
+        ));
     }
 }

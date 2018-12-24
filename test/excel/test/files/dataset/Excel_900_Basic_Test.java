@@ -49,5 +49,11 @@ class Excel_900_Basic_Test {
                 "Foglio1!B1 = Foglio1!B5+Foglio1!B4"));
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0,
+                "B4 = 10.0",
+                "B5 = 20.0",
+                "B1 = B5+B4"
+        ));
     }
 }

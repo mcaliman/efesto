@@ -53,6 +53,11 @@ class Excel_09_Expr_Test {
         System.out.println("ToFunctional.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0,
+                "A1 = 100.0",
+                "A2 = (A1*2)/2"
+        ));
 
     }
 }

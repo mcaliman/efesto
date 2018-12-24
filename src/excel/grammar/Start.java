@@ -188,6 +188,11 @@ public abstract class Start implements ToFunctional {
         return this.toString(true).equals(text);
     }
 
+    public boolean testToFunctional(String text) {
+        return (this.id() + " = " + this.toFunctional()).equals(text);
+    }
+
+
     public String getSheetName() {
         return sheetName;
     }

@@ -87,7 +87,6 @@ public class ExcelToolkitCommand implements ToolkitCommand {
     public void print() {
         for (Start start : getStartList())
             System.out.println("" + start.getClass().getSimpleName() + " : " + start.toString(true));
-        //System.out.println("" + start.getClass().getSimpleName() + " : " + start.getAddress(true) + " = " + start.toString(false));
     }
 
     private StartList getStartList() {
@@ -96,6 +95,10 @@ public class ExcelToolkitCommand implements ToolkitCommand {
 
     public boolean test(int offset, String... text) {
         return getStartList().test(offset, text);
+    }
+
+    public boolean testToFunctional(int offset, String... text) {
+        return getStartList().testToFunctional(offset, text);
     }
 
     public void toFunctional() {

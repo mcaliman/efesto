@@ -48,6 +48,9 @@ class Excel_Xl_901_Terminals_Test {
         System.out.println("elapsed: " + elapsed / 1000 + " s.");
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
+        assertTrue(toolkitCommand.testToFunctional(
+                0, "A5 = 1/0"
+        ));
     }
 
 }

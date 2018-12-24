@@ -53,11 +53,25 @@ public final class StartList extends ArrayList<Start> implements List<Start> {
         return this.get(index).test(text);
     }
 
+    private boolean testToFunctional(int index, String text) {
+        return this.get(index).testToFunctional(text);
+    }
+
+
     public boolean test(int offset, @NotNull String... text) {
         if (size() == 0) return false;
         boolean test = true;
         for (int i = 0; i < text.length; i++)
             test &= this.test(i + offset, text[i]);
+        return test;
+    }
+
+
+    public boolean testToFunctional(int offset, @NotNull String... text) {
+        if (size() == 0) return false;
+        boolean test = true;
+        for (int i = 0; i < text.length; i++)
+            test &= this.testToFunctional(i + offset, text[i]);
         return test;
     }
 }
