@@ -120,13 +120,19 @@ public abstract class AbstractParser {
      */
     protected String sheetName;
     protected boolean isSingleSheet;
-    //TODO
+
+    //Meta
     protected String creator;
     protected String description;
     protected String keywords;
     protected String title;
     protected String subject;
     protected String category;
+    //Meta
+    protected String company;
+    protected String template;
+    protected String manager;
+
     private int counterSheets = 0;
     private int counterFormulas;
     /**
@@ -148,6 +154,12 @@ public abstract class AbstractParser {
     private AbstractParser(Workbook workbook) {
         this.book = workbook;
         this.ext = new ArrayList<>();
+        this.helper = new Helper(this.book);
+        readMetadata();
+        print("Parse...");
+    }
+
+    private void readMetadata() {
         XSSFWorkbook xssfWorkbook = (XSSFWorkbook) this.book;
         protectionPresent = xssfWorkbook.validateWorkbookPassword("password");
         POIXMLProperties props = xssfWorkbook.getProperties();
@@ -160,13 +172,11 @@ public abstract class AbstractParser {
         this.subject = coreProperties.getSubject();
         this.category = coreProperties.getCategory();
 
-        POIXMLProperties.CustomProperties customProperties = props.getCustomProperties();
+        //POIXMLProperties.CustomProperties customProperties = props.getCustomProperties();
         POIXMLProperties.ExtendedProperties extendedProperties = props.getExtendedProperties();
-        String company = extendedProperties.getUnderlyingProperties().getCompany();
-        String template = extendedProperties.getUnderlyingProperties().getTemplate();
-        String manager = extendedProperties.getUnderlyingProperties().getManager();
-        this.helper = new Helper(this.book);
-        System.out.println("Parse...");
+        this.company = extendedProperties.getUnderlyingProperties().getCompany();
+        this.template = extendedProperties.getUnderlyingProperties().getTemplate();
+        this.manager = extendedProperties.getUnderlyingProperties().getManager();
     }
 
     public int getCounterFormulas() {
@@ -231,15 +241,10 @@ public abstract class AbstractParser {
             cell_reference.setSheetIndex(helper.getSheetIndex(cell.getSheet().getSheetName()));
             parseCELL_REFERENCELinked(cell_reference);
             /*
+            //cell_reference.setSheetIndex(cell.getSheet().get);1
 
-
-
-
-            //cell_reference.setSheetIndex(cell.getSheet().get);
-
-
-            this.ext.remove(cell);
             */
+            this.ext.remove(cell);
         }
     }
 
@@ -637,5 +642,9 @@ public abstract class AbstractParser {
 
     public String getCategory() {
         return category;
+    }
+
+    protected void print(String text) {
+        System.out.println(text);
     }
 }
