@@ -30,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class ExcelToolkitCommand implements ToolkitCommand {
 
@@ -76,7 +77,7 @@ public class ExcelToolkitCommand implements ToolkitCommand {
             for (Start start : list) {
                 String comment = start.getComment();
                 if (comment != null && comment.trim().length() > 0) writer.write("'' " + comment + "\n");
-                writer.write(start.toString(true));
+                writer.write(Objects.requireNonNull(start.toString(true)));
                 writer.write("\n");
             }
         }
@@ -99,7 +100,7 @@ public class ExcelToolkitCommand implements ToolkitCommand {
 
     public void toFunctional() {
         for (Start start : getStartList()) {
-            if (start instanceof ToFunctional) {
+            if (start != null) {
                 System.out.println(start.id() + " = " + start.toFunctional());
             } else {
                 System.out.println(start.toString(true));

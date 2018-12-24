@@ -33,21 +33,19 @@ class Excel_RealComplex5Test {
 
     @Test
     void testTest() throws Exception {
-        if (true) {
-            long t = System.currentTimeMillis();
-            ToolkitOptions options = new ToolkitOptions();
-            options.setMetadata(false);
-            options.setVerbose(false);
-            ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("D:/xl5.xlsx", options);
-            System.out.println("execute()...");
-            toolkitCommand.execute();
-            System.out.println("writer()...");
-            toolkitCommand.writer("D:/xl5.vb");
-            long elapsed = System.currentTimeMillis() - t;
-            System.out.println("Elapsed time: " + elapsed + " [ms] or " + elapsed / 1000 + " [s]. or " + elapsed / 1000 / 60 + "[m].");
-            System.out.println("ToFunctional.");
-            toolkitCommand.toFunctional();
-        }
+        long t = System.currentTimeMillis();
+        ToolkitOptions options = new ToolkitOptions();
+        options.setMetadata(false);
+        options.setVerbose(false);
+        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("D:/xl5.xlsx", options);
+        System.out.println("execute()...");
+        toolkitCommand.execute();
+        System.out.println("writer()...");
+        toolkitCommand.writer("D:/xl5.vb");
+        long elapsed = System.currentTimeMillis() - t;
+        System.out.println("Elapsed time: " + elapsed + " [ms] or " + elapsed / 1000 + " [s]. or " + elapsed / 1000 / 60 + "[m].");
+        System.out.println("ToFunctional.");
+        toolkitCommand.toFunctional();
 
     }
 
