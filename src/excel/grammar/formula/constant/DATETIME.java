@@ -22,6 +22,7 @@
 
 package excel.grammar.formula.constant;
 
+import excel.grammar.Start;
 import excel.grammar.formula.Constant;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,12 +67,11 @@ public final class DATETIME extends Constant {
 
     @Override
     public String toString() {
-        return value.toString();
+        return Start.format(value);
     }
 
     @Override
     public String toString(boolean address) {
         return toString();
     }
-
 }

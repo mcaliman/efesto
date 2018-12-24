@@ -84,12 +84,7 @@ public final class CELL_REFERENCE extends ReferenceItem implements ToFunctional 
 
     @Override
     public String toString() {
-        if (value instanceof String) return getAddress() + " = " + format((String) value);
-        else if (value instanceof Boolean) return getAddress() + " = " + format((Boolean) value);
-        else if (value instanceof Integer) return getAddress() + " = " + format((Integer) value);
-        else if (value instanceof Double) return getAddress() + " = " + format((Double) value);
-        else if (value instanceof Date) return getAddress() + " = " + format((Date) value);
-        else return null;
+        return getAddress() + " = " + constant.toString();
     }
 
     @Nullable
@@ -100,7 +95,6 @@ public final class CELL_REFERENCE extends ReferenceItem implements ToFunctional 
 
     @Override
     public String toFunctional() {
-        //return value != null ? value.toString() : "null";
         return constant != null ? constant.toString() : "null";
     }
 
