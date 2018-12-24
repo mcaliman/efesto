@@ -103,21 +103,6 @@ class Helper {
     }
 
 
-    @NotNull
-    private static Class internalFormulaResultType(int type) {
-        switch (type) {
-            case CELL_TYPE_STRING:
-                return String.class;
-            case CELL_TYPE_NUMERIC:
-                return Double.class;
-            case CELL_TYPE_BOOLEAN:
-                return Boolean.class;
-            default:
-                return Object.class;
-        }
-    }
-
-
     public Ptg[] getName(@NotNull NamePtg t) {
         EvaluationName evaluationName = evalBook.getName(t);
         return evaluationName.getNameDefinition();

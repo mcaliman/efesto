@@ -96,14 +96,9 @@ public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFunctiona
 
     private String argumentToFunctional(@Nullable Formula operand) {
         if (operand == null) return "Missing";
-        //System.err.println(operand.getClass().getSimpleName());
-        if (operand instanceof RangeReference || operand instanceof NamedRange) {
-            return operand.id();
-        } else if (operand instanceof CELL_REFERENCE) {
-            return operand.id();
-        } else {
-            return operand.toFunctional();
-        }
+        if (operand instanceof RangeReference || operand instanceof NamedRange) return operand.id();
+        else if (operand instanceof CELL_REFERENCE) return operand.id();
+        else return operand.toFunctional();
     }
 
 }
