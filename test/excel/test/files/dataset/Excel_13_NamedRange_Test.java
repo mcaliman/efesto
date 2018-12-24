@@ -29,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_13_NamedRange_Test {
     /**
+     * TO FIX
      * ToFormula: NO
      * ToFunctional: NO
      *

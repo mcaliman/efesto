@@ -90,7 +90,6 @@ public final class Parser extends AbstractParser {
 
 
     private void sort() {
-
         if (unordered.singleton()) {
             ordered = new StartList();
             ordered.add(unordered.get(0));

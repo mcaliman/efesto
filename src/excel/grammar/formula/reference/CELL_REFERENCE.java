@@ -23,6 +23,8 @@
 package excel.grammar.formula.reference;
 
 import excel.ToFunctional;
+import excel.grammar.formula.Constant;
+import excel.grammar.formula.constant.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
@@ -36,6 +38,8 @@ public final class CELL_REFERENCE extends ReferenceItem implements ToFunctional 
     private final int column;
 
     private Object value;
+
+    private Constant constant;
 
     public CELL_REFERENCE(int row, int column) {
         this.row = row;
@@ -64,6 +68,18 @@ public final class CELL_REFERENCE extends ReferenceItem implements ToFunctional 
 
     public void setValue(Object value) {
         this.value = value;
+        //constant
+        if (value instanceof String) {
+            constant = new TEXT((String) value);
+        } else if (value instanceof Boolean) {
+            constant = new BOOL((Boolean) value);
+        } else if (value instanceof Integer) {
+            constant = new INT((Integer) value);
+        } else if (value instanceof Double) {
+            constant = new FLOAT((Double) value);
+        } else if (value instanceof Date) {
+            constant = new DATETIME((Date) value);
+        }
     }
 
     @Override
@@ -84,7 +100,8 @@ public final class CELL_REFERENCE extends ReferenceItem implements ToFunctional 
 
     @Override
     public String toFunctional() {
-        return value != null ? value.toString() : "null";
+        //return value != null ? value.toString() : "null";
+        return constant != null ? constant.toString() : "null";
     }
 
 }

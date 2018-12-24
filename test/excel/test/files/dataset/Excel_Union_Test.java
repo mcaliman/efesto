@@ -30,8 +30,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_Union_Test {
     /**
-     * ToFormula: NO
-     * ToFunctional: NO
+     * ToFormula: OK
+     * ToFunctional: OK
      *
      * @throws Exception
      */

@@ -86,18 +86,15 @@ public abstract class Start implements ToFunctional {
         int excelColNum = col + 1;
         StringBuilder colRef = new StringBuilder(2);
         int colRemain = excelColNum;
-
         while (colRemain > 0) {
             int thisPart = colRemain % 26;
             if (thisPart == 0) {
                 thisPart = 26;
             }
-
             colRemain = (colRemain - thisPart) / 26;
             char colChar = (char) (thisPart + 64);
             colRef.insert(0, colChar);
         }
-
         return colRef.toString();
     }
 
@@ -198,4 +195,6 @@ public abstract class Start implements ToFunctional {
     public void setSheetName(String sheetName) {
         this.sheetName = sheetName;
     }
+
+
 }

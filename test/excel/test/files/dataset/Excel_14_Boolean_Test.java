@@ -29,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_14_Boolean_Test {
     /**
+     * TO FIX string "
      * ToFormula: OK
      * ToFunctional: OK
      *
