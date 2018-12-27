@@ -55,10 +55,7 @@ public class ConstantArray extends Formula implements ToFunctional {
     }
 
     public String toFunctional() {
-
         StringBuilder str = new StringBuilder();
-
-
         str.append('{');
         for (Object[] internal : array) {
             str.append(internal[0]).append(',');

@@ -34,7 +34,6 @@ import java.util.Objects;
  */
 public final class DATETIME extends Constant {
 
-    //TODO use LocalDate LocalTime LocalDateTime!
     private final Date value;
 
     @SuppressWarnings("unused")

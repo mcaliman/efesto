@@ -57,5 +57,6 @@ class Excel_01_HorizontalRangeIndex_Test {
         assertTrue(toolkitCommand.testToFunctional(0,
                 "B1:H1 = [ 0.0 1.0 2.0 3.0 4.0 5.0 6.0 ]",
                 "B5 = INDEX(B1:H1,3)"));
+        toolkitCommand.writerFormula("test/01-horizontal-range-index.formula.vb");
     }
 }

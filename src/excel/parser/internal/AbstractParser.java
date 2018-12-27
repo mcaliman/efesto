@@ -227,7 +227,6 @@ public abstract class AbstractParser {
      * @param cell
      */
     private void parse(Cell cell) {
-        System.err.println("cell(" + cell.getRowIndex() + "," + cell.getColumnIndex() + "):" + cell.toString());
         if (cell.getCellType() == CELL_TYPE_FORMULA) {
             parseFormula(cell);
             this.counterFormulas++;

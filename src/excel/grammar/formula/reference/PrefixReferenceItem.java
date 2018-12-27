@@ -71,6 +71,11 @@ public final class PrefixReferenceItem extends Reference implements ToFunctional
         return address ? ifIsNotArea() + prefix + reference + " = " + values() : toString();
     }
 
+    @Override
+    public String toFunctional() {
+        return isArea() ? values() : prefix + reference;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -81,26 +86,8 @@ public final class PrefixReferenceItem extends Reference implements ToFunctional
     }
 
     public String id() {
-        return this.singleSheet ?
-                (!isArea() ? getAddress(false) : epsilon) :
-                //(!isArea() ? getAddress(true) : epsilon)
-                (!isArea() ? getAddress(true) : epsilon)
-                ;
-
-
+        return !isArea() ? getAddress(!this.singleSheet) : prefix + reference;
     }
-
-
-    @Override
-    public String toFunctional() {
-        return prefix + reference;//values();
-    }
-
-    @NotNull
-    private String ifIsNotArea(boolean address) {
-        return !isArea() ? getAddress(address) + " = " : epsilon;
-    }
-
 
     @NotNull
     private String ifIsNotArea() {

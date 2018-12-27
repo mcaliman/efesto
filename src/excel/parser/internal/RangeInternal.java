@@ -47,19 +47,13 @@ class RangeInternal {
         int firstRow = t.getFirstRow();
         int firstColumn = t.getFirstColumn();
         sheetName = sheetnamne;
-
-
         int lastRow = t.getLastRow();
         int lastColumn = t.getLastColumn();
 
         CELL_REFERENCE first = new CELL_REFERENCE(firstRow, firstColumn);
         CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
         tRANGE = new RANGE(first, last);
-
-
         String refs = tRANGE.toString();
-
-
         SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
         AreaReference area = new AreaReference(sheetnamne + exclamationmark + refs, SPREADSHEET_VERSION);
         List<Cell> cells = helper.fromRange(area);
