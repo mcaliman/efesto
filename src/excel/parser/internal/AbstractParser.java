@@ -161,7 +161,7 @@ public abstract class AbstractParser {
 
     private void readMetadata() {
         XSSFWorkbook xssfWorkbook = (XSSFWorkbook) this.book;
-        protectionPresent = xssfWorkbook.validateWorkbookPassword("password");
+        this.protectionPresent = xssfWorkbook.validateWorkbookPassword("password");
         POIXMLProperties props = xssfWorkbook.getProperties();
         POIXMLProperties.CoreProperties coreProperties = props.getCoreProperties();
 
@@ -212,9 +212,9 @@ public abstract class AbstractParser {
         this.counterSheets++;
         this.sheet = sheet;
         protectionPresent = protectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
-        sheetIndex = book.getSheetIndex(sheet);
-        sheetName = sheet.getSheetName();
-        verbose("Parsing sheet-name:" + sheetName);
+        this.sheetIndex = book.getSheetIndex(sheet);
+        this.sheetName = sheet.getSheetName();
+        verbose("Parsing sheet-name:" + this.sheetName);
         for (Row row : sheet)
             for (Cell cell : row)
                 if (cell != null) parse(cell);
@@ -240,10 +240,6 @@ public abstract class AbstractParser {
             cell_reference.setSheetName(cell.getSheet().getSheetName());
             cell_reference.setSheetIndex(helper.getSheetIndex(cell.getSheet().getSheetName()));
             parseCELL_REFERENCELinked(cell_reference);
-            /*
-            //cell_reference.setSheetIndex(cell.getSheet().get);1
-
-            */
             this.ext.remove(cell);
         }
     }

@@ -103,11 +103,7 @@ public class ExcelToolkitCommand implements ToolkitCommand {
 
     public void toFunctional() {
         for (Start start : getStartList()) {
-            if (start != null) {
-                System.out.println(start.id() + " = " + start.toFunctional());
-            } else {
-                System.out.println(start.toString(true));
-            }
+            if (start != null) System.out.println(start.id() + " = " + start.toFunctional());
         }
     }
 
