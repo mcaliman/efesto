@@ -22,7 +22,7 @@
 
 package excel.grammar;
 
-import excel.ToFunctional;
+import excel.ToFormula;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,7 +34,7 @@ import static excel.grammar.Grammar.*;
 /**
  * @author Massimo Caliman
  */
-public abstract class Start implements ToFunctional {
+public abstract class Start implements ToFormula {
 
     private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -189,7 +189,7 @@ public abstract class Start implements ToFunctional {
     }
 
     public boolean testToFunctional(String text) {
-        return (this.id() + " = " + this.toFunctional()).equals(text);
+        return (this.id() + " = " + this.toFormula()).equals(text);
     }
 
 

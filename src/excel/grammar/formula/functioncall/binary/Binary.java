@@ -22,7 +22,7 @@
 
 package excel.grammar.formula.functioncall.binary;
 
-import excel.ToFunctional;
+import excel.ToFormula;
 import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.ParenthesisFormula;
@@ -36,7 +36,7 @@ import static excel.grammar.Grammar.openparen;
 /**
  * @author Massimo Caliman
  */
-public abstract class Binary extends FunctionCall implements ToFunctional {
+public abstract class Binary extends FunctionCall implements ToFormula {
 
     private final String op;
     private final Formula lFormula;
@@ -62,7 +62,7 @@ public abstract class Binary extends FunctionCall implements ToFunctional {
     }
 
     @Override
-    public String toFunctional() {
+    public String toFormula() {
         return operandToFuctional(lFormula) + op + operandToFuctional(rFormula);
     }
 
@@ -72,13 +72,13 @@ public abstract class Binary extends FunctionCall implements ToFunctional {
         } else if (operand instanceof ParenthesisFormula) {
             return operandToFunctional((ParenthesisFormula) operand);
         } else {
-            return operand.toFunctional();
+            return operand.toFormula();
         }
     }
 
     private String operandToFunctional(ParenthesisFormula operand) {
         return operand.getFormula() instanceof Binary ?
-                "" + openparen + operand.getFormula().toFunctional() + closeparen :
+                "" + openparen + operand.getFormula().toFormula() + closeparen :
                 "" + openparen + operand.getFormula().getAddress(false) + closeparen;
     }
 

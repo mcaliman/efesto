@@ -22,13 +22,13 @@
 
 package excel.grammar.formula.functioncall.binary;
 
-import excel.ToFunctional;
+import excel.ToFormula;
 import excel.grammar.Formula;
 
 /**
  * @author Massimo Caliman
  */
-public final class Sub extends Binary implements ToFunctional {
+public final class Sub extends Binary implements ToFormula {
 
     public Sub(Formula lFormula, Formula rFormula) {
         super(lFormula, "-", rFormula);

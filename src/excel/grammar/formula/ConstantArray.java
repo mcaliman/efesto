@@ -22,14 +22,14 @@
 
 package excel.grammar.formula;
 
-import excel.ToFunctional;
+import excel.ToFormula;
 import excel.grammar.Formula;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Massimo Caliman
  */
-public class ConstantArray extends Formula implements ToFunctional {
+public class ConstantArray extends Formula implements ToFormula {
     private final Object[][] array;
 
     public ConstantArray(Object[][] array) {
@@ -54,7 +54,7 @@ public class ConstantArray extends Formula implements ToFunctional {
         return this.getAddress();
     }
 
-    public String toFunctional() {
+    public String toFormula() {
         StringBuilder str = new StringBuilder();
         str.append('{');
         for (Object[] internal : array) {

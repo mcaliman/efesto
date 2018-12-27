@@ -22,7 +22,7 @@
 
 package excel.grammar.formula;
 
-import excel.ToFunctional;
+import excel.ToFormula;
 import excel.grammar.Formula;
 import excel.grammar.formula.functioncall.binary.Binary;
 
@@ -32,7 +32,7 @@ import static excel.grammar.Grammar.openparen;
 /**
  * @author Massimo Caliman
  */
-public final class ParenthesisFormula extends Formula implements ToFunctional {
+public final class ParenthesisFormula extends Formula implements ToFormula {
 
     private final Formula formula;
 
@@ -46,8 +46,8 @@ public final class ParenthesisFormula extends Formula implements ToFunctional {
     }
 
     @Override
-    public String toFunctional() {
-        return openparen + formula.toFunctional() + closeparen;
+    public String toFormula() {
+        return openparen + formula.toFormula() + closeparen;
     }
 
     public String toString(boolean address) {

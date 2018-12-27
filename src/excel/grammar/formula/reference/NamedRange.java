@@ -22,14 +22,14 @@
 
 package excel.grammar.formula.reference;
 
-import excel.ToFunctional;
+import excel.ToFormula;
 
 import static excel.grammar.Grammar.exclamationmark;
 
 /**
  * @author Massimo Caliman
  */
-public class NamedRange extends ReferenceItem implements ToFunctional {
+public class NamedRange extends ReferenceItem implements ToFormula {
 
     public NamedRange(String value, RANGE tRANGE) {
         this.value = value;
@@ -49,7 +49,7 @@ public class NamedRange extends ReferenceItem implements ToFunctional {
 
 
     @Override
-    public String toFunctional() {
+    public String toFormula() {
         return values();
     }
 }

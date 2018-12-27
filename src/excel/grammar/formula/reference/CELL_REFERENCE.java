@@ -22,7 +22,7 @@
 
 package excel.grammar.formula.reference;
 
-import excel.ToFunctional;
+import excel.ToFormula;
 import excel.grammar.formula.Constant;
 import excel.grammar.formula.constant.*;
 import org.jetbrains.annotations.Nullable;
@@ -32,7 +32,7 @@ import java.util.Date;
 /**
  * @author mcaliman
  */
-public final class CELL_REFERENCE extends ReferenceItem implements ToFunctional {
+public final class CELL_REFERENCE extends ReferenceItem implements ToFormula {
 
     private final int row;
     private final int column;
@@ -84,7 +84,7 @@ public final class CELL_REFERENCE extends ReferenceItem implements ToFunctional 
     }
 
     @Override
-    public String toFunctional() {
+    public String toFormula() {
         return constant != null ? constant.toString() : "null";
     }
 

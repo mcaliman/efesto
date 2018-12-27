@@ -22,7 +22,7 @@
 
 package excel.grammar.formula.reference;
 
-import excel.ToFunctional;
+import excel.ToFormula;
 import excel.grammar.formula.Reference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,7 +32,7 @@ import static excel.grammar.Grammar.epsilon;
 /**
  * @author Massimo Caliman
  */
-public final class PrefixReferenceItem extends Reference implements ToFunctional {
+public final class PrefixReferenceItem extends Reference implements ToFormula {
 
     private final Prefix prefix;
 
@@ -72,7 +72,7 @@ public final class PrefixReferenceItem extends Reference implements ToFunctional
     }
 
     @Override
-    public String toFunctional() {
+    public String toFormula() {
         return isArea() ? values() : prefix + reference;
     }
 

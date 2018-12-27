@@ -22,7 +22,7 @@
 
 package excel.grammar.formula.reference;
 
-import excel.ToFunctional;
+import excel.ToFormula;
 import excel.grammar.formula.Reference;
 
 import static excel.grammar.Grammar.colon;
@@ -31,7 +31,7 @@ import static excel.grammar.Grammar.exclamationmark;
 /**
  * @author Massimo Caliman
  */
-public final class RangeReference extends Reference implements ToFunctional {
+public final class RangeReference extends Reference implements ToFormula {
 
     private final CELL_REFERENCE reference1;
     private final CELL_REFERENCE reference2;
@@ -82,7 +82,7 @@ public final class RangeReference extends Reference implements ToFunctional {
 
 
     @Override
-    public String toFunctional() {
+    public String toFormula() {
         return values();
     }
 

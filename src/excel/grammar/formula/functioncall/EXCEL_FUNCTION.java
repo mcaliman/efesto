@@ -22,7 +22,7 @@
 
 package excel.grammar.formula.functioncall;
 
-import excel.ToFunctional;
+import excel.ToFormula;
 import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.reference.CELL_REFERENCE;
@@ -38,7 +38,7 @@ import static excel.grammar.Grammar.openparen;
 /**
  * @author Massimo Caliman
  */
-public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFunctional {
+public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFormula {
 
     protected Formula[] args;
 
@@ -64,7 +64,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFunctiona
     }
 
     @Override
-    public String toFunctional() {
+    public String toFormula() {
         return getName() + openparen + argumentsToFunctional() + closeparen;
     }
 
@@ -100,7 +100,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFunctiona
         if (operand instanceof RangeReference || operand instanceof NamedRange || operand instanceof PrefixReferenceItem)
             return operand.id();
         else if (operand instanceof CELL_REFERENCE) return operand.id();
-        else return operand.toFunctional();
+        else return operand.toFormula();
     }
 
 }

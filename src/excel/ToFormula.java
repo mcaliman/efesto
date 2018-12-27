@@ -22,9 +22,9 @@
 
 package excel;
 
-public interface ToFunctional {
+public interface ToFormula {
 
-    default String toFunctional() {
+    default String toFormula() {
         return toString();
     }
 

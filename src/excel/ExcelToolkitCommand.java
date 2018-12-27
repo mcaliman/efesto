@@ -102,7 +102,7 @@ public class ExcelToolkitCommand implements ToolkitCommand {
             for (Start start : list) {
                 String comment = start.getComment();
                 if (comment != null && comment.trim().length() > 0) writer.write("'' " + comment + "\n");
-                writer.write(start.id() + " = " + start.toFunctional());
+                writer.write(start.id() + " = " + start.toFormula());
                 writer.write("\n");
             }
         }
@@ -128,7 +128,7 @@ public class ExcelToolkitCommand implements ToolkitCommand {
 
     public void toFunctional() {
         for (Start start : getStartList()) {
-            if (start != null) System.out.println(start.id() + " = " + start.toFunctional());
+            if (start != null) System.out.println(start.id() + " = " + start.toFormula());
         }
     }
 
