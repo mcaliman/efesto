@@ -166,10 +166,6 @@ public abstract class Start implements ToFormula {
     @Nullable
     public abstract String toString(boolean address);
 
-    /*public boolean test(String text) {
-        return this.toString(true).equals(text);
-    }*/
-
     public boolean testToFunctional(String text) {
         return (this.id() + " = " + this.toFormula()).equals(text);
     }

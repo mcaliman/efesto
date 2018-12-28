@@ -29,21 +29,15 @@ public class Grammar {
     public final static char exclamationmark = '!';
 
     public final static char colon = ':';
-
-    private final static char doublequote = '"';
-
     public final static char openparen = '(';
     public final static char closeparen = ')';
-
     public final static char closesquareparen = ']';
     public final static char opensquareparen = '[';
-
     public final static String space = " ";
-
     public final static String emptylist = "[]";
-
     public final static String TRUE = "TRUE";
     public final static String FALSE = "FALSE";
+    private final static char doublequote = '"';
 
     public static String quote(String text) {
         return "" + doublequote + text + doublequote;
