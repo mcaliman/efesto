@@ -29,7 +29,8 @@ import org.jetbrains.annotations.Nullable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static excel.grammar.Grammar.*;
+import static excel.grammar.Grammar.epsilon;
+import static excel.grammar.Grammar.exclamationmark;
 
 /**
  * @author Massimo Caliman
@@ -44,25 +45,6 @@ public abstract class Start implements ToFormula {
     private int column;
     private String comment;
     private int sheetIndex;
-
-    @NotNull
-    protected static String format(@Nullable String str) {
-        return str == null ? epsilon : doublequote + str + doublequote;
-    }
-
-    protected static String format(@Nullable Boolean bool) {
-        if (bool == null) return epsilon;
-        return bool ? TRUE : FALSE;
-    }
-
-    @NotNull
-    protected static String format(@Nullable final Integer integer) {
-        return integer == null ? epsilon : integer.toString();
-    }
-
-    protected static String format(@Nullable final Double doub) {
-        return doub == null ? epsilon : doub.toString();
-    }
 
     @NotNull
     protected static String format(@Nullable final Date date) {
