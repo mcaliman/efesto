@@ -174,11 +174,6 @@ public abstract class Start implements ToFormula {
         return (this.id() + " = " + this.toFormula()).equals(text);
     }
 
-
-    public String getSheetName() {
-        return sheetName;
-    }
-
     public void setSheetName(String sheetName) {
         this.sheetName = sheetName;
     }
