@@ -71,9 +71,6 @@ public class ExcelToolkitCommand implements ToolkitCommand {
             writer.write("'' title:" + parser.getTitle() + '\n');
             writer.write("'' subject:" + parser.getSubject() + '\n');
             writer.write("'' category:" + parser.getCategory() + '\n');
-            //writer.write("'' company:"+parser.getCompany()+'\n');
-            //writer.write("'' template:"+parser.getTemplate()+'\n');
-            //writer.write("'' manager:"+parser.getManager()+'\n');
             for (Start start : list) {
                 String comment = start.getComment();
                 if (comment != null && comment.trim().length() > 0) writer.write("'' " + comment + "\n");
@@ -83,18 +80,8 @@ public class ExcelToolkitCommand implements ToolkitCommand {
         }
     }
 
-
-    public void print() {
-        for (Start start : getStartList())
-            System.out.println("" + start.getClass().getSimpleName() + " : " + start.toString(true));
-    }
-
     private StartList getStartList() {
         return parser.getList();
-    }
-
-    public boolean test(int offset, String... text) {
-        return getStartList().test(offset, text);
     }
 
     public boolean testToFunctional(int offset, String... text) {
