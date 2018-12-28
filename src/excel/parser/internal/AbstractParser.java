@@ -122,16 +122,16 @@ public abstract class AbstractParser {
     protected boolean isSingleSheet;
 
     //Meta
-    protected String creator;
-    protected String description;
-    protected String keywords;
-    protected String title;
-    protected String subject;
-    protected String category;
+    private String creator;
+    private String description;
+    private String keywords;
+    private String title;
+    private String subject;
+    private String category;
     //Meta
-    protected String company;
-    protected String template;
-    protected String manager;
+    private String company;
+    private String template;
+    private String manager;
 
     private int counterSheets = 0;
     private int counterFormulas;
@@ -639,7 +639,7 @@ public abstract class AbstractParser {
         return category;
     }
 
-    protected void print(String text) {
+    private void print(String text) {
         System.out.println(text);
     }
 }

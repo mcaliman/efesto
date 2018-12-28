@@ -30,7 +30,7 @@ public class Grammar {
 
     public final static char colon = ':';
 
-    public final static char doublequote = '"';
+    private final static char doublequote = '"';
 
     public final static char openparen = '(';
     public final static char closeparen = ')';
