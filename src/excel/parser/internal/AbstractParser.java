@@ -167,13 +167,6 @@ public abstract class AbstractParser {
         this.title = coreProperties.getTitle();
         this.subject = coreProperties.getSubject();
         this.category = coreProperties.getCategory();
-
-        //POIXMLProperties.CustomProperties customProperties = props.getCustomProperties();
-        POIXMLProperties.ExtendedProperties extendedProperties = props.getExtendedProperties();
-        //Meta
-        String company = extendedProperties.getUnderlyingProperties().getCompany();
-        String template = extendedProperties.getUnderlyingProperties().getTemplate();
-        String manager = extendedProperties.getUnderlyingProperties().getManager();
     }
 
     public int getCounterFormulas() {
