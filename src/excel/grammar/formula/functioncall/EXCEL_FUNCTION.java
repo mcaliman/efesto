@@ -90,12 +90,12 @@ public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFormula {
         var buff = new StringBuilder();
         Formula[] args = getArgs();
         if (args == null || args.length == 0) return "Missing";
-        for (Formula arg : args) buff.append(argumentToFunctional(arg)).append(",");
+        for (Formula arg : args) buff.append(argumentToFormula(arg)).append(",");
         if (buff.charAt(buff.length() - 1) == ',') buff.deleteCharAt(buff.length() - 1);
         return buff.toString();
     }
 
-    private String argumentToFunctional(@Nullable Formula operand) {
+    private String argumentToFormula(@Nullable Formula operand) {
         if (operand == null) return "Missing";
         if (operand instanceof RangeReference || operand instanceof NamedRange || operand instanceof PrefixReferenceItem)
             return operand.id();
