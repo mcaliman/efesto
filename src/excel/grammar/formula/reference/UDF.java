@@ -22,13 +22,13 @@
 
 package excel.grammar.formula.reference;
 
+import excel.ToFormula;
 import excel.grammar.formula.Reference;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Massimo Caliman
  */
-public final class UDF extends Reference {
+public final class UDF extends Reference implements ToFormula {
 
     private final String arguments;
 
@@ -36,13 +36,8 @@ public final class UDF extends Reference {
         this.arguments = arguments;
     }
 
-    @Override
-    public String toString() {
+    public String toFormula() {
         return arguments;
     }
 
-    @NotNull
-    public String toString(boolean address) {
-        return address ? getAddress() + " = " + arguments : arguments;
-    }
 }

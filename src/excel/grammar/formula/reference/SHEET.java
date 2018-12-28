@@ -22,12 +22,14 @@
 
 package excel.grammar.formula.reference;
 
+import excel.ToFormula;
+
 import static excel.grammar.Grammar.exclamationmark;
 
 /**
  * @author Massimo Caliman
  */
-public final class SHEET extends Prefix {
+public final class SHEET extends Prefix implements ToFormula {
 
     private final String name;
     private int index;
@@ -50,6 +52,11 @@ public final class SHEET extends Prefix {
     }
 
     public String toString() {
+        return toFormula();
+    }
+
+    public String toFormula() {
         return name + exclamationmark;
     }
+
 }

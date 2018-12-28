@@ -225,7 +225,6 @@ public abstract class AbstractParser {
             Object obj = Helper.valueOf(cell);
             CELL_REFERENCE cell_reference = new CELL_REFERENCE(cell.getRowIndex(), cell.getColumnIndex());
             cell_reference.setValue(obj);
-
             cell_reference.setSheetName(cell.getSheet().getSheetName());
             cell_reference.setSheetIndex(helper.getSheetIndex(cell.getSheet().getSheetName()));
             parseCELL_REFERENCELinked(cell_reference);

@@ -24,10 +24,7 @@ package excel.grammar.formula.reference;
 
 import excel.ToFormula;
 import excel.grammar.formula.Reference;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import static excel.grammar.Grammar.epsilon;
 
 /**
  * @author Massimo Caliman
@@ -57,41 +54,25 @@ public final class PrefixReferenceItem extends Reference implements ToFormula {
         }
     }
 
-    /**
-     * If not address required
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        return prefix + reference;
-    }
-
-    public String toString(boolean address) {
-        return address ? ifIsNotArea() + prefix + reference + " = " + values() : toString();
-    }
-
     @Override
     public String toFormula() {
         return isArea() ? values() : prefix + reference;
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PrefixReferenceItem that = (PrefixReferenceItem) o;
-        return that.toString(true).equals(this.toString(true));
+
+        return this.prefix.equals(that.prefix) &&
+                this.reference.equals(that.reference) &&
+                this.sheetName.equals(that.sheetName);
+        //return that.toString(true).equals(this.toString(true));
     }
 
     public String id() {
         return !isArea() ? getAddress(!this.singleSheet) : prefix + reference;
-    }
-
-    @NotNull
-    private String ifIsNotArea() {
-        return !isArea() ? getAddress() + " = " : epsilon;
     }
 
     private boolean is_HORIZONTAL_RANGE() {

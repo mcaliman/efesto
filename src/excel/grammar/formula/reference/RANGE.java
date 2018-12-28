@@ -22,6 +22,7 @@
 
 package excel.grammar.formula.reference;
 
+import excel.ToFormula;
 import excel.grammar.formula.Reference;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,7 +30,7 @@ import java.util.List;
 
 import static excel.grammar.Grammar.colon;
 
-public class RANGE extends Reference {
+public class RANGE extends Reference implements ToFormula {
 
     private final CELL_REFERENCE first;
     private final CELL_REFERENCE last;
@@ -58,6 +59,10 @@ public class RANGE extends Reference {
     @NotNull
     @Override
     public String toString(boolean address) {
+        return first.getAddress() + colon + last.getAddress();
+    }
+
+    public String toFormula() {
         return first.getAddress() + colon + last.getAddress();
     }
 

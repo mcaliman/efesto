@@ -24,7 +24,6 @@ package excel.grammar.formula;
 
 import excel.ToFormula;
 import excel.grammar.Formula;
-import excel.grammar.formula.functioncall.binary.Binary;
 
 import static excel.grammar.Grammar.closeparen;
 import static excel.grammar.Grammar.openparen;
@@ -41,23 +40,8 @@ public final class ParenthesisFormula extends Formula implements ToFormula {
     }
 
     @Override
-    public String toString() {
-        return openparen + formula.toString() + closeparen;
-    }
-
-    @Override
     public String toFormula() {
         return openparen + formula.toFormula() + closeparen;
-    }
-
-    public String toString(boolean address) {
-        return isBinary() ?
-                formula.toString(false) :
-                formula.toString();
-    }
-
-    private boolean isBinary() {
-        return formula instanceof Binary;
     }
 
     public Formula getFormula() {

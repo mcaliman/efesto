@@ -24,7 +24,6 @@ package excel.grammar.formula;
 
 import excel.ToFormula;
 import excel.grammar.Formula;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Massimo Caliman
@@ -34,20 +33,6 @@ public class ConstantArray extends Formula implements ToFormula {
 
     public ConstantArray(Object[][] array) {
         this.array = array;
-    }
-
-    @NotNull
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder();
-        str.append(this.getAddress()).append(" = ");
-        str.append('{');
-        for (Object[] internal : array) {
-            str.append(internal[0]).append(',');
-        }
-        if (str.charAt(str.length() - 1) == ',') str.deleteCharAt(str.length() - 1);
-        str.append('}');
-        return str.toString();
     }
 
     public String id() {
@@ -63,12 +48,6 @@ public class ConstantArray extends Formula implements ToFormula {
         if (str.charAt(str.length() - 1) == ',') str.deleteCharAt(str.length() - 1);
         str.append('}');
         return str.toString();
-    }
-
-    @NotNull
-    @Override
-    public String toString(boolean address) {
-        return toString();
     }
 
 }

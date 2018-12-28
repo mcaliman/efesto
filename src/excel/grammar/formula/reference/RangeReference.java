@@ -47,7 +47,7 @@ public final class RangeReference extends Reference implements ToFormula {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RangeReference that = (RangeReference) o;
-        return that.toString(true).equals(this.toString(true));
+        return that.toString().equals(this.toString());
     }
 
     private boolean horizzontal_range() {
@@ -66,7 +66,7 @@ public final class RangeReference extends Reference implements ToFormula {
     @Override
     public String toString(boolean address) {
         return address ?
-                sheetName + exclamationmark + reference1.getAddress() + colon + reference2.getAddress() + " = " + values() :
+                sheetName + exclamationmark + reference1.getAddress() + colon + reference2.getAddress() /*+ " = " + values()*/ :
                 sheetName + exclamationmark + reference1.getAddress() + colon + reference2.getAddress();
     }
 

@@ -22,15 +22,14 @@
 
 package excel.grammar.formula.reference;
 
+import excel.ToFormula;
 import excel.grammar.formula.Reference;
 import org.jetbrains.annotations.Nullable;
-
-import static excel.grammar.Grammar.exclamationmark;
 
 /**
  * @author Massimo Caliman
  */
-public class ReferenceItem extends Reference {
+public class ReferenceItem extends Reference implements ToFormula {
 
     String value;
 
@@ -50,13 +49,11 @@ public class ReferenceItem extends Reference {
     @Nullable
     @Override
     public String toString() {
-        return value;
+        return toFormula();
     }
 
-    public String toString(boolean address) {
-        return address ?
-                sheetName + exclamationmark + value + " = " + values() :
-                sheetName + exclamationmark + value;
+    public String toFormula() {
+        return value;
     }
 
     private boolean horizzontal_range() {
