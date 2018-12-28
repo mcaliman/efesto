@@ -86,6 +86,7 @@ public class ExcelToolkitCommand implements ToolkitCommand {
     public void writerFormula(@NotNull String filename) throws IOException {
         StartList list = parser.getList();
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
+            writer.write("'' \n");
             writer.write("'' Text File: " + filename + '\n');
             writer.write("'' Excel File: " + parser.getFileName() + '\n');
             writer.write("'' Excel Formulas Number: " + parser.getCounterFormulas() + '\n');

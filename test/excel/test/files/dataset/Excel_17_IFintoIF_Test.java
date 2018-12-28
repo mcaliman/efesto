@@ -38,7 +38,7 @@ class Excel_17_IFintoIF_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/17-IF-into-IF.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/17-IF-into-IF.vb");
+        /*toolkitCommand.writer("test/17-IF-into-IF.vb");
         System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.print();
@@ -46,8 +46,8 @@ class Excel_17_IFintoIF_Test {
                 "IFIF!B1 = 2.0",
                 "IFIF!C1 = TRUE",
                 "IFIF!A1 = IF(IFIF!B1>1,0,IF(IFIF!C1,\"Hello\",\"Bye\"))");
-        assertTrue(correct);
-        System.out.println("ToFunctional.");
+        assertTrue(correct);*/
+        System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
@@ -56,5 +56,6 @@ class Excel_17_IFintoIF_Test {
                 "C1 = TRUE",
                 "A1 = IF(B1>1,0,IF(C1,\"Hello\",\"Bye\"))"
         ));
+        toolkitCommand.writerFormula("test/17-IF-into-IF.vb");
     }
 }

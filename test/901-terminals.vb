@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/901-terminals.vb
 '' Excel File: 901-terminals.xlsx
 '' Excel Formulas Number: 5
@@ -8,4 +9,4 @@
 '' title:null
 '' subject:null
 '' category:null
-Foglio1!A5 = 1/0
+A5 = 1/0

@@ -41,14 +41,14 @@ class Excel_15_Others_FUN_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/15-Others-FUN.xlsx");
         toolkitCommand.execute();
-        System.out.println("ToFormula.");
+        /*System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0,
                 "Foglio1!G1 = [1]Sheet1!C5 = []",
                 "Foglio1!B29 = 70.0",
-                "Foglio1!D7 = (2*(Foglio1!B29))/(1+Foglio1!B29)"));
-        System.out.println("ToFunctional.");
+                "Foglio1!D7 = (2*(Foglio1!B29))/(1+Foglio1!B29)"));*/
+        System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
@@ -57,6 +57,6 @@ class Excel_15_Others_FUN_Test {
                 "B29 = 70.0",
                 "D7 = (2*(B29))/(1+B29)"
         ));
-
+        toolkitCommand.writerFormula("test/15-Others-FUN.vb");
     }
 }

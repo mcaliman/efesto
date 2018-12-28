@@ -38,15 +38,13 @@ class Excel_RealComplex5Test {
         options.setMetadata(false);
         options.setVerbose(false);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("D:/xl5.xlsx", options);
-        System.out.println("execute()...");
         toolkitCommand.execute();
-        System.out.println("writer()...");
-        toolkitCommand.writer("D:/xl5.vb");
+        /*toolkitCommand.writer("D:/xl5.vb");*/
         long elapsed = System.currentTimeMillis() - t;
         System.out.println("Elapsed time: " + elapsed + " [ms] or " + elapsed / 1000 + " [s]. or " + elapsed / 1000 / 60 + "[m].");
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
-
+        toolkitCommand.writerFormula("D:/xl5.vb");
     }
 
 }

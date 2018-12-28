@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/904-terminals-formulas.vb
 '' Excel File: 904-terminals-formulas.xlsx
 '' Excel Formulas Number: 6
@@ -8,11 +9,11 @@
 '' title:null
 '' subject:null
 '' category:null
-Foglio1!A2 = 20.0
-Foglio1!A1 = 10.0
-Foglio1!A4 = Foglio1!A1-Foglio1!A2
-Foglio1!A5 = Foglio1!A1*Foglio1!A2
-Foglio1!A6 = Foglio1!A1/Foglio1!A2
-Foglio1!A3 = Foglio1!A1+Foglio1!A2
-Foglio1!A8 = Foglio1!A1^Foglio1!A2
-Foglio1!A7 = Foglio1!A1&Foglio1!A2
+A2 = 20.0
+A1 = 10.0
+A4 = A1-A2
+A5 = A1*A2
+A6 = A1/A2
+A3 = A1+A2
+A8 = A1^A2
+A7 = A1&A2

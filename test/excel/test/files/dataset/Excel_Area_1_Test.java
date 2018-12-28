@@ -45,18 +45,19 @@ class Excel_Area_1_Test {
         options.setVerbose(false);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/area-1.xlsx", options);
         toolkitCommand.execute();
-        toolkitCommand.writer("test/area-1.vb");
+        /*toolkitCommand.writer("test/area-1.vb");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(
                 0,
                 "Area1!A1:B3 = [[11.0 21.0][12.0 22.0][13.0 23.0]]",
-                "Area1!A7 = INDEX(Area1!A1:B3,2,2)"));
-        System.out.println("ToFunctional.");
+                "Area1!A7 = INDEX(Area1!A1:B3,2,2)"));*/
+        System.out.println("ToFormula.");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
                 0,
                 "A1:B3 = [[11.0 21.0][12.0 22.0][13.0 23.0]]",
                 "A7 = INDEX(A1:B3,2,2)"
         ));
+        toolkitCommand.writerFormula("test/area-1.vb");
     }
 }

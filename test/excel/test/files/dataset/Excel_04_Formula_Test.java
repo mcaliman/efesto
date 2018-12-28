@@ -41,16 +41,17 @@ class Excel_04_Formula_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/04-formula.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/04-formula.vb");
+        /*toolkitCommand.writer("test/04-formula.vb");
         System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0, "FORMULA!A1 = 1+2"));
-        System.out.println("ToFunctional.");
+        assertTrue(toolkitCommand.test(0, "FORMULA!A1 = 1+2"));*/
+        System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
                 0, "A1 = 1+2"
         ));
+        toolkitCommand.writerFormula("test/04-formula.vb");
     }
 }

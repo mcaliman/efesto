@@ -41,19 +41,20 @@ class Excel_12_String_COUNTIF_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/12-String-COUNTIF.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/12-String-COUNTIF.vb");
+        /*toolkitCommand.writer("test/12-String-COUNTIF.vb");
         System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0,
                 "COUNTIF!C1:E1 = [ 1.0 2.0 3.0 ]",
-                "COUNTIF!B4 = COUNTIF(COUNTIF!C1:E1,\">=2\")"));
-        System.out.println("ToFunctional.");
+                "COUNTIF!B4 = COUNTIF(COUNTIF!C1:E1,\">=2\")"));*/
+        System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(0,
                 "C1:E1 = [ 1.0 2.0 3.0 ]",
                 "B4 = COUNTIF(C1:E1,\">=2\")"
         ));
+        toolkitCommand.writerFormula("test/12-String-COUNTIF.vb");
     }
 }

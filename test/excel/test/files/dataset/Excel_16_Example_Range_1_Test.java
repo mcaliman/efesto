@@ -38,15 +38,15 @@ class Excel_16_Example_Range_1_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/16-example-range-1.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/16-example-range-1.vb");
+        /*toolkitCommand.writer("test/16-example-range-1.vb");
         System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.print();
         boolean correct = toolkitCommand.test(0,
                 "Foglio1!D3:H3 = [ 0.0 1.0 2.0 3.0 4.0 ]",
                 "Foglio1!D7 = INDEX(Foglio1!D3:H3,2)");
-        assertTrue(correct);
-        System.out.println("ToFunctional.");
+        assertTrue(correct);*/
+        System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
@@ -54,5 +54,6 @@ class Excel_16_Example_Range_1_Test {
                 "D3:H3 = [ 0.0 1.0 2.0 3.0 4.0 ]",
                 "D7 = INDEX(D3:H3,2)"
         ));
+        toolkitCommand.writerFormula("test/16-example-range-1.vb");
     }
 }

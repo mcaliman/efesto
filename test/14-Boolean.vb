@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/14-Boolean.vb
 '' Excel File: 14-Boolean.xlsx
 '' Excel Formulas Number: 2
@@ -8,8 +9,8 @@
 '' title:null
 '' subject:null
 '' category:null
-Boolean!A3 = 1.0
-Boolean!A4 = TRUE
-Boolean!A5 = "IFTRUE"
-Boolean!A6 = "IFFALSE"
-Boolean!A1 = IF(AND(Boolean!A3=1,Boolean!A4=TRUE),Boolean!A5,Boolean!A6)
+A3 = 1.0
+A4 = TRUE
+A5 = "IFTRUE"
+A6 = "IFFALSE"
+A1 = IF(AND(A3=1,A4=TRUE),A5,A6)

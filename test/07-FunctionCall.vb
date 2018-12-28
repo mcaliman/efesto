@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/07-FunctionCall.vb
 '' Excel File: 07-FunctionCall.xlsx
 '' Excel Formulas Number: 1
@@ -8,5 +9,5 @@
 '' title:null
 '' subject:null
 '' category:null
-FunctionCall!A1:C1 = [ 1.0 2.0 3.0 ]
-FunctionCall!A2 = SUM(FunctionCall!A1:C1)
+A1:C1 = [ 1.0 2.0 3.0 ]
+A2 = SUM(A1:C1)

@@ -41,17 +41,18 @@ class Excel_HORIZONTAL_RANGE_Test {
         options.setVerbose(true);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/HORIZONTAL_RANGE.xlsx", options);
         toolkitCommand.execute();
-        toolkitCommand.writer("test/HORIZONTAL_RANGE.vb");
+        /*toolkitCommand.writer("test/HORIZONTAL_RANGE.vb");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0,
                 "Foglio1!A1:D1 = [ 1.0 3.0 6.0 8.0 ]",
-                "Foglio1!A3 = MATCH(3,Foglio1!A1:D1,0)"));
-        System.out.println("ToFunctional.");
+                "Foglio1!A3 = MATCH(3,Foglio1!A1:D1,0)"));*/
+        System.out.println("ToFormula.");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
                 0,
                 "A1:D1 = [ 1.0 3.0 6.0 8.0 ]",
                 "A3 = MATCH(3,A1:D1,0)"
         ));
+        toolkitCommand.writerFormula("test/HORIZONTAL_RANGE.vb");
     }
 }

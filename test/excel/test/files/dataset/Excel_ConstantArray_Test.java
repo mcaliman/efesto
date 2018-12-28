@@ -42,13 +42,14 @@ class Excel_ConstantArray_Test {
         options.setVerbose(true);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/ConstantArray.xlsx", options);
         toolkitCommand.execute();
-        toolkitCommand.writer("test/ConstantArray.vb");
+        /*toolkitCommand.writer("test/ConstantArray.vb");
         toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0, "Foglio1!A6 = {1.0,2.0,2.0,4.0,6.0}"));
-        System.out.println("ToFunctional.");
+        assertTrue(toolkitCommand.test(0, "Foglio1!A6 = {1.0,2.0,2.0,4.0,6.0}"));*/
+        System.out.println("ToFormula.");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
                 0, "Foglio1!A6 = {1.0,2.0,2.0,4.0,6.0}"
         ));
+        toolkitCommand.writerFormula("test/ConstantArray.vb");
     }
 }

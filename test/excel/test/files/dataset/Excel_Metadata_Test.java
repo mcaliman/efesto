@@ -36,10 +36,10 @@ class Excel_Metadata_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/metadata.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/metadata.vb");
-        toolkitCommand.print();
+        /*toolkitCommand.writer("test/metadata.vb");
+        toolkitCommand.print();*/
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
-
+        toolkitCommand.writerFormula("test/metadata.vb");
     }
 }

@@ -41,9 +41,9 @@ class Excel_Xl_901_Terminals_Test {
         long t = System.currentTimeMillis();
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/901-terminals.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/901-terminals.vb");
+        /*toolkitCommand.writer("test/901-terminals.vb");
         toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0, "Foglio1!A5 = 1/0"));
+        assertTrue(toolkitCommand.test(0, "Foglio1!A5 = 1/0"));*/
         long elapsed = System.currentTimeMillis() - t;
         System.out.println("elapsed: " + elapsed / 1000 + " s.");
         System.out.println("ToFunctional.");
@@ -51,6 +51,7 @@ class Excel_Xl_901_Terminals_Test {
         assertTrue(toolkitCommand.testToFunctional(
                 0, "A5 = 1/0"
         ));
+        toolkitCommand.writerFormula("test/901-terminals.vb");
     }
 
 }

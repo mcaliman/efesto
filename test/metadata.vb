@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/metadata.vb
 '' Excel File: metadata.xlsx
 '' Excel Formulas Number: 1
@@ -8,5 +9,5 @@
 '' title:Metatdato Titolo
 '' subject:Metadata Oggetto
 '' category:Metadato Categoria
-Foglio1!A1 = 12.0
-Foglio1!A2 = Foglio1!A1+1
+A1 = 12.0
+A2 = A1+1

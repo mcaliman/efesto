@@ -41,13 +41,13 @@ class Excel_900_Basic_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/900-basic.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/900-basic.vb");
+        /*toolkitCommand.writer("test/900-basic.vb");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0,
                 "Foglio1!B4 = 10.0",
                 "Foglio1!B5 = 20.0",
-                "Foglio1!B1 = Foglio1!B5+Foglio1!B4"));
-        System.out.println("ToFunctional.");
+                "Foglio1!B1 = Foglio1!B5+Foglio1!B4"));*/
+        System.out.println("ToFormula.");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
                 0,
@@ -55,5 +55,6 @@ class Excel_900_Basic_Test {
                 "B5 = 20.0",
                 "B1 = B5+B4"
         ));
+        toolkitCommand.writerFormula("test/900-basic.vb");
     }
 }

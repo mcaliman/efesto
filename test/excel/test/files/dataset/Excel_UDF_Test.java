@@ -41,13 +41,14 @@ class Excel_UDF_Test {
         options.setVerbose(true);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/UDF.xlsm", options);
         toolkitCommand.execute();
-        toolkitCommand.writer("test/UDF.vb");
+        /*toolkitCommand.writer("test/UDF.vb");
         toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0, "SheetUDF!A2 = GetElement(A1,2,\"-\")"));
-        System.out.println("ToFunctional.");
+        assertTrue(toolkitCommand.test(0, "SheetUDF!A2 = GetElement(A1,2,\"-\")"));*/
+        System.out.println("ToFormula.");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
                 0, "A2 = GetElement(A1,2,\"-\")"
         ));
+        toolkitCommand.writerFormula("test/UDF.vb");
     }
 }

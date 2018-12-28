@@ -39,7 +39,7 @@ class Excel_14_Boolean_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/14-Boolean.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/14-Boolean.vb");
+        /*toolkitCommand.writer("test/14-Boolean.vb");
         System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.print();
@@ -48,8 +48,8 @@ class Excel_14_Boolean_Test {
                 "Boolean!A4 = TRUE",
                 "Boolean!A5 = \"IFTRUE\"",
                 "Boolean!A6 = \"IFFALSE\"",
-                "Boolean!A1 = IF(AND(Boolean!A3=1,Boolean!A4=TRUE),Boolean!A5,Boolean!A6)"));
-        System.out.println("ToFunctional.");
+                "Boolean!A1 = IF(AND(Boolean!A3=1,Boolean!A4=TRUE),Boolean!A5,Boolean!A6)"));*/
+        System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
@@ -60,5 +60,6 @@ class Excel_14_Boolean_Test {
                 "A6 = \"IFFALSE\"",
                 "A1 = IF(AND(A3=1,A4=TRUE),A5,A6)"
         ));
+        toolkitCommand.writerFormula("test/14-Boolean.vb");
     }
 }

@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/06-cell.vb
 '' Excel File: 06-cell.xlsx
 '' Excel Formulas Number: 1
@@ -8,4 +9,4 @@
 '' title:null
 '' subject:null
 '' category:null
-Cell!A1 = 27.59
+A1 = 27.59

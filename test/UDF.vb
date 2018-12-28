@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/UDF.vb
 '' Excel File: UDF.xlsm
 '' Excel Formulas Number: 1
@@ -8,4 +9,4 @@
 '' title:null
 '' subject:null
 '' category:null
-SheetUDF!A2 = GetElement(A1,2,"-")
+A2 = GetElement(A1,2,"-")

@@ -45,18 +45,19 @@ class Excel_Comments_Test {
         options.setVerbose(false);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/comments.xlsx", options);
         toolkitCommand.execute();
-        toolkitCommand.print();
+        /*toolkitCommand.print();
         toolkitCommand.writer("test/comments.vb");
         boolean correct = toolkitCommand.test(0,
                 "Sheet1!A1 = 1.0",
                 "Sheet1!A2 = Sheet1!A1+1");
-        assertTrue(correct);
-        System.out.println("ToFunctional.");
+        assertTrue(correct);*/
+        System.out.println("ToFormula.");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
                 0,
                 "A1 = 1.0",
                 "A2 = A1+1"
         ));
+        toolkitCommand.writerFormula("test/comments.vb");
     }
 }

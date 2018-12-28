@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/03-range-index.vb
 '' Excel File: 03-range-index.xlsx
 '' Excel Formulas Number: 1
@@ -8,5 +9,5 @@
 '' title:null
 '' subject:null
 '' category:null
-RANGE!A1:B6 = [[1.1 1.2][2.1 2.2][3.1 3.2][4.1 4.2][5.1 5.2][6.1 6.2]]
-RANGE!A10 = INDEX(RANGE!A1:B6,2,2)
+A1:B6 = [[1.1 1.2][2.1 2.2][3.1 3.2][4.1 4.2][5.1 5.2][6.1 6.2]]
+A10 = INDEX(A1:B6,2,2)

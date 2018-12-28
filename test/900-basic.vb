@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/900-basic.vb
 '' Excel File: 900-basic.xlsx
 '' Excel Formulas Number: 1
@@ -8,6 +9,6 @@
 '' title:null
 '' subject:null
 '' category:null
-Foglio1!B4 = 10.0
-Foglio1!B5 = 20.0
-Foglio1!B1 = Foglio1!B5+Foglio1!B4
+B4 = 10.0
+B5 = 20.0
+B1 = B5+B4

@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/10-Prefix.vb
 '' Excel File: 10-Prefix.xlsx
 '' Excel Formulas Number: 1
@@ -9,4 +10,4 @@
 '' subject:null
 '' category:null
 Sheet1!A1 = 78.0
-Prefix!A1 = Sheet1!A1 = []
+Prefix!A1 = Sheet1!A1

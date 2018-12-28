@@ -46,18 +46,19 @@ class Excel_10_Prefix_Test {
         options.setVerbose(true);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/10-Prefix.xlsx", options);
         toolkitCommand.execute();
-        toolkitCommand.writer("test/10-Prefix.vb");
+        /*toolkitCommand.writer("test/10-Prefix.vb");
         System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0,
                 "Sheet1!A1 = 78.0",
-                "Prefix!A1 = Sheet1!A1 = []"));
-        System.out.println("ToFunctional.");
+                "Prefix!A1 = Sheet1!A1 = []"));*/
+        System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(0,
                 "Sheet1!A1 = 78.0",
                 "Prefix!A1 = Sheet1!A1"));
+        toolkitCommand.writerFormula("test/10-Prefix.vb");
     }
 }

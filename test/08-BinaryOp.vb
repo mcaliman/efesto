@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/08-BinaryOp.vb
 '' Excel File: 08-BinOp.xlsx
 '' Excel Formulas Number: 1
@@ -8,6 +9,6 @@
 '' title:null
 '' subject:null
 '' category:null
-BinOp!B1 = 1.0
-BinOp!B2 = 3.0
-BinOp!B3 = BinOp!B2-BinOp!B1
+B1 = 1.0
+B2 = 3.0
+B3 = B2-B1

@@ -39,13 +39,14 @@ class Excel_File_1_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/file-1.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/file-1.vb");
+       /* toolkitCommand.writer("test/file-1.vb");
         toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0, "SrcSheet!A1 = [1]DestSheet!$A$1 = []"));
+        assertTrue(toolkitCommand.test(0, "SrcSheet!A1 = [1]DestSheet!$A$1 = []"));*/
         System.out.println("ToFunctional.");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
                 0, "A1 = [1]DestSheet!$A$1"
         ));
+        toolkitCommand.writerFormula("test/file-1.vb");
     }
 }

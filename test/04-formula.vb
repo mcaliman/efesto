@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/04-formula.vb
 '' Excel File: 04-formula.xlsx
 '' Excel Formulas Number: 1
@@ -8,4 +9,4 @@
 '' title:null
 '' subject:null
 '' category:null
-FORMULA!A1 = 1+2
+A1 = 1+2

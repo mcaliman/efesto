@@ -42,16 +42,17 @@ class Excel_Multisheet1_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/multisheet-1.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/multisheet-1.vb");
+        /*toolkitCommand.writer("test/multisheet-1.vb");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(
                 0, "SheetB!A1:A3 = [ 1.0 2.0 3.0 ]",
-                "SheetA!A1 = SUM(SheetB!A1:A3)"));
-        System.out.println("ToFunctional.");
+                "SheetA!A1 = SUM(SheetB!A1:A3)"));*/
+        System.out.println("ToFormula.");
         toolkitCommand.toFunctional();
-        /*assertTrue(toolkitCommand.testToFunctional(0,
+        assertTrue(toolkitCommand.testToFunctional(0,
                 "SheetB!A1:A3 = [ 1.0 2.0 3.0 ]",
                 "SheetA!A1 = SUM(SheetB!A1:A3)"
-        ));*/
+        ));
+        toolkitCommand.writerFormula("test/multisheet-1.vb");
     }
 }

@@ -1,3 +1,4 @@
+'' 
 '' Text File: test/05-reference.vb
 '' Excel File: 05-reference.xlsx
 '' Excel Formulas Number: 1
@@ -8,6 +9,6 @@
 '' title:null
 '' subject:null
 '' category:null
-Reference!A1 = 15.0
-Reference!A2 = 100.0
-Reference!A3 = Reference!A2/Reference!A1
+A1 = 15.0
+A2 = 100.0
+A3 = A2/A1

@@ -41,7 +41,7 @@ class Excel_904_TerminalsFormulas_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/904-terminals-formulas.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/904-terminals-formulas.vb");
+        /*toolkitCommand.writer("test/904-terminals-formulas.vb");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(
                 0,
@@ -52,8 +52,8 @@ class Excel_904_TerminalsFormulas_Test {
                 "Foglio1!A6 = Foglio1!A1/Foglio1!A2",
                 "Foglio1!A3 = Foglio1!A1+Foglio1!A2",
                 "Foglio1!A8 = Foglio1!A1^Foglio1!A2",
-                "Foglio1!A7 = Foglio1!A1&Foglio1!A2"));
-        System.out.println("ToFunctional.");
+                "Foglio1!A7 = Foglio1!A1&Foglio1!A2"));*/
+        System.out.println("ToFormula.");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
                 0,
@@ -66,6 +66,7 @@ class Excel_904_TerminalsFormulas_Test {
                 "A8 = A1^A2",
                 "A7 = A1&A2"
         ));
+        toolkitCommand.writerFormula("test/904-terminals-formulas.vb");
     }
 
 }

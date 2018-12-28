@@ -44,16 +44,17 @@ class Excel_Date_Cell_1_Test {
         options.setVerbose(true);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/date-cell-1.xlsx", options);
         toolkitCommand.execute();
-        toolkitCommand.print();
+        /*toolkitCommand.print();
         toolkitCommand.writer("test/date-cell-1.vb");
         assertTrue(toolkitCommand.test(
                 0, "Foglio1!A1 = 01/02/2018",
-                "Foglio1!A2 = DAY(Foglio1!A1)"));
-        System.out.println("ToFunctional.");
+                "Foglio1!A2 = DAY(Foglio1!A1)"));*/
+        System.out.println("ToFormula.");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(0,
                 "A1 = 01/02/2018",
                 "A2 = DAY(A1)"
         ));
+        toolkitCommand.writerFormula("test/date-cell-1.vb");
     }
 }

@@ -39,7 +39,7 @@ class Excel_903_TerminalsFormulas_Test {
         //long t = System.currentTimeMillis();
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/903-terminals-formulas.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/903-terminals-formulas.vb");
+        /*toolkitCommand.writer("test/903-terminals-formulas.vb");
         toolkitCommand.print();
         boolean correct = toolkitCommand.test(0,
                 "Foglio1!A1 = TRUE",
@@ -48,8 +48,8 @@ class Excel_903_TerminalsFormulas_Test {
                 "Foglio1!A4 = \"This is a string\"",
                 "Foglio1!A6 = IF(Foglio1!A1,Foglio1!A2,Foglio1!A3)",
                 "Foglio1!A7 = IF(Foglio1!A1,Foglio1!A4,Foglio1!A3)");
-        assertTrue(correct);
-        System.out.println("ToFunctional.");
+        assertTrue(correct);*/
+        System.out.println("ToFormula.");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
                 0,
@@ -60,6 +60,7 @@ class Excel_903_TerminalsFormulas_Test {
                 "A6 = IF(A1,A2,A3)",
                 "A7 = IF(A1,A4,A3)"
         ));
+        toolkitCommand.writerFormula("test/903-terminals-formulas.vb");
     }
 
 }

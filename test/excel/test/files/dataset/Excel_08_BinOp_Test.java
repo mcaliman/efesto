@@ -42,14 +42,14 @@ class Excel_08_BinOp_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/08-BinOp.xlsx");
         toolkitCommand.execute();
-        toolkitCommand.writer("test/08-BinaryOp.vb");
+        /*toolkitCommand.writer("test/08-BinaryOp.vb");
         System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.print();
         assertTrue(toolkitCommand.test(0,
                 "BinOp!B1 = 1.0", "BinOp!B2 = 3.0",
-                "BinOp!B3 = BinOp!B2-BinOp!B1"));
-        System.out.println("ToFunctional.");
+                "BinOp!B3 = BinOp!B2-BinOp!B1"));*/
+        System.out.println("ToFormula.");
         System.out.println("-------------");
         toolkitCommand.toFunctional();
         assertTrue(toolkitCommand.testToFunctional(
@@ -58,5 +58,6 @@ class Excel_08_BinOp_Test {
                 "B2 = 3.0",
                 "B3 = B2-B1"
         ));
+        toolkitCommand.writerFormula("test/08-BinaryOp.vb");
     }
 }
