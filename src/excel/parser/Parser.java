@@ -445,7 +445,7 @@ public final class Parser extends AbstractParser {
 
 
     @Override
-    protected void parseFunc(String name, boolean externalFunction) {
+    protected void parseFunc(String name) {
         try {
             builtinFunction(name);
         } catch (UnsupportedBuiltinException e) {
@@ -454,7 +454,7 @@ public final class Parser extends AbstractParser {
     }
 
     @Override
-    protected void parseFunc(String name, int arity, boolean externalFunction) {
+    protected void parseFunc(String name, int arity) {
         try {
             builtInFunction(arity, name);
         } catch (UnsupportedBuiltinException e) {

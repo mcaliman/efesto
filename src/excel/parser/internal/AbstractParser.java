@@ -128,10 +128,6 @@ public abstract class AbstractParser {
     private String title;
     private String subject;
     private String category;
-    //Meta
-    private String company;
-    private String template;
-    private String manager;
 
     private int counterSheets = 0;
     private int counterFormulas;
@@ -156,7 +152,7 @@ public abstract class AbstractParser {
         this.ext = new ArrayList<>();
         this.helper = new Helper(this.book);
         readMetadata();
-        print("Parse...");
+        print();
     }
 
     private void readMetadata() {
@@ -174,9 +170,10 @@ public abstract class AbstractParser {
 
         //POIXMLProperties.CustomProperties customProperties = props.getCustomProperties();
         POIXMLProperties.ExtendedProperties extendedProperties = props.getExtendedProperties();
-        this.company = extendedProperties.getUnderlyingProperties().getCompany();
-        this.template = extendedProperties.getUnderlyingProperties().getTemplate();
-        this.manager = extendedProperties.getUnderlyingProperties().getManager();
+        //Meta
+        String company = extendedProperties.getUnderlyingProperties().getCompany();
+        String template = extendedProperties.getUnderlyingProperties().getTemplate();
+        String manager = extendedProperties.getUnderlyingProperties().getManager();
     }
 
     public int getCounterFormulas() {
@@ -320,7 +317,7 @@ public abstract class AbstractParser {
                 new WhatIf(p, percentPtg, t -> percentFormula()),
                 new WhatIf(p, powerPtg, t -> parsePower()),
                 new WhatIf(p, ref3DPxg, (Ptg t) -> parseRef3DPxg((Ref3DPxg) t)),
-                new WhatIf(p, refErrorPtg, (Ptg t) -> parseReferenceErrorLiteral((RefErrorPtg) t)),
+                new WhatIf(p, refErrorPtg, (Ptg t) -> parseReferenceErrorLiteral()),
                 new WhatIf(p, refPtg, (Ptg t) -> parseRefPtg((RefPtg) t)),
                 new WhatIf(p, stringPtg, (Ptg t) -> parseStringLiteral(((StringPtg) t).getValue())),
                 new WhatIf(p, subtractPtg, t -> parseSub()),
@@ -502,18 +499,18 @@ public abstract class AbstractParser {
     protected abstract void parseParenthesisFormula();
 
     private void parseFuncVarPtg(@NotNull FuncVarPtg t) {
-        if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
-        else parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
+        if (t.getNumberOfOperands() == 0) parseFunc(t.getName());
+        else parseFunc(t.getName(), t.getNumberOfOperands());
     }
 
     private void parseFuncPtg(@NotNull FuncPtg t) {
-        if (t.getNumberOfOperands() == 0) parseFunc(t.getName(), t.isExternalFunction());
-        else parseFunc(t.getName(), t.getNumberOfOperands(), t.isExternalFunction());
+        if (t.getNumberOfOperands() == 0) parseFunc(t.getName());
+        else parseFunc(t.getName(), t.getNumberOfOperands());
     }
 
-    protected abstract void parseFunc(String name, int arity, boolean externalFunction);
+    protected abstract void parseFunc(String name, int arity);
 
-    protected abstract void parseFunc(String name, boolean externalFunction);
+    protected abstract void parseFunc(String name);
 
     protected abstract void percentFormula();
 
@@ -607,7 +604,7 @@ public abstract class AbstractParser {
     //endregion
 
     //region Literals
-    private void parseReferenceErrorLiteral(RefErrorPtg t) {
+    private void parseReferenceErrorLiteral() {
         ERROR_REF term = new ERROR_REF();
         parseReferenceErrorLiteral(term);
     }
@@ -639,7 +636,7 @@ public abstract class AbstractParser {
         return category;
     }
 
-    private void print(String text) {
-        System.out.println(text);
+    private void print() {
+        System.out.println("Parse...");
     }
 }
