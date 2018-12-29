@@ -31,23 +31,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Massimo Caliman
  */
 class Excel_ERROR_REF_1_Test {
-    /**
-     * TO FIX
-     * ToFormula: OK
-     * ToFunctional: OK
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/ERROR_REF_1.xlsx");
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/ERROR_REF_1.vb");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0, "Foglio1!A1 = #REF!"));*/
         System.out.println("ToFormula.");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0, "A1 = #REF!"
         ));
         toolkitCommand.writerFormula("test/ERROR_REF_1.vb");

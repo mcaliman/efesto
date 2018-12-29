@@ -26,20 +26,13 @@ import excel.ExcelToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 class Excel_Metadata_Test {
-    /**
-     * ToFormula: OK
-     * ToFunctional: OK
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/metadata.xlsx");
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/metadata.vb");
-        toolkitCommand.print();*/
         System.out.println("ToFunctional.");
-        toolkitCommand.toFunctional();
+        toolkitCommand.toFormula();
         toolkitCommand.writerFormula("test/metadata.vb");
     }
 }

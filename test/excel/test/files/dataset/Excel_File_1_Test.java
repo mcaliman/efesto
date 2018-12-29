@@ -28,23 +28,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_File_1_Test {
-    /**
-     * FIX!
-     * ToFormula: OK
-     * ToFunctional: NO
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/file-1.xlsx");
         toolkitCommand.execute();
-       /* toolkitCommand.writer("test/file-1.vb");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0, "SrcSheet!A1 = [1]DestSheet!$A$1 = []"));*/
         System.out.println("ToFunctional.");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0, "A1 = [1]DestSheet!$A$1"
         ));
         toolkitCommand.writerFormula("test/file-1.vb");

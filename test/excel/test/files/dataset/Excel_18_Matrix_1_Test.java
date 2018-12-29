@@ -31,24 +31,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Massimo Caliman
  */
 class Excel_18_Matrix_1_Test {
-    /**
-     * ToFormula: OK
-     * ToFunctional: OK
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/18-matrix-1.xlsx");
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/18-matrix-1.vb");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0,
-                "Foglio1!A1:D2 = [[1.0 2.0 3.0 4.0][4.0 6.0 7.0 8.0]]",
-                "Foglio1!B7 = INDEX(Foglio1!A1:D2,1,1)"));*/
         System.out.println("ToFormula.");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0,
                 "A1:D2 = [[1.0 2.0 3.0 4.0][4.0 6.0 7.0 8.0]]",
                 "B7 = INDEX(A1:D2,1,1)"

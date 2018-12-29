@@ -23,6 +23,7 @@
 
 package excel.grammar.formula.constant;
 
+import excel.ToFormula;
 import excel.grammar.formula.Constant;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,7 +32,7 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
-public final class TEXT extends Constant {
+public final class TEXT extends Constant implements ToFormula {
 
     private final String value;
 
@@ -67,8 +68,8 @@ public final class TEXT extends Constant {
         return '"' + value + '"';
     }
 
-    @Override
-    public String toString(boolean address) {
+    public String toFormula() {
         return '"' + value + '"';
     }
+
 }

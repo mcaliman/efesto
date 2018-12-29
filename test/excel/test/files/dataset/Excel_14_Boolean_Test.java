@@ -28,31 +28,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_14_Boolean_Test {
-    /**
-     * TO FIX string "
-     * ToFormula: OK
-     * ToFunctional: OK
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/14-Boolean.xlsx");
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/14-Boolean.vb");
         System.out.println("ToFormula.");
         System.out.println("-------------");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0,
-                "Boolean!A3 = 1.0",
-                "Boolean!A4 = TRUE",
-                "Boolean!A5 = \"IFTRUE\"",
-                "Boolean!A6 = \"IFFALSE\"",
-                "Boolean!A1 = IF(AND(Boolean!A3=1,Boolean!A4=TRUE),Boolean!A5,Boolean!A6)"));*/
-        System.out.println("ToFormula.");
-        System.out.println("-------------");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0,
                 "A3 = 1.0",
                 "A4 = TRUE",

@@ -22,24 +22,19 @@
 
 package excel.grammar.formula.reference;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import excel.ToFormula;
 
 /**
  * @author Massimo Caliman
  */
-public final class ERROR_REF extends ReferenceItem {
-
-    private final static Logger LOG = Logger.getLogger(ERROR_REF.class.getName());
+public final class ERROR_REF extends ReferenceItem implements ToFormula {
 
     public ERROR_REF() {
         super("#REF");
-        LOG.log(Level.SEVERE, "parseErrorLiteral-REF Reference error literal #REF!");
     }
 
-    public String toString(boolean addr) {
-        return getAddress() + " = " + toString();
-
+    public String toFormula() {
+        return "#REF";
     }
 
 }

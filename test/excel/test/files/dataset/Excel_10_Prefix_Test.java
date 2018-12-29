@@ -33,30 +33,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @TODO FIX
  */
 class Excel_10_Prefix_Test {
-    /**
-     * TO FIX DETAIL
-     * ToFormula: NO
-     * ToFunctional: NO
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
-        options.setVerbose(true);
+        options.setVerbose(false);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/10-Prefix.xlsx", options);
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/10-Prefix.vb");
         System.out.println("ToFormula.");
         System.out.println("-------------");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0,
-                "Sheet1!A1 = 78.0",
-                "Prefix!A1 = Sheet1!A1 = []"));*/
-        System.out.println("ToFormula.");
-        System.out.println("-------------");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(0,
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(0,
                 "Sheet1!A1 = 78.0",
                 "Prefix!A1 = Sheet1!A1"));
         toolkitCommand.writerFormula("test/10-Prefix.vb");

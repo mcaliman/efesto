@@ -32,26 +32,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Massimo Caliman
  */
 class Excel_Date_Cell_1_Test {
-    /**
-     * ToFormula: OK
-     * ToFunctional: OK
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/date-cell-1.xlsx", options);
         toolkitCommand.execute();
-        /*toolkitCommand.print();
-        toolkitCommand.writer("test/date-cell-1.vb");
-        assertTrue(toolkitCommand.test(
-                0, "Foglio1!A1 = 01/02/2018",
-                "Foglio1!A2 = DAY(Foglio1!A1)"));*/
         System.out.println("ToFormula.");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(0,
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(0,
                 "A1 = 01/02/2018",
                 "A2 = DAY(A1)"
         ));

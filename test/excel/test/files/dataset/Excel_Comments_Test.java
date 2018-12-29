@@ -32,12 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Massimo Caliman
  */
 class Excel_Comments_Test {
-    /**
-     * ToFormula: OK
-     * ToFunctional: OK
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
@@ -45,15 +40,9 @@ class Excel_Comments_Test {
         options.setVerbose(false);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/comments.xlsx", options);
         toolkitCommand.execute();
-        /*toolkitCommand.print();
-        toolkitCommand.writer("test/comments.vb");
-        boolean correct = toolkitCommand.test(0,
-                "Sheet1!A1 = 1.0",
-                "Sheet1!A2 = Sheet1!A1+1");
-        assertTrue(correct);*/
         System.out.println("ToFormula.");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0,
                 "A1 = 1.0",
                 "A2 = A1+1"

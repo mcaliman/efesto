@@ -31,25 +31,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Massimo Caliman
  */
 class Excel_900_Basic_Test {
-    /**
-     * ToFormula: OK
-     * ToFunctional: OK
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/900-basic.xlsx");
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/900-basic.vb");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0,
-                "Foglio1!B4 = 10.0",
-                "Foglio1!B5 = 20.0",
-                "Foglio1!B1 = Foglio1!B5+Foglio1!B4"));*/
         System.out.println("ToFormula.");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0,
                 "B4 = 10.0",
                 "B5 = 20.0",

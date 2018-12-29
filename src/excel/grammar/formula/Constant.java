@@ -29,6 +29,6 @@ import excel.grammar.Formula;
  */
 public abstract class Constant extends Formula {
 
-    public abstract String toString(boolean address);
+    //public abstract String toString(boolean address);
 
 }

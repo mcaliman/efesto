@@ -53,8 +53,8 @@ public class ExcelToolkitCommand implements ToolkitCommand {
 
     public void execute() {
         long t = System.currentTimeMillis();
-        parser.parse();
-        elapsed = System.currentTimeMillis() - t;
+        this.parser.parse();
+        this.elapsed = System.currentTimeMillis() - t;
     }
 
     public void writerFormula(@NotNull String filename) throws IOException {
@@ -84,11 +84,11 @@ public class ExcelToolkitCommand implements ToolkitCommand {
         return parser.getList();
     }
 
-    public boolean testToFunctional(int offset, String... text) {
+    public boolean testToFormula(int offset, String... text) {
         return getStartList().testToFunctional(offset, text);
     }
 
-    public void toFunctional() {
+    public void toFormula() {
         for (Start start : getStartList()) {
             if (start != null) System.out.println(start.id() + " = " + start.toFormula());
         }

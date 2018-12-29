@@ -31,25 +31,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Massimo Caliman
  */
 class Excel_Multisheet1_Test {
-    /**
-     * FIX
-     * ToFormula: OK
-     * ToFunctional: NO
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/multisheet-1.xlsx");
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/multisheet-1.vb");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(
-                0, "SheetB!A1:A3 = [ 1.0 2.0 3.0 ]",
-                "SheetA!A1 = SUM(SheetB!A1:A3)"));*/
         System.out.println("ToFormula.");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(0,
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(0,
                 "SheetB!A1:A3 = [ 1.0 2.0 3.0 ]",
                 "SheetA!A1 = SUM(SheetB!A1:A3)"
         ));

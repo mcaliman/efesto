@@ -28,27 +28,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_07_Excel_FunctionCall_Test {
-    /**
-     * ToFormula: OK
-     * ToFunctional: OK
-     *
-     * @throws Exception
-     */
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/07-FunctionCall.xlsx");
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/07-FunctionCall.vb");
         System.out.println("ToFormula.");
         System.out.println("-------------");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0,
-                "FunctionCall!A1:C1 = [ 1.0 2.0 3.0 ]",
-                "FunctionCall!A2 = SUM(FunctionCall!A1:C1)"));*/
-        System.out.println("ToFormula.");
-        System.out.println("-------------");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0,
                 "A1:C1 = [ 1.0 2.0 3.0 ]",
                 "A2 = SUM(A1:C1)"

@@ -160,11 +160,6 @@ public abstract class Start implements ToFormula {
     @Nullable
     @Override
     public String toString() {
-        return toString(true);
-    }
-
-    @Nullable
-    public String toString(boolean address) {
         return "";
     }
 
@@ -175,6 +170,5 @@ public abstract class Start implements ToFormula {
     public void setSheetName(String sheetName) {
         this.sheetName = sheetName;
     }
-
 
 }

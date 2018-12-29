@@ -172,7 +172,8 @@ class Helper {
         CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
         RANGE tRANGE = new RANGE(first, last);
 
-        String refs = tRANGE.toString();
+        //String refs = tRANGE.toString();
+        String refs = tRANGE.toFormula();
         List<Cell> cells = range(sheet, refs);
         for (Cell cell : cells)
             if (cell != null) {
@@ -194,7 +195,7 @@ class Helper {
         CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
         var tRANGE = new RANGE(first, last);
 
-        String refs = tRANGE.toString();
+        String refs = tRANGE.toFormula();
 
 
         SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;

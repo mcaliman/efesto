@@ -41,17 +41,10 @@ class Excel_11_UnOpPrefix_Test {
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/11-UnOpPrefix.xlsx");
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/11-UnOpPrefix.vb");
         System.out.println("ToFormula.");
         System.out.println("-------------");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0,
-                "UnOpPrefix!A1 = +13.0",
-                "UnOpPrefix!A2 = +UnOpPrefix!A1+1"));*/
-        System.out.println("ToFormula.");
-        System.out.println("-------------");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(0,
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(0,
                 "UnOpPrefix!A1 = +13.0",
                 "A2 = UnOpPrefix!A1+1"
         ));

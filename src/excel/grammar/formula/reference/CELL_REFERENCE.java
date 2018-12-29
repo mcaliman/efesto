@@ -25,7 +25,6 @@ package excel.grammar.formula.reference;
 import excel.ToFormula;
 import excel.grammar.formula.Constant;
 import excel.grammar.formula.constant.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
@@ -75,12 +74,6 @@ public final class CELL_REFERENCE extends ReferenceItem implements ToFormula {
     @Override
     public String toString() {
         return getAddress() + " = " + constant.toString();
-    }
-
-    @NotNull
-    @Override
-    public String toString(boolean address) {
-        return toString();
     }
 
     @Override

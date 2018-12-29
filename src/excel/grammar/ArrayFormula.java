@@ -22,16 +22,11 @@
 
 package excel.grammar;
 
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Massimo Caliman
  */
 @Deprecated
 public class ArrayFormula extends Start {
-    @Nullable
-    @Override
-    public String toString(boolean address) {
-        return null;
-    }
+
 }

@@ -38,11 +38,10 @@ class Excel_RealComplex3Test {
         options.setVerbose(true);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("D:/xl3.xlsx", options);
         toolkitCommand.execute();
-        /*toolkitCommand.writer("D:/xl3.vb");*/
         long elapsed = System.currentTimeMillis() - t;
         System.out.println("Elapsed time: " + elapsed + " [ms] or " + elapsed / 1000 + " [s]. or " + elapsed / 1000 / 60 + "[m].");
         System.out.println("ToFunctional.");
-        toolkitCommand.toFunctional();
+        toolkitCommand.toFormula();
         toolkitCommand.writerFormula("D:/xl3.vb");
     }
 

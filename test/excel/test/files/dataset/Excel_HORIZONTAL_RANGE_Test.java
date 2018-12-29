@@ -29,26 +29,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_HORIZONTAL_RANGE_Test {
-    /**
-     * ToFormula: OK
-     * ToFunctional: OK
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/HORIZONTAL_RANGE.xlsx", options);
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/HORIZONTAL_RANGE.vb");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0,
-                "Foglio1!A1:D1 = [ 1.0 3.0 6.0 8.0 ]",
-                "Foglio1!A3 = MATCH(3,Foglio1!A1:D1,0)"));*/
         System.out.println("ToFormula.");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0,
                 "A1:D1 = [ 1.0 3.0 6.0 8.0 ]",
                 "A3 = MATCH(3,A1:D1,0)"

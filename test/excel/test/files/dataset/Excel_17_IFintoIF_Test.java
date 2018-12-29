@@ -28,29 +28,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_17_IFintoIF_Test {
-    /**
-     * ToFormula: OK
-     * ToFunctional: OK
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/17-IF-into-IF.xlsx");
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/17-IF-into-IF.vb");
         System.out.println("ToFormula.");
-        System.out.println("-------------");
-        toolkitCommand.print();
-        boolean correct = toolkitCommand.test(0,
-                "IFIF!B1 = 2.0",
-                "IFIF!C1 = TRUE",
-                "IFIF!A1 = IF(IFIF!B1>1,0,IF(IFIF!C1,\"Hello\",\"Bye\"))");
-        assertTrue(correct);*/
-        System.out.println("ToFormula.");
-        System.out.println("-------------");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        System.out.println("----------");
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0,
                 "B1 = 2.0",
                 "C1 = TRUE",

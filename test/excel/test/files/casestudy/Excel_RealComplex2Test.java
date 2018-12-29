@@ -38,8 +38,6 @@ class Excel_RealComplex2Test {
         options.setMetadata(false);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("D:/xl2.xlsx", options);
         toolkitCommand.execute();
-        /*System.out.println("writer()...");
-        toolkitCommand.writer("D:/xl2.vb");*/
         long elapsed = System.currentTimeMillis() - t;
         System.out.println("Elapsed time: " + elapsed + " [ms] or " + elapsed / 1000 + " [s]. or " + elapsed / 1000 / 60 + "[m].");
         //Elapsed time: 522682 [ms] or 522 [s]. or 8[m]. release 201807231738
@@ -47,7 +45,7 @@ class Excel_RealComplex2Test {
         //Elapsed time: 587383 [ms] or 587 [s]. or 9[m]. release 201807261612
         //Elapsed time: 971285 [ms] or 971 [s]. or 16[m].
         System.out.println("ToFormula.");
-        toolkitCommand.toFunctional();
+        toolkitCommand.toFormula();
         toolkitCommand.writerFormula("D:/xl2.vb");
 
     }

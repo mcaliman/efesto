@@ -22,13 +22,15 @@
 
 package excel.grammar.formula.reference;
 
+import excel.ToFormula;
+
 import static excel.grammar.Grammar.closesquareparen;
 import static excel.grammar.Grammar.opensquareparen;
 
 /**
  * @author Massimo Caliman
  */
-public final class FILE extends Prefix {
+public final class FILE extends Prefix implements ToFormula {
 
     private final int ext;
     private final SHEET sheet;
@@ -46,6 +48,10 @@ public final class FILE extends Prefix {
     @Override
     public String toString() {
         return "" + opensquareparen + ext + closesquareparen + sheet.toString();
+    }
+
+    public String toFormula() {
+        return toString();
     }
 
 }

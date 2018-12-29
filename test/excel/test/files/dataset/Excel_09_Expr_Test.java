@@ -32,33 +32,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class Excel_09_Expr_Test {
 
-    /**
-     * ToFormula: OK
-     * ToFunctional: OK
-     *
-     * @throws Exception
-     */
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/09-Expr.xlsx");
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/09-Expr.vb");
         System.out.println("ToFormula.");
         System.out.println("-------------");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0,
-                "Expr!A1 = 100.0",
-                "Expr!A2 = (Expr!A1*2)/2"
-        ));*/
-        System.out.println("ToFormula.");
-        System.out.println("-------------");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0,
                 "A1 = 100.0",
                 "A2 = (A1*2)/2"
         ));
         toolkitCommand.writerFormula("test/09-Expr.vb");
-
     }
 }

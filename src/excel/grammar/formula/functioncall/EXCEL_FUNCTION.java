@@ -53,40 +53,19 @@ public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFormula {
     @NotNull
     @Override
     public String toString() {
-        return getAddress() + " = " + getName() + openparen + argumentsToString() + closeparen;
-    }
-
-    @NotNull
-    public String toString(boolean address) {
-        return address ?
-                getAddress() + " = " + getName() + openparen + argumentsToString() + closeparen :
-                getName() + openparen + argumentsToString() + closeparen;
+        return getAddress() + " = " + getName() + openparen + argumentsToFormula() + closeparen;
     }
 
     @Override
     public String toFormula() {
-        return getName() + openparen + argumentsToFunctional() + closeparen;
+        return getName() + openparen + argumentsToFormula() + closeparen;
     }
 
     private String getName() {
         return getClass().getSimpleName();
     }
 
-    private String argumentsToString() {
-        var buff = new StringBuilder();
-        Formula[] args = getArgs();
-        if (args == null || args.length == 0) return "Missing";
-        for (Formula arg : args) buff.append(argumentToString(arg)).append(",");
-        if (buff.charAt(buff.length() - 1) == ',') buff.deleteCharAt(buff.length() - 1);
-        return buff.toString();
-    }
-
-    private String argumentToString(@Nullable Formula operand) {
-        if (operand == null) return "Missing";
-        return operand instanceof CELL_REFERENCE ? operand.getAddress() : operand.toString(false);
-    }
-
-    private String argumentsToFunctional() {
+    private String argumentsToFormula() {
         var buff = new StringBuilder();
         Formula[] args = getArgs();
         if (args == null || args.length == 0) return "Missing";

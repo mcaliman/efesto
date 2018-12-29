@@ -22,6 +22,7 @@
 
 package excel.grammar.formula.constant;
 
+import excel.ToFormula;
 import excel.grammar.Start;
 import excel.grammar.formula.Constant;
 import org.jetbrains.annotations.Nullable;
@@ -32,7 +33,7 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
-public final class DATETIME extends Constant {
+public final class DATETIME extends Constant implements ToFormula {
 
     private final Date value;
 
@@ -69,8 +70,7 @@ public final class DATETIME extends Constant {
         return Start.format(value);
     }
 
-    @Override
-    public String toString(boolean address) {
-        return toString();
+    public String toFormula() {
+        return Start.format(value);
     }
 }

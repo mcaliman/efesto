@@ -39,11 +39,10 @@ class Excel_RealComplex5Test {
         options.setVerbose(false);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("D:/xl5.xlsx", options);
         toolkitCommand.execute();
-        /*toolkitCommand.writer("D:/xl5.vb");*/
         long elapsed = System.currentTimeMillis() - t;
         System.out.println("Elapsed time: " + elapsed + " [ms] or " + elapsed / 1000 + " [s]. or " + elapsed / 1000 / 60 + "[m].");
         System.out.println("ToFunctional.");
-        toolkitCommand.toFunctional();
+        toolkitCommand.toFormula();
         toolkitCommand.writerFormula("D:/xl5.vb");
     }
 

@@ -22,12 +22,13 @@
 
 package excel.grammar.formula.constant;
 
+import excel.ToFormula;
 import excel.grammar.formula.Constant;
 
 /**
  * @author Massimo Caliman
  */
-public final class ERROR extends Constant {
+public final class ERROR extends Constant implements ToFormula {
 
     private final String text;
 
@@ -44,9 +45,7 @@ public final class ERROR extends Constant {
         return text;
     }
 
-    @Override
-    public String toString(boolean address) {
-        return getAddress() + " = " + text;
+    public String toFormula() {
+        return text;
     }
-
 }

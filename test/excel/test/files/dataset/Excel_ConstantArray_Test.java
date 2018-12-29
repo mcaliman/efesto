@@ -29,25 +29,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_ConstantArray_Test {
-    /**
-     * TO FIX
-     * ToFormula: OK
-     * ToFunctional: NO
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/ConstantArray.xlsx", options);
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/ConstantArray.vb");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0, "Foglio1!A6 = {1.0,2.0,2.0,4.0,6.0}"));*/
         System.out.println("ToFormula.");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0, "Foglio1!A6 = {1.0,2.0,2.0,4.0,6.0}"
         ));
         toolkitCommand.writerFormula("test/ConstantArray.vb");

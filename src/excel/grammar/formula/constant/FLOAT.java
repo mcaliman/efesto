@@ -22,6 +22,7 @@
 
 package excel.grammar.formula.constant;
 
+import excel.ToFormula;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -29,7 +30,7 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
-public final class FLOAT extends Number {
+public final class FLOAT extends Number implements ToFormula {
 
     private final Double value;
 
@@ -66,7 +67,7 @@ public final class FLOAT extends Number {
         return value.toString();
     }
 
-    public String toString(boolean address) {
+    public String toFormula() {
         return value.toString();
     }
 

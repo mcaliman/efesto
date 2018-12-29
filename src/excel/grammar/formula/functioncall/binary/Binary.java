@@ -51,14 +51,7 @@ public abstract class Binary extends FunctionCall implements ToFormula {
     @NotNull
     @Override
     public String toString() {
-        return getAddress(true) + " = " + operandTo(lFormula) + op + operandTo(rFormula);
-    }
-
-    @NotNull
-    public String toString(boolean address) {
-        return address ?
-                getAddress(true) + " = " + operandTo(lFormula) + op + operandTo(rFormula) :
-                operandTo(lFormula) + op + operandTo(rFormula);
+        return id() + " = " + toFormula();
     }
 
     @Override
@@ -67,21 +60,17 @@ public abstract class Binary extends FunctionCall implements ToFormula {
     }
 
     private String operandToFormula(Formula operand) {
-        if (operand instanceof CELL_REFERENCE || operand instanceof Unary) {
-            return operand.id();
-        } else if (operand instanceof ParenthesisFormula) {
-            return operandToFunctional((ParenthesisFormula) operand);
-        } else {
-            return operand.toFormula();
-        }
+        if (operand instanceof CELL_REFERENCE || operand instanceof Unary) return operand.id();
+        else if (operand instanceof ParenthesisFormula)
+            return operandToFormulaParenthesisFormula((ParenthesisFormula) operand);
+        else return operand.toFormula();
     }
 
-    private String operandToFunctional(ParenthesisFormula operand) {
+    private String operandToFormulaParenthesisFormula(ParenthesisFormula operand) {
         return operand.getFormula() instanceof Binary ?
                 "" + openparen + operand.getFormula().toFormula() + closeparen :
                 "" + openparen + operand.getFormula().getAddress(false) + closeparen;
     }
-
 
     public Formula getlFormula() {
         return lFormula;
@@ -89,24 +78,6 @@ public abstract class Binary extends FunctionCall implements ToFormula {
 
     public Formula getrFormula() {
         return rFormula;
-    }
-
-    private String operandTo(Formula operand) {
-        if (operand instanceof CELL_REFERENCE) {
-            return operand.getAddress();
-        } else if (operand instanceof ParenthesisFormula) {
-            return operandTo((ParenthesisFormula) operand);
-        } else if (operand instanceof Unary) {
-            return ((Unary) operand).getUnOpPrefix() + operand.getAddress();
-        } else {
-            return operand.toString();
-        }
-    }
-
-    private String operandTo(ParenthesisFormula operand) {
-        return operand.getFormula() instanceof Binary ?
-                openparen + operand.getFormula().toString(false) + closeparen :
-                openparen + operand.getFormula().getAddress(true) + closeparen;
     }
 
 }

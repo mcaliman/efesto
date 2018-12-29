@@ -30,28 +30,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Massimo Caliman
  */
 class Excel_15_Others_FUN_Test {
-    /**
-     * TO FIX
-     * ToFormula: NO
-     * ToFunctional: NO
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/15-Others-FUN.xlsx");
         toolkitCommand.execute();
-        /*System.out.println("ToFormula.");
-        System.out.println("-------------");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0,
-                "Foglio1!G1 = [1]Sheet1!C5 = []",
-                "Foglio1!B29 = 70.0",
-                "Foglio1!D7 = (2*(Foglio1!B29))/(1+Foglio1!B29)"));*/
         System.out.println("ToFormula.");
-        System.out.println("-------------");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        System.out.println("----------");
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0,
                 "G1 = [1]Sheet1!C5",
                 "B29 = 70.0",

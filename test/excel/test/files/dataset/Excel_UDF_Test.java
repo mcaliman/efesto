@@ -29,24 +29,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Excel_UDF_Test {
-    /**
-     * ToFormula: OK
-     * ToFunctional: OK
-     *
-     * @throws Exception
-     */
+
     @Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
         ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/UDF.xlsm", options);
         toolkitCommand.execute();
-        /*toolkitCommand.writer("test/UDF.vb");
-        toolkitCommand.print();
-        assertTrue(toolkitCommand.test(0, "SheetUDF!A2 = GetElement(A1,2,\"-\")"));*/
         System.out.println("ToFormula.");
-        toolkitCommand.toFunctional();
-        assertTrue(toolkitCommand.testToFunctional(
+        toolkitCommand.toFormula();
+        assertTrue(toolkitCommand.testToFormula(
                 0, "A2 = GetElement(A1,2,\"-\")"
         ));
         toolkitCommand.writerFormula("test/UDF.vb");

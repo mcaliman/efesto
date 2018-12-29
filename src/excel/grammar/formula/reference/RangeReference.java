@@ -47,6 +47,7 @@ public final class RangeReference extends Reference implements ToFormula {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RangeReference that = (RangeReference) o;
+
         return that.toString().equals(this.toString());
     }
 
@@ -61,13 +62,6 @@ public final class RangeReference extends Reference implements ToFormula {
     @Override
     public String toString() {
         return reference1.getAddress() + colon + reference2.getAddress();
-    }
-
-    @Override
-    public String toString(boolean address) {
-        return address ?
-                sheetName + exclamationmark + reference1.getAddress() + colon + reference2.getAddress() /*+ " = " + values()*/ :
-                sheetName + exclamationmark + reference1.getAddress() + colon + reference2.getAddress();
     }
 
     private String values() {

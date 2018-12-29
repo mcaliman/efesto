@@ -22,13 +22,14 @@
 
 package excel.grammar.formula.functioncall;
 
+import excel.ToFormula;
 import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
 
 /**
  * @author Massimo Caliman
  */
-public final class PercentFormula extends FunctionCall {
+public final class PercentFormula extends FunctionCall implements ToFormula {
 
     private final Formula formula;
 
@@ -42,8 +43,7 @@ public final class PercentFormula extends FunctionCall {
     }
 
     @Override
-    public String toString(boolean address) {
-        return null;
+    public String toFormula() {
+        return formula.toString() + "%";
     }
-
 }

@@ -22,6 +22,7 @@
 
 package excel.grammar.formula.constant;
 
+import excel.ToFormula;
 import excel.grammar.formula.Constant;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +34,7 @@ import static excel.grammar.Grammar.TRUE;
 /**
  * @author Massimo Caliman
  */
-public final class BOOL extends Constant {
+public final class BOOL extends Constant implements ToFormula {
 
     private final Boolean value;
 
@@ -66,8 +67,7 @@ public final class BOOL extends Constant {
         return value != null && value ? TRUE : FALSE;
     }
 
-    public String toString(boolean address) {
+    public String toFormula() {
         return value != null && value ? TRUE : FALSE;
     }
-
 }
