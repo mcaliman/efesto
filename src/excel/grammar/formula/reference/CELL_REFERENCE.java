@@ -23,6 +23,7 @@
 package excel.grammar.formula.reference;
 
 import excel.ToFormula;
+import excel.ToLanguage;
 import excel.grammar.formula.Constant;
 import excel.grammar.formula.constant.*;
 
@@ -31,7 +32,7 @@ import java.util.Date;
 /**
  * @author mcaliman
  */
-public final class CELL_REFERENCE extends ReferenceItem implements ToFormula {
+public final class CELL_REFERENCE extends ReferenceItem implements ToFormula, ToLanguage {
 
     private final int row;
     private final int column;
@@ -78,6 +79,11 @@ public final class CELL_REFERENCE extends ReferenceItem implements ToFormula {
 
     @Override
     public String toFormula() {
+        return constant != null ? constant.toString() : "null";
+    }
+
+    @Override
+    public String toLanguage() {
         return constant != null ? constant.toString() : "null";
     }
 

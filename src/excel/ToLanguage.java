@@ -20,37 +20,11 @@
  * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
  */
 
-package excel.test.files.dataset;
+package excel;
 
-import excel.ExcelToolkitCommand;
-import org.junit.jupiter.api.Test;
+public interface ToLanguage {
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-/**
- * @author Massimo Caliman
- */
-class Excel_03_RangeIndex_Test {
-
-    @Test
-    void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/03-range-index.xlsx");
-        toolkitCommand.execute();
-        System.out.println("ToFormula.");
-        System.out.println("----------");
-        toolkitCommand.toFormula();
-        assertTrue(toolkitCommand.testToFormula(
-                0,
-                "A1:B6 = [[1.1 1.2][2.1 2.2][3.1 3.2][4.1 4.2][5.1 5.2][6.1 6.2]]",
-                "A10 = INDEX(A1:B6,2,2)"
-        ));
-        toolkitCommand.writerFormula("test/03-range-index.vb");
-
-
-        System.out.println("-----------");
-        System.out.println("ToLanguage.");
-        System.out.println("-----------");
-        toolkitCommand.toLanguage();
-        toolkitCommand.writerLanguage("test/03-range-index.clj");
+    default String toLanguage() {
+        return toString();
     }
 }

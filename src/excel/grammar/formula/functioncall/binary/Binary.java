@@ -23,6 +23,7 @@
 package excel.grammar.formula.functioncall.binary;
 
 import excel.ToFormula;
+import excel.ToLanguage;
 import excel.grammar.Formula;
 import excel.grammar.formula.FunctionCall;
 import excel.grammar.formula.ParenthesisFormula;
@@ -36,7 +37,7 @@ import static excel.grammar.Grammar.openparen;
 /**
  * @author Massimo Caliman
  */
-public abstract class Binary extends FunctionCall implements ToFormula {
+public abstract class Binary extends FunctionCall implements ToFormula, ToLanguage {
 
     private final String op;
     private final Formula lFormula;
@@ -58,6 +59,12 @@ public abstract class Binary extends FunctionCall implements ToFormula {
     public String toFormula() {
         return operandToFormula(lFormula) + op + operandToFormula(rFormula);
     }
+
+    @Override
+    public String toLanguage() {
+        return "(" + op + " " + operandToFormula(lFormula) + " " + operandToFormula(rFormula) + ")";
+    }
+
 
     private String operandToFormula(Formula operand) {
         if (operand instanceof CELL_REFERENCE || operand instanceof Unary) return operand.id();

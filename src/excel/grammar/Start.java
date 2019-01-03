@@ -23,6 +23,7 @@
 package excel.grammar;
 
 import excel.ToFormula;
+import excel.ToLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,7 +36,7 @@ import static excel.grammar.Grammar.exclamationmark;
 /**
  * @author Massimo Caliman
  */
-public abstract class Start implements ToFormula {
+public abstract class Start implements ToFormula, ToLanguage {
 
     private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 

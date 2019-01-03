@@ -80,6 +80,31 @@ public class ExcelToolkitCommand implements ToolkitCommand {
         }
     }
 
+    public void writerLanguage(@NotNull String filename) throws IOException {
+        StartList list = parser.getList();
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
+            writer.write("; \n");
+            writer.write("; Text File: " + filename + '\n');
+            writer.write("; Excel File: " + parser.getFileName() + '\n');
+            writer.write("; Excel Formulas Number: " + parser.getCounterFormulas() + '\n');
+            writer.write("; Elapsed Time (parsing + topological sort): " + (elapsed / 1000 + " s. or " + (elapsed / 1000 / 60) + " min.") + '\n');
+            writer.write("; creator:" + parser.getCreator() + '\n');
+            writer.write("; description:" + parser.getDescription() + '\n');
+            writer.write("; keywords:" + parser.getKeywords() + '\n');
+            writer.write("; title:" + parser.getTitle() + '\n');
+            writer.write("; subject:" + parser.getSubject() + '\n');
+            writer.write("; category:" + parser.getCategory() + '\n');
+            for (Start start : list) {
+                String comment = start.getComment();
+                if (comment != null && comment.trim().length() > 0) writer.write("; " + comment + "\n");
+                writer.write("(def " + start.id() + " " + start.toLanguage() + ")");
+                writer.write("\n");
+            }
+        }
+    }
+
+
+
     private StartList getStartList() {
         return parser.getList();
     }
@@ -91,6 +116,18 @@ public class ExcelToolkitCommand implements ToolkitCommand {
     public void toFormula() {
         for (Start start : getStartList()) {
             if (start != null) System.out.println(start.id() + " = " + start.toFormula());
+        }
+    }
+
+    public void toLanguage() {
+        for (Start start : getStartList()) {
+            if (start != null) {
+                System.out.print("<" + start.getClass().getSimpleName() + ">");
+                if (start instanceof ToLanguage)
+                    System.out.println("[ToLanguage]:: (def " + start.id() + " " + start.toLanguage() + ")");
+                else
+                    System.out.println(start.id() + " = " + start.toFormula());
+            }
         }
     }
 
