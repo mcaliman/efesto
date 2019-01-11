@@ -74,7 +74,11 @@ public class ExcelToolkitCommand implements ToolkitCommand {
             for (Start start : list) {
                 String comment = start.getComment();
                 if (comment != null && comment.trim().length() > 0) writer.write("'' " + comment + "\n");
-                writer.write(start.id() + " = " + start.toFormula());
+                try {
+                    writer.write(start.id() + " = " + start.toFormula());
+                } catch (Exception e) {
+                    writer.write("'' Erron when compile " + start.id());
+                }
                 writer.write("\n");
             }
         }
@@ -115,7 +119,11 @@ public class ExcelToolkitCommand implements ToolkitCommand {
 
     public void toFormula() {
         for (Start start : getStartList()) {
-            if (start != null) System.out.println(start.id() + " = " + start.toFormula());
+            try {
+                if (start != null) System.out.println(start.id() + " = " + start.toFormula());
+            } catch (Exception e) {
+                System.err.println("Error when transpile " + start.id());
+            }
         }
     }
 
