@@ -1,0 +1,62 @@
+/*
+ * Efesto - Excel Formula Extractor System and Topological Ordering algorithm.
+ * Copyright (C) 2017 Massimo Caliman mcaliman@caliman.biz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * If AGPL Version 3.0 terms are incompatible with your use of
+ * Efesto, alternative license terms are available from Massimo Caliman
+ * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
+ */
+
+package dev.caliman.excel.grammar.formula.reference;
+
+import dev.caliman.excel.ToFormula;
+
+import static dev.caliman.excel.grammar.Grammar.exclamationmark;
+
+/**
+ * @author Massimo Caliman
+ */
+public final class SHEET extends Prefix implements ToFormula {
+
+    private final String name;
+    private int index;
+
+    public SHEET(String name) {
+        this.name = name;
+    }
+
+    public SHEET(String name, int index) {
+        this.name = name;
+        this.index = index;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public String toString() {
+        return toFormula();
+    }
+
+    public String toFormula() {
+        return name + exclamationmark;
+    }
+
+}
