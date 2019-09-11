@@ -27,6 +27,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * @author Massimo Caliman
+ */
 public class SHEET_QUOTED_Test {
 
     @Test
