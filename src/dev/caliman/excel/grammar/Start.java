@@ -128,7 +128,7 @@ public abstract class Start implements ToFormula, ToLanguage {
     }
 
     public String id() {
-        return this.singleSheet ? cellAddress(getRow(), getColumn()) : sheetName + "!" + cellAddress(getRow(), getColumn());
+        return this.singleSheet ? cellAddress(getRow(), getColumn()) : quoteIf(sheetName) + "!" + cellAddress(getRow(), getColumn());
     }
 
     @Override
@@ -170,6 +170,14 @@ public abstract class Start implements ToFormula, ToLanguage {
 
     public void setSheetName(String sheetName) {
         this.sheetName = sheetName;
+    }
+
+    public String quoteIf(String text) {
+        return hasSpaces(text) ? "'" + text.trim() + "'" : text.trim();
+    }
+
+    public boolean hasSpaces(String text) {
+        return text != null && text.trim().contains(" ");
     }
 
 }

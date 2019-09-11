@@ -56,7 +56,7 @@ public final class SHEET extends Prefix implements ToFormula {
     }
 
     public String toFormula() {
-        return name + exclamationmark;
+        return this.quoteIf(name) + exclamationmark;
     }
 
 }

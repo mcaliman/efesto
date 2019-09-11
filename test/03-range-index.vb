@@ -2,7 +2,7 @@
 '' Text File: test/03-range-index.vb
 '' Excel File: 03-range-index.xlsx
 '' Excel Formulas Number: 1
-'' Elapsed Time (parsing + topological sort): 2 s. or 0 min.
+'' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
 '' creator:null
 '' description:null
 '' keywords:null
