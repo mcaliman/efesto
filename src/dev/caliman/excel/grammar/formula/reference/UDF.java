@@ -36,8 +36,13 @@ public final class UDF extends Reference implements ToFormula {
         this.arguments = arguments;
     }
 
-    public String toFormula() {
+    public String toString() {
         return arguments;
+    }
+
+    @Deprecated
+    public String toFormula() {
+        return toString();//arguments;
     }
 
 }

@@ -55,8 +55,13 @@ public class RANGE extends Reference implements ToFormula {
         return last;
     }
 
-    public String toFormula() {
+    public String toString() {
         return first.getAddress() + colon + last.getAddress();
+    }
+
+    @Deprecated
+    public String toFormula() {
+        return toString();//first.getAddress() + colon + last.getAddress();
     }
 
 }

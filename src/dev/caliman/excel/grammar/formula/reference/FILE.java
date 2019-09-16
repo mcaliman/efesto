@@ -50,6 +50,7 @@ public final class FILE extends Prefix implements ToFormula {
         return "" + opensquareparen + ext + closesquareparen + sheet.toString();
     }
 
+    @Deprecated
     public String toFormula() {
         return toString();
     }

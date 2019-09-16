@@ -52,12 +52,13 @@ public abstract class Binary extends FunctionCall implements ToFormula, ToLangua
     @NotNull
     @Override
     public String toString() {
-        return id() + " = " + toFormula();
+        return operandToFormula(lFormula) + op + operandToFormula(rFormula);//id() + " = " + toFormula();
     }
 
     @Override
+    @Deprecated
     public String toFormula() {
-        return operandToFormula(lFormula) + op + operandToFormula(rFormula);
+        return toString();
     }
 
     @Override

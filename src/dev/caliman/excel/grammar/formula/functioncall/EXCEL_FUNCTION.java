@@ -53,12 +53,13 @@ public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFormula {
     @NotNull
     @Override
     public String toString() {
-        return getAddress() + " = " + getName() + openparen + argumentsToFormula() + closeparen;
+        return getName() + openparen + argumentsToFormula() + closeparen;//getAddress() + " = " + getName() + openparen + argumentsToFormula() + closeparen;
     }
 
     @Override
+    @Deprecated
     public String toFormula() {
-        return getName() + openparen + argumentsToFormula() + closeparen;
+        return toString();//getName() + openparen + argumentsToFormula() + closeparen;
     }
 
     private String getName() {

@@ -43,7 +43,8 @@ public final class PercentFormula extends FunctionCall implements ToFormula {
     }
 
     @Override
+    @Deprecated
     public String toFormula() {
-        return formula.toString() + "%";
+        return toString();
     }
 }

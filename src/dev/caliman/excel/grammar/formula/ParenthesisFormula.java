@@ -40,8 +40,14 @@ public final class ParenthesisFormula extends Formula implements ToFormula {
     }
 
     @Override
-    public String toFormula() {
+    public String toString() {
         return openparen + formula.toFormula() + closeparen;
+    }
+
+    @Deprecated
+    @Override
+    public String toFormula() {
+        return toString();//openparen + formula.toFormula() + closeparen;
     }
 
     public Formula getFormula() {

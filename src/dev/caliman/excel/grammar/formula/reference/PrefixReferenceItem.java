@@ -55,8 +55,15 @@ public final class PrefixReferenceItem extends Reference implements ToFormula {
     }
 
     @Override
-    public String toFormula() {
+    public String toString() {
         return isArea() ? values() : prefix + reference;
+    }
+
+
+    @Override
+    @Deprecated
+    public String toFormula() {
+        return toString();//isArea() ? values() : prefix + reference;
     }
 
     @Override

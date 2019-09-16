@@ -33,8 +33,13 @@ public final class ERROR_REF extends ReferenceItem implements ToFormula {
         super("#REF");
     }
 
-    public String toFormula() {
+    public String toString() {
         return "#REF";
+    }
+
+    @Deprecated
+    public String toFormula() {
+        return toString();//"#REF";
     }
 
 }

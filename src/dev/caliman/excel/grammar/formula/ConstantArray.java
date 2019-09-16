@@ -39,7 +39,7 @@ public class ConstantArray extends Formula implements ToFormula {
         return this.getAddress();
     }
 
-    public String toFormula() {
+    public String toString() {
         StringBuilder str = new StringBuilder();
         str.append('{');
         for (Object[] internal : array) {
@@ -48,6 +48,19 @@ public class ConstantArray extends Formula implements ToFormula {
         if (str.charAt(str.length() - 1) == ',') str.deleteCharAt(str.length() - 1);
         str.append('}');
         return str.toString();
+    }
+
+    @Deprecated
+    public String toFormula() {
+        return toString();
+        /*StringBuilder str = new StringBuilder();
+        str.append('{');
+        for (Object[] internal : array) {
+            str.append(internal[0]).append(',');
+        }
+        if (str.charAt(str.length() - 1) == ',') str.deleteCharAt(str.length() - 1);
+        str.append('}');
+        return str.toString();*/
     }
 
 }

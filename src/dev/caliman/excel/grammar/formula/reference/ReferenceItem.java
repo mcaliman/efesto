@@ -49,11 +49,12 @@ public class ReferenceItem extends Reference implements ToFormula {
     @Nullable
     @Override
     public String toString() {
-        return toFormula();
+        return value;//toFormula();
     }
 
+    @Deprecated
     public String toFormula() {
-        return value;
+        return toString();//value;
     }
 
     private boolean horizzontal_range() {

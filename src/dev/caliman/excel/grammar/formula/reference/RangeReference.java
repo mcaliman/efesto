@@ -61,7 +61,8 @@ public final class RangeReference extends Reference implements ToFormula {
 
     @Override
     public String toString() {
-        return reference1.getAddress() + colon + reference2.getAddress();
+        //return reference1.getAddress() + colon + reference2.getAddress();
+        return values();
     }
 
     private String values() {
@@ -76,8 +77,9 @@ public final class RangeReference extends Reference implements ToFormula {
 
 
     @Override
+    @Deprecated
     public String toFormula() {
-        return values();
+        return toString();//values();
     }
 
 }

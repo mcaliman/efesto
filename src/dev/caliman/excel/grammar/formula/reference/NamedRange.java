@@ -47,9 +47,14 @@ public class NamedRange extends ReferenceItem implements ToFormula {
                 sheetName + exclamationmark + value;
     }
 
+    @Override
+    public String toString() {
+        return values();
+    }
 
+    @Deprecated
     @Override
     public String toFormula() {
-        return values();
+        return toString();//values();
     }
 }

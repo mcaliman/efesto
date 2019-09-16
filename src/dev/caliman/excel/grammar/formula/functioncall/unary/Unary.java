@@ -44,13 +44,16 @@ public abstract class Unary extends FunctionCall implements ToFormula {
     @NotNull
     @Override
     public String toString() {
-        return unOpPrefix + formula.toString();
+        //return unOpPrefix + formula.toString();
+        if (formula instanceof CELL_REFERENCE) return unOpPrefix + ((CELL_REFERENCE) formula).getValue();
+        else return unOpPrefix + formula.toFormula();
     }
 
     @Override
     public String toFormula() {
-        if (formula instanceof CELL_REFERENCE) return unOpPrefix + ((CELL_REFERENCE) formula).getValue();
-        else return unOpPrefix + formula.toFormula();
+        //if (formula instanceof CELL_REFERENCE) return unOpPrefix + ((CELL_REFERENCE) formula).getValue();
+        //else return unOpPrefix + formula.toFormula();
+        return toString();
     }
 
 }

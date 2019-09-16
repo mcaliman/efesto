@@ -52,11 +52,11 @@ public final class SHEET extends Prefix implements ToFormula {
     }
 
     public String toString() {
-        return toFormula();
+        return this.quoteIf(name) + exclamationmark;//toFormula();
     }
 
     public String toFormula() {
-        return this.quoteIf(name) + exclamationmark;
+        return toString();//this.quoteIf(name) + exclamationmark;
     }
 
 }

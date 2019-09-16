@@ -26,7 +26,6 @@ import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.ToLanguage;
 import dev.caliman.excel.grammar.formula.Constant;
 import dev.caliman.excel.grammar.formula.constant.*;
-import dev.caliman.excel.grammar.formula.constant.*;
 
 import java.util.Date;
 
@@ -75,12 +74,13 @@ public final class CELL_REFERENCE extends ReferenceItem implements ToFormula, To
 
     @Override
     public String toString() {
-        return getAddress() + " = " + constant.toString();
+        return constant != null ? constant.toString() : "null";//getAddress() + " = " + constant.toString();
     }
 
     @Override
+    @Deprecated
     public String toFormula() {
-        return constant != null ? constant.toString() : "null";
+        return toString();//constant != null ? constant.toString() : "null";
     }
 
     @Override
