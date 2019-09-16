@@ -112,7 +112,6 @@ public class ExcelToolkitCommand implements ToolkitCommand {
     }
 
 
-
     private StartList getStartList() {
         return parser.getList();
     }
