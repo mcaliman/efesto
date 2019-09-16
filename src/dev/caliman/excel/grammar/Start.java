@@ -162,7 +162,7 @@ public abstract class Start implements ToFormula, ToLanguage {
     @Nullable
     @Override
     public String toString() {
-        return "";
+        return comment != null ? comment.toString() : "" + "";
     }
 
     public boolean testToFunctional(String text) {

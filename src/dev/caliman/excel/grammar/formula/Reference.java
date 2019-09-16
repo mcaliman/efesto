@@ -70,7 +70,8 @@ public abstract class Reference extends Formula {
     }
 
     private String toString(Object value) {
-        return value instanceof String ? quote(value.toString()) : value.toString();
+        String string = value instanceof String ? quote(value.toString()) : value.toString();
+        return super.toString() + string;
     }
 
 }

@@ -32,6 +32,9 @@ public class Comment {
         this.value = value;
     }
 
+    /**
+     * @return comment with prefix '' and postfix EOL iff value is not null and is not empty string
+     */
     @Override
     public String toString() {
         return this.value != null && this.value.trim().length() > 0 ?
