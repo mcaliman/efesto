@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.ToLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +35,7 @@ import static dev.caliman.excel.grammar.Grammar.exclamationmark;
 /**
  * @author Massimo Caliman
  */
-public abstract class Start implements ToFormula, ToLanguage {
+public abstract class Start implements /*ToFormula,*/ ToLanguage {
 
     private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -166,7 +165,7 @@ public abstract class Start implements ToFormula, ToLanguage {
     }
 
     public boolean testToFunctional(String text) {
-        return (this.id() + " = " + this.toFormula()).equals(text);
+        return (this.id() + " = " + this.toString()).equals(text);
     }
 
     public void setSheetName(String sheetName) {

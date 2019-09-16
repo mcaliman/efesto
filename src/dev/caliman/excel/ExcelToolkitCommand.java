@@ -140,7 +140,7 @@ public class ExcelToolkitCommand implements ToolkitCommand {
                 if (start instanceof ToLanguage)
                     System.out.println("[ToLanguage]:: (def " + start.id() + " " + start.toLanguage() + ")");
                 else
-                    System.out.println(start.id() + " = " + start.toFormula());
+                    System.out.println(start.id() + " = " + start.toString());
             }
         }
     }

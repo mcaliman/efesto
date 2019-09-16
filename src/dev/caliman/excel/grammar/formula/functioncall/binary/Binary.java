@@ -71,12 +71,12 @@ public abstract class Binary extends FunctionCall implements ToFormula, ToLangua
         if (operand instanceof CELL_REFERENCE || operand instanceof Unary) return operand.id();
         else if (operand instanceof ParenthesisFormula)
             return operandToFormulaParenthesisFormula((ParenthesisFormula) operand);
-        else return operand.toFormula();
+        else return operand.toString();
     }
 
     private String operandToFormulaParenthesisFormula(ParenthesisFormula operand) {
         return operand.getFormula() instanceof Binary ?
-                "" + openparen + operand.getFormula().toFormula() + closeparen :
+                "" + openparen + operand.getFormula().toString() + closeparen :
                 "" + openparen + operand.getFormula().getAddress(false) + closeparen;
     }
 

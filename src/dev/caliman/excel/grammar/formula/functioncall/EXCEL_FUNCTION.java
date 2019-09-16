@@ -80,7 +80,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFormula {
         if (operand instanceof RangeReference || operand instanceof NamedRange || operand instanceof PrefixReferenceItem)
             return operand.id();
         else if (operand instanceof CELL_REFERENCE) return operand.id();
-        else return operand.toFormula();
+        else return operand.toString();
     }
 
 }
