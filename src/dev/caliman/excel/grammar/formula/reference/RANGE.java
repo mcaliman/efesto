@@ -22,14 +22,13 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.formula.Reference;
 
 import java.util.List;
 
 import static dev.caliman.excel.grammar.Grammar.colon;
 
-public class RANGE extends Reference implements ToFormula {
+public class RANGE extends Reference {
 
     private final CELL_REFERENCE first;
     private final CELL_REFERENCE last;
@@ -59,9 +58,5 @@ public class RANGE extends Reference implements ToFormula {
         return first.getAddress() + colon + last.getAddress();
     }
 
-    @Deprecated
-    public String toFormula() {
-        return toString();//first.getAddress() + colon + last.getAddress();
-    }
 
 }

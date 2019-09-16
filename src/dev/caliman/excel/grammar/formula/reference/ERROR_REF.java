@@ -22,12 +22,10 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import dev.caliman.excel.ToFormula;
-
 /**
  * @author Massimo Caliman
  */
-public final class ERROR_REF extends ReferenceItem implements ToFormula {
+public final class ERROR_REF extends ReferenceItem {
 
     public ERROR_REF() {
         super("#REF");

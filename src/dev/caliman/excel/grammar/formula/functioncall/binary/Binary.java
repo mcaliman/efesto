@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.formula.functioncall.binary;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.ToLanguage;
 import dev.caliman.excel.grammar.Formula;
 import dev.caliman.excel.grammar.formula.FunctionCall;
@@ -37,7 +36,7 @@ import static dev.caliman.excel.grammar.Grammar.openparen;
 /**
  * @author Massimo Caliman
  */
-public abstract class Binary extends FunctionCall implements ToFormula, ToLanguage {
+public abstract class Binary extends FunctionCall implements ToLanguage {
 
     private final String op;
     private final Formula lFormula;
@@ -55,11 +54,6 @@ public abstract class Binary extends FunctionCall implements ToFormula, ToLangua
         return operandToFormula(lFormula) + op + operandToFormula(rFormula);//id() + " = " + toFormula();
     }
 
-    @Override
-    @Deprecated
-    public String toFormula() {
-        return toString();
-    }
 
     @Override
     public String toLanguage() {

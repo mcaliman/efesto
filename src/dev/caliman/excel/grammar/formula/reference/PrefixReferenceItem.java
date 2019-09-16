@@ -22,14 +22,13 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.formula.Reference;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Massimo Caliman
  */
-public final class PrefixReferenceItem extends Reference implements ToFormula {
+public final class PrefixReferenceItem extends Reference {
 
     private final Prefix prefix;
 
@@ -59,12 +58,6 @@ public final class PrefixReferenceItem extends Reference implements ToFormula {
         return isArea() ? values() : prefix + reference;
     }
 
-
-    @Override
-    @Deprecated
-    public String toFormula() {
-        return toString();//isArea() ? values() : prefix + reference;
-    }
 
     @Override
     public boolean equals(Object o) {

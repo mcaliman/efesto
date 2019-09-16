@@ -22,14 +22,12 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import dev.caliman.excel.ToFormula;
-
 import static dev.caliman.excel.grammar.Grammar.exclamationmark;
 
 /**
  * @author Massimo Caliman
  */
-public final class SHEET extends Prefix implements ToFormula {
+public final class SHEET extends Prefix {
 
     private final String name;
     private int index;
@@ -55,8 +53,5 @@ public final class SHEET extends Prefix implements ToFormula {
         return this.quoteIf(name) + exclamationmark;//toFormula();
     }
 
-    public String toFormula() {
-        return toString();//this.quoteIf(name) + exclamationmark;
-    }
 
 }

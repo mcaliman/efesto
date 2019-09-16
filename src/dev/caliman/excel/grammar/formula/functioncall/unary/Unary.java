@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.formula.functioncall.unary;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.Formula;
 import dev.caliman.excel.grammar.formula.FunctionCall;
 import dev.caliman.excel.grammar.formula.reference.CELL_REFERENCE;
@@ -31,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Massimo Caliman
  */
-public abstract class Unary extends FunctionCall implements ToFormula {
+public abstract class Unary extends FunctionCall {
 
     private final Formula formula;
     private final String unOpPrefix;
@@ -47,13 +46,6 @@ public abstract class Unary extends FunctionCall implements ToFormula {
         //return unOpPrefix + formula.toString();
         if (formula instanceof CELL_REFERENCE) return unOpPrefix + ((CELL_REFERENCE) formula).getValue();
         else return unOpPrefix + formula.toString();
-    }
-
-    @Override
-    public String toFormula() {
-        //if (formula instanceof CELL_REFERENCE) return unOpPrefix + ((CELL_REFERENCE) formula).getValue();
-        //else return unOpPrefix + formula.toFormula();
-        return toString();
     }
 
 }

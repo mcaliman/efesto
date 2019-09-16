@@ -22,14 +22,13 @@
 
 package dev.caliman.excel.grammar.formula.functioncall;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.Formula;
 import dev.caliman.excel.grammar.formula.FunctionCall;
 
 /**
  * @author Massimo Caliman
  */
-public final class PercentFormula extends FunctionCall implements ToFormula {
+public final class PercentFormula extends FunctionCall {
 
     private final Formula formula;
 
@@ -42,9 +41,5 @@ public final class PercentFormula extends FunctionCall implements ToFormula {
         return formula.toString() + "%";
     }
 
-    @Override
-    @Deprecated
-    public String toFormula() {
-        return toString();
-    }
+
 }

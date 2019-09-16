@@ -22,13 +22,12 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.formula.Reference;
 
 /**
  * @author Massimo Caliman
  */
-public final class UDF extends Reference implements ToFormula {
+public final class UDF extends Reference {
 
     private final String arguments;
 
@@ -40,9 +39,5 @@ public final class UDF extends Reference implements ToFormula {
         return arguments;
     }
 
-    @Deprecated
-    public String toFormula() {
-        return toString();//arguments;
-    }
 
 }

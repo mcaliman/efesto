@@ -22,13 +22,12 @@
 
 package dev.caliman.excel.grammar.formula;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.Formula;
 
 /**
  * @author Massimo Caliman
  */
-public class ConstantArray extends Formula implements ToFormula {
+public class ConstantArray extends Formula {
     private final Object[][] array;
 
     public ConstantArray(Object[][] array) {
@@ -50,17 +49,5 @@ public class ConstantArray extends Formula implements ToFormula {
         return str.toString();
     }
 
-    @Deprecated
-    public String toFormula() {
-        return toString();
-        /*StringBuilder str = new StringBuilder();
-        str.append('{');
-        for (Object[] internal : array) {
-            str.append(internal[0]).append(',');
-        }
-        if (str.charAt(str.length() - 1) == ',') str.deleteCharAt(str.length() - 1);
-        str.append('}');
-        return str.toString();*/
-    }
 
 }

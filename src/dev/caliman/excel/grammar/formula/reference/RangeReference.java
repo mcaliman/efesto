@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.formula.Reference;
 
 import static dev.caliman.excel.grammar.Grammar.colon;
@@ -31,7 +30,7 @@ import static dev.caliman.excel.grammar.Grammar.exclamationmark;
 /**
  * @author Massimo Caliman
  */
-public final class RangeReference extends Reference implements ToFormula {
+public final class RangeReference extends Reference {
 
     private final CELL_REFERENCE reference1;
     private final CELL_REFERENCE reference2;
@@ -75,11 +74,5 @@ public final class RangeReference extends Reference implements ToFormula {
                 sheetName + exclamationmark + reference1.getAddress() + colon + reference2.getAddress();
     }
 
-
-    @Override
-    @Deprecated
-    public String toFormula() {
-        return toString();//values();
-    }
 
 }

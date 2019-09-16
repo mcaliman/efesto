@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.formula.functioncall;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.Formula;
 import dev.caliman.excel.grammar.formula.FunctionCall;
 import dev.caliman.excel.grammar.formula.reference.CELL_REFERENCE;
@@ -38,7 +37,7 @@ import static dev.caliman.excel.grammar.Grammar.openparen;
 /**
  * @author Massimo Caliman
  */
-public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFormula {
+public abstract class EXCEL_FUNCTION extends FunctionCall {
 
     protected Formula[] args;
 
@@ -56,11 +55,6 @@ public abstract class EXCEL_FUNCTION extends FunctionCall implements ToFormula {
         return getName() + openparen + argumentsToFormula() + closeparen;//getAddress() + " = " + getName() + openparen + argumentsToFormula() + closeparen;
     }
 
-    @Override
-    @Deprecated
-    public String toFormula() {
-        return toString();//getName() + openparen + argumentsToFormula() + closeparen;
-    }
 
     private String getName() {
         return getClass().getSimpleName();

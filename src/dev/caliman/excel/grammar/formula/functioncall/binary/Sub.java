@@ -22,13 +22,12 @@
 
 package dev.caliman.excel.grammar.formula.functioncall.binary;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.Formula;
 
 /**
  * @author Massimo Caliman
  */
-public final class Sub extends Binary implements ToFormula {
+public final class Sub extends Binary {
 
     public Sub(Formula lFormula, Formula rFormula) {
         super(lFormula, "-", rFormula);

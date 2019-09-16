@@ -22,14 +22,13 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.formula.Reference;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Massimo Caliman
  */
-public class ReferenceItem extends Reference implements ToFormula {
+public class ReferenceItem extends Reference {
 
     String value;
 
@@ -52,10 +51,6 @@ public class ReferenceItem extends Reference implements ToFormula {
         return value;//toFormula();
     }
 
-    @Deprecated
-    public String toFormula() {
-        return toString();//value;
-    }
 
     private boolean horizzontal_range() {
         return firstRow == lastRow && firstColumn != lastColumn;

@@ -22,14 +22,12 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import dev.caliman.excel.ToFormula;
-
 import static dev.caliman.excel.grammar.Grammar.exclamationmark;
 
 /**
  * @author Massimo Caliman
  */
-public class NamedRange extends ReferenceItem implements ToFormula {
+public class NamedRange extends ReferenceItem {
 
     public NamedRange(String value, RANGE tRANGE) {
         this.value = value;
@@ -52,9 +50,5 @@ public class NamedRange extends ReferenceItem implements ToFormula {
         return values();
     }
 
-    @Deprecated
-    @Override
-    public String toFormula() {
-        return toString();//values();
-    }
+
 }

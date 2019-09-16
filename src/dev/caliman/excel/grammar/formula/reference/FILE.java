@@ -22,15 +22,13 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import dev.caliman.excel.ToFormula;
-
 import static dev.caliman.excel.grammar.Grammar.closesquareparen;
 import static dev.caliman.excel.grammar.Grammar.opensquareparen;
 
 /**
  * @author Massimo Caliman
  */
-public final class FILE extends Prefix implements ToFormula {
+public final class FILE extends Prefix {
 
     private final int ext;
     private final SHEET sheet;
@@ -50,9 +48,5 @@ public final class FILE extends Prefix implements ToFormula {
         return "" + opensquareparen + ext + closesquareparen + sheet.toString();
     }
 
-    @Deprecated
-    public String toFormula() {
-        return toString();
-    }
 
 }
