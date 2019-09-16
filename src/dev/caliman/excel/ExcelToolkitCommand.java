@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class ExcelToolkitCommand implements ToolkitCommand {
+public class ExcelToolkitCommand {
 
     private Parser parser;
 
