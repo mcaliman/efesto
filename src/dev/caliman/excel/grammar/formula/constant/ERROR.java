@@ -45,6 +45,7 @@ public final class ERROR extends Constant implements ToFormula {
         return text;
     }
 
+    @Deprecated
     public String toFormula() {
         return toString();
     }

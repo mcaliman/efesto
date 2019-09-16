@@ -67,6 +67,7 @@ public final class BOOL extends Constant implements ToFormula {
         return value != null && value ? TRUE : FALSE;
     }
 
+    @Deprecated
     public String toFormula() {
         return toString();
     }

@@ -70,6 +70,7 @@ public final class DATETIME extends Constant implements ToFormula {
         return Start.format(value);
     }
 
+    @Deprecated
     public String toFormula() {
         return toString();
     }

@@ -67,6 +67,7 @@ public final class FLOAT extends Number implements ToFormula {
         return value.toString();
     }
 
+    @Deprecated
     public String toFormula() {
         return toString();
     }

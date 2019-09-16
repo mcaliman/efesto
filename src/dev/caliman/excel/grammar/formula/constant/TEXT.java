@@ -68,6 +68,7 @@ public final class TEXT extends Constant implements ToFormula {
         return '"' + value + '"';
     }
 
+    @Deprecated
     public String toFormula() {
         return toString();
     }
