@@ -37,13 +37,16 @@ class Excel_RealComplex6Test {
         ToolkitOptions options = new ToolkitOptions();
         options.setMetadata(false);
         options.setVerbose(false);
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("/home/mcaliman/Dropbox/test/test.xlsx", options);
+        //ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("/home/mcaliman/Dropbox/test/test.xlsx", options);
+        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("C:\\Users\\mcaliman\\Dropbox\\test\\test.xlsx", options);
         toolkitCommand.execute();
         long elapsed = System.currentTimeMillis() - t;
         System.out.println("Elapsed time: " + elapsed + " [ms] or " + elapsed / 1000 + " [s]. or " + elapsed / 1000 / 60 + "[m].");
         System.out.println("ToFunctional.");
         toolkitCommand.toFormula();
-        toolkitCommand.writerFormula("/home/mcaliman/Dropbox/test/test.vb");
+        String test = "C:\\Users\\mcaliman\\Dropbox\\test\\test.vb";
+        //toolkitCommand.writerFormula("/home/mcaliman/Dropbox/test/test.vb");
+        toolkitCommand.writerFormula("C:\\Users\\mcaliman\\Dropbox\\test\\test.vb");
     }
 
 }
