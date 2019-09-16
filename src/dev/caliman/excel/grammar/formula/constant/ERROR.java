@@ -46,6 +46,6 @@ public final class ERROR extends Constant implements ToFormula {
     }
 
     public String toFormula() {
-        return text;
+        return toString();
     }
 }

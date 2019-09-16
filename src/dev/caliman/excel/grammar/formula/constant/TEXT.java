@@ -69,7 +69,7 @@ public final class TEXT extends Constant implements ToFormula {
     }
 
     public String toFormula() {
-        return '"' + value + '"';
+        return toString();
     }
 
 }

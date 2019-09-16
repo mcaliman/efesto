@@ -65,6 +65,6 @@ public final class INT extends Number implements ToFormula {
     }
 
     public String toFormula() {
-        return value.toString();
+        return toString();
     }
 }
