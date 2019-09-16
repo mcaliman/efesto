@@ -77,7 +77,8 @@ public class ExcelToolkitCommand implements ToolkitCommand {
                 //if (comment != null && comment.trim().length() > 0)
                 if (comment != null) writer.write(comment.toString());
                 try {
-                    writer.write(start.id() + " = " + start.toFormula());
+                    //writer.write(start.id() + " = " + start.toFormula());
+                    writer.write(start.id() + " = " + start.toString());
                 } catch (Exception e) {
                     writer.write("'' Erron when compile " + start.id());
                 }
@@ -86,6 +87,7 @@ public class ExcelToolkitCommand implements ToolkitCommand {
         }
     }
 
+    @Deprecated
     public void writerLanguage(@NotNull String filename) throws IOException {
         StartList list = parser.getList();
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
@@ -122,7 +124,9 @@ public class ExcelToolkitCommand implements ToolkitCommand {
     public void toFormula() {
         for (Start start : getStartList()) {
             try {
-                if (start != null) System.out.println(start.id() + " = " + start.toFormula());
+                if (start != null)
+                    //System.out.println(start.id() + " = " + start.toFormula());
+                    System.out.println(start.id() + " = " + start.toString());
             } catch (Exception e) {
                 System.err.println("Error when transpile " + start.id());
             }
