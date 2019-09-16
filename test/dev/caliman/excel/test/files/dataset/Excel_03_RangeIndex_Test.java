@@ -47,10 +47,5 @@ class Excel_03_RangeIndex_Test {
         toolkitCommand.writerFormula("test/03-range-index.vb");
 
 
-        System.out.println("-----------");
-        System.out.println("ToLanguage.");
-        System.out.println("-----------");
-        toolkitCommand.toLanguage();
-        toolkitCommand.writerLanguage("test/03-range-index.clj");
     }
 }

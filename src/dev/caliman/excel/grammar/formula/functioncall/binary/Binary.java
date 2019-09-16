@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.formula.functioncall.binary;
 
-import dev.caliman.excel.ToLanguage;
 import dev.caliman.excel.grammar.Formula;
 import dev.caliman.excel.grammar.formula.FunctionCall;
 import dev.caliman.excel.grammar.formula.ParenthesisFormula;
@@ -36,7 +35,7 @@ import static dev.caliman.excel.grammar.Grammar.openparen;
 /**
  * @author Massimo Caliman
  */
-public abstract class Binary extends FunctionCall implements ToLanguage {
+public abstract class Binary extends FunctionCall {
 
     private final String op;
     private final Formula lFormula;
@@ -53,13 +52,6 @@ public abstract class Binary extends FunctionCall implements ToLanguage {
     public String toString() {
         return operandToFormula(lFormula) + op + operandToFormula(rFormula);//id() + " = " + toFormula();
     }
-
-
-    @Override
-    public String toLanguage() {
-        return "(" + op + " " + operandToFormula(lFormula) + " " + operandToFormula(rFormula) + ")";
-    }
-
 
     private String operandToFormula(Formula operand) {
         if (operand instanceof CELL_REFERENCE || operand instanceof Unary) return operand.id();

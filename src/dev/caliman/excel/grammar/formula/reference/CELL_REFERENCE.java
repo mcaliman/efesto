@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import dev.caliman.excel.ToLanguage;
 import dev.caliman.excel.grammar.formula.Constant;
 import dev.caliman.excel.grammar.formula.constant.*;
 
@@ -31,7 +30,7 @@ import java.util.Date;
 /**
  * @author mcaliman
  */
-public final class CELL_REFERENCE extends ReferenceItem implements ToLanguage {
+public final class CELL_REFERENCE extends ReferenceItem {
 
     private final int row;
     private final int column;
@@ -74,12 +73,6 @@ public final class CELL_REFERENCE extends ReferenceItem implements ToLanguage {
     @Override
     public String toString() {
         return constant != null ? constant.toString() : "null";//getAddress() + " = " + constant.toString();
-    }
-
-
-    @Override
-    public String toLanguage() {
-        return constant != null ? constant.toString() : "null";
     }
 
 }

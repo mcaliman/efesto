@@ -53,11 +53,6 @@ class Excel_08_BinOp_Test {
         ));
         toolkitCommand.writerFormula("test/08-BinaryOp.vb");
 
-        System.out.println("-----------");
-        System.out.println("ToLanguage.");
-        System.out.println("-----------");
-        toolkitCommand.toLanguage();
-        toolkitCommand.writerLanguage("test/08-BinaryOp.clj");
 
     }
 }
