@@ -1,6 +1,6 @@
 /*
  * Efesto - Excel Formula Extractor System and Topological Ordering algorithm.
- * Copyright (C) 2017 Massimo Caliman mcaliman@caliman.biz
+ * Copyright (C) 2017 Massimo Caliman mcaliman@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
@@ -17,7 +17,7 @@
  *
  * If AGPL Version 3.0 terms are incompatible with your use of
  * Efesto, alternative license terms are available from Massimo Caliman
- * please direct inquiries about Efesto licensing to mcaliman@caliman.biz
+ * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 package dev.caliman.excel.grammar.formula.reference.referencefunction;
 
