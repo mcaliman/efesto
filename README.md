@@ -15,4 +15,4 @@ TODO
 All files of Efesto are released under the AGPL Version 3.0.
 If AGPL Version 3.0 terms are incompatible with your use of
 Efesto, alternative license terms are available from Massimo Caliman
-please direct inquiries about Efesto licensing to mcaliman@caliman.biz
+please direct inquiries about Efesto licensing to mcaliman@gmail.com
