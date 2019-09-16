@@ -31,6 +31,6 @@ public class Comment {
 
     @Override
     public String toString() {
-        return this.value;
+        return this.value != null ? "'' " + this.value : "";
     }
 }

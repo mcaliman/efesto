@@ -44,7 +44,8 @@ public abstract class Start implements ToFormula, ToLanguage {
     protected boolean singleSheet;
     private int row;
     private int column;
-    private String comment;
+    //private String comment;
+    private Comment comment;
     private int sheetIndex;
 
     @NotNull
@@ -90,11 +91,11 @@ public abstract class Start implements ToFormula, ToLanguage {
     }
 
     public String getComment() {
-        return comment;
+        return comment != null ? comment.toString() : "";
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        this.comment = new Comment(comment);
     }
 
     protected int getRow() {

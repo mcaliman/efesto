@@ -73,7 +73,7 @@ public class ExcelToolkitCommand implements ToolkitCommand {
             writer.write("'' category:" + parser.getCategory() + '\n');
             for (Start start : list) {
                 String comment = start.getComment();
-                if (comment != null && comment.trim().length() > 0) writer.write("'' " + comment + "\n");
+                if (comment != null && comment.trim().length() > 0) writer.write(comment + "\n");
                 try {
                     writer.write(start.id() + " = " + start.toFormula());
                 } catch (Exception e) {
