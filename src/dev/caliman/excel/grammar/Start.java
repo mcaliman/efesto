@@ -90,8 +90,8 @@ public abstract class Start implements ToFormula, ToLanguage {
         return false;
     }
 
-    public String getComment() {
-        return comment != null ? comment.toString() : "";
+    public Comment getComment() {
+        return this.comment;
     }
 
     public void setComment(String comment) {

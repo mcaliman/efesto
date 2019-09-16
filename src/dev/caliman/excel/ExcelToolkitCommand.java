@@ -22,6 +22,7 @@
 
 package dev.caliman.excel;
 
+import dev.caliman.excel.grammar.Comment;
 import dev.caliman.excel.grammar.Start;
 import dev.caliman.excel.parser.Parser;
 import dev.caliman.excel.parser.StartList;
@@ -72,8 +73,9 @@ public class ExcelToolkitCommand implements ToolkitCommand {
             writer.write("'' subject:" + parser.getSubject() + '\n');
             writer.write("'' category:" + parser.getCategory() + '\n');
             for (Start start : list) {
-                String comment = start.getComment();
-                if (comment != null && comment.trim().length() > 0) writer.write(comment + "\n");
+                Comment comment = start.getComment();
+                //if (comment != null && comment.trim().length() > 0)
+                if (comment != null) writer.write(comment.toString());
                 try {
                     writer.write(start.id() + " = " + start.toFormula());
                 } catch (Exception e) {
@@ -99,8 +101,8 @@ public class ExcelToolkitCommand implements ToolkitCommand {
             writer.write("; subject:" + parser.getSubject() + '\n');
             writer.write("; category:" + parser.getCategory() + '\n');
             for (Start start : list) {
-                String comment = start.getComment();
-                if (comment != null && comment.trim().length() > 0) writer.write("; " + comment + "\n");
+                Comment comment = start.getComment();
+                if (comment != null) writer.write("; " + comment.toString());
                 writer.write("(def " + start.id() + " " + start.toLanguage() + ")");
                 writer.write("\n");
             }

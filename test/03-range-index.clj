@@ -10,4 +10,4 @@
 ; subject:null
 ; category:null
 (def A1:B6 A1:B6)
-(def A10 RANGE!A10 = INDEX(A1:B6,2,2))
+; (def A10 RANGE!A10 = INDEX(A1:B6,2,2))
