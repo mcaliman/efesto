@@ -23,7 +23,6 @@
 
 package dev.caliman.excel.grammar.formula.constant;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.formula.Constant;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,7 +31,7 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
-public final class TEXT extends Constant implements ToFormula {
+public final class TEXT extends Constant {
 
     private final String value;
 
@@ -66,11 +65,6 @@ public final class TEXT extends Constant implements ToFormula {
     @Override
     public String toString() {
         return '"' + value + '"';
-    }
-
-    @Deprecated
-    public String toFormula() {
-        return toString();
     }
 
 }

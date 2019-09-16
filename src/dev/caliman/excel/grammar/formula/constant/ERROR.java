@@ -22,13 +22,12 @@
 
 package dev.caliman.excel.grammar.formula.constant;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.formula.Constant;
 
 /**
  * @author Massimo Caliman
  */
-public final class ERROR extends Constant implements ToFormula {
+public final class ERROR extends Constant {
 
     private final String text;
 
@@ -45,8 +44,4 @@ public final class ERROR extends Constant implements ToFormula {
         return text;
     }
 
-    @Deprecated
-    public String toFormula() {
-        return toString();
-    }
 }

@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.formula.constant;
 
-import dev.caliman.excel.ToFormula;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -30,7 +29,7 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
-public final class FLOAT extends Number implements ToFormula {
+public final class FLOAT extends Number {
 
     private final Double value;
 
@@ -65,11 +64,6 @@ public final class FLOAT extends Number implements ToFormula {
     @Override
     public String toString() {
         return value.toString();
-    }
-
-    @Deprecated
-    public String toFormula() {
-        return toString();
     }
 
 }

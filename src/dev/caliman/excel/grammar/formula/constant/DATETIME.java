@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.formula.constant;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.Start;
 import dev.caliman.excel.grammar.formula.Constant;
 import org.jetbrains.annotations.Nullable;
@@ -33,7 +32,7 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
-public final class DATETIME extends Constant implements ToFormula {
+public final class DATETIME extends Constant {
 
     private final Date value;
 
@@ -70,8 +69,4 @@ public final class DATETIME extends Constant implements ToFormula {
         return Start.format(value);
     }
 
-    @Deprecated
-    public String toFormula() {
-        return toString();
-    }
 }

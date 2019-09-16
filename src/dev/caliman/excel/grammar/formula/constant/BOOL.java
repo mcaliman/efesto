@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.formula.constant;
 
-import dev.caliman.excel.ToFormula;
 import dev.caliman.excel.grammar.formula.Constant;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,7 +33,7 @@ import static dev.caliman.excel.grammar.Grammar.TRUE;
 /**
  * @author Massimo Caliman
  */
-public final class BOOL extends Constant implements ToFormula {
+public final class BOOL extends Constant {
 
     private final Boolean value;
 
@@ -67,8 +66,4 @@ public final class BOOL extends Constant implements ToFormula {
         return value != null && value ? TRUE : FALSE;
     }
 
-    @Deprecated
-    public String toFormula() {
-        return toString();
-    }
 }
