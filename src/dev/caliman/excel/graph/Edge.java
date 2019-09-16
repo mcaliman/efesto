@@ -53,7 +53,6 @@ class Edge {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean equals(@Nullable Object object) {
         if (this == object) return true;
         if (object == null) return false;
