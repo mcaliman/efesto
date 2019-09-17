@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class Excel_HORIZONTAL_RANGE_Test {
+class HORIZONTAL_RANGE_Test {
 
     @Test
     void testTest() throws Exception {
