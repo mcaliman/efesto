@@ -48,7 +48,7 @@ public abstract class Reference extends Formula {
             buff.append(opensquareparen).append(space);
             for (Object element : list) buff.append(toString(element)).append(space);
             if (buff.length() > 1) buff.deleteCharAt(buff.length() - 1);
-            buff.append(space).append(closesquareparen);
+            buff.append(space).append("]");
             return buff.toString();
         } else {
             StringBuilder buff = new StringBuilder();
@@ -62,9 +62,9 @@ public abstract class Reference extends Formula {
                     index++;
                 }
                 if (buff.length() > 1) buff.deleteCharAt(buff.length() - 1);
-                buff.append(closesquareparen);
+                buff.append("]");
             }
-            buff.append(closesquareparen);
+            buff.append("]");
             return buff.toString();
         }
     }

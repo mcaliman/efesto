@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import static dev.caliman.excel.grammar.Grammar.closesquareparen;
 import static dev.caliman.excel.grammar.Grammar.opensquareparen;
 
 /**
@@ -45,7 +44,7 @@ public final class FILE extends Prefix {
 
     @Override
     public String toString() {
-        return "" + opensquareparen + ext + closesquareparen + sheet.toString();
+        return "" + opensquareparen + ext + "]" + sheet.toString();
     }
 
 
