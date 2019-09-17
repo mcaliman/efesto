@@ -369,8 +369,6 @@ public abstract class AbstractParser {
      * <p>
      * This is XSSF only, as it stores the sheet / book references in String
      * form. The HSSF equivalent using indexes is Area3DPtg
-     *
-     * @param t
      */
     private void parseArea3DPxg(@NotNull Area3DPxg t) {
         String sheetName = t.getSheetName();

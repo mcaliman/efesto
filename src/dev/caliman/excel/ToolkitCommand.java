@@ -78,7 +78,7 @@ public class ToolkitCommand {
                 try {
                     writer.write(start.id() + " = " + start.toString());
                 } catch (Exception e) {
-                    writer.write("'' Erron when compile " + start.id());
+                    writer.write("'' Error when compile " + start.id());
                 }
                 writer.write("\n");
             }
