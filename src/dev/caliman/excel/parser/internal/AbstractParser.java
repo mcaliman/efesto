@@ -230,8 +230,6 @@ public abstract class AbstractParser {
 
     /**
      * Parse Formula Cell
-     *
-     * @param cell
      */
     private void parseFormula(Cell cell) {
         verbose("Cell:" + cell.getClass().getSimpleName() + " " + cell.toString() + " " + cell.getCellType());
@@ -263,6 +261,7 @@ public abstract class AbstractParser {
      * @param ptgs
      * @return
      */
+    @SuppressWarnings("JavaDoc")
     private Start parse(@NotNull Ptg[] ptgs) {
         parseFormulaInit();
         if (Ptg.doesFormulaReferToDeletedCell(ptgs)) doesFormulaReferToDeletedCell(rowFormula, colFormula);

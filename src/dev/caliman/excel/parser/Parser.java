@@ -129,8 +129,6 @@ public final class Parser extends AbstractParser {
 
     /**
      * parseConstantArray
-     *
-     * @param array
      */
     @Override
     protected void parseConstantArray(Object[][] array) {
@@ -141,8 +139,6 @@ public final class Parser extends AbstractParser {
 
     /**
      * Used
-     *
-     * @param arguments
      */
     @Override
     protected void parseUDF(String arguments) {

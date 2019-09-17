@@ -34,8 +34,6 @@ class Excel_11_UnOpPrefix_Test {
 
     /**
      * TO FIX
-     *
-     * @throws Exception
      */
     @Test
     void testTest() throws Exception {
