@@ -30,17 +30,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-class Excel_ERROR_REF_1_Test {
+class ERROR_REF_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/ERROR_REF_1.xlsx");
+        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/ERROR_REF.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0, "A1 = #REF!"
         ));
-        toolkitCommand.writerFormula("test/ERROR_REF_1.vb");
+        toolkitCommand.writerFormula("test/ERROR_REF.vb");
     }
 }
