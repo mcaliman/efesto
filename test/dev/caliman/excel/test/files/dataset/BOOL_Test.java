@@ -27,11 +27,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class Excel_14_Boolean_Test {
+class BOOL_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/14-Boolean.xlsx");
+        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/BOOL.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
@@ -44,6 +44,6 @@ class Excel_14_Boolean_Test {
                 "A6 = \"IFFALSE\"",
                 "A1 = IF(AND(A3=1,A4=TRUE),A5,A6)"
         ));
-        toolkitCommand.writerFormula("test/14-Boolean.vb");
+        toolkitCommand.writerFormula("test/BOOL.vb");
     }
 }
