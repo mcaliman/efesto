@@ -24,6 +24,8 @@ package dev.caliman.excel.grammar.formula.reference;
 
 import dev.caliman.excel.grammar.formula.Reference;
 
+import java.util.Objects;
+
 import static dev.caliman.excel.grammar.Grammar.colon;
 import static dev.caliman.excel.grammar.Grammar.exclamationmark;
 
@@ -47,7 +49,7 @@ public final class RangeReference extends Reference {
         if (o == null || getClass() != o.getClass()) return false;
         RangeReference that = (RangeReference) o;
 
-        return that.toString().equals(this.toString());
+        return Objects.requireNonNull(that.toString()).equals(this.toString());
     }
 
     private boolean horizzontal_range() {
