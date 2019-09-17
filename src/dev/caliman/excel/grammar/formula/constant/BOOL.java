@@ -27,8 +27,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-import static dev.caliman.excel.grammar.Grammar.FALSE;
-import static dev.caliman.excel.grammar.Grammar.TRUE;
 
 /**
  * @author Massimo Caliman
@@ -63,7 +61,7 @@ public final class BOOL extends Constant {
 
     @Override
     public String toString() {
-        return value != null && value ? TRUE : FALSE;
+        return value != null && value ? "TRUE" : "FALSE";
     }
 
 }

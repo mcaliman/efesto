@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import static dev.caliman.excel.grammar.Grammar.opensquareparen;
+
 
 /**
  * @author Massimo Caliman
@@ -44,7 +44,7 @@ public final class FILE extends Prefix {
 
     @Override
     public String toString() {
-        return "" + opensquareparen + ext + "]" + sheet.toString();
+        return "" + "[" + ext + "]" + sheet.toString();
     }
 
 

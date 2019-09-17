@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.parser.internal;
 
-import dev.caliman.excel.grammar.Grammar;
+
 import dev.caliman.excel.grammar.Start;
 import dev.caliman.excel.grammar.formula.reference.CELL_REFERENCE;
 import dev.caliman.excel.grammar.formula.reference.RANGE;
@@ -85,10 +85,10 @@ class Helper {
             case CELL_TYPE_BOOLEAN:
                 return cell.getBooleanCellValue();
             case CELL_TYPE_FORMULA:
-                if (cell.toString() != null && cell.toString().equalsIgnoreCase(Grammar.TRUE)) {
+                if (cell.toString() != null && cell.toString().equalsIgnoreCase("TRUE")) {
                     return true;
                 }
-                if (cell.toString() != null && cell.toString().equalsIgnoreCase(Grammar.FALSE)) {
+                if (cell.toString() != null && cell.toString().equalsIgnoreCase("FALSE")) {
                     return false;
                 }
                 return cell.toString();

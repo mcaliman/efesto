@@ -26,16 +26,8 @@ public class Grammar {
 
     public final static String epsilon = "";
 
-    //public final static char closesquareparen = ']';
-    public final static char opensquareparen = '[';
-    public final static String space = " ";
-    public final static String emptylist = "[]";
-    public final static String TRUE = "TRUE";
-    public final static String FALSE = "FALSE";
-    private final static char doublequote = '"';
-
     public static String quote(String text) {
-        return "" + doublequote + text + doublequote;
+        return "" + '"' + text + '"';
     }
 
 }

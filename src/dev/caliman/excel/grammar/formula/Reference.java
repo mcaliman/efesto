@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static dev.caliman.excel.grammar.Grammar.*;
+import static dev.caliman.excel.grammar.Grammar.quote;
 
 /**
  * @author Massimo Caliman
@@ -42,23 +42,23 @@ public abstract class Reference extends Formula {
     }
 
     protected String values(int fRow, int fCol, int lRow, int lCol, @NotNull List<Object> list, boolean isHorizzontalOrVerticalRange) {
-        if (list.isEmpty()) return emptylist;
+        if (list.isEmpty()) return "[]";
         if (isHorizzontalOrVerticalRange) {
             StringBuilder buff = new StringBuilder();
-            buff.append(opensquareparen).append(space);
-            for (Object element : list) buff.append(toString(element)).append(space);
+            buff.append("[").append(" ");
+            for (Object element : list) buff.append(toString(element)).append(" ");
             if (buff.length() > 1) buff.deleteCharAt(buff.length() - 1);
-            buff.append(space).append("]");
+            buff.append(" ").append("]");
             return buff.toString();
         } else {
             StringBuilder buff = new StringBuilder();
-            buff.append(opensquareparen);
+            buff.append("[");
             int index = 0;
             for (int row = fRow; row <= lRow; row++) {
-                buff.append(opensquareparen);
+                buff.append("[");
                 for (int col = fCol; col <= lCol; col++) {
                     Object element = list.get(index);
-                    buff.append(toString(element)).append(space);
+                    buff.append(toString(element)).append(" ");
                     index++;
                 }
                 if (buff.length() > 1) buff.deleteCharAt(buff.length() - 1);
