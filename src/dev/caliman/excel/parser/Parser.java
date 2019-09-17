@@ -474,7 +474,7 @@ public final class Parser extends AbstractParser {
         setOwnProperty(builtinFunction);
         graph.addNode(builtinFunction);
         for (Start arg : args) {
-            if (arg instanceof RangeReference || arg instanceof CELL_REFERENCE || arg instanceof PrefixReferenceItem || arg instanceof ReferenceItem) {
+            if (arg instanceof RangeReference /*|| arg instanceof CELL_REFERENCE*/ || arg instanceof PrefixReferenceItem || arg instanceof ReferenceItem) {
                 if (unordered.add(arg)) {
                     graph.addNode(arg);
                     graph.addEdge(arg, builtinFunction);
