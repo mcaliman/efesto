@@ -43,6 +43,6 @@ class UNION_Test {
                 "C2:C3 = [ 6.0 8.0 ]",
                 "A5 = SUM(A1:B2,C2:C3)"
         ));
-        toolkitCommand.writerFormula("test/Union.vb");
+        toolkitCommand.writerFormula("test/UNION.vb");
     }
 }
