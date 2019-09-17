@@ -195,8 +195,6 @@ public abstract class AbstractParser {
 
     /**
      * Parse a single (Work)Sheet
-     *
-     * @param sheet
      */
     private void parse(@NotNull Sheet sheet) {
         this.counterSheets++;
@@ -213,8 +211,6 @@ public abstract class AbstractParser {
 
     /**
      * Parse Cell
-     *
-     * @param cell
      */
     private void parse(Cell cell) {
         if (cell.getCellType() == CELL_TYPE_FORMULA) {

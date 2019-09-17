@@ -27,7 +27,4 @@ package dev.caliman.excel.grammar.formula.reference;
  */
 class SHEET_QUOTED extends Prefix {
 
-    public SHEET_QUOTED() {
-    }
-
 }

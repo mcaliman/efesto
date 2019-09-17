@@ -78,13 +78,12 @@ class Helper {
             return cell.getDateCellValue();
         switch (cell.getCellType()) {
             case CELL_TYPE_STRING:
+            case CELL_TYPE_BLANK:
                 return cell.getStringCellValue();
             case CELL_TYPE_NUMERIC:
                 return cell.getNumericCellValue();
             case CELL_TYPE_BOOLEAN:
                 return cell.getBooleanCellValue();
-            case CELL_TYPE_BLANK:
-                return cell.getStringCellValue();
             case CELL_TYPE_FORMULA:
                 if (cell.toString() != null && cell.toString().equalsIgnoreCase(Grammar.TRUE)) {
                     return true;

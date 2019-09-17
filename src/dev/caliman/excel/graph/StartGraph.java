@@ -83,7 +83,7 @@ public class StartGraph {
     /**
      * Use kahn Top Sort
      *
-     * @return
+     * @return sorted StartList
      */
     @NotNull
     public StartList topologicalSort() {
