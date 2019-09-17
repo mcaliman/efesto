@@ -23,7 +23,6 @@
 package dev.caliman.excel.grammar.formula.reference;
 
 
-
 /**
  * @author Massimo Caliman
  */

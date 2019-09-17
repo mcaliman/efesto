@@ -36,6 +36,10 @@ public abstract class Reference extends Formula {
 
     protected final List<Object> vals = new ArrayList<>();
 
+    private static String quote(String text) {
+        return "" + '"' + text + '"';
+    }
+
     public void add(@NotNull List<Object> values) {
         vals.addAll(values);
     }
@@ -71,9 +75,5 @@ public abstract class Reference extends Formula {
     private String toString(Object value) {
         String string = value instanceof String ? quote(value.toString()) : value.toString();
         return super.toString() + string;
-    }
-
-    private static String quote(String text) {
-        return "" + '"' + text + '"';
     }
 }

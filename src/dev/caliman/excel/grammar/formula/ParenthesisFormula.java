@@ -25,8 +25,6 @@ package dev.caliman.excel.grammar.formula;
 import dev.caliman.excel.grammar.Formula;
 
 
-
-
 /**
  * @author Massimo Caliman
  */
