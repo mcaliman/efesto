@@ -30,10 +30,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-class Excel_06_Cell_Test {
+class CELL_REFERENCE_Test {
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/06-cell.xlsx");
+        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/CELL_REFERENCE.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
@@ -41,6 +41,6 @@ class Excel_06_Cell_Test {
         assertTrue(toolkitCommand.testToFormula(
                 0, "A1 = 27.59"
         ));
-        toolkitCommand.writerFormula("test/06-cell.vb");
+        toolkitCommand.writerFormula("test/CELL_REFERENCE.vb");
     }
 }
