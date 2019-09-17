@@ -26,6 +26,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Massimo Caliman
+ */
 class BOOLTest {
 
     @Test
