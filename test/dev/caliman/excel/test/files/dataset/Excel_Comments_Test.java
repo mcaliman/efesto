@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import dev.caliman.excel.ToolkitOptions;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +38,7 @@ class Excel_Comments_Test {
         ToolkitOptions options = new ToolkitOptions();
         options.setMetadata(true);
         options.setVerbose(false);
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/comments.xlsx", options);
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/comments.xlsx", options);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
@@ -47,6 +47,6 @@ class Excel_Comments_Test {
                 "A1 = 1.0",
                 "A2 = A1+1"
         ));
-        toolkitCommand.writerFormula("test/comments.vb");
+        toolkitCommand.write("test/comments.vb");
     }
 }

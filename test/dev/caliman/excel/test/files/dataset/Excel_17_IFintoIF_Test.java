@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,7 +31,7 @@ class Excel_17_IFintoIF_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/17-IF-into-IF.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/17-IF-into-IF.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("----------");
@@ -42,6 +42,6 @@ class Excel_17_IFintoIF_Test {
                 "C1 = TRUE",
                 "A1 = IF(B1>1,0,IF(C1,\"Hello\",\"Bye\"))"
         ));
-        toolkitCommand.writerFormula("test/17-IF-into-IF.vb");
+        toolkitCommand.write("test/17-IF-into-IF.vb");
     }
 }

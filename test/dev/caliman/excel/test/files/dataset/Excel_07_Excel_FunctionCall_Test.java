@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class Excel_07_Excel_FunctionCall_Test {
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/07-FunctionCall.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/07-FunctionCall.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
@@ -40,6 +40,6 @@ class Excel_07_Excel_FunctionCall_Test {
                 "A1:C1 = [ 1.0 2.0 3.0 ]",
                 "A2 = SUM(A1:C1)"
         ));
-        toolkitCommand.writerFormula("test/07-FunctionCall.vb");
+        toolkitCommand.write("test/07-FunctionCall.vb");
     }
 }

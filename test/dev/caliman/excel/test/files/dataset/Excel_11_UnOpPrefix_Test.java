@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -39,7 +39,7 @@ class Excel_11_UnOpPrefix_Test {
      */
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/11-UnOpPrefix.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/11-UnOpPrefix.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
@@ -48,6 +48,6 @@ class Excel_11_UnOpPrefix_Test {
                 "UnOpPrefix!A1 = +13.0",
                 "A2 = UnOpPrefix!A1+1"
         ));
-        toolkitCommand.writerFormula("test/11-UnOpPrefix.vb");
+        toolkitCommand.write("test/11-UnOpPrefix.vb");
     }
 }

@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -35,7 +35,7 @@ public class SHEET_QUOTED_Test {
     @Test
     void testTest() throws Exception {
         long t = System.currentTimeMillis();
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/SHEET-QUOTED.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/SHEET-QUOTED.xlsx");
         toolkitCommand.execute();
         long elapsed = System.currentTimeMillis() - t;
         System.out.println("elapsed: " + elapsed / 1000 + " s.");
@@ -48,7 +48,7 @@ public class SHEET_QUOTED_Test {
                 "'Other Sheet Name With Spaces'!A2 = 'Other Sheet Name With Spaces'!A1+30",
                 "'Sheet Name With Spaces'!A2 = 'Sheet Name With Spaces'!A1+10"
         ));
-        toolkitCommand.writerFormula("test/SHEET-QUOTED.vb");
+        toolkitCommand.write("test/SHEET-QUOTED.vb");
     }
 
 }

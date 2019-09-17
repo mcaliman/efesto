@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import dev.caliman.excel.ToolkitOptions;
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +34,7 @@ class HORIZONTAL_RANGE_Test {
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/HORIZONTAL_RANGE.xlsx", options);
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/HORIZONTAL_RANGE.xlsx", options);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
@@ -43,6 +43,6 @@ class HORIZONTAL_RANGE_Test {
                 "A1:D1 = [ 1.0 3.0 6.0 8.0 ]",
                 "A3 = MATCH(3,A1:D1,0)"
         ));
-        toolkitCommand.writerFormula("test/HORIZONTAL_RANGE.vb");
+        toolkitCommand.write("test/HORIZONTAL_RANGE.vb");
     }
 }

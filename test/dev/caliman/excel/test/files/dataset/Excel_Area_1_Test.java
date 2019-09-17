@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import dev.caliman.excel.ToolkitOptions;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +38,7 @@ class Excel_Area_1_Test {
         ToolkitOptions options = new ToolkitOptions();
         options.setMetadata(true);
         options.setVerbose(false);
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/area-1.xlsx", options);
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/area-1.xlsx", options);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
@@ -47,6 +47,6 @@ class Excel_Area_1_Test {
                 "A1:B3 = [[11.0 21.0][12.0 22.0][13.0 23.0]]",
                 "A7 = INDEX(A1:B3,2,2)"
         ));
-        toolkitCommand.writerFormula("test/area-1.vb");
+        toolkitCommand.write("test/area-1.vb");
     }
 }

@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import dev.caliman.excel.ToolkitOptions;
 import org.junit.jupiter.api.Test;
 
@@ -34,13 +34,13 @@ class Excel_ConstantArray_Test {
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/ConstantArray.xlsx", options);
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/ConstantArray.xlsx", options);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0, "Foglio1!A6 = {1.0,2.0,2.0,4.0,6.0}"
         ));
-        toolkitCommand.writerFormula("test/ConstantArray.vb");
+        toolkitCommand.write("test/ConstantArray.vb");
     }
 }

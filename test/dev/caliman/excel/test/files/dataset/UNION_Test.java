@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import dev.caliman.excel.ToolkitOptions;
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +34,7 @@ class UNION_Test {
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/UNION.xlsx", options);
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/UNION.xlsx", options);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
@@ -43,6 +43,6 @@ class UNION_Test {
                 "C2:C3 = [ 6.0 8.0 ]",
                 "A5 = SUM(A1:B2,C2:C3)"
         ));
-        toolkitCommand.writerFormula("test/UNION.vb");
+        toolkitCommand.write("test/UNION.vb");
     }
 }

@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,7 +31,7 @@ class Excel_16_Example_Range_1_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/16-example-range-1.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/16-example-range-1.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
@@ -41,6 +41,6 @@ class Excel_16_Example_Range_1_Test {
                 "D3:H3 = [ 0.0 1.0 2.0 3.0 4.0 ]",
                 "D7 = INDEX(D3:H3,2)"
         ));
-        toolkitCommand.writerFormula("test/16-example-range-1.vb");
+        toolkitCommand.write("test/16-example-range-1.vb");
     }
 }

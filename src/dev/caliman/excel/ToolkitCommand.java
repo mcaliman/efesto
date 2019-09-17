@@ -32,20 +32,20 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class ExcelToolkitCommand {
+public class ToolkitCommand {
 
     private Parser parser;
 
     private long elapsed = 0;
 
-    public ExcelToolkitCommand(@NotNull String name) throws IOException, InvalidFormatException {
+    public ToolkitCommand(@NotNull String name) throws IOException, InvalidFormatException {
         ToolkitOptions options = new ToolkitOptions();
         parser = new Parser(name);
         parser.verbose = options.isVerbose();
         parser.metadata = options.isMetadata();
     }
 
-    public ExcelToolkitCommand(@NotNull String name, ToolkitOptions options) throws IOException, InvalidFormatException {
+    public ToolkitCommand(@NotNull String name, ToolkitOptions options) throws IOException, InvalidFormatException {
         parser = new Parser(name);
         parser.verbose = options.isVerbose();
         parser.metadata = options.isMetadata();
@@ -58,7 +58,7 @@ public class ExcelToolkitCommand {
         this.elapsed = System.currentTimeMillis() - t;
     }
 
-    public void writerFormula(@NotNull String filename) throws IOException {
+    public void write(@NotNull String filename) throws IOException {
         StartList list = parser.getList();
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
             writer.write("'' \n");
@@ -74,10 +74,8 @@ public class ExcelToolkitCommand {
             writer.write("'' category:" + parser.getCategory() + '\n');
             for (Start start : list) {
                 Comment comment = start.getComment();
-                //if (comment != null && comment.trim().length() > 0)
                 if (comment != null) writer.write(comment.toString());
                 try {
-                    //writer.write(start.id() + " = " + start.toFormula());
                     writer.write(start.id() + " = " + start.toString());
                 } catch (Exception e) {
                     writer.write("'' Erron when compile " + start.id());
@@ -100,7 +98,6 @@ public class ExcelToolkitCommand {
         for (Start start : getStartList()) {
             try {
                 if (start != null)
-                    //System.out.println(start.id() + " = " + start.toFormula());
                     System.out.println(start.id() + " = " + start.toString());
             } catch (Exception e) {
                 System.err.println("Error when transpile " + start.id());

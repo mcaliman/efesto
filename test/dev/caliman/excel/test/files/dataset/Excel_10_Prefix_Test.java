@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import dev.caliman.excel.ToolkitOptions;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +38,7 @@ class Excel_10_Prefix_Test {
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(false);
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/10-Prefix.xlsx", options);
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/10-Prefix.xlsx", options);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
@@ -46,6 +46,6 @@ class Excel_10_Prefix_Test {
         assertTrue(toolkitCommand.testToFormula(0,
                 "Sheet1!A1 = 78.0",
                 "Prefix!A1 = Sheet1!A1"));
-        toolkitCommand.writerFormula("test/10-Prefix.vb");
+        toolkitCommand.write("test/10-Prefix.vb");
     }
 }

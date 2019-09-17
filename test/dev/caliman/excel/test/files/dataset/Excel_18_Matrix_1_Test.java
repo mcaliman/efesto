@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,7 +34,7 @@ class Excel_18_Matrix_1_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/18-matrix-1.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/18-matrix-1.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
@@ -43,6 +43,6 @@ class Excel_18_Matrix_1_Test {
                 "A1:D2 = [[1.0 2.0 3.0 4.0][4.0 6.0 7.0 8.0]]",
                 "B7 = INDEX(A1:D2,1,1)"
         ));
-        toolkitCommand.writerFormula("test/18-matrix-1.vb");
+        toolkitCommand.write("test/18-matrix-1.vb");
     }
 }

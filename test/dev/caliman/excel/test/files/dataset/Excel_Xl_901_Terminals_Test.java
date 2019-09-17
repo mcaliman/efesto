@@ -21,7 +21,7 @@
  */
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,7 +34,7 @@ class Excel_Xl_901_Terminals_Test {
     @Test
     void testTest() throws Exception {
         long t = System.currentTimeMillis();
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/901-terminals.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/901-terminals.xlsx");
         toolkitCommand.execute();
         long elapsed = System.currentTimeMillis() - t;
         System.out.println("elapsed: " + elapsed / 1000 + " s.");
@@ -43,7 +43,7 @@ class Excel_Xl_901_Terminals_Test {
         assertTrue(toolkitCommand.testToFormula(
                 0, "A5 = 1/0"
         ));
-        toolkitCommand.writerFormula("test/901-terminals.vb");
+        toolkitCommand.write("test/901-terminals.vb");
     }
 
 }

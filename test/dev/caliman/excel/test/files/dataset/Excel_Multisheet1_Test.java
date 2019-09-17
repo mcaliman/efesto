@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,7 +34,7 @@ class Excel_Multisheet1_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/multisheet-1.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/multisheet-1.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
@@ -42,6 +42,6 @@ class Excel_Multisheet1_Test {
                 "SheetB!A1:A3 = [ 1.0 2.0 3.0 ]",
                 "SheetA!A1 = SUM(SheetB!A1:A3)"
         ));
-        toolkitCommand.writerFormula("test/multisheet-1.vb");
+        toolkitCommand.write("test/multisheet-1.vb");
     }
 }

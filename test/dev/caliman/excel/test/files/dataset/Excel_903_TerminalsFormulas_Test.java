@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,7 +31,7 @@ class Excel_903_TerminalsFormulas_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/903-terminals-formulas.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/903-terminals-formulas.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
@@ -44,7 +44,7 @@ class Excel_903_TerminalsFormulas_Test {
                 "A6 = IF(A1,A2,A3)",
                 "A7 = IF(A1,A4,A3)"
         ));
-        toolkitCommand.writerFormula("test/903-terminals-formulas.vb");
+        toolkitCommand.write("test/903-terminals-formulas.vb");
     }
 
 }

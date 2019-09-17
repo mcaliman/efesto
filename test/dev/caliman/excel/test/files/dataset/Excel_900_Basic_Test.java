@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,7 +34,7 @@ class Excel_900_Basic_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/900-basic.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/900-basic.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
@@ -44,6 +44,6 @@ class Excel_900_Basic_Test {
                 "B5 = 20.0",
                 "B1 = B5+B4"
         ));
-        toolkitCommand.writerFormula("test/900-basic.vb");
+        toolkitCommand.write("test/900-basic.vb");
     }
 }

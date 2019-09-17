@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,14 +34,14 @@ class Excel_01_HorizontalRangeIndex_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/01-horizontal-range-index.xlsx");
-        toolkitCommand.execute();
+        ToolkitCommand cmd = new ToolkitCommand("test/01-horizontal-range-index.xlsx");
+        cmd.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
-        toolkitCommand.toFormula();
-        assertTrue(toolkitCommand.testToFormula(0,
+        cmd.toFormula();
+        assertTrue(cmd.testToFormula(0,
                 "B1:H1 = [ 0.0 1.0 2.0 3.0 4.0 5.0 6.0 ]",
                 "B5 = INDEX(B1:H1,3)"));
-        toolkitCommand.writerFormula("test/01-horizontal-range-index.vb");
+        cmd.write("test/01-horizontal-range-index.vb");
     }
 }

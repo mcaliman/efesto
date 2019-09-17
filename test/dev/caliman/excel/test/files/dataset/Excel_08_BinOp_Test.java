@@ -23,7 +23,7 @@
 package dev.caliman.excel.test.files.dataset;
 
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -40,7 +40,7 @@ class Excel_08_BinOp_Test {
      */
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/08-BinOp.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/08-BinOp.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("----------");
@@ -51,7 +51,7 @@ class Excel_08_BinOp_Test {
                 "B2 = 3.0",
                 "B3 = B2-B1"
         ));
-        toolkitCommand.writerFormula("test/08-BinaryOp.vb");
+        toolkitCommand.write("test/08-BinaryOp.vb");
 
 
     }

@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,13 +31,13 @@ class Excel_File_1_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/file-1.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/file-1.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFunctional.");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0, "A1 = [1]DestSheet!$A$1"
         ));
-        toolkitCommand.writerFormula("test/file-1.vb");
+        toolkitCommand.write("test/file-1.vb");
     }
 }

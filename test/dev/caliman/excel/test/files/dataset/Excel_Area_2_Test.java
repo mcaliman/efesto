@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,7 +34,7 @@ class Excel_Area_2_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/area-2.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/area-2.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
@@ -46,6 +46,6 @@ class Excel_Area_2_Test {
                 "UseArea1AndArea2!A2 = INDEX(Area1!A1:B3,2,2)",
                 "UseArea1AndArea2!A1 = INDEX(Area2!Area2Name,1,2)"
         ));
-        toolkitCommand.writerFormula("test/area-2.vb");
+        toolkitCommand.write("test/area-2.vb");
     }
 }

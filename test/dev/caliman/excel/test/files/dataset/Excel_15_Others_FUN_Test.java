@@ -21,7 +21,7 @@
  */
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -33,7 +33,7 @@ class Excel_15_Others_FUN_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/15-Others-FUN.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/15-Others-FUN.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("----------");
@@ -44,6 +44,6 @@ class Excel_15_Others_FUN_Test {
                 "B29 = 70.0",
                 "D7 = (2*(B29))/(1+B29)"
         ));
-        toolkitCommand.writerFormula("test/15-Others-FUN.vb");
+        toolkitCommand.write("test/15-Others-FUN.vb");
     }
 }

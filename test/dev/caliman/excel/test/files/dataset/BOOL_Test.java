@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,12 +31,12 @@ class BOOL_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/BOOL.xlsx");
-        toolkitCommand.execute();
+        ToolkitCommand cmd = new ToolkitCommand("test/BOOL.xlsx");
+        cmd.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
-        toolkitCommand.toFormula();
-        assertTrue(toolkitCommand.testToFormula(
+        cmd.toFormula();
+        assertTrue(cmd.testToFormula(
                 0,
                 "A3 = 1.0",
                 "A4 = TRUE",
@@ -44,6 +44,6 @@ class BOOL_Test {
                 "A6 = \"IFFALSE\"",
                 "A1 = IF(AND(A3=1,A4=TRUE),A5,A6)"
         ));
-        toolkitCommand.writerFormula("test/BOOL.vb");
+        cmd.write("test/BOOL.vb");
     }
 }

@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import dev.caliman.excel.ToolkitOptions;
 import org.junit.jupiter.api.Test;
 
@@ -34,13 +34,13 @@ class UDF_Test {
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/UDF.xlsm", options);
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/UDF.xlsm", options);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0, "A2 = GetElement(A1,2,\"-\")"
         ));
-        toolkitCommand.writerFormula("test/UDF.vb");
+        toolkitCommand.write("test/UDF.vb");
     }
 }

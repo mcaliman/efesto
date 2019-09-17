@@ -22,17 +22,17 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 class Excel_Metadata_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/metadata.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/metadata.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFunctional.");
         toolkitCommand.toFormula();
-        toolkitCommand.writerFormula("test/metadata.vb");
+        toolkitCommand.write("test/metadata.vb");
     }
 }

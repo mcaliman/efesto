@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,13 +34,13 @@ class ERROR_REF_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/ERROR_REF.xlsx");
-        toolkitCommand.execute();
+        ToolkitCommand cmd = new ToolkitCommand("test/ERROR_REF.xlsx");
+        cmd.execute();
         System.out.println("ToFormula.");
-        toolkitCommand.toFormula();
-        assertTrue(toolkitCommand.testToFormula(
+        cmd.toFormula();
+        assertTrue(cmd.testToFormula(
                 0, "A1 = #REF!"
         ));
-        toolkitCommand.writerFormula("test/ERROR_REF.vb");
+        cmd.write("test/ERROR_REF.vb");
     }
 }

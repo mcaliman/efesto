@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,7 +34,7 @@ class Excel_12_String_COUNTIF_Test {
 
     @Test
     void testTest() throws Exception {
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/12-String-COUNTIF.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/12-String-COUNTIF.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
@@ -43,6 +43,6 @@ class Excel_12_String_COUNTIF_Test {
                 "C1:E1 = [ 1.0 2.0 3.0 ]",
                 "B4 = COUNTIF(C1:E1,\">=2\")"
         ));
-        toolkitCommand.writerFormula("test/12-String-COUNTIF.vb");
+        toolkitCommand.write("test/12-String-COUNTIF.vb");
     }
 }

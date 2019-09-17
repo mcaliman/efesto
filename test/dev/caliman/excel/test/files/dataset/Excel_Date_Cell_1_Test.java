@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import dev.caliman.excel.ToolkitOptions;
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +37,7 @@ class Excel_Date_Cell_1_Test {
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/date-cell-1.xlsx", options);
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/date-cell-1.xlsx", options);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
@@ -45,6 +45,6 @@ class Excel_Date_Cell_1_Test {
                 "A1 = 01/02/2018",
                 "A2 = DAY(A1)"
         ));
-        toolkitCommand.writerFormula("test/date-cell-1.vb");
+        toolkitCommand.write("test/date-cell-1.vb");
     }
 }

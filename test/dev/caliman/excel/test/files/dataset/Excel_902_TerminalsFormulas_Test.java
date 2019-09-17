@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -32,7 +32,7 @@ class Excel_902_TerminalsFormulas_Test {
     @Test
     void testTest() throws Exception {
         long t = System.currentTimeMillis();
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/902-terminals-formulas.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/902-terminals-formulas.xlsx");
         toolkitCommand.execute();
         long elapsed = System.currentTimeMillis() - t;
         System.out.println("elapsed: " + elapsed / 1000 + " s.");
@@ -49,7 +49,7 @@ class Excel_902_TerminalsFormulas_Test {
                 "A7 = IF(A1,A2,A3)",
                 "A8 = IF(A1,A4,A7)"
         ));
-        toolkitCommand.writerFormula("test/902-terminals-formulas.vb");
+        toolkitCommand.write("test/902-terminals-formulas.vb");
     }
 
 }

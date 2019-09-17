@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.test.files.dataset;
 
-import dev.caliman.excel.ExcelToolkitCommand;
+import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -40,7 +40,7 @@ class Excel_02_VerticalRangeIndex_Test {
     @Test
     void testTest() throws Exception {
 
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/02-vertical-range-index.xlsx");
+        ToolkitCommand toolkitCommand = new ToolkitCommand("test/02-vertical-range-index.xlsx");
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("----------");
@@ -48,6 +48,6 @@ class Excel_02_VerticalRangeIndex_Test {
         assertTrue(toolkitCommand.testToFormula(0,
                 "I1:I7 = [ 0.0 1.0 2.0 3.0 4.0 5.0 6.0 ]",
                 "B9 = INDEX(I1:I7,4)"));
-        toolkitCommand.writerFormula("test/02-vertical-range-index.vb");
+        toolkitCommand.write("test/02-vertical-range-index.vb");
     }
 }
