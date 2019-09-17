@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-public class SHEET_QUOTED_Test {
+class SHEET_QUOTED_Test {
 
     @Test
     void testTest() throws Exception {
