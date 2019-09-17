@@ -442,7 +442,7 @@ public abstract class AbstractParser {
                 }
             }
         }
-        RANGE tRANGE = range.getRANGE();
+        RANGE tRANGE = Objects.requireNonNull(range).getRANGE();
 
         NamedRange term = new NamedRange(name, tRANGE);
         term.setSheetIndex(sheetIndex);
