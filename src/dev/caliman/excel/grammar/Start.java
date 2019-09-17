@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static dev.caliman.excel.grammar.Grammar.epsilon;
+
 
 
 /**
@@ -48,7 +48,7 @@ public abstract class Start {
 
     @NotNull
     protected static String format(@Nullable final Date date) {
-        return date == null ? epsilon : DATE_FORMAT.format(date);
+        return date == null ? "" : DATE_FORMAT.format(date);
     }
 
     public static String cellAddress(final int row, final int column, @Nullable final String sheetName) {

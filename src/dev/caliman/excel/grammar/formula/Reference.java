@@ -28,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static dev.caliman.excel.grammar.Grammar.quote;
 
 /**
  * @author Massimo Caliman
@@ -74,4 +73,7 @@ public abstract class Reference extends Formula {
         return super.toString() + string;
     }
 
+    private static String quote(String text) {
+        return "" + '"' + text + '"';
+    }
 }
