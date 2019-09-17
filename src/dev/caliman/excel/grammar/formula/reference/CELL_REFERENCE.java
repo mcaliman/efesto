@@ -72,7 +72,7 @@ public final class CELL_REFERENCE extends ReferenceItem {
 
     @Override
     public String toString() {
-        return constant != null ? constant.toString() : "null";//getAddress() + " = " + constant.toString();
+        return constant != null ? constant.toString() : "null";
     }
 
 }

@@ -37,7 +37,7 @@ public final class ERROR_REF extends ReferenceItem {
 
     @Deprecated
     public String toFormula() {
-        return toString();//"#REF";
+        return toString();
     }
 
 }

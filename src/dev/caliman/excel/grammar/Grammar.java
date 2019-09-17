@@ -26,7 +26,7 @@ public class Grammar {
 
     public final static String epsilon = "";
 
-    public final static char exclamationmark = '!';
+    //public final static char exclamationmark = '!';
 
     public final static char colon = ':';
     public final static char openparen = '(';

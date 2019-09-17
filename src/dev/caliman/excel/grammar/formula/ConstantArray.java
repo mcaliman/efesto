@@ -28,6 +28,7 @@ import dev.caliman.excel.grammar.Formula;
  * @author Massimo Caliman
  */
 public class ConstantArray extends Formula {
+
     private final Object[][] array;
 
     public ConstantArray(Object[][] array) {
@@ -48,6 +49,5 @@ public class ConstantArray extends Formula {
         str.append('}');
         return str.toString();
     }
-
 
 }

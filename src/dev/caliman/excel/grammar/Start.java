@@ -29,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static dev.caliman.excel.grammar.Grammar.epsilon;
-import static dev.caliman.excel.grammar.Grammar.exclamationmark;
+
 
 /**
  * @author Massimo Caliman
@@ -54,7 +54,7 @@ public abstract class Start {
     public static String cellAddress(final int row, final int column, @Nullable final String sheetName) {
         StringBuilder buffer = new StringBuilder();
         if (sheetName != null)
-            buffer.append(sheetName).append(exclamationmark);
+            buffer.append(sheetName).append("!");
         buffer.append(cellAddress(row, column));
         return buffer.toString();
     }

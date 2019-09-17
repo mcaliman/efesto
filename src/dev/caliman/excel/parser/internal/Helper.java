@@ -126,7 +126,7 @@ class Helper {
 
     @NotNull
     private List<Cell> range(Sheet sheet, String refs) {
-        AreaReference area = new AreaReference(sheet.getSheetName() + Grammar.exclamationmark + refs, SPREADSHEET_VERSION);
+        AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
         return fromRange(area);
     }
 
@@ -198,7 +198,7 @@ class Helper {
 
 
         SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
-        AreaReference area = new AreaReference(sheetnamne + Grammar.exclamationmark + refs, SPREADSHEET_VERSION);
+        AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
         List<Cell> cells = fromRange(area);
 
         for (Cell cell : cells)

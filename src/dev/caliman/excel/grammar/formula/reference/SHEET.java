@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import static dev.caliman.excel.grammar.Grammar.exclamationmark;
+
 
 /**
  * @author Massimo Caliman
@@ -50,7 +50,7 @@ public final class SHEET extends Prefix {
     }
 
     public String toString() {
-        return this.quoteIf(name) + exclamationmark;//toFormula();
+        return this.quoteIf(name) + "!";
     }
 
 

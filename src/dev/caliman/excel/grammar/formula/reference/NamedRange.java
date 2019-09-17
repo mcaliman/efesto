@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import static dev.caliman.excel.grammar.Grammar.exclamationmark;
+
 
 /**
  * @author Massimo Caliman
@@ -42,7 +42,7 @@ public class NamedRange extends ReferenceItem {
     public String id() {
         return this.singleSheet ?
                 value :
-                sheetName + exclamationmark + value;
+                sheetName + "!" + value;
     }
 
     @Override

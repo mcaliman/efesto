@@ -27,7 +27,7 @@ import dev.caliman.excel.grammar.formula.Reference;
 import java.util.Objects;
 
 import static dev.caliman.excel.grammar.Grammar.colon;
-import static dev.caliman.excel.grammar.Grammar.exclamationmark;
+
 
 /**
  * @author Massimo Caliman
@@ -62,7 +62,6 @@ public final class RangeReference extends Reference {
 
     @Override
     public String toString() {
-        //return reference1.getAddress() + colon + reference2.getAddress();
         return values();
     }
 
@@ -73,7 +72,7 @@ public final class RangeReference extends Reference {
     public String id() {
         return this.singleSheet ?
                 reference1.getAddress() + colon + reference2.getAddress() :
-                sheetName + exclamationmark + reference1.getAddress() + colon + reference2.getAddress();
+                sheetName + "!" + reference1.getAddress() + colon + reference2.getAddress();
     }
 
 

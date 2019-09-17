@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.parser.internal;
 
-import dev.caliman.excel.grammar.Grammar;
 import dev.caliman.excel.grammar.formula.reference.CELL_REFERENCE;
 import dev.caliman.excel.grammar.formula.reference.RANGE;
 import org.apache.poi.ss.SpreadsheetVersion;
@@ -54,7 +53,7 @@ class RangeInternal {
         tRANGE = new RANGE(first, last);
         String refs = tRANGE.toString();
         SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
-        AreaReference area = new AreaReference(sheetnamne + Grammar.exclamationmark + refs, SPREADSHEET_VERSION);
+        AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
         List<Cell> cells = helper.fromRange(area);
 
         for (Cell cell : cells)
