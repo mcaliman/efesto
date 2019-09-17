@@ -175,7 +175,7 @@ public abstract class Start {
         return hasSpaces(text) ? "'" + text.trim() + "'" : text.trim();
     }
 
-    public boolean hasSpaces(String text) {
+    private boolean hasSpaces(String text) {
         return text != null && text.trim().contains(" ");
     }
 

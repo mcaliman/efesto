@@ -64,7 +64,6 @@ public class Node {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (obj == null) return false;

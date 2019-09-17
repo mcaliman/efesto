@@ -26,7 +26,7 @@ package dev.caliman.excel.grammar;
  * @author Massimo Caliman
  */
 public class Comment {
-    private String value;
+    private final String value;
 
     public Comment(String value) {
         this.value = value;
