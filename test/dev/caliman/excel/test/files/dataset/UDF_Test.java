@@ -28,21 +28,19 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class Excel_Union_Test {
+class UDF_Test {
 
     @Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
-        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/Union.xlsx", options);
+        ExcelToolkitCommand toolkitCommand = new ExcelToolkitCommand("test/UDF.xlsm", options);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
-        assertTrue(toolkitCommand.testToFormula(0,
-                "A1:B2 = [[1.0 2.0][3.0 5.0]]",
-                "C2:C3 = [ 6.0 8.0 ]",
-                "A5 = SUM(A1:B2,C2:C3)"
+        assertTrue(toolkitCommand.testToFormula(
+                0, "A2 = GetElement(A1,2,\"-\")"
         ));
-        toolkitCommand.writerFormula("test/Union.vb");
+        toolkitCommand.writerFormula("test/UDF.vb");
     }
 }
