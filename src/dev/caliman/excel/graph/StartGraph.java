@@ -149,7 +149,7 @@ public class StartGraph {
     }
 
     private boolean notEquals(Start start1, Start start) {
-        return !start1.toString().equals(start.toString());
+        return !Objects.requireNonNull(start1.toString()).equals(start.toString());
     }
 
 }
