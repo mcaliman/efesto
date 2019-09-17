@@ -26,7 +26,6 @@ import dev.caliman.excel.grammar.formula.Reference;
 
 import java.util.List;
 
-import static dev.caliman.excel.grammar.Grammar.colon;
 
 public class RANGE extends Reference {
 
@@ -55,7 +54,7 @@ public class RANGE extends Reference {
     }
 
     public String toString() {
-        return first.getAddress() + colon + last.getAddress();
+        return first.getAddress() + ":" + last.getAddress();
     }
 
 

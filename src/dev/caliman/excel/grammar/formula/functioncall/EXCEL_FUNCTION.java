@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static dev.caliman.excel.grammar.Grammar.closeparen;
-import static dev.caliman.excel.grammar.Grammar.openparen;
+
 
 /**
  * @author Massimo Caliman
@@ -52,7 +52,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
     @NotNull
     @Override
     public String toString() {
-        return getName() + openparen + argumentsToFormula() + closeparen;//getAddress() + " = " + getName() + openparen + argumentsToFormula() + closeparen;
+        return getName() + "(" + argumentsToFormula() + closeparen;
     }
 
 

@@ -26,8 +26,6 @@ import dev.caliman.excel.grammar.formula.Reference;
 
 import java.util.Objects;
 
-import static dev.caliman.excel.grammar.Grammar.colon;
-
 
 /**
  * @author Massimo Caliman
@@ -71,8 +69,8 @@ public final class RangeReference extends Reference {
 
     public String id() {
         return this.singleSheet ?
-                reference1.getAddress() + colon + reference2.getAddress() :
-                sheetName + "!" + reference1.getAddress() + colon + reference2.getAddress();
+                reference1.getAddress() + ":" + reference2.getAddress() :
+                sheetName + "!" + reference1.getAddress() + ":" + reference2.getAddress();
     }
 
 
