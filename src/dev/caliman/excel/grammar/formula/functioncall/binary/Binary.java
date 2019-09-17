@@ -29,9 +29,6 @@ import dev.caliman.excel.grammar.formula.functioncall.unary.Unary;
 import dev.caliman.excel.grammar.formula.reference.CELL_REFERENCE;
 import org.jetbrains.annotations.NotNull;
 
-import static dev.caliman.excel.grammar.Grammar.closeparen;
-
-
 /**
  * @author Massimo Caliman
  */
@@ -62,8 +59,8 @@ public abstract class Binary extends FunctionCall {
 
     private String operandToFormulaParenthesisFormula(ParenthesisFormula operand) {
         return operand.getFormula() instanceof Binary ?
-                "" + "(" + operand.getFormula().toString() + closeparen :
-                "" + "(" + operand.getFormula().getAddress(false) + closeparen;
+                "" + "(" + operand.getFormula().toString() + ")" :
+                "" + "(" + operand.getFormula().getAddress(false) + ")";
     }
 
     public Formula getlFormula() {

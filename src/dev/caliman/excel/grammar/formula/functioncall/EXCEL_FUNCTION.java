@@ -31,7 +31,7 @@ import dev.caliman.excel.grammar.formula.reference.RangeReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static dev.caliman.excel.grammar.Grammar.closeparen;
+
 
 
 /**
@@ -52,7 +52,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
     @NotNull
     @Override
     public String toString() {
-        return getName() + "(" + argumentsToFormula() + closeparen;
+        return getName() + "(" + argumentsToFormula() + ")";
     }
 
 

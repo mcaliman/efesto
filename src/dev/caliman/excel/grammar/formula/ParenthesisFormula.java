@@ -24,7 +24,7 @@ package dev.caliman.excel.grammar.formula;
 
 import dev.caliman.excel.grammar.Formula;
 
-import static dev.caliman.excel.grammar.Grammar.closeparen;
+
 
 
 /**
@@ -40,7 +40,7 @@ public final class ParenthesisFormula extends Formula {
 
     @Override
     public String toString() {
-        return "(" + formula.toString() + closeparen;
+        return "(" + formula.toString() + ")";
     }
 
     public Formula getFormula() {

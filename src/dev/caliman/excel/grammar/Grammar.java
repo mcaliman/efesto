@@ -26,7 +26,7 @@ public class Grammar {
 
     public final static String epsilon = "";
 
-    public final static char closeparen = ')';
+    //public final static char closeparen = ')';
     public final static char closesquareparen = ']';
     public final static char opensquareparen = '[';
     public final static String space = " ";
