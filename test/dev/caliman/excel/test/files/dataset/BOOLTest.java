@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class BOOL_Test {
+class BOOLTest {
 
     @Test
     void testTest() throws Exception {
