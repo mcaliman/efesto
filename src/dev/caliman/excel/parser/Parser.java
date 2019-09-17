@@ -49,6 +49,7 @@ import java.util.Stack;
 /**
  * @author Massimo Caliman
  */
+@SuppressWarnings("JavaDoc")
 public final class Parser extends AbstractParser {
 
     private StartList unordered;

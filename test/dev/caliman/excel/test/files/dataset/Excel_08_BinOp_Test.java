@@ -38,6 +38,7 @@ class Excel_08_BinOp_Test {
      *
      * @throws Exception
      */
+    @SuppressWarnings("JavaDoc")
     @Test
     void testTest() throws Exception {
         ToolkitCommand toolkitCommand = new ToolkitCommand("test/08-BinOp.xlsx");

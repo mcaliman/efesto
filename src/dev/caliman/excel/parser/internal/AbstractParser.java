@@ -393,6 +393,7 @@ public abstract class AbstractParser {
      *
      * @param t
      */
+    @SuppressWarnings("JavaDoc")
     private void parseRef3DPxg(@NotNull Ref3DPxg t) {
         int extWorkbookNumber = t.getExternalWorkbookNumber();
         String sheetName = t.getSheetName();
