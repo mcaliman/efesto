@@ -44,7 +44,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Stack;
 
 /**
@@ -101,7 +100,6 @@ public final class Parser extends AbstractParser {
 
     @Override
     public void parseFormula(@NotNull Start obj) {
-        if (Objects.isNull(obj)) return;
         setOwnProperty(obj);
         unordered.add(obj);
     }
