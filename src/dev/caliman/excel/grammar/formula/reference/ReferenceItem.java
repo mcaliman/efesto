@@ -48,7 +48,7 @@ public class ReferenceItem extends Reference {
     @Nullable
     @Override
     public String toString() {
-        return value;//toFormula();
+        return value;
     }
 
 

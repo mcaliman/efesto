@@ -37,7 +37,7 @@ public abstract class Reference extends Formula {
     protected final List<Object> vals = new ArrayList<>();
 
     private static String quote(String text) {
-        return "" + '"' + text + '"';
+        return "\"" + text + "\"";
     }
 
     public void add(@NotNull List<Object> values) {

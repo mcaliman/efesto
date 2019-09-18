@@ -47,20 +47,20 @@ public abstract class Binary extends FunctionCall {
     @NotNull
     @Override
     public String toString() {
-        return operandToFormula(lFormula) + op + operandToFormula(rFormula);//id() + " = " + toFormula();
+        return operandToFormula(lFormula) + op + operandToFormula(rFormula);
     }
 
     private String operandToFormula(Formula operand) {
         if (operand instanceof CELL_REFERENCE || operand instanceof Unary) return operand.id();
-        else if (operand instanceof ParenthesisFormula)
+        else if ( operand instanceof ParenthesisFormula )
             return operandToFormulaParenthesisFormula((ParenthesisFormula) operand);
         else return operand.toString();
     }
 
     private String operandToFormulaParenthesisFormula(ParenthesisFormula operand) {
         return operand.getFormula() instanceof Binary ?
-                "" + "(" + operand.getFormula().toString() + ")" :
-                "" + "(" + operand.getFormula().getAddress(false) + ")";
+                "(" + operand.getFormula().toString() + ")" :
+                "(" + operand.getFormula().getAddress(false) + ")";
     }
 
     public Formula getlFormula() {

@@ -68,7 +68,6 @@ public final class PrefixReferenceItem extends Reference {
         return this.prefix.equals(that.prefix) &&
                 this.reference.equals(that.reference) &&
                 this.sheetName.equals(that.sheetName);
-        //return that.toString(true).equals(this.toString(true));
     }
 
     public String id() {

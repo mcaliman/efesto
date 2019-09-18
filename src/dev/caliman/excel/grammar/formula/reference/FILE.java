@@ -43,7 +43,7 @@ public final class FILE extends Prefix {
 
     @Override
     public String toString() {
-        return "" + "[" + ext + "]" + sheet.toString();
+        return "[" + ext + "]" + sheet.toString();
     }
 
 
