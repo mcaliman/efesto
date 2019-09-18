@@ -48,12 +48,12 @@ public final class CELL_REFERENCE extends ReferenceItem {
         this.setComment(comment);
     }
 
-    @Override
+    //@Override
     public int getRow() {
         return row;
     }
 
-    @Override
+    //@Override
     public int getColumn() {
         return column;
     }
