@@ -20,7 +20,7 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.test.files.dataset;
+package dev.caliman.excel.test.datasets.eusesenron;
 
 import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
@@ -30,18 +30,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-class Excel_04_Formula_Test {
+class FormulaTest {
 
     @Test
     void testTest() throws Exception {
-        ToolkitCommand toolkitCommand = new ToolkitCommand("test/04-formula.xlsx");
+        String dataSet = "test/Datasets/EusesEnron/Formula.xlsx";
+        ToolkitCommand toolkitCommand = new ToolkitCommand(dataSet);
         toolkitCommand.execute();
-        System.out.println("ToFormula.");
+        System.out.println(dataSet);
         System.out.println("----------");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0, "A1 = 1+2"
         ));
-        toolkitCommand.write("test/04-formula.vb");
+        toolkitCommand.write("test/Datasets/EusesEnron/Formula.vb");
     }
 }
