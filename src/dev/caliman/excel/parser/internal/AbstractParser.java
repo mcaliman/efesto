@@ -95,54 +95,28 @@ public abstract class AbstractParser {
     private final Predicate<Ptg> unaryPlusPtg = (Ptg t) -> t instanceof UnaryPlusPtg;
     private final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
-
     private final Workbook book;
-
     private final Helper helper;
     private final List<Cell> ext;
     public boolean verbose = false;
-    /**
-     * Current Formula Column
-     */
-    protected int colFormula;
-    /**
-     * Current Formula Row
-     */
-    protected int rowFormula;
-    /**
-     * Current Sheet Index
-     */
-    protected int sheetIndex;
-    /**
-     * Current Sheet Name
-     */
-    protected String sheetName;
+    protected int colFormula;//Current Formula Column
+    protected int rowFormula;//Current Formula Row
+    protected int sheetIndex;//Current Sheet Index
+    protected String sheetName;//Current Sheet Name
     protected boolean isSingleSheet;
-
-
     private int counterFormulas;
-    /**
-     * (Work)Sheet
-     */
-    private Sheet sheet;
-    /**
-     * (Work)Book Protection Present flag
-     */
-    private boolean protectionPresent;
+    private Sheet sheet;//(Work)Sheet
+    private boolean protectionPresent;//(Work)Book Protection Present flag
     private String fileName;
 
-
     protected AbstractParser(@NotNull File file) throws InvalidFormatException, IOException {
-        this(WorkbookFactory.create(file));
-        this.fileName = file.getName();
-    }
-
-    private AbstractParser(Workbook workbook) {
-        this.book = workbook;
+        this.book = WorkbookFactory.create(file);
         this.ext = new ArrayList<>();
         this.helper = new Helper(this.book);
         print();
+        this.fileName = file.getName();
     }
+
 
     public int getCounterFormulas() {
         return counterFormulas;
