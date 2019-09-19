@@ -20,57 +20,53 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.reference;
+package dev.caliman.excel.grammar.formula.constant;
 
+import dev.caliman.excel.grammar.Start;
 import dev.caliman.excel.grammar.formula.Constant;
-import dev.caliman.excel.grammar.formula.constant.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
- * @author mcaliman
+ * @author Massimo Caliman
  */
-public final class CELL extends ReferenceItem {
+public final class DATE extends Constant {
 
-    private final int row;
-    private final int column;
+    private final Date value;
 
-    private Constant constant;
-
-    public CELL(int row, int column) {
-        this.row = row;
-        this.column = column;
+    @SuppressWarnings("unused")
+    public DATE(Date value) {
+        this.value = value;
     }
 
-    public CELL(int row, int column, String comment) {
-        this.row = row;
-        this.column = column;
-        this.setComment(comment);
+    public boolean isTerminal() {
+        return true;
     }
 
-    public int getRow() {
-        return row;
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 11 * hash + Objects.hashCode(this.value);
+        return hash;
     }
 
-    public int getColumn() {
-        return column;
-    }
-
-    public Constant getValue() {
-        return constant;
-    }
-
-    public void setValue(Object value) {
-        if (value instanceof String) constant = new TEXT((String) value);
-        else if (value instanceof Boolean) constant = new BOOL((Boolean) value);
-        else if (value instanceof Integer) constant = new INT((Integer) value);
-        else if (value instanceof Double) constant = new FLOAT((Double) value);
-        else if ( value instanceof Date ) constant = new DATE((Date) value);
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final DATE other = (DATE) obj;
+        return Objects.equals(this.value, other.value);
     }
 
     @Override
     public String toString() {
-        return constant != null ? constant.toString() : "null";
+        return Start.format(value);
     }
 
 }

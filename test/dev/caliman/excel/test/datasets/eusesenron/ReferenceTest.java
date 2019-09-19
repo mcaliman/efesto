@@ -38,17 +38,17 @@ class ReferenceTest {
         String dir = "test/Datasets/EusesEnron/";
         String dataSet = dir + "Reference.xlsx";
         String output = dir + "Reference.vb";
-        ToolkitCommand toolkitCommand = new ToolkitCommand(dataSet);
-        toolkitCommand.execute();
+        ToolkitCommand cmd = new ToolkitCommand(dataSet);
+        cmd.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
-        toolkitCommand.toFormula();
-        assertTrue(toolkitCommand.testToFormula(
+        cmd.toFormula();
+        assertTrue(cmd.testToFormula(
                 0,
                 "A1 = 15.0",
                 "A2 = 100.0",
                 "A3 = A2/A1"
         ));
-        toolkitCommand.write(output);
+        cmd.write(output);
     }
 }

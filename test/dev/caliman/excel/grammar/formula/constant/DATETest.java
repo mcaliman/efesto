@@ -22,51 +22,50 @@
 
 package dev.caliman.excel.grammar.formula.constant;
 
-import dev.caliman.excel.grammar.Start;
-import dev.caliman.excel.grammar.formula.Constant;
-import org.jetbrains.annotations.Nullable;
+import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
-import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * @author Massimo Caliman
+ * TODO use LocalDate
  */
-public final class DATETIME extends Constant {
+class DATETest {
 
-    private final Date value;
-
-    @SuppressWarnings("unused")
-    public DATETIME(Date value) {
-        this.value = value;
+    Date convertToDateViaInstant(LocalDateTime dateToConvert) {
+        return java.util.Date
+                .from(dateToConvert.atZone(ZoneId.systemDefault())
+                        .toInstant());
     }
 
-    public boolean isTerminal() {
-        return true;
+    @Test
+    void testIsTerminal() {
+        Date date = new Date();
+        DATE t = new DATE(date);
+        assertTrue(t.isTerminal());
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 11 * hash + Objects.hashCode(this.value);
-        return hash;
+    @Test
+    void testEquals() {
+        Date date = new Date();
+        DATE date1 = new DATE(date);
+        DATE date2 = new DATE(date);
+        assertEquals(date1, date2);
+        Date date3 = new Date();
+        date3.setTime(date3.getTime() + 150);
+        assertNotEquals(date1, date3);
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        final DATETIME other = (DATETIME) obj;
-        return Objects.equals(this.value, other.value);
-    }
-
-    @Override
-    public String toString() {
-        return Start.format(value);
+    @Test
+    void testToString() {
+        Date date = new Date(2019 - 1900, 9 - 1, 17);
+        DATE date1 = new DATE(date);
+        String result = date1.toString();
+        System.out.println(result);
+        assertEquals("17/09/2019", result);
     }
 
 }

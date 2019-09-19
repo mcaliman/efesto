@@ -542,7 +542,7 @@ public abstract class AbstractParser {
     //endregion
 
     //region Constants
-    //@todo impl. DATETIME
+    //@todo impl. DATE
     private void parseErrorLiteral(ErrPtg t) {
         String text;
         if (t == NULL_INTERSECTION) text = "#NULL!";
