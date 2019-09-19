@@ -30,11 +30,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-class Excel_900_Basic_Test {
+class BasicTest {
 
     @Test
     void testTest() throws Exception {
-        ToolkitCommand toolkitCommand = new ToolkitCommand("test/900-basic.xlsx");
+        String dir = "test/Datasets/Extra/";
+        String dataSet = dir + "Basic.xlsx";
+        String output = dir + "Basic.vb";
+        ToolkitCommand toolkitCommand = new ToolkitCommand(dataSet);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
@@ -44,6 +47,6 @@ class Excel_900_Basic_Test {
                 "B5 = 20.0",
                 "B1 = B5+B4"
         ));
-        toolkitCommand.write("test/900-basic.vb");
+        toolkitCommand.write(output);
     }
 }
