@@ -95,11 +95,9 @@ public abstract class AbstractParser {
     private final Predicate<Ptg> unaryPlusPtg = (Ptg t) -> t instanceof UnaryPlusPtg;
     private final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
-    /**
-     * (Work)Book
-     */
+
     private final Workbook book;
-    @NotNull
+
     private final Helper helper;
     private final List<Cell> ext;
     public boolean verbose = false;
@@ -162,17 +160,11 @@ public abstract class AbstractParser {
 
     }
 
-    /**
-     * Parse (Work)Book.
-     */
     public void parse() {
         this.isSingleSheet = this.book.getNumberOfSheets() == 1;
         for (Sheet currentSheet : this.book) parse(currentSheet);
     }
 
-    /**
-     * Parse a single (Work)Sheet
-     */
     private void parse(@NotNull Sheet sheet) {
         this.sheet = sheet;
         protectionPresent = protectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
@@ -185,9 +177,6 @@ public abstract class AbstractParser {
                 else err("Cell is null.", rowFormula, colFormula);
     }
 
-    /**
-     * Parse Cell
-     */
     private void parse(Cell cell) {
         if ( cell.getCellType() == CELL_TYPE_FORMULA ) {
             parseFormula(cell);
@@ -204,12 +193,8 @@ public abstract class AbstractParser {
         }
     }
 
-    /**
-     * Parse Formula Cell
-     */
     private void parseFormula(Cell cell) {
         verbose("Cell:" + cell.getClass().getSimpleName() + " " + cell.toString() + " " + cell.getCellType());
-        String comment = Helper.getComment(cell);
         colFormula = cell.getColumnIndex();
         rowFormula = cell.getRowIndex();
         String formulaAddress = Start.cellAddress(rowFormula, colFormula);
@@ -230,13 +215,6 @@ public abstract class AbstractParser {
         }
     }
 
-    /**
-     * Parse Ptg array
-     *
-     * @param ptgs
-     * @return
-     */
-    @SuppressWarnings("JavaDoc")
     private Start parse(@NotNull Ptg[] ptgs) {
         parseFormulaInit();
         if ( Ptg.doesFormulaReferToDeletedCell(ptgs) ) doesFormulaReferToDeletedCell(rowFormula, colFormula);
@@ -293,7 +271,6 @@ public abstract class AbstractParser {
             System.err.println("parse: " + p.getClass().getSimpleName());
             System.err.println(this.sheetName + "row:" + row + "column:" + column + e.getMessage());
             e.printStackTrace();
-            //System.exit(-1);
         }
     }
 
@@ -336,7 +313,6 @@ public abstract class AbstractParser {
 
     protected abstract Start parseFormulaPost();
 
-    //region Reference
 
     /**
      * Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
@@ -442,9 +418,7 @@ public abstract class AbstractParser {
 
     protected abstract void parseCELL_REFERENCELinked(CELL tCELL_REFERENCE);
 
-    //endregion
 
-    //region Formula
     private void parseArrayPtg(@NotNull ArrayPtg t) {
         parseConstantArray(t.getTokenArrayValues());
     }
@@ -476,15 +450,9 @@ public abstract class AbstractParser {
     protected abstract void percentFormula();
 
     protected abstract void parseSum();
-    //endregion
-
-    //region Binary
     protected abstract void parseAdd();
-
     protected abstract void parseSub();
-
     protected abstract void parseMult();
-
     protected abstract void parseDiv();
 
     protected abstract void parsePower();
@@ -502,21 +470,13 @@ public abstract class AbstractParser {
     protected abstract void parseNeq();
 
     protected abstract void parseConcat();
-    //endregion
-
-    //region Unary
     protected abstract void parseMinus();
 
     protected abstract void parsePlus();
-    //endregion
-
-    //region Union & Intersection
     protected abstract void parseUnion();
 
     protected abstract void parseIntersection();
-    //endregion
 
-    //region Constants
     //@todo impl. DATE
     private void parseErrorLiteral(ErrPtg t) {
         String text;
@@ -562,16 +522,15 @@ public abstract class AbstractParser {
     }
 
     protected abstract void parseFloatLiteral(FLOAT term);
-    //endregion
 
-    //region Literals
+
     private void parseReferenceErrorLiteral() {
         ERROR_REF term = new ERROR_REF();
         parseReferenceErrorLiteral(term);
     }
 
     protected abstract void parseReferenceErrorLiteral(ERROR_REF term);
-    //endregion
+
 
     private void print() {
         System.out.println("Parse...");
