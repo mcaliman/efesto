@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -625,4 +626,18 @@ public abstract class AbstractParser {
     private void print() {
         System.out.println("Parse...");
     }
+
+    class WhatIf {
+
+        final Ptg ptg;
+        final Predicate<Ptg> predicate;
+        final Consumer<Ptg> consumer;
+
+        WhatIf(Ptg ptg, Predicate<Ptg> predicate, Consumer<Ptg> consumer) {
+            this.ptg = ptg;
+            this.predicate = predicate;
+            this.consumer = consumer;
+        }
+    }
+
 }
