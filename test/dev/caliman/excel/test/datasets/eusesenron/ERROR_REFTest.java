@@ -20,7 +20,7 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.test.files.dataset;
+package dev.caliman.excel.test.datasets.eusesenron;
 
 import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
@@ -30,17 +30,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-class ERROR_REF_Test {
+class ERROR_REFTest {
 
     @Test
     void testTest() throws Exception {
-        ToolkitCommand cmd = new ToolkitCommand("test/ERROR_REF.xlsx");
+        String dir = "test/Datasets/EusesEnron/";
+        String dataSet = dir + "ERROR_REF.xlsx";
+        String output = dir + "ERROR_REF.vb";
+        ToolkitCommand cmd = new ToolkitCommand(dataSet);
         cmd.execute();
         System.out.println("ToFormula.");
         cmd.toFormula();
         assertTrue(cmd.testToFormula(
                 0, "A1 = #REF!"
         ));
-        cmd.write("test/ERROR_REF.vb");
+        cmd.write(output);
     }
 }
