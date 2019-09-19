@@ -20,7 +20,7 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.test.files.dataset;
+package dev.caliman.excel.test.datasets.eusesenron;
 
 import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,10 @@ class BOOLTest {
 
     @Test
     void testTest() throws Exception {
-        ToolkitCommand cmd = new ToolkitCommand("test/BOOL.xlsx");
+        String dir = "test/Datasets/EusesEnron/";
+        String dataSet = dir + "BOOL.xlsx";
+        String output = dir + "BOOL.vb";
+        ToolkitCommand cmd = new ToolkitCommand(dataSet);
         cmd.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
@@ -44,6 +47,6 @@ class BOOLTest {
                 "A6 = \"IFFALSE\"",
                 "A1 = IF(AND(A3=1,A4=TRUE),A5,A6)"
         ));
-        cmd.write("test/BOOL.vb");
+        cmd.write(output);
     }
 }
