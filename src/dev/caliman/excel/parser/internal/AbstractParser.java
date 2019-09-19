@@ -27,8 +27,10 @@ import dev.caliman.excel.grammar.formula.constant.*;
 import dev.caliman.excel.grammar.formula.reference.*;
 import org.apache.poi.POIXMLProperties;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -638,6 +640,48 @@ public abstract class AbstractParser {
             this.predicate = predicate;
             this.consumer = consumer;
         }
+    }
+
+
+    class RangeInternal {
+
+        @NotNull
+        private final RANGE tRANGE;
+        private final String sheetName;
+
+
+        RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
+            Helper helper = new Helper(workbook);
+            int firstRow = t.getFirstRow();
+            int firstColumn = t.getFirstColumn();
+            sheetName = sheetnamne;
+            int lastRow = t.getLastRow();
+            int lastColumn = t.getLastColumn();
+
+            CELL first = new CELL(firstRow, firstColumn);
+            CELL last = new CELL(lastRow, lastColumn);
+            tRANGE = new RANGE(first, last);
+            String refs = tRANGE.toString();
+            SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+            AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
+            List<Cell> cells = helper.fromRange(area);
+
+            for (Cell cell : cells)
+                if ( cell != null ) {
+                    tRANGE.add(Helper.valueOf(cell));
+                }
+        }
+
+
+        String getSheetName() {
+            return sheetName;
+        }
+
+        @NotNull
+        RANGE getRANGE() {
+            return tRANGE;
+        }
+
     }
 
 }
