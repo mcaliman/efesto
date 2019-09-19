@@ -25,7 +25,6 @@ package dev.caliman.excel.parser.internal;
 import dev.caliman.excel.grammar.Start;
 import dev.caliman.excel.grammar.formula.constant.*;
 import dev.caliman.excel.grammar.formula.reference.*;
-import org.apache.poi.POIXMLProperties;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.formula.ptg.*;
@@ -33,7 +32,6 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -105,7 +103,6 @@ public abstract class AbstractParser {
     private final Helper helper;
     private final List<Cell> ext;
     public boolean verbose = false;
-    public boolean metadata = false;
     /**
      * Current Formula Column
      */
@@ -124,13 +121,6 @@ public abstract class AbstractParser {
     protected String sheetName;
     protected boolean isSingleSheet;
 
-    //Meta
-    private String creator;
-    private String description;
-    private String keywords;
-    private String title;
-    private String subject;
-    private String category;
 
     private int counterFormulas;
     /**
@@ -153,22 +143,7 @@ public abstract class AbstractParser {
         this.book = workbook;
         this.ext = new ArrayList<>();
         this.helper = new Helper(this.book);
-        readMetadata();
         print();
-    }
-
-    private void readMetadata() {
-        XSSFWorkbook xssfWorkbook = (XSSFWorkbook) this.book;
-        this.protectionPresent = xssfWorkbook.validateWorkbookPassword("password");
-        POIXMLProperties props = xssfWorkbook.getProperties();
-        POIXMLProperties.CoreProperties coreProperties = props.getCoreProperties();
-
-        this.creator = coreProperties.getCreator();
-        this.description = coreProperties.getDescription();
-        this.keywords = coreProperties.getKeywords();
-        this.title = coreProperties.getTitle();
-        this.subject = coreProperties.getSubject();
-        this.category = coreProperties.getCategory();
     }
 
     public int getCounterFormulas() {
@@ -598,30 +573,6 @@ public abstract class AbstractParser {
 
     protected abstract void parseReferenceErrorLiteral(ERROR_REF term);
     //endregion
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getKeywords() {
-        return keywords;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getCategory() {
-        return category;
-    }
 
     private void print() {
         System.out.println("Parse...");

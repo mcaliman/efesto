@@ -3,12 +3,6 @@
 '' Excel File: 17-IF-into-IF.xlsx
 '' Excel Formulas Number: 1
 '' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
-'' creator:mcaliman
-'' description:null
-'' keywords:null
-'' title:null
-'' subject:null
-'' category:null
 B1 = 2.0
 C1 = TRUE
 A1 = IF(B1>1,0,IF(C1,"Hello","Bye"))

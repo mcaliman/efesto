@@ -42,13 +42,11 @@ public class ToolkitCommand {
         ToolkitOptions options = new ToolkitOptions();
         parser = new Parser(name);
         parser.verbose = options.isVerbose();
-        parser.metadata = options.isMetadata();
     }
 
     public ToolkitCommand(@NotNull String name, ToolkitOptions options) throws IOException, InvalidFormatException {
         parser = new Parser(name);
         parser.verbose = options.isVerbose();
-        parser.metadata = options.isMetadata();
     }
 
 
@@ -66,12 +64,7 @@ public class ToolkitCommand {
             writer.write("'' Excel File: " + parser.getFileName() + '\n');
             writer.write("'' Excel Formulas Number: " + parser.getCounterFormulas() + '\n');
             writer.write("'' Elapsed Time (parsing + topological sort): " + (elapsed / 1000 + " s. or " + (elapsed / 1000 / 60) + " min.") + '\n');
-            writer.write("'' creator:" + parser.getCreator() + '\n');
-            writer.write("'' description:" + parser.getDescription() + '\n');
-            writer.write("'' keywords:" + parser.getKeywords() + '\n');
-            writer.write("'' title:" + parser.getTitle() + '\n');
-            writer.write("'' subject:" + parser.getSubject() + '\n');
-            writer.write("'' category:" + parser.getCategory() + '\n');
+
             for (Start start : list) {
                 Comment comment = start.getComment();
                 if ( comment != null ) writer.write(comment.toString());
