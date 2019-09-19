@@ -20,7 +20,7 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.parser.internal;
+package dev.caliman.excel.parser;
 
 
 import dev.caliman.excel.grammar.Start;

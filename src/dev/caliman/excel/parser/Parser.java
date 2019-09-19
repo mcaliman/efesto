@@ -37,7 +37,6 @@ import dev.caliman.excel.grammar.formula.functioncall.unary.Plus;
 import dev.caliman.excel.grammar.formula.reference.*;
 import dev.caliman.excel.grammar.formula.reference.referencefunction.OFFSET;
 import dev.caliman.excel.graph.StartGraph;
-import dev.caliman.excel.parser.internal.Helper;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.formula.ptg.*;
@@ -65,7 +64,7 @@ import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
  * @author Massimo Caliman
  */
 @SuppressWarnings("JavaDoc")
-public final class Parser /*extends  */ {
+public final class Parser {
 
     protected final boolean errors = false;
     private final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
