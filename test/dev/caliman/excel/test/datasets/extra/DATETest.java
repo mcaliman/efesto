@@ -31,13 +31,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-class Excel_Date_Cell_1_Test {
+class DATETest {
 
     @Test
     void testTest() throws Exception {
+        String dir = "test/Datasets/Extra/";
+        String dataSet = dir + "DATE.xlsx";
+        String output = dir + "DATE.vb";
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
-        ToolkitCommand toolkitCommand = new ToolkitCommand("test/date-cell-1.xlsx", options);
+        ToolkitCommand toolkitCommand = new ToolkitCommand(dataSet, options);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
@@ -45,6 +48,6 @@ class Excel_Date_Cell_1_Test {
                 "A1 = 01/02/2018",
                 "A2 = DAY(A1)"
         ));
-        toolkitCommand.write("test/date-cell-1.vb");
+        toolkitCommand.write(output);
     }
 }
