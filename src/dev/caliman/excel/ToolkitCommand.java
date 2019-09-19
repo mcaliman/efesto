@@ -74,7 +74,7 @@ public class ToolkitCommand {
             writer.write("'' category:" + parser.getCategory() + '\n');
             for (Start start : list) {
                 Comment comment = start.getComment();
-                if (comment != null) writer.write(comment.toString());
+                if ( comment != null ) writer.write(comment.toString());
                 try {
                     writer.write(start.id() + " = " + start.toString());
                 } catch (Exception e) {
@@ -97,7 +97,7 @@ public class ToolkitCommand {
     public void toFormula() {
         for (Start start : getStartList()) {
             try {
-                if (start != null)
+                if ( start != null )
                     System.out.println(start.id() + " = " + start.toString());
             } catch (Exception e) {
                 System.err.println("Error when transpile " + start.id());

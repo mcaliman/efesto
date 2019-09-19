@@ -41,20 +41,20 @@ public class StartGraph {
     }
 
     public void addNode(@NotNull Start start) {
-        if (start.isTerminal()) return;
+        if ( start.isTerminal() ) return;
         Node u = graph.get(start);
-        if (u == null) {
+        if ( u == null ) {
             u = new Node(start);
             graph.put(start, u);
-        } else if (notEquals(u, start)) {
+        } else if ( notEquals(u, start) ) {
             u.setValue(start);
             graph.put(start, u);
         }
     }
 
     public void addEdge(@NotNull Start x, @NotNull Start y) {
-        if (x.isTerminal() || y.isTerminal()) return;
-        if (x.getAddress().equalsIgnoreCase(y.getAddress())) return;
+        if ( x.isTerminal() || y.isTerminal() ) return;
+        if ( x.getAddress().equalsIgnoreCase(y.getAddress()) ) return;
         Node u = graph.get(x);
         Node v = graph.get(y);
         Edge edge = new Edge(u, v);
@@ -92,7 +92,7 @@ public class StartGraph {
         Collection<Node> nodes = graph.values();
         List<Edge> edges = edges();
         for (Node v : nodes)
-            if (notHasIncomingEdges(v, edges))
+            if ( notHasIncomingEdges(v, edges) )
                 queue.add(v);
         while (!queue.isEmpty()) {
             Node v = queue.poll();
@@ -104,11 +104,11 @@ public class StartGraph {
                 removeEdge(s.value(), t.value());
                 Node end = e.dest();
                 List<Edge> edges1 = this.edges();
-                if (notHasIncomingEdges(end, edges1))
+                if ( notHasIncomingEdges(end, edges1) )
                     queue.add(end);
             }
         }
-        if (!edges().isEmpty()) {
+        if ( !edges().isEmpty() ) {
             System.err.println("error when sort!. this.edges().size()=" + this.edges().size());
             return result;
         }
@@ -131,7 +131,7 @@ public class StartGraph {
 
     private boolean notHasIncomingEdges(Node v, List<Edge> allEdges) {
         for (var edge : allEdges)
-            if (edge.dest().equals(v)) return false;
+            if ( edge.dest().equals(v) ) return false;
         return true;
     }
 

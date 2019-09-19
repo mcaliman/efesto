@@ -64,17 +64,17 @@ class Helper {
 
     @Nullable
     private static String comment(@Nullable Comment comment) {
-        if (comment == null) return null;
+        if ( comment == null ) return null;
         RichTextString text = comment.getString();
-        if (text == null) return null;
+        if ( text == null ) return null;
         return text.getString();
 
     }
 
     @Nullable
     public static Object valueOf(@Nullable Cell cell) {
-        if (cell == null) return null;
-        if (Helper.isDataType(cell))
+        if ( cell == null ) return null;
+        if ( Helper.isDataType(cell) )
             return cell.getDateCellValue();
         switch (cell.getCellType()) {
             case CELL_TYPE_STRING:
@@ -85,10 +85,10 @@ class Helper {
             case CELL_TYPE_BOOLEAN:
                 return cell.getBooleanCellValue();
             case CELL_TYPE_FORMULA:
-                if (cell.toString() != null && cell.toString().equalsIgnoreCase("TRUE")) {
+                if ( cell.toString() != null && cell.toString().equalsIgnoreCase("TRUE") ) {
                     return true;
                 }
-                if (cell.toString() != null && cell.toString().equalsIgnoreCase("FALSE")) {
+                if ( cell.toString() != null && cell.toString().equalsIgnoreCase("FALSE") ) {
                     return false;
                 }
                 return cell.toString();
@@ -137,7 +137,7 @@ class Helper {
         for (org.apache.poi.ss.util.CellReference cel : cels) {
             XSSFSheet ss = (XSSFSheet) workbook.getSheet(cel.getSheetName());
             Row r = ss.getRow(cel.getRow());
-            if (r == null) continue;
+            if ( r == null ) continue;
             Cell c = r.getCell(cel.getCol());
             cells.add(c);
         }
@@ -175,7 +175,7 @@ class Helper {
         String refs = tRANGE.toString();
         List<Cell> cells = range(sheet, refs);
         for (Cell cell : cells)
-            if (cell != null) {
+            if ( cell != null ) {
                 tRANGE.add(Helper.valueOf(cell));
             }
         return tRANGE;
@@ -202,7 +202,7 @@ class Helper {
         List<Cell> cells = fromRange(area);
 
         for (Cell cell : cells)
-            if (cell != null) {
+            if ( cell != null ) {
                 tRANGE.add(Helper.valueOf(cell));
             }
         return tRANGE;

@@ -57,7 +57,7 @@ class RangeInternal {
         List<Cell> cells = helper.fromRange(area);
 
         for (Cell cell : cells)
-            if (cell != null) {
+            if ( cell != null ) {
                 tRANGE.add(Helper.valueOf(cell));
             }
     }

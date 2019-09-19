@@ -54,15 +54,15 @@ class Edge {
 
     @Override
     public boolean equals(@Nullable Object object) {
-        if (this == object) return true;
-        if (object == null) return false;
-        if (getClass() != object.getClass()) return false;
+        if ( this == object ) return true;
+        if ( object == null ) return false;
+        if ( getClass() != object.getClass() ) return false;
         Edge edge = (Edge) object;
-        if (src == null) {
-            if (edge.src != null) return false;
-        } else if (!src.equals(edge.src)) return false;
+        if ( src == null ) {
+            if ( edge.src != null ) return false;
+        } else if ( !src.equals(edge.src) ) return false;
 
-        if (dest == null) return edge.dest == null;
+        if ( dest == null ) return edge.dest == null;
         else return dest.equals(edge.dest);
     }
 

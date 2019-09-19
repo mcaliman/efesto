@@ -59,7 +59,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
     }
 
     private String argumentsToFormula() {
-        if (args == null || args.length == 0) return "Missing";
+        if ( args == null || args.length == 0 ) return "Missing";
         var buff = new StringBuilder();
         for (Formula arg : args) buff.append(argumentToFormula(arg)).append(",");
         if ( buff.charAt(buff.length() - 1) == ',' ) buff.deleteCharAt(buff.length() - 1);
@@ -67,8 +67,8 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
     }
 
     private String argumentToFormula(@Nullable Formula operand) {
-        if (operand == null) return "Missing";
-        if (operand instanceof RangeReference || operand instanceof NamedRange || operand instanceof PrefixReferenceItem)
+        if ( operand == null ) return "Missing";
+        if ( operand instanceof RangeReference || operand instanceof NamedRange || operand instanceof PrefixReferenceItem )
             return operand.id();
         else if ( operand instanceof CELL ) return operand.id();
         else return operand.toString();

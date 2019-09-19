@@ -46,7 +46,7 @@ public class Node {
     }
 
     private Edge getEdgeTo(Node dest) {
-        for (Edge current : neighbors) if (current.dest().equals(dest)) return current;
+        for (Edge current : neighbors) if ( current.dest().equals(dest) ) return current;
         return null;
     }
 
@@ -65,16 +65,16 @@ public class Node {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if ( this == obj ) return true;
+        if ( obj == null ) return false;
+        if ( getClass() != obj.getClass() ) return false;
         Node other = (Node) obj;
-        if (data == null) return other.data == null;
+        if ( data == null ) return other.data == null;
         else return data.equals(other.data);
     }
 
     public void addEdge(Edge edge) {
-        if (!neighbors.contains(edge))
+        if ( !neighbors.contains(edge) )
             neighbors.add(edge);
     }
 

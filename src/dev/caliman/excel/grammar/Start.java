@@ -51,7 +51,7 @@ public abstract class Start {
 
     public static String cellAddress(final int row, final int column, @Nullable final String sheetName) {
         StringBuilder buffer = new StringBuilder();
-        if (sheetName != null)
+        if ( sheetName != null )
             buffer.append(sheetName).append("!");
         buffer.append(cellAddress(row, column));
         return buffer.toString();
@@ -68,7 +68,7 @@ public abstract class Start {
         int colRemain = excelColNum;
         while (colRemain > 0) {
             int thisPart = colRemain % 26;
-            if (thisPart == 0) {
+            if ( thisPart == 0 ) {
                 thisPart = 26;
             }
             colRemain = (colRemain - thisPart) / 26;
@@ -148,9 +148,9 @@ public abstract class Start {
 
     @Override
     public boolean equals(final Object obj) {
-        if (!(obj instanceof Start)) return false;
+        if ( !(obj instanceof Start) ) return false;
         final Start that = (Start) obj;
-        if (this.row == -1 || that.row == -1)
+        if ( this.row == -1 || that.row == -1 )
             return (this.column == that.column && this.row == that.row && this.sheetIndex == that.sheetIndex);
         else return this.getAddress().equalsIgnoreCase(that.getAddress());
     }

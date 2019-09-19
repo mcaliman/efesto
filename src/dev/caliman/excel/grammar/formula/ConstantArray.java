@@ -45,7 +45,7 @@ public class ConstantArray extends Formula {
         for (Object[] internal : array) {
             str.append(internal[0]).append(',');
         }
-        if (str.charAt(str.length() - 1) == ',') str.deleteCharAt(str.length() - 1);
+        if ( str.charAt(str.length() - 1) == ',' ) str.deleteCharAt(str.length() - 1);
         str.append('}');
         return str.toString();
     }

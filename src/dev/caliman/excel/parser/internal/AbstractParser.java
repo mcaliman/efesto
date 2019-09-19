@@ -178,7 +178,7 @@ public abstract class AbstractParser {
     }
 
     protected void verbose(String text) {
-        if (this.verbose) System.out.println(text);
+        if ( this.verbose ) System.out.println(text);
     }
 
     protected void err(String string, int row, int column) {
@@ -205,7 +205,7 @@ public abstract class AbstractParser {
         verbose("Parsing sheet-name:" + this.sheetName);
         for (Row row : sheet)
             for (Cell cell : row)
-                if (cell != null) parse(cell);
+                if ( cell != null ) parse(cell);
                 else err("Cell is null.", rowFormula, colFormula);
     }
 
@@ -213,10 +213,10 @@ public abstract class AbstractParser {
      * Parse Cell
      */
     private void parse(Cell cell) {
-        if (cell.getCellType() == CELL_TYPE_FORMULA) {
+        if ( cell.getCellType() == CELL_TYPE_FORMULA ) {
             parseFormula(cell);
             this.counterFormulas++;
-        } else if (this.ext.contains(cell)) {
+        } else if ( this.ext.contains(cell) ) {
             verbose("Recover loosed cell!");
             Object obj = Helper.valueOf(cell);
             CELL cell_reference = new CELL(cell.getRowIndex(), cell.getColumnIndex());
@@ -240,7 +240,7 @@ public abstract class AbstractParser {
         //String formulaText = cell.getCellFormula();
         //verbose(formulaAddress + " = " + formulaText);
         Ptg[] formulaPtgs = helper.tokens(this.sheet, this.rowFormula, this.colFormula);
-        if (formulaPtgs == null) {
+        if ( formulaPtgs == null ) {
             String formulaText = cell.getCellFormula();
             System.err.println("ptgs empty or null for address " + formulaAddress);
             err("ptgs empty or null for address " + formulaAddress, rowFormula, colFormula);
@@ -248,7 +248,7 @@ public abstract class AbstractParser {
             return;
         }
         Start start = parse(formulaPtgs);
-        if (Objects.nonNull(start)) {
+        if ( Objects.nonNull(start) ) {
             start.setComment(comment);
             start.setSingleSheet(this.isSingleSheet);
             parseFormula(start);
@@ -264,7 +264,7 @@ public abstract class AbstractParser {
     @SuppressWarnings("JavaDoc")
     private Start parse(@NotNull Ptg[] ptgs) {
         parseFormulaInit();
-        if (Ptg.doesFormulaReferToDeletedCell(ptgs)) doesFormulaReferToDeletedCell(rowFormula, colFormula);
+        if ( Ptg.doesFormulaReferToDeletedCell(ptgs) ) doesFormulaReferToDeletedCell(rowFormula, colFormula);
         for (Ptg ptg : ptgs) parse(ptg, rowFormula, colFormula);
         return parseFormulaPost();
     }
@@ -399,9 +399,9 @@ public abstract class AbstractParser {
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
         String cellref = helper.getCellRef(t);
-        if (this.sheetIndex != sheetIndex) {
+        if ( this.sheetIndex != sheetIndex ) {
             Sheet extSheet = this.book.getSheet(sheetName);
-            if (extSheet != null) {
+            if ( extSheet != null ) {
                 CellReference cr = new CellReference(cellref);
                 Row row = extSheet.getRow(cr.getRow());
                 Cell cell = row.getCell(cr.getCol());
@@ -409,7 +409,7 @@ public abstract class AbstractParser {
                 verbose("Loosing!!! reference[ext] " + tSHEET.toString() + "" + cellref);
             }
         }
-        if (extWorkbookNumber > 0) parseReference(tFILE, cellref);
+        if ( extWorkbookNumber > 0 ) parseReference(tFILE, cellref);
         else parseReference(tSHEET, cellref);
     }
 
@@ -427,8 +427,8 @@ public abstract class AbstractParser {
         String name = helper.getNameText(t);
         int sheetIndex = 0;
         for (Ptg ptg : ptgs) {
-            if (ptg != null) {
-                if (ptg instanceof Area3DPxg) {
+            if ( ptg != null ) {
+                if ( ptg instanceof Area3DPxg ) {
                     Area3DPxg area3DPxg = (Area3DPxg) ptg;
 
                     range = new RangeInternal(book, area3DPxg.getSheetName(), area3DPxg);
@@ -453,7 +453,7 @@ public abstract class AbstractParser {
         Row rowObject = sheet.getRow(t.getRow());
         Object value = null;
         String comment = null;
-        if (rowObject != null) {
+        if ( rowObject != null ) {
             Cell c = rowObject.getCell(t.getColumn());
             value = Helper.valueOf(c);
             comment = Helper.getComment(c);
@@ -479,18 +479,18 @@ public abstract class AbstractParser {
     protected abstract void parseUDF(String arguments);
 
     private void parseAttrPtg(@NotNull AttrPtg t) {
-        if (t.isSum()) parseSum();
+        if ( t.isSum() ) parseSum();
     }
 
     protected abstract void parseParenthesisFormula();
 
     private void parseFuncVarPtg(@NotNull FuncVarPtg t) {
-        if (t.getNumberOfOperands() == 0) parseFunc(t.getName());
+        if ( t.getNumberOfOperands() == 0 ) parseFunc(t.getName());
         else parseFunc(t.getName(), t.getNumberOfOperands());
     }
 
     private void parseFuncPtg(@NotNull FuncPtg t) {
-        if (t.getNumberOfOperands() == 0) parseFunc(t.getName());
+        if ( t.getNumberOfOperands() == 0 ) parseFunc(t.getName());
         else parseFunc(t.getName(), t.getNumberOfOperands());
     }
 
@@ -545,13 +545,13 @@ public abstract class AbstractParser {
     //@todo impl. DATE
     private void parseErrorLiteral(ErrPtg t) {
         String text;
-        if (t == NULL_INTERSECTION) text = "#NULL!";
-        else if (t == DIV_ZERO) text = "#DIV/0!";
-        else if (t == VALUE_INVALID) text = "#VALUE!";
-        else if (t == REF_INVALID) text = "#REF!";
-        else if (t == NAME_INVALID) text = "#NAME?";
-        else if (t == NUM_ERROR) text = "#NUM!";
-        else if (t == N_A) text = "#N/A";
+        if ( t == NULL_INTERSECTION ) text = "#NULL!";
+        else if ( t == DIV_ZERO ) text = "#DIV/0!";
+        else if ( t == VALUE_INVALID ) text = "#VALUE!";
+        else if ( t == REF_INVALID ) text = "#REF!";
+        else if ( t == NAME_INVALID ) text = "#NAME?";
+        else if ( t == NUM_ERROR ) text = "#NUM!";
+        else if ( t == N_A ) text = "#N/A";
         else text = "FIXME!";
 
         var term = new ERROR(text);

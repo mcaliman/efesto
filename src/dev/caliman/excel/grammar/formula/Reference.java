@@ -45,12 +45,12 @@ public abstract class Reference extends Formula {
     }
 
     protected String values(int fRow, int fCol, int lRow, int lCol, @NotNull List<Object> list, boolean isHorizzontalOrVerticalRange) {
-        if (list.isEmpty()) return "[]";
-        if (isHorizzontalOrVerticalRange) {
+        if ( list.isEmpty() ) return "[]";
+        if ( isHorizzontalOrVerticalRange ) {
             StringBuilder buff = new StringBuilder();
             buff.append("[").append(" ");
             for (Object element : list) buff.append(toString(element)).append(" ");
-            if (buff.length() > 1) buff.deleteCharAt(buff.length() - 1);
+            if ( buff.length() > 1 ) buff.deleteCharAt(buff.length() - 1);
             buff.append(" ").append("]");
             return buff.toString();
         } else {
@@ -64,7 +64,7 @@ public abstract class Reference extends Formula {
                     buff.append(toString(element)).append(" ");
                     index++;
                 }
-                if (buff.length() > 1) buff.deleteCharAt(buff.length() - 1);
+                if ( buff.length() > 1 ) buff.deleteCharAt(buff.length() - 1);
                 buff.append("]");
             }
             buff.append("]");

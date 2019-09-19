@@ -413,9 +413,9 @@ final class BuiltinFactory {
         Class<?> clazz;
         try {
             clazz = clazzMap.get(name);
-            if (clazz == null)
+            if ( clazz == null )
                 throw new UnsupportedBuiltinException("unsupported " + name);
-            if (arity == 0) {
+            if ( arity == 0 ) {
                 Constructor<?> constructor = clazz.getConstructor();
                 builtInFunction = (Start) constructor.newInstance();
                 return;

@@ -51,9 +51,9 @@ public final class INT extends Number {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if ( this == obj ) return true;
+        if ( obj == null ) return false;
+        if ( getClass() != obj.getClass() ) return false;
         final INT other = (INT) obj;
         return Objects.equals(this.value, other.value);
     }

@@ -78,7 +78,7 @@ public final class Parser extends AbstractParser {
     @Override
     protected void err(String string, int row, int column) {
         super.err(string, row, column);
-        if (errors) System.err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
+        if ( errors ) System.err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
     }
 
     @Override
@@ -90,7 +90,7 @@ public final class Parser extends AbstractParser {
 
 
     private void sort() {
-        if (unordered.singleton()) {
+        if ( unordered.singleton() ) {
             ordered = new StartList();
             ordered.add(unordered.get(0));
             return;
@@ -122,7 +122,7 @@ public final class Parser extends AbstractParser {
     @Override
     protected Start parseFormulaPost() {
         Start start = null;
-        if (!stack.empty()) start = stack.pop();
+        if ( !stack.empty() ) start = stack.pop();
         return start;
     }
 
@@ -291,7 +291,7 @@ public final class Parser extends AbstractParser {
      */
     @Override
     protected void parseMult() {
-        if (stack.empty()) return;
+        if ( stack.empty() ) return;
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var mult = new Mult(lFormula, rFormula);
@@ -423,7 +423,7 @@ public final class Parser extends AbstractParser {
     @Override
     protected void parseSum() {
         var args = stack.pop();
-        if (args instanceof Reference || args instanceof OFFSET) {
+        if ( args instanceof Reference || args instanceof OFFSET ) {
             args.setSheetIndex(sheetIndex);
             args.setSheetName(sheetName);
             args.setAsArea();
@@ -464,13 +464,13 @@ public final class Parser extends AbstractParser {
         factory.create(arity, name);
         var builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
         Start[] args = factory.getArgs();
-        for (int i = arity - 1; i >= 0; i--) if (!stack.empty()) args[i] = stack.pop();
+        for (int i = arity - 1; i >= 0; i--) if ( !stack.empty() ) args[i] = stack.pop();
 
         setOwnProperty(builtinFunction);
         graph.addNode(builtinFunction);
         for (Start arg : args) {
             if ( arg instanceof RangeReference /*|| arg instanceof CELL*/ || arg instanceof PrefixReferenceItem || arg instanceof ReferenceItem ) {
-                if (unordered.add(arg)) {
+                if ( unordered.add(arg) ) {
                     graph.addNode(arg);
                     graph.addEdge(arg, builtinFunction);
                 }

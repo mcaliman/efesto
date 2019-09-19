@@ -43,7 +43,7 @@ public final class PrefixReferenceItem extends Reference {
     public PrefixReferenceItem(Prefix prefix, String reference, @Nullable RANGE tRANGE) {
         this.prefix = prefix;
         this.reference = reference;
-        if (tRANGE != null) {
+        if ( tRANGE != null ) {
             setAsArea();
             add(tRANGE.values());
             setFirstRow(tRANGE.getFirst().getRow());
@@ -61,8 +61,8 @@ public final class PrefixReferenceItem extends Reference {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
         PrefixReferenceItem that = (PrefixReferenceItem) o;
 
         return this.prefix.equals(that.prefix) &&

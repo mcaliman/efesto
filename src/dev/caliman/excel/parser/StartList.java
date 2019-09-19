@@ -35,7 +35,7 @@ public final class StartList extends ArrayList<Start> implements List<Start> {
 
     @Override
     public boolean add(Start object) {
-        if (!contains(object)) {
+        if ( !contains(object) ) {
             return super.add(object);
         }
         return true;
@@ -54,7 +54,7 @@ public final class StartList extends ArrayList<Start> implements List<Start> {
     }
 
     public boolean testToFunctional(int offset, @NotNull String... text) {
-        if (size() == 0) return false;
+        if ( size() == 0 ) return false;
         boolean test = true;
         for (int i = 0; i < text.length; i++)
             test &= this.testToFunctional(i + offset, text[i]);
