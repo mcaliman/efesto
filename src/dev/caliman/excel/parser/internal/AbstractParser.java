@@ -132,7 +132,6 @@ public abstract class AbstractParser {
     private String subject;
     private String category;
 
-    private int counterSheets = 0;
     private int counterFormulas;
     /**
      * (Work)Sheet
@@ -200,7 +199,6 @@ public abstract class AbstractParser {
      * Parse a single (Work)Sheet
      */
     private void parse(@NotNull Sheet sheet) {
-        this.counterSheets++;
         this.sheet = sheet;
         protectionPresent = protectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
         this.sheetIndex = book.getSheetIndex(sheet);
