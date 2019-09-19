@@ -40,8 +40,7 @@ public abstract class Start {
     protected boolean singleSheet;
     private int row;
     private int column;
-    //private String comment;
-    private Comment comment;
+
     private int sheetIndex;
 
     @NotNull
@@ -86,13 +85,6 @@ public abstract class Start {
         return false;
     }
 
-    public Comment getComment() {
-        return this.comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = new Comment(comment);
-    }
 
     protected int getRow() {
         return row;
@@ -158,7 +150,7 @@ public abstract class Start {
     @Nullable
     @Override
     public String toString() {
-        return comment != null ? comment.toString() : "" + "";
+        return "";
     }
 
     public boolean testToFunctional(String text) {

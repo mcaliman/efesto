@@ -3,12 +3,6 @@
 '' Excel File: 902-terminals-formulas.xlsx
 '' Excel Formulas Number: 4
 '' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
-'' creator:null
-'' description:null
-'' keywords:null
-'' title:null
-'' subject:null
-'' category:null
 A1 = TRUE
 A5 = "1/0"
 A3 = 24.0

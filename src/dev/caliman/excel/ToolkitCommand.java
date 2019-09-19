@@ -22,7 +22,6 @@
 
 package dev.caliman.excel;
 
-import dev.caliman.excel.grammar.Comment;
 import dev.caliman.excel.grammar.Start;
 import dev.caliman.excel.parser.Parser;
 import dev.caliman.excel.parser.StartList;
@@ -66,8 +65,6 @@ public class ToolkitCommand {
             writer.write("'' Elapsed Time (parsing + topological sort): " + (elapsed / 1000 + " s. or " + (elapsed / 1000 / 60) + " min.") + '\n');
 
             for (Start start : list) {
-                Comment comment = start.getComment();
-                if ( comment != null ) writer.write(comment.toString());
                 try {
                     writer.write(start.id() + " = " + start.toString());
                 } catch (Exception e) {

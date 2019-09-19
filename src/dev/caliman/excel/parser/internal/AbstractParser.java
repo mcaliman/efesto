@@ -225,7 +225,6 @@ public abstract class AbstractParser {
         }
         Start start = parse(formulaPtgs);
         if ( Objects.nonNull(start) ) {
-            start.setComment(comment);
             start.setSingleSheet(this.isSingleSheet);
             parseFormula(start);
         }
