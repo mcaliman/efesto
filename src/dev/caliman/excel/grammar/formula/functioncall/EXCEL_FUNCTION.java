@@ -24,7 +24,7 @@ package dev.caliman.excel.grammar.formula.functioncall;
 
 import dev.caliman.excel.grammar.Formula;
 import dev.caliman.excel.grammar.formula.FunctionCall;
-import dev.caliman.excel.grammar.formula.reference.CELL_REFERENCE;
+import dev.caliman.excel.grammar.formula.reference.CELL;
 import dev.caliman.excel.grammar.formula.reference.NamedRange;
 import dev.caliman.excel.grammar.formula.reference.PrefixReferenceItem;
 import dev.caliman.excel.grammar.formula.reference.RangeReference;
@@ -70,7 +70,7 @@ public abstract class EXCEL_FUNCTION extends FunctionCall {
         if (operand == null) return "Missing";
         if (operand instanceof RangeReference || operand instanceof NamedRange || operand instanceof PrefixReferenceItem)
             return operand.id();
-        else if (operand instanceof CELL_REFERENCE) return operand.id();
+        else if ( operand instanceof CELL ) return operand.id();
         else return operand.toString();
     }
 

@@ -219,7 +219,7 @@ public abstract class AbstractParser {
         } else if (this.ext.contains(cell)) {
             verbose("Recover loosed cell!");
             Object obj = Helper.valueOf(cell);
-            CELL_REFERENCE cell_reference = new CELL_REFERENCE(cell.getRowIndex(), cell.getColumnIndex());
+            CELL cell_reference = new CELL(cell.getRowIndex(), cell.getColumnIndex());
             cell_reference.setValue(obj);
             cell_reference.setSheetName(cell.getSheet().getSheetName());
             cell_reference.setSheetIndex(helper.getSheetIndex(cell.getSheet().getSheetName()));
@@ -458,14 +458,14 @@ public abstract class AbstractParser {
             value = Helper.valueOf(c);
             comment = Helper.getComment(c);
         }
-        CELL_REFERENCE tCELL_REFERENCE = new CELL_REFERENCE(t.getRow(), t.getColumn(), comment);
+        CELL tCELL_REFERENCE = new CELL(t.getRow(), t.getColumn(), comment);
         tCELL_REFERENCE.setValue(value);
         parseCELL_REFERENCE(tCELL_REFERENCE);
     }
 
-    protected abstract void parseCELL_REFERENCE(CELL_REFERENCE tCELL_REFERENCE);
+    protected abstract void parseCELL_REFERENCE(CELL tCELL_REFERENCE);
 
-    protected abstract void parseCELL_REFERENCELinked(CELL_REFERENCE tCELL_REFERENCE);
+    protected abstract void parseCELL_REFERENCELinked(CELL tCELL_REFERENCE);
 
     //endregion
 

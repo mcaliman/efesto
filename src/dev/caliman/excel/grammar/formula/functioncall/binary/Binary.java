@@ -26,7 +26,7 @@ import dev.caliman.excel.grammar.Formula;
 import dev.caliman.excel.grammar.formula.FunctionCall;
 import dev.caliman.excel.grammar.formula.ParenthesisFormula;
 import dev.caliman.excel.grammar.formula.functioncall.unary.Unary;
-import dev.caliman.excel.grammar.formula.reference.CELL_REFERENCE;
+import dev.caliman.excel.grammar.formula.reference.CELL;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -51,7 +51,7 @@ public abstract class Binary extends FunctionCall {
     }
 
     private String operandToFormula(Formula operand) {
-        if (operand instanceof CELL_REFERENCE || operand instanceof Unary) return operand.id();
+        if ( operand instanceof CELL || operand instanceof Unary ) return operand.id();
         else if ( operand instanceof ParenthesisFormula )
             return operandToFormulaParenthesisFormula((ParenthesisFormula) operand);
         else return operand.toString();

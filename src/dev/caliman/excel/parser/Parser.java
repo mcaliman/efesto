@@ -353,14 +353,14 @@ public final class Parser extends AbstractParser {
      * CELLREF
      */
     @Override
-    protected void parseCELL_REFERENCE(@NotNull CELL_REFERENCE tCELL_REFERENCE) {
+    protected void parseCELL_REFERENCE(@NotNull CELL tCELL_REFERENCE) {
         setOwnProperty(tCELL_REFERENCE);
         this.unordered.add(tCELL_REFERENCE);
         stack.push(tCELL_REFERENCE);
     }
 
     @Override
-    protected void parseCELL_REFERENCELinked(@NotNull CELL_REFERENCE tCELL_REFERENCE) {
+    protected void parseCELL_REFERENCELinked(@NotNull CELL tCELL_REFERENCE) {
         setOwnProperty(tCELL_REFERENCE);
         this.unordered.add(tCELL_REFERENCE);
         stack.push(tCELL_REFERENCE);
@@ -469,7 +469,7 @@ public final class Parser extends AbstractParser {
         setOwnProperty(builtinFunction);
         graph.addNode(builtinFunction);
         for (Start arg : args) {
-            if (arg instanceof RangeReference /*|| arg instanceof CELL_REFERENCE*/ || arg instanceof PrefixReferenceItem || arg instanceof ReferenceItem) {
+            if ( arg instanceof RangeReference /*|| arg instanceof CELL*/ || arg instanceof PrefixReferenceItem || arg instanceof ReferenceItem ) {
                 if (unordered.add(arg)) {
                     graph.addNode(arg);
                     graph.addEdge(arg, builtinFunction);

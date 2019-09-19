@@ -29,10 +29,10 @@ import java.util.List;
 
 public class RANGE extends Reference {
 
-    private final CELL_REFERENCE first;
-    private final CELL_REFERENCE last;
+    private final CELL first;
+    private final CELL last;
 
-    public RANGE(CELL_REFERENCE first, CELL_REFERENCE end) {
+    public RANGE(CELL first, CELL end) {
         this.first = first;
         this.last = end;
     }
@@ -45,11 +45,11 @@ public class RANGE extends Reference {
         vals.add(values);
     }
 
-    public CELL_REFERENCE getFirst() {
+    public CELL getFirst() {
         return first;
     }
 
-    public CELL_REFERENCE getLast() {
+    public CELL getLast() {
         return last;
     }
 

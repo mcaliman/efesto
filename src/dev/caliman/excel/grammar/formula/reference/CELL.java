@@ -30,19 +30,19 @@ import java.util.Date;
 /**
  * @author mcaliman
  */
-public final class CELL_REFERENCE extends ReferenceItem {
+public final class CELL extends ReferenceItem {
 
     private final int row;
     private final int column;
 
     private Constant constant;
 
-    public CELL_REFERENCE(int row, int column) {
+    public CELL(int row, int column) {
         this.row = row;
         this.column = column;
     }
 
-    public CELL_REFERENCE(int row, int column, String comment) {
+    public CELL(int row, int column, String comment) {
         this.row = row;
         this.column = column;
         this.setComment(comment);

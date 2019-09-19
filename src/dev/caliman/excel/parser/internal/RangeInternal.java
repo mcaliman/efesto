@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.parser.internal;
 
-import dev.caliman.excel.grammar.formula.reference.CELL_REFERENCE;
+import dev.caliman.excel.grammar.formula.reference.CELL;
 import dev.caliman.excel.grammar.formula.reference.RANGE;
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.formula.ptg.Area3DPxg;
@@ -48,8 +48,8 @@ class RangeInternal {
         int lastRow = t.getLastRow();
         int lastColumn = t.getLastColumn();
 
-        CELL_REFERENCE first = new CELL_REFERENCE(firstRow, firstColumn);
-        CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
+        CELL first = new CELL(firstRow, firstColumn);
+        CELL last = new CELL(lastRow, lastColumn);
         tRANGE = new RANGE(first, last);
         String refs = tRANGE.toString();
         SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;

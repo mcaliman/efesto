@@ -24,7 +24,7 @@ package dev.caliman.excel.parser.internal;
 
 
 import dev.caliman.excel.grammar.Start;
-import dev.caliman.excel.grammar.formula.reference.CELL_REFERENCE;
+import dev.caliman.excel.grammar.formula.reference.CELL;
 import dev.caliman.excel.grammar.formula.reference.RANGE;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.SpreadsheetVersion;
@@ -167,8 +167,8 @@ class Helper {
         var lastRow = t.getLastRow();
         var lastColumn = t.getLastColumn();
 
-        CELL_REFERENCE first = new CELL_REFERENCE(firstRow, firstColumn);
-        CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
+        CELL first = new CELL(firstRow, firstColumn);
+        CELL last = new CELL(lastRow, lastColumn);
         RANGE tRANGE = new RANGE(first, last);
 
         //String refs = tRANGE.toString();
@@ -190,8 +190,8 @@ class Helper {
         var lastRow = t.getLastRow();
         var lastColumn = t.getLastColumn();
 
-        CELL_REFERENCE first = new CELL_REFERENCE(firstRow, firstColumn);
-        CELL_REFERENCE last = new CELL_REFERENCE(lastRow, lastColumn);
+        CELL first = new CELL(firstRow, firstColumn);
+        CELL last = new CELL(lastRow, lastColumn);
         var tRANGE = new RANGE(first, last);
 
         String refs = tRANGE.toString();

@@ -32,10 +32,10 @@ import java.util.Objects;
  */
 public final class RangeReference extends Reference {
 
-    private final CELL_REFERENCE reference1;
-    private final CELL_REFERENCE reference2;
+    private final CELL reference1;
+    private final CELL reference2;
 
-    public RangeReference(CELL_REFERENCE reference1, CELL_REFERENCE reference2) {
+    public RangeReference(CELL reference1, CELL reference2) {
         this.reference1 = reference1;
         this.reference2 = reference2;
     }
