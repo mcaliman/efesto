@@ -34,7 +34,9 @@ class FormulaTest {
 
     @Test
     void testTest() throws Exception {
-        String dataSet = "test/Datasets/EusesEnron/Formula.xlsx";
+        String dir = "test/Datasets/EusesEnron/";
+        String dataSet = dir + "Formula.xlsx";
+        String output = dir + "Formula.vb";
         ToolkitCommand toolkitCommand = new ToolkitCommand(dataSet);
         toolkitCommand.execute();
         System.out.println(dataSet);
@@ -43,6 +45,6 @@ class FormulaTest {
         assertTrue(toolkitCommand.testToFormula(
                 0, "A1 = 1+2"
         ));
-        toolkitCommand.write("test/Datasets/EusesEnron/Formula.vb");
+        toolkitCommand.write(output);
     }
 }

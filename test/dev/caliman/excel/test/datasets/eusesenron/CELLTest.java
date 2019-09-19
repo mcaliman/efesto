@@ -20,7 +20,7 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.test.files.dataset;
+package dev.caliman.excel.test.datasets.eusesenron;
 
 import dev.caliman.excel.ToolkitCommand;
 import org.junit.jupiter.api.Test;
@@ -30,17 +30,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-class CELL_REFERENCE_Test {
+class CELLTest {
     @Test
     void testTest() throws Exception {
-        ToolkitCommand cmd = new ToolkitCommand("test/CELL_REFERENCE.xlsx");
+        String dir = "test/Datasets/EusesEnron/";
+        String dataSet = dir + "CELL.xlsx";
+        String output = dir + "CELL.vb";
+        ToolkitCommand cmd = new ToolkitCommand(dataSet);
         cmd.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
         cmd.toFormula();
         assertTrue(cmd.testToFormula(
-                0, "A1 = 27.59"
+                0, "A1 = 55.0"
         ));
-        cmd.write("test/CELL_REFERENCE.vb");
+        cmd.write(output);
     }
 }
