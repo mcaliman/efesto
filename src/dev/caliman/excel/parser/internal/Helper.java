@@ -44,7 +44,7 @@ import java.util.List;
 
 import static org.apache.poi.ss.usermodel.Cell.*;
 
-class Helper {
+public class Helper {
 
     private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
 
