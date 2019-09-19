@@ -9,8 +9,6 @@
 '' title:null
 '' subject:null
 '' category:null
-'' Cella riferita A1
 A1 = 15.0
-'' Cella riferita A2
 A2 = 100.0
 A3 = A2/A1

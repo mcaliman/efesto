@@ -20,7 +20,7 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.test.files.dataset;
+package dev.caliman.excel.test.datasets.eusesenron;
 
 
 import dev.caliman.excel.ToolkitCommand;
@@ -31,11 +31,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-class Excel_05_Reference_Test {
+class ReferenceTest {
 
     @Test
     void testTest() throws Exception {
-        ToolkitCommand toolkitCommand = new ToolkitCommand("test/05-reference.xlsx");
+        String dir = "test/Datasets/EusesEnron/";
+        String dataSet = dir + "Reference.xlsx";
+        String output = dir + "Reference.vb";
+        ToolkitCommand toolkitCommand = new ToolkitCommand(dataSet);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
         System.out.println("-------------");
@@ -46,6 +49,6 @@ class Excel_05_Reference_Test {
                 "A2 = 100.0",
                 "A3 = A2/A1"
         ));
-        toolkitCommand.write("test/05-reference.vb");
+        toolkitCommand.write(output);
     }
 }
