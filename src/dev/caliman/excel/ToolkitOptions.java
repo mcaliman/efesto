@@ -25,7 +25,6 @@ package dev.caliman.excel;
 public class ToolkitOptions {
 
     private boolean verbose;
-    private boolean metadata;
 
     public ToolkitOptions() {
         this.verbose = false;
@@ -39,11 +38,4 @@ public class ToolkitOptions {
         this.verbose = verbose;
     }
 
-    public boolean isMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(boolean metadata) {
-        this.metadata = metadata;
-    }
 }

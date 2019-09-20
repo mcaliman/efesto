@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,6 +36,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class DATETest {
 
+    @SuppressWarnings("unused")
     Date convertToDateViaInstant(LocalDateTime dateToConvert) {
         return java.util.Date
                 .from(dateToConvert.atZone(ZoneId.systemDefault())
@@ -59,9 +61,10 @@ class DATETest {
         assertNotEquals(date1, date3);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void testToString() {
-        Date date = new Date(2019 - 1900, 9 - 1, 17);
+        Date date = new Date(2019 - 1900, Calendar.SEPTEMBER, 17);
         DATE date1 = new DATE(date);
         String result = date1.toString();
         System.out.println(result);

@@ -36,7 +36,6 @@ class Excel_Area_1_Test {
     @Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
-        options.setMetadata(true);
         options.setVerbose(false);
         ToolkitCommand toolkitCommand = new ToolkitCommand("test/area-1.xlsx", options);
         toolkitCommand.execute();

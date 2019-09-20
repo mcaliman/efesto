@@ -31,7 +31,10 @@ import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.*;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -44,7 +47,7 @@ import java.util.List;
 
 import static org.apache.poi.ss.usermodel.Cell.*;
 
-public class Helper {
+class Helper {
 
     private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
 
@@ -54,21 +57,6 @@ public class Helper {
     public Helper(Workbook workbook) {
         this.workbook = workbook;
         this.evalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
-    }
-
-    @Nullable
-    public static String getComment(Cell cell) {
-        Comment cellComment = cell.getCellComment();
-        return comment(cellComment);
-    }
-
-    @Nullable
-    private static String comment(@Nullable Comment comment) {
-        if ( comment == null ) return null;
-        RichTextString text = comment.getString();
-        if ( text == null ) return null;
-        return text.getString();
-
     }
 
     @Nullable

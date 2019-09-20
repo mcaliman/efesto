@@ -66,7 +66,6 @@ import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 @SuppressWarnings("JavaDoc")
 public final class Parser {
 
-    private final boolean errors = false;
     private final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
     private final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
     private final Predicate<Ptg> area3DPxg = (Ptg t) -> t instanceof Area3DPxg;
@@ -187,7 +186,6 @@ public final class Parser {
         String formulaAddress = Start.cellAddress(rowFormula, colFormula);
         String text = cell.getCellFormula();
         System.out.println("RAW>> " + formulaAddress + " = " + text);
-        //verbose(formulaAddress + " = " + formulaText);
         Ptg[] formulaPtgs = helper.tokens(this.sheet, this.rowFormula, this.colFormula);
         if ( formulaPtgs == null ) {
             String formulaText = cell.getCellFormula();
@@ -369,13 +367,11 @@ public final class Parser {
     private void parseRefPtg(@NotNull RefPtg t) {
         Row rowObject = sheet.getRow(t.getRow());
         Object value = null;
-        String comment = null;
         if ( rowObject != null ) {
             Cell c = rowObject.getCell(t.getColumn());
             value = Helper.valueOf(c);
-            comment = Helper.getComment(c);
         }
-        CELL tCELL_REFERENCE = new CELL(t.getRow(), t.getColumn(), comment);
+        CELL tCELL_REFERENCE = new CELL(t.getRow(), t.getColumn());
         tCELL_REFERENCE.setValue(value);
         parseCELL_REFERENCE(tCELL_REFERENCE);
     }
@@ -469,7 +465,7 @@ public final class Parser {
 
 
     private void err(String string, int row, int column) {
-        if ( errors ) System.err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
+        System.err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
     }
 
 

@@ -36,7 +36,6 @@ class Excel_Comments_Test {
     @Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
-        options.setMetadata(true);
         options.setVerbose(false);
         ToolkitCommand toolkitCommand = new ToolkitCommand("test/comments.xlsx", options);
         toolkitCommand.execute();

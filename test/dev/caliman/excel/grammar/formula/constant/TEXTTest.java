@@ -47,6 +47,6 @@ class TEXTTest {
     void testToString() {
         TEXT f1 = new TEXT("75");
         System.out.println(f1.toString());
-        assertTrue("\"75\"".equals(f1.toString()));
+        assertEquals("\"75\"", f1.toString());
     }
 }

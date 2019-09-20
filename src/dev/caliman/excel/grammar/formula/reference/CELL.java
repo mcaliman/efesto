@@ -42,11 +42,6 @@ public final class CELL extends ReferenceItem {
         this.column = column;
     }
 
-    public CELL(int row, int column, String comment) {
-        this.row = row;
-        this.column = column;
-    }
-
     public int getRow() {
         return row;
     }
