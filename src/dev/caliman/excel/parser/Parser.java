@@ -132,7 +132,6 @@ public final class Parser {
         this.book = WorkbookFactory.create(file);
         this.ext = new ArrayList<>();
         this.helper = new Helper(this.book);
-        print();
         this.fileName = file.getName();
         this.unordered = new StartList();
         this.ordered = new StartList();
@@ -289,34 +288,33 @@ public final class Parser {
         err("Error Unknown Ptg: " + t.toString(), rowFormula, colFormula);
     }
 
-    /**
-     * Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
-     * external or different sheet.
-     * <p>
-     * This is XSSF only, as it stores the sheet / book references in String
-     * form. The HSSF equivalent using indexes is Area3DPtg
-     */
+
     private void parseArea3DPxg(@NotNull Area3DPxg t) {
+        // Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
+        // external or different sheet.
+        // This is XSSF only, as it stores the sheet / book references in String
+        // form. The HSSF equivalent using indexes is Area3DPtg
         String sheetName = t.getSheetName();
         int sheetIndex = helper.getSheetIndex(sheetName);
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
-
         String area = helper.getArea(t);
         parseArea3D(helper.getRANGE(sheetName, t), tSHEET, area);
     }
 
-    /**
-     * Title: XSSF 3D Reference
-     * <p>
-     * Description: Defines a cell in an external or different sheet.
-     * <p>
-     * REFERENCE:
-     * This is XSSF only, as it stores the sheet / book references in String form. The HSSF equivalent using indexes is Ref3DPtg
-     *
-     * @param t
-     */
-    @SuppressWarnings("JavaDoc")
+    private void parseArea3D(RANGE tRANGE, @NotNull SHEET tSHEET, String area) {
+        //Sheet2!A1:B1 (Sheet + AREA/RANGE)
+        var term = new PrefixReferenceItem(tSHEET, area, tRANGE);
+        term.setSheetIndex(tSHEET.getIndex());
+        term.setSheetName(tSHEET.getName());
+        unordered.add(term);
+        stack.push(term);
+    }
+
     private void parseRef3DPxg(@NotNull Ref3DPxg t) {
+        //Title: XSSF 3D Reference
+        //Description: Defines a cell in an external or different sheet.
+        //REFERENCE:
+        //This is XSSF only, as it stores the sheet / book references in String form. The HSSF equivalent using indexes is Ref3DPtg
         int extWorkbookNumber = t.getExternalWorkbookNumber();
         String sheetName = t.getSheetName();
         int sheetIndex = helper.getSheetIndex(sheetName);
@@ -337,9 +335,26 @@ public final class Parser {
         else parseReference(tSHEET, cellref);
     }
 
+    private void parseReference(SHEET tSHEET, String cellref) {
+        var term = new PrefixReferenceItem(tSHEET, cellref, null);
+        setOwnProperty(term);
+        graph.addNode(term);
+        stack.push(term);
+    }
+
     private void parseAreaPtg(@NotNull AreaPtg t) {
         parseRangeReference(helper.getRANGE(sheet, t));
     }
+
+    private void parseRangeReference(RANGE tRANGE) {
+        var rangeReference = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
+        setOwnProperty(rangeReference);
+        rangeReference.setAsArea();//is area not a cell with ref to area
+        rangeReference.add(tRANGE.values());
+        graph.addNode(rangeReference);
+        stack.push(rangeReference);
+    }
+
 
     private void parseNamePtg(@NotNull NamePtg t) {
         RangeInternal range = null;
@@ -357,12 +372,14 @@ public final class Parser {
             }
         }
         RANGE tRANGE = Objects.requireNonNull(range).getRANGE();
-
         NamedRange term = new NamedRange(name, tRANGE);
         term.setSheetIndex(sheetIndex);
         term.setSheetName(range.getSheetName());
-
         parseNamedRange(term);
+    }
+
+    private void parseNamedRange(NamedRange tNamedRange) {
+        stack.push(tNamedRange);
     }
 
     private void parseRefPtg(@NotNull RefPtg t) {
@@ -377,8 +394,20 @@ public final class Parser {
         parseCELL_REFERENCE(tCELL_REFERENCE);
     }
 
+    private void parseCELL_REFERENCE(@NotNull CELL tCELL_REFERENCE) {
+        setOwnProperty(tCELL_REFERENCE);
+        this.unordered.add(tCELL_REFERENCE);
+        stack.push(tCELL_REFERENCE);
+    }
+
     private void parseArrayPtg(@NotNull ArrayPtg t) {
         parseConstantArray(t.getTokenArrayValues());
+    }
+
+    private void parseConstantArray(Object[][] array) {
+        var term = new ConstantArray(array);
+        setOwnProperty(term);
+        stack.push(term);
     }
 
     private void parseAttrPtg(@NotNull AttrPtg t) {
@@ -395,6 +424,14 @@ public final class Parser {
         else parseFunc(t.getName(), t.getNumberOfOperands());
     }
 
+    private void parseFunc(String name, int arity) {
+        try {
+            builtInFunction(arity, name);
+        } catch (UnsupportedBuiltinException e) {
+            err("Unsupported Excel ExcelFunction: " + name + " " + e, rowFormula, colFormula);
+        }
+    }
+
     //@todo impl. DATE
     private void parseErrorLiteral(ErrPtg t) {
         String text;
@@ -406,7 +443,6 @@ public final class Parser {
         else if ( t == NUM_ERROR ) text = "#NUM!";
         else if ( t == N_A ) text = "#N/A";
         else text = "FIXME!";
-
         var term = new ERROR(text);
         parseErrorLiteral(term);
     }
@@ -414,6 +450,11 @@ public final class Parser {
     private void parseBooleanLiteral(Boolean bool) {
         var term = new BOOL(bool);
         parseBooleanLiteral(term);
+    }
+
+    private void parseBooleanLiteral(@NotNull BOOL term) {
+        graph.addNode(term);
+        stack.push(term);
     }
 
     private void parseStringLiteral(String string) {
@@ -426,9 +467,19 @@ public final class Parser {
         parseIntLiteral(term);
     }
 
+    private void parseIntLiteral(@NotNull INT term) {
+        graph.addNode(term);
+        stack.push(term);
+    }
+
     private void parseFloatLiteral(Double value) {
         var term = new FLOAT(value);
         parseFloatLiteral(term);
+    }
+
+    private void parseFloatLiteral(@NotNull FLOAT term) {
+        graph.addNode(term);
+        stack.push(term);
     }
 
     private void parseReferenceErrorLiteral() {
@@ -436,8 +487,11 @@ public final class Parser {
         parseReferenceErrorLiteral(term);
     }
 
-    private void print() {
-        out.println("Parse...");
+    private void parseReferenceErrorLiteral(@NotNull ERROR_REF error) {
+        //#REF
+        setOwnProperty(error);
+        stack.push(error);
+        err("", rowFormula, colFormula);
     }
 
     public void parse() {
@@ -445,33 +499,6 @@ public final class Parser {
         for (Sheet currentSheet : this.book) parse(currentSheet);
         verbose("** topological sorting beginning...");
         sort();
-    }
-
-
-    private void parseConstantArray(Object[][] array) {
-        var term = new ConstantArray(array);
-        setOwnProperty(term);
-        stack.push(term);
-    }
-
-
-    private void parseMissingArguments(int row, int column) {
-        err("Missing ExcelFunction Arguments for cell: " + Start.cellAddress(row, column, sheetName), row, column);
-    }
-
-
-    private void doesFormulaReferToDeletedCell(int row, int column) {
-        err(Start.cellAddress(row, column, sheetName) + " does formula refer to deleted cell", row, column);
-    }
-
-
-    private void err(String string, int row, int column) {
-        err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
-    }
-
-
-    private void parseNamedRange(NamedRange tNamedRange) {
-        stack.push(tNamedRange);
     }
 
 
@@ -554,11 +581,8 @@ public final class Parser {
         stack.push(lt);
     }
 
-    /**
-     * F>F
-     */
-
     private void parseGt() {
+        // F>F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var gt = new Gt(lFormula, rFormula);
@@ -567,11 +591,8 @@ public final class Parser {
         stack.push(gt);
     }
 
-    /**
-     * F<=F
-     */
-
     private void parseLeq() {
+        // F<=F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var leq = new Leq(lFormula, rFormula);
@@ -580,11 +601,8 @@ public final class Parser {
         stack.push(leq);
     }
 
-    /**
-     * F>=F
-     */
-
     private void parseGteq() {
+        // F>=F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var gteq = new GtEq(lFormula, rFormula);
@@ -593,11 +611,8 @@ public final class Parser {
         stack.push(gteq);
     }
 
-    /**
-     * F<>F
-     */
-
     private void parseNeq() {
+        // F<>F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var neq = new Neq(lFormula, rFormula);
@@ -606,11 +621,8 @@ public final class Parser {
         stack.push(neq);
     }
 
-    /**
-     * F&F
-     */
-
     private void parseConcat() {
+        // F&F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var concat = new Concat(lFormula, rFormula);
@@ -619,11 +631,8 @@ public final class Parser {
         stack.push(concat);
     }
 
-    /**
-     * F+F
-     */
-    //
     private void parseAdd() {
+        // F+F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var add = new Add(lFormula, rFormula);
@@ -632,11 +641,8 @@ public final class Parser {
         stack.push(add);
     }
 
-    /**
-     * F-F
-     */
-    //
     private void parseSub() {
+        // F-F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var sub = new Sub(lFormula, rFormula);
@@ -645,11 +651,8 @@ public final class Parser {
         stack.push(sub);
     }
 
-    /**
-     * F*F
-     */
-    //
     private void parseMult() {
+        // F*F
         if ( stack.empty() ) return;
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
@@ -659,11 +662,8 @@ public final class Parser {
         stack.push(mult);
     }
 
-    /**
-     * F/F
-     */
-    //
     private void parseDiv() {
+        // F/F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var div = new Divide(lFormula, rFormula);
@@ -672,11 +672,8 @@ public final class Parser {
         stack.push(div);
     }
 
-    /**
-     * F^F
-     */
-    //
     private void parsePower() {
+        // F^F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var power = new Power(lFormula, rFormula);
@@ -685,11 +682,8 @@ public final class Parser {
         stack.push(power);
     }
 
-    /**
-     * F%
-     */
-    //
     private void percentFormula() {
+        // F%
         var formula = (Formula) stack.pop();
         var percentFormula = new PercentFormula(formula);
         setOwnProperty(percentFormula);
@@ -697,27 +691,6 @@ public final class Parser {
         stack.push(percentFormula);
     }
 
-    /**
-     * #REF
-     */
-    //
-    private void parseReferenceErrorLiteral(@NotNull ERROR_REF error) {
-        setOwnProperty(error);
-        stack.push(error);
-        err("", rowFormula, colFormula);
-    }
-
-    /**
-     * CELLREF
-     */
-    //
-    private void parseCELL_REFERENCE(@NotNull CELL tCELL_REFERENCE) {
-        setOwnProperty(tCELL_REFERENCE);
-        this.unordered.add(tCELL_REFERENCE);
-        stack.push(tCELL_REFERENCE);
-    }
-
-    //
     private void parseCELL_REFERENCELinked(@NotNull CELL tCELL_REFERENCE) {
         setOwnProperty(tCELL_REFERENCE);
         this.unordered.add(tCELL_REFERENCE);
@@ -725,60 +698,18 @@ public final class Parser {
         graph.addNode(tCELL_REFERENCE);
     }
 
-    /**
-     * Used
-     * Sheet2!A1:B1 (Sheet + AREA/RANGE)
-     */
-    //
-    private void parseArea3D(RANGE tRANGE, @NotNull SHEET tSHEET, String area) {
-        var term = new PrefixReferenceItem(tSHEET, area, tRANGE);
-        term.setSheetIndex(tSHEET.getIndex());
-        term.setSheetName(tSHEET.getName());
-        unordered.add(term);
-        stack.push(term);
-    }
-
-    /**
-     * Used
-     * Sheet2!A1 (Sheet + parseCELL_REFERENCE)
-     * External references: External references are normally in the form [File]Sheet!Cell
-     *
-     * @param cellref
-     */
-    //
     private void parseReference(FILE tFILE, String cellref) {
+        // Used
+        // Sheet2!A1 (Sheet + parseCELL_REFERENCE)
+        // External references: External references are normally in the form [File]Sheet!Cell
         var term = new PrefixReferenceItem(tFILE, cellref, null);
         setOwnProperty(term);
         graph.addNode(term);
         stack.push(term);
     }
 
-    //
-    private void parseReference(SHEET tSHEET, String cellref) {
-        var term = new PrefixReferenceItem(tSHEET, cellref, null);
-        setOwnProperty(term);
-        graph.addNode(term);
-        stack.push(term);
-    }
-
-    /**
-     * Used
-     */
-    //
-    private void parseRangeReference(RANGE tRANGE) {
-        var rangeReference = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
-        setOwnProperty(rangeReference);
-        rangeReference.setAsArea();//is area not a cell with ref to area
-        rangeReference.add(tRANGE.values());
-        graph.addNode(rangeReference);
-        stack.push(rangeReference);
-    }
-
-    /**
-     * SUM(Arguments)
-     */
-    //
     private void parseSum() {
+        // SUM(Arguments)
         var args = stack.pop();
         if ( args instanceof Reference || args instanceof OFFSET ) {
             args.setSheetIndex(sheetIndex);
@@ -795,7 +726,6 @@ public final class Parser {
         stack.push(term);
     }
 
-    //
     private void parseFunc(String name) {
         try {
             builtinFunction(name);
@@ -804,20 +734,8 @@ public final class Parser {
         }
     }
 
-    //
-    private void parseFunc(String name, int arity) {
-        try {
-            builtInFunction(arity, name);
-        } catch (UnsupportedBuiltinException e) {
-            err("Unsupported Excel ExcelFunction: " + name + " " + e, rowFormula, colFormula);
-        }
-    }
-
-    /**
-     * +
-     */
-    //
     private void parsePlus() {
+        // +
         var formula = (Formula) stack.pop();
         var plus = new Plus(formula);
         plus.setSheetName(sheetName);
@@ -826,11 +744,8 @@ public final class Parser {
         stack.push(plus);
     }
 
-    /**
-     * -
-     */
-    //
     private void parseMinus() {
+        // -
         var formula = (Formula) stack.pop();
         var minus = new Minus(formula);
         setOwnProperty(minus);
@@ -870,12 +785,8 @@ public final class Parser {
         return ordered;
     }
 
-
-    /**
-     * F F
-     */
-    //
     private void parseIntersection() {
+        //F F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var intersection = new Intersection(lFormula, rFormula);
@@ -884,11 +795,8 @@ public final class Parser {
         stack.push(intersection);
     }
 
-    /**
-     * F,F
-     */
-    //
     private void parseUnion() {
+        //F,F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var union = new Union(lFormula, rFormula);
@@ -897,7 +805,6 @@ public final class Parser {
         stack.push(union);
     }
 
-    //
     private void parseErrorLiteral(@NotNull ERROR term) {
         setOwnProperty(term);
         err(term.toString(), rowFormula, colFormula);
@@ -905,29 +812,21 @@ public final class Parser {
         stack.push(term);
     }
 
-    //
-    private void parseBooleanLiteral(@NotNull BOOL term) {
-        graph.addNode(term);
-        stack.push(term);
-    }
-
-
-    //
     private void parseStringLiteral(@NotNull TEXT term) {
         graph.addNode(term);
         stack.push(term);
     }
 
-    //
-    private void parseIntLiteral(@NotNull INT term) {
-        graph.addNode(term);
-        stack.push(term);
+    private void parseMissingArguments(int row, int column) {
+        err("Missing ExcelFunction Arguments for cell: " + Start.cellAddress(row, column, sheetName), row, column);
     }
 
-    //
-    private void parseFloatLiteral(@NotNull FLOAT term) {
-        graph.addNode(term);
-        stack.push(term);
+    private void doesFormulaReferToDeletedCell(int row, int column) {
+        err(Start.cellAddress(row, column, sheetName) + " does formula refer to deleted cell", row, column);
+    }
+
+    private void err(String string, int row, int column) {
+        err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
     }
 
     class WhatIf {
