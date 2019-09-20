@@ -66,7 +66,7 @@ import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 @SuppressWarnings("JavaDoc")
 public final class Parser {
 
-    protected final boolean errors = false;
+    private final boolean errors = false;
     private final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
     private final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
     private final Predicate<Ptg> area3DPxg = (Ptg t) -> t instanceof Area3DPxg;
@@ -121,17 +121,7 @@ public final class Parser {
     private boolean protectionPresent;//(Work)Book Protection Present flag
     private String fileName;
 
-    /*protected (@NotNull File file) throws InvalidFormatException, IOException {
-        this.book = WorkbookFactory.create(file);
-        this.ext = new ArrayList<>();
-        this.helper = new Helper(this.book);
-        print();
-        this.fileName = file.getName();
-    }*/
-
-
     public Parser(@NotNull String filename) throws IOException, InvalidFormatException {
-
         File file = new File(filename);
         this.book = WorkbookFactory.create(file);
         this.ext = new ArrayList<>();
@@ -139,7 +129,6 @@ public final class Parser {
         print();
         this.fileName = file.getName();
 
-        //super(new File(filename));
         unordered = new StartList();
         ordered = new StartList();
         graph = new StartGraph();
@@ -153,13 +142,6 @@ public final class Parser {
     public String getFileName() {
         return fileName;
     }
-
-
-
-    /*public void parse() {
-        this.isSingleSheet = this.book.getNumberOfSheets() == 1;
-        for (Sheet currentSheet : this.book) parse(currentSheet);
-    }*/
 
     protected void verbose(String text) {
         if ( this.verbose ) System.out.println(text);
@@ -198,7 +180,8 @@ public final class Parser {
         colFormula = cell.getColumnIndex();
         rowFormula = cell.getRowIndex();
         String formulaAddress = Start.cellAddress(rowFormula, colFormula);
-        //String formulaText = cell.getCellFormula();
+        String text = cell.getCellFormula();
+        System.out.println("RAW>> " + formulaAddress + " = " + text);
         //verbose(formulaAddress + " = " + formulaText);
         Ptg[] formulaPtgs = helper.tokens(this.sheet, this.rowFormula, this.colFormula);
         if ( formulaPtgs == null ) {
@@ -495,9 +478,7 @@ public final class Parser {
         if ( errors ) System.err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
     }
 
-    /**
-     * Used
-     */
+
 
     protected void parseNamedRange(NamedRange tNamedRange) {
         stack.push(tNamedRange);
@@ -542,9 +523,6 @@ public final class Parser {
 
     // TERMINAL AND NON TERMINAL BEGIN
 
-    /**
-     * Used
-     */
 
     protected void parseParenthesisFormula() {
         var formula = (Formula) stack.pop();
@@ -553,9 +531,7 @@ public final class Parser {
         stack.push(parFormula);
     }
 
-    /**
-     * Used
-     */
+
     protected void parseUDF(String arguments) {
         var term = new UDF(arguments);
         setOwnProperty(term);
@@ -873,7 +849,6 @@ public final class Parser {
         stack.push(minus);
     }
 
-    // TERMINAL AND NON TERMINAL END
 
     private void builtInFunction(int arity, String name) throws UnsupportedBuiltinException {
         var factory = new BuiltinFactory();
@@ -907,8 +882,6 @@ public final class Parser {
     }
 
 
-//Unary BEGIN
-
     /**
      * F F
      */
@@ -934,10 +907,6 @@ public final class Parser {
         graph.add(union);
         stack.push(union);
     }
-//Unary END
-
-
-//Union & Intersection BEGIN
 
     //
     protected void parseErrorLiteral(@NotNull ERROR term) {
@@ -952,9 +921,7 @@ public final class Parser {
         graph.addNode(term);
         stack.push(term);
     }
-//Union & Intersection END
 
-//Constants BEGIN
 
     //
     protected void parseStringLiteral(@NotNull TEXT term) {
@@ -1028,5 +995,4 @@ public final class Parser {
 
     }
 
-//Constants END
 }
