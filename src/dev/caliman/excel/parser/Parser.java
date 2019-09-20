@@ -56,10 +56,12 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import static java.lang.System.err;
+import static java.lang.System.out;
 import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
 import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 
-//
+
 /**
  * @author Massimo Caliman
  */
@@ -132,11 +134,10 @@ public final class Parser {
         this.helper = new Helper(this.book);
         print();
         this.fileName = file.getName();
-
-        unordered = new StartList();
-        ordered = new StartList();
-        graph = new StartGraph();
-        stack = new Stack<>();
+        this.unordered = new StartList();
+        this.ordered = new StartList();
+        this.graph = new StartGraph();
+        this.stack = new Stack<>();
     }
 
     public int getCounterFormulas() {
@@ -148,7 +149,7 @@ public final class Parser {
     }
 
     private void verbose(String text) {
-        if ( this.verbose ) System.out.println(text);
+        if ( this.verbose ) out.println(text);
     }
 
     private void parse(@NotNull Sheet sheet) {
@@ -185,11 +186,11 @@ public final class Parser {
         rowFormula = cell.getRowIndex();
         String formulaAddress = Start.cellAddress(rowFormula, colFormula);
         String text = cell.getCellFormula();
-        System.out.println("RAW>> " + formulaAddress + " = " + text);
+        out.println("RAW>> " + formulaAddress + " = " + text);
         Ptg[] formulaPtgs = helper.tokens(this.sheet, this.rowFormula, this.colFormula);
         if ( formulaPtgs == null ) {
             String formulaText = cell.getCellFormula();
-            System.err.println("ptgs empty or null for address " + formulaAddress);
+            err.println("ptgs empty or null for address " + formulaAddress);
             err("ptgs empty or null for address " + formulaAddress, rowFormula, colFormula);
             parseUDF(formulaText);
             return;
@@ -254,8 +255,8 @@ public final class Parser {
         )) {
             stream.filter((WhatIf t) -> t.predicate.test(t.ptg)).forEach(t -> t.consumer.accept(t.ptg));
         } catch (Exception e) {
-            System.err.println("parse: " + p.getClass().getSimpleName());
-            System.err.println(this.sheetName + "row:" + row + "column:" + column + e.getMessage());
+            err.println("parse: " + p.getClass().getSimpleName());
+            err.println(this.sheetName + "row:" + row + "column:" + column + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -436,7 +437,7 @@ public final class Parser {
     }
 
     private void print() {
-        System.out.println("Parse...");
+        out.println("Parse...");
     }
 
     public void parse() {
@@ -465,7 +466,7 @@ public final class Parser {
 
 
     private void err(String string, int row, int column) {
-        System.err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
+        err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
     }
 
 
