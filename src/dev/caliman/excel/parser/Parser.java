@@ -108,11 +108,11 @@ public final class Parser {
     private final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
     public boolean verbose = false;
-    protected int colFormula;//Current Formula Column
-    protected int rowFormula;//Current Formula Row
-    protected int sheetIndex;//Current Sheet Index
-    protected String sheetName;//Current Sheet Name
-    protected boolean isSingleSheet;
+    private int colFormula;//Current Formula Column
+    private int rowFormula;//Current Formula Row
+    private int sheetIndex;//Current Sheet Index
+    private String sheetName;//Current Sheet Name
+    private boolean isSingleSheet;
     private Workbook book;
     private Helper helper;
     private List<Cell> ext;
@@ -120,6 +120,11 @@ public final class Parser {
     private Sheet sheet;//(Work)Sheet
     private boolean protectionPresent;//(Work)Book Protection Present flag
     private String fileName;
+
+    private StartList unordered;
+    private StartList ordered;
+    private StartGraph graph;
+    private Stack<Start> stack;
 
     public Parser(@NotNull String filename) throws IOException, InvalidFormatException {
         File file = new File(filename);
@@ -143,7 +148,7 @@ public final class Parser {
         return fileName;
     }
 
-    protected void verbose(String text) {
+    private void verbose(String text) {
         if ( this.verbose ) System.out.println(text);
     }
 
@@ -446,41 +451,29 @@ public final class Parser {
     }
 
 
-    //==>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FINE EX ABSTRACT
-
-    private StartList unordered;
-    private StartList ordered;
-    private StartGraph graph;
-    private Stack<Start> stack;
-
-    /**
-     * parseConstantArray
-     */
-
-    protected void parseConstantArray(Object[][] array) {
+    private void parseConstantArray(Object[][] array) {
         var term = new ConstantArray(array);
         setOwnProperty(term);
         stack.push(term);
     }
 
 
-    protected void parseMissingArguments(int row, int column) {
+    private void parseMissingArguments(int row, int column) {
         err("Missing ExcelFunction Arguments for cell: " + Start.cellAddress(row, column, sheetName), row, column);
     }
 
 
-    protected void doesFormulaReferToDeletedCell(int row, int column) {
+    private void doesFormulaReferToDeletedCell(int row, int column) {
         err(Start.cellAddress(row, column, sheetName) + " does formula refer to deleted cell", row, column);
     }
 
 
-    protected void err(String string, int row, int column) {
+    private void err(String string, int row, int column) {
         if ( errors ) System.err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
     }
 
 
-
-    protected void parseNamedRange(NamedRange tNamedRange) {
+    private void parseNamedRange(NamedRange tNamedRange) {
         stack.push(tNamedRange);
     }
 
@@ -495,8 +488,7 @@ public final class Parser {
     }
 
 
-
-    public void parseFormula(@NotNull Start obj) {
+    private void parseFormula(@NotNull Start obj) {
         setOwnProperty(obj);
         unordered.add(obj);
     }
@@ -510,12 +502,12 @@ public final class Parser {
     }
 
 
-    protected void parseFormulaInit() {
+    private void parseFormulaInit() {
         stack.empty();
     }
 
 
-    protected Start parseFormulaPost() {
+    private Start parseFormulaPost() {
         Start start = null;
         if ( !stack.empty() ) start = stack.pop();
         return start;
@@ -524,7 +516,7 @@ public final class Parser {
     // TERMINAL AND NON TERMINAL BEGIN
 
 
-    protected void parseParenthesisFormula() {
+    private void parseParenthesisFormula() {
         var formula = (Formula) stack.pop();
         var parFormula = new ParenthesisFormula(formula);
         setOwnProperty(parFormula);
@@ -532,7 +524,7 @@ public final class Parser {
     }
 
 
-    protected void parseUDF(String arguments) {
+    private void parseUDF(String arguments) {
         var term = new UDF(arguments);
         setOwnProperty(term);
         unordered.add(term);
@@ -543,7 +535,7 @@ public final class Parser {
      * F=F
      */
 
-    protected void parseEq() {
+    private void parseEq() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var eq = new Eq(lFormula, rFormula);
@@ -556,7 +548,7 @@ public final class Parser {
      * F<F
      */
 
-    protected void parseLt() {
+    private void parseLt() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var lt = new Lt(lFormula, rFormula);
@@ -569,7 +561,7 @@ public final class Parser {
      * F>F
      */
 
-    protected void parseGt() {
+    private void parseGt() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var gt = new Gt(lFormula, rFormula);
@@ -582,7 +574,7 @@ public final class Parser {
      * F<=F
      */
 
-    protected void parseLeq() {
+    private void parseLeq() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var leq = new Leq(lFormula, rFormula);
@@ -595,7 +587,7 @@ public final class Parser {
      * F>=F
      */
 
-    protected void parseGteq() {
+    private void parseGteq() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var gteq = new GtEq(lFormula, rFormula);
@@ -608,7 +600,7 @@ public final class Parser {
      * F<>F
      */
 
-    protected void parseNeq() {
+    private void parseNeq() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var neq = new Neq(lFormula, rFormula);
@@ -621,7 +613,7 @@ public final class Parser {
      * F&F
      */
 
-    protected void parseConcat() {
+    private void parseConcat() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var concat = new Concat(lFormula, rFormula);
@@ -634,7 +626,7 @@ public final class Parser {
      * F+F
      */
     //
-    protected void parseAdd() {
+    private void parseAdd() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var add = new Add(lFormula, rFormula);
@@ -647,7 +639,7 @@ public final class Parser {
      * F-F
      */
     //
-    protected void parseSub() {
+    private void parseSub() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var sub = new Sub(lFormula, rFormula);
@@ -660,7 +652,7 @@ public final class Parser {
      * F*F
      */
     //
-    protected void parseMult() {
+    private void parseMult() {
         if ( stack.empty() ) return;
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
@@ -674,7 +666,7 @@ public final class Parser {
      * F/F
      */
     //
-    protected void parseDiv() {
+    private void parseDiv() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var div = new Divide(lFormula, rFormula);
@@ -687,7 +679,7 @@ public final class Parser {
      * F^F
      */
     //
-    protected void parsePower() {
+    private void parsePower() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var power = new Power(lFormula, rFormula);
@@ -700,7 +692,7 @@ public final class Parser {
      * F%
      */
     //
-    protected void percentFormula() {
+    private void percentFormula() {
         var formula = (Formula) stack.pop();
         var percentFormula = new PercentFormula(formula);
         setOwnProperty(percentFormula);
@@ -712,7 +704,7 @@ public final class Parser {
      * #REF
      */
     //
-    protected void parseReferenceErrorLiteral(@NotNull ERROR_REF error) {
+    private void parseReferenceErrorLiteral(@NotNull ERROR_REF error) {
         setOwnProperty(error);
         stack.push(error);
         err("", rowFormula, colFormula);
@@ -722,14 +714,14 @@ public final class Parser {
      * CELLREF
      */
     //
-    protected void parseCELL_REFERENCE(@NotNull CELL tCELL_REFERENCE) {
+    private void parseCELL_REFERENCE(@NotNull CELL tCELL_REFERENCE) {
         setOwnProperty(tCELL_REFERENCE);
         this.unordered.add(tCELL_REFERENCE);
         stack.push(tCELL_REFERENCE);
     }
 
     //
-    protected void parseCELL_REFERENCELinked(@NotNull CELL tCELL_REFERENCE) {
+    private void parseCELL_REFERENCELinked(@NotNull CELL tCELL_REFERENCE) {
         setOwnProperty(tCELL_REFERENCE);
         this.unordered.add(tCELL_REFERENCE);
         stack.push(tCELL_REFERENCE);
@@ -741,7 +733,7 @@ public final class Parser {
      * Sheet2!A1:B1 (Sheet + AREA/RANGE)
      */
     //
-    protected void parseArea3D(RANGE tRANGE, @NotNull SHEET tSHEET, String area) {
+    private void parseArea3D(RANGE tRANGE, @NotNull SHEET tSHEET, String area) {
         var term = new PrefixReferenceItem(tSHEET, area, tRANGE);
         term.setSheetIndex(tSHEET.getIndex());
         term.setSheetName(tSHEET.getName());
@@ -757,7 +749,7 @@ public final class Parser {
      * @param cellref
      */
     //
-    protected void parseReference(FILE tFILE, String cellref) {
+    private void parseReference(FILE tFILE, String cellref) {
         var term = new PrefixReferenceItem(tFILE, cellref, null);
         setOwnProperty(term);
         graph.addNode(term);
@@ -765,7 +757,7 @@ public final class Parser {
     }
 
     //
-    protected void parseReference(SHEET tSHEET, String cellref) {
+    private void parseReference(SHEET tSHEET, String cellref) {
         var term = new PrefixReferenceItem(tSHEET, cellref, null);
         setOwnProperty(term);
         graph.addNode(term);
@@ -776,7 +768,7 @@ public final class Parser {
      * Used
      */
     //
-    protected void parseRangeReference(RANGE tRANGE) {
+    private void parseRangeReference(RANGE tRANGE) {
         var rangeReference = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         setOwnProperty(rangeReference);
         rangeReference.setAsArea();//is area not a cell with ref to area
@@ -789,7 +781,7 @@ public final class Parser {
      * SUM(Arguments)
      */
     //
-    protected void parseSum() {
+    private void parseSum() {
         var args = stack.pop();
         if ( args instanceof Reference || args instanceof OFFSET ) {
             args.setSheetIndex(sheetIndex);
@@ -807,7 +799,7 @@ public final class Parser {
     }
 
     //
-    protected void parseFunc(String name) {
+    private void parseFunc(String name) {
         try {
             builtinFunction(name);
         } catch (UnsupportedBuiltinException e) {
@@ -816,7 +808,7 @@ public final class Parser {
     }
 
     //
-    protected void parseFunc(String name, int arity) {
+    private void parseFunc(String name, int arity) {
         try {
             builtInFunction(arity, name);
         } catch (UnsupportedBuiltinException e) {
@@ -828,7 +820,7 @@ public final class Parser {
      * +
      */
     //
-    protected void parsePlus() {
+    private void parsePlus() {
         var formula = (Formula) stack.pop();
         var plus = new Plus(formula);
         plus.setSheetName(sheetName);
@@ -841,7 +833,7 @@ public final class Parser {
      * -
      */
     //
-    protected void parseMinus() {
+    private void parseMinus() {
         var formula = (Formula) stack.pop();
         var minus = new Minus(formula);
         setOwnProperty(minus);
@@ -886,7 +878,7 @@ public final class Parser {
      * F F
      */
     //
-    protected void parseIntersection() {
+    private void parseIntersection() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var intersection = new Intersection(lFormula, rFormula);
@@ -899,7 +891,7 @@ public final class Parser {
      * F,F
      */
     //
-    protected void parseUnion() {
+    private void parseUnion() {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var union = new Union(lFormula, rFormula);
@@ -909,7 +901,7 @@ public final class Parser {
     }
 
     //
-    protected void parseErrorLiteral(@NotNull ERROR term) {
+    private void parseErrorLiteral(@NotNull ERROR term) {
         setOwnProperty(term);
         err(term.toString(), rowFormula, colFormula);
         graph.addNode(term);
@@ -917,26 +909,26 @@ public final class Parser {
     }
 
     //
-    protected void parseBooleanLiteral(@NotNull BOOL term) {
+    private void parseBooleanLiteral(@NotNull BOOL term) {
         graph.addNode(term);
         stack.push(term);
     }
 
 
     //
-    protected void parseStringLiteral(@NotNull TEXT term) {
+    private void parseStringLiteral(@NotNull TEXT term) {
         graph.addNode(term);
         stack.push(term);
     }
 
     //
-    protected void parseIntLiteral(@NotNull INT term) {
+    private void parseIntLiteral(@NotNull INT term) {
         graph.addNode(term);
         stack.push(term);
     }
 
     //
-    protected void parseFloatLiteral(@NotNull FLOAT term) {
+    private void parseFloatLiteral(@NotNull FLOAT term) {
         graph.addNode(term);
         stack.push(term);
     }
