@@ -235,7 +235,7 @@ public final class Parser {
                 new WhatIf(p, deletedRef3DPtg, (Ptg t) -> parseDeletedRef3DPtg((DeletedRef3DPtg) t)),
                 new WhatIf(p, dividePtg, t -> parseDiv()),
                 new WhatIf(p, equalPtg, t -> parseEq()),
-                new WhatIf(p, errPtg, (Ptg t) -> parseErrorLiteral((ErrPtg) t)),
+                new WhatIf(p, errPtg, (Ptg t) -> parseERROR((ErrPtg) t)),
                 new WhatIf(p, funcPtg, (Ptg t) -> parseFuncPtg((FuncPtg) t)),
                 new WhatIf(p, funcVarPtg, (Ptg t) -> parseFuncVarPtg((FuncVarPtg) t)),
                 new WhatIf(p, greaterEqualPtg, t -> parseGteq()),
@@ -478,7 +478,7 @@ public final class Parser {
     }
 
     //@todo impl. DATE
-    private void parseErrorLiteral(ErrPtg t) {
+    private void parseERROR(ErrPtg t) {
         String text;
         if ( t == NULL_INTERSECTION ) text = "#NULL!";
         else if ( t == DIV_ZERO ) text = "#DIV/0!";
