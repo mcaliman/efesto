@@ -208,10 +208,18 @@ public final class Parser {
         return start;
     }
 
+    private void parseUDF(String arguments) {
+        var term = new UDF(arguments);
+        setOwnProperty(term);
+        unordered.add(term);
+        stack.push(term);
+    }
+
+
     private void parse(@NotNull Ptg p, int row, int column) {
         verbose("parse: " + p.getClass().getSimpleName());
         try (Stream<WhatIf> stream = Stream.of(
-                new WhatIf(p, arrayPtg, (Ptg t) -> parseArrayPtg((ArrayPtg) t)),
+                new WhatIf(p, arrayPtg, (Ptg t) -> parseConstantArray((ArrayPtg) t)),
                 new WhatIf(p, addPtg, (Ptg t) -> parseAdd()),
                 new WhatIf(p, area3DPxg, (Ptg t) -> parseArea3DPxg((Area3DPxg) t)),
                 new WhatIf(p, areaErrPtg, (Ptg t) -> parseAreaErrPtg((AreaErrPtg) t)),
@@ -347,7 +355,7 @@ public final class Parser {
 
     private void parseAreaPtg(@NotNull AreaPtg t) {
         RANGE tRANGE = helper.getRANGE(sheet, t);
-        // parseRangeReference
+        // RangeReference
         var term = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         term.setColumn(colFormula);
         term.setRow(rowFormula);
@@ -381,7 +389,6 @@ public final class Parser {
         NamedRange term = new NamedRange(name, tRANGE);
         term.setSheetIndex(sheetIndex);
         term.setSheetName(range.getSheetName());
-        //parseNamedRange(term);
         stack.push(term);
     }
 
@@ -396,7 +403,6 @@ public final class Parser {
         }
         CELL term = new CELL(t.getRow(), t.getColumn());
         term.setValue(value);
-
         //parse CELL
         term.setColumn(colFormula);
         term.setRow(rowFormula);
@@ -408,11 +414,9 @@ public final class Parser {
     }
 
 
-    private void parseArrayPtg(@NotNull ArrayPtg t) {
-        parseConstantArray(t.getTokenArrayValues());
-    }
-
-    private void parseConstantArray(Object[][] array) {
+    private void parseConstantArray(@NotNull ArrayPtg t) {
+        Object[][] array = t.getTokenArrayValues();
+        // ConstantArray
         var term = new ConstantArray(array);
         term.setColumn(colFormula);
         term.setRow(rowFormula);
@@ -426,6 +430,23 @@ public final class Parser {
         if ( t.isSum() ) parseSum();
     }
 
+    private void parseSum() {
+        // SUM(Arguments)
+        var args = stack.pop();
+        if ( args instanceof Reference || args instanceof OFFSET ) {
+            args.setSheetIndex(sheetIndex);
+            args.setSheetName(sheetName);
+            args.setAsArea();
+            unordered.add(args);
+        } else {
+            err("Not RangeReference " + args.getClass().getSimpleName() + " " + args.toString(), rowFormula, colFormula);
+        }
+        var term = new SUM((Formula) args);
+        setOwnProperty(term);
+        unordered.add(term);
+        graph.add(term);
+        stack.push(term);
+    }
     private void parseFuncVarPtg(@NotNull FuncVarPtg t) {
         if ( t.getNumberOfOperands() == 0 ) parseFunc(t.getName());
         else parseFunc(t.getName(), t.getNumberOfOperands());
@@ -455,11 +476,8 @@ public final class Parser {
         else if ( t == NUM_ERROR ) text = "#NUM!";
         else if ( t == N_A ) text = "#N/A";
         else text = "FIXME!";
+        // ERROR
         var term = new ERROR(text);
-        parseErrorLiteral(term);
-    }
-
-    private void parseErrorLiteral(@NotNull ERROR term) {
         term.setColumn(colFormula);
         term.setRow(rowFormula);
         term.setSheetIndex(sheetIndex);
@@ -470,6 +488,7 @@ public final class Parser {
         graph.addNode(term);
         stack.push(term);
     }
+
 
     private void parseBooleanLiteral(Boolean bool) {
         var term = new BOOL(bool);
@@ -556,12 +575,6 @@ public final class Parser {
     }
 
 
-    private void parseUDF(String arguments) {
-        var term = new UDF(arguments);
-        setOwnProperty(term);
-        unordered.add(term);
-        stack.push(term);
-    }
 
     private void parseEq() {
         // F=F
@@ -707,23 +720,6 @@ public final class Parser {
         stack.push(term);
     }
 
-    private void parseSum() {
-        // SUM(Arguments)
-        var args = stack.pop();
-        if ( args instanceof Reference || args instanceof OFFSET ) {
-            args.setSheetIndex(sheetIndex);
-            args.setSheetName(sheetName);
-            args.setAsArea();
-            unordered.add(args);
-        } else {
-            err("Not RangeReference " + args.getClass().getSimpleName() + " " + args.toString(), rowFormula, colFormula);
-        }
-        var term = new SUM((Formula) args);
-        setOwnProperty(term);
-        unordered.add(term);
-        graph.add(term);
-        stack.push(term);
-    }
 
     private void parseFunc(String name) {
         try {
