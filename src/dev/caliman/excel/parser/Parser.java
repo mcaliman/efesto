@@ -365,7 +365,6 @@ public final class Parser {
             if ( ptg != null ) {
                 if ( ptg instanceof Area3DPxg ) {
                     Area3DPxg area3DPxg = (Area3DPxg) ptg;
-
                     range = new RangeInternal(book, area3DPxg.getSheetName(), area3DPxg);
                     sheetIndex = helper.getSheetIndex(area3DPxg.getSheetName());
                 }
@@ -389,9 +388,9 @@ public final class Parser {
             Cell c = rowObject.getCell(t.getColumn());
             value = Helper.valueOf(c);
         }
-        CELL tCELL_REFERENCE = new CELL(t.getRow(), t.getColumn());
-        tCELL_REFERENCE.setValue(value);
-        parseCELL_REFERENCE(tCELL_REFERENCE);
+        CELL cellRef = new CELL(t.getRow(), t.getColumn());
+        cellRef.setValue(value);
+        parseCELL_REFERENCE(cellRef);
     }
 
     private void parseCELL_REFERENCE(@NotNull CELL tCELL_REFERENCE) {
@@ -486,15 +485,12 @@ public final class Parser {
 
     private void parseReferenceErrorLiteral() {
         ERROR_REF term = new ERROR_REF();
-        parseReferenceErrorLiteral(term);
-    }
-
-    private void parseReferenceErrorLiteral(@NotNull ERROR_REF error) {
         //#REF
-        setOwnProperty(error);
-        stack.push(error);
+        setOwnProperty(term);
+        stack.push(term);
         err("", rowFormula, colFormula);
     }
+
 
     public void parse() {
         this.isSingleSheet = this.book.getNumberOfSheets() == 1;
