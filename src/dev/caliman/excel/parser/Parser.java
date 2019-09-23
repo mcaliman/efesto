@@ -510,7 +510,11 @@ public final class Parser {
 
 
     private void parseFormula(@NotNull Start obj) {
-        setOwnProperty(obj);
+        obj.setColumn(colFormula);
+        obj.setRow(rowFormula);
+        obj.setSheetIndex(sheetIndex);
+        obj.setSheetName(sheetName);
+        obj.setSingleSheet(this.isSingleSheet);
         unordered.add(obj);
     }
 
