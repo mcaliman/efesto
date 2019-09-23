@@ -170,11 +170,11 @@ public final class Parser {
         } else if ( this.ext.contains(cell) ) {
             verbose("Recover loosed cell!");
             Object obj = Helper.valueOf(cell);
-            CELL cell_reference = new CELL(cell.getRowIndex(), cell.getColumnIndex());
-            cell_reference.setValue(obj);
-            cell_reference.setSheetName(cell.getSheet().getSheetName());
-            cell_reference.setSheetIndex(helper.getSheetIndex(cell.getSheet().getSheetName()));
-            parseCELL_REFERENCELinked(cell_reference);
+            CELL cellRef = new CELL(cell.getRowIndex(), cell.getColumnIndex());
+            cellRef.setValue(obj);
+            cellRef.setSheetName(cell.getSheet().getSheetName());
+            cellRef.setSheetIndex(helper.getSheetIndex(cell.getSheet().getSheetName()));
+            parseCELLlinked(cellRef);
             this.ext.remove(cell);
         }
     }
@@ -202,10 +202,12 @@ public final class Parser {
     }
 
     private Start parse(@NotNull Ptg[] ptgs) {
-        parseFormulaInit();
+        stack.empty();
         if ( Ptg.doesFormulaReferToDeletedCell(ptgs) ) doesFormulaReferToDeletedCell(rowFormula, colFormula);
         for (Ptg ptg : ptgs) parse(ptg, rowFormula, colFormula);
-        return parseFormulaPost();
+        Start start = null;
+        if ( !stack.empty() ) start = stack.pop();
+        return start;
     }
 
     private void parse(@NotNull Ptg p, int row, int column) {
@@ -288,7 +290,6 @@ public final class Parser {
         err("Error Unknown Ptg: " + t.toString(), rowFormula, colFormula);
     }
 
-
     private void parseArea3DPxg(@NotNull Area3DPxg t) {
         // Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
         // external or different sheet.
@@ -354,7 +355,6 @@ public final class Parser {
         graph.addNode(rangeReference);
         stack.push(rangeReference);
     }
-
 
     private void parseNamePtg(@NotNull NamePtg t) {
         RangeInternal range = null;
@@ -447,6 +447,13 @@ public final class Parser {
         parseErrorLiteral(term);
     }
 
+    private void parseErrorLiteral(@NotNull ERROR term) {
+        setOwnProperty(term);
+        err(term.toString(), rowFormula, colFormula);
+        graph.addNode(term);
+        stack.push(term);
+    }
+
     private void parseBooleanLiteral(Boolean bool) {
         var term = new BOOL(bool);
         parseBooleanLiteral(term);
@@ -456,7 +463,6 @@ public final class Parser {
         graph.addNode(term);
         stack.push(term);
     }
-
     private void parseStringLiteral(String string) {
         var term = new TEXT(string);
         parseStringLiteral(term);
@@ -474,10 +480,6 @@ public final class Parser {
 
     private void parseFloatLiteral(Double value) {
         var term = new FLOAT(value);
-        parseFloatLiteral(term);
-    }
-
-    private void parseFloatLiteral(@NotNull FLOAT term) {
         graph.addNode(term);
         stack.push(term);
     }
@@ -526,16 +528,9 @@ public final class Parser {
     }
 
 
-    private void parseFormulaInit() {
-        stack.empty();
-    }
 
 
-    private Start parseFormulaPost() {
-        Start start = null;
-        if ( !stack.empty() ) start = stack.pop();
-        return start;
-    }
+
 
     // TERMINAL AND NON TERMINAL BEGIN
 
@@ -691,7 +686,7 @@ public final class Parser {
         stack.push(percentFormula);
     }
 
-    private void parseCELL_REFERENCELinked(@NotNull CELL tCELL_REFERENCE) {
+    private void parseCELLlinked(@NotNull CELL tCELL_REFERENCE) {
         setOwnProperty(tCELL_REFERENCE);
         this.unordered.add(tCELL_REFERENCE);
         stack.push(tCELL_REFERENCE);
@@ -805,12 +800,6 @@ public final class Parser {
         stack.push(union);
     }
 
-    private void parseErrorLiteral(@NotNull ERROR term) {
-        setOwnProperty(term);
-        err(term.toString(), rowFormula, colFormula);
-        graph.addNode(term);
-        stack.push(term);
-    }
 
     private void parseStringLiteral(@NotNull TEXT term) {
         graph.addNode(term);
