@@ -455,13 +455,10 @@ public final class Parser {
 
     private void parseBooleanLiteral(Boolean bool) {
         var term = new BOOL(bool);
-        parseBooleanLiteral(term);
-    }
-
-    private void parseBooleanLiteral(@NotNull BOOL term) {
         graph.addNode(term);
         stack.push(term);
     }
+
     private void parseStringLiteral(String string) {
         var term = new TEXT(string);
         graph.addNode(term);
@@ -471,10 +468,6 @@ public final class Parser {
 
     private void parseIntLiteral(Integer value) {
         var term = new INT(value);
-        parseIntLiteral(term);
-    }
-
-    private void parseIntLiteral(@NotNull INT term) {
         graph.addNode(term);
         stack.push(term);
     }
