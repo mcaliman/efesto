@@ -807,15 +807,11 @@ public final class Parser {
         // -
         var formula = (Formula) stack.pop();
         var minus = new Minus(formula);
-
-
         minus.setColumn(colFormula);
         minus.setRow(rowFormula);
         minus.setSheetIndex(sheetIndex);
         minus.setSheetName(sheetName);
         minus.setSingleSheet(this.isSingleSheet);
-
-
         graph.addNode(minus);
         stack.push(minus);
     }
@@ -827,7 +823,6 @@ public final class Parser {
         var builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
         Start[] args = factory.getArgs();
         for (int i = arity - 1; i >= 0; i--) if ( !stack.empty() ) args[i] = stack.pop();
-
 
         builtinFunction.setColumn(colFormula);
         builtinFunction.setRow(rowFormula);
@@ -881,7 +876,6 @@ public final class Parser {
         var lFormula = (Formula) stack.pop();
         var union = new Union(lFormula, rFormula);
 
-
         union.setColumn(colFormula);
         union.setRow(rowFormula);
         union.setSheetIndex(sheetIndex);
@@ -892,7 +886,9 @@ public final class Parser {
         stack.push(union);
     }
 
+    // METHODS
 
+    // ERROR
     private void parseMissingArguments(int row, int column) {
         err("Missing ExcelFunction Arguments for cell: " + Start.cellAddress(row, column, sheetName), row, column);
     }
@@ -900,11 +896,11 @@ public final class Parser {
     private void doesFormulaReferToDeletedCell(int row, int column) {
         err(Start.cellAddress(row, column, sheetName) + " does formula refer to deleted cell", row, column);
     }
-
     private void err(String string, int row, int column) {
         err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
     }
 
+    // INNER CLASS
     class WhatIf {
 
         final Ptg ptg;
