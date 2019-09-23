@@ -348,10 +348,8 @@ public final class Parser {
     }
 
     private void parseAreaPtg(@NotNull AreaPtg t) {
-        parseRangeReference(helper.getRANGE(sheet, t));
-    }
-
-    private void parseRangeReference(RANGE tRANGE) {
+        RANGE tRANGE = helper.getRANGE(sheet, t);
+        // parseRangeReference
         var term = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         term.setColumn(colFormula);
         term.setRow(rowFormula);
@@ -363,7 +361,9 @@ public final class Parser {
         term.add(tRANGE.values());
         graph.addNode(term);
         stack.push(term);
+
     }
+
 
     private void parseNamePtg(@NotNull NamePtg t) {
         RangeInternal range = null;
@@ -383,12 +383,11 @@ public final class Parser {
         NamedRange term = new NamedRange(name, tRANGE);
         term.setSheetIndex(sheetIndex);
         term.setSheetName(range.getSheetName());
-        parseNamedRange(term);
+        //parseNamedRange(term);
+        stack.push(term);
     }
 
-    private void parseNamedRange(NamedRange tNamedRange) {
-        stack.push(tNamedRange);
-    }
+
 
     private void parseRefPtg(@NotNull RefPtg t) {
         Row rowObject = sheet.getRow(t.getRow());
@@ -397,12 +396,10 @@ public final class Parser {
             Cell c = rowObject.getCell(t.getColumn());
             value = Helper.valueOf(c);
         }
-        CELL cellRef = new CELL(t.getRow(), t.getColumn());
-        cellRef.setValue(value);
-        parseCELL_REFERENCE(cellRef);
-    }
+        CELL term = new CELL(t.getRow(), t.getColumn());
+        term.setValue(value);
 
-    private void parseCELL_REFERENCE(@NotNull CELL term) {
+        //parseCELL_REFERENCE(cellRef);
         term.setColumn(colFormula);
         term.setRow(rowFormula);
         term.setSheetIndex(sheetIndex);
@@ -411,6 +408,7 @@ public final class Parser {
         this.unordered.add(term);
         stack.push(term);
     }
+
 
     private void parseArrayPtg(@NotNull ArrayPtg t) {
         parseConstantArray(t.getTokenArrayValues());
