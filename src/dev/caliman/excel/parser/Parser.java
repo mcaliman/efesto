@@ -464,8 +464,10 @@ public final class Parser {
     }
     private void parseStringLiteral(String string) {
         var term = new TEXT(string);
-        parseStringLiteral(term);
+        graph.addNode(term);
+        stack.push(term);
     }
+
 
     private void parseIntLiteral(Integer value) {
         var term = new INT(value);
@@ -801,10 +803,6 @@ public final class Parser {
     }
 
 
-    private void parseStringLiteral(@NotNull TEXT term) {
-        graph.addNode(term);
-        stack.push(term);
-    }
 
     private void parseMissingArguments(int row, int column) {
         err("Missing ExcelFunction Arguments for cell: " + Start.cellAddress(row, column, sheetName), row, column);
