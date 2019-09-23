@@ -210,18 +210,14 @@ public final class Parser {
 
     private void parseUDF(String arguments) {
         var term = new UDF(arguments);
-
-
         term.setColumn(colFormula);
         term.setRow(rowFormula);
         term.setSheetIndex(sheetIndex);
         term.setSheetName(sheetName);
         term.setSingleSheet(this.isSingleSheet);
-
         unordered.add(term);
         stack.push(term);
     }
-
 
     private void parse(@NotNull Ptg p, int row, int column) {
         verbose("parse: " + p.getClass().getSimpleName());
@@ -251,7 +247,7 @@ public final class Parser {
                 new WhatIf(p, memErrPtg, (Ptg t) -> parseMemErrPtg((MemErrPtg) t)),
                 new WhatIf(p, missingArgPtg, (Ptg t) -> parseMissingArgPtg(row, column)),
                 new WhatIf(p, multiplyPtg, t -> parseMult()),
-                new WhatIf(p, namePtg, (Ptg t) -> parseNamePtg((NamePtg) t)),
+                new WhatIf(p, namePtg, (Ptg t) -> parseNamedRange((NamePtg) t)),
                 new WhatIf(p, notEqualPtg, t -> parseNeq()),
                 new WhatIf(p, numberPtg, t -> parseFloatLiteral(((NumberPtg) t).getValue())),
                 new WhatIf(p, parenthesisPtg, t -> parseParenthesisFormula()),
@@ -377,8 +373,7 @@ public final class Parser {
 
     }
 
-
-    private void parseNamePtg(@NotNull NamePtg t) {
+    private void parseNamedRange(@NotNull NamePtg t) {
         RangeInternal range = null;
         Ptg[] ptgs = helper.getName(t);
         String name = helper.getNameText(t);
@@ -393,13 +388,11 @@ public final class Parser {
             }
         }
         RANGE tRANGE = Objects.requireNonNull(range).getRANGE();
-        NamedRange term = new NamedRange(name, tRANGE);
-        term.setSheetIndex(sheetIndex);
-        term.setSheetName(range.getSheetName());
-        stack.push(term);
+        NamedRange namedRange = new NamedRange(name, tRANGE);
+        namedRange.setSheetIndex(sheetIndex);
+        namedRange.setSheetName(range.getSheetName());
+        stack.push(namedRange);
     }
-
-
 
     private void parseRefPtg(@NotNull RefPtg t) {
         Row rowObject = sheet.getRow(t.getRow());
@@ -450,7 +443,6 @@ public final class Parser {
         }
         var term = new SUM((Formula) args);
 
-
         term.setColumn(colFormula);
         term.setRow(rowFormula);
         term.setSheetIndex(sheetIndex);
@@ -461,9 +453,12 @@ public final class Parser {
         graph.add(term);
         stack.push(term);
     }
+
     private void parseFuncVarPtg(@NotNull FuncVarPtg t) {
-        if ( t.getNumberOfOperands() == 0 ) parseFunc(t.getName());
-        else parseFunc(t.getName(), t.getNumberOfOperands());
+        int arity = t.getNumberOfOperands();
+        String name = t.getName();
+        if ( arity == 0 ) parseFunc(name);
+        else parseFunc(name, arity);
     }
 
     private void parseFuncPtg(@NotNull FuncPtg t) {
@@ -560,13 +555,13 @@ public final class Parser {
     }
 
 
-    private void parseFormula(@NotNull Start obj) {
-        obj.setColumn(colFormula);
-        obj.setRow(rowFormula);
-        obj.setSheetIndex(sheetIndex);
-        obj.setSheetName(sheetName);
-        obj.setSingleSheet(this.isSingleSheet);
-        unordered.add(obj);
+    private void parseFormula(@NotNull Start formula) {
+        formula.setColumn(colFormula);
+        formula.setRow(rowFormula);
+        formula.setSheetIndex(sheetIndex);
+        formula.setSheetName(sheetName);
+        formula.setSingleSheet(this.isSingleSheet);
+        unordered.add(formula);
     }
 
 
@@ -582,70 +577,58 @@ public final class Parser {
     }
 
 
-
     private void parseEq() {
         // F=F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var eq = new Eq(lFormula, rFormula);
-
-
         eq.setColumn(colFormula);
         eq.setRow(rowFormula);
         eq.setSheetIndex(sheetIndex);
         eq.setSheetName(sheetName);
         eq.setSingleSheet(this.isSingleSheet);
-
-
         graph.add(eq);
         stack.push(eq);
     }
+
     private void parseLt() {
         // F<F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var lt = new Lt(lFormula, rFormula);
-
-
         lt.setColumn(colFormula);
         lt.setRow(rowFormula);
         lt.setSheetIndex(sheetIndex);
         lt.setSheetName(sheetName);
         lt.setSingleSheet(this.isSingleSheet);
-
         graph.add(lt);
         stack.push(lt);
     }
+
     private void parseGt() {
         // F>F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var gt = new Gt(lFormula, rFormula);
-
-
         gt.setColumn(colFormula);
         gt.setRow(rowFormula);
         gt.setSheetIndex(sheetIndex);
         gt.setSheetName(sheetName);
         gt.setSingleSheet(this.isSingleSheet);
-
-
         graph.add(gt);
         stack.push(gt);
     }
+
     private void parseLeq() {
         // F<=F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var leq = new Leq(lFormula, rFormula);
-
-
         leq.setColumn(colFormula);
         leq.setRow(rowFormula);
         leq.setSheetIndex(sheetIndex);
         leq.setSheetName(sheetName);
         leq.setSingleSheet(this.isSingleSheet);
-
         graph.add(leq);
         stack.push(leq);
     }
@@ -655,13 +638,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var gteq = new GtEq(lFormula, rFormula);
-
         gteq.setColumn(colFormula);
         gteq.setRow(rowFormula);
         gteq.setSheetIndex(sheetIndex);
         gteq.setSheetName(sheetName);
         gteq.setSingleSheet(this.isSingleSheet);
-
         graph.add(gteq);
         stack.push(gteq);
     }
@@ -671,15 +652,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var neq = new Neq(lFormula, rFormula);
-
-
         neq.setColumn(colFormula);
         neq.setRow(rowFormula);
         neq.setSheetIndex(sheetIndex);
         neq.setSheetName(sheetName);
         neq.setSingleSheet(this.isSingleSheet);
-
-
         graph.add(neq);
         stack.push(neq);
     }
@@ -713,7 +690,6 @@ public final class Parser {
         add.setSheetIndex(sheetIndex);
         add.setSheetName(sheetName);
         add.setSingleSheet(this.isSingleSheet);
-
 
 
         graph.add(add);
@@ -943,7 +919,6 @@ public final class Parser {
         graph.add(union);
         stack.push(union);
     }
-
 
 
     private void parseMissingArguments(int row, int column) {
