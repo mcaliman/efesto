@@ -544,25 +544,14 @@ public final class Parser {
         start.setSingleSheet(this.isSingleSheet);
     }
 
-
-
-
-
-
-    // TERMINAL AND NON TERMINAL BEGIN
-
-
     private void parseParenthesisFormula() {
         var formula = (Formula) stack.pop();
         var parFormula = new ParenthesisFormula(formula);
-
-
         parFormula.setColumn(colFormula);
         parFormula.setRow(rowFormula);
         parFormula.setSheetIndex(sheetIndex);
         parFormula.setSheetName(sheetName);
         parFormula.setSingleSheet(this.isSingleSheet);
-
         stack.push(parFormula);
     }
 
@@ -575,7 +564,7 @@ public final class Parser {
     }
 
     private void parseEq() {
-        //F=F
+        // F=F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var eq = new Eq(lFormula, rFormula);
@@ -583,12 +572,8 @@ public final class Parser {
         graph.add(eq);
         stack.push(eq);
     }
-
-    /**
-     * F<F
-     */
-
     private void parseLt() {
+        // F<F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var lt = new Lt(lFormula, rFormula);
@@ -596,7 +581,6 @@ public final class Parser {
         graph.add(lt);
         stack.push(lt);
     }
-
     private void parseGt() {
         // F>F
         var rFormula = (Formula) stack.pop();
@@ -606,7 +590,6 @@ public final class Parser {
         graph.add(gt);
         stack.push(gt);
     }
-
     private void parseLeq() {
         // F<=F
         var rFormula = (Formula) stack.pop();
