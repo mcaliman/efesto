@@ -43,7 +43,6 @@ import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -119,7 +118,6 @@ public final class Parser {
     private List<Cell> ext;
     private int counterFormulas;
     private Sheet sheet;//(Work)Sheet
-    private boolean protectionPresent;//(Work)Book Protection Present flag
     private String fileName;
 
     private StartList unordered;
@@ -139,6 +137,7 @@ public final class Parser {
         this.stack = new Stack<>();
     }
 
+
     public int getCounterFormulas() {
         return counterFormulas;
     }
@@ -153,7 +152,6 @@ public final class Parser {
 
     private void parse(@NotNull Sheet sheet) {
         this.sheet = sheet;
-        protectionPresent = protectionPresent || ((XSSFSheet) sheet).validateSheetPassword("password");
         this.sheetIndex = book.getSheetIndex(sheet);
         this.sheetName = sheet.getSheetName();
         verbose("Parsing sheet-name:" + this.sheetName);
@@ -399,7 +397,7 @@ public final class Parser {
         CELL term = new CELL(t.getRow(), t.getColumn());
         term.setValue(value);
 
-        //parseCELL_REFERENCE(cellRef);
+        //parse CELL
         term.setColumn(colFormula);
         term.setRow(rowFormula);
         term.setSheetIndex(sheetIndex);
@@ -462,7 +460,6 @@ public final class Parser {
     }
 
     private void parseErrorLiteral(@NotNull ERROR term) {
-        //setOwnProperty(term);
         term.setColumn(colFormula);
         term.setRow(rowFormula);
         term.setSheetIndex(sheetIndex);
@@ -558,7 +555,14 @@ public final class Parser {
     private void parseParenthesisFormula() {
         var formula = (Formula) stack.pop();
         var parFormula = new ParenthesisFormula(formula);
-        setOwnProperty(parFormula);
+
+
+        parFormula.setColumn(colFormula);
+        parFormula.setRow(rowFormula);
+        parFormula.setSheetIndex(sheetIndex);
+        parFormula.setSheetName(sheetName);
+        parFormula.setSingleSheet(this.isSingleSheet);
+
         stack.push(parFormula);
     }
 
@@ -570,11 +574,8 @@ public final class Parser {
         stack.push(term);
     }
 
-    /**
-     * F=F
-     */
-
     private void parseEq() {
+        //F=F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var eq = new Eq(lFormula, rFormula);
