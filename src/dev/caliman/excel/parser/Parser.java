@@ -484,9 +484,13 @@ public final class Parser {
     }
 
     private void parseReferenceErrorLiteral() {
-        ERROR_REF term = new ERROR_REF();
         //#REF
-        setOwnProperty(term);
+        ERROR_REF term = new ERROR_REF();
+        term.setColumn(colFormula);
+        term.setRow(rowFormula);
+        term.setSheetIndex(sheetIndex);
+        term.setSheetName(sheetName);
+        term.setSingleSheet(this.isSingleSheet);
         stack.push(term);
         err("", rowFormula, colFormula);
     }
