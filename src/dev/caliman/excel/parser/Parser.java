@@ -569,13 +569,6 @@ public final class Parser {
         unordered.add(obj);
     }
 
-    /*private void setOwnProperty(Start start) {
-        start.setColumn(colFormula);
-        start.setRow(rowFormula);
-        start.setSheetIndex(sheetIndex);
-        start.setSheetName(sheetName);
-        start.setSingleSheet(this.isSingleSheet);
-    }*/
 
     private void parseParenthesisFormula() {
         var formula = (Formula) stack.pop();
