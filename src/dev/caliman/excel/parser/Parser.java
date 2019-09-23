@@ -182,12 +182,12 @@ public final class Parser {
         colFormula = cell.getColumnIndex();
         rowFormula = cell.getRowIndex();
         String formulaAddress = Start.cellAddress(rowFormula, colFormula);
-        String text = cell.getCellFormula();
-        out.println("RAW>> " + formulaAddress + " = " + text);
+        //String text = cell.getCellFormula();
+        //out.println("RAW>> " + formulaAddress + " = " + text);
         Ptg[] formulaPtgs = helper.tokens(this.sheet, this.rowFormula, this.colFormula);
         if ( formulaPtgs == null ) {
             String formulaText = cell.getCellFormula();
-            err.println("ptgs empty or null for address " + formulaAddress);
+            //err.println("ptgs empty or null for address " + formulaAddress);
             err("ptgs empty or null for address " + formulaAddress, rowFormula, colFormula);
             parseUDF(formulaText);
             return;
@@ -209,14 +209,14 @@ public final class Parser {
     }
 
     private void parseUDF(String arguments) {
-        var term = new UDF(arguments);
-        term.setColumn(colFormula);
-        term.setRow(rowFormula);
-        term.setSheetIndex(sheetIndex);
-        term.setSheetName(sheetName);
-        term.setSingleSheet(this.isSingleSheet);
-        unordered.add(term);
-        stack.push(term);
+        var udf = new UDF(arguments);
+        udf.setColumn(colFormula);
+        udf.setRow(rowFormula);
+        udf.setSheetIndex(sheetIndex);
+        udf.setSheetName(sheetName);
+        udf.setSingleSheet(this.isSingleSheet);
+        unordered.add(udf);
+        stack.push(udf);
     }
 
     private void parse(@NotNull Ptg p, int row, int column) {
@@ -245,7 +245,7 @@ public final class Parser {
                 new WhatIf(p, lessEqualPtg, t -> parseLeq()),
                 new WhatIf(p, lessThanPtg, t -> parseLt()),
                 new WhatIf(p, memErrPtg, (Ptg t) -> parseMemErrPtg((MemErrPtg) t)),
-                new WhatIf(p, missingArgPtg, (Ptg t) -> parseMissingArgPtg(row, column)),
+                new WhatIf(p, missingArgPtg, (Ptg t) -> parseMissingArguments(row, column)),
                 new WhatIf(p, multiplyPtg, t -> parseMult()),
                 new WhatIf(p, namePtg, (Ptg t) -> parseNamedRange((NamePtg) t)),
                 new WhatIf(p, notEqualPtg, t -> parseNeq()),
@@ -283,9 +283,10 @@ public final class Parser {
         err("DeletedRef3DPtg: " + t.toString(), rowFormula, colFormula);
     }
 
-    private void parseMissingArgPtg(int row, int column) {
-        parseMissingArguments(row, column);
+    private void parseMissingArguments(int row, int column) {
+        err("Missing ExcelFunction Arguments for cell: " + Start.cellAddress(row, column, sheetName), row, column);
     }
+
 
     private void parseDeletedArea3DPtg(@NotNull DeletedArea3DPtg t) {
         err("DeletedArea3DPtg: " + t.toString(), rowFormula, colFormula);
@@ -462,8 +463,10 @@ public final class Parser {
     }
 
     private void parseFuncPtg(@NotNull FuncPtg t) {
-        if ( t.getNumberOfOperands() == 0 ) parseFunc(t.getName());
-        else parseFunc(t.getName(), t.getNumberOfOperands());
+        int arity = t.getNumberOfOperands();
+        String name = t.getName();
+        if ( arity == 0 ) parseFunc(name);
+        else parseFunc(name, arity);
     }
 
     private void parseFunc(String name, int arity) {
@@ -886,12 +889,6 @@ public final class Parser {
         stack.push(union);
     }
 
-    // METHODS
-
-    // ERROR
-    private void parseMissingArguments(int row, int column) {
-        err("Missing ExcelFunction Arguments for cell: " + Start.cellAddress(row, column, sheetName), row, column);
-    }
 
     private void doesFormulaReferToDeletedCell(int row, int column) {
         err(Start.cellAddress(row, column, sheetName) + " does formula refer to deleted cell", row, column);
