@@ -338,7 +338,11 @@ public final class Parser {
 
     private void parseReference(SHEET tSHEET, String cellref) {
         var term = new PrefixReferenceItem(tSHEET, cellref, null);
-        setOwnProperty(term);
+        term.setColumn(colFormula);
+        term.setRow(rowFormula);
+        term.setSheetIndex(sheetIndex);
+        term.setSheetName(sheetName);
+        term.setSingleSheet(this.isSingleSheet);
         graph.addNode(term);
         stack.push(term);
     }
@@ -348,12 +352,17 @@ public final class Parser {
     }
 
     private void parseRangeReference(RANGE tRANGE) {
-        var rangeReference = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
-        setOwnProperty(rangeReference);
-        rangeReference.setAsArea();//is area not a cell with ref to area
-        rangeReference.add(tRANGE.values());
-        graph.addNode(rangeReference);
-        stack.push(rangeReference);
+        var term = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
+        term.setColumn(colFormula);
+        term.setRow(rowFormula);
+        term.setSheetIndex(sheetIndex);
+        term.setSheetName(sheetName);
+        term.setSingleSheet(this.isSingleSheet);
+
+        term.setAsArea();//is area not a cell with ref to area
+        term.add(tRANGE.values());
+        graph.addNode(term);
+        stack.push(term);
     }
 
     private void parseNamePtg(@NotNull NamePtg t) {
@@ -393,10 +402,14 @@ public final class Parser {
         parseCELL_REFERENCE(cellRef);
     }
 
-    private void parseCELL_REFERENCE(@NotNull CELL tCELL_REFERENCE) {
-        setOwnProperty(tCELL_REFERENCE);
-        this.unordered.add(tCELL_REFERENCE);
-        stack.push(tCELL_REFERENCE);
+    private void parseCELL_REFERENCE(@NotNull CELL term) {
+        term.setColumn(colFormula);
+        term.setRow(rowFormula);
+        term.setSheetIndex(sheetIndex);
+        term.setSheetName(sheetName);
+        term.setSingleSheet(this.isSingleSheet);
+        this.unordered.add(term);
+        stack.push(term);
     }
 
     private void parseArrayPtg(@NotNull ArrayPtg t) {
@@ -405,7 +418,11 @@ public final class Parser {
 
     private void parseConstantArray(Object[][] array) {
         var term = new ConstantArray(array);
-        setOwnProperty(term);
+        term.setColumn(colFormula);
+        term.setRow(rowFormula);
+        term.setSheetIndex(sheetIndex);
+        term.setSheetName(sheetName);
+        term.setSingleSheet(this.isSingleSheet);
         stack.push(term);
     }
 
@@ -447,7 +464,13 @@ public final class Parser {
     }
 
     private void parseErrorLiteral(@NotNull ERROR term) {
-        setOwnProperty(term);
+        //setOwnProperty(term);
+        term.setColumn(colFormula);
+        term.setRow(rowFormula);
+        term.setSheetIndex(sheetIndex);
+        term.setSheetName(sheetName);
+        term.setSingleSheet(this.isSingleSheet);
+
         err(term.toString(), rowFormula, colFormula);
         graph.addNode(term);
         stack.push(term);
