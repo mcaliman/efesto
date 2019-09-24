@@ -215,14 +215,14 @@ public final class Parser {
                 new WhatIf(p, arrayPtg, (Ptg t) -> parseConstantArray((ArrayPtg) t)),
                 new WhatIf(p, addPtg, (Ptg t) -> parseAdd()),
                 new WhatIf(p, area3DPxg, (Ptg t) -> parseArea3DPxg((Area3DPxg) t)),
-                new WhatIf(p, areaErrPtg, (Ptg t) -> parseAreaErrPtg((AreaErrPtg) t)),
+                new WhatIf(p, areaErrPtg, (Ptg t) -> parseErrPtg((AreaErrPtg) t)),
                 new WhatIf(p, areaPtg, (Ptg t) -> parseAreaPtg((AreaPtg) t)),
                 new WhatIf(p, attrPtg, (Ptg t) -> parseAttrPtg((AttrPtg) t)),
                 new WhatIf(p, boolPtg, t -> parseBOOL(((BoolPtg) t).getValue())),
                 new WhatIf(p, concatPtg, t -> parseConcat()),
-                new WhatIf(p, deleted3DPxg, (Ptg t) -> parseDeleted3DPxg((Deleted3DPxg) t)),
-                new WhatIf(p, deletedArea3DPtg, (Ptg t) -> parseDeletedArea3DPtg((DeletedArea3DPtg) t)),
-                new WhatIf(p, deletedRef3DPtg, (Ptg t) -> parseDeletedRef3DPtg((DeletedRef3DPtg) t)),
+                new WhatIf(p, deleted3DPxg, (Ptg t) -> parseErrPtg((Deleted3DPxg) t)),
+                new WhatIf(p, deletedArea3DPtg, (Ptg t) -> parseErrPtg((DeletedArea3DPtg) t)),
+                new WhatIf(p, deletedRef3DPtg, (Ptg t) -> parseErrPtg((DeletedRef3DPtg) t)),
                 new WhatIf(p, dividePtg, t -> parseDiv()),
                 new WhatIf(p, equalPtg, t -> parseEq()),
                 new WhatIf(p, errPtg, (Ptg t) -> parseERROR((ErrPtg) t)),
@@ -251,7 +251,7 @@ public final class Parser {
                 new WhatIf(p, unaryMinusPtg, (Ptg t) -> parseMinus()),
                 new WhatIf(p, unaryPlusPtg, (Ptg t) -> parsePlus()),
                 new WhatIf(p, unionPtg, t -> parseUnion()),
-                new WhatIf(p, unknownPtg, (Ptg t) -> parseUnknownPtg((UnknownPtg) t))
+                new WhatIf(p, unknownPtg, (Ptg t) -> parseErrPtg((UnknownPtg) t))
         )) {
             stream.filter((WhatIf t) -> t.predicate.test(t.ptg)).forEach(t -> t.consumer.accept(t.ptg));
         } catch (Exception e) {
@@ -265,32 +265,11 @@ public final class Parser {
         err(t.getClass().getName() + ": " + t.toString());
     }
 
-    /*private void parseMemErrPtg(MemErrPtg t) {
-        err("MemErrPtg: " + t.toString());
-    }*/
 
-    private void parseDeleted3DPxg(Deleted3DPxg t) {
-        err("Deleted3DPxg: " + t.toString());
-    }
 
-    private void parseDeletedRef3DPtg(DeletedRef3DPtg t) {
-        err("DeletedRef3DPtg: " + t.toString());
-    }
 
     private void parseMissingArguments() {
         err("Missing ExcelFunction Arguments for cell: " + getCellAddress());
-    }
-
-    private void parseDeletedArea3DPtg(DeletedArea3DPtg t) {
-        err("DeletedArea3DPtg: " + t.toString());
-    }
-
-    private void parseAreaErrPtg(AreaErrPtg t) {
-        err("AreaErrPtg: " + t.toString());
-    }
-
-    private void parseUnknownPtg(UnknownPtg t) {
-        err("Error Unknown Ptg: " + t.toString());
     }
 
     private void parseArea3DPxg(Area3DPxg t) {
