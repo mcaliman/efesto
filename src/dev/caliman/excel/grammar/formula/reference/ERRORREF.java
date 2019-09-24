@@ -25,9 +25,9 @@ package dev.caliman.excel.grammar.formula.reference;
 /**
  * @author Massimo Caliman
  */
-public final class ERROR_REF extends ReferenceItem {
+public final class ERRORREF extends ReferenceItem {
 
-    public ERROR_REF() {
+    public ERRORREF() {
         super("#REF");
     }
 

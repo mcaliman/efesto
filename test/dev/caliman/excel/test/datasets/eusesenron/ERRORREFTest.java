@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Massimo Caliman
  */
-class ERROR_REFTest {
+class ERRORREFTest {
 
     @Test
     void testTest() throws Exception {

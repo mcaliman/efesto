@@ -228,7 +228,7 @@ public final class Parser {
                 new WhatIf(p, areaErrPtg, (Ptg t) -> parseAreaErrPtg((AreaErrPtg) t)),
                 new WhatIf(p, areaPtg, (Ptg t) -> parseAreaPtg((AreaPtg) t)),
                 new WhatIf(p, attrPtg, (Ptg t) -> parseAttrPtg((AttrPtg) t)),
-                new WhatIf(p, boolPtg, t -> parseBooleanLiteral(((BoolPtg) t).getValue())),
+                new WhatIf(p, boolPtg, t -> parseBOOL(((BoolPtg) t).getValue())),
                 new WhatIf(p, concatPtg, t -> parseConcat()),
                 new WhatIf(p, deleted3DPxg, (Ptg t) -> parseDeleted3DPxg((Deleted3DPxg) t)),
                 new WhatIf(p, deletedArea3DPtg, (Ptg t) -> parseDeletedArea3DPtg((DeletedArea3DPtg) t)),
@@ -241,7 +241,7 @@ public final class Parser {
                 new WhatIf(p, greaterEqualPtg, t -> parseGteq()),
                 new WhatIf(p, greaterThanPtg, t -> parseGt()),
                 new WhatIf(p, intersectionPtg, t -> parseIntersection()),
-                new WhatIf(p, intPtg, t -> parseIntLiteral(((IntPtg) t).getValue())),
+                new WhatIf(p, intPtg, t -> parseINT(((IntPtg) t).getValue())),
                 new WhatIf(p, lessEqualPtg, t -> parseLeq()),
                 new WhatIf(p, lessThanPtg, t -> parseLt()),
                 new WhatIf(p, memErrPtg, (Ptg t) -> parseMemErrPtg((MemErrPtg) t)),
@@ -249,14 +249,14 @@ public final class Parser {
                 new WhatIf(p, multiplyPtg, t -> parseMult()),
                 new WhatIf(p, namePtg, (Ptg t) -> parseNamedRange((NamePtg) t)),
                 new WhatIf(p, notEqualPtg, t -> parseNeq()),
-                new WhatIf(p, numberPtg, t -> parseFloatLiteral(((NumberPtg) t).getValue())),
+                new WhatIf(p, numberPtg, t -> parseFLOAT(((NumberPtg) t).getValue())),
                 new WhatIf(p, parenthesisPtg, t -> parseParenthesisFormula()),
                 new WhatIf(p, percentPtg, t -> percentFormula()),
                 new WhatIf(p, powerPtg, t -> parsePower()),
                 new WhatIf(p, ref3DPxg, (Ptg t) -> parseRef3DPxg((Ref3DPxg) t)),
-                new WhatIf(p, refErrorPtg, (Ptg t) -> parseReferenceErrorLiteral()),
+                new WhatIf(p, refErrorPtg, (Ptg t) -> parseERRORREF()),
                 new WhatIf(p, refPtg, (Ptg t) -> parseRefPtg((RefPtg) t)),
-                new WhatIf(p, stringPtg, (Ptg t) -> parseStringLiteral(((StringPtg) t).getValue())),
+                new WhatIf(p, stringPtg, (Ptg t) -> parseTEXT(((StringPtg) t).getValue())),
                 new WhatIf(p, subtractPtg, t -> parseSub()),
                 new WhatIf(p, unaryMinusPtg, (Ptg t) -> parseMinus()),
                 new WhatIf(p, unaryPlusPtg, (Ptg t) -> parsePlus()),
@@ -488,6 +488,8 @@ public final class Parser {
         else if ( t == NUM_ERROR ) text = "#NUM!";
         else if ( t == N_A ) text = "#N/A";
         else text = "FIXME!";
+
+
         // ERROR
         var term = new ERROR(text);
         term.setColumn(colFormula);
@@ -501,35 +503,33 @@ public final class Parser {
         stack.push(term);
     }
 
-
-    private void parseBooleanLiteral(Boolean bool) {
+    private void parseBOOL(Boolean bool) {
         var term = new BOOL(bool);
         graph.addNode(term);
         stack.push(term);
     }
 
-    private void parseStringLiteral(String string) {
+    private void parseTEXT(String string) {
         var term = new TEXT(string);
         graph.addNode(term);
         stack.push(term);
     }
 
-
-    private void parseIntLiteral(Integer value) {
+    private void parseINT(Integer value) {
         var term = new INT(value);
         graph.addNode(term);
         stack.push(term);
     }
 
-    private void parseFloatLiteral(Double value) {
+    private void parseFLOAT(Double value) {
         var term = new FLOAT(value);
         graph.addNode(term);
         stack.push(term);
     }
 
-    private void parseReferenceErrorLiteral() {
+    private void parseERRORREF() {
         //#REF
-        ERROR_REF term = new ERROR_REF();
+        ERRORREF term = new ERRORREF();
         term.setColumn(colFormula);
         term.setRow(rowFormula);
         term.setSheetIndex(sheetIndex);
@@ -539,15 +539,12 @@ public final class Parser {
         err("", rowFormula, colFormula);
     }
 
-
     public void parse() {
         this.isSingleSheet = this.book.getNumberOfSheets() == 1;
         for (Sheet currentSheet : this.book) parse(currentSheet);
         verbose("** topological sorting beginning...");
         sort();
     }
-
-
     private void sort() {
         if ( unordered.singleton() ) {
             ordered = new StartList();
@@ -556,8 +553,6 @@ public final class Parser {
         }
         ordered = graph.topologicalSort();
     }
-
-
     private void parseFormula(@NotNull Start formula) {
         formula.setColumn(colFormula);
         formula.setRow(rowFormula);
@@ -566,8 +561,6 @@ public final class Parser {
         formula.setSingleSheet(this.isSingleSheet);
         unordered.add(formula);
     }
-
-
     private void parseParenthesisFormula() {
         var formula = (Formula) stack.pop();
         var parFormula = new ParenthesisFormula(formula);
@@ -578,7 +571,6 @@ public final class Parser {
         parFormula.setSingleSheet(this.isSingleSheet);
         stack.push(parFormula);
     }
-
 
     private void parseEq() {
         // F=F
@@ -593,7 +585,6 @@ public final class Parser {
         graph.add(eq);
         stack.push(eq);
     }
-
     private void parseLt() {
         // F<F
         var rFormula = (Formula) stack.pop();
@@ -607,7 +598,6 @@ public final class Parser {
         graph.add(lt);
         stack.push(lt);
     }
-
     private void parseGt() {
         // F>F
         var rFormula = (Formula) stack.pop();
@@ -621,7 +611,6 @@ public final class Parser {
         graph.add(gt);
         stack.push(gt);
     }
-
     private void parseLeq() {
         // F<=F
         var rFormula = (Formula) stack.pop();
@@ -635,7 +624,6 @@ public final class Parser {
         graph.add(leq);
         stack.push(leq);
     }
-
     private void parseGteq() {
         // F>=F
         var rFormula = (Formula) stack.pop();
@@ -649,7 +637,6 @@ public final class Parser {
         graph.add(gteq);
         stack.push(gteq);
     }
-
     private void parseNeq() {
         // F<>F
         var rFormula = (Formula) stack.pop();
@@ -663,7 +650,6 @@ public final class Parser {
         graph.add(neq);
         stack.push(neq);
     }
-
     private void parseConcat() {
         // F&F
         var rFormula = (Formula) stack.pop();
@@ -677,7 +663,6 @@ public final class Parser {
         graph.add(concat);
         stack.push(concat);
     }
-
     private void parseAdd() {
         // F+F
         var rFormula = (Formula) stack.pop();
@@ -691,7 +676,6 @@ public final class Parser {
         graph.add(add);
         stack.push(add);
     }
-
     private void parseSub() {
         // F-F
         var rFormula = (Formula) stack.pop();
@@ -705,7 +689,6 @@ public final class Parser {
         graph.add(sub);
         stack.push(sub);
     }
-
     private void parseMult() {
         // F*F
         if ( stack.empty() ) return;
@@ -720,7 +703,6 @@ public final class Parser {
         graph.add(mult);
         stack.push(mult);
     }
-
     private void parseDiv() {
         // F/F
         var rFormula = (Formula) stack.pop();
@@ -734,7 +716,6 @@ public final class Parser {
         graph.add(div);
         stack.push(div);
     }
-
     private void parsePower() {
         // F^F
         var rFormula = (Formula) stack.pop();
@@ -748,7 +729,6 @@ public final class Parser {
         graph.add(power);
         stack.push(power);
     }
-
     private void percentFormula() {
         // F%
         var formula = (Formula) stack.pop();
@@ -805,7 +785,6 @@ public final class Parser {
         graph.addNode(plus);
         stack.push(plus);
     }
-
     private void parseMinus() {
         // -
         var formula = (Formula) stack.pop();
