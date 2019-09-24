@@ -269,15 +269,15 @@ public final class Parser {
         }
     }
 
-    private void parseMemErrPtg(@NotNull MemErrPtg t) {
+    private void parseMemErrPtg(MemErrPtg t) {
         err("MemErrPtg: " + t.toString());
     }
 
-    private void parseDeleted3DPxg(@NotNull Deleted3DPxg t) {
+    private void parseDeleted3DPxg(Deleted3DPxg t) {
         err("Deleted3DPxg: " + t.toString());
     }
 
-    private void parseDeletedRef3DPtg(@NotNull DeletedRef3DPtg t) {
+    private void parseDeletedRef3DPtg(DeletedRef3DPtg t) {
         err("DeletedRef3DPtg: " + t.toString());
     }
 
@@ -285,19 +285,19 @@ public final class Parser {
         err("Missing ExcelFunction Arguments for cell: " + getCellAddress());
     }
 
-    private void parseDeletedArea3DPtg(@NotNull DeletedArea3DPtg t) {
+    private void parseDeletedArea3DPtg(DeletedArea3DPtg t) {
         err("DeletedArea3DPtg: " + t.toString());
     }
 
-    private void parseAreaErrPtg(@NotNull AreaErrPtg t) {
+    private void parseAreaErrPtg(AreaErrPtg t) {
         err("AreaErrPtg: " + t.toString());
     }
 
-    private void parseUnknownPtg(@NotNull UnknownPtg t) {
+    private void parseUnknownPtg(UnknownPtg t) {
         err("Error Unknown Ptg: " + t.toString());
     }
 
-    private void parseArea3DPxg(@NotNull Area3DPxg t) {
+    private void parseArea3DPxg(Area3DPxg t) {
         // Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
         // external or different sheet.
         // This is XSSF only, as it stores the sheet / book references in String
@@ -309,7 +309,7 @@ public final class Parser {
         parseArea3D(helper.getRANGE(sheetName, t), tSHEET, area);
     }
 
-    private void parseArea3D(RANGE tRANGE, @NotNull SHEET tSHEET, String area) {
+    private void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area) {
         //Sheet2!A1:B1 (Sheet + AREA/RANGE)
         var term = new PrefixReferenceItem(tSHEET, area, tRANGE);
         term.setSheetIndex(tSHEET.getIndex());
@@ -318,7 +318,7 @@ public final class Parser {
         stack.push(term);
     }
 
-    private void parseRef3DPxg(@NotNull Ref3DPxg t) {
+    private void parseRef3DPxg(Ref3DPxg t) {
         //Title: XSSF 3D Reference
         //Description: Defines a cell in an external or different sheet.
         //REFERENCE:
@@ -354,7 +354,7 @@ public final class Parser {
         stack.push(term);
     }
 
-    private void parseAreaPtg(@NotNull AreaPtg t) {
+    private void parseAreaPtg(AreaPtg t) {
         RANGE tRANGE = helper.getRANGE(sheet, t);
         // RangeReference
         var term = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
