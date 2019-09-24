@@ -871,7 +871,8 @@ public final class Parser {
     }
 
     private void err(String string) {
-        err.println(getCellAddress() + " parseErrorLiteral: " + string);
+        err.println(getCellAddress() + " error: " + string);
+        //throw new RuntimeException(getCellAddress() + " error: " + string);
     }
 
 
