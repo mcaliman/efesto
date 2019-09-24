@@ -192,7 +192,7 @@ public final class Parser {
     private Start parse(Ptg[] ptgs) {
         stack.empty();
         if ( Ptg.doesFormulaReferToDeletedCell(ptgs) ) doesFormulaReferToDeletedCell();
-        for (Ptg ptg : ptgs) parse(ptg/*, formulaRow, formulaColumn*/);
+        for (Ptg ptg : ptgs) parse(ptg);
         Start start = null;
         if ( !stack.empty() ) start = stack.pop();
         return start;
@@ -209,7 +209,7 @@ public final class Parser {
         stack.push(udf);
     }
 
-    private void parse(Ptg p/*, int row, int column*/) {
+    private void parse(Ptg p) {
         verbose("parse: " + p.getClass().getSimpleName());
         try (Stream<WhatIf> stream = Stream.of(
                 new WhatIf(p, arrayPtg, (Ptg t) -> parseConstantArray((ArrayPtg) t)),
@@ -234,7 +234,7 @@ public final class Parser {
                 new WhatIf(p, intPtg, t -> parseINT(((IntPtg) t).getValue())),
                 new WhatIf(p, lessEqualPtg, t -> parseLeq()),
                 new WhatIf(p, lessThanPtg, t -> parseLt()),
-                new WhatIf(p, memErrPtg, (Ptg t) -> parseMemErrPtg((MemErrPtg) t)),
+                new WhatIf(p, memErrPtg, (Ptg t) -> parseErrPtg((MemErrPtg) t)),
                 new WhatIf(p, missingArgPtg, (Ptg t) -> parseMissingArguments()),
                 new WhatIf(p, multiplyPtg, t -> parseMult()),
                 new WhatIf(p, namePtg, (Ptg t) -> parseNamedRange((NamePtg) t)),
@@ -260,9 +260,14 @@ public final class Parser {
         }
     }
 
-    private void parseMemErrPtg(MemErrPtg t) {
-        err("MemErrPtg: " + t.toString());
+
+    private void parseErrPtg(Ptg t) {
+        err(t.getClass().getName() + ": " + t.toString());
     }
+
+    /*private void parseMemErrPtg(MemErrPtg t) {
+        err("MemErrPtg: " + t.toString());
+    }*/
 
     private void parseDeleted3DPxg(Deleted3DPxg t) {
         err("Deleted3DPxg: " + t.toString());
