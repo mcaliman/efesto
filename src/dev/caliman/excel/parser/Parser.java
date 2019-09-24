@@ -158,7 +158,7 @@ public final class Parser {
         for (Row row : sheet)
             for (Cell cell : row)
                 if ( cell != null ) parse(cell);
-                else err("Cell is null.", rowFormula, colFormula);
+                else err("Cell is null.");
     }
 
     private void parse(Cell cell) {
@@ -188,7 +188,7 @@ public final class Parser {
         if ( formulaPtgs == null ) {
             String formulaText = cell.getCellFormula();
             //err.println("ptgs empty or null for address " + formulaAddress);
-            err("ptgs empty or null for address " + formulaAddress, rowFormula, colFormula);
+            err("ptgs empty or null for address " + formulaAddress);
             parseUDF(formulaText);
             return;
         }
@@ -201,7 +201,7 @@ public final class Parser {
 
     private Start parse(@NotNull Ptg[] ptgs) {
         stack.empty();
-        if ( Ptg.doesFormulaReferToDeletedCell(ptgs) ) doesFormulaReferToDeletedCell(rowFormula, colFormula);
+        if ( Ptg.doesFormulaReferToDeletedCell(ptgs) ) doesFormulaReferToDeletedCell();
         for (Ptg ptg : ptgs) parse(ptg, rowFormula, colFormula);
         Start start = null;
         if ( !stack.empty() ) start = stack.pop();
@@ -265,39 +265,37 @@ public final class Parser {
         )) {
             stream.filter((WhatIf t) -> t.predicate.test(t.ptg)).forEach(t -> t.consumer.accept(t.ptg));
         } catch (Exception e) {
-            err.println("parse: " + p.getClass().getSimpleName());
-            err.println(this.sheetName + "row:" + row + "column:" + column + e.getMessage());
+            err.println("parse: " + p.getClass().getSimpleName() + " " + this.sheetName + "row:" + row + "column:" + column + e.getMessage());
             e.printStackTrace();
         }
     }
 
     private void parseMemErrPtg(@NotNull MemErrPtg t) {
-        err("MemErrPtg: " + t.toString(), rowFormula, colFormula);
+        err("MemErrPtg: " + t.toString());
     }
 
     private void parseDeleted3DPxg(@NotNull Deleted3DPxg t) {
-        err("Deleted3DPxg: " + t.toString(), rowFormula, colFormula);
+        err("Deleted3DPxg: " + t.toString());
     }
 
     private void parseDeletedRef3DPtg(@NotNull DeletedRef3DPtg t) {
-        err("DeletedRef3DPtg: " + t.toString(), rowFormula, colFormula);
+        err("DeletedRef3DPtg: " + t.toString());
     }
 
     private void parseMissingArguments(int row, int column) {
-        err("Missing ExcelFunction Arguments for cell: " + Start.cellAddress(row, column, sheetName), row, column);
+        err("Missing ExcelFunction Arguments for cell: " + Start.cellAddress(row, column, sheetName));
     }
 
-
     private void parseDeletedArea3DPtg(@NotNull DeletedArea3DPtg t) {
-        err("DeletedArea3DPtg: " + t.toString(), rowFormula, colFormula);
+        err("DeletedArea3DPtg: " + t.toString());
     }
 
     private void parseAreaErrPtg(@NotNull AreaErrPtg t) {
-        err("AreaErrPtg: " + t.toString(), rowFormula, colFormula);
+        err("AreaErrPtg: " + t.toString());
     }
 
     private void parseUnknownPtg(@NotNull UnknownPtg t) {
-        err("Error Unknown Ptg: " + t.toString(), rowFormula, colFormula);
+        err("Error Unknown Ptg: " + t.toString());
     }
 
     private void parseArea3DPxg(@NotNull Area3DPxg t) {
@@ -440,7 +438,7 @@ public final class Parser {
             args.setAsArea();
             unordered.add(args);
         } else {
-            err("Not RangeReference " + args.getClass().getSimpleName() + " " + args.toString(), rowFormula, colFormula);
+            err("Not RangeReference " + args.getClass().getSimpleName() + " " + args.toString());
         }
         var term = new SUM((Formula) args);
 
@@ -473,7 +471,7 @@ public final class Parser {
         try {
             builtInFunction(arity, name);
         } catch (UnsupportedBuiltinException e) {
-            err("Unsupported Excel ExcelFunction: " + name + " " + e, rowFormula, colFormula);
+            err("Unsupported Excel ExcelFunction: " + name + " " + e);
         }
     }
 
@@ -498,7 +496,7 @@ public final class Parser {
         term.setSheetName(sheetName);
         term.setSingleSheet(this.isSingleSheet);
 
-        err(term.toString(), rowFormula, colFormula);
+        err(term.toString());
         graph.addNode(term);
         stack.push(term);
     }
@@ -536,7 +534,7 @@ public final class Parser {
         term.setSheetName(sheetName);
         term.setSingleSheet(this.isSingleSheet);
         stack.push(term);
-        err("", rowFormula, colFormula);
+        err("");
     }
 
     public void parse() {
@@ -772,7 +770,7 @@ public final class Parser {
         try {
             builtinFunction(name);
         } catch (UnsupportedBuiltinException e) {
-            err("Unsupported Excel ExcelFunction: " + name + " " + e, rowFormula, colFormula);
+            err("Unsupported Excel ExcelFunction: " + name + " " + e);
         }
     }
 
@@ -869,11 +867,12 @@ public final class Parser {
     }
 
 
-    private void doesFormulaReferToDeletedCell(int row, int column) {
-        err(Start.cellAddress(row, column, sheetName) + " does formula refer to deleted cell", row, column);
+    private void doesFormulaReferToDeletedCell() {
+        err(Start.cellAddress(this.rowFormula, this.colFormula, sheetName) + " does formula refer to deleted cell");
     }
-    private void err(String string, int row, int column) {
-        err.println(Start.cellAddress(row, column, sheetName) + " parseErrorLiteral: " + string);
+
+    private void err(String string) {
+        err.println(Start.cellAddress(this.rowFormula, this.colFormula, sheetName) + " parseErrorLiteral: " + string);
     }
 
     // INNER CLASS
