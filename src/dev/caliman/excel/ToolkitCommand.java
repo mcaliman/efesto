@@ -40,12 +40,12 @@ public class ToolkitCommand {
     public ToolkitCommand(@NotNull String name) throws IOException, InvalidFormatException {
         ToolkitOptions options = new ToolkitOptions();
         parser = new Parser(name);
-        parser.verbose = options.isVerbose();
+        parser.setVerbose(options.isVerbose());
     }
 
     public ToolkitCommand(@NotNull String name, ToolkitOptions options) throws IOException, InvalidFormatException {
         parser = new Parser(name);
-        parser.verbose = options.isVerbose();
+        parser.setVerbose(options.isVerbose());
     }
 
 

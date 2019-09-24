@@ -107,7 +107,7 @@ public final class Parser {
     private final Predicate<Ptg> unaryPlusPtg = (Ptg t) -> t instanceof UnaryPlusPtg;
     private final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
-    public boolean verbose = false;
+    private boolean verbose = false;
 
     private int formulaColumn;//Current Formula Column
     private int formulaRow;//Current Formula Row
@@ -126,6 +126,10 @@ public final class Parser {
     private StartList ordered;
     private StartGraph graph;
     private Stack<Start> stack;
+
+    public void setVerbose(boolean verbose) {
+        this.verbose = verbose;
+    }
 
     public Parser(@NotNull String filename) throws IOException, InvalidFormatException {
         File file = new File(filename);
