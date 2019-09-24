@@ -163,8 +163,9 @@ public final class Parser {
             cellRef.setSheetIndex(helper.getSheetIndex(cell.getSheet().getSheetName()));
             parseCELLlinked(cellRef);
             this.ext.remove(cell);
-        } else if ( !this.ext.contains(cell) ) {
+        } else if ( !this.ext.contains(cell) && !isCellEmpty(cell) ) {
             //Non è formula non è nelle celle utili collezionate
+            out.println("Cella di interesse? " + cell.toString());
 
         }
     }
@@ -878,6 +879,23 @@ public final class Parser {
 
     private void verbose(String text) {
         if ( this.verbose ) out.println(text);
+    }
+
+
+    private boolean isCellEmpty(final Cell cell) {
+        if ( cell == null ) { // use row.getCell(x, Row.CREATE_NULL_AS_BLANK) to avoid null cells
+            return true;
+        }
+
+        if ( cell.getCellType() == Cell.CELL_TYPE_BLANK ) {
+            return true;
+        }
+
+        if ( cell.getCellType() == Cell.CELL_TYPE_STRING && cell.getStringCellValue().trim().isEmpty() ) {
+            return true;
+        }
+
+        return false;
     }
 
     // INNER CLASS
