@@ -127,10 +127,6 @@ public final class Parser {
     private StartGraph graph;
     private Stack<Start> stack;
 
-    public void setVerbose(boolean verbose) {
-        this.verbose = verbose;
-    }
-
     public Parser(@NotNull String filename) throws IOException, InvalidFormatException {
         File file = new File(filename);
         this.book = WorkbookFactory.create(file);
@@ -141,19 +137,6 @@ public final class Parser {
         this.ordered = new StartList();
         this.graph = new StartGraph();
         this.stack = new Stack<>();
-    }
-
-
-    public int getCounterFormulas() {
-        return counterFormulas;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    private void verbose(String text) {
-        if ( this.verbose ) out.println(text);
     }
 
     private void parse(@NotNull Sheet sheet) {
@@ -180,6 +163,9 @@ public final class Parser {
             cellRef.setSheetIndex(helper.getSheetIndex(cell.getSheet().getSheetName()));
             parseCELLlinked(cellRef);
             this.ext.remove(cell);
+        } else if ( !this.ext.contains(cell) ) {
+            //Non è formula non è nelle celle utili collezionate
+
         }
     }
 
@@ -838,19 +824,16 @@ public final class Parser {
 
     private void parseIntersection() {
         //F F
-        var rFormula = (Formula) stack.pop();
-        var lFormula = (Formula) stack.pop();
+        var rFormula = (Formula) this.stack.pop();
+        var lFormula = (Formula) this.stack.pop();
         var intersection = new Intersection(lFormula, rFormula);
-
-
-        intersection.setColumn(formulaColumn);
-        intersection.setRow(formulaRow);
-        intersection.setSheetIndex(sheetIndex);
-        intersection.setSheetName(sheetName);
+        intersection.setColumn(this.formulaColumn);
+        intersection.setRow(this.formulaRow);
+        intersection.setSheetIndex(this.sheetIndex);
+        intersection.setSheetName(this.sheetName);
         intersection.setSingleSheet(this.isSingleSheet);
-
-        graph.add(intersection);
-        stack.push(intersection);
+        this.graph.add(intersection);
+        this.stack.push(intersection);
     }
 
     private void parseUnion() {
@@ -858,13 +841,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var union = new Union(lFormula, rFormula);
-
         union.setColumn(formulaColumn);
         union.setRow(formulaRow);
         union.setSheetIndex(sheetIndex);
         union.setSheetName(sheetName);
         union.setSingleSheet(this.isSingleSheet);
-
         graph.add(union);
         stack.push(union);
     }
@@ -879,9 +860,24 @@ public final class Parser {
         //throw new RuntimeException(getCellAddress() + " error: " + string);
     }
 
-
     private String getCellAddress() {
         return Start.cellAddress(this.formulaRow, this.formulaColumn, this.sheetName);
+    }
+
+    public void setVerbose(boolean verbose) {
+        this.verbose = verbose;
+    }
+
+    public int getCounterFormulas() {
+        return counterFormulas;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    private void verbose(String text) {
+        if ( this.verbose ) out.println(text);
     }
 
     // INNER CLASS
