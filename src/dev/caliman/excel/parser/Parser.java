@@ -181,7 +181,7 @@ public final class Parser {
         verbose("Cell:" + cell.getClass().getSimpleName() + " " + cell.toString() + " " + cell.getCellType());
         colFormula = cell.getColumnIndex();
         rowFormula = cell.getRowIndex();
-        String formulaAddress = Start.cellAddress(rowFormula, colFormula);
+        String formulaAddress = getCellAddress();
         //String text = cell.getCellFormula();
         //out.println("RAW>> " + formulaAddress + " = " + text);
         Ptg[] formulaPtgs = helper.tokens(this.sheet, this.rowFormula, this.colFormula);
@@ -868,11 +868,16 @@ public final class Parser {
 
 
     private void doesFormulaReferToDeletedCell() {
-        err(Start.cellAddress(this.rowFormula, this.colFormula, sheetName) + " does formula refer to deleted cell");
+        err(getCellAddress() + " does formula refer to deleted cell");
     }
 
     private void err(String string) {
-        err.println(Start.cellAddress(this.rowFormula, this.colFormula, sheetName) + " parseErrorLiteral: " + string);
+        err.println(getCellAddress() + " parseErrorLiteral: " + string);
+    }
+
+
+    private String getCellAddress() {
+        return Start.cellAddress(this.rowFormula, this.colFormula, this.sheetName);
     }
 
     // INNER CLASS
