@@ -108,10 +108,12 @@ public final class Parser {
     private final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
     public boolean verbose = false;
+
     private int colFormula;//Current Formula Column
     private int rowFormula;//Current Formula Row
     private int sheetIndex;//Current Sheet Index
     private String sheetName;//Current Sheet Name
+
     private boolean isSingleSheet;
     private Workbook book;
     private Helper helper;
@@ -182,12 +184,9 @@ public final class Parser {
         colFormula = cell.getColumnIndex();
         rowFormula = cell.getRowIndex();
         String formulaAddress = getCellAddress();
-        //String text = cell.getCellFormula();
-        //out.println("RAW>> " + formulaAddress + " = " + text);
         Ptg[] formulaPtgs = helper.tokens(this.sheet, this.rowFormula, this.colFormula);
         if ( formulaPtgs == null ) {
             String formulaText = cell.getCellFormula();
-            //err.println("ptgs empty or null for address " + formulaAddress);
             err("ptgs empty or null for address " + formulaAddress);
             parseUDF(formulaText);
             return;
