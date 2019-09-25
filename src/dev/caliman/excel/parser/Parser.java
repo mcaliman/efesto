@@ -64,7 +64,6 @@ import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 /**
  * @author Massimo Caliman
  */
-@SuppressWarnings("JavaDoc")
 public final class Parser {
 
     private final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
@@ -127,7 +126,7 @@ public final class Parser {
     private StartGraph graph;
     private Stack<Start> stack;
 
-    public Parser(@NotNull String filename) throws IOException, InvalidFormatException {
+    public Parser(String filename) throws IOException, InvalidFormatException {
         File file = new File(filename);
         this.book = WorkbookFactory.create(file);
         this.ext = new ArrayList<>();
@@ -215,14 +214,14 @@ public final class Parser {
                 new WhatIf(p, arrayPtg, (Ptg t) -> parseConstantArray((ArrayPtg) t)),
                 new WhatIf(p, addPtg, (Ptg t) -> parseAdd()),
                 new WhatIf(p, area3DPxg, (Ptg t) -> parseArea3DPxg((Area3DPxg) t)),
-                new WhatIf(p, areaErrPtg, (Ptg t) -> parseErrPtg((AreaErrPtg) t)),
+                new WhatIf(p, areaErrPtg, (Ptg t) -> parseErrPtg(t)),
                 new WhatIf(p, areaPtg, (Ptg t) -> parseAreaPtg((AreaPtg) t)),
                 new WhatIf(p, attrPtg, (Ptg t) -> parseAttrPtg((AttrPtg) t)),
                 new WhatIf(p, boolPtg, t -> parseBOOL(((BoolPtg) t).getValue())),
                 new WhatIf(p, concatPtg, t -> parseConcat()),
-                new WhatIf(p, deleted3DPxg, (Ptg t) -> parseErrPtg((Deleted3DPxg) t)),
-                new WhatIf(p, deletedArea3DPtg, (Ptg t) -> parseErrPtg((DeletedArea3DPtg) t)),
-                new WhatIf(p, deletedRef3DPtg, (Ptg t) -> parseErrPtg((DeletedRef3DPtg) t)),
+                new WhatIf(p, deleted3DPxg, (Ptg t) -> parseErrPtg(t)),
+                new WhatIf(p, deletedArea3DPtg, (Ptg t) -> parseErrPtg(t)),
+                new WhatIf(p, deletedRef3DPtg, (Ptg t) -> parseErrPtg(t)),
                 new WhatIf(p, dividePtg, t -> parseDiv()),
                 new WhatIf(p, equalPtg, t -> parseEq()),
                 new WhatIf(p, errPtg, (Ptg t) -> parseERROR((ErrPtg) t)),
@@ -234,7 +233,7 @@ public final class Parser {
                 new WhatIf(p, intPtg, t -> parseINT(((IntPtg) t).getValue())),
                 new WhatIf(p, lessEqualPtg, t -> parseLeq()),
                 new WhatIf(p, lessThanPtg, t -> parseLt()),
-                new WhatIf(p, memErrPtg, (Ptg t) -> parseErrPtg((MemErrPtg) t)),
+                new WhatIf(p, memErrPtg, (Ptg t) -> parseErrPtg(t)),
                 new WhatIf(p, missingArgPtg, (Ptg t) -> parseMissingArguments()),
                 new WhatIf(p, multiplyPtg, t -> parseMult()),
                 new WhatIf(p, namePtg, (Ptg t) -> parseNamedRange((NamePtg) t)),
@@ -251,7 +250,7 @@ public final class Parser {
                 new WhatIf(p, unaryMinusPtg, (Ptg t) -> parseMinus()),
                 new WhatIf(p, unaryPlusPtg, (Ptg t) -> parsePlus()),
                 new WhatIf(p, unionPtg, t -> parseUnion()),
-                new WhatIf(p, unknownPtg, (Ptg t) -> parseErrPtg((UnknownPtg) t))
+                new WhatIf(p, unknownPtg, (Ptg t) -> parseErrPtg(t))
         )) {
             stream.filter((WhatIf t) -> t.predicate.test(t.ptg)).forEach(t -> t.consumer.accept(t.ptg));
         } catch (Exception e) {
