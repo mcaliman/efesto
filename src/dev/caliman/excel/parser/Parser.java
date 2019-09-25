@@ -108,16 +108,16 @@ public final class Parser {
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
     private boolean verbose = false;
 
-    private int formulaColumn;//Current Formula Column
-    private int formulaRow;//Current Formula Row
+    private int column;//Current Formula Column
+    private int row;//Current Formula Row
     private int sheetIndex;//Current Sheet Index
     private String sheetName;//Current Sheet Name
 
-    private boolean isSingleSheet;
+    private boolean singleSheet;//is single sheet or not?
     private Workbook book;
     private Helper helper;
     private List<Cell> ext;
-    private int counterFormulas;
+    private int counterFormulas;//formula counters
     private Sheet sheet;//(Work)Sheet
     private String fileName;
 
@@ -138,7 +138,7 @@ public final class Parser {
         this.stack = new Stack<>();
     }
 
-    private void parse(@NotNull Sheet sheet) {
+    private void parse(Sheet sheet) {
         this.sheet = sheet;
         this.sheetIndex = book.getSheetIndex(sheet);
         this.sheetName = sheet.getSheetName();
@@ -171,10 +171,10 @@ public final class Parser {
 
     private void parseFormula(Cell cell) {
         verbose("Cell:" + cell.getClass().getSimpleName() + " " + cell.toString() + " " + cell.getCellType());
-        formulaColumn = cell.getColumnIndex();
-        formulaRow = cell.getRowIndex();
+        column = cell.getColumnIndex();
+        row = cell.getRowIndex();
         String formulaAddress = getCellAddress();
-        Ptg[] formulaPtgs = helper.tokens(this.sheet, this.formulaRow, this.formulaColumn);
+        Ptg[] formulaPtgs = helper.tokens(this.sheet, this.row, this.column);
         if ( formulaPtgs == null ) {
             String formulaText = cell.getCellFormula();
             err("ptgs empty or null for address " + formulaAddress);
@@ -183,7 +183,7 @@ public final class Parser {
         }
         Start start = parse(formulaPtgs);
         if ( Objects.nonNull(start) ) {
-            start.setSingleSheet(this.isSingleSheet);
+            start.setSingleSheet(this.singleSheet);
             parseFormula(start);
         }
     }
@@ -199,11 +199,11 @@ public final class Parser {
 
     private void parseUDF(String arguments) {
         var udf = new UDF(arguments);
-        udf.setColumn(formulaColumn);
-        udf.setRow(formulaRow);
+        udf.setColumn(column);
+        udf.setRow(row);
         udf.setSheetIndex(sheetIndex);
         udf.setSheetName(sheetName);
-        udf.setSingleSheet(this.isSingleSheet);
+        udf.setSingleSheet(this.singleSheet);
         unordered.add(udf);
         stack.push(udf);
     }
@@ -254,7 +254,7 @@ public final class Parser {
         )) {
             stream.filter((WhatIf t) -> t.predicate.test(t.ptg)).forEach(t -> t.consumer.accept(t.ptg));
         } catch (Exception e) {
-            err.println("parse: " + p.getClass().getSimpleName() + " " + this.sheetName + "row:" + formulaRow + "column:" + formulaColumn + e.getMessage());
+            err.println("parse: " + p.getClass().getSimpleName() + " " + this.sheetName + "row:" + row + "column:" + column + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -263,9 +263,6 @@ public final class Parser {
     private void parseErrPtg(Ptg t) {
         err(t.getClass().getName() + ": " + t.toString());
     }
-
-
-
 
     private void parseMissingArguments() {
         err("Missing ExcelFunction Arguments for cell: " + getCellAddress());
@@ -319,11 +316,11 @@ public final class Parser {
 
     private void parseReference(SHEET tSHEET, String cellref) {
         var term = new PrefixReferenceItem(tSHEET, cellref, null);
-        term.setColumn(formulaColumn);
-        term.setRow(formulaRow);
+        term.setColumn(column);
+        term.setRow(row);
         term.setSheetIndex(sheetIndex);
         term.setSheetName(sheetName);
-        term.setSingleSheet(this.isSingleSheet);
+        term.setSingleSheet(this.singleSheet);
         graph.addNode(term);
         stack.push(term);
     }
@@ -332,11 +329,11 @@ public final class Parser {
         RANGE tRANGE = helper.getRANGE(sheet, t);
         // RangeReference
         var term = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
-        term.setColumn(formulaColumn);
-        term.setRow(formulaRow);
+        term.setColumn(column);
+        term.setRow(row);
         term.setSheetIndex(sheetIndex);
         term.setSheetName(sheetName);
-        term.setSingleSheet(this.isSingleSheet);
+        term.setSingleSheet(this.singleSheet);
 
         term.setAsArea();//is area not a cell with ref to area
         term.add(tRANGE.values());
@@ -376,11 +373,11 @@ public final class Parser {
         CELL term = new CELL(t.getRow(), t.getColumn());
         term.setValue(value);
         //parse CELL
-        term.setColumn(formulaColumn);
-        term.setRow(formulaRow);
+        term.setColumn(column);
+        term.setRow(row);
         term.setSheetIndex(sheetIndex);
         term.setSheetName(sheetName);
-        term.setSingleSheet(this.isSingleSheet);
+        term.setSingleSheet(this.singleSheet);
         this.unordered.add(term);
         stack.push(term);
     }
@@ -390,11 +387,11 @@ public final class Parser {
         Object[][] array = t.getTokenArrayValues();
         // ConstantArray
         var term = new ConstantArray(array);
-        term.setColumn(formulaColumn);
-        term.setRow(formulaRow);
+        term.setColumn(column);
+        term.setRow(row);
         term.setSheetIndex(sheetIndex);
         term.setSheetName(sheetName);
-        term.setSingleSheet(this.isSingleSheet);
+        term.setSingleSheet(this.singleSheet);
         stack.push(term);
     }
 
@@ -415,11 +412,11 @@ public final class Parser {
         }
         var term = new SUM((Formula) args);
 
-        term.setColumn(formulaColumn);
-        term.setRow(formulaRow);
+        term.setColumn(column);
+        term.setRow(row);
         term.setSheetIndex(sheetIndex);
         term.setSheetName(sheetName);
-        term.setSingleSheet(this.isSingleSheet);
+        term.setSingleSheet(this.singleSheet);
 
         unordered.add(term);
         graph.add(term);
@@ -463,11 +460,11 @@ public final class Parser {
 
         // ERROR
         var term = new ERROR(text);
-        term.setColumn(formulaColumn);
-        term.setRow(formulaRow);
+        term.setColumn(column);
+        term.setRow(row);
         term.setSheetIndex(sheetIndex);
         term.setSheetName(sheetName);
-        term.setSingleSheet(this.isSingleSheet);
+        term.setSingleSheet(this.singleSheet);
 
         err(term.toString());
         graph.addNode(term);
@@ -501,17 +498,17 @@ public final class Parser {
     private void parseERRORREF() {
         //#REF
         ERRORREF term = new ERRORREF();
-        term.setColumn(formulaColumn);
-        term.setRow(formulaRow);
+        term.setColumn(column);
+        term.setRow(row);
         term.setSheetIndex(sheetIndex);
         term.setSheetName(sheetName);
-        term.setSingleSheet(this.isSingleSheet);
+        term.setSingleSheet(this.singleSheet);
         stack.push(term);
         err("");
     }
 
     public void parse() {
-        this.isSingleSheet = this.book.getNumberOfSheets() == 1;
+        this.singleSheet = this.book.getNumberOfSheets() == 1;
         for (Sheet currentSheet : this.book) parse(currentSheet);
         verbose("** topological sorting beginning...");
         sort();
@@ -525,21 +522,21 @@ public final class Parser {
         ordered = graph.topologicalSort();
     }
     private void parseFormula(@NotNull Start formula) {
-        formula.setColumn(formulaColumn);
-        formula.setRow(formulaRow);
+        formula.setColumn(column);
+        formula.setRow(row);
         formula.setSheetIndex(sheetIndex);
         formula.setSheetName(sheetName);
-        formula.setSingleSheet(this.isSingleSheet);
+        formula.setSingleSheet(this.singleSheet);
         unordered.add(formula);
     }
     private void parseParenthesisFormula() {
         var formula = (Formula) stack.pop();
         var parFormula = new ParenthesisFormula(formula);
-        parFormula.setColumn(formulaColumn);
-        parFormula.setRow(formulaRow);
+        parFormula.setColumn(column);
+        parFormula.setRow(row);
         parFormula.setSheetIndex(sheetIndex);
         parFormula.setSheetName(sheetName);
-        parFormula.setSingleSheet(this.isSingleSheet);
+        parFormula.setSingleSheet(this.singleSheet);
         stack.push(parFormula);
     }
 
@@ -548,11 +545,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var eq = new Eq(lFormula, rFormula);
-        eq.setColumn(formulaColumn);
-        eq.setRow(formulaRow);
+        eq.setColumn(column);
+        eq.setRow(row);
         eq.setSheetIndex(sheetIndex);
         eq.setSheetName(sheetName);
-        eq.setSingleSheet(this.isSingleSheet);
+        eq.setSingleSheet(this.singleSheet);
         graph.add(eq);
         stack.push(eq);
     }
@@ -561,11 +558,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var lt = new Lt(lFormula, rFormula);
-        lt.setColumn(formulaColumn);
-        lt.setRow(formulaRow);
+        lt.setColumn(column);
+        lt.setRow(row);
         lt.setSheetIndex(sheetIndex);
         lt.setSheetName(sheetName);
-        lt.setSingleSheet(this.isSingleSheet);
+        lt.setSingleSheet(this.singleSheet);
         graph.add(lt);
         stack.push(lt);
     }
@@ -574,11 +571,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var gt = new Gt(lFormula, rFormula);
-        gt.setColumn(formulaColumn);
-        gt.setRow(formulaRow);
+        gt.setColumn(column);
+        gt.setRow(row);
         gt.setSheetIndex(sheetIndex);
         gt.setSheetName(sheetName);
-        gt.setSingleSheet(this.isSingleSheet);
+        gt.setSingleSheet(this.singleSheet);
         graph.add(gt);
         stack.push(gt);
     }
@@ -587,11 +584,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var leq = new Leq(lFormula, rFormula);
-        leq.setColumn(formulaColumn);
-        leq.setRow(formulaRow);
+        leq.setColumn(column);
+        leq.setRow(row);
         leq.setSheetIndex(sheetIndex);
         leq.setSheetName(sheetName);
-        leq.setSingleSheet(this.isSingleSheet);
+        leq.setSingleSheet(this.singleSheet);
         graph.add(leq);
         stack.push(leq);
     }
@@ -600,11 +597,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var gteq = new GtEq(lFormula, rFormula);
-        gteq.setColumn(formulaColumn);
-        gteq.setRow(formulaRow);
+        gteq.setColumn(column);
+        gteq.setRow(row);
         gteq.setSheetIndex(sheetIndex);
         gteq.setSheetName(sheetName);
-        gteq.setSingleSheet(this.isSingleSheet);
+        gteq.setSingleSheet(this.singleSheet);
         graph.add(gteq);
         stack.push(gteq);
     }
@@ -613,11 +610,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var neq = new Neq(lFormula, rFormula);
-        neq.setColumn(formulaColumn);
-        neq.setRow(formulaRow);
+        neq.setColumn(column);
+        neq.setRow(row);
         neq.setSheetIndex(sheetIndex);
         neq.setSheetName(sheetName);
-        neq.setSingleSheet(this.isSingleSheet);
+        neq.setSingleSheet(this.singleSheet);
         graph.add(neq);
         stack.push(neq);
     }
@@ -626,11 +623,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var concat = new Concat(lFormula, rFormula);
-        concat.setColumn(formulaColumn);
-        concat.setRow(formulaRow);
+        concat.setColumn(column);
+        concat.setRow(row);
         concat.setSheetIndex(sheetIndex);
         concat.setSheetName(sheetName);
-        concat.setSingleSheet(this.isSingleSheet);
+        concat.setSingleSheet(this.singleSheet);
         graph.add(concat);
         stack.push(concat);
     }
@@ -639,11 +636,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var add = new Add(lFormula, rFormula);
-        add.setColumn(formulaColumn);
-        add.setRow(formulaRow);
+        add.setColumn(column);
+        add.setRow(row);
         add.setSheetIndex(sheetIndex);
         add.setSheetName(sheetName);
-        add.setSingleSheet(this.isSingleSheet);
+        add.setSingleSheet(this.singleSheet);
         graph.add(add);
         stack.push(add);
     }
@@ -652,11 +649,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var sub = new Sub(lFormula, rFormula);
-        sub.setColumn(formulaColumn);
-        sub.setRow(formulaRow);
+        sub.setColumn(column);
+        sub.setRow(row);
         sub.setSheetIndex(sheetIndex);
         sub.setSheetName(sheetName);
-        sub.setSingleSheet(this.isSingleSheet);
+        sub.setSingleSheet(this.singleSheet);
         graph.add(sub);
         stack.push(sub);
     }
@@ -666,11 +663,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var mult = new Mult(lFormula, rFormula);
-        mult.setColumn(formulaColumn);
-        mult.setRow(formulaRow);
+        mult.setColumn(column);
+        mult.setRow(row);
         mult.setSheetIndex(sheetIndex);
         mult.setSheetName(sheetName);
-        mult.setSingleSheet(this.isSingleSheet);
+        mult.setSingleSheet(this.singleSheet);
         graph.add(mult);
         stack.push(mult);
     }
@@ -679,11 +676,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var div = new Divide(lFormula, rFormula);
-        div.setColumn(formulaColumn);
-        div.setRow(formulaRow);
+        div.setColumn(column);
+        div.setRow(row);
         div.setSheetIndex(sheetIndex);
         div.setSheetName(sheetName);
-        div.setSingleSheet(this.isSingleSheet);
+        div.setSingleSheet(this.singleSheet);
         graph.add(div);
         stack.push(div);
     }
@@ -692,11 +689,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var power = new Power(lFormula, rFormula);
-        power.setColumn(formulaColumn);
-        power.setRow(formulaRow);
+        power.setColumn(column);
+        power.setRow(row);
         power.setSheetIndex(sheetIndex);
         power.setSheetName(sheetName);
-        power.setSingleSheet(this.isSingleSheet);
+        power.setSingleSheet(this.singleSheet);
         graph.add(power);
         stack.push(power);
     }
@@ -704,21 +701,21 @@ public final class Parser {
         // F%
         var formula = (Formula) stack.pop();
         var percentFormula = new PercentFormula(formula);
-        percentFormula.setColumn(formulaColumn);
-        percentFormula.setRow(formulaRow);
+        percentFormula.setColumn(column);
+        percentFormula.setRow(row);
         percentFormula.setSheetIndex(sheetIndex);
         percentFormula.setSheetName(sheetName);
-        percentFormula.setSingleSheet(this.isSingleSheet);
+        percentFormula.setSingleSheet(this.singleSheet);
         graph.addNode(percentFormula);
         stack.push(percentFormula);
     }
 
     private void parseCELLlinked(@NotNull CELL tCELL) {
-        tCELL.setColumn(formulaColumn);
-        tCELL.setRow(formulaRow);
+        tCELL.setColumn(column);
+        tCELL.setRow(row);
         tCELL.setSheetIndex(sheetIndex);
         tCELL.setSheetName(sheetName);
-        tCELL.setSingleSheet(this.isSingleSheet);
+        tCELL.setSingleSheet(this.singleSheet);
         this.unordered.add(tCELL);
         stack.push(tCELL);
         graph.addNode(tCELL);
@@ -729,11 +726,11 @@ public final class Parser {
         // Sheet2!A1 (Sheet + parseCELL_REFERENCE)
         // External references: External references are normally in the form [File]Sheet!Cell
         var term = new PrefixReferenceItem(tFILE, cellref, null);
-        term.setColumn(formulaColumn);
-        term.setRow(formulaRow);
+        term.setColumn(column);
+        term.setRow(row);
         term.setSheetIndex(sheetIndex);
         term.setSheetName(sheetName);
-        term.setSingleSheet(this.isSingleSheet);
+        term.setSingleSheet(this.singleSheet);
         graph.addNode(term);
         stack.push(term);
     }
@@ -760,11 +757,11 @@ public final class Parser {
         // -
         var formula = (Formula) stack.pop();
         var minus = new Minus(formula);
-        minus.setColumn(formulaColumn);
-        minus.setRow(formulaRow);
+        minus.setColumn(column);
+        minus.setRow(row);
         minus.setSheetIndex(sheetIndex);
         minus.setSheetName(sheetName);
-        minus.setSingleSheet(this.isSingleSheet);
+        minus.setSingleSheet(this.singleSheet);
         graph.addNode(minus);
         stack.push(minus);
     }
@@ -777,11 +774,11 @@ public final class Parser {
         Start[] args = factory.getArgs();
         for (int i = arity - 1; i >= 0; i--) if ( !stack.empty() ) args[i] = stack.pop();
 
-        builtinFunction.setColumn(formulaColumn);
-        builtinFunction.setRow(formulaRow);
+        builtinFunction.setColumn(column);
+        builtinFunction.setRow(row);
         builtinFunction.setSheetIndex(sheetIndex);
         builtinFunction.setSheetName(sheetName);
-        builtinFunction.setSingleSheet(this.isSingleSheet);
+        builtinFunction.setSingleSheet(this.singleSheet);
 
         graph.addNode(builtinFunction);
         for (Start arg : args) {
@@ -811,11 +808,11 @@ public final class Parser {
         var rFormula = (Formula) this.stack.pop();
         var lFormula = (Formula) this.stack.pop();
         var intersection = new Intersection(lFormula, rFormula);
-        intersection.setColumn(this.formulaColumn);
-        intersection.setRow(this.formulaRow);
+        intersection.setColumn(this.column);
+        intersection.setRow(this.row);
         intersection.setSheetIndex(this.sheetIndex);
         intersection.setSheetName(this.sheetName);
-        intersection.setSingleSheet(this.isSingleSheet);
+        intersection.setSingleSheet(this.singleSheet);
         this.graph.add(intersection);
         this.stack.push(intersection);
     }
@@ -825,11 +822,11 @@ public final class Parser {
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
         var union = new Union(lFormula, rFormula);
-        union.setColumn(formulaColumn);
-        union.setRow(formulaRow);
+        union.setColumn(column);
+        union.setRow(row);
         union.setSheetIndex(sheetIndex);
         union.setSheetName(sheetName);
-        union.setSingleSheet(this.isSingleSheet);
+        union.setSingleSheet(this.singleSheet);
         graph.add(union);
         stack.push(union);
     }
@@ -845,7 +842,7 @@ public final class Parser {
     }
 
     private String getCellAddress() {
-        return Start.cellAddress(this.formulaRow, this.formulaColumn, this.sheetName);
+        return Start.cellAddress(this.row, this.column, this.sheetName);
     }
 
     public void setVerbose(boolean verbose) {
@@ -882,6 +879,8 @@ public final class Parser {
     }
 
     // INNER CLASS
+
+
     class WhatIf {
 
         final Ptg ptg;
