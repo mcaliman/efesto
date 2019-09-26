@@ -106,6 +106,7 @@ public final class Parser {
     private final Predicate<Ptg> unaryPlusPtg = (Ptg t) -> t instanceof UnaryPlusPtg;
     private final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
+
     private boolean verbose = false;
 
     private int column;//Current Formula Column
@@ -138,19 +139,19 @@ public final class Parser {
         this.stack = new Stack<>();
     }
 
+
     private void parse(Sheet sheet) {
         this.sheet = sheet;
-        int index = book.getSheetIndex(sheet);
-        String name = sheet.getSheetName();
-
+        int index = getSheetIndex();
+        String name = getSheetName();
         this.cSHEET = new SHEET(name, index);
-
         verbose("Parsing sheet-name:" + cSHEET.getName());
         for (Row row : sheet)
             for (Cell cell : row)
                 if ( cell != null ) parse(cell);
                 else err("Cell is null.");
     }
+
 
     private void parse(Cell cell) {
         if ( cell.getCellType() == CELL_TYPE_FORMULA ) {
@@ -161,8 +162,8 @@ public final class Parser {
             Object obj = Helper.valueOf(cell);
             CELL elem = new CELL(cell.getRowIndex(), cell.getColumnIndex());
             elem.setValue(obj);
-            String name = cell.getSheet().getSheetName();
-            int index = helper.getSheetIndex(cell.getSheet().getSheetName());
+            String name = getSheetName(cell);
+            int index = getSheetIndex(cell);
             elem.setSheetName(name);
             elem.setSheetIndex(index);
             parseCELLlinked(elem);
@@ -846,6 +847,21 @@ public final class Parser {
         if ( this.verbose ) out.println(text);
     }
 
+    private String getSheetName(Cell cell) {
+        return cell.getSheet().getSheetName();
+    }
+
+    private int getSheetIndex(Cell cell) {
+        return helper.getSheetIndex(cell.getSheet().getSheetName());
+    }
+
+    private int getSheetIndex() {
+        return this.book.getSheetIndex(sheet);
+    }
+
+    private String getSheetName() {
+        return this.sheet.getSheetName();
+    }
 
     private boolean isCellEmpty(final Cell cell) {
         if ( cell == null ) { // use row.getCell(x, Row.CREATE_NULL_AS_BLANK) to avoid null cells
