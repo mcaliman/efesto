@@ -159,9 +159,9 @@ public final class Parser {
             this.counterFormulas++;
         } else if ( this.ext.contains(cell) ) {
             verbose("Recover loosed cell!");
-            Object obj = Helper.valueOf(cell);
+            Object value = Helper.valueOf(cell);
             CELL elem = new CELL(cell.getRowIndex(), cell.getColumnIndex());
-            elem.setValue(obj);
+            elem.setValue(value);
             String name = getSheetName(cell);
             int index = getSheetIndex(cell);
             elem.setSheetName(name);
@@ -336,8 +336,7 @@ public final class Parser {
         var elem = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSheetIndex(cSHEET.getIndex());
-        elem.setSheetName(cSHEET.getName());
+        elem.setSHEET(cSHEET);
         elem.setSingleSheet(this.singleSheet);
 
         elem.setAsArea();//is area not a cell with ref to area
@@ -380,8 +379,7 @@ public final class Parser {
         //parse CELL
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSheetIndex(cSHEET.getIndex());
-        elem.setSheetName(cSHEET.getName());
+        elem.setSHEET(cSHEET);
         elem.setSingleSheet(this.singleSheet);
         this.unordered.add(elem);
         stack.push(elem);
