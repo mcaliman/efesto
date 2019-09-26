@@ -529,8 +529,6 @@ public final class Parser {
     private void parseFormula(@NotNull Start elem) {
         elem.setColumn(column);
         elem.setRow(row);
-        //elem.setSheetIndex(cSHEET.getIndex());
-        //elem.setSheetName(cSHEET.getName());
         elem.setSHEET(cSHEET);
         elem.setSingleSheet(this.singleSheet);
         unordered.add(elem);
