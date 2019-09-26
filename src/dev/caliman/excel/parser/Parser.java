@@ -535,53 +535,49 @@ public final class Parser {
     }
     private void parseParenthesisFormula() {
         var formula = (Formula) stack.pop();
-        var parFormula = new ParenthesisFormula(formula);
-        parFormula.setColumn(column);
-        parFormula.setRow(row);
-        parFormula.setSheetIndex(cSHEET.getIndex());
-        parFormula.setSheetName(cSHEET.getName());
-        parFormula.setSingleSheet(this.singleSheet);
-        stack.push(parFormula);
+        var elem = new ParenthesisFormula(formula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        stack.push(elem);
     }
 
     private void parseEq() {
         // F=F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var eq = new Eq(lFormula, rFormula);
-        eq.setColumn(column);
-        eq.setRow(row);
-        eq.setSheetIndex(cSHEET.getIndex());
-        eq.setSheetName(cSHEET.getName());
-        eq.setSingleSheet(this.singleSheet);
-        graph.add(eq);
-        stack.push(eq);
+        var elem = new Eq(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
     private void parseLt() {
         // F<F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var lt = new Lt(lFormula, rFormula);
-        lt.setColumn(column);
-        lt.setRow(row);
-        lt.setSheetIndex(cSHEET.getIndex());
-        lt.setSheetName(cSHEET.getName());
-        lt.setSingleSheet(this.singleSheet);
-        graph.add(lt);
-        stack.push(lt);
+        var elem = new Lt(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
     private void parseGt() {
         // F>F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var gt = new Gt(lFormula, rFormula);
-        gt.setColumn(column);
-        gt.setRow(row);
-        gt.setSheetIndex(cSHEET.getIndex());
-        gt.setSheetName(cSHEET.getName());
-        gt.setSingleSheet(this.singleSheet);
-        graph.add(gt);
-        stack.push(gt);
+        var elem = new Gt(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
     private void parseLeq() {
         // F<=F
