@@ -414,17 +414,17 @@ public final class Parser {
         } else {
             err("Not RangeReference " + args.getClass().getSimpleName() + " " + args.toString());
         }
-        var term = new SUM((Formula) args);
+        var elem = new SUM((Formula) args);
 
-        term.setColumn(column);
-        term.setRow(row);
-        term.setSheetIndex(cSHEET.getIndex());
-        term.setSheetName(cSHEET.getName());
-        term.setSingleSheet(this.singleSheet);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(cSHEET.getIndex());
+        elem.setSheetName(cSHEET.getName());
+        elem.setSingleSheet(this.singleSheet);
 
-        unordered.add(term);
-        graph.add(term);
-        stack.push(term);
+        unordered.add(elem);
+        graph.add(elem);
+        stack.push(elem);
     }
 
     private void parseFuncVarPtg(@NotNull FuncVarPtg t) {
@@ -463,51 +463,51 @@ public final class Parser {
 
 
         // ERROR
-        var term = new ERROR(text);
-        term.setColumn(column);
-        term.setRow(row);
-        term.setSheetIndex(cSHEET.getIndex());
-        term.setSheetName(cSHEET.getName());
-        term.setSingleSheet(this.singleSheet);
+        var elem = new ERROR(text);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(cSHEET.getIndex());
+        elem.setSheetName(cSHEET.getName());
+        elem.setSingleSheet(this.singleSheet);
 
-        err(term.toString());
-        graph.addNode(term);
-        stack.push(term);
+        err(elem.toString());
+        graph.addNode(elem);
+        stack.push(elem);
     }
 
     private void parseBOOL(Boolean bool) {
-        var term = new BOOL(bool);
-        graph.addNode(term);
-        stack.push(term);
+        var elem = new BOOL(bool);
+        graph.addNode(elem);
+        stack.push(elem);
     }
 
     private void parseTEXT(String string) {
-        var term = new TEXT(string);
-        graph.addNode(term);
-        stack.push(term);
+        var elem = new TEXT(string);
+        graph.addNode(elem);
+        stack.push(elem);
     }
 
     private void parseINT(Integer value) {
-        var term = new INT(value);
-        graph.addNode(term);
-        stack.push(term);
+        var elem = new INT(value);
+        graph.addNode(elem);
+        stack.push(elem);
     }
 
     private void parseFLOAT(Double value) {
-        var term = new FLOAT(value);
-        graph.addNode(term);
-        stack.push(term);
+        var elem = new FLOAT(value);
+        graph.addNode(elem);
+        stack.push(elem);
     }
 
     private void parseERRORREF() {
         //#REF
-        ERRORREF term = new ERRORREF();
-        term.setColumn(column);
-        term.setRow(row);
-        term.setSheetIndex(cSHEET.getIndex());
-        term.setSheetName(cSHEET.getName());
-        term.setSingleSheet(this.singleSheet);
-        stack.push(term);
+        ERRORREF elem = new ERRORREF();
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(cSHEET.getIndex());
+        elem.setSheetName(cSHEET.getName());
+        elem.setSingleSheet(this.singleSheet);
+        stack.push(elem);
         err("");
     }
 
@@ -525,13 +525,15 @@ public final class Parser {
         }
         ordered = graph.topologicalSort();
     }
-    private void parseFormula(@NotNull Start formula) {
-        formula.setColumn(column);
-        formula.setRow(row);
-        formula.setSheetIndex(cSHEET.getIndex());
-        formula.setSheetName(cSHEET.getName());
-        formula.setSingleSheet(this.singleSheet);
-        unordered.add(formula);
+
+    private void parseFormula(@NotNull Start elem) {
+        elem.setColumn(column);
+        elem.setRow(row);
+        //elem.setSheetIndex(cSHEET.getIndex());
+        //elem.setSheetName(cSHEET.getName());
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        unordered.add(elem);
     }
     private void parseParenthesisFormula() {
         var formula = (Formula) stack.pop();
