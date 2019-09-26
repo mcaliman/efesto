@@ -691,14 +691,15 @@ public final class Parser {
     private void percentFormula() {
         // F%
         var formula = (Formula) stack.pop();
-        var percentFormula = new PercentFormula(formula);
-        percentFormula.setColumn(column);
-        percentFormula.setRow(row);
-        percentFormula.setSheetIndex(cSHEET.getIndex());
-        percentFormula.setSheetName(cSHEET.getName());
-        percentFormula.setSingleSheet(this.singleSheet);
-        graph.addNode(percentFormula);
-        stack.push(percentFormula);
+        var elem = new PercentFormula(formula);
+        elem.setColumn(column);
+        elem.setRow(row);
+
+        elem.setSHEET(cSHEET);
+
+        elem.setSingleSheet(this.singleSheet);
+        graph.addNode(elem);
+        stack.push(elem);
     }
 
     private void parseCELLlinked(@NotNull CELL tCELL) {
