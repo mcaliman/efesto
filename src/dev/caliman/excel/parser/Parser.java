@@ -159,13 +159,13 @@ public final class Parser {
         } else if ( this.ext.contains(cell) ) {
             verbose("Recover loosed cell!");
             Object obj = Helper.valueOf(cell);
-            CELL term = new CELL(cell.getRowIndex(), cell.getColumnIndex());
-            term.setValue(obj);
+            CELL elem = new CELL(cell.getRowIndex(), cell.getColumnIndex());
+            elem.setValue(obj);
             String name = cell.getSheet().getSheetName();
             int index = helper.getSheetIndex(cell.getSheet().getSheetName());
-            term.setSheetName(name);
-            term.setSheetIndex(index);
-            parseCELLlinked(term);
+            elem.setSheetName(name);
+            elem.setSheetIndex(index);
+            parseCELLlinked(elem);
             this.ext.remove(cell);
         } else if ( !this.ext.contains(cell) && !isCellEmpty(cell) ) {
             //Non è formula non è nelle celle utili collezionate
@@ -176,8 +176,8 @@ public final class Parser {
 
     private void parseFormula(Cell cell) {
         verbose("Cell:" + cell.getClass().getSimpleName() + " " + cell.toString() + " " + cell.getCellType());
-        column = cell.getColumnIndex();
-        row = cell.getRowIndex();
+        this.column = cell.getColumnIndex();
+        this.row = cell.getRowIndex();
         String formulaAddress = getCellAddress();
         Ptg[] formulaPtgs = helper.tokens(this.sheet, this.row, this.column);
         if ( formulaPtgs == null ) {
@@ -203,14 +203,14 @@ public final class Parser {
     }
 
     private void parseUDF(String arguments) {
-        var udf = new UDF(arguments);
-        udf.setColumn(column);
-        udf.setRow(row);
-        udf.setSheetIndex(this.cSHEET.getIndex());
-        udf.setSheetName(this.cSHEET.getName());
-        udf.setSingleSheet(this.singleSheet);
-        unordered.add(udf);
-        stack.push(udf);
+        var elem = new UDF(arguments);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(this.cSHEET.getIndex());
+        elem.setSheetName(this.cSHEET.getName());
+        elem.setSingleSheet(this.singleSheet);
+        unordered.add(elem);
+        stack.push(elem);
     }
 
     private void parse(Ptg p) {
@@ -278,20 +278,20 @@ public final class Parser {
         // external or different sheet.
         // This is XSSF only, as it stores the sheet / book references in String
         // form. The HSSF equivalent using indexes is Area3DPtg
-        String sheetName = t.getSheetName();
-        int sheetIndex = helper.getSheetIndex(sheetName);
-        SHEET tSHEET = new SHEET(sheetName, sheetIndex);
+        String name = t.getSheetName();
+        int index = helper.getSheetIndex(name);
+        SHEET tSHEET = new SHEET(name, index);
         String area = helper.getArea(t);
-        parseArea3D(helper.getRANGE(sheetName, t), tSHEET, area);
+        parseArea3D(helper.getRANGE(name, t), tSHEET, area);
     }
 
     private void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area) {
         //Sheet2!A1:B1 (Sheet + AREA/RANGE)
-        var term = new PrefixReferenceItem(tSHEET, area, tRANGE);
-        term.setSheetIndex(tSHEET.getIndex());
-        term.setSheetName(tSHEET.getName());
-        unordered.add(term);
-        stack.push(term);
+        var elem = new PrefixReferenceItem(tSHEET, area, tRANGE);
+        elem.setSheetIndex(tSHEET.getIndex());
+        elem.setSheetName(tSHEET.getName());
+        unordered.add(elem);
+        stack.push(elem);
     }
 
     private void parseRef3DPxg(Ref3DPxg t) {
@@ -320,29 +320,29 @@ public final class Parser {
     }
 
     private void parseReference(SHEET tSHEET, String cellref) {
-        var term = new PrefixReferenceItem(tSHEET, cellref, null);
-        term.setColumn(column);
-        term.setRow(row);
-        term.setSHEET(cSHEET);
-        term.setSingleSheet(this.singleSheet);
-        graph.addNode(term);
-        stack.push(term);
+        var elem = new PrefixReferenceItem(tSHEET, cellref, null);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.addNode(elem);
+        stack.push(elem);
     }
 
     private void parseAreaPtg(AreaPtg t) {
         RANGE tRANGE = helper.getRANGE(sheet, t);
         // RangeReference
-        var term = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
-        term.setColumn(column);
-        term.setRow(row);
-        term.setSheetIndex(cSHEET.getIndex());
-        term.setSheetName(cSHEET.getName());
-        term.setSingleSheet(this.singleSheet);
+        var elem = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(cSHEET.getIndex());
+        elem.setSheetName(cSHEET.getName());
+        elem.setSingleSheet(this.singleSheet);
 
-        term.setAsArea();//is area not a cell with ref to area
-        term.add(tRANGE.values());
-        graph.addNode(term);
-        stack.push(term);
+        elem.setAsArea();//is area not a cell with ref to area
+        elem.add(tRANGE.values());
+        graph.addNode(elem);
+        stack.push(elem);
 
     }
 
@@ -361,10 +361,10 @@ public final class Parser {
             }
         }
         RANGE tRANGE = Objects.requireNonNull(range).getRANGE();
-        NamedRange namedRange = new NamedRange(name, tRANGE);
-        namedRange.setSheetIndex(sheetIndex);
-        namedRange.setSheetName(range.getSheetName());
-        stack.push(namedRange);
+        NamedRange elem = new NamedRange(name, tRANGE);
+        elem.setSheetIndex(sheetIndex);
+        elem.setSheetName(range.getSheetName());
+        stack.push(elem);
     }
 
     private void parseRefPtg(@NotNull RefPtg t) {
@@ -374,29 +374,28 @@ public final class Parser {
             Cell c = rowObject.getCell(t.getColumn());
             value = Helper.valueOf(c);
         }
-        CELL term = new CELL(t.getRow(), t.getColumn());
-        term.setValue(value);
+        CELL elem = new CELL(t.getRow(), t.getColumn());
+        elem.setValue(value);
         //parse CELL
-        term.setColumn(column);
-        term.setRow(row);
-        term.setSheetIndex(cSHEET.getIndex());
-        term.setSheetName(cSHEET.getName());
-        term.setSingleSheet(this.singleSheet);
-        this.unordered.add(term);
-        stack.push(term);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(cSHEET.getIndex());
+        elem.setSheetName(cSHEET.getName());
+        elem.setSingleSheet(this.singleSheet);
+        this.unordered.add(elem);
+        stack.push(elem);
     }
 
 
     private void parseConstantArray(@NotNull ArrayPtg t) {
         Object[][] array = t.getTokenArrayValues();
         // ConstantArray
-        var term = new ConstantArray(array);
-        term.setColumn(column);
-        term.setRow(row);
-        term.setSheetIndex(cSHEET.getIndex());
-        term.setSheetName(cSHEET.getName());
-        term.setSingleSheet(this.singleSheet);
-        stack.push(term);
+        var elem = new ConstantArray(array);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        stack.push(elem);
     }
 
     private void parseAttrPtg(@NotNull AttrPtg t) {
