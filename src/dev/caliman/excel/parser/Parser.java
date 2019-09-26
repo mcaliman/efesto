@@ -583,119 +583,110 @@ public final class Parser {
         // F<=F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var leq = new Leq(lFormula, rFormula);
-        leq.setColumn(column);
-        leq.setRow(row);
-        leq.setSheetIndex(cSHEET.getIndex());
-        leq.setSheetName(cSHEET.getName());
-        leq.setSingleSheet(this.singleSheet);
-        graph.add(leq);
-        stack.push(leq);
+        var elem = new Leq(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
     private void parseGteq() {
         // F>=F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var gteq = new GtEq(lFormula, rFormula);
-        gteq.setColumn(column);
-        gteq.setRow(row);
-        gteq.setSheetIndex(cSHEET.getIndex());
-        gteq.setSheetName(cSHEET.getName());
-        gteq.setSingleSheet(this.singleSheet);
-        graph.add(gteq);
-        stack.push(gteq);
+        var elem = new GtEq(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
     private void parseNeq() {
         // F<>F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var neq = new Neq(lFormula, rFormula);
-        neq.setColumn(column);
-        neq.setRow(row);
-        neq.setSheetIndex(cSHEET.getIndex());
-        neq.setSheetName(cSHEET.getName());
-        neq.setSingleSheet(this.singleSheet);
-        graph.add(neq);
-        stack.push(neq);
+        var elem = new Neq(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
     private void parseConcat() {
         // F&F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var concat = new Concat(lFormula, rFormula);
-        concat.setColumn(column);
-        concat.setRow(row);
-        concat.setSheetIndex(cSHEET.getIndex());
-        concat.setSheetName(cSHEET.getName());
-        concat.setSingleSheet(this.singleSheet);
-        graph.add(concat);
-        stack.push(concat);
+        var elem = new Concat(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
     private void parseAdd() {
         // F+F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var add = new Add(lFormula, rFormula);
-        add.setColumn(column);
-        add.setRow(row);
-        add.setSheetIndex(cSHEET.getIndex());
-        add.setSheetName(cSHEET.getName());
-        add.setSingleSheet(this.singleSheet);
-        graph.add(add);
-        stack.push(add);
+        var elem = new Add(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
     private void parseSub() {
         // F-F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var sub = new Sub(lFormula, rFormula);
-        sub.setColumn(column);
-        sub.setRow(row);
-        sub.setSheetIndex(cSHEET.getIndex());
-        sub.setSheetName(cSHEET.getName());
-        sub.setSingleSheet(this.singleSheet);
-        graph.add(sub);
-        stack.push(sub);
+        var elem = new Sub(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
     private void parseMult() {
         // F*F
         if ( stack.empty() ) return;
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var mult = new Mult(lFormula, rFormula);
-        mult.setColumn(column);
-        mult.setRow(row);
-        mult.setSheetIndex(cSHEET.getIndex());
-        mult.setSheetName(cSHEET.getName());
-        mult.setSingleSheet(this.singleSheet);
-        graph.add(mult);
-        stack.push(mult);
+        var elem = new Mult(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
     private void parseDiv() {
         // F/F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var div = new Divide(lFormula, rFormula);
-        div.setColumn(column);
-        div.setRow(row);
-        div.setSheetIndex(cSHEET.getIndex());
-        div.setSheetName(cSHEET.getName());
-        div.setSingleSheet(this.singleSheet);
-        graph.add(div);
-        stack.push(div);
+        var elem = new Divide(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
     private void parsePower() {
         // F^F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var power = new Power(lFormula, rFormula);
-        power.setColumn(column);
-        power.setRow(row);
-        power.setSheetIndex(cSHEET.getIndex());
-        power.setSheetName(cSHEET.getName());
-        power.setSingleSheet(this.singleSheet);
-        graph.add(power);
-        stack.push(power);
+        var elem = new Power(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
     private void percentFormula() {
         // F%
