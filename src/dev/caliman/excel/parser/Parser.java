@@ -159,11 +159,13 @@ public final class Parser {
         } else if ( this.ext.contains(cell) ) {
             verbose("Recover loosed cell!");
             Object obj = Helper.valueOf(cell);
-            CELL cellRef = new CELL(cell.getRowIndex(), cell.getColumnIndex());
-            cellRef.setValue(obj);
-            cellRef.setSheetName(cell.getSheet().getSheetName());
-            cellRef.setSheetIndex(helper.getSheetIndex(cell.getSheet().getSheetName()));
-            parseCELLlinked(cellRef);
+            CELL term = new CELL(cell.getRowIndex(), cell.getColumnIndex());
+            term.setValue(obj);
+            String name = cell.getSheet().getSheetName();
+            int index = helper.getSheetIndex(cell.getSheet().getSheetName());
+            term.setSheetName(name);
+            term.setSheetIndex(index);
+            parseCELLlinked(term);
             this.ext.remove(cell);
         } else if ( !this.ext.contains(cell) && !isCellEmpty(cell) ) {
             //Non è formula non è nelle celle utili collezionate
