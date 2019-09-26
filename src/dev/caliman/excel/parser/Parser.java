@@ -321,8 +321,7 @@ public final class Parser {
         var term = new PrefixReferenceItem(tSHEET, cellref, null);
         term.setColumn(column);
         term.setRow(row);
-        term.setSheetIndex(cSHEET.getIndex());
-        term.setSheetName(cSHEET.getName());
+        term.setSHEET(cSHEET);
         term.setSingleSheet(this.singleSheet);
         graph.addNode(term);
         stack.push(term);

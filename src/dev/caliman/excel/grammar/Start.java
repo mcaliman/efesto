@@ -22,6 +22,7 @@
 
 package dev.caliman.excel.grammar;
 
+import dev.caliman.excel.grammar.formula.reference.SHEET;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,11 +38,13 @@ public abstract class Start {
     private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     protected String sheetName;
+    private int sheetIndex;
+
     protected boolean singleSheet;
     private int row;
     private int column;
 
-    private int sheetIndex;
+
 
     @NotNull
     protected static String format(@Nullable final Date date) {
@@ -106,6 +109,15 @@ public abstract class Start {
         this.sheetIndex = sheetIndex;
     }
 
+    public void setSheetName(String sheetName) {
+        this.sheetName = sheetName;
+    }
+
+    public void setSHEET(SHEET tSHEET) {
+        this.sheetIndex = tSHEET.getIndex();
+        this.sheetName = tSHEET.getName();
+    }
+
     @NotNull
     public String getAddress() {
         return Start.cellAddress(getRow(), getColumn(), sheetName);
@@ -157,9 +169,6 @@ public abstract class Start {
         return (this.id() + " = " + this.toString()).equals(text);
     }
 
-    public void setSheetName(String sheetName) {
-        this.sheetName = sheetName;
-    }
 
     public String quoteIf(String text) {
         return hasSpaces(text) ? "'" + text.trim() + "'" : text.trim();
