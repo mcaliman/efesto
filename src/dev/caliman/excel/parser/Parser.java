@@ -702,29 +702,27 @@ public final class Parser {
         stack.push(elem);
     }
 
-    private void parseCELLlinked(@NotNull CELL tCELL) {
-        tCELL.setColumn(column);
-        tCELL.setRow(row);
-        tCELL.setSheetIndex(cSHEET.getIndex());
-        tCELL.setSheetName(cSHEET.getName());
-        tCELL.setSingleSheet(this.singleSheet);
-        this.unordered.add(tCELL);
-        stack.push(tCELL);
-        graph.addNode(tCELL);
+    private void parseCELLlinked(@NotNull CELL elem) {
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        this.unordered.add(elem);
+        stack.push(elem);
+        graph.addNode(elem);
     }
 
     private void parseReference(FILE tFILE, String cellref) {
         // Used
         // Sheet2!A1 (Sheet + parseCELL_REFERENCE)
         // External references: External references are normally in the form [File]Sheet!Cell
-        var term = new PrefixReferenceItem(tFILE, cellref, null);
-        term.setColumn(column);
-        term.setRow(row);
-        term.setSheetIndex(cSHEET.getIndex());
-        term.setSheetName(cSHEET.getName());
-        term.setSingleSheet(this.singleSheet);
-        graph.addNode(term);
-        stack.push(term);
+        var elem = new PrefixReferenceItem(tFILE, cellref, null);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.addNode(elem);
+        stack.push(elem);
     }
 
 
@@ -739,23 +737,21 @@ public final class Parser {
     private void parsePlus() {
         // +
         var formula = (Formula) stack.pop();
-        var plus = new Plus(formula);
-        plus.setSheetIndex(cSHEET.getIndex());
-        plus.setSheetName(cSHEET.getName());
-        graph.addNode(plus);
-        stack.push(plus);
+        var elem = new Plus(formula);
+        elem.setSHEET(cSHEET);
+        graph.addNode(elem);
+        stack.push(elem);
     }
     private void parseMinus() {
         // -
         var formula = (Formula) stack.pop();
-        var minus = new Minus(formula);
-        minus.setColumn(column);
-        minus.setRow(row);
-        minus.setSheetIndex(cSHEET.getIndex());
-        minus.setSheetName(cSHEET.getName());
-        minus.setSingleSheet(this.singleSheet);
-        graph.addNode(minus);
-        stack.push(minus);
+        var elem = new Minus(formula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.addNode(elem);
+        stack.push(elem);
     }
 
 
@@ -768,8 +764,7 @@ public final class Parser {
 
         builtinFunction.setColumn(column);
         builtinFunction.setRow(row);
-        builtinFunction.setSheetIndex(cSHEET.getIndex());
-        builtinFunction.setSheetName(cSHEET.getName());
+        builtinFunction.setSHEET(cSHEET);
         builtinFunction.setSingleSheet(this.singleSheet);
 
         graph.addNode(builtinFunction);
@@ -799,28 +794,26 @@ public final class Parser {
         //F F
         var rFormula = (Formula) this.stack.pop();
         var lFormula = (Formula) this.stack.pop();
-        var intersection = new Intersection(lFormula, rFormula);
-        intersection.setColumn(this.column);
-        intersection.setRow(this.row);
-        intersection.setSheetIndex(cSHEET.getIndex());
-        intersection.setSheetName(cSHEET.getName());
-        intersection.setSingleSheet(this.singleSheet);
-        this.graph.add(intersection);
-        this.stack.push(intersection);
+        var elem = new Intersection(lFormula, rFormula);
+        elem.setColumn(this.column);
+        elem.setRow(this.row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        this.graph.add(elem);
+        this.stack.push(elem);
     }
 
     private void parseUnion() {
         //F,F
         var rFormula = (Formula) stack.pop();
         var lFormula = (Formula) stack.pop();
-        var union = new Union(lFormula, rFormula);
-        union.setColumn(column);
-        union.setRow(row);
-        union.setSheetIndex(cSHEET.getIndex());
-        union.setSheetName(cSHEET.getName());
-        union.setSingleSheet(this.singleSheet);
-        graph.add(union);
-        stack.push(union);
+        var elem = new Union(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSHEET(cSHEET);
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
     }
 
 
