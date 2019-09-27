@@ -164,8 +164,10 @@ public final class Parser {
             elem.setValue(value);
             String name = getSheetName(cell);
             int index = getSheetIndex(cell);
-            elem.setSheetName(name);
-            elem.setSheetIndex(index);
+
+            elem.setSHEET(new SHEET(name, index));
+            //elem.setSheetName(name);
+            //elem.setSheetIndex(index);
             parseCELLlinked(elem);
             this.ext.remove(cell);
         } else if ( !this.ext.contains(cell) && !isCellEmpty(cell) ) {
