@@ -405,9 +405,7 @@ public final class Parser {
         // SUM(Arguments)
         var args = stack.pop();
         if ( args instanceof Reference || args instanceof OFFSET ) {
-            args.setSheetIndex(cSHEET.getIndex());
-            args.setSheetName(cSHEET.getName());
-
+            args.setSHEET(cSHEET);
             args.setAsArea();
             unordered.add(args);
         } else {
