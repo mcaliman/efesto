@@ -415,8 +415,8 @@ public final class Parser {
 
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSheetIndex(cSHEET.getIndex());
-        elem.setSheetName(cSHEET.getName());
+
+        elem.setSHEET(cSHEET);
         elem.setSingleSheet(this.singleSheet);
 
         unordered.add(elem);
@@ -463,8 +463,7 @@ public final class Parser {
         var elem = new ERROR(text);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSheetIndex(cSHEET.getIndex());
-        elem.setSheetName(cSHEET.getName());
+        elem.setSHEET(cSHEET);
         elem.setSingleSheet(this.singleSheet);
 
         err(elem.toString());
@@ -501,8 +500,7 @@ public final class Parser {
         ERRORREF elem = new ERRORREF();
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSheetIndex(cSHEET.getIndex());
-        elem.setSheetName(cSHEET.getName());
+        elem.setSHEET(cSHEET);
         elem.setSingleSheet(this.singleSheet);
         stack.push(elem);
         err("");
@@ -691,9 +689,7 @@ public final class Parser {
         var elem = new PercentFormula(formula);
         elem.setColumn(column);
         elem.setRow(row);
-
         elem.setSHEET(cSHEET);
-
         elem.setSingleSheet(this.singleSheet);
         graph.addNode(elem);
         stack.push(elem);
