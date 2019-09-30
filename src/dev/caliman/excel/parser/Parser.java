@@ -154,10 +154,12 @@ public final class Parser {
     private void parseSheet() {
         for (Row row : sheet)
             for (Cell cell : row)
-                if ( !isCellEmpty(cell) ) parse(cell);
-                else err("Cell is null.");
+                if ( notEmpty(cell) ) parse(cell);
+                else {
+                    err("Cell is null.");
+                    //throw new RuntimeException("Cell is null.");
+                }
     }
-
 
     private void parse(Cell cell) {
         if ( cell.getCellType() == CELL_TYPE_FORMULA ) {
@@ -168,15 +170,10 @@ public final class Parser {
             Object value = Helper.valueOf(cell);
             CELL elem = new CELL(cell.getRowIndex(), cell.getColumnIndex());
             elem.setValue(value);
-            String name = getSheetName(cell);
-            int index = getSheetIndex(cell);
-
-            elem.setSHEET(new SHEET(name, index));
-            //elem.setSheetName(name);
-            //elem.setSheetIndex(index);
+            elem.setSHEET(new SHEET(getSheetName(cell), getSheetIndex(cell)));
             parseCELLlinked(elem);
             this.ext.remove(cell);
-        } else if ( !this.ext.contains(cell) && !isCellEmpty(cell) ) {
+        } else if ( !this.ext.contains(cell) && !empty(cell) ) {
             //Non è formula non è nelle celle utili collezionate
             out.println("Cella di interesse? " + cell.toString());
 
@@ -859,7 +856,11 @@ public final class Parser {
         return this.sheet.getSheetName();
     }
 
-    private boolean isCellEmpty(final Cell cell) {
+    private boolean notEmpty(final Cell cell) {
+        return !empty(cell);
+    }
+
+    private boolean empty(final Cell cell) {
         if ( cell == null ) { // use row.getCell(x, Row.CREATE_NULL_AS_BLANK) to avoid null cells
             return true;
         }
