@@ -209,8 +209,7 @@ public final class Parser {
         var elem = new UDF(arguments);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSheetIndex(this.cSHEET.getIndex());
-        elem.setSheetName(this.cSHEET.getName());
+        elem.setSHEET(this.cSHEET);
         elem.setSingleSheet(this.singleSheet);
         unordered.add(elem);
         stack.push(elem);
@@ -291,8 +290,8 @@ public final class Parser {
     private void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area) {
         //Sheet2!A1:B1 (Sheet + AREA/RANGE)
         var elem = new PrefixReferenceItem(tSHEET, area, tRANGE);
-        elem.setSheetIndex(tSHEET.getIndex());
-        elem.setSheetName(tSHEET.getName());
+
+        elem.setSHEET(tSHEET);
         unordered.add(elem);
         stack.push(elem);
     }
@@ -301,7 +300,8 @@ public final class Parser {
         //Title: XSSF 3D Reference
         //Description: Defines a cell in an external or different sheet.
         //REFERENCE:
-        //This is XSSF only, as it stores the sheet / book references in String form. The HSSF equivalent using indexes is Ref3DPtg
+        //This is XSSF only, as it stores the sheet / book references in String form.
+        //The HSSF equivalent using indexes is Ref3DPtg
         int extWorkbookNumber = t.getExternalWorkbookNumber();
         String sheetName = t.getSheetName();
         int sheetIndex = helper.getSheetIndex(sheetName);
@@ -321,6 +321,7 @@ public final class Parser {
         if ( extWorkbookNumber > 0 ) parseReference(tFILE, cellref);
         else parseReference(tSHEET, cellref);
     }
+
 
     private void parseReference(SHEET tSHEET, String cellref) {
         var elem = new PrefixReferenceItem(tSHEET, cellref, null);
