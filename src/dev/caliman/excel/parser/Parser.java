@@ -170,9 +170,8 @@ public final class Parser {
     }
 
     private void parse( Cell xlsxCell ) {
-        if( xlsxCell.getCellType( ) == CELL_TYPE_FORMULA ) {
+        if( isFormula( xlsxCell ) ) {
             parseFormula( xlsxCell );
-            this.counterFormulas++;
         } else if( this.ext.contains( xlsxCell ) ) {
             verbose( "Recover loosed cell!" );
             Object value = Helper.valueOf( xlsxCell );
@@ -184,11 +183,15 @@ public final class Parser {
         } else if( !this.ext.contains( xlsxCell ) && !empty( xlsxCell ) ) {
             //Non è formula non è nelle celle utili collezionate
             out.println( "Cella di interesse? " + xlsxCell.toString( ) );
-
         }
     }
 
+    private boolean isFormula( Cell xlsxCell ) {
+        return xlsxCell.getCellType( ) == CELL_TYPE_FORMULA;
+    }
+
     private void parseFormula( Cell xlsxCell ) {
+        this.counterFormulas++;
         verbose( "Cell:" + xlsxCell.getClass( ).getSimpleName( ) + " " + xlsxCell.toString( ) + " " + xlsxCell.getCellType( ) );
         this.column = xlsxCell.getColumnIndex( );
         this.row = xlsxCell.getRowIndex( );
