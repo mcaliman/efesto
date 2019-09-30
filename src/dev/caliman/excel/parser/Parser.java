@@ -154,7 +154,7 @@ public final class Parser {
     private void parseSheet() {
         for (Row row : sheet)
             for (Cell cell : row)
-                if ( cell != null ) parse(cell);
+                if ( !isCellEmpty(cell) ) parse(cell);
                 else err("Cell is null.");
     }
 
