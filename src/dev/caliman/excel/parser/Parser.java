@@ -139,13 +139,19 @@ public final class Parser {
         this.stack = new Stack<>();
     }
 
+    public void parse() {
+        this.singleSheet = this.book.getNumberOfSheets() == 1;
+        for (Sheet currentSheet : this.book) {
+            this.sheet = currentSheet;
+            this.cSHEET = new SHEET(getSheetName(), getSheetIndex());
+            verbose("Parsing sheet-name:" + cSHEET.getName());
+            parseSheet();
+        }
+        verbose("** topological sorting beginning...");
+        sort();
+    }
 
-    private void parse(Sheet sheet) {
-        this.sheet = sheet;
-        int index = getSheetIndex();
-        String name = getSheetName();
-        this.cSHEET = new SHEET(name, index);
-        verbose("Parsing sheet-name:" + cSHEET.getName());
+    private void parseSheet() {
         for (Row row : sheet)
             for (Cell cell : row)
                 if ( cell != null ) parse(cell);
@@ -509,12 +515,7 @@ public final class Parser {
         err("");
     }
 
-    public void parse() {
-        this.singleSheet = this.book.getNumberOfSheets() == 1;
-        for (Sheet currentSheet : this.book) parse(currentSheet);
-        verbose("** topological sorting beginning...");
-        sort();
-    }
+
     private void sort() {
         if ( unordered.singleton() ) {
             ordered = new StartList();
