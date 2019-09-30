@@ -1,6 +1,6 @@
 '' 
 '' Text File: test/904-terminals-formulas.vb
-'' Excel File: 904-terminals-formulas.xlsx
+'' Excel File: test/904-terminals-formulas.xlsx
 '' Excel Formulas Number: 6
 '' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
 A2 = 20.0

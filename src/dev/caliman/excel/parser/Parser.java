@@ -296,7 +296,7 @@ public final class Parser {
         // This is XSSF only, as it stores the xlsxSheet / xlsxBook references in String
         // form. The HSSF equivalent using indexes is Area3DPtg
         String name = t.getSheetName();
-        int index = helper.getSheetIndex(name);
+        int index = getSheetIndex(name);
         SHEET tSHEET = new SHEET(name, index);
         String area = helper.getArea(t);
         parseArea3D(helper.getRANGE(name, t), tSHEET, area);
@@ -854,6 +854,10 @@ public final class Parser {
 
     private String getSheetName(Cell xlsxCell) {
         return xlsxCell.getSheet().getSheetName();
+    }
+
+    private int getSheetIndex(String xlsxSheetName) {
+        return helper.getSheetIndex(xlsxSheetName);
     }
 
     private int getSheetIndex(Cell xlsxCell) {
