@@ -319,7 +319,7 @@ public final class Parser {
         //The HSSF equivalent using indexes is Ref3DPtg
         int extWorkbookNumber = t.getExternalWorkbookNumber();
         String sheetName = t.getSheetName();
-        int sheetIndex = helper.getSheetIndex(sheetName);
+        int sheetIndex = getSheetIndex(sheetName);
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
         String cellref = helper.getCellRef(t);
