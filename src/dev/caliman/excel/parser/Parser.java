@@ -942,10 +942,7 @@ public final class Parser {
         if( xlsxCell.getCellType( ) == Cell.CELL_TYPE_BLANK ) {
             return true;
         }
-        if( xlsxCell.getCellType( ) == Cell.CELL_TYPE_STRING && xlsxCell.getStringCellValue( ).trim( ).isEmpty( ) ) {
-            return true;
-        }
-        return false;
+        return xlsxCell.getCellType( ) == Cell.CELL_TYPE_STRING && xlsxCell.getStringCellValue( ).trim( ).isEmpty( );
     }
 
     //</editor-fold>
