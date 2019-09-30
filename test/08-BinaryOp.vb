@@ -1,6 +1,6 @@
 '' 
 '' Text File: test/08-BinaryOp.vb
-'' Excel File: 08-BinOp.xlsx
+'' Excel File: test/08-BinOp.xlsx
 '' Excel Formulas Number: 1
 '' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
 B1 = 1.0

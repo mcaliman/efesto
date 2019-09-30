@@ -107,32 +107,40 @@ public final class Parser {
     private final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
 
-    private boolean verbose = false;
+    private String xlsxFileName;
+    private Workbook xlsxBook;
+    private Sheet xlsxSheet;//(Work)Sheet
 
     private int column;//Current Formula Column
     private int row;//Current Formula Row
 
-    private SHEET cSHEET;//current sheet
+    private boolean singleSheet;//is single xlsxSheet or not?
 
-    private boolean singleSheet;//is single sheet or not?
-    private Workbook book;
+    private boolean verbose = false;
+
+
+    private SHEET cSHEET;//current xlsxSheet
+
+
+
     private Helper helper;
     private List<Cell> ext;
     private int counterFormulas;//formula counters
-    private Sheet sheet;//(Work)Sheet
-    private String fileName;
+
 
     private StartList unordered;
     private StartList ordered;
     private StartGraph graph;
     private Stack<Start> stack;
 
-    public Parser(String filename) throws IOException, InvalidFormatException {
-        File file = new File(filename);
-        this.book = WorkbookFactory.create(file);
+    public Parser(String xlsxFileName) throws IOException, InvalidFormatException {
+        this.xlsxFileName = xlsxFileName;
+        File xlsxFile = new File(this.xlsxFileName);
+        this.xlsxBook = WorkbookFactory.create(xlsxFile);
+
         this.ext = new ArrayList<>();
-        this.helper = new Helper(this.book);
-        this.fileName = file.getName();
+        this.helper = new Helper(this.xlsxBook);
+
         this.unordered = new StartList();
         this.ordered = new StartList();
         this.graph = new StartGraph();
@@ -140,11 +148,11 @@ public final class Parser {
     }
 
     public void parse() {
-        this.singleSheet = this.book.getNumberOfSheets() == 1;
-        for (Sheet currentSheet : this.book) {
-            this.sheet = currentSheet;
+        this.singleSheet = this.xlsxBook.getNumberOfSheets() == 1;
+        for (Sheet currentSheet : this.xlsxBook) {
+            this.xlsxSheet = currentSheet;
             this.cSHEET = new SHEET(getSheetName(), getSheetIndex());
-            verbose("Parsing sheet-name:" + cSHEET.getName());
+            verbose("Parsing xlsxSheet-name:" + cSHEET.getName());
             parseSheet();
         }
         verbose("** topological sorting beginning...");
@@ -152,44 +160,44 @@ public final class Parser {
     }
 
     private void parseSheet() {
-        for (Row row : sheet)
-            for (Cell cell : row)
-                if ( notEmpty(cell) ) parse(cell);
+        for (Row xlsxRow : xlsxSheet)
+            for (Cell xlsxCell : xlsxRow)
+                if ( notEmpty(xlsxCell) ) parse(xlsxCell);
                 else {
                     err("Cell is null.");
                     //throw new RuntimeException("Cell is null.");
                 }
     }
 
-    private void parse(Cell cell) {
-        if ( cell.getCellType() == CELL_TYPE_FORMULA ) {
-            parseFormula(cell);
+    private void parse(Cell xlsxCell) {
+        if ( xlsxCell.getCellType() == CELL_TYPE_FORMULA ) {
+            parseFormula(xlsxCell);
             this.counterFormulas++;
-        } else if ( this.ext.contains(cell) ) {
+        } else if ( this.ext.contains(xlsxCell) ) {
             verbose("Recover loosed cell!");
-            Object value = Helper.valueOf(cell);
-            CELL elem = new CELL(cell.getRowIndex(), cell.getColumnIndex());
+            Object value = Helper.valueOf(xlsxCell);
+            CELL elem = new CELL(xlsxCell.getRowIndex(), xlsxCell.getColumnIndex());
             elem.setValue(value);
-            elem.setSHEET(new SHEET(getSheetName(cell), getSheetIndex(cell)));
+            elem.setSHEET(new SHEET(getSheetName(xlsxCell), getSheetIndex(xlsxCell)));
             parseCELLlinked(elem);
-            this.ext.remove(cell);
-        } else if ( !this.ext.contains(cell) && !empty(cell) ) {
+            this.ext.remove(xlsxCell);
+        } else if ( !this.ext.contains(xlsxCell) && !empty(xlsxCell) ) {
             //Non è formula non è nelle celle utili collezionate
-            out.println("Cella di interesse? " + cell.toString());
+            out.println("Cella di interesse? " + xlsxCell.toString());
 
         }
     }
 
-    private void parseFormula(Cell cell) {
-        verbose("Cell:" + cell.getClass().getSimpleName() + " " + cell.toString() + " " + cell.getCellType());
-        this.column = cell.getColumnIndex();
-        this.row = cell.getRowIndex();
+    private void parseFormula(Cell xlsxCell) {
+        verbose("Cell:" + xlsxCell.getClass().getSimpleName() + " " + xlsxCell.toString() + " " + xlsxCell.getCellType());
+        this.column = xlsxCell.getColumnIndex();
+        this.row = xlsxCell.getRowIndex();
         String formulaAddress = getCellAddress();
-        Ptg[] formulaPtgs = helper.tokens(this.sheet, this.row, this.column);
+        Ptg[] formulaPtgs = tokens();
         if ( formulaPtgs == null ) {
-            String formulaText = cell.getCellFormula();
+            String xlsxFormulaPlainText = xlsxCell.getCellFormula();
             err("ptgs empty or null for address " + formulaAddress);
-            parseUDF(formulaText);
+            parseUDF(xlsxFormulaPlainText);
             return;
         }
         Start start = parse(formulaPtgs);
@@ -197,6 +205,10 @@ public final class Parser {
             start.setSingleSheet(this.singleSheet);
             parseFormula(start);
         }
+    }
+
+    private Ptg[] tokens() {
+        return helper.tokens(this.xlsxSheet, this.row, this.column);
     }
 
     private Start parse(Ptg[] ptgs) {
@@ -210,8 +222,8 @@ public final class Parser {
 
     private void parseUDF(String arguments) {
         var elem = new UDF(arguments);
-        elem.setColumn(column);
-        elem.setRow(row);
+        elem.setColumn(this.column);
+        elem.setRow(this.row);
         elem.setSHEET(this.cSHEET);
         elem.setSingleSheet(this.singleSheet);
         unordered.add(elem);
@@ -280,8 +292,8 @@ public final class Parser {
 
     private void parseArea3DPxg(Area3DPxg t) {
         // Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
-        // external or different sheet.
-        // This is XSSF only, as it stores the sheet / book references in String
+        // external or different xlsxSheet.
+        // This is XSSF only, as it stores the xlsxSheet / xlsxBook references in String
         // form. The HSSF equivalent using indexes is Area3DPtg
         String name = t.getSheetName();
         int index = helper.getSheetIndex(name);
@@ -301,9 +313,9 @@ public final class Parser {
 
     private void parseRef3DPxg(Ref3DPxg t) {
         //Title: XSSF 3D Reference
-        //Description: Defines a cell in an external or different sheet.
+        //Description: Defines a cell in an external or different xlsxSheet.
         //REFERENCE:
-        //This is XSSF only, as it stores the sheet / book references in String form.
+        //This is XSSF only, as it stores the xlsxSheet / xlsxBook references in String form.
         //The HSSF equivalent using indexes is Ref3DPtg
         int extWorkbookNumber = t.getExternalWorkbookNumber();
         String sheetName = t.getSheetName();
@@ -312,7 +324,7 @@ public final class Parser {
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
         String cellref = helper.getCellRef(t);
         if ( this.cSHEET.getIndex() != sheetIndex ) {
-            Sheet extSheet = this.book.getSheet(sheetName);
+            Sheet extSheet = this.xlsxBook.getSheet(sheetName);
             if ( extSheet != null ) {
                 CellReference cr = new CellReference(cellref);
                 Row row = extSheet.getRow(cr.getRow());
@@ -337,7 +349,7 @@ public final class Parser {
     }
 
     private void parseAreaPtg(AreaPtg t) {
-        RANGE tRANGE = helper.getRANGE(sheet, t);
+        RANGE tRANGE = helper.getRANGE(xlsxSheet, t);
         // RangeReference
         var elem = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         elem.setColumn(column);
@@ -361,7 +373,7 @@ public final class Parser {
             if ( ptg != null ) {
                 if ( ptg instanceof Area3DPxg ) {
                     Area3DPxg area3DPxg = (Area3DPxg) ptg;
-                    range = new RangeInternal(book, area3DPxg.getSheetName(), area3DPxg);
+                    range = new RangeInternal(xlsxBook, area3DPxg.getSheetName(), area3DPxg);
                     sheetIndex = helper.getSheetIndex(area3DPxg.getSheetName());
                 }
             }
@@ -374,7 +386,7 @@ public final class Parser {
     }
 
     private void parseRefPtg(@NotNull RefPtg t) {
-        Row rowObject = sheet.getRow(t.getRow());
+        Row rowObject = xlsxSheet.getRow(t.getRow());
         Object value = null;
         if ( rowObject != null ) {
             Cell c = rowObject.getCell(t.getColumn());
@@ -832,47 +844,44 @@ public final class Parser {
         return counterFormulas;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getXlsxFileName() {
+        return xlsxFileName;
     }
 
     private void verbose(String text) {
         if ( this.verbose ) out.println(text);
     }
 
-    private String getSheetName(Cell cell) {
-        return cell.getSheet().getSheetName();
+    private String getSheetName(Cell xlsxCell) {
+        return xlsxCell.getSheet().getSheetName();
     }
 
-    private int getSheetIndex(Cell cell) {
-        return helper.getSheetIndex(cell.getSheet().getSheetName());
+    private int getSheetIndex(Cell xlsxCell) {
+        return helper.getSheetIndex(xlsxCell.getSheet().getSheetName());
     }
 
     private int getSheetIndex() {
-        return this.book.getSheetIndex(sheet);
+        return this.xlsxBook.getSheetIndex(this.xlsxSheet);
     }
 
     private String getSheetName() {
-        return this.sheet.getSheetName();
+        return this.xlsxSheet.getSheetName();
     }
 
-    private boolean notEmpty(final Cell cell) {
-        return !empty(cell);
+    private boolean notEmpty(final Cell xlsxCell) {
+        return !empty(xlsxCell);
     }
 
-    private boolean empty(final Cell cell) {
-        if ( cell == null ) { // use row.getCell(x, Row.CREATE_NULL_AS_BLANK) to avoid null cells
+    private boolean empty(final Cell xlsxCell) {
+        if ( xlsxCell == null ) { // use row.getCell(x, Row.CREATE_NULL_AS_BLANK) to avoid null cells
             return true;
         }
-
-        if ( cell.getCellType() == Cell.CELL_TYPE_BLANK ) {
+        if ( xlsxCell.getCellType() == Cell.CELL_TYPE_BLANK ) {
             return true;
         }
-
-        if ( cell.getCellType() == Cell.CELL_TYPE_STRING && cell.getStringCellValue().trim().isEmpty() ) {
+        if ( xlsxCell.getCellType() == Cell.CELL_TYPE_STRING && xlsxCell.getStringCellValue().trim().isEmpty() ) {
             return true;
         }
-
         return false;
     }
 

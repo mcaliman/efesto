@@ -1,6 +1,6 @@
 '' 
 '' Text File: test/17-IF-into-IF.vb
-'' Excel File: 17-IF-into-IF.xlsx
+'' Excel File: test/17-IF-into-IF.xlsx
 '' Excel Formulas Number: 1
 '' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
 B1 = 2.0
