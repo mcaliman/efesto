@@ -148,15 +148,19 @@ public final class Parser {
     }
 
     public void parse() {
-        this.singleSheet = this.xlsxBook.getNumberOfSheets( ) == 1;
+        analyze( );
         for(Sheet currentSheet : this.xlsxBook) {
             this.xlsxSheet = currentSheet;
             this.cSHEET = new SHEET( getSheetName( ), getSheetIndex( ) );
-            verbose( "Parsing xlsxSheet-name:" + cSHEET.getName( ) );
+            verbose( "Parsing xlsxSheet-name:" + this.cSHEET.getName( ) );
             parseSheet( );
         }
         verbose( "** topological sorting beginning..." );
         sort( );
+    }
+
+    private void analyze() {
+        this.singleSheet = this.xlsxBook.getNumberOfSheets( ) == 1;
     }
 
     private void parseSheet() {
