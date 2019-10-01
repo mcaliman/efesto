@@ -44,8 +44,6 @@ import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
-import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -159,7 +157,8 @@ public final class Parser extends AbstractParser {
         sort();
     }
 
-    private void analyze() {
+    protected void analyze() {
+        super.analyze();
         this.singleSheet=this.xlsxBook.getNumberOfSheets()==1;
     }
 
@@ -212,12 +211,11 @@ public final class Parser extends AbstractParser {
     }
 
     private Ptg[] tokens() {
-        //return helper.tokens(this.xlsxSheet, this.row, this.column);
         return tokens(this.xlsxSheet, this.row, this.column);
     }
 
     public Ptg[] tokens(@NotNull Sheet sheet, int rowFormula, int colFormula) {
-        this.evalBook=XSSFEvaluationWorkbook.create((XSSFWorkbook) this.xlsxBook);
+
         int sheetIndex=this.xlsxBook.getSheetIndex(sheet);
         var sheetName=sheet.getSheetName();
         var evalSheet=evalBook.getSheet(sheetIndex);

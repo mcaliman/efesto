@@ -26,6 +26,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 
@@ -36,7 +37,10 @@ public abstract class AbstractParser {
     protected XSSFEvaluationWorkbook evalBook;
 
 
-
+    protected void analyze() {
+        System.out.println("Analyze...");
+        this.evalBook=XSSFEvaluationWorkbook.create((XSSFWorkbook) this.xlsxBook);
+    }
 
     protected int getSheetIndex() {
         return this.xlsxBook.getSheetIndex(this.xlsxSheet);
