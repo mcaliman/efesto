@@ -61,10 +61,10 @@ class Helper {
 
     @Nullable
     public static Object valueOf(@Nullable Cell cell) {
-        if ( cell == null ) return null;
-        if ( Helper.isDataType(cell) )
+        if(cell == null) return null;
+        if(Helper.isDataType(cell))
             return cell.getDateCellValue();
-        switch (cell.getCellType()) {
+        switch(cell.getCellType()) {
             case CELL_TYPE_STRING:
             case CELL_TYPE_BLANK:
                 return cell.getStringCellValue();
@@ -73,10 +73,10 @@ class Helper {
             case CELL_TYPE_BOOLEAN:
                 return cell.getBooleanCellValue();
             case CELL_TYPE_FORMULA:
-                if ( cell.toString() != null && cell.toString().equalsIgnoreCase("TRUE") ) {
+                if(cell.toString() != null && cell.toString().equalsIgnoreCase("TRUE")) {
                     return true;
                 }
-                if ( cell.toString() != null && cell.toString().equalsIgnoreCase("FALSE") ) {
+                if(cell.toString() != null && cell.toString().equalsIgnoreCase("FALSE")) {
                     return false;
                 }
                 return cell.toString();
@@ -122,10 +122,10 @@ class Helper {
     public List<Cell> fromRange(@NotNull AreaReference area) {
         List<Cell> cells = new ArrayList<>();
         org.apache.poi.ss.util.CellReference[] cels = area.getAllReferencedCells();
-        for (org.apache.poi.ss.util.CellReference cel : cels) {
+        for(org.apache.poi.ss.util.CellReference cel : cels) {
             XSSFSheet ss = (XSSFSheet) workbook.getSheet(cel.getSheetName());
             Row r = ss.getRow(cel.getRow());
-            if ( r == null ) continue;
+            if(r == null) continue;
             Cell c = r.getCell(cel.getCol());
             cells.add(c);
         }
@@ -140,7 +140,7 @@ class Helper {
         Ptg[] ptgs = null;
         try {
             ptgs = evalBook.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
-        } catch (FormulaParseException e) {
+        } catch(FormulaParseException e) {
             err("" + e.getMessage(), sheetName, rowFormula, colFormula);
         }
         return ptgs;
@@ -162,8 +162,8 @@ class Helper {
         //String refs = tRANGE.toString();
         String refs = tRANGE.toString();
         List<Cell> cells = range(sheet, refs);
-        for (Cell cell : cells)
-            if ( cell != null ) {
+        for(Cell cell : cells)
+            if(cell != null) {
                 tRANGE.add(Helper.valueOf(cell));
             }
         return tRANGE;
@@ -189,8 +189,8 @@ class Helper {
         AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
         List<Cell> cells = fromRange(area);
 
-        for (Cell cell : cells)
-            if ( cell != null ) {
+        for(Cell cell : cells)
+            if(cell != null) {
                 tRANGE.add(Helper.valueOf(cell));
             }
         return tRANGE;

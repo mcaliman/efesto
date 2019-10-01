@@ -52,11 +52,11 @@ public final class TEXT extends Constant {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        if ( this == obj )
+        if(this == obj)
             return true;
-        if ( obj == null )
+        if(obj == null)
             return false;
-        if ( getClass() != obj.getClass() )
+        if(getClass() != obj.getClass())
             return false;
         final TEXT other = (TEXT) obj;
         return Objects.equals(this.value, other.value);

@@ -47,22 +47,22 @@ class Edge {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((src == null) ? 0 : src.hashCode());
-        result = prime * result + ((dest == null) ? 0 : dest.hashCode());
+        result = prime * result + ((src == null)?0:src.hashCode());
+        result = prime * result + ((dest == null)?0:dest.hashCode());
         return result;
     }
 
     @Override
     public boolean equals(@Nullable Object object) {
-        if ( this == object ) return true;
-        if ( object == null ) return false;
-        if ( getClass() != object.getClass() ) return false;
+        if(this == object) return true;
+        if(object == null) return false;
+        if(getClass() != object.getClass()) return false;
         Edge edge = (Edge) object;
-        if ( src == null ) {
-            if ( edge.src != null ) return false;
-        } else if ( !src.equals(edge.src) ) return false;
+        if(src == null) {
+            if(edge.src != null) return false;
+        } else if(!src.equals(edge.src)) return false;
 
-        if ( dest == null ) return edge.dest == null;
+        if(dest == null) return edge.dest == null;
         else return dest.equals(edge.dest);
     }
 

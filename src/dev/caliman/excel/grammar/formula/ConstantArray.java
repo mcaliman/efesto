@@ -42,10 +42,10 @@ public class ConstantArray extends Formula {
     public String toString() {
         StringBuilder str = new StringBuilder();
         str.append('{');
-        for (Object[] internal : array) {
+        for(Object[] internal : array) {
             str.append(internal[0]).append(',');
         }
-        if ( str.charAt(str.length() - 1) == ',' ) str.deleteCharAt(str.length() - 1);
+        if(str.charAt(str.length() - 1) == ',') str.deleteCharAt(str.length() - 1);
         str.append('}');
         return str.toString();
     }

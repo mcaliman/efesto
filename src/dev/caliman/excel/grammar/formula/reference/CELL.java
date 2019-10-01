@@ -55,16 +55,16 @@ public final class CELL extends ReferenceItem {
     }
 
     public void setValue(Object value) {
-        if ( value instanceof String ) constant = new TEXT((String) value);
-        else if ( value instanceof Boolean ) constant = new BOOL((Boolean) value);
-        else if ( value instanceof Integer ) constant = new INT((Integer) value);
-        else if ( value instanceof Double ) constant = new FLOAT((Double) value);
-        else if ( value instanceof Date ) constant = new DATE((Date) value);
+        if(value instanceof String) constant = new TEXT((String) value);
+        else if(value instanceof Boolean) constant = new BOOL((Boolean) value);
+        else if(value instanceof Integer) constant = new INT((Integer) value);
+        else if(value instanceof Double) constant = new FLOAT((Double) value);
+        else if(value instanceof Date) constant = new DATE((Date) value);
     }
 
     @Override
     public String toString() {
-        return constant != null ? constant.toString() : "null";
+        return constant != null?constant.toString():"null";
     }
 
 }

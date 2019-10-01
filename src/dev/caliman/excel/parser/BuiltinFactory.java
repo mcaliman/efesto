@@ -42,7 +42,7 @@ import java.util.logging.Logger;
 final class BuiltinFactory {
 
     private static final Logger LOG = Logger.getLogger(BuiltinFactory.class.getName());
-    private static final Map<String, Class> clazzMap = new HashMap<>();
+    private static final Map<String,Class> clazzMap = new HashMap<>();
 
     static {
         clazzMap.put("ABS", ABS.class);
@@ -413,9 +413,9 @@ final class BuiltinFactory {
         Class<?> clazz;
         try {
             clazz = clazzMap.get(name);
-            if ( clazz == null )
+            if(clazz == null)
                 throw new UnsupportedBuiltinException("unsupported " + name);
-            if ( arity == 0 ) {
+            if(arity == 0) {
                 Constructor<?> constructor = clazz.getConstructor();
                 builtInFunction = (Start) constructor.newInstance();
                 return;
@@ -423,7 +423,7 @@ final class BuiltinFactory {
             args = new Formula[arity];
             Constructor<?> constructor = clazz.getConstructor(Formula[].class);
             builtInFunction = (Start) constructor.newInstance(new Object[]{args});
-        } catch (@NotNull NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+        } catch(@NotNull NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             LOG.log(Level.SEVERE, null, ex);
             throw new UnsupportedBuiltinException(ex.getMessage());
         }

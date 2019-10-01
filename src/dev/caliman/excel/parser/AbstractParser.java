@@ -42,19 +42,19 @@ public abstract class AbstractParser {
 
     protected void analyze() {
         System.out.println("Analyze...");
-        this.evalBook=XSSFEvaluationWorkbook.create((XSSFWorkbook) this.xlsxBook);
-        this.singleSheet=this.xlsxBook.getNumberOfSheets()==1;
+        this.evalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.xlsxBook);
+        this.singleSheet = this.xlsxBook.getNumberOfSheets() == 1;
     }
 
     protected Ptg[] tokens(Sheet sheet, int rowFormula, int colFormula) {
-        int sheetIndex=this.xlsxBook.getSheetIndex(sheet);
-        var sheetName=sheet.getSheetName();
-        var evalSheet=evalBook.getSheet(sheetIndex);
-        Ptg[] ptgs=null;
+        int sheetIndex = this.xlsxBook.getSheetIndex(sheet);
+        var sheetName = sheet.getSheetName();
+        var evalSheet = evalBook.getSheet(sheetIndex);
+        Ptg[] ptgs = null;
         try {
-            ptgs=evalBook.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
+            ptgs = evalBook.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
         } catch(FormulaParseException e) {
-            System.err.println(""+e.getMessage()+sheetName+rowFormula+colFormula);
+            System.err.println("" + e.getMessage() + sheetName + rowFormula + colFormula);
         }
         return ptgs;
     }
@@ -73,17 +73,17 @@ public abstract class AbstractParser {
     }
 
     protected boolean isFormula(Cell xlsxCell) {
-        return xlsxCell.getCellType()==CELL_TYPE_FORMULA;
+        return xlsxCell.getCellType() == CELL_TYPE_FORMULA;
     }
 
     protected boolean empty(final Cell xlsxCell) {
-        if(xlsxCell==null) { // use row.getCell(x, Row.CREATE_NULL_AS_BLANK) to avoid null cells
+        if(xlsxCell == null) { // use row.getCell(x, Row.CREATE_NULL_AS_BLANK) to avoid null cells
             return true;
         }
-        if(xlsxCell.getCellType()==Cell.CELL_TYPE_BLANK) {
+        if(xlsxCell.getCellType() == Cell.CELL_TYPE_BLANK) {
             return true;
         }
-        return xlsxCell.getCellType()==Cell.CELL_TYPE_STRING&&xlsxCell.getStringCellValue().trim().isEmpty();
+        return xlsxCell.getCellType() == Cell.CELL_TYPE_STRING && xlsxCell.getStringCellValue().trim().isEmpty();
     }
 
 }

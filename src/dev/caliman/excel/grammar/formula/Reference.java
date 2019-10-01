@@ -45,26 +45,26 @@ public abstract class Reference extends Formula {
     }
 
     protected String values(int fRow, int fCol, int lRow, int lCol, @NotNull List<Object> list, boolean isHorizzontalOrVerticalRange) {
-        if ( list.isEmpty() ) return "[]";
-        if ( isHorizzontalOrVerticalRange ) {
+        if(list.isEmpty()) return "[]";
+        if(isHorizzontalOrVerticalRange) {
             StringBuilder buff = new StringBuilder();
             buff.append("[").append(" ");
-            for (Object element : list) buff.append(toString(element)).append(" ");
-            if ( buff.length() > 1 ) buff.deleteCharAt(buff.length() - 1);
+            for(Object element : list) buff.append(toString(element)).append(" ");
+            if(buff.length() > 1) buff.deleteCharAt(buff.length() - 1);
             buff.append(" ").append("]");
             return buff.toString();
         } else {
             StringBuilder buff = new StringBuilder();
             buff.append("[");
             int index = 0;
-            for (int row = fRow; row <= lRow; row++) {
+            for(int row = fRow; row <= lRow; row++) {
                 buff.append("[");
-                for (int col = fCol; col <= lCol; col++) {
+                for(int col = fCol; col <= lCol; col++) {
                     Object element = list.get(index);
                     buff.append(toString(element)).append(" ");
                     index++;
                 }
-                if ( buff.length() > 1 ) buff.deleteCharAt(buff.length() - 1);
+                if(buff.length() > 1) buff.deleteCharAt(buff.length() - 1);
                 buff.append("]");
             }
             buff.append("]");
@@ -73,7 +73,7 @@ public abstract class Reference extends Formula {
     }
 
     private String toString(Object value) {
-        String string = value instanceof String ? quote(value.toString()) : value.toString();
+        String string = value instanceof String?quote(value.toString()):value.toString();
         return super.toString() + string;
     }
 }

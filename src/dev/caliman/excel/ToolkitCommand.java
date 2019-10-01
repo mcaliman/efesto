@@ -57,17 +57,17 @@ public class ToolkitCommand {
 
     public void write(@NotNull String filename) throws IOException {
         StartList list = parser.getList();
-        try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
+        try(Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
             writer.write("'' \n");
             writer.write("'' Text File: " + filename + '\n');
             writer.write("'' Excel File: " + parser.getXlsxFileName() + '\n');
             writer.write("'' Excel Formulas Number: " + parser.getCounterFormulas() + '\n');
             writer.write("'' Elapsed Time (parsing + topological sort): " + (elapsed / 1000 + " s. or " + (elapsed / 1000 / 60) + " min.") + '\n');
 
-            for (Start start : list) {
+            for(Start start : list) {
                 try {
                     writer.write(start.id() + " = " + start.toString());
-                } catch (Exception e) {
+                } catch(Exception e) {
                     writer.write("'' Error when compile " + start.id());
                 }
                 writer.write("\n");
@@ -85,11 +85,11 @@ public class ToolkitCommand {
     }
 
     public void toFormula() {
-        for (Start start : getStartList()) {
+        for(Start start : getStartList()) {
             try {
-                if ( start != null )
+                if(start != null)
                     System.out.println(start.id() + " = " + start.toString());
-            } catch (Exception e) {
+            } catch(Exception e) {
                 System.err.println("Error when transpile " + start.id());
             }
         }

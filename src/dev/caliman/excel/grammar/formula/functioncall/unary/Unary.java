@@ -43,7 +43,7 @@ public abstract class Unary extends FunctionCall {
     @NotNull
     @Override
     public String toString() {
-        if ( formula instanceof CELL ) return unOpPrefix + ((CELL) formula).getValue();
+        if(formula instanceof CELL) return unOpPrefix + ((CELL) formula).getValue();
         else return unOpPrefix + formula.toString();
     }
 

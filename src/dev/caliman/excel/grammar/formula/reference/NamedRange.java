@@ -39,8 +39,8 @@ public class NamedRange extends ReferenceItem {
     }
 
     public String id() {
-        return this.singleSheet ?
-                value :
+        return this.singleSheet?
+                value:
                 sheetName + "!" + value;
     }
 

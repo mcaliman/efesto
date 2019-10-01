@@ -43,8 +43,8 @@ public final class RangeReference extends Reference {
 
     @Override
     public boolean equals(Object o) {
-        if ( this == o ) return true;
-        if ( o == null || getClass() != o.getClass() ) return false;
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
         RangeReference that = (RangeReference) o;
 
         return Objects.requireNonNull(that.toString()).equals(this.toString());
@@ -68,8 +68,8 @@ public final class RangeReference extends Reference {
     }
 
     public String id() {
-        return this.singleSheet ?
-                reference1.getAddress() + ":" + reference2.getAddress() :
+        return this.singleSheet?
+                reference1.getAddress() + ":" + reference2.getAddress():
                 sheetName + "!" + reference1.getAddress() + ":" + reference2.getAddress();
     }
 

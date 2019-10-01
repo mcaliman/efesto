@@ -51,15 +51,15 @@ public abstract class Binary extends FunctionCall {
     }
 
     private String operandToFormula(Formula operand) {
-        if ( operand instanceof CELL || operand instanceof Unary ) return operand.id();
-        else if ( operand instanceof ParenthesisFormula )
+        if(operand instanceof CELL || operand instanceof Unary) return operand.id();
+        else if(operand instanceof ParenthesisFormula)
             return operandToFormulaParenthesisFormula((ParenthesisFormula) operand);
         else return operand.toString();
     }
 
     private String operandToFormulaParenthesisFormula(ParenthesisFormula operand) {
-        return operand.getFormula() instanceof Binary ?
-                "(" + operand.getFormula().toString() + ")" :
+        return operand.getFormula() instanceof Binary?
+                "(" + operand.getFormula().toString() + ")":
                 "(" + operand.getFormula().getAddress(false) + ")";
     }
 
