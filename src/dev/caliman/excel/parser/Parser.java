@@ -107,8 +107,6 @@ public final class Parser extends AbstractParser {
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
 
 
-    protected String xlsxFileName;
-
     private int column;//Current Formula Column
     private int row;//Current Formula Row
 
@@ -896,9 +894,6 @@ public final class Parser extends AbstractParser {
         return counterFormulas;
     }
 
-    public String getXlsxFileName() {
-        return xlsxFileName;
-    }
 
     private void verbose(String text) {
         if(this.verbose) out.println(text);

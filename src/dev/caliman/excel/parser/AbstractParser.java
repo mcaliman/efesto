@@ -40,6 +40,13 @@ public abstract class AbstractParser {
 
     protected boolean singleSheet;//is single xlsxSheet or not?
 
+    protected String xlsxFileName;
+
+    public String getXlsxFileName() {
+        return xlsxFileName;
+    }
+
+
     protected void analyze() {
         System.out.println("Analyze...");
         this.evalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.xlsxBook);
