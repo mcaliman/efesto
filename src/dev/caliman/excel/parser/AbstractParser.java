@@ -26,10 +26,13 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
+
 public abstract class AbstractParser {
 
     protected Workbook xlsxBook;
     protected Sheet xlsxSheet;//(Work)Sheet
+
 
     protected int getSheetIndex() {
         return this.xlsxBook.getSheetIndex(this.xlsxSheet);
@@ -42,6 +45,10 @@ public abstract class AbstractParser {
 
     protected String getSheetName(Cell xlsxCell) {
         return xlsxCell.getSheet().getSheetName();
+    }
+
+    protected boolean isFormula(Cell xlsxCell) {
+        return xlsxCell.getCellType()==CELL_TYPE_FORMULA;
     }
 
     protected boolean empty(final Cell xlsxCell) {

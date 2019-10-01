@@ -58,7 +58,6 @@ import java.util.stream.Stream;
 import static java.lang.System.err;
 import static java.lang.System.out;
 import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
-import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 
 
 /**
@@ -188,9 +187,6 @@ public final class Parser extends AbstractParser {
         }
     }
 
-    private boolean isFormula(Cell xlsxCell) {
-        return xlsxCell.getCellType()==CELL_TYPE_FORMULA;
-    }
 
     private void parseFormula(Cell xlsxCell) {
         this.counterFormulas++;
