@@ -22,6 +22,8 @@
 
 package dev.caliman.excel.parser;
 
+import org.apache.poi.ss.formula.FormulaParseException;
+import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -42,6 +44,19 @@ public abstract class AbstractParser {
         System.out.println("Analyze...");
         this.evalBook=XSSFEvaluationWorkbook.create((XSSFWorkbook) this.xlsxBook);
         this.singleSheet=this.xlsxBook.getNumberOfSheets()==1;
+    }
+
+    protected Ptg[] tokens(Sheet sheet, int rowFormula, int colFormula) {
+        int sheetIndex=this.xlsxBook.getSheetIndex(sheet);
+        var sheetName=sheet.getSheetName();
+        var evalSheet=evalBook.getSheet(sheetIndex);
+        Ptg[] ptgs=null;
+        try {
+            ptgs=evalBook.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
+        } catch(FormulaParseException e) {
+            System.err.println(""+e.getMessage()+sheetName+rowFormula+colFormula);
+        }
+        return ptgs;
     }
 
     protected int getSheetIndex() {

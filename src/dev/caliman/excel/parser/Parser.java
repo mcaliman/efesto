@@ -39,7 +39,6 @@ import dev.caliman.excel.grammar.formula.reference.referencefunction.OFFSET;
 import dev.caliman.excel.graph.StartGraph;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.SpreadsheetVersion;
-import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.AreaReference;
@@ -208,19 +207,7 @@ public final class Parser extends AbstractParser {
         return tokens(this.xlsxSheet, this.row, this.column);
     }
 
-    public Ptg[] tokens(@NotNull Sheet sheet, int rowFormula, int colFormula) {
 
-        int sheetIndex=this.xlsxBook.getSheetIndex(sheet);
-        var sheetName=sheet.getSheetName();
-        var evalSheet=evalBook.getSheet(sheetIndex);
-        Ptg[] ptgs=null;
-        try {
-            ptgs=evalBook.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
-        } catch(FormulaParseException e) {
-            System.err.println(""+e.getMessage()+sheetName+rowFormula+colFormula);
-        }
-        return ptgs;
-    }
 
     private Start parse(Ptg[] ptgs) {
         stack.empty();
