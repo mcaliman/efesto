@@ -39,10 +39,13 @@ import dev.caliman.excel.grammar.formula.reference.referencefunction.OFFSET;
 import dev.caliman.excel.graph.StartGraph;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.SpreadsheetVersion;
+import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -209,7 +212,22 @@ public final class Parser extends AbstractParser {
     }
 
     private Ptg[] tokens() {
-        return helper.tokens(this.xlsxSheet, this.row, this.column);
+        //return helper.tokens(this.xlsxSheet, this.row, this.column);
+        return tokens(this.xlsxSheet, this.row, this.column);
+    }
+
+    public Ptg[] tokens(@NotNull Sheet sheet, int rowFormula, int colFormula) {
+        this.evalBook=XSSFEvaluationWorkbook.create((XSSFWorkbook) this.xlsxBook);
+        int sheetIndex=this.xlsxBook.getSheetIndex(sheet);
+        var sheetName=sheet.getSheetName();
+        var evalSheet=evalBook.getSheet(sheetIndex);
+        Ptg[] ptgs=null;
+        try {
+            ptgs=evalBook.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
+        } catch(FormulaParseException e) {
+            System.err.println(""+e.getMessage()+sheetName+rowFormula+colFormula);
+        }
+        return ptgs;
     }
 
     private Start parse(Ptg[] ptgs) {

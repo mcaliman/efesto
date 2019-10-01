@@ -25,6 +25,7 @@ package dev.caliman.excel.parser;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 
 import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 
@@ -32,6 +33,9 @@ public abstract class AbstractParser {
 
     protected Workbook xlsxBook;
     protected Sheet xlsxSheet;//(Work)Sheet
+    protected XSSFEvaluationWorkbook evalBook;
+
+
 
 
     protected int getSheetIndex() {
