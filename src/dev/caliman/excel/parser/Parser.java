@@ -189,7 +189,7 @@ public final class Parser extends AbstractParser {
         this.column=xlsxCell.getColumnIndex();
         this.row=xlsxCell.getRowIndex();
         String formulaAddress=getCellAddress();
-        Ptg[] formulaPtgs=tokens();
+        Ptg[] formulaPtgs=tokens(this.xlsxSheet, this.row, this.column);
         if(formulaPtgs==null) {
             String xlsxFormulaPlainText=xlsxCell.getCellFormula();
             err("ptgs empty or null for address "+formulaAddress);
@@ -202,11 +202,6 @@ public final class Parser extends AbstractParser {
             parseFormula(start);
         }
     }
-
-    private Ptg[] tokens() {
-        return tokens(this.xlsxSheet, this.row, this.column);
-    }
-
 
 
     private Start parse(Ptg[] ptgs) {
