@@ -36,10 +36,12 @@ public abstract class AbstractParser {
     protected Sheet xlsxSheet;//(Work)Sheet
     protected XSSFEvaluationWorkbook evalBook;
 
+    protected boolean singleSheet;//is single xlsxSheet or not?
 
     protected void analyze() {
         System.out.println("Analyze...");
         this.evalBook=XSSFEvaluationWorkbook.create((XSSFWorkbook) this.xlsxBook);
+        this.singleSheet=this.xlsxBook.getNumberOfSheets()==1;
     }
 
     protected int getSheetIndex() {

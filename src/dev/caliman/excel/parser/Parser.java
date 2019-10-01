@@ -113,7 +113,6 @@ public final class Parser extends AbstractParser {
     private int column;//Current Formula Column
     private int row;//Current Formula Row
 
-    private boolean singleSheet;//is single xlsxSheet or not?
 
     private boolean verbose=false;
 
@@ -155,11 +154,6 @@ public final class Parser extends AbstractParser {
         }
         verbose("** topological sorting beginning...");
         sort();
-    }
-
-    protected void analyze() {
-        super.analyze();
-        this.singleSheet=this.xlsxBook.getNumberOfSheets()==1;
     }
 
     private void parseSheet() {
