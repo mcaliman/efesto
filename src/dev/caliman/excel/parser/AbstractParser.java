@@ -111,7 +111,8 @@ public abstract class AbstractParser {
         analyze();
         for(Sheet currentSheet : this.workbook) {
             this.sheet = currentSheet;
-            parseSheet();
+            for(Row xlsxRow : sheet)
+                for(Cell xlsxCell : xlsxRow) if(!empty(xlsxCell)) parse(xlsxCell);
         }
     }
 
@@ -119,16 +120,6 @@ public abstract class AbstractParser {
         System.out.println("Analyze...");
         this.evaluation = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.workbook);
         this.singleSheet = this.workbook.getNumberOfSheets() == 1;
-    }
-
-    protected void parseSheet() {
-        for(Row xlsxRow : sheet)
-            for(Cell xlsxCell : xlsxRow)
-                if(!empty(xlsxCell)) parse(xlsxCell);
-                else {
-                    System.err.println("Cell is null.");
-                    //throw new RuntimeException("Cell is null.");
-                }
     }
 
 

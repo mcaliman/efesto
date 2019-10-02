@@ -101,11 +101,6 @@ public final class Parser extends AbstractParser {
         sort();
     }
 
-    protected void parseSheet() {
-        //this.cSHEET = new SHEET(getSheetName(), getSheetIndex());
-        //verbose("Parsing sheet-name:" + this.cSHEET.getName());
-        super.parseSheet();
-    }
 
     protected void parse(Cell xlsxCell) {
         if(isFormula(xlsxCell)) {
