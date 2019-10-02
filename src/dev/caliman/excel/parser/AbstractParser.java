@@ -25,6 +25,7 @@ package dev.caliman.excel.parser;
 import dev.caliman.excel.grammar.Start;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
@@ -144,6 +145,12 @@ public abstract class AbstractParser {
             err.println("" + e.getMessage() + sheetName + this.row + this.column);
         }
         return ptgs;
+    }
+
+    //TODO TEST
+    protected Ptg[] getName(NamePtg t) {
+        EvaluationName evaluationName = this.evaluation.getName(t);
+        return evaluationName.getNameDefinition();
     }
 
     protected String cellAddress() {

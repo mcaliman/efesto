@@ -90,7 +90,7 @@ class Helper {
     }
 
 
-    public Ptg[] getName(@NotNull NamePtg t) {
+    public Ptg[] getName(NamePtg t) {
         EvaluationName evaluationName = evalBook.getName(t);
         return evaluationName.getNameDefinition();
     }
