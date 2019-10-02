@@ -275,7 +275,7 @@ public final class Parser extends AbstractParser {
     private void parseNamedRange(NamePtg t) {
         RangeInternal range = null;
         Ptg[] ptgs = getName(t);//helper.getName(t);
-        String name = helper.getNameText(t);
+        String name = /*helper.*/getNameText(t);
         int sheetIndex = 0;
         for(Ptg ptg : ptgs) {
             if(ptg != null) {

@@ -153,6 +153,11 @@ public abstract class AbstractParser {
         return evaluationName.getNameDefinition();
     }
 
+    protected String getNameText(NamePtg t) {
+        return this.evaluation.getNameText(t);
+    }
+
+
     protected String cellAddress() {
         return Start.cellAddress(this.row, this.column, getSheetName());
     }
