@@ -90,6 +90,7 @@ public abstract class AbstractParser {
         this.counterFormulas++;
         this.column = xlsxCell.getColumnIndex();
         this.row = xlsxCell.getRowIndex();
+
     }
 
     protected Ptg[] tokens(Sheet sheet, int rowFormula, int colFormula) {
