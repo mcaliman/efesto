@@ -83,12 +83,10 @@ public final class Parser extends AbstractParser {
     private StartGraph graph;
     private Stack<Start> stack;
 
-    public Parser(String xlsxFileName) throws IOException, InvalidFormatException {
-        super(xlsxFileName);
-
+    public Parser(String filename) throws IOException, InvalidFormatException {
+        super(filename);
         this.ext = new ArrayList<>();
         this.helper = new Helper(this.workbook);
-
         this.unordered = new StartList();
         this.ordered = new StartList();
         this.graph = new StartGraph();
@@ -102,32 +100,32 @@ public final class Parser extends AbstractParser {
     }
 
 
-    protected void parse(Cell xlsxCell) {
-        if(isFormula(xlsxCell)) {
-            parseFormula(xlsxCell);
-        } else if(this.ext.contains(xlsxCell)) {
+    protected void parse(Cell cell) {
+        if(isFormula(cell)) {
+            parseFormula(cell);
+        } else if(this.ext.contains(cell)) {
             verbose("Recover loosed cell!");
-            Object value = Helper.valueOf(xlsxCell);
-            CELL elem = new CELL(xlsxCell.getRowIndex(), xlsxCell.getColumnIndex());
+            Object value = Helper.valueOf(cell);
+            CELL elem = new CELL(cell.getRowIndex(), cell.getColumnIndex());
             elem.setValue(value);
-            elem.setSHEET(new SHEET(getSheetName(xlsxCell), getSheetIndex(xlsxCell)));
+            elem.setSHEET(new SHEET(getSheetName(cell), getSheetIndex(cell)));
             parseCELLlinked(elem);
-            this.ext.remove(xlsxCell);
-        } else if(!this.ext.contains(xlsxCell) && !empty(xlsxCell)) {
+            this.ext.remove(cell);
+        } else if(!this.ext.contains(cell) && !empty(cell)) {
             //Non è formula non è nelle celle utili collezionate
-            out.println("Cella di interesse? " + xlsxCell.toString());
+            out.println("Cella di interesse? " + cell.toString());
         }
     }
 
 
-    protected void parseFormula(Cell xlsxCell) {
-        super.parseFormula(xlsxCell);
-        if(formulaPtgs == null) {
+    protected void parseFormula(Cell cell) {
+        super.parseFormula(cell);
+        if(this.formulaPtgs == null) {
             err("ptgs empty or null for address " + this.formulaAddress);
             parseUDF(this.formulaPlainText);
             return;
         }
-        Start start = parse(formulaPtgs);
+        Start start = parse(this.formulaPtgs);
         if(Objects.nonNull(start)) {
             start.setSingleSheet(this.singleSheet);
             parseFormula(start);
@@ -148,10 +146,8 @@ public final class Parser extends AbstractParser {
         var elem = new UDF(arguments);
         elem.setColumn(this.column);
         elem.setRow(this.row);
-        //elem.setSHEET(this.cSHEET);
         elem.setSheetIndex(this.getSheetIndex());
         elem.setSheetName(this.getSheetName());
-
         elem.setSingleSheet(this.singleSheet);
         unordered.add(elem);
         stack.push(elem);
@@ -209,12 +205,10 @@ public final class Parser extends AbstractParser {
     }
 
 
-    private void parseErrPtg(Ptg t) {
-        err(t.getClass().getName() + ": " + t.toString());
-    }
+
 
     private void parseMissingArguments() {
-        err("Missing ExcelFunction Arguments for cell: " + getCellAddress());
+        err.println("Missing ExcelFunction Arguments for cell: " + getCellAddress());
     }
 
     private void parseArea3DPxg(Area3DPxg t) {
@@ -848,16 +842,14 @@ public final class Parser extends AbstractParser {
     //</editor-fold>
 
     //<editor-fold desc="Utilities">
-    private String getCellAddress() {
-        return Start.cellAddress(this.row, this.column, this.getSheetName());
-    }
+
 
     public void setVerbose(boolean verbose) {
         this.verbose = verbose;
     }
 
     public int getCounterFormulas() {
-        return counterFormulas;
+        return formulaCounters;
     }
 
 

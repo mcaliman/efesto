@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.function.Predicate;
 
+import static java.lang.System.err;
 import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 
 public abstract class AbstractParser {
@@ -80,7 +81,7 @@ public abstract class AbstractParser {
     protected final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
     protected final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
 
-    protected String fileName;
+    protected String filename;
     protected File file;
 
     protected Workbook workbook;
@@ -90,21 +91,21 @@ public abstract class AbstractParser {
     protected Ptg[] formulaPtgs;
     protected String formulaAddress;
     protected String formulaPlainText;
-
+    protected int formulaCounters;//formula counters
 
     protected boolean singleSheet;//is single sheet or not?
-    protected int counterFormulas;//formula counters
+
     protected int column;//Current Formula Column
     protected int row;//Current Formula Row
 
-    protected AbstractParser(String xlsxFileName) throws IOException, InvalidFormatException {
-        this.fileName = xlsxFileName;
-        this.file = new File(this.fileName);
-        this.workbook = WorkbookFactory.create(file);
+    protected AbstractParser(String filename) throws IOException, InvalidFormatException {
+        this.filename = filename;
+        this.file = new File(this.filename);
+        this.workbook = WorkbookFactory.create(this.file);
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getFilename() {
+        return this.filename;
     }
 
     public void parse() {
@@ -123,7 +124,7 @@ public abstract class AbstractParser {
 
 
     protected void parseFormula(Cell xlsxCell) {
-        this.counterFormulas++;
+        this.formulaCounters++;
         this.column = xlsxCell.getColumnIndex();
         this.row = xlsxCell.getRowIndex();
         this.formulaAddress = cellAddress();
@@ -170,6 +171,14 @@ public abstract class AbstractParser {
         if(xlsxCell == null) return true;
         if(xlsxCell.getCellType() == Cell.CELL_TYPE_BLANK) return true;
         return xlsxCell.getCellType() == Cell.CELL_TYPE_STRING && xlsxCell.getStringCellValue().trim().isEmpty();
+    }
+
+    protected String getCellAddress() {
+        return Start.cellAddress(this.row, this.column, this.getSheetName());
+    }
+
+    protected void parseErrPtg(Ptg t) {
+        err.println(t.getClass().getName() + ": " + t.toString());
     }
 
 }

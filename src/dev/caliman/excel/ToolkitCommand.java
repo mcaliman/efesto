@@ -60,7 +60,7 @@ public class ToolkitCommand {
         try(Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
             writer.write("'' \n");
             writer.write("'' Text File: " + filename + '\n');
-            writer.write("'' Excel File: " + parser.getFileName() + '\n');
+            writer.write("'' Excel File: " + parser.getFilename() + '\n');
             writer.write("'' Excel Formulas Number: " + parser.getCounterFormulas() + '\n');
             writer.write("'' Elapsed Time (parsing + topological sort): " + (elapsed / 1000 + " s. or " + (elapsed / 1000 / 60) + " min.") + '\n');
 
