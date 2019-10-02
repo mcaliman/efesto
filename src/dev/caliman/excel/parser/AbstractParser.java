@@ -25,6 +25,7 @@ package dev.caliman.excel.parser;
 import dev.caliman.excel.grammar.Start;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.formula.FormulaParseException;
+import org.apache.poi.ss.formula.ptg.ArrayPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
@@ -32,54 +33,57 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.function.Predicate;
 
 import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 
 public abstract class AbstractParser {
 
-    protected String xlsxFileName;
-    protected File xlsxFile;
+    protected final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
 
-    protected Workbook xlsxBook;
-    protected Sheet xlsxSheet;
-    protected XSSFEvaluationWorkbook xlsxEvalBook;
+    protected String fileName;
+    protected File file;
+
+    protected Workbook workbook;
+    protected Sheet sheet;
+    protected XSSFEvaluationWorkbook evaluation;
 
     protected Ptg[] formulaPtgs;
     protected String formulaAddress;
-    protected String xlsxFormulaPlainText;
+    protected String formulaPlainText;
 
 
-    protected boolean singleSheet;//is single xlsxSheet or not?
+    protected boolean singleSheet;//is single sheet or not?
     protected int counterFormulas;//formula counters
     protected int column;//Current Formula Column
     protected int row;//Current Formula Row
 
     protected AbstractParser(String xlsxFileName) throws IOException, InvalidFormatException {
-        this.xlsxFileName = xlsxFileName;
-        this.xlsxFile = new File(this.xlsxFileName);
-        this.xlsxBook = WorkbookFactory.create(xlsxFile);
+        this.fileName = xlsxFileName;
+        this.file = new File(this.fileName);
+        this.workbook = WorkbookFactory.create(file);
     }
 
-    public String getXlsxFileName() {
-        return xlsxFileName;
+    public String getFileName() {
+        return fileName;
     }
 
     public void parse() {
         analyze();
-        for(Sheet currentSheet : this.xlsxBook) {
-            this.xlsxSheet = currentSheet;
+        for(Sheet currentSheet : this.workbook) {
+            this.sheet = currentSheet;
             parseSheet();
         }
     }
 
     protected void analyze() {
         System.out.println("Analyze...");
-        this.xlsxEvalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.xlsxBook);
-        this.singleSheet = this.xlsxBook.getNumberOfSheets() == 1;
+        this.evaluation = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.workbook);
+        this.singleSheet = this.workbook.getNumberOfSheets() == 1;
     }
 
     protected void parseSheet() {
-        for(Row xlsxRow : xlsxSheet)
+        for(Row xlsxRow : sheet)
             for(Cell xlsxCell : xlsxRow)
                 if(!empty(xlsxCell)) parse(xlsxCell);
                 else {
@@ -97,19 +101,19 @@ public abstract class AbstractParser {
         this.column = xlsxCell.getColumnIndex();
         this.row = xlsxCell.getRowIndex();
         this.formulaAddress = cellAddress();
-        this.xlsxFormulaPlainText = xlsxCell.getCellFormula();
+        this.formulaPlainText = xlsxCell.getCellFormula();
         System.out.println("Formula Plain Text: " + this.formulaAddress);
-        this.formulaPtgs = tokens(this.xlsxSheet, this.row, this.column);
+        this.formulaPtgs = tokens(this.sheet, this.row, this.column);
 
     }
 
     protected Ptg[] tokens(Sheet sheet, int rowFormula, int colFormula) {
-        int sheetIndex = this.xlsxBook.getSheetIndex(sheet);
+        int sheetIndex = this.workbook.getSheetIndex(sheet);
         var sheetName = sheet.getSheetName();
-        var evalSheet = xlsxEvalBook.getSheet(sheetIndex);
+        var evalSheet = evaluation.getSheet(sheetIndex);
         Ptg[] ptgs = null;
         try {
-            ptgs = xlsxEvalBook.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
+            ptgs = evaluation.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
         } catch(FormulaParseException e) {
             System.err.println("" + e.getMessage() + sheetName + rowFormula + colFormula);
         }
@@ -121,11 +125,11 @@ public abstract class AbstractParser {
     }
 
     protected int getSheetIndex() {
-        return this.xlsxBook.getSheetIndex(this.xlsxSheet);
+        return this.workbook.getSheetIndex(this.sheet);
     }
 
     protected String getSheetName() {
-        return this.xlsxSheet.getSheetName();
+        return this.sheet.getSheetName();
     }
 
     protected String getSheetName(Cell xlsxCell) {

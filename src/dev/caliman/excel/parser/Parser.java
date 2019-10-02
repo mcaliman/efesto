@@ -67,7 +67,7 @@ import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
  */
 public final class Parser extends AbstractParser {
 
-    private final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
+
     private final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
     private final Predicate<Ptg> area3DPxg = (Ptg t) -> t instanceof Area3DPxg;
     private final Predicate<Ptg> areaErrPtg = (Ptg t) -> t instanceof AreaErrPtg;
@@ -112,8 +112,7 @@ public final class Parser extends AbstractParser {
     private boolean verbose = false;
 
 
-
-    private SHEET cSHEET;//current xlsxSheet
+    private SHEET cSHEET;//current sheet
 
 
     private Helper helper;
@@ -129,7 +128,7 @@ public final class Parser extends AbstractParser {
         super(xlsxFileName);
 
         this.ext = new ArrayList<>();
-        this.helper = new Helper(this.xlsxBook);
+        this.helper = new Helper(this.workbook);
 
         this.unordered = new StartList();
         this.ordered = new StartList();
@@ -145,7 +144,7 @@ public final class Parser extends AbstractParser {
 
     protected void parseSheet() {
         this.cSHEET = new SHEET(getSheetName(), getSheetIndex());
-        verbose("Parsing xlsxSheet-name:" + this.cSHEET.getName());
+        verbose("Parsing sheet-name:" + this.cSHEET.getName());
         super.parseSheet();
     }
 
@@ -171,7 +170,7 @@ public final class Parser extends AbstractParser {
         super.parseFormula(xlsxCell);
         if(formulaPtgs == null) {
             err("ptgs empty or null for address " + this.formulaAddress);
-            parseUDF(this.xlsxFormulaPlainText);
+            parseUDF(this.formulaPlainText);
             return;
         }
         Start start = parse(formulaPtgs);
@@ -263,8 +262,8 @@ public final class Parser extends AbstractParser {
 
     private void parseArea3DPxg(Area3DPxg t) {
         // Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
-        // external or different xlsxSheet.
-        // This is XSSF only, as it stores the xlsxSheet / xlsxBook references in String
+        // external or different sheet.
+        // This is XSSF only, as it stores the sheet / workbook references in String
         // form. The HSSF equivalent using indexes is Area3DPtg
         String name = t.getSheetName();
         int index = getSheetIndex(name);
@@ -284,9 +283,9 @@ public final class Parser extends AbstractParser {
 
     private void parseRef3DPxg(Ref3DPxg t) {
         //Title: XSSF 3D Reference
-        //Description: Defines a cell in an external or different xlsxSheet.
+        //Description: Defines a cell in an external or different sheet.
         //REFERENCE:
-        //This is XSSF only, as it stores the xlsxSheet / xlsxBook references in String form.
+        //This is XSSF only, as it stores the sheet / workbook references in String form.
         //The HSSF equivalent using indexes is Ref3DPtg
         int extWorkbookNumber = t.getExternalWorkbookNumber();
         String sheetName = t.getSheetName();
@@ -295,7 +294,7 @@ public final class Parser extends AbstractParser {
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
         String cellref = helper.getCellRef(t);
         if(this.cSHEET.getIndex() != sheetIndex) {
-            Sheet extSheet = this.xlsxBook.getSheet(sheetName);
+            Sheet extSheet = this.workbook.getSheet(sheetName);
             if(extSheet != null) {
                 CellReference cr = new CellReference(cellref);
                 Row row = extSheet.getRow(cr.getRow());
@@ -320,7 +319,7 @@ public final class Parser extends AbstractParser {
     }
 
     private void parseAreaPtg(AreaPtg t) {
-        RANGE tRANGE = helper.getRANGE(xlsxSheet, t);
+        RANGE tRANGE = helper.getRANGE(sheet, t);
         // RangeReference
         var elem = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         elem.setColumn(column);
@@ -344,7 +343,7 @@ public final class Parser extends AbstractParser {
             if(ptg != null) {
                 if(ptg instanceof Area3DPxg) {
                     Area3DPxg area3DPxg = (Area3DPxg) ptg;
-                    range = new RangeInternal(xlsxBook, area3DPxg.getSheetName(), area3DPxg);
+                    range = new RangeInternal(workbook, area3DPxg.getSheetName(), area3DPxg);
                     sheetIndex = helper.getSheetIndex(area3DPxg.getSheetName());
                 }
             }
@@ -357,7 +356,7 @@ public final class Parser extends AbstractParser {
     }
 
     private void parseRefPtg(@NotNull RefPtg t) {
-        Row rowObject = xlsxSheet.getRow(t.getRow());
+        Row rowObject = sheet.getRow(t.getRow());
         Object value = null;
         if(rowObject != null) {
             Cell c = rowObject.getCell(t.getColumn());
