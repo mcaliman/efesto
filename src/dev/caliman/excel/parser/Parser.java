@@ -137,6 +137,10 @@ public final class Parser extends AbstractParser {
         this.stack = new Stack<>();
     }
 
+    protected void analyze() {
+        super.analyze();
+    }
+
     public void parse() {
         analyze();
         for(Sheet currentSheet : this.xlsxBook) {
