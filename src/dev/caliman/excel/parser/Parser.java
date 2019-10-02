@@ -114,7 +114,7 @@ public final class Parser extends AbstractParser {
             return;
         }
         Start start = parse(this.formulaPtgs);
-        if(Objects.nonNull(start)) {
+        if(start != null) {
             start.setSingleSheet(this.singleSheet);
             parseFormula(start);
         }
