@@ -22,6 +22,7 @@
 
 package dev.caliman.excel.parser;
 
+import dev.caliman.excel.grammar.Start;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.Ptg;
@@ -90,6 +91,8 @@ public abstract class AbstractParser {
         this.counterFormulas++;
         this.column = xlsxCell.getColumnIndex();
         this.row = xlsxCell.getRowIndex();
+        String formulaAddress = Start.cellAddress(this.row, this.column, getSheetName());
+        System.out.println("Formula Plain Text: " + formulaAddress);
 
     }
 
