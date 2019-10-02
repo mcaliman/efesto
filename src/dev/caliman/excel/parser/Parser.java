@@ -211,10 +211,11 @@ public final class Parser extends AbstractParser {
         parseArea3D(helper.getRANGE(name, t), tSHEET, area);
     }
 
+    /**
+     * Sheet2!A1:B1 (Sheet + AREA/RANGE)
+     */
     private void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area) {
-        //Sheet2!A1:B1 (Sheet + AREA/RANGE)
         var elem = new PrefixReferenceItem(tSHEET, area, tRANGE);
-
         elem.setSHEET(tSHEET);
         unordered.add(elem);
         stack.push(elem);
@@ -232,7 +233,7 @@ public final class Parser extends AbstractParser {
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
         String cellref = helper.getCellRef(t);
-        if(/*this.cSHEET.getIndex()*/this.getSheetIndex() != sheetIndex) {
+        if(this.getSheetIndex() != sheetIndex) {
             Sheet extSheet = this.workbook.getSheet(sheetName);
             if(extSheet != null) {
                 CellReference cr = new CellReference(cellref);
@@ -258,9 +259,11 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
+    /**
+     * RangeReference
+     */
     private void parseAreaPtg(AreaPtg t) {
         RANGE tRANGE = helper.getRANGE(sheet, t);
-        // RangeReference
         var elem = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         elem.setColumn(column);
         elem.setRow(row);
@@ -297,17 +300,16 @@ public final class Parser extends AbstractParser {
     }
 
     private void parseRefPtg(RefPtg t) {
-        Row rowObject = sheet.getRow(t.getRow());
+        Row row_ = this.sheet.getRow(t.getRow());
         Object value = null;
-        if(rowObject != null) {
-            Cell c = rowObject.getCell(t.getColumn());
+        if(row_ != null) {
+            Cell c = row_.getCell(t.getColumn());
             value = Helper.valueOf(c);
         }
         CELL elem = new CELL(t.getRow(), t.getColumn());
         elem.setValue(value);
-        //parse CELL
-        elem.setColumn(column);
-        elem.setRow(row);
+        elem.setColumn(this.column);
+        elem.setRow(this.row);
         elem.setSheetIndex(this.getSheetIndex());
         elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
@@ -315,25 +317,28 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
-
+    /**
+     * ConstantArray
+     */
     private void parseConstantArray(ArrayPtg t) {
         Object[][] array = t.getTokenArrayValues();
-        // ConstantArray
         var elem = new ConstantArray(array);
-        elem.setColumn(column);
-        elem.setRow(row);
+        elem.setColumn(this.column);
+        elem.setRow(this.row);
         elem.setSheetIndex(this.getSheetIndex());
         elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
-        stack.push(elem);
+        this.stack.push(elem);
     }
 
     private void parseAttrPtg(AttrPtg t) {
         if(t.isSum()) parseSum();
     }
 
+    /**
+     * SUM(Arguments)
+     */
     private void parseSum() {
-        // SUM(Arguments)
         var args = stack.pop();
         if(args instanceof Reference || args instanceof OFFSET) {
             args.setSheetIndex(this.getSheetIndex());
@@ -344,14 +349,11 @@ public final class Parser extends AbstractParser {
             err("Not RangeReference " + args.getClass().getSimpleName() + " " + args.toString());
         }
         var elem = new SUM((Formula) args);
-
         elem.setColumn(column);
         elem.setRow(row);
-
         elem.setSheetIndex(this.getSheetIndex());
         elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
-
         unordered.add(elem);
         graph.add(elem);
         stack.push(elem);
