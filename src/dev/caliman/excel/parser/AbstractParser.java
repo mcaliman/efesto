@@ -23,6 +23,7 @@
 package dev.caliman.excel.parser;
 
 import dev.caliman.excel.grammar.Start;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.*;
@@ -35,7 +36,7 @@ import java.io.IOException;
 import java.util.function.Predicate;
 
 import static java.lang.System.err;
-import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
+import static org.apache.poi.ss.usermodel.Cell.*;
 
 public abstract class AbstractParser {
 
@@ -182,4 +183,33 @@ public abstract class AbstractParser {
         err.println(t.getClass().getName() + ": " + t.toString());
     }
 
+
+    protected Object parseCellValue(Cell cell) {
+        if(cell == null) return null;
+        if(isDataType(cell))
+            return cell.getDateCellValue();
+        switch(cell.getCellType()) {
+            case CELL_TYPE_STRING:
+            case CELL_TYPE_BLANK:
+                return cell.getStringCellValue();
+            case CELL_TYPE_NUMERIC:
+                return cell.getNumericCellValue();
+            case CELL_TYPE_BOOLEAN:
+                return cell.getBooleanCellValue();
+            case CELL_TYPE_FORMULA:
+                if(cell.toString() != null && cell.toString().equalsIgnoreCase("TRUE")) {
+                    return true;
+                }
+                if(cell.toString() != null && cell.toString().equalsIgnoreCase("FALSE")) {
+                    return false;
+                }
+                return cell.toString();
+            default:
+                return null;
+        }
+    }
+
+    private boolean isDataType(Cell cell) {
+        return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
+    }
 }

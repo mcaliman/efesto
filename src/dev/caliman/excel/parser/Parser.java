@@ -68,11 +68,6 @@ public final class Parser extends AbstractParser {
 
 
     private boolean verbose = false;
-
-
-    //private SHEET cSHEET;//current sheet
-
-
     private Helper helper;
     private List<Cell> ext;
 
@@ -92,19 +87,13 @@ public final class Parser extends AbstractParser {
         this.stack = new Stack<>();
     }
 
-    /*public void parse() {
-        super.parse();
-        //verbose("** topological sorting beginning...");
-        //sort();
-    }*/
-
 
     protected void parse(Cell cell) {
         if(isFormula(cell)) {
             parseFormula(cell);
         } else if(this.ext.contains(cell)) {
             verbose("Recover loosed cell!");
-            Object value = Helper.valueOf(cell);
+            Object value = this.parseCellValue(cell);
             CELL elem = new CELL(cell.getRowIndex(), cell.getColumnIndex());
             elem.setValue(value);
             elem.setSHEET(new SHEET(getSheetName(cell), getSheetIndex(cell)));
