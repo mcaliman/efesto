@@ -36,6 +36,10 @@ public abstract class AbstractParser {
 
     protected Workbook xlsxBook;
     protected Sheet xlsxSheet;//(Work)Sheet
+
+    protected int column;//Current Formula Column
+    protected int row;//Current Formula Row
+
     protected XSSFEvaluationWorkbook evalBook;
 
     protected boolean singleSheet;//is single xlsxSheet or not?
@@ -45,7 +49,6 @@ public abstract class AbstractParser {
     public String getXlsxFileName() {
         return xlsxFileName;
     }
-
 
     protected void analyze() {
         System.out.println("Analyze...");
@@ -74,7 +77,6 @@ public abstract class AbstractParser {
         return this.xlsxSheet.getSheetName();
     }
 
-
     protected String getSheetName(Cell xlsxCell) {
         return xlsxCell.getSheet().getSheetName();
     }
@@ -84,12 +86,8 @@ public abstract class AbstractParser {
     }
 
     protected boolean empty(final Cell xlsxCell) {
-        if(xlsxCell == null) { // use row.getCell(x, Row.CREATE_NULL_AS_BLANK) to avoid null cells
-            return true;
-        }
-        if(xlsxCell.getCellType() == Cell.CELL_TYPE_BLANK) {
-            return true;
-        }
+        if(xlsxCell == null) return true;
+        if(xlsxCell.getCellType() == Cell.CELL_TYPE_BLANK) return true;
         return xlsxCell.getCellType() == Cell.CELL_TYPE_STRING && xlsxCell.getStringCellValue().trim().isEmpty();
     }
 

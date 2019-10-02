@@ -107,10 +107,6 @@ public final class Parser extends AbstractParser {
     private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
 
 
-    private int column;//Current Formula Column
-    private int row;//Current Formula Row
-
-
     private boolean verbose = false;
 
 
