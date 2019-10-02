@@ -108,7 +108,10 @@ public abstract class AbstractParser {
     }
 
     public void parse() {
-        analyze();
+        //analyze();
+        System.out.println("Analyze...");
+        this.evaluation = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.workbook);
+        this.singleSheet = this.workbook.getNumberOfSheets() == 1;
         for(Sheet currentSheet : this.workbook) {
             this.sheet = currentSheet;
             for(Row xlsxRow : sheet)
@@ -116,11 +119,11 @@ public abstract class AbstractParser {
         }
     }
 
-    protected void analyze() {
+    /*protected void analyze() {
         System.out.println("Analyze...");
         this.evaluation = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.workbook);
         this.singleSheet = this.workbook.getNumberOfSheets() == 1;
-    }
+    }*/
 
 
     protected abstract void parse(Cell xlsxCell);
