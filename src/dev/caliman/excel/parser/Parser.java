@@ -118,7 +118,6 @@ public final class Parser extends AbstractParser {
 
     private Helper helper;
     private List<Cell> ext;
-    private int counterFormulas;//formula counters
 
 
     private StartList unordered;

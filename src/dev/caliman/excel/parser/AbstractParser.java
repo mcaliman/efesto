@@ -44,7 +44,7 @@ public abstract class AbstractParser {
     protected XSSFEvaluationWorkbook xlsxEvalBook;
 
     protected boolean singleSheet;//is single xlsxSheet or not?
-
+    protected int counterFormulas;//formula counters
     protected int column;//Current Formula Column
     protected int row;//Current Formula Row
 
@@ -73,7 +73,6 @@ public abstract class AbstractParser {
     }
 
     protected void parseSheet() {
-
         for(Row xlsxRow : xlsxSheet)
             for(Cell xlsxCell : xlsxRow)
                 if(!empty(xlsxCell)) parse(xlsxCell);
