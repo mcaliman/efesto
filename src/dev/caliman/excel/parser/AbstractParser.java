@@ -176,6 +176,9 @@ public abstract class AbstractParser {
         return Start.cellAddress(this.row, this.column, this.getSheetName());
     }
 
+    protected void doesFormulaReferToDeletedCell() {
+        err.println(getCellAddress() + " does formula refer to deleted cell");
+    }
     protected void parseErrPtg(Ptg t) {
         err.println(t.getClass().getName() + ": " + t.toString());
     }

@@ -46,7 +46,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -287,7 +286,7 @@ public final class Parser extends AbstractParser {
 
     }
 
-    private void parseNamedRange(@NotNull NamePtg t) {
+    private void parseNamedRange(NamePtg t) {
         RangeInternal range = null;
         Ptg[] ptgs = helper.getName(t);
         String name = helper.getNameText(t);
@@ -308,7 +307,7 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
-    private void parseRefPtg(@NotNull RefPtg t) {
+    private void parseRefPtg(RefPtg t) {
         Row rowObject = sheet.getRow(t.getRow());
         Object value = null;
         if(rowObject != null) {
@@ -328,7 +327,7 @@ public final class Parser extends AbstractParser {
     }
 
 
-    private void parseConstantArray(@NotNull ArrayPtg t) {
+    private void parseConstantArray(ArrayPtg t) {
         Object[][] array = t.getTokenArrayValues();
         // ConstantArray
         var elem = new ConstantArray(array);
@@ -340,7 +339,7 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
-    private void parseAttrPtg(@NotNull AttrPtg t) {
+    private void parseAttrPtg(AttrPtg t) {
         if(t.isSum()) parseSum();
     }
 
@@ -369,14 +368,14 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
-    private void parseFuncVarPtg(@NotNull FuncVarPtg t) {
+    private void parseFuncVarPtg(FuncVarPtg t) {
         int arity = t.getNumberOfOperands();
         String name = t.getName();
         if(arity == 0) parseFunc(name);
         else parseFunc(name, arity);
     }
 
-    private void parseFuncPtg(@NotNull FuncPtg t) {
+    private void parseFuncPtg(FuncPtg t) {
         int arity = t.getNumberOfOperands();
         String name = t.getName();
         if(arity == 0) parseFunc(name);
@@ -473,7 +472,7 @@ public final class Parser extends AbstractParser {
     }
 
 
-    private void parseCELLlinked(@NotNull CELL elem) {
+    private void parseCELLlinked(CELL elem) {
         elem.setColumn(column);
         elem.setRow(row);
         elem.setSheetIndex(this.getSheetIndex());
@@ -544,10 +543,6 @@ public final class Parser extends AbstractParser {
         return ordered;
     }
 
-
-    private void doesFormulaReferToDeletedCell() {
-        err(getCellAddress() + " does formula refer to deleted cell");
-    }
 
     private void err(String string) {
         err.println(getCellAddress() + " error: " + string);
@@ -887,7 +882,6 @@ public final class Parser extends AbstractParser {
 
     protected class RangeInternal {
 
-        @NotNull
         private final RANGE tRANGE;
         private final String sheetName;
 
@@ -919,7 +913,7 @@ public final class Parser extends AbstractParser {
             return sheetName;
         }
 
-        @NotNull
+
         RANGE getRANGE() {
             return tRANGE;
         }
