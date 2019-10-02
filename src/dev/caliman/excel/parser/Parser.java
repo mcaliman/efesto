@@ -109,6 +109,7 @@ public final class Parser extends AbstractParser {
 
     private boolean verbose = false;
 
+    protected File xlsxFile;
 
     private SHEET cSHEET;//current xlsxSheet
 
@@ -125,7 +126,7 @@ public final class Parser extends AbstractParser {
 
     public Parser(String xlsxFileName) throws IOException, InvalidFormatException {
         this.xlsxFileName = xlsxFileName;
-        File xlsxFile = new File(this.xlsxFileName);
+        this.xlsxFile = new File(this.xlsxFileName);
         this.xlsxBook = WorkbookFactory.create(xlsxFile);
 
         this.ext = new ArrayList<>();
