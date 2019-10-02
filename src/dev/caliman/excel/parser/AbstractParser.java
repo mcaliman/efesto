@@ -118,30 +118,29 @@ public abstract class AbstractParser {
     }
 
 
+    protected abstract void parse(Cell cell);
 
-    protected abstract void parse(Cell xlsxCell);
 
-
-    protected void parseFormula(Cell xlsxCell) {
+    protected void parseFormula(Cell cell) {
         this.formulaCounters++;
-        this.column = xlsxCell.getColumnIndex();
-        this.row = xlsxCell.getRowIndex();
+        this.column = cell.getColumnIndex();
+        this.row = cell.getRowIndex();
         this.formulaAddress = cellAddress();
-        this.formulaPlainText = xlsxCell.getCellFormula();
+        this.formulaPlainText = cell.getCellFormula();
         System.out.println("Formula Plain Text: " + this.formulaAddress);
-        this.formulaPtgs = tokens(this.sheet, this.row, this.column);
+        this.formulaPtgs = tokens(/*this.sheet, this.row, this.column*/);
 
     }
 
-    protected Ptg[] tokens(Sheet sheet, int rowFormula, int colFormula) {
-        int sheetIndex = this.workbook.getSheetIndex(sheet);
-        var sheetName = sheet.getSheetName();
-        var evalSheet = evaluation.getSheet(sheetIndex);
+    protected Ptg[] tokens(/*Sheet sheet, int rowFormula, int colFormula*/) {
+        int sheetIndex = this.getSheetIndex();// this.workbook.getSheetIndex(sheet);
+        var sheetName = this.getSheetName();//sheet.getSheetName();
+        var evalSheet = this.evaluation.getSheet(sheetIndex);
         Ptg[] ptgs = null;
         try {
-            ptgs = evaluation.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
+            ptgs = evaluation.getFormulaTokens(evalSheet.getCell(this.row, this.column));
         } catch(FormulaParseException e) {
-            System.err.println("" + e.getMessage() + sheetName + rowFormula + colFormula);
+            err.println("" + e.getMessage() + sheetName + this.row + this.column);
         }
         return ptgs;
     }
