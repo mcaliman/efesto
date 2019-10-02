@@ -68,45 +68,6 @@ import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
 public final class Parser extends AbstractParser {
 
 
-    private final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
-    private final Predicate<Ptg> area3DPxg = (Ptg t) -> t instanceof Area3DPxg;
-    private final Predicate<Ptg> areaErrPtg = (Ptg t) -> t instanceof AreaErrPtg;
-    private final Predicate<Ptg> areaPtg = (Ptg t) -> t instanceof AreaPtg;
-    private final Predicate<Ptg> attrPtg = (Ptg t) -> t instanceof AttrPtg;
-    private final Predicate<Ptg> boolPtg = (Ptg t) -> t instanceof BoolPtg;
-    private final Predicate<Ptg> concatPtg = (Ptg t) -> t instanceof ConcatPtg;
-    private final Predicate<Ptg> deleted3DPxg = (Ptg t) -> t instanceof Deleted3DPxg;
-    private final Predicate<Ptg> deletedArea3DPtg = (Ptg t) -> t instanceof DeletedArea3DPtg;
-    private final Predicate<Ptg> deletedRef3DPtg = (Ptg t) -> t instanceof DeletedRef3DPtg;
-    private final Predicate<Ptg> dividePtg = (Ptg t) -> t instanceof DividePtg;
-    private final Predicate<Ptg> equalPtg = (Ptg t) -> t instanceof EqualPtg;
-    private final Predicate<Ptg> errPtg = (Ptg t) -> t instanceof ErrPtg;
-    private final Predicate<Ptg> funcPtg = (Ptg t) -> t instanceof FuncPtg;
-    private final Predicate<Ptg> funcVarPtg = (Ptg t) -> t instanceof FuncVarPtg;
-    private final Predicate<Ptg> greaterEqualPtg = (Ptg t) -> t instanceof GreaterEqualPtg;
-    private final Predicate<Ptg> greaterThanPtg = (Ptg t) -> t instanceof GreaterThanPtg;
-    private final Predicate<Ptg> intersectionPtg = (Ptg t) -> t instanceof IntersectionPtg;
-    private final Predicate<Ptg> intPtg = (Ptg t) -> t instanceof IntPtg;
-    private final Predicate<Ptg> lessEqualPtg = (Ptg t) -> t instanceof LessEqualPtg;
-    private final Predicate<Ptg> lessThanPtg = (Ptg t) -> t instanceof LessThanPtg;
-    private final Predicate<Ptg> memErrPtg = (Ptg t) -> t instanceof MemErrPtg;
-    private final Predicate<Ptg> missingArgPtg = (Ptg t) -> t instanceof MissingArgPtg;
-    private final Predicate<Ptg> multiplyPtg = (Ptg t) -> t instanceof MultiplyPtg;
-    private final Predicate<Ptg> namePtg = (Ptg t) -> t instanceof NamePtg;
-    private final Predicate<Ptg> notEqualPtg = (Ptg t) -> t instanceof NotEqualPtg;
-    private final Predicate<Ptg> numberPtg = (Ptg t) -> t instanceof NumberPtg;
-    private final Predicate<Ptg> parenthesisPtg = (Ptg t) -> t instanceof ParenthesisPtg;
-    private final Predicate<Ptg> percentPtg = (Ptg t) -> t instanceof PercentPtg;
-    private final Predicate<Ptg> powerPtg = (Ptg t) -> t instanceof PowerPtg;
-    private final Predicate<Ptg> ref3DPxg = (Ptg t) -> t instanceof Ref3DPxg;
-    private final Predicate<Ptg> refErrorPtg = (Ptg t) -> t instanceof RefErrorPtg;
-    private final Predicate<Ptg> refPtg = (Ptg t) -> t instanceof RefPtg;
-    private final Predicate<Ptg> stringPtg = (Ptg t) -> t instanceof StringPtg;
-    private final Predicate<Ptg> subtractPtg = (Ptg t) -> t instanceof SubtractPtg;
-    private final Predicate<Ptg> unaryMinusPtg = (Ptg t) -> t instanceof UnaryMinusPtg;
-    private final Predicate<Ptg> unaryPlusPtg = (Ptg t) -> t instanceof UnaryPlusPtg;
-    private final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
-    private final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
 
 
     private boolean verbose = false;
