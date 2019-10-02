@@ -40,7 +40,6 @@ import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 public abstract class AbstractParser {
 
     protected final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
-
     protected final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
     protected final Predicate<Ptg> area3DPxg = (Ptg t) -> t instanceof Area3DPxg;
     protected final Predicate<Ptg> areaErrPtg = (Ptg t) -> t instanceof AreaErrPtg;

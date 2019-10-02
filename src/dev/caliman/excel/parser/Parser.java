@@ -454,13 +454,13 @@ public final class Parser extends AbstractParser {
     }
 
 
-    private void sort() {
-        if(unordered.singleton()) {
-            ordered = new StartList();
-            ordered.add(unordered.get(0));
+    public void sort() {
+        if(this.unordered.singleton()) {
+            this.ordered = new StartList();
+            this.ordered.add(this.unordered.get(0));
             return;
         }
-        ordered = graph.topologicalSort();
+        this.ordered = this.graph.topologicalSort();
     }
 
     private void parseFormula(Start elem) {
@@ -872,7 +872,7 @@ public final class Parser extends AbstractParser {
 
     // INNERS CLASS
 
-    class WhatIf {
+    protected class WhatIf {
 
         final Ptg ptg;
         final Predicate<Ptg> predicate;
@@ -885,7 +885,7 @@ public final class Parser extends AbstractParser {
         }
     }
 
-    class RangeInternal {
+    protected class RangeInternal {
 
         @NotNull
         private final RANGE tRANGE;
