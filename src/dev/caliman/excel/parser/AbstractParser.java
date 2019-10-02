@@ -45,6 +45,7 @@ public abstract class AbstractParser {
     protected XSSFEvaluationWorkbook xlsxEvalBook;
 
     protected Ptg[] formulaPtgs;
+    protected String formulaAddress;
     protected String xlsxFormulaPlainText;
 
 
@@ -95,7 +96,7 @@ public abstract class AbstractParser {
         this.counterFormulas++;
         this.column = xlsxCell.getColumnIndex();
         this.row = xlsxCell.getRowIndex();
-        String formulaAddress = Start.cellAddress(this.row, this.column, getSheetName());
+        this.formulaAddress = cellAddress();
         this.xlsxFormulaPlainText = xlsxCell.getCellFormula();
         System.out.println("Formula Plain Text: " + formulaAddress);
         this.formulaPtgs = tokens(this.xlsxSheet, this.row, this.column);
@@ -113,6 +114,10 @@ public abstract class AbstractParser {
             System.err.println("" + e.getMessage() + sheetName + rowFormula + colFormula);
         }
         return ptgs;
+    }
+
+    protected String cellAddress() {
+        return Start.cellAddress(this.row, this.column, getSheetName());
     }
 
     protected int getSheetIndex() {

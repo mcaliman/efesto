@@ -169,13 +169,8 @@ public final class Parser extends AbstractParser {
 
     protected void parseFormula(Cell xlsxCell) {
         super.parseFormula(xlsxCell);
-
-        //verbose("Cell:" + xlsxCell.getClass().getSimpleName() + " " + xlsxCell.toString() + " " + xlsxCell.getCellType());
-
-
         if(formulaPtgs == null) {
-
-            //err("ptgs empty or null for address " + formulaAddress);
+            err("ptgs empty or null for address " + this.formulaAddress);
             parseUDF(this.xlsxFormulaPlainText);
             return;
         }
