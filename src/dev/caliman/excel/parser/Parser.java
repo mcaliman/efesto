@@ -71,7 +71,7 @@ public final class Parser extends AbstractParser {
     private boolean verbose = false;
 
 
-    private SHEET cSHEET;//current sheet
+    //private SHEET cSHEET;//current sheet
 
 
     private Helper helper;
@@ -102,8 +102,8 @@ public final class Parser extends AbstractParser {
     }
 
     protected void parseSheet() {
-        this.cSHEET = new SHEET(getSheetName(), getSheetIndex());
-        verbose("Parsing sheet-name:" + this.cSHEET.getName());
+        //this.cSHEET = new SHEET(getSheetName(), getSheetIndex());
+        //verbose("Parsing sheet-name:" + this.cSHEET.getName());
         super.parseSheet();
     }
 
@@ -153,7 +153,10 @@ public final class Parser extends AbstractParser {
         var elem = new UDF(arguments);
         elem.setColumn(this.column);
         elem.setRow(this.row);
-        elem.setSHEET(this.cSHEET);
+        //elem.setSHEET(this.cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+
         elem.setSingleSheet(this.singleSheet);
         unordered.add(elem);
         stack.push(elem);
@@ -205,7 +208,7 @@ public final class Parser extends AbstractParser {
         )) {
             stream.filter((WhatIf t) -> t.predicate.test(t.ptg)).forEach(t -> t.consumer.accept(t.ptg));
         } catch(Exception e) {
-            err.println("parse: " + p.getClass().getSimpleName() + " " + this.cSHEET.getName() + "row:" + row + "column:" + column + e.getMessage());
+            //err.println("parse: " + p.getClass().getSimpleName() + " " + this.cSHEET.getName() + "row:" + row + "column:" + column + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -252,7 +255,7 @@ public final class Parser extends AbstractParser {
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
         String cellref = helper.getCellRef(t);
-        if(this.cSHEET.getIndex() != sheetIndex) {
+        if(/*this.cSHEET.getIndex()*/this.getSheetIndex() != sheetIndex) {
             Sheet extSheet = this.workbook.getSheet(sheetName);
             if(extSheet != null) {
                 CellReference cr = new CellReference(cellref);
@@ -271,7 +274,8 @@ public final class Parser extends AbstractParser {
         var elem = new PrefixReferenceItem(tSHEET, cellref, null);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.addNode(elem);
         stack.push(elem);
@@ -283,7 +287,8 @@ public final class Parser extends AbstractParser {
         var elem = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
 
         elem.setAsArea();//is area not a cell with ref to area
@@ -326,7 +331,8 @@ public final class Parser extends AbstractParser {
         //parse CELL
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         this.unordered.add(elem);
         stack.push(elem);
@@ -339,7 +345,8 @@ public final class Parser extends AbstractParser {
         var elem = new ConstantArray(array);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         stack.push(elem);
     }
@@ -352,7 +359,8 @@ public final class Parser extends AbstractParser {
         // SUM(Arguments)
         var args = stack.pop();
         if(args instanceof Reference || args instanceof OFFSET) {
-            args.setSHEET(cSHEET);
+            args.setSheetIndex(this.getSheetIndex());
+            args.setSheetName(this.getSheetName());
             args.setAsArea();
             unordered.add(args);
         } else {
@@ -363,7 +371,8 @@ public final class Parser extends AbstractParser {
         elem.setColumn(column);
         elem.setRow(row);
 
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
 
         unordered.add(elem);
@@ -410,7 +419,8 @@ public final class Parser extends AbstractParser {
         var elem = new ERROR(text);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
 
         err(elem.toString());
@@ -447,7 +457,8 @@ public final class Parser extends AbstractParser {
         ERRORREF elem = new ERRORREF();
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         stack.push(elem);
         err("");
@@ -466,7 +477,8 @@ public final class Parser extends AbstractParser {
     private void parseFormula(Start elem) {
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         unordered.add(elem);
     }
@@ -475,7 +487,8 @@ public final class Parser extends AbstractParser {
     private void parseCELLlinked(@NotNull CELL elem) {
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         this.unordered.add(elem);
         stack.push(elem);
@@ -489,7 +502,8 @@ public final class Parser extends AbstractParser {
         var elem = new PrefixReferenceItem(tFILE, cellref, null);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.addNode(elem);
         stack.push(elem);
@@ -514,7 +528,8 @@ public final class Parser extends AbstractParser {
 
         builtinFunction.setColumn(column);
         builtinFunction.setRow(row);
-        builtinFunction.setSHEET(cSHEET);
+        builtinFunction.setSheetIndex(this.getSheetIndex());
+        builtinFunction.setSheetName(this.getSheetName());
         builtinFunction.setSingleSheet(this.singleSheet);
 
         graph.addNode(builtinFunction);
@@ -561,7 +576,8 @@ public final class Parser extends AbstractParser {
         var elem = new ParenthesisFormula(formula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         stack.push(elem);
     }
@@ -575,7 +591,8 @@ public final class Parser extends AbstractParser {
         var elem = new Eq(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -590,7 +607,8 @@ public final class Parser extends AbstractParser {
         var elem = new Lt(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -605,7 +623,8 @@ public final class Parser extends AbstractParser {
         var elem = new Gt(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -620,7 +639,8 @@ public final class Parser extends AbstractParser {
         var elem = new Leq(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -635,7 +655,8 @@ public final class Parser extends AbstractParser {
         var elem = new GtEq(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -650,7 +671,8 @@ public final class Parser extends AbstractParser {
         var elem = new Neq(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -665,7 +687,8 @@ public final class Parser extends AbstractParser {
         var elem = new Concat(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -680,7 +703,8 @@ public final class Parser extends AbstractParser {
         var elem = new Add(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -695,7 +719,8 @@ public final class Parser extends AbstractParser {
         var elem = new Sub(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -711,7 +736,8 @@ public final class Parser extends AbstractParser {
         var elem = new Mult(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -726,7 +752,8 @@ public final class Parser extends AbstractParser {
         var elem = new Divide(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -741,7 +768,8 @@ public final class Parser extends AbstractParser {
         var elem = new Power(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -755,7 +783,8 @@ public final class Parser extends AbstractParser {
         var elem = new PercentFormula(formula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.addNode(elem);
         stack.push(elem);
@@ -767,7 +796,8 @@ public final class Parser extends AbstractParser {
     private void parsePlus() {
         var formula = (Formula) stack.pop();
         var elem = new Plus(formula);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         graph.addNode(elem);
         stack.push(elem);
     }
@@ -780,7 +810,8 @@ public final class Parser extends AbstractParser {
         var elem = new Minus(formula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.addNode(elem);
         stack.push(elem);
@@ -796,7 +827,8 @@ public final class Parser extends AbstractParser {
         var elem = new Intersection(lFormula, rFormula);
         elem.setColumn(this.column);
         elem.setRow(this.row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         this.graph.add(elem);
         this.stack.push(elem);
@@ -812,7 +844,8 @@ public final class Parser extends AbstractParser {
         var elem = new Union(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSHEET(cSHEET);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
         graph.add(elem);
         stack.push(elem);
@@ -821,7 +854,7 @@ public final class Parser extends AbstractParser {
 
     //<editor-fold desc="Utilities">
     private String getCellAddress() {
-        return Start.cellAddress(this.row, this.column, this.cSHEET.getName());
+        return Start.cellAddress(this.row, this.column, this.getSheetName());
     }
 
     public void setVerbose(boolean verbose) {
