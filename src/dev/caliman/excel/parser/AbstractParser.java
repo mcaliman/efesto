@@ -25,10 +25,7 @@ package dev.caliman.excel.parser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.Ptg;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -75,7 +72,19 @@ public abstract class AbstractParser {
         this.singleSheet = this.xlsxBook.getNumberOfSheets() == 1;
     }
 
-    protected abstract void parseSheet();
+    protected void parseSheet() {
+
+        for(Row xlsxRow : xlsxSheet)
+            for(Cell xlsxCell : xlsxRow)
+                if(!empty(xlsxCell)) parse(xlsxCell);
+                else {
+                    System.err.println("Cell is null.");
+                    //throw new RuntimeException("Cell is null.");
+                }
+    }
+
+
+    protected abstract void parse(Cell xlsxCell);
 
 
 

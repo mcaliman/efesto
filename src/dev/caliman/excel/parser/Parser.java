@@ -138,8 +138,6 @@ public final class Parser extends AbstractParser {
         this.stack = new Stack<>();
     }
 
-
-
     public void parse() {
         super.parse();
         verbose("** topological sorting beginning...");
@@ -149,16 +147,10 @@ public final class Parser extends AbstractParser {
     protected void parseSheet() {
         this.cSHEET = new SHEET(getSheetName(), getSheetIndex());
         verbose("Parsing xlsxSheet-name:" + this.cSHEET.getName());
-        for(Row xlsxRow : xlsxSheet)
-            for(Cell xlsxCell : xlsxRow)
-                if(!empty(xlsxCell)) parse(xlsxCell);
-                else {
-                    err("Cell is null.");
-                    //throw new RuntimeException("Cell is null.");
-                }
+        super.parseSheet();
     }
 
-    private void parse(Cell xlsxCell) {
+    protected void parse(Cell xlsxCell) {
         if(isFormula(xlsxCell)) {
             parseFormula(xlsxCell);
         } else if(this.ext.contains(xlsxCell)) {
