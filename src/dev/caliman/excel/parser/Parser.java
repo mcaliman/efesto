@@ -167,11 +167,11 @@ public final class Parser extends AbstractParser {
     }
 
 
-    private void parseFormula(Cell xlsxCell) {
-        this.counterFormulas++;
-        verbose("Cell:" + xlsxCell.getClass().getSimpleName() + " " + xlsxCell.toString() + " " + xlsxCell.getCellType());
-        this.column = xlsxCell.getColumnIndex();
-        this.row = xlsxCell.getRowIndex();
+    protected void parseFormula(Cell xlsxCell) {
+        super.parseFormula(xlsxCell);
+
+        //verbose("Cell:" + xlsxCell.getClass().getSimpleName() + " " + xlsxCell.toString() + " " + xlsxCell.getCellType());
+
         String formulaAddress = getCellAddress();
         Ptg[] formulaPtgs = tokens(this.xlsxSheet, this.row, this.column);
         if(formulaPtgs == null) {

@@ -86,6 +86,11 @@ public abstract class AbstractParser {
     protected abstract void parse(Cell xlsxCell);
 
 
+    protected void parseFormula(Cell xlsxCell) {
+        this.counterFormulas++;
+        this.column = xlsxCell.getColumnIndex();
+        this.row = xlsxCell.getRowIndex();
+    }
 
     protected Ptg[] tokens(Sheet sheet, int rowFormula, int colFormula) {
         int sheetIndex = this.xlsxBook.getSheetIndex(sheet);
