@@ -68,8 +68,6 @@ import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
 public final class Parser extends AbstractParser {
 
 
-
-
     private boolean verbose = false;
 
 
