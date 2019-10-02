@@ -125,6 +125,7 @@ public final class Parser extends AbstractParser {
     private Stack<Start> stack;
 
     public Parser(String xlsxFileName) throws IOException, InvalidFormatException {
+        super();
         this.xlsxFileName = xlsxFileName;
         this.xlsxFile = new File(this.xlsxFileName);
         this.xlsxBook = WorkbookFactory.create(xlsxFile);

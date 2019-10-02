@@ -46,6 +46,10 @@ public abstract class AbstractParser {
 
     protected String xlsxFileName;
 
+    protected AbstractParser() {
+
+    }
+
     public String getXlsxFileName() {
         return xlsxFileName;
     }
