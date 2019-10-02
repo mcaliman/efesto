@@ -61,8 +61,12 @@ public abstract class AbstractParser {
         return xlsxFileName;
     }
 
-    protected void parse() {
-
+    public void parse() {
+        analyze();
+        for(Sheet currentSheet : this.xlsxBook) {
+            this.xlsxSheet = currentSheet;
+            parseSheet();
+        }
     }
 
     protected void analyze() {
@@ -70,6 +74,10 @@ public abstract class AbstractParser {
         this.xlsxEvalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.xlsxBook);
         this.singleSheet = this.xlsxBook.getNumberOfSheets() == 1;
     }
+
+    protected abstract void parseSheet();
+
+
 
     protected Ptg[] tokens(Sheet sheet, int rowFormula, int colFormula) {
         int sheetIndex = this.xlsxBook.getSheetIndex(sheet);

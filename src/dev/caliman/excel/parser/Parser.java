@@ -138,23 +138,15 @@ public final class Parser extends AbstractParser {
         this.stack = new Stack<>();
     }
 
-    protected void analyze() {
-        super.analyze();
-    }
+
 
     public void parse() {
-        analyze();
-        for(Sheet currentSheet : this.xlsxBook) {
-            this.xlsxSheet = currentSheet;
-            //this.cSHEET = new SHEET(getSheetName(), getSheetIndex());
-            //verbose("Parsing xlsxSheet-name:" + this.cSHEET.getName());
-            parseSheet();
-        }
+        super.parse();
         verbose("** topological sorting beginning...");
         sort();
     }
 
-    private void parseSheet() {
+    protected void parseSheet() {
         this.cSHEET = new SHEET(getSheetName(), getSheetIndex());
         verbose("Parsing xlsxSheet-name:" + this.cSHEET.getName());
         for(Row xlsxRow : xlsxSheet)
