@@ -22,51 +22,62 @@
 
 package dev.caliman.excel.parser;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.IOException;
 
 import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_FORMULA;
 
 public abstract class AbstractParser {
 
+    protected String xlsxFileName;
+    protected File xlsxFile;
+
     protected Workbook xlsxBook;
-    protected Sheet xlsxSheet;//(Work)Sheet
+    protected Sheet xlsxSheet;
+    protected XSSFEvaluationWorkbook xlsxEvalBook;
+
+    protected boolean singleSheet;//is single xlsxSheet or not?
 
     protected int column;//Current Formula Column
     protected int row;//Current Formula Row
 
-    protected XSSFEvaluationWorkbook evalBook;
-
-    protected boolean singleSheet;//is single xlsxSheet or not?
-
-    protected String xlsxFileName;
-
-    protected AbstractParser() {
-
+    protected AbstractParser(String xlsxFileName) throws IOException, InvalidFormatException {
+        this.xlsxFileName = xlsxFileName;
+        this.xlsxFile = new File(this.xlsxFileName);
+        this.xlsxBook = WorkbookFactory.create(xlsxFile);
     }
 
     public String getXlsxFileName() {
         return xlsxFileName;
     }
 
+    protected void parse() {
+
+    }
+
     protected void analyze() {
         System.out.println("Analyze...");
-        this.evalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.xlsxBook);
+        this.xlsxEvalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.xlsxBook);
         this.singleSheet = this.xlsxBook.getNumberOfSheets() == 1;
     }
 
     protected Ptg[] tokens(Sheet sheet, int rowFormula, int colFormula) {
         int sheetIndex = this.xlsxBook.getSheetIndex(sheet);
         var sheetName = sheet.getSheetName();
-        var evalSheet = evalBook.getSheet(sheetIndex);
+        var evalSheet = xlsxEvalBook.getSheet(sheetIndex);
         Ptg[] ptgs = null;
         try {
-            ptgs = evalBook.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
+            ptgs = xlsxEvalBook.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
         } catch(FormulaParseException e) {
             System.err.println("" + e.getMessage() + sheetName + rowFormula + colFormula);
         }

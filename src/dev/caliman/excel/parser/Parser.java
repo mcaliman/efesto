@@ -40,12 +40,14 @@ import dev.caliman.excel.graph.StartGraph;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.formula.ptg.*;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +111,7 @@ public final class Parser extends AbstractParser {
 
     private boolean verbose = false;
 
-    protected File xlsxFile;
+
 
     private SHEET cSHEET;//current xlsxSheet
 
@@ -125,10 +127,7 @@ public final class Parser extends AbstractParser {
     private Stack<Start> stack;
 
     public Parser(String xlsxFileName) throws IOException, InvalidFormatException {
-        super();
-        this.xlsxFileName = xlsxFileName;
-        this.xlsxFile = new File(this.xlsxFileName);
-        this.xlsxBook = WorkbookFactory.create(xlsxFile);
+        super(xlsxFileName);
 
         this.ext = new ArrayList<>();
         this.helper = new Helper(this.xlsxBook);
