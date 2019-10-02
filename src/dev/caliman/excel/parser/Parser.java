@@ -146,8 +146,8 @@ public final class Parser extends AbstractParser {
         analyze();
         for(Sheet currentSheet : this.xlsxBook) {
             this.xlsxSheet = currentSheet;
-            this.cSHEET = new SHEET(getSheetName(), getSheetIndex());
-            verbose("Parsing xlsxSheet-name:" + this.cSHEET.getName());
+            //this.cSHEET = new SHEET(getSheetName(), getSheetIndex());
+            //verbose("Parsing xlsxSheet-name:" + this.cSHEET.getName());
             parseSheet();
         }
         verbose("** topological sorting beginning...");
@@ -155,6 +155,8 @@ public final class Parser extends AbstractParser {
     }
 
     private void parseSheet() {
+        this.cSHEET = new SHEET(getSheetName(), getSheetIndex());
+        verbose("Parsing xlsxSheet-name:" + this.cSHEET.getName());
         for(Row xlsxRow : xlsxSheet)
             for(Cell xlsxCell : xlsxRow)
                 if(!empty(xlsxCell)) parse(xlsxCell);
