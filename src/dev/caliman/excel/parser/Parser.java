@@ -173,8 +173,6 @@ public final class Parser extends AbstractParser {
         //verbose("Cell:" + xlsxCell.getClass().getSimpleName() + " " + xlsxCell.toString() + " " + xlsxCell.getCellType());
 
 
-
-        Ptg[] formulaPtgs = tokens(this.xlsxSheet, this.row, this.column);
         if(formulaPtgs == null) {
             String xlsxFormulaPlainText = xlsxCell.getCellFormula();
             //err("ptgs empty or null for address " + formulaAddress);

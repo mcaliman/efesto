@@ -44,6 +44,8 @@ public abstract class AbstractParser {
     protected Sheet xlsxSheet;
     protected XSSFEvaluationWorkbook xlsxEvalBook;
 
+    protected Ptg[] formulaPtgs;
+
     protected boolean singleSheet;//is single xlsxSheet or not?
     protected int counterFormulas;//formula counters
     protected int column;//Current Formula Column
@@ -93,6 +95,7 @@ public abstract class AbstractParser {
         this.row = xlsxCell.getRowIndex();
         String formulaAddress = Start.cellAddress(this.row, this.column, getSheetName());
         System.out.println("Formula Plain Text: " + formulaAddress);
+        this.formulaPtgs = tokens(this.xlsxSheet, this.row, this.column);
 
     }
 
