@@ -174,9 +174,9 @@ public final class Parser extends AbstractParser {
 
 
         if(formulaPtgs == null) {
-            String xlsxFormulaPlainText = xlsxCell.getCellFormula();
+            this.xlsxFormulaPlainText = xlsxCell.getCellFormula();
             //err("ptgs empty or null for address " + formulaAddress);
-            parseUDF(xlsxFormulaPlainText);
+            parseUDF(this.xlsxFormulaPlainText);
             return;
         }
         Start start = parse(formulaPtgs);

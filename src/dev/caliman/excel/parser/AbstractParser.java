@@ -45,6 +45,7 @@ public abstract class AbstractParser {
     protected XSSFEvaluationWorkbook xlsxEvalBook;
 
     protected Ptg[] formulaPtgs;
+    protected String xlsxFormulaPlainText;
 
     protected boolean singleSheet;//is single xlsxSheet or not?
     protected int counterFormulas;//formula counters
