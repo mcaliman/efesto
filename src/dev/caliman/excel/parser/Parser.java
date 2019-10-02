@@ -193,12 +193,6 @@ public final class Parser extends AbstractParser {
     }
 
 
-
-
-    private void parseMissingArguments() {
-        err.println("Missing ExcelFunction Arguments for cell: " + getCellAddress());
-    }
-
     private void parseArea3DPxg(Area3DPxg t) {
         // Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
         // external or different sheet.

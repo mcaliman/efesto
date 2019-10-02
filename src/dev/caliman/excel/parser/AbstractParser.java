@@ -183,6 +183,9 @@ public abstract class AbstractParser {
         err.println(t.getClass().getName() + ": " + t.toString());
     }
 
+    protected void parseMissingArguments() {
+        err.println("Missing ExcelFunction Arguments for cell: " + getCellAddress());
+    }
 
     protected Object parseCellValue(Cell cell) {
         if(cell == null) return null;
