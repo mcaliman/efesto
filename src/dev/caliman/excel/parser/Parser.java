@@ -92,11 +92,11 @@ public final class Parser extends AbstractParser {
         this.stack = new Stack<>();
     }
 
-    public void parse() {
+    /*public void parse() {
         super.parse();
-        verbose("** topological sorting beginning...");
-        sort();
-    }
+        //verbose("** topological sorting beginning...");
+        //sort();
+    }*/
 
 
     protected void parse(Cell cell) {

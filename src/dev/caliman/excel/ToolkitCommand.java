@@ -52,6 +52,7 @@ public class ToolkitCommand {
     public void execute() {
         long t = System.currentTimeMillis();
         this.parser.parse();
+        this.parser.sort();
         this.elapsed = System.currentTimeMillis() - t;
     }
 

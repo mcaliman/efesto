@@ -128,17 +128,17 @@ public abstract class AbstractParser {
         this.formulaAddress = cellAddress();
         this.formulaPlainText = cell.getCellFormula();
         System.out.println("Formula Plain Text: " + this.formulaAddress);
-        this.formulaPtgs = tokens(/*this.sheet, this.row, this.column*/);
+        this.formulaPtgs = tokens();
 
     }
 
-    protected Ptg[] tokens(/*Sheet sheet, int rowFormula, int colFormula*/) {
-        int sheetIndex = this.getSheetIndex();// this.workbook.getSheetIndex(sheet);
-        var sheetName = this.getSheetName();//sheet.getSheetName();
+    protected Ptg[] tokens() {
+        int sheetIndex = this.getSheetIndex();
+        var sheetName = this.getSheetName();
         var evalSheet = this.evaluation.getSheet(sheetIndex);
         Ptg[] ptgs = null;
         try {
-            ptgs = evaluation.getFormulaTokens(evalSheet.getCell(this.row, this.column));
+            ptgs = this.evaluation.getFormulaTokens(evalSheet.getCell(this.row, this.column));
         } catch(FormulaParseException e) {
             err.println("" + e.getMessage() + sheetName + this.row + this.column);
         }
@@ -157,18 +157,18 @@ public abstract class AbstractParser {
         return this.sheet.getSheetName();
     }
 
-    protected String getSheetName(Cell xlsxCell) {
-        return xlsxCell.getSheet().getSheetName();
+    protected String getSheetName(Cell cell) {
+        return cell.getSheet().getSheetName();
     }
 
-    protected boolean isFormula(Cell xlsxCell) {
-        return xlsxCell.getCellType() == CELL_TYPE_FORMULA;
+    protected boolean isFormula(final Cell cell) {
+        return cell.getCellType() == CELL_TYPE_FORMULA;
     }
 
-    protected boolean empty(final Cell xlsxCell) {
-        if(xlsxCell == null) return true;
-        if(xlsxCell.getCellType() == Cell.CELL_TYPE_BLANK) return true;
-        return xlsxCell.getCellType() == Cell.CELL_TYPE_STRING && xlsxCell.getStringCellValue().trim().isEmpty();
+    protected boolean empty(final Cell cell) {
+        if(cell == null) return true;
+        if(cell.getCellType() == Cell.CELL_TYPE_BLANK) return true;
+        return cell.getCellType() == Cell.CELL_TYPE_STRING && cell.getStringCellValue().trim().isEmpty();
     }
 
     protected String getCellAddress() {
