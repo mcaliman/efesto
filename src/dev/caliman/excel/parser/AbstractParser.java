@@ -23,8 +23,11 @@
 package dev.caliman.excel.parser;
 
 import dev.caliman.excel.grammar.Start;
+import dev.caliman.excel.grammar.formula.reference.CELL;
+import dev.caliman.excel.grammar.formula.reference.RANGE;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.formula.EvaluationCell;
 import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.FormulaParseException;
@@ -257,6 +260,46 @@ public abstract class AbstractParser {
             cells.add(c);
         }
         return cells;
+    }
+
+    protected class RangeInternal {
+
+        private final RANGE tRANGE;
+        private final String sheetName;
+
+
+        RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
+            Helper helper = new Helper(workbook);
+            int firstRow = t.getFirstRow();
+            int firstColumn = t.getFirstColumn();
+            sheetName = sheetnamne;
+            int lastRow = t.getLastRow();
+            int lastColumn = t.getLastColumn();
+
+            CELL first = new CELL(firstRow, firstColumn);
+            CELL last = new CELL(lastRow, lastColumn);
+            tRANGE = new RANGE(first, last);
+            String refs = tRANGE.toString();
+            SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+            AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
+            List<Cell> cells = helper.fromRange(area);
+
+            for(Cell cell : cells)
+                if(cell != null) {
+                    tRANGE.add(Helper.valueOf(cell));
+                }
+        }
+
+
+        String getSheetName() {
+            return sheetName;
+        }
+
+
+        RANGE getRANGE() {
+            return tRANGE;
+        }
+
     }
 
 
