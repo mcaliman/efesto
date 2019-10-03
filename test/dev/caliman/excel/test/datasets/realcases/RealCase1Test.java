@@ -26,7 +26,7 @@ import dev.caliman.excel.ToolkitCommand;
 import dev.caliman.excel.ToolkitOptions;
 import org.junit.jupiter.api.Test;
 
-public class RealCase1Test {
+class RealCase1Test {
     @Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();

@@ -140,14 +140,14 @@ public final class Parser extends AbstractParser {
                 new WhatIf(p, arrayPtg, (Ptg t) -> parseConstantArray((ArrayPtg) t)),
                 new WhatIf(p, addPtg, (Ptg t) -> parseAdd()),
                 new WhatIf(p, area3DPxg, (Ptg t) -> parseArea3DPxg((Area3DPxg) t)),
-                new WhatIf(p, areaErrPtg, (Ptg t) -> parseErrPtg(t)),
+                new WhatIf(p, areaErrPtg, this::parseErrPtg),
                 new WhatIf(p, areaPtg, (Ptg t) -> parseAreaPtg((AreaPtg) t)),
                 new WhatIf(p, attrPtg, (Ptg t) -> parseAttrPtg((AttrPtg) t)),
                 new WhatIf(p, boolPtg, t -> parseBOOL(((BoolPtg) t).getValue())),
                 new WhatIf(p, concatPtg, t -> parseConcat()),
-                new WhatIf(p, deleted3DPxg, (Ptg t) -> parseErrPtg(t)),
-                new WhatIf(p, deletedArea3DPtg, (Ptg t) -> parseErrPtg(t)),
-                new WhatIf(p, deletedRef3DPtg, (Ptg t) -> parseErrPtg(t)),
+                new WhatIf(p, deleted3DPxg, this::parseErrPtg),
+                new WhatIf(p, deletedArea3DPtg, this::parseErrPtg),
+                new WhatIf(p, deletedRef3DPtg, this::parseErrPtg),
                 new WhatIf(p, dividePtg, t -> parseDiv()),
                 new WhatIf(p, equalPtg, t -> parseEq()),
                 new WhatIf(p, errPtg, (Ptg t) -> parseERROR((ErrPtg) t)),
@@ -159,7 +159,7 @@ public final class Parser extends AbstractParser {
                 new WhatIf(p, intPtg, t -> parseINT(((IntPtg) t).getValue())),
                 new WhatIf(p, lessEqualPtg, t -> parseLeq()),
                 new WhatIf(p, lessThanPtg, t -> parseLt()),
-                new WhatIf(p, memErrPtg, (Ptg t) -> parseErrPtg(t)),
+                new WhatIf(p, memErrPtg, this::parseErrPtg),
                 new WhatIf(p, missingArgPtg, (Ptg t) -> parseMissingArguments()),
                 new WhatIf(p, multiplyPtg, t -> parseMult()),
                 new WhatIf(p, namePtg, (Ptg t) -> parseNamedRange((NamePtg) t)),
@@ -176,7 +176,7 @@ public final class Parser extends AbstractParser {
                 new WhatIf(p, unaryMinusPtg, (Ptg t) -> parseMinus()),
                 new WhatIf(p, unaryPlusPtg, (Ptg t) -> parsePlus()),
                 new WhatIf(p, unionPtg, t -> parseUnion()),
-                new WhatIf(p, unknownPtg, (Ptg t) -> parseErrPtg(t))
+                new WhatIf(p, unknownPtg, this::parseErrPtg)
         )) {
             stream.filter((WhatIf t) -> t.predicate.test(t.ptg)).forEach(t -> t.consumer.accept(t.ptg));
         } catch(Exception e) {
@@ -220,7 +220,7 @@ public final class Parser extends AbstractParser {
         int sheetIndex = getSheetIndex(sheetName);
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
-        String cellref = t.format2DRefAsString();//helper.getCellRef(t);
+        String cellref = t.format2DRefAsString();
         if(this.getSheetIndex() != sheetIndex) {
             Sheet extSheet = this.workbook.getSheet(sheetName);
             if(extSheet != null) {

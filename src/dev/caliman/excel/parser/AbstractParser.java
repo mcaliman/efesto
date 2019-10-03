@@ -54,66 +54,63 @@ public abstract class AbstractParser {
 
     private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
 
-    protected final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
-    protected final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
-    protected final Predicate<Ptg> area3DPxg = (Ptg t) -> t instanceof Area3DPxg;
-    protected final Predicate<Ptg> areaErrPtg = (Ptg t) -> t instanceof AreaErrPtg;
-    protected final Predicate<Ptg> areaPtg = (Ptg t) -> t instanceof AreaPtg;
-    protected final Predicate<Ptg> attrPtg = (Ptg t) -> t instanceof AttrPtg;
-    protected final Predicate<Ptg> boolPtg = (Ptg t) -> t instanceof BoolPtg;
-    protected final Predicate<Ptg> concatPtg = (Ptg t) -> t instanceof ConcatPtg;
-    protected final Predicate<Ptg> deleted3DPxg = (Ptg t) -> t instanceof Deleted3DPxg;
-    protected final Predicate<Ptg> deletedArea3DPtg = (Ptg t) -> t instanceof DeletedArea3DPtg;
-    protected final Predicate<Ptg> deletedRef3DPtg = (Ptg t) -> t instanceof DeletedRef3DPtg;
-    protected final Predicate<Ptg> dividePtg = (Ptg t) -> t instanceof DividePtg;
-    protected final Predicate<Ptg> equalPtg = (Ptg t) -> t instanceof EqualPtg;
-    protected final Predicate<Ptg> errPtg = (Ptg t) -> t instanceof ErrPtg;
-    protected final Predicate<Ptg> funcPtg = (Ptg t) -> t instanceof FuncPtg;
-    protected final Predicate<Ptg> funcVarPtg = (Ptg t) -> t instanceof FuncVarPtg;
-    protected final Predicate<Ptg> greaterEqualPtg = (Ptg t) -> t instanceof GreaterEqualPtg;
-    protected final Predicate<Ptg> greaterThanPtg = (Ptg t) -> t instanceof GreaterThanPtg;
-    protected final Predicate<Ptg> intersectionPtg = (Ptg t) -> t instanceof IntersectionPtg;
-    protected final Predicate<Ptg> intPtg = (Ptg t) -> t instanceof IntPtg;
-    protected final Predicate<Ptg> lessEqualPtg = (Ptg t) -> t instanceof LessEqualPtg;
-    protected final Predicate<Ptg> lessThanPtg = (Ptg t) -> t instanceof LessThanPtg;
-    protected final Predicate<Ptg> memErrPtg = (Ptg t) -> t instanceof MemErrPtg;
-    protected final Predicate<Ptg> missingArgPtg = (Ptg t) -> t instanceof MissingArgPtg;
-    protected final Predicate<Ptg> multiplyPtg = (Ptg t) -> t instanceof MultiplyPtg;
-    protected final Predicate<Ptg> namePtg = (Ptg t) -> t instanceof NamePtg;
-    protected final Predicate<Ptg> notEqualPtg = (Ptg t) -> t instanceof NotEqualPtg;
-    protected final Predicate<Ptg> numberPtg = (Ptg t) -> t instanceof NumberPtg;
-    protected final Predicate<Ptg> parenthesisPtg = (Ptg t) -> t instanceof ParenthesisPtg;
-    protected final Predicate<Ptg> percentPtg = (Ptg t) -> t instanceof PercentPtg;
-    protected final Predicate<Ptg> powerPtg = (Ptg t) -> t instanceof PowerPtg;
-    protected final Predicate<Ptg> ref3DPxg = (Ptg t) -> t instanceof Ref3DPxg;
-    protected final Predicate<Ptg> refErrorPtg = (Ptg t) -> t instanceof RefErrorPtg;
-    protected final Predicate<Ptg> refPtg = (Ptg t) -> t instanceof RefPtg;
-    protected final Predicate<Ptg> stringPtg = (Ptg t) -> t instanceof StringPtg;
-    protected final Predicate<Ptg> subtractPtg = (Ptg t) -> t instanceof SubtractPtg;
-    protected final Predicate<Ptg> unaryMinusPtg = (Ptg t) -> t instanceof UnaryMinusPtg;
-    protected final Predicate<Ptg> unaryPlusPtg = (Ptg t) -> t instanceof UnaryPlusPtg;
-    protected final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
-    protected final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
+    final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
+    final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
+    final Predicate<Ptg> area3DPxg = (Ptg t) -> t instanceof Area3DPxg;
+    final Predicate<Ptg> areaErrPtg = (Ptg t) -> t instanceof AreaErrPtg;
+    final Predicate<Ptg> areaPtg = (Ptg t) -> t instanceof AreaPtg;
+    final Predicate<Ptg> attrPtg = (Ptg t) -> t instanceof AttrPtg;
+    final Predicate<Ptg> boolPtg = (Ptg t) -> t instanceof BoolPtg;
+    final Predicate<Ptg> concatPtg = (Ptg t) -> t instanceof ConcatPtg;
+    final Predicate<Ptg> deleted3DPxg = (Ptg t) -> t instanceof Deleted3DPxg;
+    final Predicate<Ptg> deletedArea3DPtg = (Ptg t) -> t instanceof DeletedArea3DPtg;
+    final Predicate<Ptg> deletedRef3DPtg = (Ptg t) -> t instanceof DeletedRef3DPtg;
+    final Predicate<Ptg> dividePtg = (Ptg t) -> t instanceof DividePtg;
+    final Predicate<Ptg> equalPtg = (Ptg t) -> t instanceof EqualPtg;
+    final Predicate<Ptg> errPtg = (Ptg t) -> t instanceof ErrPtg;
+    final Predicate<Ptg> funcPtg = (Ptg t) -> t instanceof FuncPtg;
+    final Predicate<Ptg> funcVarPtg = (Ptg t) -> t instanceof FuncVarPtg;
+    final Predicate<Ptg> greaterEqualPtg = (Ptg t) -> t instanceof GreaterEqualPtg;
+    final Predicate<Ptg> greaterThanPtg = (Ptg t) -> t instanceof GreaterThanPtg;
+    final Predicate<Ptg> intersectionPtg = (Ptg t) -> t instanceof IntersectionPtg;
+    final Predicate<Ptg> intPtg = (Ptg t) -> t instanceof IntPtg;
+    final Predicate<Ptg> lessEqualPtg = (Ptg t) -> t instanceof LessEqualPtg;
+    final Predicate<Ptg> lessThanPtg = (Ptg t) -> t instanceof LessThanPtg;
+    final Predicate<Ptg> memErrPtg = (Ptg t) -> t instanceof MemErrPtg;
+    final Predicate<Ptg> missingArgPtg = (Ptg t) -> t instanceof MissingArgPtg;
+    final Predicate<Ptg> multiplyPtg = (Ptg t) -> t instanceof MultiplyPtg;
+    final Predicate<Ptg> namePtg = (Ptg t) -> t instanceof NamePtg;
+    final Predicate<Ptg> notEqualPtg = (Ptg t) -> t instanceof NotEqualPtg;
+    final Predicate<Ptg> numberPtg = (Ptg t) -> t instanceof NumberPtg;
+    final Predicate<Ptg> parenthesisPtg = (Ptg t) -> t instanceof ParenthesisPtg;
+    final Predicate<Ptg> percentPtg = (Ptg t) -> t instanceof PercentPtg;
+    final Predicate<Ptg> powerPtg = (Ptg t) -> t instanceof PowerPtg;
+    final Predicate<Ptg> ref3DPxg = (Ptg t) -> t instanceof Ref3DPxg;
+    final Predicate<Ptg> refErrorPtg = (Ptg t) -> t instanceof RefErrorPtg;
+    final Predicate<Ptg> refPtg = (Ptg t) -> t instanceof RefPtg;
+    final Predicate<Ptg> stringPtg = (Ptg t) -> t instanceof StringPtg;
+    final Predicate<Ptg> subtractPtg = (Ptg t) -> t instanceof SubtractPtg;
+    final Predicate<Ptg> unaryMinusPtg = (Ptg t) -> t instanceof UnaryMinusPtg;
+    final Predicate<Ptg> unaryPlusPtg = (Ptg t) -> t instanceof UnaryPlusPtg;
+    final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
+    final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
 
-    protected String filename;
-    protected File file;
+    private final String filename;
+    private final File file;
 
-    protected Workbook workbook;
-    protected Sheet sheet;
-    protected XSSFEvaluationWorkbook evaluation;
+    Workbook workbook;
+    Sheet sheet;
+    Ptg[] formulaPtgs;
+    String formulaAddress;
+    String formulaPlainText;
+    int noOfFormulas;//formula counters noOfFormulas
+    boolean singleSheet;//is single sheet or not?
+    int column;//Current Formula Column
+    int row;//Current Formula Row
+    private XSSFEvaluationWorkbook evaluation;
+    private int noOfSheets;
 
-    protected Ptg[] formulaPtgs;
-    protected String formulaAddress;
-    protected String formulaPlainText;
-    protected int noOfFormulas;//formula counters noOfFormulas
-    protected int noOfSheets;
-
-    protected boolean singleSheet;//is single sheet or not?
-
-    protected int column;//Current Formula Column
-    protected int row;//Current Formula Row
-
-    protected AbstractParser(String filename) throws IOException, InvalidFormatException {
+    AbstractParser(String filename) throws IOException, InvalidFormatException {
         this.filename = filename;
         this.file = new File(this.filename);
         this.workbook = WorkbookFactory.create(this.file);
@@ -138,7 +135,7 @@ public abstract class AbstractParser {
     protected abstract void parse(Cell cell);
 
 
-    protected void parseFormula(Cell cell) {
+    void parseFormula(Cell cell) {
         this.noOfFormulas++;
         this.column = cell.getColumnIndex();
         this.row = cell.getRowIndex();
@@ -149,7 +146,7 @@ public abstract class AbstractParser {
 
     }
 
-    protected String parseErrorText(ErrPtg t) {
+    String parseErrorText(ErrPtg t) {
         String text;
         if(t == NULL_INTERSECTION) text = "#NULL!";
         else if(t == DIV_ZERO) text = "#DIV/0!";
@@ -163,7 +160,7 @@ public abstract class AbstractParser {
     }
 
 
-    protected Ptg[] tokens() {
+    private Ptg[] tokens() {
         int sheetIndex = this.getSheetIndex();
         var sheetName = this.getSheetName();
         var evaluationSheet = this.evaluation.getSheet(sheetIndex);
@@ -177,53 +174,67 @@ public abstract class AbstractParser {
         return ptgs;
     }
 
-    protected Ptg[] getName(NamePtg t) {
+    Ptg[] getName(NamePtg t) {
         EvaluationName evaluationName = this.evaluation.getName(t);
         return evaluationName.getNameDefinition();
     }
 
-    protected String getNameText(NamePtg t) {
+    String getNameText(NamePtg t) {
         return this.evaluation.getNameText(t);
     }
-    protected String cellAddress() {
+
+    private String cellAddress() {
         return Start.cellAddress(this.row, this.column, getSheetName());
     }
-    protected int getSheetIndex() {
+
+    int getSheetIndex() {
         return this.workbook.getSheetIndex(this.sheet);
     }
-    protected int getSheetIndex(String sheetName) {
+
+    int getSheetIndex(String sheetName) {
         return this.evaluation.getSheetIndex(sheetName);
     }
-    protected int getSheetIndex(Cell cell) {
+
+    int getSheetIndex(Cell cell) {
         return this.evaluation.getSheetIndex(cell.getSheet().getSheetName());
     }
-    protected String getSheetName() {
+
+    String getSheetName() {
         return this.sheet.getSheetName();
     }
-    protected String getSheetName(Cell cell) {
+
+    String getSheetName(Cell cell) {
         return cell.getSheet().getSheetName();
     }
-    protected boolean isFormula(final Cell cell) {
+
+    boolean isFormula(final Cell cell) {
         return cell.getCellType() == CELL_TYPE_FORMULA;
     }
-    protected boolean empty(final Cell cell) {
+
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    boolean empty(final Cell cell) {
         if(cell == null) return true;
         if(cell.getCellType() == Cell.CELL_TYPE_BLANK) return true;
         return cell.getCellType() == Cell.CELL_TYPE_STRING && cell.getStringCellValue().trim().isEmpty();
     }
-    protected String getCellAddress() {
+
+    String getCellAddress() {
         return Start.cellAddress(this.row, this.column, this.getSheetName());
     }
-    protected void doesFormulaReferToDeletedCell() {
+
+    void doesFormulaReferToDeletedCell() {
         err.println(getCellAddress() + " does formula refer to deleted cell");
     }
-    protected void parseErrPtg(Ptg t) {
+
+    void parseErrPtg(Ptg t) {
         err.println(t.getClass().getName() + ": " + t.toString());
     }
-    protected void parseMissingArguments() {
+
+    void parseMissingArguments() {
         err.println("Missing ExcelFunction Arguments for cell: " + getCellAddress());
     }
-    protected Object parseCellValue(Cell cell) {
+
+    Object parseCellValue(Cell cell) {
         if(cell == null) return null;
         if(isDataType(cell))
             return cell.getDateCellValue();
@@ -252,7 +263,7 @@ public abstract class AbstractParser {
         return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
     }
 
-    protected List<Cell> fromRange(AreaReference area) {
+    private List<Cell> fromRange(AreaReference area) {
         List<Cell> cells = new ArrayList<>();
         org.apache.poi.ss.util.CellReference[] cels = area.getAllReferencedCells();
         for(org.apache.poi.ss.util.CellReference cel : cels) {
@@ -266,7 +277,7 @@ public abstract class AbstractParser {
     }
 
 
-    protected RANGE parseRange(String sheetnamne, @NotNull Area3DPxg t) {
+    RANGE parseRange(String sheetnamne, @NotNull Area3DPxg t) {
         var firstRow = t.getFirstRow();
         var firstColumn = t.getFirstColumn();
 
@@ -290,7 +301,7 @@ public abstract class AbstractParser {
     }
 
 
-    protected RANGE parseRange(@NotNull Sheet sheet, @NotNull AreaPtg t) {
+    RANGE parseRange(@NotNull Sheet sheet, @NotNull AreaPtg t) {
         var firstRow = t.getFirstRow();
         var firstColumn = t.getFirstColumn();
 
@@ -318,13 +329,13 @@ public abstract class AbstractParser {
         return fromRange(area);
     }
 
-    public class RangeInternal {
+    class RangeInternal {
 
         private final RANGE tRANGE;
         private final String sheetName;
 
 
-        public RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
+        RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
             Helper helper = new Helper(workbook);
             int firstRow = t.getFirstRow();
             int firstColumn = t.getFirstColumn();
@@ -347,19 +358,19 @@ public abstract class AbstractParser {
         }
 
 
-        public String getSheetName() {
+        String getSheetName() {
             return sheetName;
         }
 
 
-        public RANGE getRANGE() {
+        RANGE getRANGE() {
             return tRANGE;
         }
 
     }
 
 
-    protected class WhatIf {
+    class WhatIf {
 
         final Ptg ptg;
         final Predicate<Ptg> predicate;

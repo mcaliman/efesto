@@ -99,10 +99,6 @@ class Helper {
         return evalBook.getNameText(t);
     }
 
-    public String getArea(@NotNull Area3DPxg t) {
-        return t.format2DRefAsString();
-    }
-
     public String getCellRef(@NotNull Ref3DPxg t) {
         return t.format2DRefAsString();
     }
