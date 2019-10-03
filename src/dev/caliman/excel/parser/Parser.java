@@ -829,7 +829,7 @@ public final class Parser extends AbstractParser {
     }
 
     public int getCounterFormulas() {
-        return formulaCounters;
+        return noOfFormulas;
     }
 
 

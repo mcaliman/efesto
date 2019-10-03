@@ -25,6 +25,7 @@ package dev.caliman.excel.parser;
 import dev.caliman.excel.grammar.Start;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.formula.EvaluationCell;
 import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.*;
@@ -92,7 +93,8 @@ public abstract class AbstractParser {
     protected Ptg[] formulaPtgs;
     protected String formulaAddress;
     protected String formulaPlainText;
-    protected int formulaCounters;//formula counters
+    protected int noOfFormulas;//formula counters noOfFormulas
+    protected int noOfSheets;
 
     protected boolean singleSheet;//is single sheet or not?
 
@@ -111,7 +113,8 @@ public abstract class AbstractParser {
 
     public void parse() {
         this.evaluation = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.workbook);
-        this.singleSheet = this.workbook.getNumberOfSheets() == 1;
+        this.noOfSheets = this.workbook.getNumberOfSheets();
+        this.singleSheet = this.noOfSheets == 1;
         for(Sheet sheet : this.workbook) {
             this.sheet = sheet;
             for(Row row : this.sheet)
@@ -124,7 +127,7 @@ public abstract class AbstractParser {
 
 
     protected void parseFormula(Cell cell) {
-        this.formulaCounters++;
+        this.noOfFormulas++;
         this.column = cell.getColumnIndex();
         this.row = cell.getRowIndex();
         this.formulaAddress = cellAddress();
@@ -137,10 +140,11 @@ public abstract class AbstractParser {
     protected Ptg[] tokens() {
         int sheetIndex = this.getSheetIndex();
         var sheetName = this.getSheetName();
-        var evalSheet = this.evaluation.getSheet(sheetIndex);
+        var evaluationSheet = this.evaluation.getSheet(sheetIndex);
         Ptg[] ptgs = null;
         try {
-            ptgs = this.evaluation.getFormulaTokens(evalSheet.getCell(this.row, this.column));
+            EvaluationCell evaluationCell = evaluationSheet.getCell(this.row, this.column);
+            ptgs = this.evaluation.getFormulaTokens(evaluationCell);
         } catch(FormulaParseException e) {
             err.println("" + e.getMessage() + sheetName + this.row + this.column);
         }
