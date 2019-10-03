@@ -23,22 +23,12 @@
 package dev.caliman.excel.parser;
 
 
-import dev.caliman.excel.grammar.Start;
-import dev.caliman.excel.grammar.formula.reference.CELL;
-import dev.caliman.excel.grammar.formula.reference.RANGE;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.ss.SpreadsheetVersion;
-import org.apache.poi.ss.formula.EvaluationName;
-import org.apache.poi.ss.formula.FormulaParseException;
-import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.AreaReference;
-import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,14 +39,12 @@ import static org.apache.poi.ss.usermodel.Cell.*;
 
 class Helper {
 
-    private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
 
     private final Workbook workbook;
-    private final XSSFEvaluationWorkbook evalBook;
 
     public Helper(Workbook workbook) {
         this.workbook = workbook;
-        this.evalBook = XSSFEvaluationWorkbook.create((XSSFWorkbook) workbook);
+
     }
 
     @Nullable
@@ -90,30 +78,6 @@ class Helper {
     }
 
 
-    public Ptg[] getName(NamePtg t) {
-        EvaluationName evaluationName = evalBook.getName(t);
-        return evaluationName.getNameDefinition();
-    }
-
-    public String getNameText(@NotNull NamePtg t) {
-        return evalBook.getNameText(t);
-    }
-
-    public String getCellRef(@NotNull Ref3DPxg t) {
-        return t.format2DRefAsString();
-    }
-
-    public int getSheetIndex(String sheetName) {
-        return evalBook.getSheetIndex(sheetName);
-    }
-
-
-    @NotNull
-    private List<Cell> range(Sheet sheet, String refs) {
-        AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
-        return fromRange(area);
-    }
-
     @NotNull
     public List<Cell> fromRange(@NotNull AreaReference area) {
         List<Cell> cells = new ArrayList<>();
@@ -128,71 +92,5 @@ class Helper {
         return cells;
     }
 
-    @Nullable
-    public Ptg[] tokens(@NotNull Sheet sheet, int rowFormula, int colFormula) {
-        int sheetIndex = workbook.getSheetIndex(sheet);
-        var sheetName = sheet.getSheetName();
-        var evalSheet = evalBook.getSheet(sheetIndex);
-        Ptg[] ptgs = null;
-        try {
-            ptgs = evalBook.getFormulaTokens(evalSheet.getCell(rowFormula, colFormula));
-        } catch(FormulaParseException e) {
-            err("" + e.getMessage(), sheetName, rowFormula, colFormula);
-        }
-        return ptgs;
-    }
 
-
-    @NotNull
-    public RANGE getRANGE(@NotNull Sheet sheet, @NotNull AreaPtg t) {
-        var firstRow = t.getFirstRow();
-        var firstColumn = t.getFirstColumn();
-
-        var lastRow = t.getLastRow();
-        var lastColumn = t.getLastColumn();
-
-        CELL first = new CELL(firstRow, firstColumn);
-        CELL last = new CELL(lastRow, lastColumn);
-        RANGE tRANGE = new RANGE(first, last);
-
-        //String refs = tRANGE.toString();
-        String refs = tRANGE.toString();
-        List<Cell> cells = range(sheet, refs);
-        for(Cell cell : cells)
-            if(cell != null) {
-                tRANGE.add(Helper.valueOf(cell));
-            }
-        return tRANGE;
-
-    }
-
-    protected RANGE getRANGE(String sheetnamne, @NotNull Area3DPxg t) {
-        var firstRow = t.getFirstRow();
-        var firstColumn = t.getFirstColumn();
-
-        var lastRow = t.getLastRow();
-        var lastColumn = t.getLastColumn();
-
-        CELL first = new CELL(firstRow, firstColumn);
-        CELL last = new CELL(lastRow, lastColumn);
-        var tRANGE = new RANGE(first, last);
-
-        String refs = tRANGE.toString();
-
-
-        SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
-        AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
-        List<Cell> cells = fromRange(area);
-
-        for(Cell cell : cells)
-            if(cell != null) {
-                tRANGE.add(Helper.valueOf(cell));
-            }
-        return tRANGE;
-    }
-
-
-    private void err(String string, String sheetName, int row, int column) {
-        System.err.println(Start.cellAddress(row, column, sheetName) + " parse error: " + string);
-    }
 }
