@@ -295,7 +295,7 @@ public abstract class AbstractParser {
 
         for(Cell cell : cells)
             if(cell != null) {
-                tRANGE.add(Helper.valueOf(cell));
+                tRANGE.add(this.parseCellValue(cell));
             }
         return tRANGE;
     }
@@ -317,7 +317,7 @@ public abstract class AbstractParser {
         List<Cell> cells = range(sheet, refs);
         for(Cell cell : cells)
             if(cell != null) {
-                tRANGE.add(Helper.valueOf(cell));
+                tRANGE.add(parseCellValue(cell));
             }
         return tRANGE;
 
@@ -342,7 +342,7 @@ public abstract class AbstractParser {
 
         for(Cell cell : cells)
             if(cell != null) {
-                tRANGE.add(Helper.valueOf(cell));
+                tRANGE.add(parseCellValue(cell));
             }
         return tRANGE;
     }
@@ -353,45 +353,7 @@ public abstract class AbstractParser {
         return fromRange(area);
     }
 
-    class RangeInternal {
 
-        private final RANGE tRANGE;
-        private final String sheetName;
-
-
-        RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
-            Helper helper = new Helper(workbook);
-            int firstRow = t.getFirstRow();
-            int firstColumn = t.getFirstColumn();
-            sheetName = sheetnamne;
-            int lastRow = t.getLastRow();
-            int lastColumn = t.getLastColumn();
-
-            CELL first = new CELL(firstRow, firstColumn);
-            CELL last = new CELL(lastRow, lastColumn);
-            tRANGE = new RANGE(first, last);
-            String refs = tRANGE.toString();
-            SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
-            AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
-            List<Cell> cells = helper.fromRange(area);
-
-            for(Cell cell : cells)
-                if(cell != null) {
-                    tRANGE.add(Helper.valueOf(cell));
-                }
-        }
-
-
-        String getSheetName() {
-            return sheetName;
-        }
-
-
-        RANGE getRANGE() {
-            return tRANGE;
-        }
-
-    }
 
 
     class WhatIf {
