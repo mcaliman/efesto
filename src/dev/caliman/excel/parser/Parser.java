@@ -47,7 +47,6 @@ import org.apache.poi.ss.util.CellReference;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Stack;
 import java.util.stream.Stream;
 
@@ -267,23 +266,26 @@ public final class Parser extends AbstractParser {
     }
 
     private void parseNamedRange(NamePtg t) {
-        RangeInternal range = null;
+        // RangeInternal range = null;
         Ptg[] ptgs = getName(t);
         String name = getNameText(t);
+        RANGE tRANGE = null;
+        String sheetName = this.getSheetName();
         int sheetIndex = 0;
         for(Ptg ptg : ptgs) {
             if(ptg != null) {
                 if(ptg instanceof Area3DPxg) {
                     Area3DPxg area3DPxg = (Area3DPxg) ptg;
-                    range = new RangeInternal(workbook, area3DPxg.getSheetName(), area3DPxg);
+                    tRANGE = RangeInternal(workbook, area3DPxg.getSheetName(), area3DPxg);
+                    sheetName = area3DPxg.getSheetName();
                     sheetIndex = getSheetIndex(area3DPxg.getSheetName());
                 }
             }
         }
-        RANGE tRANGE = Objects.requireNonNull(range).getRANGE();
+        //RANGE tRANGE = Objects.requireNonNull(range).getRANGE();
         NamedRange elem = new NamedRange(name, tRANGE);
         elem.setSheetIndex(sheetIndex);
-        elem.setSheetName(range.getSheetName());
+        elem.setSheetName(sheetName);
         stack.push(elem);
     }
 

@@ -323,6 +323,30 @@ public abstract class AbstractParser {
 
     }
 
+
+    public RANGE RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
+        Helper helper = new Helper(workbook);
+        int firstRow = t.getFirstRow();
+        int firstColumn = t.getFirstColumn();
+
+        int lastRow = t.getLastRow();
+        int lastColumn = t.getLastColumn();
+
+        CELL first = new CELL(firstRow, firstColumn);
+        CELL last = new CELL(lastRow, lastColumn);
+        RANGE tRANGE = new RANGE(first, last);
+        String refs = tRANGE.toString();
+        SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+        AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
+        List<Cell> cells = helper.fromRange(area);
+
+        for(Cell cell : cells)
+            if(cell != null) {
+                tRANGE.add(Helper.valueOf(cell));
+            }
+        return tRANGE;
+    }
+
     @NotNull
     private List<Cell> range(Sheet sheet, String refs) {
         AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
