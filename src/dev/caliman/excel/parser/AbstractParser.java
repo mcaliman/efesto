@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.util.function.Predicate;
 
 import static java.lang.System.err;
+import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
 import static org.apache.poi.ss.usermodel.Cell.*;
 
 public abstract class AbstractParser {
@@ -137,6 +138,20 @@ public abstract class AbstractParser {
 
     }
 
+    protected String parseErrorText(ErrPtg t) {
+        String text;
+        if(t == NULL_INTERSECTION) text = "#NULL!";
+        else if(t == DIV_ZERO) text = "#DIV/0!";
+        else if(t == VALUE_INVALID) text = "#VALUE!";
+        else if(t == REF_INVALID) text = "#REF!";
+        else if(t == NAME_INVALID) text = "#NAME?";
+        else if(t == NUM_ERROR) text = "#NUM!";
+        else if(t == N_A) text = "#N/A";
+        else text = "FIXME!";
+        return text;
+    }
+
+
     protected Ptg[] tokens() {
         int sheetIndex = this.getSheetIndex();
         var sheetName = this.getSheetName();
@@ -165,17 +180,12 @@ public abstract class AbstractParser {
     protected int getSheetIndex() {
         return this.workbook.getSheetIndex(this.sheet);
     }
-
     protected int getSheetIndex(String sheetName) {
         return this.evaluation.getSheetIndex(sheetName);
     }
-
-
     protected int getSheetIndex(Cell cell) {
-        //return helper.getSheetIndex(cell.getSheet().getSheetName());
         return this.evaluation.getSheetIndex(cell.getSheet().getSheetName());
     }
-
     protected String getSheetName() {
         return this.sheet.getSheetName();
     }

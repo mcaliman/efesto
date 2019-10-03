@@ -58,7 +58,6 @@ import java.util.stream.Stream;
 
 import static java.lang.System.err;
 import static java.lang.System.out;
-import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
 
 
 /**
@@ -375,20 +374,8 @@ public final class Parser extends AbstractParser {
         }
     }
 
-    //@todo impl. DATE
     private void parseERROR(ErrPtg t) {
-        String text;
-        if(t == NULL_INTERSECTION) text = "#NULL!";
-        else if(t == DIV_ZERO) text = "#DIV/0!";
-        else if(t == VALUE_INVALID) text = "#VALUE!";
-        else if(t == REF_INVALID) text = "#REF!";
-        else if(t == NAME_INVALID) text = "#NAME?";
-        else if(t == NUM_ERROR) text = "#NUM!";
-        else if(t == N_A) text = "#N/A";
-        else text = "FIXME!";
-
-
-        // ERROR
+        String text = parseErrorText(t);
         var elem = new ERROR(text);
         elem.setColumn(column);
         elem.setRow(row);
