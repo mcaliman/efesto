@@ -191,16 +191,17 @@ public final class Parser extends AbstractParser {
         }
     }
 
-
+    /**
+     * Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
+     * external or different sheet.
+     * This is XSSF only, as it stores the sheet / workbook references in String
+     * form. The HSSF equivalent using indexes is Area3DPtg
+     */
     private void parseArea3DPxg(Area3DPxg t) {
-        // Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
-        // external or different sheet.
-        // This is XSSF only, as it stores the sheet / workbook references in String
-        // form. The HSSF equivalent using indexes is Area3DPtg
         String name = t.getSheetName();
         int index = getSheetIndex(name);
         SHEET tSHEET = new SHEET(name, index);
-        String area = helper.getArea(t);
+        String area = t.format2DRefAsString();
         parseArea3D(helper.getRANGE(name, t), tSHEET, area);
     }
 
@@ -281,7 +282,7 @@ public final class Parser extends AbstractParser {
                 if(ptg instanceof Area3DPxg) {
                     Area3DPxg area3DPxg = (Area3DPxg) ptg;
                     range = new RangeInternal(workbook, area3DPxg.getSheetName(), area3DPxg);
-                    sheetIndex = getSheetIndex(area3DPxg.getSheetName());//helper.getSheetIndex(area3DPxg.getSheetName());
+                    sheetIndex = getSheetIndex(area3DPxg.getSheetName());
                 }
             }
         }
