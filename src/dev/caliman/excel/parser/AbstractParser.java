@@ -30,11 +30,15 @@ import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -240,6 +244,19 @@ public abstract class AbstractParser {
 
     private boolean isDataType(Cell cell) {
         return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
+    }
+
+    protected List<Cell> fromRange(AreaReference area) {
+        List<Cell> cells = new ArrayList<>();
+        org.apache.poi.ss.util.CellReference[] cels = area.getAllReferencedCells();
+        for(org.apache.poi.ss.util.CellReference cel : cels) {
+            XSSFSheet ss = (XSSFSheet) workbook.getSheet(cel.getSheetName());
+            Row r = ss.getRow(cel.getRow());
+            if(r == null) continue;
+            Cell c = r.getCell(cel.getCol());
+            cells.add(c);
+        }
+        return cells;
     }
 
 
