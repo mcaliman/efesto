@@ -170,8 +170,7 @@ class Helper {
 
     }
 
-    @NotNull
-    public RANGE getRANGE(String sheetnamne, @NotNull Area3DPxg t) {
+    protected RANGE getRANGE(String sheetnamne, @NotNull Area3DPxg t) {
         var firstRow = t.getFirstRow();
         var firstColumn = t.getFirstColumn();
 

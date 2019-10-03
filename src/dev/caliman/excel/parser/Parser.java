@@ -197,7 +197,7 @@ public final class Parser extends AbstractParser {
         int index = getSheetIndex(name);
         SHEET tSHEET = new SHEET(name, index);
         String area = t.format2DRefAsString();
-        parseArea3D(helper.getRANGE(name, t), tSHEET, area);
+        parseArea3D(parseRange(name, t), tSHEET, area);
     }
 
     /**

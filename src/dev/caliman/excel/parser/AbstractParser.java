@@ -37,6 +37,7 @@ import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -260,6 +261,32 @@ public abstract class AbstractParser {
             cells.add(c);
         }
         return cells;
+    }
+
+
+    protected RANGE parseRange(String sheetnamne, @NotNull Area3DPxg t) {
+        var firstRow = t.getFirstRow();
+        var firstColumn = t.getFirstColumn();
+
+        var lastRow = t.getLastRow();
+        var lastColumn = t.getLastColumn();
+
+        CELL first = new CELL(firstRow, firstColumn);
+        CELL last = new CELL(lastRow, lastColumn);
+        var tRANGE = new RANGE(first, last);
+
+        String refs = tRANGE.toString();
+
+
+        SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+        AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
+        List<Cell> cells = fromRange(area);
+
+        for(Cell cell : cells)
+            if(cell != null) {
+                tRANGE.add(Helper.valueOf(cell));
+            }
+        return tRANGE;
     }
 
     protected class RangeInternal {
