@@ -325,7 +325,7 @@ public abstract class AbstractParser {
 
 
     public RANGE RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
-        Helper helper = new Helper(workbook);
+
         int firstRow = t.getFirstRow();
         int firstColumn = t.getFirstColumn();
 
@@ -338,7 +338,7 @@ public abstract class AbstractParser {
         String refs = tRANGE.toString();
         SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
         AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
-        List<Cell> cells = helper.fromRange(area);
+        List<Cell> cells = fromRange(area);
 
         for(Cell cell : cells)
             if(cell != null) {
