@@ -52,6 +52,8 @@ import static org.apache.poi.ss.usermodel.Cell.*;
 
 public abstract class AbstractParser {
 
+    private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+
     protected final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
     protected final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
     protected final Predicate<Ptg> area3DPxg = (Ptg t) -> t instanceof Area3DPxg;
@@ -277,8 +279,6 @@ public abstract class AbstractParser {
 
         String refs = tRANGE.toString();
 
-
-        SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
         AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
         List<Cell> cells = fromRange(area);
 
@@ -289,9 +289,8 @@ public abstract class AbstractParser {
         return tRANGE;
     }
 
-    private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
 
-    public RANGE parseRange(@NotNull Sheet sheet, @NotNull AreaPtg t) {
+    protected RANGE parseRange(@NotNull Sheet sheet, @NotNull AreaPtg t) {
         var firstRow = t.getFirstRow();
         var firstColumn = t.getFirstColumn();
 
@@ -319,13 +318,13 @@ public abstract class AbstractParser {
         return fromRange(area);
     }
 
-    protected class RangeInternal {
+    public class RangeInternal {
 
         private final RANGE tRANGE;
         private final String sheetName;
 
 
-        RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
+        public RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
             Helper helper = new Helper(workbook);
             int firstRow = t.getFirstRow();
             int firstColumn = t.getFirstColumn();
@@ -348,12 +347,12 @@ public abstract class AbstractParser {
         }
 
 
-        String getSheetName() {
+        public String getSheetName() {
             return sheetName;
         }
 
 
-        RANGE getRANGE() {
+        public RANGE getRANGE() {
             return tRANGE;
         }
 
