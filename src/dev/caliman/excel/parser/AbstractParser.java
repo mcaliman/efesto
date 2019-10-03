@@ -147,7 +147,6 @@ public abstract class AbstractParser {
         return ptgs;
     }
 
-    //TODO TEST
     protected Ptg[] getName(NamePtg t) {
         EvaluationName evaluationName = this.evaluation.getName(t);
         return evaluationName.getNameDefinition();
