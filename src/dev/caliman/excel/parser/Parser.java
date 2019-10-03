@@ -468,10 +468,11 @@ public final class Parser extends AbstractParser {
         graph.addNode(elem);
     }
 
+    /**
+     * Sheet2!A1 (Sheet + parseCELL_REFERENCE)
+     * External references: External references are normally in the form [File]Sheet!Cell
+     */
     private void parseReference(FILE tFILE, String cellref) {
-        // Used
-        // Sheet2!A1 (Sheet + parseCELL_REFERENCE)
-        // External references: External references are normally in the form [File]Sheet!Cell
         var elem = new PrefixReferenceItem(tFILE, cellref, null);
         elem.setColumn(column);
         elem.setRow(row);
@@ -838,12 +839,8 @@ public final class Parser extends AbstractParser {
     }
 
 
-    private int getSheetIndex(String xlsxSheetName) {
-        return helper.getSheetIndex(xlsxSheetName);
-    }
-
-    private int getSheetIndex(Cell xlsxCell) {
-        return helper.getSheetIndex(xlsxCell.getSheet().getSheetName());
+    private int getSheetIndex(Cell cell) {
+        return helper.getSheetIndex(cell.getSheet().getSheetName());
     }
 
 

@@ -159,50 +159,42 @@ public abstract class AbstractParser {
     protected String getNameText(NamePtg t) {
         return this.evaluation.getNameText(t);
     }
-
-
     protected String cellAddress() {
         return Start.cellAddress(this.row, this.column, getSheetName());
     }
-
     protected int getSheetIndex() {
         return this.workbook.getSheetIndex(this.sheet);
     }
 
+    protected int getSheetIndex(String sheetName) {
+        return this.evaluation.getSheetIndex(sheetName);
+    }
     protected String getSheetName() {
         return this.sheet.getSheetName();
     }
-
     protected String getSheetName(Cell cell) {
         return cell.getSheet().getSheetName();
     }
-
     protected boolean isFormula(final Cell cell) {
         return cell.getCellType() == CELL_TYPE_FORMULA;
     }
-
     protected boolean empty(final Cell cell) {
         if(cell == null) return true;
         if(cell.getCellType() == Cell.CELL_TYPE_BLANK) return true;
         return cell.getCellType() == Cell.CELL_TYPE_STRING && cell.getStringCellValue().trim().isEmpty();
     }
-
     protected String getCellAddress() {
         return Start.cellAddress(this.row, this.column, this.getSheetName());
     }
-
     protected void doesFormulaReferToDeletedCell() {
         err.println(getCellAddress() + " does formula refer to deleted cell");
     }
-
     protected void parseErrPtg(Ptg t) {
         err.println(t.getClass().getName() + ": " + t.toString());
     }
-
     protected void parseMissingArguments() {
         err.println("Missing ExcelFunction Arguments for cell: " + getCellAddress());
     }
-
     protected Object parseCellValue(Cell cell) {
         if(cell == null) return null;
         if(isDataType(cell))
