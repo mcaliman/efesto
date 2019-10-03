@@ -52,8 +52,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import static java.lang.System.err;
@@ -834,18 +832,6 @@ public final class Parser extends AbstractParser {
 
     // INNERS CLASS
 
-    protected class WhatIf {
-
-        final Ptg ptg;
-        final Predicate<Ptg> predicate;
-        final Consumer<Ptg> consumer;
-
-        WhatIf(Ptg ptg, Predicate<Ptg> predicate, Consumer<Ptg> consumer) {
-            this.ptg = ptg;
-            this.predicate = predicate;
-            this.consumer = consumer;
-        }
-    }
 
     protected class RangeInternal {
 

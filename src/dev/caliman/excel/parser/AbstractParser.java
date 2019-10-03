@@ -35,6 +35,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import static java.lang.System.err;
@@ -239,5 +240,19 @@ public abstract class AbstractParser {
 
     private boolean isDataType(Cell cell) {
         return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
+    }
+
+
+    protected class WhatIf {
+
+        final Ptg ptg;
+        final Predicate<Ptg> predicate;
+        final Consumer<Ptg> consumer;
+
+        WhatIf(Ptg ptg, Predicate<Ptg> predicate, Consumer<Ptg> consumer) {
+            this.ptg = ptg;
+            this.predicate = predicate;
+            this.consumer = consumer;
+        }
     }
 }
