@@ -191,6 +191,7 @@ public abstract class AbstractParser {
     protected void doesFormulaReferToDeletedCell() {
         err.println(getCellAddress() + " does formula refer to deleted cell");
     }
+
     protected void parseErrPtg(Ptg t) {
         err.println(t.getClass().getName() + ": " + t.toString());
     }
