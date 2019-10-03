@@ -839,9 +839,6 @@ public final class Parser extends AbstractParser {
     }
 
 
-    private int getSheetIndex(Cell cell) {
-        return helper.getSheetIndex(cell.getSheet().getSheetName());
-    }
 
 
     //</editor-fold>

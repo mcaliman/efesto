@@ -169,6 +169,13 @@ public abstract class AbstractParser {
     protected int getSheetIndex(String sheetName) {
         return this.evaluation.getSheetIndex(sheetName);
     }
+
+
+    protected int getSheetIndex(Cell cell) {
+        //return helper.getSheetIndex(cell.getSheet().getSheetName());
+        return this.evaluation.getSheetIndex(cell.getSheet().getSheetName());
+    }
+
     protected String getSheetName() {
         return this.sheet.getSheetName();
     }
