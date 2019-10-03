@@ -226,7 +226,7 @@ public final class Parser extends AbstractParser {
         int sheetIndex = getSheetIndex(sheetName);
         SHEET tSHEET = new SHEET(sheetName, sheetIndex);
         FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
-        String cellref = helper.getCellRef(t);
+        String cellref = t.format2DRefAsString();//helper.getCellRef(t);
         if(this.getSheetIndex() != sheetIndex) {
             Sheet extSheet = this.workbook.getSheet(sheetName);
             if(extSheet != null) {
