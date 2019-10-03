@@ -289,6 +289,36 @@ public abstract class AbstractParser {
         return tRANGE;
     }
 
+    private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+
+    public RANGE parseRange(@NotNull Sheet sheet, @NotNull AreaPtg t) {
+        var firstRow = t.getFirstRow();
+        var firstColumn = t.getFirstColumn();
+
+        var lastRow = t.getLastRow();
+        var lastColumn = t.getLastColumn();
+
+        CELL first = new CELL(firstRow, firstColumn);
+        CELL last = new CELL(lastRow, lastColumn);
+        RANGE tRANGE = new RANGE(first, last);
+
+        //String refs = tRANGE.toString();
+        String refs = tRANGE.toString();
+        List<Cell> cells = range(sheet, refs);
+        for(Cell cell : cells)
+            if(cell != null) {
+                tRANGE.add(Helper.valueOf(cell));
+            }
+        return tRANGE;
+
+    }
+
+    @NotNull
+    private List<Cell> range(Sheet sheet, String refs) {
+        AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
+        return fromRange(area);
+    }
+
     protected class RangeInternal {
 
         private final RANGE tRANGE;

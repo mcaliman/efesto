@@ -62,7 +62,7 @@ public final class Parser extends AbstractParser {
 
 
     private boolean verbose = false;
-    private Helper helper;
+
     private List<Cell> ext;
 
 
@@ -74,7 +74,6 @@ public final class Parser extends AbstractParser {
     public Parser(String filename) throws IOException, InvalidFormatException {
         super(filename);
         this.ext = new ArrayList<>();
-        this.helper = new Helper(this.workbook);
         this.unordered = new StartList();
         this.ordered = new StartList();
         this.graph = new StartGraph();
@@ -252,7 +251,7 @@ public final class Parser extends AbstractParser {
      * RangeReference
      */
     private void parseAreaPtg(AreaPtg t) {
-        RANGE tRANGE = helper.getRANGE(sheet, t);
+        RANGE tRANGE = parseRange(sheet, t);
         var elem = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         elem.setColumn(column);
         elem.setRow(row);
