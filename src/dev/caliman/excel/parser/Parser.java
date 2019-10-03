@@ -281,7 +281,7 @@ public final class Parser extends AbstractParser {
                 if(ptg instanceof Area3DPxg) {
                     Area3DPxg area3DPxg = (Area3DPxg) ptg;
                     range = new RangeInternal(workbook, area3DPxg.getSheetName(), area3DPxg);
-                    sheetIndex = helper.getSheetIndex(area3DPxg.getSheetName());
+                    sheetIndex = getSheetIndex(area3DPxg.getSheetName());//helper.getSheetIndex(area3DPxg.getSheetName());
                 }
             }
         }
@@ -297,7 +297,7 @@ public final class Parser extends AbstractParser {
         Object value = null;
         if(row_ != null) {
             Cell c = row_.getCell(t.getColumn());
-            value = Helper.valueOf(c);
+            value = this.parseCellValue(c);
         }
         CELL elem = new CELL(t.getRow(), t.getColumn());
         elem.setValue(value);
