@@ -96,6 +96,7 @@ public abstract class AbstractParser {
     private final String filename;
 
     Workbook workbook;
+    XSSFEvaluationWorkbook evaluation;
     Sheet sheet;
     Ptg[] formulaPtgs;
     String formulaAddress;
@@ -104,8 +105,7 @@ public abstract class AbstractParser {
     boolean singleSheet;//is single sheet or not?
     int column;//Current Formula Column
     int row;//Current Formula Row
-    private XSSFEvaluationWorkbook evaluation;
-    private int noOfSheets;
+
 
     AbstractParser(String filename) throws IOException, InvalidFormatException {
         this.filename = filename;
@@ -119,8 +119,8 @@ public abstract class AbstractParser {
 
     public void parse() {
         this.evaluation = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.workbook);
-        this.noOfSheets = this.workbook.getNumberOfSheets();
-        this.singleSheet = this.noOfSheets == 1;
+        int noOfSheets = this.workbook.getNumberOfSheets();
+        this.singleSheet = noOfSheets == 1;
         for(Sheet sheet : this.workbook) {
             this.sheet = sheet;
             for(Row row : this.sheet)
@@ -179,8 +179,7 @@ public abstract class AbstractParser {
 
     private String cellAddress(final String sheetName) {
         StringBuilder buffer = new StringBuilder();
-        if(sheetName != null)
-            buffer.append(sheetName).append("!");
+        if(sheetName != null) buffer.append(sheetName).append("!");
         buffer.append(cellAddress());
         return buffer.toString();
     }
@@ -190,20 +189,18 @@ public abstract class AbstractParser {
         return (letter + (row + 1));
     }
 
-    private String columnAsLetter(int col) {
-        int excelColNum = col + 1;
-        StringBuilder colRef = new StringBuilder(2);
-        int colRemain = excelColNum;
+    private String columnAsLetter(int column) {
+        int columnNumber = column + 1;
+        StringBuilder string = new StringBuilder(2);
+        int colRemain = columnNumber;
         while(colRemain > 0) {
             int thisPart = colRemain % 26;
-            if(thisPart == 0) {
-                thisPart = 26;
-            }
+            if(thisPart == 0) thisPart = 26;
             colRemain = (colRemain - thisPart) / 26;
             char colChar = (char) (thisPart + 64);
-            colRef.insert(0, colChar);
+            string.insert(0, colChar);
         }
-        return colRef.toString();
+        return string.toString();
     }
 
     String getCellAddress() {
@@ -237,7 +234,8 @@ public abstract class AbstractParser {
 
     boolean empty(final Cell cell) {
         if(cell == null || cell.getCellType() == CELL_TYPE_BLANK) return true;
-        return cell.getCellType() == CELL_TYPE_STRING && cell.getStringCellValue().trim().isEmpty();
+        return cell.getCellType() == CELL_TYPE_STRING &&
+                cell.getStringCellValue().trim().isEmpty();
     }
 
     void doesFormulaReferToDeletedCell() {
@@ -254,8 +252,7 @@ public abstract class AbstractParser {
 
     Object parseCellValue(Cell cell) {
         if(cell == null) return null;
-        if(isDataType(cell))
-            return cell.getDateCellValue();
+        if(isDataType(cell)) return cell.getDateCellValue();
         switch(cell.getCellType()) {
             case CELL_TYPE_STRING:
             case CELL_TYPE_BLANK:
@@ -281,19 +278,26 @@ public abstract class AbstractParser {
         return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
     }
 
-    private List<Cell> fromRange(AreaReference area) {
-        List<Cell> cells = new ArrayList<>();
-        CellReference[] cels = area.getAllReferencedCells();
-        for(CellReference cel : cels) {
-            Sheet sheet = this.workbook.getSheet(cel.getSheetName());
-            Row r = sheet.getRow(cel.getRow());
-            if(r == null) continue;
-            Cell c = r.getCell(cel.getCol());
-            cells.add(c);
+    private List<Cell> fromRange(AreaReference ar) {
+        List<Cell> list = new ArrayList<>();
+        CellReference[] allReferencedCells = ar.getAllReferencedCells();
+        for(CellReference cell : allReferencedCells) {
+            Sheet sheet = this.workbook.getSheet(cell.getSheetName());
+            Row row = getRow(sheet, cell);
+            if(row == null) continue;
+            Cell c = getCell(row, cell);
+            list.add(c);
         }
-        return cells;
+        return list;
     }
 
+    Row getRow(Sheet sheet, CellReference cell) {
+        return sheet.getRow(cell.getRow());
+    }
+
+    Cell getCell(Row row, CellReference cell) {
+        return row.getCell(cell.getCol());
+    }
 
     RANGE parseRange(String sheetnamne, Area3DPxg t) {
         var firstRow = t.getFirstRow();
