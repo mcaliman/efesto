@@ -131,9 +131,7 @@ public abstract class AbstractParser {
         }
     }
 
-
     protected abstract void parse(Cell cell);
-
 
     void parseFormula(Cell cell) {
         this.noOfFormulas++;
@@ -158,7 +156,6 @@ public abstract class AbstractParser {
         else text = "FIXME!";
         return text;
     }
-
 
     private Ptg[] tokens() {
         int sheetIndex = this.getSheetIndex();
@@ -213,8 +210,7 @@ public abstract class AbstractParser {
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     boolean empty(final Cell cell) {
-        if(cell == null) return true;
-        if(cell.getCellType() == Cell.CELL_TYPE_BLANK) return true;
+        if(cell == null || cell.getCellType() == Cell.CELL_TYPE_BLANK) return true;
         return cell.getCellType() == Cell.CELL_TYPE_STRING && cell.getStringCellValue().trim().isEmpty();
     }
 
@@ -312,7 +308,6 @@ public abstract class AbstractParser {
         CELL last = new CELL(lastRow, lastColumn);
         RANGE tRANGE = new RANGE(first, last);
 
-        //String refs = tRANGE.toString();
         String refs = tRANGE.toString();
         List<Cell> cells = range(sheet, refs);
         for(Cell cell : cells)
@@ -324,7 +319,7 @@ public abstract class AbstractParser {
     }
 
 
-    public RANGE RangeInternal(Workbook workbook, String sheetnamne, Area3DPxg t) {
+    public RANGE RangeInternal(String sheetnamne, Area3DPxg t) {
 
         int firstRow = t.getFirstRow();
         int firstColumn = t.getFirstColumn();
@@ -352,8 +347,6 @@ public abstract class AbstractParser {
         AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
         return fromRange(area);
     }
-
-
 
 
     class WhatIf {
