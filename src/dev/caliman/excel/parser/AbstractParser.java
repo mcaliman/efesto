@@ -281,14 +281,19 @@ public abstract class AbstractParser {
     private List<Cell> fromRange(AreaReference ar) {
         List<Cell> list = new ArrayList<>();
         CellReference[] allReferencedCells = ar.getAllReferencedCells();
-        for(CellReference referencedCells : allReferencedCells) {
-            Sheet sheet = getSheet(referencedCells);
-            Row row = getRow(sheet, referencedCells);
+        for(CellReference referencedCell : allReferencedCells) {
+            Row row = getRow(referencedCell);
             if(row == null) continue;
-            Cell cell = getCell(row, referencedCells);
+            Cell cell = getCell(row, referencedCell);
             list.add(cell);
         }
         return list;
+    }
+
+
+    Row getRow(CellReference cell) {
+        Sheet sheet = getSheet(cell);
+        return getRow(sheet, cell);
     }
 
     Sheet getSheet(CellReference cell) {
