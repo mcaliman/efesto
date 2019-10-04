@@ -36,7 +36,6 @@ import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -178,7 +177,7 @@ public abstract class AbstractParser {
         return this.evaluation.getNameText(t);
     }
 
-    private String cellAddress(final int row, final int column, @Nullable final String sheetName) {
+    private String cellAddress(final String sheetName) {
         StringBuilder buffer = new StringBuilder();
         if(sheetName != null)
             buffer.append(sheetName).append("!");
@@ -208,7 +207,7 @@ public abstract class AbstractParser {
     }
 
     String getCellAddress() {
-        return cellAddress(this.row, this.column, this.getSheetName());
+        return cellAddress(this.getSheetName());
     }
 
 
