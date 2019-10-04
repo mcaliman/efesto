@@ -40,9 +40,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import static java.lang.System.err;
 import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
@@ -281,12 +283,16 @@ public abstract class AbstractParser {
     private List<Cell> fromRange(AreaReference ar) {
         List<Cell> list = new ArrayList<>();
         CellReference[] allReferencedCells = ar.getAllReferencedCells();
-        for(CellReference referencedCell : allReferencedCells) {
-            Row row = getRow(referencedCell);
-            if(row == null) continue;
-            Cell cell = getCell(row, referencedCell);
-            list.add(cell);
-        }
+        Stream<CellReference> stream = Arrays.stream(allReferencedCells);
+        stream.forEachOrdered(
+                referencedCell -> {
+                    Row row = getRow(referencedCell);
+                    if(row != null) {
+                        Cell cell = getCell(row, referencedCell);
+                        list.add(cell);
+                    }
+                }
+        );
         return list;
     }
 
