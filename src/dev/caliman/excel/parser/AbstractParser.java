@@ -178,7 +178,7 @@ public abstract class AbstractParser {
         return this.evaluation.getNameText(t);
     }
 
-    private static String cellAddress(final int row, final int column, @Nullable final String sheetName) {
+    private String cellAddress(final int row, final int column, @Nullable final String sheetName) {
         StringBuilder buffer = new StringBuilder();
         if(sheetName != null)
             buffer.append(sheetName).append("!");
@@ -186,12 +186,12 @@ public abstract class AbstractParser {
         return buffer.toString();
     }
 
-    private static String cellAddress(final int row, final int column) {
+    private String cellAddress(final int row, final int column) {
         String letter = columnAsLetter(column);
         return (letter + (row + 1));
     }
 
-    private static String columnAsLetter(int col) {
+    private String columnAsLetter(int col) {
         int excelColNum = col + 1;
         StringBuilder colRef = new StringBuilder(2);
         int colRemain = excelColNum;
