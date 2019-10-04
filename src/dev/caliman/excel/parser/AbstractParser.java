@@ -270,17 +270,19 @@ public abstract class AbstractParser {
             case CELL_TYPE_BOOLEAN:
                 return cell.getBooleanCellValue();
             case CELL_TYPE_FORMULA:
-                if(cell.toString() != null && cell.toString().equalsIgnoreCase("TRUE")) {
-                    return true;
-                }
-                if(cell.toString() != null && cell.toString().equalsIgnoreCase("FALSE")) {
-                    return false;
-                }
+                if(cellToStringEqualsTo(cell, "TRUE")) return true;
+                else if(cellToStringEqualsTo(cell, "FALSE")) return true;
                 return cell.toString();
             default:
                 return null;
         }
     }
+
+    boolean cellToStringEqualsTo(Cell cell, String text) {
+        return cell.toString() != null && cell.toString().equalsIgnoreCase(text);
+
+    }
+
 
     private boolean isDataType(Cell cell) {
         return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
