@@ -157,15 +157,15 @@ public abstract class AbstractParser {
     }
 
     private Ptg[] tokens() {
-        int sheetIndex = this.getSheetIndex();
-        var sheetName = this.getSheetName();
-        var evaluationSheet = this.evaluation.getSheet(sheetIndex);
+        int index = this.getSheetIndex();
+        var name = this.getSheetName();
+        var evaluationSheet = this.evaluation.getSheet(index);
         Ptg[] ptgs = null;
         try {
             EvaluationCell evaluationCell = evaluationSheet.getCell(this.row, this.column);
             ptgs = this.evaluation.getFormulaTokens(evaluationCell);
         } catch(FormulaParseException e) {
-            err.println("" + e.getMessage() + sheetName + this.row + this.column);
+            err.println("" + e.getMessage() + name + this.row + this.column);
         }
         return ptgs;
     }
@@ -183,6 +183,9 @@ public abstract class AbstractParser {
         return Start.cellAddress(this.row, this.column, getSheetName());
     }
 
+    String getCellAddress() {
+        return Start.cellAddress(this.row, this.column, this.getSheetName());
+    }
     int getSheetIndex() {
         return this.workbook.getSheetIndex(this.sheet);
     }
@@ -207,14 +210,9 @@ public abstract class AbstractParser {
         return cell.getCellType() == CELL_TYPE_FORMULA;
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     boolean empty(final Cell cell) {
         if(cell == null || cell.getCellType() == CELL_TYPE_BLANK) return true;
         return cell.getCellType() == CELL_TYPE_STRING && cell.getStringCellValue().trim().isEmpty();
-    }
-
-    String getCellAddress() {
-        return Start.cellAddress(this.row, this.column, this.getSheetName());
     }
 
     void doesFormulaReferToDeletedCell() {
