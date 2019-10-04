@@ -136,7 +136,7 @@ public abstract class AbstractParser {
         this.noOfFormulas++;
         this.column = cell.getColumnIndex();
         this.row = cell.getRowIndex();
-        this.formulaAddress = cellAddress();
+        this.formulaAddress = getCellAddress();
         this.formulaPlainText = cell.getCellFormula();
         System.out.println("Formula Plain Text: " + this.formulaAddress);
         this.formulaPtgs = tokens();
@@ -177,10 +177,6 @@ public abstract class AbstractParser {
 
     String getNameText(NamePtg t) {
         return this.evaluation.getNameText(t);
-    }
-
-    private String cellAddress() {
-        return Start.cellAddress(this.row, this.column, getSheetName());
     }
 
     String getCellAddress() {
