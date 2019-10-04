@@ -51,7 +51,7 @@ import static org.apache.poi.ss.usermodel.Cell.*;
 
 public abstract class AbstractParser {
 
-    final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+    private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
 
     final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
     final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
@@ -95,7 +95,6 @@ public abstract class AbstractParser {
     final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
 
     private final String filename;
-    private final File file;
 
     Workbook workbook;
     Sheet sheet;
@@ -111,8 +110,8 @@ public abstract class AbstractParser {
 
     AbstractParser(String filename) throws IOException, InvalidFormatException {
         this.filename = filename;
-        this.file = new File(this.filename);
-        this.workbook = WorkbookFactory.create(this.file);
+        File file = new File(this.filename);
+        this.workbook = WorkbookFactory.create(file);
     }
 
     public String getFilename() {
@@ -179,7 +178,7 @@ public abstract class AbstractParser {
         return this.evaluation.getNameText(t);
     }
 
-    public static String cellAddress(final int row, final int column, @Nullable final String sheetName) {
+    private static String cellAddress(final int row, final int column, @Nullable final String sheetName) {
         StringBuilder buffer = new StringBuilder();
         if(sheetName != null)
             buffer.append(sheetName).append("!");
@@ -187,12 +186,12 @@ public abstract class AbstractParser {
         return buffer.toString();
     }
 
-    public static String cellAddress(final int row, final int column) {
+    private static String cellAddress(final int row, final int column) {
         String letter = columnAsLetter(column);
         return (letter + (row + 1));
     }
 
-    public static String columnAsLetter(int col) {
+    private static String columnAsLetter(int col) {
         int excelColNum = col + 1;
         StringBuilder colRef = new StringBuilder(2);
         int colRemain = excelColNum;
@@ -343,7 +342,7 @@ public abstract class AbstractParser {
     }
 
 
-    public RANGE RangeInternal(String sheetnamne, Area3DPxg t) {
+    RANGE RangeInternal(String sheetnamne, Area3DPxg t) {
 
         int firstRow = t.getFirstRow();
         int firstColumn = t.getFirstColumn();

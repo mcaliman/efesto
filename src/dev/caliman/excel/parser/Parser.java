@@ -98,7 +98,7 @@ public final class Parser extends AbstractParser {
     }
 
 
-    protected void parseFormula(Cell cell) {
+    void parseFormula(Cell cell) {
         super.parseFormula(cell);
         if(this.formulaPtgs == null) {
             err("ptgs empty or null for address " + this.formulaAddress);
