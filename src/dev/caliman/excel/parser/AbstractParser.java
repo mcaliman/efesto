@@ -288,6 +288,12 @@ public abstract class AbstractParser {
         return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
     }
 
+    private List<Cell> fromRange(String reference) {
+        AreaReference area = new AreaReference(reference, SPREADSHEET_VERSION);
+        List<Cell> cells = fromRange(area);
+        return cells;
+    }
+
     private List<Cell> fromRange(AreaReference ar) {
         CellReference[] allReferencedCells = ar.getAllReferencedCells();
         return fromRange(allReferencedCells);
@@ -330,26 +336,24 @@ public abstract class AbstractParser {
     }
 
     RANGE parseRange(String sheetnamne, Area3DPxg t) {
-        var firstRow = t.getFirstRow();
-        var firstColumn = t.getFirstColumn();
+        var rangeFirstRow = t.getFirstRow();
+        var rangeFirstColumn = t.getFirstColumn();
+        var rangeLastRow = t.getLastRow();
+        var rangeLastColumn = t.getLastColumn();
 
-        var lastRow = t.getLastRow();
-        var lastColumn = t.getLastColumn();
+        CELL cellFirst = new CELL(rangeFirstRow, rangeFirstColumn);
+        CELL cellLast = new CELL(rangeLastRow, rangeLastColumn);
+        var range = new RANGE(cellFirst, cellLast);
 
-        CELL first = new CELL(firstRow, firstColumn);
-        CELL last = new CELL(lastRow, lastColumn);
-        var tRANGE = new RANGE(first, last);
+        String reference = range.toString();
 
-        String refs = tRANGE.toString();
+        //AreaReference area = new AreaReference(sheetnamne + "!" + reference, SPREADSHEET_VERSION);
+        //List<Cell> cells = fromRange(area);
 
-        AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
-        List<Cell> cells = fromRange(area);
+        List<Cell> cells = fromRange(sheetnamne + "!" + reference);
 
-        for(Cell cell : cells)
-            if(cell != null) {
-                tRANGE.add(this.parseCellValue(cell));
-            }
-        return tRANGE;
+        for(Cell cell : cells) if(cell != null) range.add(this.parseCellValue(cell));
+        return range;
     }
 
 
