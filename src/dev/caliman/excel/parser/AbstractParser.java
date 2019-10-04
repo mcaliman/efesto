@@ -346,7 +346,6 @@ public abstract class AbstractParser {
         var range = new RANGE(cellFirst, cellLast);
 
         String reference = range.toString();
-
         List<Cell> cells = fromRange(sheetnamne + "!" + reference);
 
         for(Cell cell : cells) if(cell != null) range.add(this.parseCellValue(cell));
