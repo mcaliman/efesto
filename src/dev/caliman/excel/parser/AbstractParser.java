@@ -98,7 +98,7 @@ public abstract class AbstractParser {
     private final String filename;
 
     Workbook workbook;
-    XSSFEvaluationWorkbook evaluation;
+    private XSSFEvaluationWorkbook evaluation;
     Sheet sheet;
     Ptg[] formulaPtgs;
     String formulaAddress;
@@ -304,20 +304,20 @@ public abstract class AbstractParser {
         return list;
     }
 
-    Row getRow(CellReference cell) {
+    private Row getRow(CellReference cell) {
         Sheet sheet = getSheet(cell);
         return getRow(sheet, cell);
     }
 
-    Sheet getSheet(CellReference cell) {
+    private Sheet getSheet(CellReference cell) {
         return this.workbook.getSheet(cell.getSheetName());
     }
 
-    Row getRow(Sheet sheet, CellReference cell) {
+    private Row getRow(Sheet sheet, CellReference cell) {
         return sheet.getRow(cell.getRow());
     }
 
-    Cell getCell(Row row, CellReference cell) {
+    private Cell getCell(Row row, CellReference cell) {
         return row.getCell(cell.getCol());
     }
 
