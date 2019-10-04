@@ -286,8 +286,12 @@ public abstract class AbstractParser {
     }
 
     private List<Cell> fromRange(CellReference[] allReferencedCells) {
-        List<Cell> list = new ArrayList<>();
         Stream<CellReference> stream = Arrays.stream(allReferencedCells);
+        return fromRange(stream);
+    }
+
+    private List<Cell> fromRange(Stream<CellReference> stream) {
+        List<Cell> list = new ArrayList<>();
         stream.forEach(
                 referencedCell -> {
                     Row row = getRow(referencedCell);
@@ -299,7 +303,6 @@ public abstract class AbstractParser {
         );
         return list;
     }
-
 
     Row getRow(CellReference cell) {
         Sheet sheet = getSheet(cell);
