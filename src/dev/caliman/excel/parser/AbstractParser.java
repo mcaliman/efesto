@@ -281,10 +281,13 @@ public abstract class AbstractParser {
     }
 
     private List<Cell> fromRange(AreaReference ar) {
-        List<Cell> list = new ArrayList<>();
         CellReference[] allReferencedCells = ar.getAllReferencedCells();
+        return fromRange(allReferencedCells);
+    }
+
+    private List<Cell> fromRange(CellReference[] allReferencedCells) {
+        List<Cell> list = new ArrayList<>();
         Stream<CellReference> stream = Arrays.stream(allReferencedCells);
-        //stream.forEachOrdered(
         stream.forEach(
                 referencedCell -> {
                     Row row = getRow(referencedCell);
