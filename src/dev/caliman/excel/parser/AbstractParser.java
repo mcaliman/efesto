@@ -278,7 +278,7 @@ public abstract class AbstractParser {
         }
     }
 
-    boolean cellToStringEqualsTo(Cell cell, String text) {
+    private boolean cellToStringEqualsTo(Cell cell, String text) {
         return cell.toString() != null && cell.toString().equalsIgnoreCase(text);
 
     }
