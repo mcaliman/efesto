@@ -34,10 +34,10 @@ import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.ptg.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.AreaReference;
+import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,7 +52,7 @@ import static org.apache.poi.ss.usermodel.Cell.*;
 
 public abstract class AbstractParser {
 
-    private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+    final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
 
     final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
     final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
@@ -193,7 +193,7 @@ public abstract class AbstractParser {
     }
 
     int getSheetIndex(Cell cell) {
-        return this.evaluation.getSheetIndex(cell.getSheet().getSheetName());
+        return getSheetIndex(cell.getSheet().getSheetName());
     }
 
     String getSheetName() {
@@ -210,8 +210,8 @@ public abstract class AbstractParser {
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     boolean empty(final Cell cell) {
-        if(cell == null || cell.getCellType() == Cell.CELL_TYPE_BLANK) return true;
-        return cell.getCellType() == Cell.CELL_TYPE_STRING && cell.getStringCellValue().trim().isEmpty();
+        if(cell == null || cell.getCellType() == CELL_TYPE_BLANK) return true;
+        return cell.getCellType() == CELL_TYPE_STRING && cell.getStringCellValue().trim().isEmpty();
     }
 
     String getCellAddress() {
@@ -261,8 +261,9 @@ public abstract class AbstractParser {
 
     private List<Cell> fromRange(AreaReference area) {
         List<Cell> cells = new ArrayList<>();
-        org.apache.poi.ss.util.CellReference[] cels = area.getAllReferencedCells();
-        for(org.apache.poi.ss.util.CellReference cel : cels) {
+        /*org.apache.poi.ss.util.*/
+        CellReference[] cels = area.getAllReferencedCells();
+        for(/*org.apache.poi.ss.util.*/CellReference cel : cels) {
             XSSFSheet ss = (XSSFSheet) workbook.getSheet(cel.getSheetName());
             Row r = ss.getRow(cel.getRow());
             if(r == null) continue;
@@ -273,7 +274,7 @@ public abstract class AbstractParser {
     }
 
 
-    RANGE parseRange(String sheetnamne, @NotNull Area3DPxg t) {
+    RANGE parseRange(String sheetnamne, Area3DPxg t) {
         var firstRow = t.getFirstRow();
         var firstColumn = t.getFirstColumn();
 
@@ -297,7 +298,7 @@ public abstract class AbstractParser {
     }
 
 
-    RANGE parseRange(@NotNull Sheet sheet, @NotNull AreaPtg t) {
+    RANGE parseRange(Sheet sheet, AreaPtg t) {
         var firstRow = t.getFirstRow();
         var firstColumn = t.getFirstColumn();
 
@@ -335,14 +336,10 @@ public abstract class AbstractParser {
         AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
         List<Cell> cells = fromRange(area);
 
-        for(Cell cell : cells)
-            if(cell != null) {
-                tRANGE.add(parseCellValue(cell));
-            }
+        for(Cell cell : cells) if(cell != null) tRANGE.add(parseCellValue(cell));
         return tRANGE;
     }
 
-    @NotNull
     private List<Cell> range(Sheet sheet, String refs) {
         AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
         return fromRange(area);
