@@ -187,8 +187,8 @@ public abstract class AbstractParser {
     }
 
     private String cellAddress() {
-        String letter = columnAsLetter(column);
-        return (letter + (row + 1));
+        String letter = columnAsLetter(this.column);
+        return (letter + (this.row + 1));
     }
 
     private String columnAsLetter(int column) {
@@ -235,9 +235,15 @@ public abstract class AbstractParser {
     }
 
     boolean empty(final Cell cell) {
-        if(cell == null || cell.getCellType() == CELL_TYPE_BLANK) return true;
-        return cell.getCellType() == CELL_TYPE_STRING &&
-                cell.getStringCellValue().trim().isEmpty();
+        return emptyCell(cell) && emptyTextCell(cell);
+    }
+
+    private boolean emptyCell(Cell cell) {
+        return cell == null || cell.getCellType() == CELL_TYPE_BLANK;
+    }
+
+    private boolean emptyTextCell(Cell cell) {
+        return cell.getCellType() == CELL_TYPE_STRING && cell.getStringCellValue().trim().isEmpty();
     }
 
     void doesFormulaReferToDeletedCell() {
