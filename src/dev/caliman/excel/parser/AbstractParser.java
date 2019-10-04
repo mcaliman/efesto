@@ -36,7 +36,6 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
@@ -261,11 +260,10 @@ public abstract class AbstractParser {
 
     private List<Cell> fromRange(AreaReference area) {
         List<Cell> cells = new ArrayList<>();
-        /*org.apache.poi.ss.util.*/
         CellReference[] cels = area.getAllReferencedCells();
-        for(/*org.apache.poi.ss.util.*/CellReference cel : cels) {
-            XSSFSheet ss = (XSSFSheet) workbook.getSheet(cel.getSheetName());
-            Row r = ss.getRow(cel.getRow());
+        for(CellReference cel : cels) {
+            Sheet sheet = this.workbook.getSheet(cel.getSheetName());
+            Row r = sheet.getRow(cel.getRow());
             if(r == null) continue;
             Cell c = r.getCell(cel.getCol());
             cells.add(c);
