@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.parser;
 
-import dev.caliman.excel.grammar.Start;
 import dev.caliman.excel.grammar.formula.reference.CELL;
 import dev.caliman.excel.grammar.formula.reference.RANGE;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -37,6 +36,7 @@ import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFEvaluationWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -179,9 +179,40 @@ public abstract class AbstractParser {
         return this.evaluation.getNameText(t);
     }
 
-    String getCellAddress() {
-        return Start.cellAddress(this.row, this.column, this.getSheetName());
+    public static String cellAddress(final int row, final int column, @Nullable final String sheetName) {
+        StringBuilder buffer = new StringBuilder();
+        if(sheetName != null)
+            buffer.append(sheetName).append("!");
+        buffer.append(cellAddress(row, column));
+        return buffer.toString();
     }
+
+    public static String cellAddress(final int row, final int column) {
+        String letter = columnAsLetter(column);
+        return (letter + (row + 1));
+    }
+
+    public static String columnAsLetter(int col) {
+        int excelColNum = col + 1;
+        StringBuilder colRef = new StringBuilder(2);
+        int colRemain = excelColNum;
+        while(colRemain > 0) {
+            int thisPart = colRemain % 26;
+            if(thisPart == 0) {
+                thisPart = 26;
+            }
+            colRemain = (colRemain - thisPart) / 26;
+            char colChar = (char) (thisPart + 64);
+            colRef.insert(0, colChar);
+        }
+        return colRef.toString();
+    }
+
+    String getCellAddress() {
+        return cellAddress(this.row, this.column, this.getSheetName());
+    }
+
+
     int getSheetIndex() {
         return this.workbook.getSheetIndex(this.sheet);
     }
