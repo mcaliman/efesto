@@ -347,9 +347,6 @@ public abstract class AbstractParser {
 
         String reference = range.toString();
 
-        //AreaReference area = new AreaReference(sheetnamne + "!" + reference, SPREADSHEET_VERSION);
-        //List<Cell> cells = fromRange(area);
-
         List<Cell> cells = fromRange(sheetnamne + "!" + reference);
 
         for(Cell cell : cells) if(cell != null) range.add(this.parseCellValue(cell));
