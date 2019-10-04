@@ -181,11 +181,11 @@ public abstract class AbstractParser {
         StringBuilder buffer = new StringBuilder();
         if(sheetName != null)
             buffer.append(sheetName).append("!");
-        buffer.append(cellAddress(row, column));
+        buffer.append(cellAddress());
         return buffer.toString();
     }
 
-    private String cellAddress(final int row, final int column) {
+    private String cellAddress() {
         String letter = columnAsLetter(column);
         return (letter + (row + 1));
     }
