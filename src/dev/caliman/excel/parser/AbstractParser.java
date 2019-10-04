@@ -284,7 +284,8 @@ public abstract class AbstractParser {
         List<Cell> list = new ArrayList<>();
         CellReference[] allReferencedCells = ar.getAllReferencedCells();
         Stream<CellReference> stream = Arrays.stream(allReferencedCells);
-        stream.forEachOrdered(
+        //stream.forEachOrdered(
+        stream.forEach(
                 referencedCell -> {
                     Row row = getRow(referencedCell);
                     if(row != null) {
