@@ -354,15 +354,14 @@ public abstract class AbstractParser {
 
 
     RANGE parseRange(Sheet sheet, AreaPtg t) {
-        var firstRow = t.getFirstRow();
-        var firstColumn = t.getFirstColumn();
+        var rangeFirstRow = t.getFirstRow();
+        var rangeFirstColumn = t.getFirstColumn();
+        var rangeLastRow = t.getLastRow();
+        var rangeLastColumn = t.getLastColumn();
 
-        var lastRow = t.getLastRow();
-        var lastColumn = t.getLastColumn();
-
-        CELL first = new CELL(firstRow, firstColumn);
-        CELL last = new CELL(lastRow, lastColumn);
-        RANGE tRANGE = new RANGE(first, last);
+        CELL cellFirst = new CELL(rangeFirstRow, rangeFirstColumn);
+        CELL cellLast = new CELL(rangeLastRow, rangeLastColumn);
+        RANGE tRANGE = new RANGE(cellFirst, cellLast);
 
         String refs = tRANGE.toString();
         List<Cell> cells = range(sheet, refs);
