@@ -276,7 +276,7 @@ public final class Parser extends AbstractParser {
             if(ptg != null) {
                 if(ptg instanceof Area3DPxg) {
                     Area3DPxg area3DPxg = (Area3DPxg) ptg;
-                    tRANGE = RangeInternal(area3DPxg.getSheetName(), area3DPxg);
+                    tRANGE = parseRange(area3DPxg.getSheetName(), area3DPxg);//RangeInternal(area3DPxg.getSheetName(), area3DPxg);
                     sheetName = area3DPxg.getSheetName();
                     sheetIndex = getSheetIndex(area3DPxg.getSheetName());
                 }

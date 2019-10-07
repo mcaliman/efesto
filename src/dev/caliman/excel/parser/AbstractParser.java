@@ -354,6 +354,27 @@ public abstract class AbstractParser {
 
 
 
+    /*RANGE RangeInternal(String sheetnamne, Area3DPxg t) {
+
+        int rangeFirstRow = t.getFirstRow();
+        int rangeFirstColumn = t.getFirstColumn();
+
+        int rangeLastRow = t.getLastRow();
+        int rangeLastColumn = t.getLastColumn();
+
+        RANGE range = emptyRange(rangeFirstRow, rangeFirstColumn, rangeLastRow, rangeLastColumn);
+
+        String reference = range.toString();
+        SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
+        AreaReference area = new AreaReference(sheetnamne + "!" + reference, SPREADSHEET_VERSION);
+        List<Cell> cells = list(area);
+
+        Stream<Cell> stream = cells.stream().parallel();
+        stream.filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
+        return range;
+    }*/
+
+
     protected RANGE parseRange(Sheet sheet, AreaPtg t) {
         RANGE range = null;
         var rangeFirstRow = t.getFirstRow();
@@ -377,30 +398,6 @@ public abstract class AbstractParser {
         CELL cellFirst = new CELL(rangeFirstRow, rangeFirstColumn);
         CELL cellLast = new CELL(rangeLastRow, rangeLastColumn);
         range = new RANGE(cellFirst, cellLast);
-        return range;
-    }
-
-
-    RANGE RangeInternal(String sheetnamne, Area3DPxg t) {
-
-        int rangeFirstRow = t.getFirstRow();
-        int rangeFirstColumn = t.getFirstColumn();
-
-        int rangeLastRow = t.getLastRow();
-        int rangeLastColumn = t.getLastColumn();
-
-        //CELL first = new CELL(rangeFirstRow, rangeFirstColumn);
-        //CELL last = new CELL(rangeLastRow, rangeLastColumn);
-        //RANGE tRANGE = new RANGE(first, last);
-        RANGE range = emptyRange(rangeFirstRow, rangeFirstColumn, rangeLastRow, rangeLastColumn);
-
-        String reference = range.toString();
-        SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
-        AreaReference area = new AreaReference(sheetnamne + "!" + reference, SPREADSHEET_VERSION);
-        List<Cell> cells = list(area);
-
-        Stream<Cell> stream = cells.stream().parallel();
-        stream.filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
         return range;
     }
 
