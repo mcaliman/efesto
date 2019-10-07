@@ -42,6 +42,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -335,7 +336,7 @@ public abstract class AbstractParser {
         return row.getCell(cell.getCol());
     }
 
-    RANGE parseRange(String sheetnamne, Area3DPxg t) {
+    protected RANGE parseRange(String sheetnamne, Area3DPxg t) {
         var rangeFirstRow = t.getFirstRow();
         var rangeFirstColumn = t.getFirstColumn();
         var rangeLastRow = t.getLastRow();
@@ -348,12 +349,12 @@ public abstract class AbstractParser {
         String reference = range.toString();
         List<Cell> cells = fromRange(sheetnamne + "!" + reference);
 
-        for(Cell cell : cells) if(cell != null) range.add(this.parseCellValue(cell));
+        cells.stream().filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
         return range;
     }
 
 
-    RANGE parseRange(Sheet sheet, AreaPtg t) {
+    protected RANGE parseRange(Sheet sheet, AreaPtg t) {
         var rangeFirstRow = t.getFirstRow();
         var rangeFirstColumn = t.getFirstColumn();
         var rangeLastRow = t.getLastRow();
@@ -361,15 +362,13 @@ public abstract class AbstractParser {
 
         CELL cellFirst = new CELL(rangeFirstRow, rangeFirstColumn);
         CELL cellLast = new CELL(rangeLastRow, rangeLastColumn);
-        RANGE tRANGE = new RANGE(cellFirst, cellLast);
+        RANGE range = new RANGE(cellFirst, cellLast);
 
-        String refs = tRANGE.toString();
-        List<Cell> cells = range(sheet, refs);
-        for(Cell cell : cells)
-            if(cell != null) {
-                tRANGE.add(parseCellValue(cell));
-            }
-        return tRANGE;
+        String reference = range.toString();
+
+        List<Cell> cells = range(sheet, reference);
+        for(Cell cell : cells) if(cell != null) range.add(parseCellValue(cell));
+        return range;
 
     }
 
