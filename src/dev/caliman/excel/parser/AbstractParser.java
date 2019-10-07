@@ -127,9 +127,9 @@ public abstract class AbstractParser {
         for(Sheet sheet : this.workbook) {
             this.sheet = sheet;
             for(Row row : this.sheet) {
-                for(Cell cell : row) {
+                row.forEach(cell -> {
                     if(!empty(cell)) parse(cell);
-                }
+                });
             }
         }
     }
