@@ -124,10 +124,12 @@ public abstract class AbstractParser {
         this.evaluation = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.workbook);
         int noOfSheets = this.workbook.getNumberOfSheets();
         this.singleSheet = noOfSheets == 1;
-        for(Sheet sheet : this.workbook) {
-            this.sheet = sheet;
-            parseRows();
-        }
+        this.workbook.forEach(
+                (sheet) -> {
+                    this.sheet = sheet;
+                    parseRows();
+                }
+        );
     }
 
     private void parseRows() {
@@ -143,25 +145,6 @@ public abstract class AbstractParser {
 
         cells.stream().parallel().filter(cell -> !empty(cell)).forEachOrdered(this::parse);
     }
-
-    /*Stream<Cell> cells(Row row) {
-        List<Cell> cells = new ArrayList<>();
-        row.forEach(cells::add);
-        return cells.stream();
-    }*/
-
-    /*Stream<Row> rows() {
-        List<Row> rows = new ArrayList<>();
-        int first = this.sheet.getFirstRowNum();
-        int last = this.sheet.getLastRowNum();
-        for(int i = first; i < last; i++) {
-            Row row = this.sheet.getRow(i);
-            rows.add(row);
-        }
-        return rows.stream();
-    }*/
-
-
 
     protected abstract void parse(Cell cell);
 
