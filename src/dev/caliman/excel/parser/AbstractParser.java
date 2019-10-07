@@ -289,23 +289,23 @@ public abstract class AbstractParser {
         return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
     }
 
-    private List<Cell> fromRange(String reference) {
+    private List<Cell> list(String reference) {
         AreaReference area = new AreaReference(reference, SPREADSHEET_VERSION);
-        List<Cell> cells = fromRange(area);
+        List<Cell> cells = list(area);
         return cells;
     }
 
-    private List<Cell> fromRange(AreaReference ar) {
+    private List<Cell> list(AreaReference ar) {
         CellReference[] allReferencedCells = ar.getAllReferencedCells();
-        return fromRange(allReferencedCells);
+        return list(allReferencedCells);
     }
 
-    private List<Cell> fromRange(CellReference[] allReferencedCells) {
+    private List<Cell> list(CellReference[] allReferencedCells) {
         Stream<CellReference> stream = Arrays.stream(allReferencedCells);
-        return fromRange(stream);
+        return list(stream);
     }
 
-    private List<Cell> fromRange(Stream<CellReference> stream) {
+    private List<Cell> list(Stream<CellReference> stream) {
         List<Cell> list = new ArrayList<>();
         stream.forEach(
                 referencedCell -> {
@@ -345,9 +345,10 @@ public abstract class AbstractParser {
         var range = emptyRange(rangeFirstRow, rangeFirstColumn, rangeLastRow, rangeLastColumn);
 
         String reference = range.toString();
-        List<Cell> cells = fromRange(sheetnamne + "!" + reference);
+        List<Cell> cells = list(sheetnamne + "!" + reference);
 
-        cells.stream().filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
+        Stream<Cell> stream = cells.stream();
+        stream.filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
         return range;
     }
 
@@ -365,7 +366,8 @@ public abstract class AbstractParser {
         String reference = range.toString();
 
         List<Cell> cells = range(sheet, reference);
-        cells.stream().filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
+        Stream<Cell> stream = cells.stream();
+        stream.filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
         return range;
 
     }
@@ -393,7 +395,7 @@ public abstract class AbstractParser {
         String refs = tRANGE.toString();
         SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
         AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
-        List<Cell> cells = fromRange(area);
+        List<Cell> cells = list(area);
 
         for(Cell cell : cells) if(cell != null) tRANGE.add(parseCellValue(cell));
         return tRANGE;
@@ -401,7 +403,7 @@ public abstract class AbstractParser {
 
     private List<Cell> range(Sheet sheet, String refs) {
         AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
-        return fromRange(area);
+        return list(area);
     }
 
 
