@@ -367,7 +367,7 @@ public abstract class AbstractParser {
         String reference = range.toString();
 
         List<Cell> cells = range(sheet, reference);
-        for(Cell cell : cells) if(cell != null) range.add(parseCellValue(cell));
+        cells.stream().filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
         return range;
 
     }
