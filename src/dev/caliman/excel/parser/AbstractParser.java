@@ -131,9 +131,12 @@ public abstract class AbstractParser {
     }
 
     void parseRows() {
-        for(Row row : this.sheet) {
+        List<Row> rows = new ArrayList<>();
+        for(Row row : this.sheet) rows.add(row);
+        Stream<Row> stream = rows.stream();
+        stream.forEachOrdered(row -> {
             parse(row);
-        }
+        });
     }
 
     void parse(Row row) {
