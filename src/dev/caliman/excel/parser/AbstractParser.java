@@ -130,14 +130,14 @@ public abstract class AbstractParser {
         }
     }
 
-    void parseRows() {
+    private void parseRows() {
         List<Row> rows = new ArrayList<>();
         for(Row row : this.sheet) rows.add(row);
         Stream<Row> stream = rows.stream();
         stream.forEachOrdered(this::parse);
     }
 
-    void parse(Row row) {
+    private void parse(Row row) {
         List<Cell> cells = new ArrayList<>();
         for(Cell cell : row) cells.add(cell);
 
@@ -146,9 +146,7 @@ public abstract class AbstractParser {
 
     Stream<Cell> cells(Row row) {
         List<Cell> cells = new ArrayList<>();
-        row.forEach(cell -> {
-            cells.add(cell);
-        });
+        row.forEach(cells::add);
         return cells.stream();
     }
 
