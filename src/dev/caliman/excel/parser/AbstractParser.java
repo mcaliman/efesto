@@ -144,13 +144,13 @@ public abstract class AbstractParser {
         cells.stream().parallel().filter(cell -> !empty(cell)).forEachOrdered(this::parse);
     }
 
-    Stream<Cell> cells(Row row) {
+    /*Stream<Cell> cells(Row row) {
         List<Cell> cells = new ArrayList<>();
         row.forEach(cells::add);
         return cells.stream();
-    }
+    }*/
 
-    Stream<Row> rows() {
+    /*Stream<Row> rows() {
         List<Row> rows = new ArrayList<>();
         int first = this.sheet.getFirstRowNum();
         int last = this.sheet.getLastRowNum();
@@ -159,7 +159,7 @@ public abstract class AbstractParser {
             rows.add(row);
         }
         return rows.stream();
-    }
+    }*/
 
 
 
