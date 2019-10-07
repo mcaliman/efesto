@@ -139,9 +139,8 @@ public abstract class AbstractParser {
 
     void parse(Row row) {
         List<Cell> cells = new ArrayList<>();
-        for(Cell cell : row) {
-            cells.add(cell);
-        }
+        for(Cell cell : row) cells.add(cell);
+
         cells.stream().filter(cell -> !empty(cell)).forEachOrdered(this::parse);
     }
 
