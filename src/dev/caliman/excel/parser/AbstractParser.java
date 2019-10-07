@@ -134,6 +134,7 @@ public abstract class AbstractParser {
         }
     }
 
+
     Stream<Cell> cells(Row row) {
         List<Cell> cells = new ArrayList<>();
         row.forEach(cell -> {
