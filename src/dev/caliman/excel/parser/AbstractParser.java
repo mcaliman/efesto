@@ -399,7 +399,8 @@ public abstract class AbstractParser {
         AreaReference area = new AreaReference(sheetnamne + "!" + reference, SPREADSHEET_VERSION);
         List<Cell> cells = list(area);
 
-        for(Cell cell : cells) if(cell != null) range.add(parseCellValue(cell));
+        Stream<Cell> stream = cells.stream().parallel();
+        stream.filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
         return range;
     }
 
