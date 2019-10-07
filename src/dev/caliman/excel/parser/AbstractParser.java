@@ -135,7 +135,6 @@ public abstract class AbstractParser {
         for(Row row : this.sheet) rows.add(row);
         Stream<Row> stream = rows.stream();
         stream.forEachOrdered(this::parse);
-        //stream..forEach(this::parse);
     }
 
     void parse(Row row) {
