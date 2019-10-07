@@ -291,8 +291,7 @@ public abstract class AbstractParser {
 
     private List<Cell> list(String reference) {
         AreaReference area = new AreaReference(reference, SPREADSHEET_VERSION);
-        List<Cell> cells = list(area);
-        return cells;
+        return list(area);
     }
 
     private List<Cell> list(AreaReference ar) {
@@ -336,7 +335,7 @@ public abstract class AbstractParser {
         return row.getCell(cell.getCol());
     }
 
-    protected RANGE parseRange(String sheetnamne, Area3DPxg t) {
+    RANGE parseRange(String sheetnamne, Area3DPxg t) {
         var rangeFirstRow = t.getFirstRow();
         var rangeFirstColumn = t.getFirstColumn();
         var rangeLastRow = t.getLastRow();
@@ -352,7 +351,7 @@ public abstract class AbstractParser {
         return range;
     }
 
-    protected RANGE parseRange(Sheet sheet, AreaPtg t) {
+    RANGE parseRange(Sheet sheet, AreaPtg t) {
         RANGE range = null;
         var rangeFirstRow = t.getFirstRow();
         var rangeFirstColumn = t.getFirstColumn();
@@ -370,7 +369,7 @@ public abstract class AbstractParser {
 
     }
 
-    protected RANGE emptyRange(int rangeFirstRow, int rangeFirstColumn, int rangeLastRow, int rangeLastColumn) {
+    private RANGE emptyRange(int rangeFirstRow, int rangeFirstColumn, int rangeLastRow, int rangeLastColumn) {
         RANGE range = null;
         CELL cellFirst = new CELL(rangeFirstRow, rangeFirstColumn);
         CELL cellLast = new CELL(rangeLastRow, rangeLastColumn);
