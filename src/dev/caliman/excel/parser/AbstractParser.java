@@ -354,7 +354,9 @@ public abstract class AbstractParser {
     }
 
 
+
     protected RANGE parseRange(Sheet sheet, AreaPtg t) {
+        RANGE range = null;
         var rangeFirstRow = t.getFirstRow();
         var rangeFirstColumn = t.getFirstColumn();
         var rangeLastRow = t.getLastRow();
@@ -362,7 +364,7 @@ public abstract class AbstractParser {
 
         CELL cellFirst = new CELL(rangeFirstRow, rangeFirstColumn);
         CELL cellLast = new CELL(rangeLastRow, rangeLastColumn);
-        RANGE range = new RANGE(cellFirst, cellLast);
+        range = new RANGE(cellFirst, cellLast);
 
         String reference = range.toString();
 
