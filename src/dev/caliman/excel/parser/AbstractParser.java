@@ -362,9 +362,11 @@ public abstract class AbstractParser {
         var rangeLastRow = t.getLastRow();
         var rangeLastColumn = t.getLastColumn();
 
-        CELL cellFirst = new CELL(rangeFirstRow, rangeFirstColumn);
+        /*CELL cellFirst = new CELL(rangeFirstRow, rangeFirstColumn);
         CELL cellLast = new CELL(rangeLastRow, rangeLastColumn);
-        range = new RANGE(cellFirst, cellLast);
+        range = new RANGE(cellFirst, cellLast);*/
+
+        range = emptyRange(rangeFirstRow, rangeFirstColumn, rangeLastRow, rangeLastColumn);
 
         String reference = range.toString();
 
@@ -372,6 +374,14 @@ public abstract class AbstractParser {
         cells.stream().filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
         return range;
 
+    }
+
+    protected RANGE emptyRange(int rangeFirstRow, int rangeFirstColumn, int rangeLastRow, int rangeLastColumn) {
+        RANGE range = null;
+        CELL cellFirst = new CELL(rangeFirstRow, rangeFirstColumn);
+        CELL cellLast = new CELL(rangeLastRow, rangeLastColumn);
+        range = new RANGE(cellFirst, cellLast);
+        return range;
     }
 
 
