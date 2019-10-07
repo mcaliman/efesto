@@ -342,9 +342,7 @@ public abstract class AbstractParser {
         var rangeLastRow = t.getLastRow();
         var rangeLastColumn = t.getLastColumn();
 
-        CELL cellFirst = new CELL(rangeFirstRow, rangeFirstColumn);
-        CELL cellLast = new CELL(rangeLastRow, rangeLastColumn);
-        var range = new RANGE(cellFirst, cellLast);
+        var range = emptyRange(rangeFirstRow, rangeFirstColumn, rangeLastRow, rangeLastColumn);
 
         String reference = range.toString();
         List<Cell> cells = fromRange(sheetnamne + "!" + reference);
@@ -361,10 +359,6 @@ public abstract class AbstractParser {
         var rangeFirstColumn = t.getFirstColumn();
         var rangeLastRow = t.getLastRow();
         var rangeLastColumn = t.getLastColumn();
-
-        /*CELL cellFirst = new CELL(rangeFirstRow, rangeFirstColumn);
-        CELL cellLast = new CELL(rangeLastRow, rangeLastColumn);
-        range = new RANGE(cellFirst, cellLast);*/
 
         range = emptyRange(rangeFirstRow, rangeFirstColumn, rangeLastRow, rangeLastColumn);
 
