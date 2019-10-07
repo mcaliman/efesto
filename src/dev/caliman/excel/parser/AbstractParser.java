@@ -126,10 +126,34 @@ public abstract class AbstractParser {
         this.singleSheet = noOfSheets == 1;
         for(Sheet sheet : this.workbook) {
             this.sheet = sheet;
-            for(Row row : this.sheet)
-                for(Cell cell : row) if(!empty(cell)) parse(cell);
+            for(Row row : this.sheet) {
+                for(Cell cell : row) {
+                    if(!empty(cell)) parse(cell);
+                }
+            }
         }
     }
+
+    Stream<Cell> cells(Row row) {
+        List<Cell> cells = new ArrayList<>();
+        row.forEach(cell -> {
+            cells.add(cell);
+        });
+        return cells.stream();
+    }
+
+    Stream<Row> rows() {
+        List<Row> rows = new ArrayList<>();
+        int first = this.sheet.getFirstRowNum();
+        int last = this.sheet.getLastRowNum();
+        for(int i = first; i < last; i++) {
+            Row row = this.sheet.getRow(i);
+            rows.add(row);
+        }
+        return rows.stream();
+    }
+
+
 
     protected abstract void parse(Cell cell);
 
