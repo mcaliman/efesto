@@ -128,10 +128,6 @@ public abstract class AbstractParser {
             this.sheet = sheet;
             for(Row row : this.sheet) {
                 parse(row);
-                /*row.forEach(cell -> {
-                    if(!empty(cell)) parse(cell);
-                });*/
-
             }
         }
     }
