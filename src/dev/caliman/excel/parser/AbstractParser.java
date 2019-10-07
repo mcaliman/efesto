@@ -347,7 +347,7 @@ public abstract class AbstractParser {
         String reference = range.toString();
         List<Cell> cells = list(sheetnamne + "!" + reference);
 
-        Stream<Cell> stream = cells.stream();
+        Stream<Cell> stream = cells.stream().parallel();
         stream.filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
         return range;
     }
@@ -366,7 +366,7 @@ public abstract class AbstractParser {
         String reference = range.toString();
 
         List<Cell> cells = range(sheet, reference);
-        Stream<Cell> stream = cells.stream();
+        Stream<Cell> stream = cells.stream().parallel();
         stream.filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
         return range;
 
@@ -392,6 +392,7 @@ public abstract class AbstractParser {
         CELL first = new CELL(firstRow, firstColumn);
         CELL last = new CELL(lastRow, lastColumn);
         RANGE tRANGE = new RANGE(first, last);
+
         String refs = tRANGE.toString();
         SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
         AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
