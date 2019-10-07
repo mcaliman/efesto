@@ -127,13 +127,20 @@ public abstract class AbstractParser {
         for(Sheet sheet : this.workbook) {
             this.sheet = sheet;
             for(Row row : this.sheet) {
-                row.forEach(cell -> {
+                parse(row);
+                /*row.forEach(cell -> {
                     if(!empty(cell)) parse(cell);
-                });
+                });*/
+
             }
         }
     }
 
+    void parse(Row row) {
+        row.forEach(cell -> {
+            if(!empty(cell)) parse(cell);
+        });
+    }
 
     Stream<Cell> cells(Row row) {
         List<Cell> cells = new ArrayList<>();
