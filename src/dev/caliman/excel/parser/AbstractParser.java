@@ -383,23 +383,24 @@ public abstract class AbstractParser {
 
     RANGE RangeInternal(String sheetnamne, Area3DPxg t) {
 
-        int firstRow = t.getFirstRow();
-        int firstColumn = t.getFirstColumn();
+        int rangeFirstRow = t.getFirstRow();
+        int rangeFirstColumn = t.getFirstColumn();
 
-        int lastRow = t.getLastRow();
-        int lastColumn = t.getLastColumn();
+        int rangeLastRow = t.getLastRow();
+        int rangeLastColumn = t.getLastColumn();
 
-        CELL first = new CELL(firstRow, firstColumn);
-        CELL last = new CELL(lastRow, lastColumn);
-        RANGE tRANGE = new RANGE(first, last);
+        //CELL first = new CELL(rangeFirstRow, rangeFirstColumn);
+        //CELL last = new CELL(rangeLastRow, rangeLastColumn);
+        //RANGE tRANGE = new RANGE(first, last);
+        RANGE range = emptyRange(rangeFirstRow, rangeFirstColumn, rangeLastRow, rangeLastColumn);
 
-        String refs = tRANGE.toString();
+        String reference = range.toString();
         SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
-        AreaReference area = new AreaReference(sheetnamne + "!" + refs, SPREADSHEET_VERSION);
+        AreaReference area = new AreaReference(sheetnamne + "!" + reference, SPREADSHEET_VERSION);
         List<Cell> cells = list(area);
 
-        for(Cell cell : cells) if(cell != null) tRANGE.add(parseCellValue(cell));
-        return tRANGE;
+        for(Cell cell : cells) if(cell != null) range.add(parseCellValue(cell));
+        return range;
     }
 
     private List<Cell> range(Sheet sheet, String refs) {
