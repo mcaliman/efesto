@@ -126,9 +126,13 @@ public abstract class AbstractParser {
         this.singleSheet = noOfSheets == 1;
         for(Sheet sheet : this.workbook) {
             this.sheet = sheet;
-            for(Row row : this.sheet) {
-                parse(row);
-            }
+            parseRows();
+        }
+    }
+
+    void parseRows() {
+        for(Row row : this.sheet) {
+            parse(row);
         }
     }
 
