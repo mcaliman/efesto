@@ -352,29 +352,6 @@ public abstract class AbstractParser {
         return range;
     }
 
-
-
-    /*RANGE RangeInternal(String sheetnamne, Area3DPxg t) {
-
-        int rangeFirstRow = t.getFirstRow();
-        int rangeFirstColumn = t.getFirstColumn();
-
-        int rangeLastRow = t.getLastRow();
-        int rangeLastColumn = t.getLastColumn();
-
-        RANGE range = emptyRange(rangeFirstRow, rangeFirstColumn, rangeLastRow, rangeLastColumn);
-
-        String reference = range.toString();
-        SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
-        AreaReference area = new AreaReference(sheetnamne + "!" + reference, SPREADSHEET_VERSION);
-        List<Cell> cells = list(area);
-
-        Stream<Cell> stream = cells.stream().parallel();
-        stream.filter(Objects::nonNull).map(this::parseCellValue).forEachOrdered(range::add);
-        return range;
-    }*/
-
-
     protected RANGE parseRange(Sheet sheet, AreaPtg t) {
         RANGE range = null;
         var rangeFirstRow = t.getFirstRow();
@@ -405,7 +382,6 @@ public abstract class AbstractParser {
         AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
         return list(area);
     }
-
 
     class WhatIf {
 
