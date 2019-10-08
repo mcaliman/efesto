@@ -53,8 +53,6 @@ import static org.apache.poi.ss.usermodel.Cell.*;
 
 public abstract class AbstractParser {
 
-    private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
-
     final Predicate<Ptg> arrayPtg = (Ptg t) -> t instanceof ArrayPtg;
     final Predicate<Ptg> addPtg = (Ptg t) -> t instanceof AddPtg;
     final Predicate<Ptg> area3DPxg = (Ptg t) -> t instanceof Area3DPxg;
@@ -95,11 +93,10 @@ public abstract class AbstractParser {
     final Predicate<Ptg> unaryPlusPtg = (Ptg t) -> t instanceof UnaryPlusPtg;
     final Predicate<Ptg> unionPtg = (Ptg t) -> t instanceof UnionPtg;
     final Predicate<Ptg> unknownPtg = (Ptg t) -> t instanceof UnknownPtg;
-
+    private final SpreadsheetVersion SPREADSHEET_VERSION = SpreadsheetVersion.EXCEL2007;
     private final String filename;
 
     Workbook workbook;
-    private XSSFEvaluationWorkbook evaluation;
     Sheet sheet;
     Ptg[] formulaPtgs;
     String formulaAddress;
@@ -108,6 +105,7 @@ public abstract class AbstractParser {
     boolean singleSheet;//is single sheet or not?
     int column;//Current Formula Column
     int row;//Current Formula Row
+    private XSSFEvaluationWorkbook evaluation;
 
 
     AbstractParser(String filename) throws IOException, InvalidFormatException {

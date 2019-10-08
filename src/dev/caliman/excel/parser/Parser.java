@@ -287,7 +287,6 @@ public final class Parser extends AbstractParser {
     }
 
 
-
     private void parseERROR(ErrPtg t) {
         String text = parseErrorText(t);
         var elem = new ERROR(text);
@@ -368,7 +367,6 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
         graph.addNode(elem);
     }
-
 
 
     public StartList getList() {
@@ -810,7 +808,6 @@ public final class Parser extends AbstractParser {
     //</editor-fold>
 
 
-
     public void setVerbose(boolean verbose) {
         this.verbose = verbose;
     }
@@ -823,12 +820,6 @@ public final class Parser extends AbstractParser {
     private void verbose(String text) {
         if(this.verbose) out.println(text);
     }
-
-
-
-
-
-
 
 
 }
