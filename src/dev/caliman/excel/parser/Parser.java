@@ -59,12 +59,8 @@ import static java.lang.System.out;
  */
 public final class Parser extends AbstractParser {
 
-
     private boolean verbose = false;
-
     private List<Cell> ext;
-
-
     private StartList unordered;
     private StartList ordered;
     private StartGraph graph;
@@ -78,7 +74,6 @@ public final class Parser extends AbstractParser {
         this.graph = new StartGraph();
         this.stack = new Stack<>();
     }
-
 
     protected void parse(Cell cell) {
         if(isFormula(cell)) {
@@ -97,7 +92,6 @@ public final class Parser extends AbstractParser {
         }
     }
 
-
     void parseFormula(Cell cell) {
         super.parseFormula(cell);
         if(this.formulaPtgs == null) {
@@ -111,7 +105,6 @@ public final class Parser extends AbstractParser {
             parseFormula(start);
         }
     }
-
 
     private Start parse(Ptg[] ptgs) {
         stack.empty();
@@ -170,7 +163,7 @@ public final class Parser extends AbstractParser {
                 new WhatIf(p, ref3DPxg, (Ptg t) -> parsePrefixReferenceItem((Ref3DPxg) t)),
                 new WhatIf(p, refErrorPtg, (Ptg t) -> parseERRORREF()),
                 new WhatIf(p, refPtg, (Ptg t) -> parseCELL((RefPtg) t)),
-                new WhatIf(p, stringPtg, (Ptg t) -> parseTEXT(((StringPtg) t).getValue())),
+                new WhatIf(p, stringPtg, (Ptg t) -> parseSTRING(((StringPtg) t).getValue())),
                 new WhatIf(p, subtractPtg, t -> parseSub()),
                 new WhatIf(p, unaryMinusPtg, (Ptg t) -> parseMinus()),
                 new WhatIf(p, unaryPlusPtg, (Ptg t) -> parsePlus()),
@@ -287,6 +280,41 @@ public final class Parser extends AbstractParser {
     }
 
 
+    private void parseERRORREF() {
+        //#REF
+        ERRORREF elem = new ERRORREF();
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        stack.push(elem);
+        err("");
+    }
+
+    private void parseFormula(Start elem) {
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        unordered.add(elem);
+    }
+
+    private void parseCELLlinked(CELL elem) {
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        this.unordered.add(elem);
+        stack.push(elem);
+        graph.addNode(elem);
+    }
+
+
+//<editor-fold desc="Constants Constant ::= NUMBER | STRING | BOOL | ERROR">
+
     private void parseERROR(ErrPtg t) {
         String text = parseErrorText(t);
         var elem = new ERROR(text);
@@ -307,7 +335,7 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
-    private void parseTEXT(String string) {
+    private void parseSTRING(String string) {
         var elem = new TEXT(string);
         graph.addNode(elem);
         stack.push(elem);
@@ -324,61 +352,7 @@ public final class Parser extends AbstractParser {
         graph.addNode(elem);
         stack.push(elem);
     }
-
-    private void parseERRORREF() {
-        //#REF
-        ERRORREF elem = new ERRORREF();
-        elem.setColumn(column);
-        elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        stack.push(elem);
-        err("");
-    }
-
-
-    public void sort() {
-        if(this.unordered.singleton()) {
-            this.ordered = new StartList();
-            this.ordered.add(this.unordered.get(0));
-            return;
-        }
-        this.ordered = this.graph.topologicalSort();
-    }
-
-    private void parseFormula(Start elem) {
-        elem.setColumn(column);
-        elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        unordered.add(elem);
-    }
-
-
-    private void parseCELLlinked(CELL elem) {
-        elem.setColumn(column);
-        elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        this.unordered.add(elem);
-        stack.push(elem);
-        graph.addNode(elem);
-    }
-
-
-    public StartList getList() {
-        return ordered;
-    }
-
-
-    private void err(String string) {
-        err.println(getCellAddress() + " error: " + string);
-        //throw new RuntimeException(getCellAddress() + " error: " + string);
-    }
-
+//</editor-fold>
 
 //<editor-fold desc="Reference">
 
@@ -410,7 +384,7 @@ public final class Parser extends AbstractParser {
 
 //</editor-fold>
 
-    //<editor-fold desc="PrefixReferenceItem">
+//<editor-fold desc="PrefixReferenceItem">
 
     /**
      * Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
@@ -462,9 +436,9 @@ public final class Parser extends AbstractParser {
         else parseReference(tSHEET, cellref);
     }
 
-    //</editor-fold>
+//</editor-fold>
 
-    //<editor-fold desc="BuiltInFunction">
+//<editor-fold desc="BuiltInFunction">
 
     private void parseBuiltinFunction(FuncVarPtg t) {
         int arity = t.getNumberOfOperands();
@@ -519,9 +493,9 @@ public final class Parser extends AbstractParser {
             err("Unsupported Excel ExcelFunction: " + name + " " + e);
         }
     }
-    //</editor-fold>
+//</editor-fold>
 
-    //<editor-fold desc="GRAMMAR ELEMENTS">
+//<editor-fold desc="GRAMMAR ELEMENTS">
 
     /**
      * (F)
@@ -805,21 +779,33 @@ public final class Parser extends AbstractParser {
         graph.add(elem);
         stack.push(elem);
     }
-    //</editor-fold>
-
+//</editor-fold>
 
     public void setVerbose(boolean verbose) {
         this.verbose = verbose;
     }
-
     public int getCounterFormulas() {
         return noOfFormulas;
     }
 
+    public StartList getList() {
+        return ordered;
+    }
 
+    private void err(String string) {
+        err.println(getCellAddress() + " error: " + string);
+        //throw new RuntimeException(getCellAddress() + " error: " + string);
+    }
     private void verbose(String text) {
         if(this.verbose) out.println(text);
     }
 
-
+    public void sort() {
+        if(this.unordered.singleton()) {
+            this.ordered = new StartList();
+            this.ordered.add(this.unordered.get(0));
+            return;
+        }
+        this.ordered = this.graph.topologicalSort();
+    }
 }
