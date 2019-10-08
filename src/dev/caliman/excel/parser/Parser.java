@@ -133,7 +133,7 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
-    private void parse(Ptg p) {
+    protected void parse(Ptg p) {
         verbose("parse: " + p.getClass().getSimpleName());
         try(Stream<WhatIf> stream = Stream.of(
                 new WhatIf(p, arrayPtg, (Ptg t) -> parseConstantArray((ArrayPtg) t)),
@@ -182,68 +182,6 @@ public final class Parser extends AbstractParser {
             //err.println("parse: " + p.getClass().getSimpleName() + " " + this.cSHEET.getName() + "row:" + row + "column:" + column + e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
-     * external or different sheet.
-     * This is XSSF only, as it stores the sheet / workbook references in String
-     * form. The HSSF equivalent using indexes is Area3DPtg
-     */
-    private void parsePrefixReferenceItem(Area3DPxg t) {
-        String name = t.getSheetName();
-        int index = getSheetIndex(name);
-        SHEET tSHEET = new SHEET(name, index);
-        String area = t.format2DRefAsString();
-        parsePrefixReferenceItem(parseRange(name, t), tSHEET, area);
-    }
-
-    /**
-     * Sheet2!A1:B1 (Sheet + AREA/RANGE)
-     *
-     */
-    private void parsePrefixReferenceItem(RANGE tRANGE, SHEET tSHEET, String area) {
-        var elem = new PrefixReferenceItem(tSHEET, area, tRANGE);
-        elem.setSHEET(tSHEET);
-        unordered.add(elem);
-        stack.push(elem);
-    }
-
-    private void parsePrefixReferenceItem(Ref3DPxg t) {
-        //Title: XSSF 3D Reference
-        //Description: Defines a cell in an external or different sheet.
-        //REFERENCE:
-        //This is XSSF only, as it stores the sheet / workbook references in String form.
-        //The HSSF equivalent using indexes is Ref3DPtg
-        int extWorkbookNumber = t.getExternalWorkbookNumber();
-        String sheetName = t.getSheetName();
-        int sheetIndex = getSheetIndex(sheetName);
-        SHEET tSHEET = new SHEET(sheetName, sheetIndex);
-        FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
-        String cellref = t.format2DRefAsString();
-        if(this.getSheetIndex() != sheetIndex) {
-            Sheet extSheet = this.workbook.getSheet(sheetName);
-            if(extSheet != null) {
-                CellReference cr = new CellReference(cellref);
-                Row row = extSheet.getRow(cr.getRow());
-                Cell cell = row.getCell(cr.getCol());
-                this.ext.add(cell);
-                verbose("Loosing!!! reference[ext] " + tSHEET.toString() + "" + cellref);
-            }
-        }
-        if(extWorkbookNumber > 0) parseReference(tFILE, cellref);
-        else parseReference(tSHEET, cellref);
-    }
-
-    private void parseReference(SHEET tSHEET, String cellref) {
-        var elem = new PrefixReferenceItem(tSHEET, cellref, null);
-        elem.setColumn(column);
-        elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        graph.addNode(elem);
-        stack.push(elem);
     }
 
     /**
@@ -348,48 +286,7 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
-    private void parseBuiltinFunction(FuncVarPtg t) {
-        int arity = t.getNumberOfOperands();
-        String name = t.getName();
-        if(arity == 0) parseBuiltinFunction(name);
-        else parseBuiltinFunction(name, arity);
-    }
 
-    private void parseBuiltinFunction(FuncPtg t) {
-        int arity = t.getNumberOfOperands();
-        String name = t.getName();
-        if(arity == 0) parseBuiltinFunction(name);
-        else parseBuiltinFunction(name, arity);
-    }
-
-    private void parseBuiltinFunction(String name, int arity) {
-        try {
-            var factory = new BuiltinFactory();
-            factory.create(arity, name);
-            var builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
-            Start[] args = factory.getArgs();
-            for(int i = arity - 1; i >= 0; i--) if(!stack.empty()) args[i] = stack.pop();
-
-            builtinFunction.setColumn(column);
-            builtinFunction.setRow(row);
-            builtinFunction.setSheetIndex(this.getSheetIndex());
-            builtinFunction.setSheetName(this.getSheetName());
-            builtinFunction.setSingleSheet(this.singleSheet);
-
-            graph.addNode(builtinFunction);
-            for(Start arg : args) {
-                if(arg instanceof RangeReference /*|| arg instanceof CELL*/ || arg instanceof PrefixReferenceItem || arg instanceof ReferenceItem) {
-                    if(unordered.add(arg)) {
-                        graph.addNode(arg);
-                        graph.addEdge(arg, builtinFunction);
-                    }
-                }
-            }
-            stack.push(builtinFunction);
-        } catch(UnsupportedBuiltinException e) {
-            err("Unsupported Excel ExcelFunction: " + name + " " + e);
-        }
-    }
 
     private void parseERROR(ErrPtg t) {
         String text = parseErrorText(t);
@@ -472,6 +369,21 @@ public final class Parser extends AbstractParser {
         graph.addNode(elem);
     }
 
+
+
+    public StartList getList() {
+        return ordered;
+    }
+
+
+    private void err(String string) {
+        err.println(getCellAddress() + " error: " + string);
+        //throw new RuntimeException(getCellAddress() + " error: " + string);
+    }
+
+
+//<editor-fold desc="Reference">
+
     /**
      * Sheet2!A1 (Sheet + parseCELL_REFERENCE)
      * External references: External references are normally in the form [File]Sheet!Cell
@@ -487,6 +399,117 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
+    private void parseReference(SHEET tSHEET, String cellref) {
+        var elem = new PrefixReferenceItem(tSHEET, cellref, null);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        graph.addNode(elem);
+        stack.push(elem);
+    }
+
+//</editor-fold>
+
+    //<editor-fold desc="PrefixReferenceItem">
+
+    /**
+     * Area3DPxg is XSSF Area 3D Reference (Sheet + Area) Defined an area in an
+     * external or different sheet.
+     * This is XSSF only, as it stores the sheet / workbook references in String
+     * form. The HSSF equivalent using indexes is Area3DPtg
+     */
+    private void parsePrefixReferenceItem(Area3DPxg t) {
+        String name = t.getSheetName();
+        int index = getSheetIndex(name);
+        SHEET tSHEET = new SHEET(name, index);
+        String area = t.format2DRefAsString();
+        parsePrefixReferenceItem(parseRange(name, t), tSHEET, area);
+    }
+
+    /**
+     * Sheet2!A1:B1 (Sheet + AREA/RANGE)
+     */
+    private void parsePrefixReferenceItem(RANGE tRANGE, SHEET tSHEET, String area) {
+        var elem = new PrefixReferenceItem(tSHEET, area, tRANGE);
+        elem.setSHEET(tSHEET);
+        unordered.add(elem);
+        stack.push(elem);
+    }
+
+    private void parsePrefixReferenceItem(Ref3DPxg t) {
+        //Title: XSSF 3D Reference
+        //Description: Defines a cell in an external or different sheet.
+        //REFERENCE:
+        //This is XSSF only, as it stores the sheet / workbook references in String form.
+        //The HSSF equivalent using indexes is Ref3DPtg
+        int extWorkbookNumber = t.getExternalWorkbookNumber();
+        String sheetName = t.getSheetName();
+        int sheetIndex = getSheetIndex(sheetName);
+        SHEET tSHEET = new SHEET(sheetName, sheetIndex);
+        FILE tFILE = new FILE(extWorkbookNumber, tSHEET);
+        String cellref = t.format2DRefAsString();
+        if(this.getSheetIndex() != sheetIndex) {
+            Sheet extSheet = this.workbook.getSheet(sheetName);
+            if(extSheet != null) {
+                CellReference cr = new CellReference(cellref);
+                Row row = extSheet.getRow(cr.getRow());
+                Cell cell = row.getCell(cr.getCol());
+                this.ext.add(cell);
+                verbose("Loosing!!! reference[ext] " + tSHEET.toString() + "" + cellref);
+            }
+        }
+        if(extWorkbookNumber > 0) parseReference(tFILE, cellref);
+        else parseReference(tSHEET, cellref);
+    }
+
+    //</editor-fold>
+
+    //<editor-fold desc="BuiltInFunction">
+
+    private void parseBuiltinFunction(FuncVarPtg t) {
+        int arity = t.getNumberOfOperands();
+        String name = t.getName();
+        if(arity == 0) parseBuiltinFunction(name);
+        else parseBuiltinFunction(name, arity);
+    }
+
+    private void parseBuiltinFunction(FuncPtg t) {
+        int arity = t.getNumberOfOperands();
+        String name = t.getName();
+        if(arity == 0) parseBuiltinFunction(name);
+        else parseBuiltinFunction(name, arity);
+    }
+
+    private void parseBuiltinFunction(String name, int arity) {
+        try {
+            var factory = new BuiltinFactory();
+            factory.create(arity, name);
+            var builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
+            Start[] args = factory.getArgs();
+            for(int i = arity - 1; i >= 0; i--) if(!stack.empty()) args[i] = stack.pop();
+
+            builtinFunction.setColumn(column);
+            builtinFunction.setRow(row);
+            builtinFunction.setSheetIndex(this.getSheetIndex());
+            builtinFunction.setSheetName(this.getSheetName());
+            builtinFunction.setSingleSheet(this.singleSheet);
+
+            graph.addNode(builtinFunction);
+            for(Start arg : args) {
+                if(arg instanceof RangeReference /*|| arg instanceof CELL*/ || arg instanceof PrefixReferenceItem || arg instanceof ReferenceItem) {
+                    if(unordered.add(arg)) {
+                        graph.addNode(arg);
+                        graph.addEdge(arg, builtinFunction);
+                    }
+                }
+            }
+            stack.push(builtinFunction);
+        } catch(UnsupportedBuiltinException e) {
+            err("Unsupported Excel ExcelFunction: " + name + " " + e);
+        }
+    }
 
     private void parseBuiltinFunction(String name) {
         try {
@@ -498,17 +521,7 @@ public final class Parser extends AbstractParser {
             err("Unsupported Excel ExcelFunction: " + name + " " + e);
         }
     }
-
-    public StartList getList() {
-        return ordered;
-    }
-
-
-    private void err(String string) {
-        err.println(getCellAddress() + " error: " + string);
-        //throw new RuntimeException(getCellAddress() + " error: " + string);
-    }
-
+    //</editor-fold>
 
     //<editor-fold desc="GRAMMAR ELEMENTS">
 
@@ -796,7 +809,6 @@ public final class Parser extends AbstractParser {
     }
     //</editor-fold>
 
-    //<editor-fold desc="Utilities">
 
 
     public void setVerbose(boolean verbose) {
@@ -815,6 +827,8 @@ public final class Parser extends AbstractParser {
 
 
 
-    //</editor-fold>
+
+
+
 
 }
