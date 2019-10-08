@@ -138,10 +138,10 @@ public final class Parser extends AbstractParser {
         try(Stream<WhatIf> stream = Stream.of(
                 new WhatIf(p, arrayPtg, (Ptg t) -> parseConstantArray((ArrayPtg) t)),
                 new WhatIf(p, addPtg, (Ptg t) -> parseAdd()),
-                new WhatIf(p, area3DPxg, (Ptg t) -> parseArea3DPxg((Area3DPxg) t)),
+                new WhatIf(p, area3DPxg, (Ptg t) -> parsePrefixReferenceItem((Area3DPxg) t)),
                 new WhatIf(p, areaErrPtg, this::parseErrPtg),
                 new WhatIf(p, areaPtg, (Ptg t) -> parseRangeReference((AreaPtg) t)),
-                new WhatIf(p, attrPtg, (Ptg t) -> parseAttrPtg((AttrPtg) t)),
+                new WhatIf(p, attrPtg, (Ptg t) -> parseSum((AttrPtg) t)),
                 new WhatIf(p, boolPtg, t -> parseBOOL(((BoolPtg) t).getValue())),
                 new WhatIf(p, concatPtg, t -> parseConcat()),
                 new WhatIf(p, deleted3DPxg, this::parseErrPtg),
@@ -190,7 +190,7 @@ public final class Parser extends AbstractParser {
      * This is XSSF only, as it stores the sheet / workbook references in String
      * form. The HSSF equivalent using indexes is Area3DPtg
      */
-    private void parseArea3DPxg(Area3DPxg t) {
+    private void parsePrefixReferenceItem(Area3DPxg t) {
         String name = t.getSheetName();
         int index = getSheetIndex(name);
         SHEET tSHEET = new SHEET(name, index);
@@ -321,7 +321,7 @@ public final class Parser extends AbstractParser {
         this.stack.push(elem);
     }
 
-    private void parseAttrPtg(AttrPtg t) {
+    private void parseSum(AttrPtg t) {
         if(t.isSum()) parseSum();
     }
 
