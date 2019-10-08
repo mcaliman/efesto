@@ -196,47 +196,6 @@ public final class Parser extends AbstractParser {
 
     }
 
-    private void parseNamedRange(NamePtg t) {
-        // RangeInternal range = null;
-        Ptg[] ptgs = getName(t);
-        String name = getNameText(t);
-        RANGE tRANGE = null;
-        String sheetName = this.getSheetName();
-        int sheetIndex = 0;
-        for(Ptg ptg : ptgs) {
-            if(ptg != null) {
-                if(ptg instanceof Area3DPxg) {
-                    Area3DPxg area3DPxg = (Area3DPxg) ptg;
-                    tRANGE = parseRange(area3DPxg.getSheetName(), area3DPxg);//RangeInternal(area3DPxg.getSheetName(), area3DPxg);
-                    sheetName = area3DPxg.getSheetName();
-                    sheetIndex = getSheetIndex(area3DPxg.getSheetName());
-                }
-            }
-        }
-        NamedRange elem = new NamedRange(name, tRANGE);
-        elem.setSheetIndex(sheetIndex);
-        elem.setSheetName(sheetName);
-        stack.push(elem);
-    }
-
-    private void parseCELL(RefPtg t) {
-        Row row_ = this.sheet.getRow(t.getRow());
-        Object value = null;
-        if(row_ != null) {
-            Cell c = row_.getCell(t.getColumn());
-            value = this.parseCellValue(c);
-        }
-        CELL elem = new CELL(t.getRow(), t.getColumn());
-        elem.setValue(value);
-        elem.setColumn(this.column);
-        elem.setRow(this.row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        this.unordered.add(elem);
-        stack.push(elem);
-    }
-
     /**
      * ConstantArray
      */
@@ -280,18 +239,6 @@ public final class Parser extends AbstractParser {
     }
 
 
-    private void parseERRORREF() {
-        //#REF
-        ERRORREF elem = new ERRORREF();
-        elem.setColumn(column);
-        elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        stack.push(elem);
-        err("");
-    }
-
     private void parseFormula(Start elem) {
         elem.setColumn(column);
         elem.setRow(row);
@@ -313,7 +260,7 @@ public final class Parser extends AbstractParser {
     }
 
 
-//<editor-fold desc="Constants Constant ::= NUMBER | STRING | BOOL | ERROR">
+//<editor-fold desc="Constants: Constant ::= NUMBER | STRING | BOOL | ERROR">
 
     private void parseERROR(ErrPtg t) {
         String text = parseErrorText(t);
@@ -352,6 +299,63 @@ public final class Parser extends AbstractParser {
         graph.addNode(elem);
         stack.push(elem);
     }
+//</editor-fold>
+
+//<editor-fold desc="ReferenceItem::= CELL | NamedRange | ERROR-REF">
+
+    private void parseCELL(RefPtg t) {
+        Row row_ = this.sheet.getRow(t.getRow());
+        Object value = null;
+        if(row_ != null) {
+            Cell c = row_.getCell(t.getColumn());
+            value = this.parseCellValue(c);
+        }
+        CELL elem = new CELL(t.getRow(), t.getColumn());
+        elem.setValue(value);
+        elem.setColumn(this.column);
+        elem.setRow(this.row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        this.unordered.add(elem);
+        stack.push(elem);
+    }
+
+    private void parseNamedRange(NamePtg t) {
+        // RangeInternal range = null;
+        Ptg[] ptgs = getName(t);
+        String name = getNameText(t);
+        RANGE tRANGE = null;
+        String sheetName = this.getSheetName();
+        int sheetIndex = 0;
+        for(Ptg ptg : ptgs) {
+            if(ptg != null) {
+                if(ptg instanceof Area3DPxg) {
+                    Area3DPxg area3DPxg = (Area3DPxg) ptg;
+                    tRANGE = parseRange(area3DPxg.getSheetName(), area3DPxg);//RangeInternal(area3DPxg.getSheetName(), area3DPxg);
+                    sheetName = area3DPxg.getSheetName();
+                    sheetIndex = getSheetIndex(area3DPxg.getSheetName());
+                }
+            }
+        }
+        NamedRange elem = new NamedRange(name, tRANGE);
+        elem.setSheetIndex(sheetIndex);
+        elem.setSheetName(sheetName);
+        stack.push(elem);
+    }
+
+    private void parseERRORREF() {
+        //#REF
+        ERRORREF elem = new ERRORREF();
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        stack.push(elem);
+        err("");
+    }
+
 //</editor-fold>
 
 //<editor-fold desc="Reference">
