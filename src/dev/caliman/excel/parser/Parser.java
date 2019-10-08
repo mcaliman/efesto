@@ -150,8 +150,8 @@ public final class Parser extends AbstractParser {
                 new WhatIf(p, dividePtg, t -> parseDiv()),
                 new WhatIf(p, equalPtg, t -> parseEq()),
                 new WhatIf(p, errPtg, (Ptg t) -> parseERROR((ErrPtg) t)),
-                new WhatIf(p, funcPtg, (Ptg t) -> parseFuncPtg((FuncPtg) t)),
-                new WhatIf(p, funcVarPtg, (Ptg t) -> parseFuncVarPtg((FuncVarPtg) t)),
+                new WhatIf(p, funcPtg, (Ptg t) -> parseBuiltinFunction((FuncPtg) t)),
+                new WhatIf(p, funcVarPtg, (Ptg t) -> parseBuiltinFunction((FuncVarPtg) t)),
                 new WhatIf(p, greaterEqualPtg, t -> parseGteq()),
                 new WhatIf(p, greaterThanPtg, t -> parseGt()),
                 new WhatIf(p, intersectionPtg, t -> parseIntersection()),
@@ -234,7 +234,6 @@ public final class Parser extends AbstractParser {
         if(extWorkbookNumber > 0) parseReference(tFILE, cellref);
         else parseReference(tSHEET, cellref);
     }
-
 
     private void parseReference(SHEET tSHEET, String cellref) {
         var elem = new PrefixReferenceItem(tSHEET, cellref, null);
@@ -349,14 +348,14 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
-    private void parseFuncVarPtg(FuncVarPtg t) {
+    private void parseBuiltinFunction(FuncVarPtg t) {
         int arity = t.getNumberOfOperands();
         String name = t.getName();
         if(arity == 0) parseBuiltinFunction(name);
         else parseBuiltinFunction(name, arity);
     }
 
-    private void parseFuncPtg(FuncPtg t) {
+    private void parseBuiltinFunction(FuncPtg t) {
         int arity = t.getNumberOfOperands();
         String name = t.getName();
         if(arity == 0) parseBuiltinFunction(name);
