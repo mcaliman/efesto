@@ -23,7 +23,6 @@
 package dev.caliman.excel.grammar.formula.reference;
 
 import dev.caliman.excel.grammar.formula.Reference;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Massimo Caliman
@@ -40,7 +39,7 @@ public final class PrefixReferenceItem extends Reference {
     private int lastRow;
     private int lastColumn;
 
-    public PrefixReferenceItem(Prefix prefix, String reference, @Nullable RANGE tRANGE) {
+    public PrefixReferenceItem(Prefix prefix, String reference, RANGE tRANGE) {
         this.prefix = prefix;
         this.reference = reference;
         if(tRANGE != null) {

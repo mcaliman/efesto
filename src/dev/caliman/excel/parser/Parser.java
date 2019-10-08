@@ -167,9 +167,9 @@ public final class Parser extends AbstractParser {
                 new WhatIf(p, parenthesisPtg, t -> parseParenthesisFormula()),
                 new WhatIf(p, percentPtg, t -> percentFormula()),
                 new WhatIf(p, powerPtg, t -> parsePower()),
-                new WhatIf(p, ref3DPxg, (Ptg t) -> parseRef3DPxg((Ref3DPxg) t)),
+                new WhatIf(p, ref3DPxg, (Ptg t) -> parsePrefixReferenceItem((Ref3DPxg) t)),
                 new WhatIf(p, refErrorPtg, (Ptg t) -> parseERRORREF()),
-                new WhatIf(p, refPtg, (Ptg t) -> parseRefPtg((RefPtg) t)),
+                new WhatIf(p, refPtg, (Ptg t) -> parseCELL((RefPtg) t)),
                 new WhatIf(p, stringPtg, (Ptg t) -> parseTEXT(((StringPtg) t).getValue())),
                 new WhatIf(p, subtractPtg, t -> parseSub()),
                 new WhatIf(p, unaryMinusPtg, (Ptg t) -> parseMinus()),
@@ -195,20 +195,21 @@ public final class Parser extends AbstractParser {
         int index = getSheetIndex(name);
         SHEET tSHEET = new SHEET(name, index);
         String area = t.format2DRefAsString();
-        parseArea3D(parseRange(name, t), tSHEET, area);
+        parsePrefixReferenceItem(parseRange(name, t), tSHEET, area);
     }
 
     /**
      * Sheet2!A1:B1 (Sheet + AREA/RANGE)
+     *
      */
-    private void parseArea3D(RANGE tRANGE, SHEET tSHEET, String area) {
+    private void parsePrefixReferenceItem(RANGE tRANGE, SHEET tSHEET, String area) {
         var elem = new PrefixReferenceItem(tSHEET, area, tRANGE);
         elem.setSHEET(tSHEET);
         unordered.add(elem);
         stack.push(elem);
     }
 
-    private void parseRef3DPxg(Ref3DPxg t) {
+    private void parsePrefixReferenceItem(Ref3DPxg t) {
         //Title: XSSF 3D Reference
         //Description: Defines a cell in an external or different sheet.
         //REFERENCE:
@@ -288,7 +289,7 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
-    private void parseRefPtg(RefPtg t) {
+    private void parseCELL(RefPtg t) {
         Row row_ = this.sheet.getRow(t.getRow());
         Object value = null;
         if(row_ != null) {
