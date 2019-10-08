@@ -352,20 +352,41 @@ public final class Parser extends AbstractParser {
     private void parseFuncVarPtg(FuncVarPtg t) {
         int arity = t.getNumberOfOperands();
         String name = t.getName();
-        if(arity == 0) parseFunc(name);
-        else parseFunc(name, arity);
+        if(arity == 0) parseBuiltinFunction(name);
+        else parseBuiltinFunction(name, arity);
     }
 
     private void parseFuncPtg(FuncPtg t) {
         int arity = t.getNumberOfOperands();
         String name = t.getName();
-        if(arity == 0) parseFunc(name);
-        else parseFunc(name, arity);
+        if(arity == 0) parseBuiltinFunction(name);
+        else parseBuiltinFunction(name, arity);
     }
 
-    private void parseFunc(String name, int arity) {
+    private void parseBuiltinFunction(String name, int arity) {
         try {
-            builtInFunction(arity, name);
+            var factory = new BuiltinFactory();
+            factory.create(arity, name);
+            var builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
+            Start[] args = factory.getArgs();
+            for(int i = arity - 1; i >= 0; i--) if(!stack.empty()) args[i] = stack.pop();
+
+            builtinFunction.setColumn(column);
+            builtinFunction.setRow(row);
+            builtinFunction.setSheetIndex(this.getSheetIndex());
+            builtinFunction.setSheetName(this.getSheetName());
+            builtinFunction.setSingleSheet(this.singleSheet);
+
+            graph.addNode(builtinFunction);
+            for(Start arg : args) {
+                if(arg instanceof RangeReference /*|| arg instanceof CELL*/ || arg instanceof PrefixReferenceItem || arg instanceof ReferenceItem) {
+                    if(unordered.add(arg)) {
+                        graph.addNode(arg);
+                        graph.addEdge(arg, builtinFunction);
+                    }
+                }
+            }
+            stack.push(builtinFunction);
         } catch(UnsupportedBuiltinException e) {
             err("Unsupported Excel ExcelFunction: " + name + " " + e);
         }
@@ -468,45 +489,15 @@ public final class Parser extends AbstractParser {
     }
 
 
-    private void parseFunc(String name) {
+    private void parseBuiltinFunction(String name) {
         try {
-            builtinFunction(name);
+            var factory = new BuiltinFactory();
+            factory.create(0, name);
+            var builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
+            stack.push(builtinFunction);
         } catch(UnsupportedBuiltinException e) {
             err("Unsupported Excel ExcelFunction: " + name + " " + e);
         }
-    }
-
-
-    private void builtInFunction(int arity, String name) throws UnsupportedBuiltinException {
-        var factory = new BuiltinFactory();
-        factory.create(arity, name);
-        var builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
-        Start[] args = factory.getArgs();
-        for(int i = arity - 1; i >= 0; i--) if(!stack.empty()) args[i] = stack.pop();
-
-        builtinFunction.setColumn(column);
-        builtinFunction.setRow(row);
-        builtinFunction.setSheetIndex(this.getSheetIndex());
-        builtinFunction.setSheetName(this.getSheetName());
-        builtinFunction.setSingleSheet(this.singleSheet);
-
-        graph.addNode(builtinFunction);
-        for(Start arg : args) {
-            if(arg instanceof RangeReference /*|| arg instanceof CELL*/ || arg instanceof PrefixReferenceItem || arg instanceof ReferenceItem) {
-                if(unordered.add(arg)) {
-                    graph.addNode(arg);
-                    graph.addEdge(arg, builtinFunction);
-                }
-            }
-        }
-        stack.push(builtinFunction);
-    }
-
-    private void builtinFunction(String name) throws UnsupportedBuiltinException {
-        var factory = new BuiltinFactory();
-        factory.create(0, name);
-        var builtinFunction = (EXCEL_FUNCTION) factory.getBuiltInFunction();
-        stack.push(builtinFunction);
     }
 
     public StartList getList() {
