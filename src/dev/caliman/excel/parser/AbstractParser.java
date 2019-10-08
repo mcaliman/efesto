@@ -350,6 +350,16 @@ public abstract class AbstractParser {
         return row.getCell(cell.getCol());
     }
 
+    /**
+     * Area3DPxg
+     * Title: XSSF Area 3D Reference (Sheet + Area)
+     * Description: Defined an area in an external or different sheet.
+     * REFERENCE:
+     * This is XSSF only, as it stores the sheet / book references in String form.
+     * The HSSF equivalent using indexes is Area3DPtg
+     * <p>
+     * parseSheetPlusArea
+     */
     RANGE parseRange(String sheetnamne, Area3DPxg t) {
         var rangeFirstRow = t.getFirstRow();
         var rangeFirstColumn = t.getFirstColumn();
@@ -366,6 +376,9 @@ public abstract class AbstractParser {
         return range;
     }
 
+    /**
+     * AreaPtg t Specifies a rectangular area of cells A1:A4 for instance.
+     */
     RANGE parseRange(Sheet sheet, AreaPtg t) {
         RANGE range = null;
         var rangeFirstRow = t.getFirstRow();

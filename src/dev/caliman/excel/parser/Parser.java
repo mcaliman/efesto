@@ -140,7 +140,7 @@ public final class Parser extends AbstractParser {
                 new WhatIf(p, addPtg, (Ptg t) -> parseAdd()),
                 new WhatIf(p, area3DPxg, (Ptg t) -> parseArea3DPxg((Area3DPxg) t)),
                 new WhatIf(p, areaErrPtg, this::parseErrPtg),
-                new WhatIf(p, areaPtg, (Ptg t) -> parseAreaPtg((AreaPtg) t)),
+                new WhatIf(p, areaPtg, (Ptg t) -> parseRangeReference((AreaPtg) t)),
                 new WhatIf(p, attrPtg, (Ptg t) -> parseAttrPtg((AttrPtg) t)),
                 new WhatIf(p, boolPtg, t -> parseBOOL(((BoolPtg) t).getValue())),
                 new WhatIf(p, concatPtg, t -> parseConcat()),
@@ -249,7 +249,7 @@ public final class Parser extends AbstractParser {
     /**
      * RangeReference
      */
-    private void parseAreaPtg(AreaPtg t) {
+    private void parseRangeReference(AreaPtg t) {
         RANGE tRANGE = parseRange(sheet, t);
         var elem = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         elem.setColumn(column);
