@@ -115,16 +115,6 @@ public final class Parser extends AbstractParser {
         return start;
     }
 
-    private void parseUDF(String arguments) {
-        var elem = new UDF(arguments);
-        elem.setColumn(this.column);
-        elem.setRow(this.row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        unordered.add(elem);
-        stack.push(elem);
-    }
 
     protected void parse(Ptg p) {
         verbose("parse: " + p.getClass().getSimpleName());
@@ -196,19 +186,7 @@ public final class Parser extends AbstractParser {
 
     }
 
-    /**
-     * ConstantArray
-     */
-    private void parseConstantArray(ArrayPtg t) {
-        Object[][] array = t.getTokenArrayValues();
-        var elem = new ConstantArray(array);
-        elem.setColumn(this.column);
-        elem.setRow(this.row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        this.stack.push(elem);
-    }
+
 
     private void parseSum(AttrPtg t) {
         if(t.isSum()) parseSum();
@@ -259,6 +237,38 @@ public final class Parser extends AbstractParser {
         graph.addNode(elem);
     }
 
+
+//<editor-fold desc="ConstantArray,( Formula ): Formula ::= Constant | Reference | FunctionCall | ( Formula ) | ConstantArray | RESERVED-NAME">
+
+    /**
+     * ConstantArray
+     */
+    private void parseConstantArray(ArrayPtg t) {
+        Object[][] array = t.getTokenArrayValues();
+        var elem = new ConstantArray(array);
+        elem.setColumn(this.column);
+        elem.setRow(this.row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        this.stack.push(elem);
+    }
+
+    /**
+     * (F)
+     */
+    private void parseParenthesisFormula() {
+        var formula = (Formula) stack.pop();
+        var elem = new ParenthesisFormula(formula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        stack.push(elem);
+    }
+
+//</editor-fold>
 
 //<editor-fold desc="Constants: Constant ::= NUMBER | STRING | BOOL | ERROR">
 
@@ -442,7 +452,18 @@ public final class Parser extends AbstractParser {
 
 //</editor-fold>
 
-//<editor-fold desc="BuiltInFunction">
+//<editor-fold desc="BuiltInFunction: Function ::= FUNCTION | UDF">
+
+    private void parseUDF(String arguments) {
+        var elem = new UDF(arguments);
+        elem.setColumn(this.column);
+        elem.setRow(this.row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        unordered.add(elem);
+        stack.push(elem);
+    }
 
     private void parseBuiltinFunction(FuncVarPtg t) {
         int arity = t.getNumberOfOperands();
@@ -501,19 +522,6 @@ public final class Parser extends AbstractParser {
 
 //<editor-fold desc="GRAMMAR ELEMENTS">
 
-    /**
-     * (F)
-     */
-    private void parseParenthesisFormula() {
-        var formula = (Formula) stack.pop();
-        var elem = new ParenthesisFormula(formula);
-        elem.setColumn(column);
-        elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        stack.push(elem);
-    }
 
     /**
      * F=F
@@ -788,6 +796,7 @@ public final class Parser extends AbstractParser {
     public void setVerbose(boolean verbose) {
         this.verbose = verbose;
     }
+
     public int getCounterFormulas() {
         return noOfFormulas;
     }
@@ -800,6 +809,7 @@ public final class Parser extends AbstractParser {
         err.println(getCellAddress() + " error: " + string);
         //throw new RuntimeException(getCellAddress() + " error: " + string);
     }
+
     private void verbose(String text) {
         if(this.verbose) out.println(text);
     }
