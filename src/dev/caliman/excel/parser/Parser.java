@@ -187,36 +187,6 @@ public final class Parser extends AbstractParser {
     }
 
 
-
-    private void parseSum(AttrPtg t) {
-        if(t.isSum()) parseSum();
-    }
-
-    /**
-     * SUM(Arguments)
-     */
-    private void parseSum() {
-        var args = stack.pop();
-        if(args instanceof Reference || args instanceof OFFSET) {
-            args.setSheetIndex(this.getSheetIndex());
-            args.setSheetName(this.getSheetName());
-            args.setAsArea();
-            unordered.add(args);
-        } else {
-            err("Not RangeReference " + args.getClass().getSimpleName() + " " + args.toString());
-        }
-        var elem = new SUM((Formula) args);
-        elem.setColumn(column);
-        elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        unordered.add(elem);
-        graph.add(elem);
-        stack.push(elem);
-    }
-
-
     private void parseFormula(Start elem) {
         elem.setColumn(column);
         elem.setRow(row);
@@ -452,7 +422,35 @@ public final class Parser extends AbstractParser {
 
 //</editor-fold>
 
-//<editor-fold desc="BuiltInFunction: Function ::= FUNCTION | UDF">
+//<editor-fold desc="BuiltInFunction,UDF,SUM : Function ::= FUNCTION | UDF">
+
+    private void parseSum(AttrPtg t) {
+        if(t.isSum()) parseSum();
+    }
+
+    /**
+     * SUM(Arguments)
+     */
+    private void parseSum() {
+        var args = stack.pop();
+        if(args instanceof Reference || args instanceof OFFSET) {
+            args.setSheetIndex(this.getSheetIndex());
+            args.setSheetName(this.getSheetName());
+            args.setAsArea();
+            unordered.add(args);
+        } else {
+            err("Not RangeReference " + args.getClass().getSimpleName() + " " + args.toString());
+        }
+        var elem = new SUM((Formula) args);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        unordered.add(elem);
+        graph.add(elem);
+        stack.push(elem);
+    }
 
     private void parseUDF(String arguments) {
         var elem = new UDF(arguments);
@@ -520,8 +518,37 @@ public final class Parser extends AbstractParser {
     }
 //</editor-fold>
 
-//<editor-fold desc="GRAMMAR ELEMENTS">
+//<editor-fold desc="UnOpPrefix = + | -">
 
+    /**
+     * + F
+     */
+    private void parsePlus() {
+        var formula = (Formula) stack.pop();
+        var elem = new Plus(formula);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        graph.addNode(elem);
+        stack.push(elem);
+    }
+
+    /**
+     * - F
+     */
+    private void parseMinus() {
+        var formula = (Formula) stack.pop();
+        var elem = new Minus(formula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        graph.addNode(elem);
+        stack.push(elem);
+    }
+//</editor-fold>
+
+//<editor-fold desc="BinOp = + | - | * | / | ^ | < | > | = | <= | >= | <>">
 
     /**
      * F=F
@@ -620,22 +647,6 @@ public final class Parser extends AbstractParser {
     }
 
     /**
-     * F&F
-     */
-    private void parseConcat() {
-        var rFormula = (Formula) stack.pop();
-        var lFormula = (Formula) stack.pop();
-        var elem = new Concat(lFormula, rFormula);
-        elem.setColumn(column);
-        elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        graph.add(elem);
-        stack.push(elem);
-    }
-
-    /**
      * F+F
      */
     private void parseAdd() {
@@ -716,6 +727,12 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
+
+//</editor-fold>
+
+
+//<editor-fold desc="Formula %: FunctionCall ::= Function Arguments )| UnOpPrefix Formula | Formula % | Formula BinOp Formula">
+
     /**
      * F%
      */
@@ -731,32 +748,29 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
-    /**
-     * + F
-     */
-    private void parsePlus() {
-        var formula = (Formula) stack.pop();
-        var elem = new Plus(formula);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        graph.addNode(elem);
-        stack.push(elem);
-    }
+
+//</editor-fold>
+
+//<editor-fold desc="GRAMMAR ELEMENTS">
 
     /**
-     * - F
+     * F&F
      */
-    private void parseMinus() {
-        var formula = (Formula) stack.pop();
-        var elem = new Minus(formula);
+    private void parseConcat() {
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var elem = new Concat(lFormula, rFormula);
         elem.setColumn(column);
         elem.setRow(row);
         elem.setSheetIndex(this.getSheetIndex());
         elem.setSheetName(this.getSheetName());
         elem.setSingleSheet(this.singleSheet);
-        graph.addNode(elem);
+        graph.add(elem);
         stack.push(elem);
     }
+
+
+
 
     /**
      * Intersection
@@ -792,6 +806,7 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 //</editor-fold>
+
 
     public void setVerbose(boolean verbose) {
         this.verbose = verbose;
