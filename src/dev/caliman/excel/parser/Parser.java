@@ -117,7 +117,6 @@ public final class Parser extends AbstractParser {
         return start;
     }
 
-
     protected void parse(Ptg p) {
         verbose("parse: " + p.getClass().getSimpleName());
         try(Stream<WhatIf> stream = Stream.of(
