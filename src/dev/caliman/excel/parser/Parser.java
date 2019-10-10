@@ -730,7 +730,6 @@ public final class Parser extends AbstractParser {
 
 //</editor-fold>
 
-
 //<editor-fold desc="Formula %: FunctionCall ::= Function Arguments )| UnOpPrefix Formula | Formula % | Formula BinOp Formula">
 
     /**
@@ -751,8 +750,7 @@ public final class Parser extends AbstractParser {
 
 //</editor-fold>
 
-//<editor-fold desc="GRAMMAR ELEMENTS">
-
+//<editor-fold desc="& : Concat op">
     /**
      * F&F
      */
@@ -768,9 +766,29 @@ public final class Parser extends AbstractParser {
         graph.add(elem);
         stack.push(elem);
     }
+//</editor-fold>
 
+//<editor-fold desc="Union ::= Reference | Reference , Union">
 
+    /**
+     * Union
+     * F,F
+     */
+    private void parseUnion() {
+        var rFormula = (Formula) stack.pop();
+        var lFormula = (Formula) stack.pop();
+        var elem = new Union(lFormula, rFormula);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        graph.add(elem);
+        stack.push(elem);
+    }
+//</editor-fold>
 
+//<editor-fold desc="Reference ' ' Reference: Reference ::= ReferenceItem | Reference : Reference | Reference ' ' Reference | ( Union ) | ( Reference ) | Prefix ReferenceItem| Prefix UDF Arguments )| DynamicDataExchange">
 
     /**
      * Intersection
@@ -789,22 +807,6 @@ public final class Parser extends AbstractParser {
         this.stack.push(elem);
     }
 
-    /**
-     * Union
-     * F,F
-     */
-    private void parseUnion() {
-        var rFormula = (Formula) stack.pop();
-        var lFormula = (Formula) stack.pop();
-        var elem = new Union(lFormula, rFormula);
-        elem.setColumn(column);
-        elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        graph.add(elem);
-        stack.push(elem);
-    }
 //</editor-fold>
 
 
