@@ -75,6 +75,8 @@ public final class Parser extends AbstractParser {
         this.stack = new Stack<>();
     }
 
+
+    //<editor-fold desc="Parsing">
     protected void parse(Cell cell) {
         if(isFormula(cell)) {
             parseFormula(cell);
@@ -167,26 +169,6 @@ public final class Parser extends AbstractParser {
         }
     }
 
-    /**
-     * RangeReference
-     */
-    private void parseRangeReference(AreaPtg t) {
-        RANGE tRANGE = parseRange(sheet, t);
-        var elem = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
-        elem.setColumn(column);
-        elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-
-        elem.setAsArea();//is area not a cell with ref to area
-        elem.add(tRANGE.values());
-        graph.addNode(elem);
-        stack.push(elem);
-
-    }
-
-
     private void parseFormula(Start elem) {
         elem.setColumn(column);
         elem.setRow(row);
@@ -196,17 +178,7 @@ public final class Parser extends AbstractParser {
         unordered.add(elem);
     }
 
-    private void parseCELLlinked(CELL elem) {
-        elem.setColumn(column);
-        elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        this.unordered.add(elem);
-        stack.push(elem);
-        graph.addNode(elem);
-    }
-
+//</editor-fold>
 
 //<editor-fold desc="ConstantArray,( Formula ): Formula ::= Constant | Reference | FunctionCall | ( Formula ) | ConstantArray | RESERVED-NAME">
 
@@ -299,6 +271,17 @@ public final class Parser extends AbstractParser {
         elem.setSingleSheet(this.singleSheet);
         this.unordered.add(elem);
         stack.push(elem);
+    }
+
+    private void parseCELLlinked(CELL elem) {
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+        this.unordered.add(elem);
+        stack.push(elem);
+        graph.addNode(elem);
     }
 
     private void parseNamedRange(NamePtg t) {
@@ -788,7 +771,26 @@ public final class Parser extends AbstractParser {
     }
 //</editor-fold>
 
-//<editor-fold desc="Reference ' ' Reference: Reference ::= ReferenceItem | Reference : Reference | Reference ' ' Reference | ( Union ) | ( Reference ) | Prefix ReferenceItem| Prefix UDF Arguments )| DynamicDataExchange">
+//<editor-fold desc="Reference : Reference [A1:B3], Reference ' ' Reference [A1:B1 A2:C4] : Reference ::= ReferenceItem | Reference : Reference | Reference ' ' Reference | ( Union ) | ( Reference ) | Prefix ReferenceItem| Prefix UDF Arguments )| DynamicDataExchange">
+
+    /**
+     * RangeReference
+     */
+    private void parseRangeReference(AreaPtg t) {
+        RANGE tRANGE = parseRange(sheet, t);
+        var elem = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(this.getSheetIndex());
+        elem.setSheetName(this.getSheetName());
+        elem.setSingleSheet(this.singleSheet);
+
+        elem.setAsArea();//is area not a cell with ref to area
+        elem.add(tRANGE.values());
+        graph.addNode(elem);
+        stack.push(elem);
+
+    }
 
     /**
      * Intersection
@@ -809,18 +811,18 @@ public final class Parser extends AbstractParser {
 
 //</editor-fold>
 
-
-    public void setVerbose(boolean verbose) {
-        this.verbose = verbose;
+    //<editor-fold desc="Sorting">
+    public void sort() {
+        if(this.unordered.singleton()) {
+            this.ordered = new StartList();
+            this.ordered.add(this.unordered.get(0));
+            return;
+        }
+        this.ordered = this.graph.topologicalSort();
     }
+//</editor-fold>
 
-    public int getCounterFormulas() {
-        return noOfFormulas;
-    }
-
-    public StartList getList() {
-        return ordered;
-    }
+//<editor-fold desc="Utilities">
 
     private void err(String string) {
         err.println(getCellAddress() + " error: " + string);
@@ -831,12 +833,24 @@ public final class Parser extends AbstractParser {
         if(this.verbose) out.println(text);
     }
 
-    public void sort() {
-        if(this.unordered.singleton()) {
-            this.ordered = new StartList();
-            this.ordered.add(this.unordered.get(0));
-            return;
-        }
-        this.ordered = this.graph.topologicalSort();
+
+//</editor-fold>
+
+    //<editor-fold desc="Getters">
+    public int getCounterFormulas() {
+        return noOfFormulas;
     }
+
+    public StartList getList() {
+        return ordered;
+    }
+//</editor-fold>
+
+//<editor-fold desc="Setters">
+
+    public void setVerbose(boolean verbose) {
+        this.verbose = verbose;
+    }
+
+//</editor-fold>
 }
