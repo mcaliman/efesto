@@ -82,7 +82,7 @@ public final class Parser extends AbstractParser {
             parseFormula(cell);
         } else if(this.ext.contains(cell)) {
             verbose("Recover loosed cell!");
-            Object value = this.parseCellValue(cell);
+            Object value = parseCellValue(cell);
             CELL elem = new CELL(cell.getRowIndex(), cell.getColumnIndex());
             elem.setValue(value);
             elem.setSHEET(new SHEET(getSheetName(cell), getSheetIndex(cell)));
@@ -161,7 +161,9 @@ public final class Parser extends AbstractParser {
                 new WhatIf(p, unionPtg, t -> parseUnion()),
                 new WhatIf(p, unknownPtg, this::parseErrPtg)
         )) {
-            stream.filter((WhatIf t) -> t.predicate.test(t.ptg)).forEach(t -> t.consumer.accept(t.ptg));
+            stream.
+                    filter((WhatIf t) -> t.predicate.test(t.ptg)).
+                    forEach(t -> t.consumer.accept(t.ptg));
         } catch(Exception e) {
             //err.println("parse: " + p.getClass().getSimpleName() + " " + this.cSHEET.getName() + "row:" + row + "column:" + column + e.getMessage());
             e.printStackTrace();
@@ -169,10 +171,10 @@ public final class Parser extends AbstractParser {
     }
 
     private void parseFormula(Start elem) {
-        elem.setColumn(column);
-        elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
+        elem.setColumn(this.column);
+        elem.setRow(this.row);
+        elem.setSheetIndex(getSheetIndex());
+        elem.setSheetName(getSheetName());
         elem.setSingleSheet(this.singleSheet);
         unordered.add(elem);
     }
@@ -254,31 +256,44 @@ public final class Parser extends AbstractParser {
 
 //<editor-fold desc="ReferenceItem::= CELL | NamedRange | ERROR-REF">
 
+
     private void parseCELL(RefPtg t) {
-        Row row_ = this.sheet.getRow(t.getRow());
-        Object value = null;
-        if(row_ != null) {
-            Cell c = row_.getCell(t.getColumn());
-            value = this.parseCellValue(c);
+        Row row = this.sheet.getRow(t.getRow());
+        //Object value = null;
+        if(row != null) {
+            Cell cell = row.getCell(t.getColumn());
+            Object value = null;
+            value = this.parseCellValue(cell);
+            CELL elem = new CELL(t.getRow(), t.getColumn());
+            elem.setValue(value);
+            elem.setColumn(this.column);
+            elem.setRow(this.row);
+            elem.setSheetIndex(getSheetIndex());
+            elem.setSheetName(getSheetName());
+            elem.setSingleSheet(singleSheet);
+            unordered.add(elem);
+            stack.push(elem);
+        } else {
+            throw new RuntimeException("Row value is null!");
         }
-        CELL elem = new CELL(t.getRow(), t.getColumn());
-        elem.setValue(value);
-        elem.setColumn(this.column);
-        elem.setRow(this.row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        this.unordered.add(elem);
-        stack.push(elem);
+//        CELL elem = new CELL(t.getRow(), t.getColumn());
+//        elem.setValue(value);
+//        elem.setColumn(this.column);
+//        elem.setRow(this.row);
+//        elem.setSheetIndex(getSheetIndex());
+//        elem.setSheetName(getSheetName());
+//        elem.setSingleSheet(singleSheet);
+//        unordered.add(elem);
+//        stack.push(elem);
     }
 
     private void parseCELLlinked(CELL elem) {
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        this.unordered.add(elem);
+        elem.setSheetIndex(getSheetIndex());
+        elem.setSheetName(getSheetName());
+        elem.setSingleSheet(singleSheet);
+        unordered.add(elem);
         stack.push(elem);
         graph.addNode(elem);
     }
