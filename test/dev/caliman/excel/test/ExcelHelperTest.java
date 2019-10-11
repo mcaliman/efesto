@@ -23,6 +23,7 @@
 package dev.caliman.excel.test;
 
 import dev.caliman.excel.grammar.Start;
+import dev.caliman.excel.parser.AbstractParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -39,8 +40,8 @@ class ExcelHelperTest {
     @Test
     void testColumnAsLetter() {
         System.out.println("columnAsLetter");
-        Assertions.assertEquals("A", Start.columnAsLetter(0));
-        assertEquals("B", Start.columnAsLetter(1));
+        Assertions.assertEquals("A", AbstractParser.columnAsLetter(0));
+        assertEquals("B", AbstractParser.columnAsLetter(1));
     }
 
     @Test

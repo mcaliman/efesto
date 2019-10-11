@@ -23,6 +23,7 @@
 package dev.caliman.excel.grammar;
 
 import dev.caliman.excel.grammar.formula.reference.SHEET;
+import dev.caliman.excel.parser.AbstractParser;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -55,11 +56,11 @@ public abstract class Start {
     }
 
     public static String cellAddress(final int row, final int column) {
-        String letter = columnAsLetter(column);
+        String letter = AbstractParser.columnAsLetter(column);
         return (letter + (row + 1));
     }
 
-    public static String columnAsLetter(int col) {
+    /*public static String columnAsLetter(int col) {
         int excelColNum = col + 1;
         StringBuilder colRef = new StringBuilder(2);
         int colRemain = excelColNum;
@@ -73,7 +74,7 @@ public abstract class Start {
             colRef.insert(0, colChar);
         }
         return colRef.toString();
-    }
+    }*/
 
     public void setSingleSheet(boolean singleSheet) {
         this.singleSheet = singleSheet;
