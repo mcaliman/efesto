@@ -60,22 +60,6 @@ public abstract class Start {
         return (letter + (row + 1));
     }
 
-    /*public static String columnAsLetter(int col) {
-        int excelColNum = col + 1;
-        StringBuilder colRef = new StringBuilder(2);
-        int colRemain = excelColNum;
-        while(colRemain > 0) {
-            int thisPart = colRemain % 26;
-            if(thisPart == 0) {
-                thisPart = 26;
-            }
-            colRemain = (colRemain - thisPart) / 26;
-            char colChar = (char) (thisPart + 64);
-            colRef.insert(0, colChar);
-        }
-        return colRef.toString();
-    }*/
-
     public void setSingleSheet(boolean singleSheet) {
         this.singleSheet = singleSheet;
     }
