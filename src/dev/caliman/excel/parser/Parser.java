@@ -185,16 +185,21 @@ public final class Parser extends AbstractParser {
 
     /**
      * ConstantArray
+     *
+     * ConstantArray ::= { ArrayColumns }
+     * ArrayColumns::= ArrayRows | ArrayRows ; ArrayColumns
+     * ArrayRows ::= ArrayConstant | ArrayConstant , ArrayRows
+     * ArrayConstant ::= Constant | UnOpPrefix NUMBER | ERROR-REF
      */
     private void parseConstantArray(ArrayPtg t) {
         Object[][] array = t.getTokenArrayValues();
         var elem = new ConstantArray(array);
-        elem.setColumn(this.column);
-        elem.setRow(this.row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
-        this.stack.push(elem);
+        elem.setColumn(column);
+        elem.setRow(row);
+        elem.setSheetIndex(getSheetIndex());
+        elem.setSheetName(getSheetName());
+        elem.setSingleSheet(singleSheet);
+        stack.push(elem);
     }
 
     /**
