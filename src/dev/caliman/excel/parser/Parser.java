@@ -299,23 +299,22 @@ public final class Parser extends AbstractParser {
     }
 
     private void parseNamedRange(NamePtg t) {
-        // RangeInternal range = null;
         Ptg[] ptgs = getName(t);
         String name = getNameText(t);
-        RANGE tRANGE = null;
+        RANGE range = null;
         String sheetName = this.getSheetName();
         int sheetIndex = 0;
         for(Ptg ptg : ptgs) {
             if(ptg != null) {
                 if(ptg instanceof Area3DPxg) {
                     Area3DPxg area3DPxg = (Area3DPxg) ptg;
-                    tRANGE = parseRange(area3DPxg.getSheetName(), area3DPxg);//RangeInternal(area3DPxg.getSheetName(), area3DPxg);
+                    range = parseRange(area3DPxg.getSheetName(), area3DPxg);
                     sheetName = area3DPxg.getSheetName();
                     sheetIndex = getSheetIndex(area3DPxg.getSheetName());
                 }
             }
         }
-        NamedRange elem = new NamedRange(name, tRANGE);
+        NamedRange elem = new NamedRange(name, range);
         elem.setSheetIndex(sheetIndex);
         elem.setSheetName(sheetName);
         stack.push(elem);
@@ -796,9 +795,9 @@ public final class Parser extends AbstractParser {
         var elem = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
         elem.setColumn(column);
         elem.setRow(row);
-        elem.setSheetIndex(this.getSheetIndex());
-        elem.setSheetName(this.getSheetName());
-        elem.setSingleSheet(this.singleSheet);
+        elem.setSheetIndex(getSheetIndex());
+        elem.setSheetName(getSheetName());
+        elem.setSingleSheet(singleSheet);
 
         elem.setAsArea();//is area not a cell with ref to area
         elem.add(tRANGE.values());
