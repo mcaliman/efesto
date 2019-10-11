@@ -23,8 +23,6 @@
 package dev.caliman.excel.grammar;
 
 import dev.caliman.excel.grammar.formula.reference.SHEET;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,12 +42,11 @@ public abstract class Start {
     private int column;
 
 
-    @NotNull
-    protected static String format(@Nullable final Date date) {
+    protected static String format(final Date date) {
         return date == null?"":DATE_FORMAT.format(date);
     }
 
-    public static String cellAddress(final int row, final int column, @Nullable final String sheetName) {
+    public static String cellAddress(final int row, final int column, final String sheetName) {
         StringBuilder buffer = new StringBuilder();
         if(sheetName != null)
             buffer.append(sheetName).append("!");
@@ -116,12 +113,10 @@ public abstract class Start {
         this.sheetName = tSHEET.getName();
     }
 
-    @NotNull
     public String getAddress() {
         return Start.cellAddress(getRow(), getColumn(), sheetName);
     }
 
-    @NotNull
     public String getAddress(boolean sheet) {
         return sheet?Start.cellAddress(getRow(), getColumn(), sheetName):cellAddress(getRow(), getColumn());
     }
@@ -157,7 +152,6 @@ public abstract class Start {
         else return this.getAddress().equalsIgnoreCase(that.getAddress());
     }
 
-    @Nullable
     @Override
     public String toString() {
         return "";

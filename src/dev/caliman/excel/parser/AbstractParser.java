@@ -205,7 +205,7 @@ public abstract class AbstractParser {
         return (letter + (this.row + 1));
     }
 
-    private String columnAsLetter(int column) {
+    public final static String columnAsLetter(int column) {
         int columnNumber = column + 1;
         StringBuilder string = new StringBuilder(2);
         int colRemain = columnNumber;
@@ -222,7 +222,6 @@ public abstract class AbstractParser {
     String getCellAddress() {
         return cellAddress(this.getSheetName());
     }
-
 
     int getSheetIndex() {
         return this.workbook.getSheetIndex(this.sheet);
