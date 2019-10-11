@@ -123,7 +123,8 @@ public abstract class AbstractParser {
         this.evaluation = XSSFEvaluationWorkbook.create((XSSFWorkbook) this.workbook);
         int noOfSheets = this.workbook.getNumberOfSheets();
         this.singleSheet = noOfSheets == 1;
-        this.workbook.forEach(
+        Stream<Sheet> stream = StreamSupport.stream(this.workbook.spliterator(), false);
+        stream.forEach(
                 (sheet) -> {
                     this.sheet = sheet;
                     parseRows();
