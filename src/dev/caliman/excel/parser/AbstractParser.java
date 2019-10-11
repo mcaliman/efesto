@@ -194,10 +194,7 @@ public abstract class AbstractParser {
     }
 
     private String cellAddress(final String sheetName) {
-        StringBuilder buffer = new StringBuilder();
-        if(sheetName != null) buffer.append(sheetName).append("!");
-        buffer.append(cellAddress());
-        return buffer.toString();
+        return sheetName != null?sheetName + "!" + cellAddress():cellAddress();
     }
 
     private String cellAddress() {
