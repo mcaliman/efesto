@@ -23,7 +23,6 @@
 package dev.caliman.excel.parser;
 
 import dev.caliman.excel.grammar.Start;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +52,7 @@ public final class StartList extends ArrayList<Start> implements List<Start> {
         return this.get(index).testToFunctional(text);
     }
 
-    public boolean testToFunctional(int offset, @NotNull String... text) {
+    public boolean testToFunctional(int offset, String... text) {
         if(size() == 0) return false;
         boolean test = true;
         for(int i = 0; i < text.length; i++)

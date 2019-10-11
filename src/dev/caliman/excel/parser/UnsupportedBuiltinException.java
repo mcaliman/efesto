@@ -1,4 +1,3 @@
-
 /*
  * Efesto - Excel Formula Extractor System and Topological Ordering algorithm.
  * Copyright (C) 2017 Massimo Caliman mcaliman@gmail.com

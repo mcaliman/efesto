@@ -30,7 +30,6 @@ import dev.caliman.excel.grammar.formula.reference.conditionalreferencefunction.
 import dev.caliman.excel.grammar.formula.reference.referencefunction.INDEX;
 import dev.caliman.excel.grammar.formula.reference.referencefunction.INDIRECT;
 import dev.caliman.excel.grammar.formula.reference.referencefunction.OFFSET;
-import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -41,8 +40,8 @@ import java.util.logging.Logger;
 
 final class BuiltinFactory {
 
-    private static final Logger LOG = Logger.getLogger(BuiltinFactory.class.getName());
-    private static final Map<String,Class> clazzMap = new HashMap<>();
+    private final static Logger LOG = Logger.getLogger(BuiltinFactory.class.getName());
+    private final static Map<String,Class> clazzMap = new HashMap<>();
 
     static {
         clazzMap.put("ABS", ABS.class);
@@ -391,12 +390,10 @@ final class BuiltinFactory {
         clazzMap.put("YIELDDISC", YIELDDISC.class);
         clazzMap.put("YIELDMAT", YIELDMAT.class);
         clazzMap.put("ZTEST", ZTEST.class);
-
     }
 
     private Start builtInFunction;
     private Formula[] args;
-
 
     public BuiltinFactory() {
     }
@@ -414,7 +411,7 @@ final class BuiltinFactory {
         try {
             clazz = clazzMap.get(name);
             if(clazz == null)
-                throw new UnsupportedBuiltinException("unsupported " + name);
+                throw new UnsupportedBuiltinException("Unsupported " + name);
             if(arity == 0) {
                 Constructor<?> constructor = clazz.getConstructor();
                 builtInFunction = (Start) constructor.newInstance();
@@ -423,7 +420,7 @@ final class BuiltinFactory {
             args = new Formula[arity];
             Constructor<?> constructor = clazz.getConstructor(Formula[].class);
             builtInFunction = (Start) constructor.newInstance(new Object[]{args});
-        } catch(@NotNull NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+        } catch(NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             LOG.log(Level.SEVERE, null, ex);
             throw new UnsupportedBuiltinException(ex.getMessage());
         }
