@@ -25,16 +25,12 @@ package dev.caliman.excel.grammar;
 import dev.caliman.excel.grammar.formula.reference.SHEET;
 import dev.caliman.excel.parser.AbstractParser;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 
 /**
  * @author Massimo Caliman
  */
 public abstract class Start {
 
-    private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     protected String sheetName;
     protected boolean singleSheet;
@@ -42,10 +38,6 @@ public abstract class Start {
     private int row;
     private int column;
 
-
-    protected static String format(final Date date) {
-        return date == null?"":DATE_FORMAT.format(date);
-    }
 
     public static String cellAddress(final int row, final int column, final String sheetName) {
         StringBuilder buffer = new StringBuilder();

@@ -22,10 +22,10 @@
 
 package dev.caliman.excel.grammar.formula.constant;
 
-import dev.caliman.excel.grammar.Start;
 import dev.caliman.excel.grammar.formula.Constant;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -33,7 +33,7 @@ import java.util.Objects;
  * @author Massimo Caliman
  */
 public final class DATE extends Constant {
-
+    private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
     private final Date value;
 
     @SuppressWarnings("unused")
@@ -66,7 +66,10 @@ public final class DATE extends Constant {
 
     @Override
     public String toString() {
-        return Start.format(value);
+        return format(value);
     }
 
+    private String format(final Date date) {
+        return date == null?"":DATE_FORMAT.format(date);
+    }
 }
