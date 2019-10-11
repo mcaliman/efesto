@@ -161,7 +161,7 @@ public final class Parser extends AbstractParser {
                 new WhatIf(p, unionPtg, t -> parseUnion()),
                 new WhatIf(p, unknownPtg, this::parseErrPtg)
         )) {
-            stream.
+            stream.parallel().
                     filter((WhatIf t) -> t.predicate.test(t.ptg)).
                     forEach(t -> t.consumer.accept(t.ptg));
         } catch(Exception e) {
