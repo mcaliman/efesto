@@ -46,6 +46,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import static java.lang.System.err;
 import static org.apache.poi.ss.formula.ptg.ErrPtg.*;
@@ -131,17 +132,13 @@ public abstract class AbstractParser {
     }
 
     private void parseRows() {
-        List<Row> rows = new ArrayList<>();
-        for(Row row : this.sheet) rows.add(row);
-        Stream<Row> stream = rows.stream();
+        Stream<Row> stream = StreamSupport.stream(this.sheet.spliterator(), false);
         stream.forEachOrdered(this::parse);
     }
 
     private void parse(Row row) {
-        List<Cell> cells = new ArrayList<>();
-        for(Cell cell : row) cells.add(cell);
-
-        cells.stream().parallel().filter(cell -> !empty(cell)).forEachOrdered(this::parse);
+        Stream<Cell> stream = StreamSupport.stream(row.spliterator(), false);
+        stream.parallel().filter(cell -> !empty(cell)).forEachOrdered(this::parse);
     }
 
     protected abstract void parse(Cell cell);
