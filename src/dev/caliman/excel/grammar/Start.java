@@ -51,13 +51,8 @@ public abstract class Start {
         StringBuilder buffer = new StringBuilder();
         if(sheetName != null)
             buffer.append(sheetName).append("!");
-        buffer.append(cellAddress(row, column));
+        buffer.append(AbstractParser.cellAddress(row, column));
         return buffer.toString();
-    }
-
-    public static String cellAddress(final int row, final int column) {
-        String letter = AbstractParser.columnAsLetter(column);
-        return (letter + (row + 1));
     }
 
     public void setSingleSheet(boolean singleSheet) {
@@ -103,11 +98,11 @@ public abstract class Start {
     }
 
     public String getAddress(boolean sheet) {
-        return sheet?Start.cellAddress(getRow(), getColumn(), sheetName):cellAddress(getRow(), getColumn());
+        return sheet?Start.cellAddress(getRow(), getColumn(), sheetName):AbstractParser.cellAddress(getRow(), getColumn());
     }
 
     public String id() {
-        return this.singleSheet?cellAddress(getRow(), getColumn()):quoteIf(sheetName) + "!" + cellAddress(getRow(), getColumn());
+        return this.singleSheet?AbstractParser.cellAddress(getRow(), getColumn()):quoteIf(sheetName) + "!" + AbstractParser.cellAddress(getRow(), getColumn());
     }
 
     @Override

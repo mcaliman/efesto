@@ -47,7 +47,7 @@ class ExcelHelperTest {
     @Test
     void testCellAddress_int_int() {
         System.out.println("cellAddress(row,col)");
-        assertEquals("A1", Start.cellAddress(0, 0));
+        assertEquals("A1", AbstractParser.cellAddress(0, 0));
 
     }
 

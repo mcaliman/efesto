@@ -200,6 +200,11 @@ public abstract class AbstractParser {
         return (letter + (this.row + 1));
     }
 
+    public final static String cellAddress(final int row, final int column) {
+        String letter = AbstractParser.columnAsLetter(column);
+        return (letter + (row + 1));
+    }
+
     public final static String columnAsLetter(int column) {
         int columnNumber = column + 1;
         StringBuilder string = new StringBuilder(2);
