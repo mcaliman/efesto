@@ -165,8 +165,8 @@ public final class Parser extends AbstractParser {
                     filter((WhatIf t) -> t.predicate.test(t.ptg)).
                     forEach(t -> t.consumer.accept(t.ptg));
         } catch(Exception e) {
-            //err.println("parse: " + p.getClass().getSimpleName() + " " + this.cSHEET.getName() + "row:" + row + "column:" + column + e.getMessage());
-            e.printStackTrace();
+            err.println("Parse Error: " + p.getClass().getSimpleName() + " Sheet:" + getSheetName() + " row:" + row + " column:" + column + " exception:" + e.getMessage());
+            //e.printStackTrace();
         }
     }
 
