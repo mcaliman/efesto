@@ -264,7 +264,6 @@ public final class Parser extends AbstractParser {
 
     private void parseCELL(RefPtg t) {
         Row row = this.sheet.getRow(t.getRow());
-        //Object value = null;
         if(row != null) {
             Cell cell = row.getCell(t.getColumn());
             Object value = null;
@@ -281,15 +280,6 @@ public final class Parser extends AbstractParser {
         } else {
             throw new RuntimeException("Row value is null!");
         }
-//        CELL elem = new CELL(t.getRow(), t.getColumn());
-//        elem.setValue(value);
-//        elem.setColumn(this.column);
-//        elem.setRow(this.row);
-//        elem.setSheetIndex(getSheetIndex());
-//        elem.setSheetName(getSheetName());
-//        elem.setSingleSheet(singleSheet);
-//        unordered.add(elem);
-//        stack.push(elem);
     }
 
     private void parseCELLlinked(CELL elem) {
@@ -325,8 +315,10 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
+    /**
+     * #REF
+     */
     private void parseERRORREF() {
-        //#REF
         ERRORREF elem = new ERRORREF();
         elem.setColumn(column);
         elem.setRow(row);
