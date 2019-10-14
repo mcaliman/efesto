@@ -40,11 +40,10 @@ public abstract class Start {
 
 
     public static String cellAddress(final int row, final int column, final String sheetName) {
-        StringBuilder buffer = new StringBuilder();
-        if(sheetName != null)
-            buffer.append(sheetName).append("!");
-        buffer.append(AbstractParser.cellAddress(row, column));
-        return buffer.toString();
+        return sheetName != null?
+                sheetName + "!" + AbstractParser.cellAddress(row, column):
+                AbstractParser.cellAddress(row, column);
+
     }
 
     public void setSingleSheet(boolean singleSheet) {
