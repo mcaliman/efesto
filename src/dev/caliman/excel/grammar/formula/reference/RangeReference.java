@@ -37,11 +37,6 @@ public final class RangeReference extends Reference {
 
     private RANGE range;
 
-    private RangeReference(CELL reference1, CELL reference2) {
-        this.reference1 = reference1;
-        this.reference2 = reference2;
-    }
-
     public RangeReference(RANGE range) {
         this.range = range;
         this.reference1 = range.getFirst();
@@ -57,21 +52,13 @@ public final class RangeReference extends Reference {
         return Objects.requireNonNull(that.toString()).equals(this.toString());
     }
 
-    private boolean horizzontal_range() {
-        return reference1.getRow() == reference2.getRow() && reference1.getColumn() != reference2.getColumn();
-    }
-
-    private boolean vertical_range() {
-        return reference1.getColumn() == reference2.getColumn() && reference1.getRow() != reference2.getRow();
-    }
-
     @Override
     public String toString() {
         return values();
     }
 
     private String values() {
-        return values(reference1.getRow(), reference1.getColumn(), reference2.getRow(), reference2.getColumn(), vals, (horizzontal_range() || vertical_range()));
+        return values(reference1.getRow(), reference1.getColumn(), reference2.getRow(), reference2.getColumn(), vals, (range.isHorizzontal() || range.isVertical()));
     }
 
     public String id() {

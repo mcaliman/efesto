@@ -58,4 +58,12 @@ public class RANGE extends Reference {
     }
 
 
+    public boolean isHorizzontal() {
+        return first.getRow() == last.getRow() && first.getColumn() != last.getColumn();
+    }
+
+    public boolean isVertical() {
+        return first.getColumn() == last.getColumn() && first.getRow() != last.getRow();
+    }
+
 }
