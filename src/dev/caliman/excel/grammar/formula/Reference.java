@@ -24,7 +24,6 @@ package dev.caliman.excel.grammar.formula;
 
 import dev.caliman.excel.grammar.Formula;
 import dev.caliman.excel.parser.AbstractParser;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +36,11 @@ public abstract class Reference extends Formula {
 
     protected final List<Object> vals = new ArrayList<>();
 
-    public void add(@NotNull List<Object> values) {
+    public void add(List<Object> values) {
         vals.addAll(values);
     }
 
-    protected String values(int fRow, int fCol, int lRow, int lCol, @NotNull List<Object> list, boolean isHorizzontalOrVerticalRange) {
+    protected String values(int fRow, int fCol, int lRow, int lCol, List<Object> list, boolean isHorizzontalOrVerticalRange) {
         if(list.isEmpty()) return "[]";
         if(isHorizzontalOrVerticalRange) {
             StringBuilder buff = new StringBuilder();

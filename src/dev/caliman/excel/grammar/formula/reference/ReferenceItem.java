@@ -23,7 +23,6 @@
 package dev.caliman.excel.grammar.formula.reference;
 
 import dev.caliman.excel.grammar.formula.Reference;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Massimo Caliman
@@ -45,7 +44,6 @@ public class ReferenceItem extends Reference {
         this.value = value;
     }
 
-    @Nullable
     @Override
     public String toString() {
         return value;
