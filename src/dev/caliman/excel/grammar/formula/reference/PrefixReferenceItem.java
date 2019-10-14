@@ -48,10 +48,6 @@ public final class PrefixReferenceItem extends Reference {
         if(this.range != null) {
             setAsArea();
             add(this.range.values());
-            setFirstRow(this.range.getFirst().getRow());
-            setFirstColumn(this.range.getFirst().getColumn());
-            setLastRow(this.range.getLast().getRow());
-            setLastColumn(this.range.getLast().getColumn());
         }
     }
 
@@ -77,22 +73,12 @@ public final class PrefixReferenceItem extends Reference {
     }
 
     private String values() {
-        return values(firstRow, firstColumn, lastRow, lastColumn, vals, (range.isHorizzontal() || range.isVertical()));
+        return values(this.range.getFirst().getRow(),
+                this.range.getFirst().getColumn(),
+                this.range.getLast().getRow(),
+                this.range.getLast().getColumn(),
+                vals,
+                (range.isHorizzontal() || range.isVertical()));
     }
 
-    private void setFirstRow(int firstRow) {
-        this.firstRow = firstRow;
-    }
-
-    private void setFirstColumn(int firstColumn) {
-        this.firstColumn = firstColumn;
-    }
-
-    private void setLastRow(int lastRow) {
-        this.lastRow = lastRow;
-    }
-
-    private void setLastColumn(int lastColumn) {
-        this.lastColumn = lastColumn;
-    }
 }
