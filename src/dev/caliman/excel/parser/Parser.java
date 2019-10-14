@@ -47,6 +47,7 @@ import org.apache.poi.ss.util.CellReference;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Stack;
 import java.util.stream.Stream;
 
@@ -88,7 +89,7 @@ public final class Parser extends AbstractParser {
             elem.setSHEET(new SHEET(getSheetName(cell), getSheetIndex(cell)));
             parseCELLlinked(elem);
             this.ext.remove(cell);
-        } else if(!this.ext.contains(cell) && !empty(cell)) {
+        } else if(!this.ext.contains(cell) && nonEmpty(cell)) {
             //Non è formula non è nelle celle utili collezionate
             out.println("Cella di interesse? " + cell.toString());
         }
@@ -309,7 +310,7 @@ public final class Parser extends AbstractParser {
                 }
             }
         }
-        NamedRange elem = new NamedRange(name, range);
+        NamedRange elem = new NamedRange(name, Objects.requireNonNull(range));
         elem.setSheetIndex(sheetIndex);
         elem.setSheetName(sheetName);
         stack.push(elem);
