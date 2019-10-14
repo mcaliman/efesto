@@ -200,6 +200,13 @@ public abstract class AbstractParser {
         return (letter + (this.row + 1));
     }
 
+    public static String cellAddress(final int row, final int column, final String sheetName) {
+        return sheetName != null?
+                sheetName + "!" + AbstractParser.cellAddress(row, column):
+                AbstractParser.cellAddress(row, column);
+
+    }
+
     public final static String cellAddress(final int row, final int column) {
         String letter = AbstractParser.columnAsLetter(column);
         return (letter + (row + 1));

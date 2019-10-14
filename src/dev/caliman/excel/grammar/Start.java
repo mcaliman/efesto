@@ -39,12 +39,7 @@ public abstract class Start {
     private int column;
 
 
-    public static String cellAddress(final int row, final int column, final String sheetName) {
-        return sheetName != null?
-                sheetName + "!" + AbstractParser.cellAddress(row, column):
-                AbstractParser.cellAddress(row, column);
 
-    }
 
     public void setSingleSheet(boolean singleSheet) {
         this.singleSheet = singleSheet;
@@ -85,11 +80,11 @@ public abstract class Start {
     }
 
     public String getAddress() {
-        return Start.cellAddress(getRow(), getColumn(), sheetName);
+        return AbstractParser.cellAddress(getRow(), getColumn(), sheetName);
     }
 
     public String getAddress(boolean sheet) {
-        return sheet?Start.cellAddress(getRow(), getColumn(), sheetName):AbstractParser.cellAddress(getRow(), getColumn());
+        return sheet?AbstractParser.cellAddress(getRow(), getColumn(), sheetName):AbstractParser.cellAddress(getRow(), getColumn());
     }
 
     public String id() {

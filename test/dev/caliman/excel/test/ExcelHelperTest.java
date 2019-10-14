@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.test;
 
-import dev.caliman.excel.grammar.Start;
 import dev.caliman.excel.parser.AbstractParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -55,7 +54,7 @@ class ExcelHelperTest {
     void testCellAddress_3args() {
         System.out.println("cellAddress(row,col,sheetname)");
 
-        String result = Start.cellAddress(0, 0, "Sheet");
+        String result = AbstractParser.cellAddress(0, 0, "Sheet");
         System.out.println(result);
         assertEquals("Sheet!A1", result);
     }
