@@ -419,6 +419,11 @@ public abstract class AbstractParser {
         return list(area);
     }
 
+
+    public static String quote(String text) {
+        return "\"" + text + "\"";
+    }
+
     class WhatIf {
 
         final Ptg ptg;

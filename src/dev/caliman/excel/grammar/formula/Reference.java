@@ -23,6 +23,7 @@
 package dev.caliman.excel.grammar.formula;
 
 import dev.caliman.excel.grammar.Formula;
+import dev.caliman.excel.parser.AbstractParser;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -35,10 +36,6 @@ import java.util.List;
 public abstract class Reference extends Formula {
 
     protected final List<Object> vals = new ArrayList<>();
-
-    private static String quote(String text) {
-        return "\"" + text + "\"";
-    }
 
     public void add(@NotNull List<Object> values) {
         vals.addAll(values);
@@ -73,7 +70,7 @@ public abstract class Reference extends Formula {
     }
 
     private String toString(Object value) {
-        String string = value instanceof String?quote(value.toString()):value.toString();
+        String string = value instanceof String?AbstractParser.quote(value.toString()):value.toString();
         return super.toString() + string;
     }
 }
