@@ -37,7 +37,7 @@ public final class RangeReference extends Reference {
 
     private RANGE range;
 
-    public RangeReference(CELL reference1, CELL reference2) {
+    private RangeReference(CELL reference1, CELL reference2) {
         this.reference1 = reference1;
         this.reference2 = reference2;
     }
