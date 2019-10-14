@@ -32,8 +32,8 @@ import java.util.Objects;
  */
 public final class RangeReference extends Reference {
 
-    private final CELL reference1;
-    private final CELL reference2;
+    private CELL reference1;
+    private CELL reference2;
 
     private RANGE range;
 
@@ -42,6 +42,11 @@ public final class RangeReference extends Reference {
         this.reference2 = reference2;
     }
 
+    public RangeReference(RANGE range) {
+        this.range = range;
+        this.reference1 = range.getFirst();
+        this.reference2 = range.getLast();
+    }
 
     @Override
     public boolean equals(Object o) {

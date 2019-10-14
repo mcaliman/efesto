@@ -790,7 +790,7 @@ public final class Parser extends AbstractParser {
      */
     private void parseRangeReference(AreaPtg t) {
         RANGE tRANGE = parseRange(sheet, t);
-        var elem = new RangeReference(tRANGE.getFirst(), tRANGE.getLast());
+        var elem = new RangeReference(/*tRANGE.getFirst(), tRANGE.getLast()*/tRANGE);
         elem.setColumn(column);
         elem.setRow(row);
         elem.setSheetIndex(getSheetIndex());
