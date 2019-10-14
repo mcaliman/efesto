@@ -115,6 +115,36 @@ public abstract class AbstractParser {
         this.workbook = WorkbookFactory.create(file);
     }
 
+    public static String cellAddress(final int row, final int column, final String sheetName) {
+        return sheetName != null ?
+                sheetName + "!" + AbstractParser.cellAddress(row, column) :
+                AbstractParser.cellAddress(row, column);
+
+    }
+
+    public static String cellAddress(final int row, final int column) {
+        String letter = AbstractParser.columnAsLetter(column);
+        return (letter + (row + 1));
+    }
+
+    public static String columnAsLetter(int column) {
+        int columnNumber = column + 1;
+        StringBuilder string = new StringBuilder(2);
+        int colRemain = columnNumber;
+        while(colRemain > 0) {
+            int thisPart = colRemain % 26;
+            if(thisPart == 0) thisPart = 26;
+            colRemain = (colRemain - thisPart) / 26;
+            char colChar = (char) (thisPart + 64);
+            string.insert(0, colChar);
+        }
+        return string.toString();
+    }
+
+    public static String quote(String text) {
+        return "\"" + text + "\"";
+    }
+
     public String getFilename() {
         return this.filename;
     }
@@ -192,38 +222,12 @@ public abstract class AbstractParser {
     }
 
     private String cellAddress(final String sheetName) {
-        return sheetName != null?sheetName + "!" + cellAddress():cellAddress();
+        return sheetName != null ? sheetName + "!" + cellAddress() : cellAddress();
     }
 
     private String cellAddress() {
         String letter = columnAsLetter(this.column);
         return (letter + (this.row + 1));
-    }
-
-    public static String cellAddress(final int row, final int column, final String sheetName) {
-        return sheetName != null?
-                sheetName + "!" + AbstractParser.cellAddress(row, column):
-                AbstractParser.cellAddress(row, column);
-
-    }
-
-    public static String cellAddress(final int row, final int column) {
-        String letter = AbstractParser.columnAsLetter(column);
-        return (letter + (row + 1));
-    }
-
-    public static String columnAsLetter(int column) {
-        int columnNumber = column + 1;
-        StringBuilder string = new StringBuilder(2);
-        int colRemain = columnNumber;
-        while(colRemain > 0) {
-            int thisPart = colRemain % 26;
-            if(thisPart == 0) thisPart = 26;
-            colRemain = (colRemain - thisPart) / 26;
-            char colChar = (char) (thisPart + 64);
-            string.insert(0, colChar);
-        }
-        return string.toString();
     }
 
     String getCellAddress() {
@@ -253,7 +257,6 @@ public abstract class AbstractParser {
     boolean isFormula(final Cell cell) {
         return cell.getCellType() == CELL_TYPE_FORMULA;
     }
-
 
     boolean nonEmpty(final Cell cell) {
         return !empty(cell);
@@ -307,7 +310,6 @@ public abstract class AbstractParser {
         return cell.toString() != null && cell.toString().equalsIgnoreCase(text);
 
     }
-
 
     private boolean isDataType(Cell cell) {
         return cell.getCellType() == CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell);
@@ -417,11 +419,6 @@ public abstract class AbstractParser {
     private List<Cell> range(Sheet sheet, String refs) {
         AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
         return list(area);
-    }
-
-
-    public static String quote(String text) {
-        return "\"" + text + "\"";
     }
 
     class WhatIf {

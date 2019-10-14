@@ -64,7 +64,7 @@ public final class CELL extends ReferenceItem {
 
     @Override
     public String toString() {
-        return constant != null?constant.toString():"null";
+        return constant != null ? constant.toString() : "null";
     }
 
 }

@@ -40,8 +40,6 @@ public abstract class Start {
     private int column;
 
 
-
-
     public void setSingleSheet(boolean singleSheet) {
         this.singleSheet = singleSheet;
     }
@@ -85,11 +83,11 @@ public abstract class Start {
     }
 
     public String getAddress(boolean sheet) {
-        return sheet?cellAddress(getRow(), getColumn(), sheetName):cellAddress(getRow(), getColumn());
+        return sheet ? cellAddress(getRow(), getColumn(), sheetName) : cellAddress(getRow(), getColumn());
     }
 
     public String id() {
-        return this.singleSheet?cellAddress(getRow(), getColumn()):quoteIf(sheetName) + "!" + cellAddress(getRow(), getColumn());
+        return this.singleSheet ? cellAddress(getRow(), getColumn()) : quoteIf(sheetName) + "!" + cellAddress(getRow(), getColumn());
     }
 
     @Override
@@ -130,7 +128,7 @@ public abstract class Start {
 
 
     public String quoteIf(String text) {
-        return hasSpaces(text)?"'" + text.trim() + "'":text.trim();
+        return hasSpaces(text) ? "'" + text.trim() + "'" : text.trim();
     }
 
     private boolean hasSpaces(String text) {

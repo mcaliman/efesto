@@ -24,7 +24,6 @@
 package dev.caliman.excel.grammar.formula.constant;
 
 import dev.caliman.excel.grammar.formula.Constant;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -51,7 +50,7 @@ public final class TEXT extends Constant {
     }
 
     @Override
-    public boolean equals(@Nullable Object obj) {
+    public boolean equals(Object obj) {
         if(this == obj)
             return true;
         if(obj == null)

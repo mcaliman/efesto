@@ -22,8 +22,6 @@
 
 package dev.caliman.excel.grammar.formula.constant;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Objects;
 
 /**
@@ -37,7 +35,6 @@ public final class INT extends Number {
         this.value = value;
     }
 
-
     public boolean isTerminal() {
         return true;
     }
@@ -50,7 +47,7 @@ public final class INT extends Number {
     }
 
     @Override
-    public boolean equals(@Nullable Object obj) {
+    public boolean equals(Object obj) {
         if(this == obj) return true;
         if(obj == null) return false;
         if(getClass() != obj.getClass()) return false;

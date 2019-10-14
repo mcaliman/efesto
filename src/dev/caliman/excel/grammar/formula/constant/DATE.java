@@ -70,6 +70,6 @@ public final class DATE extends Constant {
     }
 
     private String format(final Date date) {
-        return date == null?"":DATE_FORMAT.format(date);
+        return date == null ? "" : DATE_FORMAT.format(date);
     }
 }

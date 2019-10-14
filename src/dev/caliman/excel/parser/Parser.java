@@ -186,7 +186,7 @@ public final class Parser extends AbstractParser {
 
     /**
      * ConstantArray
-     *
+     * <p>
      * ConstantArray ::= { ArrayColumns }
      * ArrayColumns::= ArrayRows | ArrayRows ; ArrayColumns
      * ArrayRows ::= ArrayConstant | ArrayConstant , ArrayRows

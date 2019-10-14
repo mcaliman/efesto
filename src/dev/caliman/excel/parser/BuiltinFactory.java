@@ -41,7 +41,7 @@ import java.util.logging.Logger;
 final class BuiltinFactory {
 
     private final static Logger LOG = Logger.getLogger(BuiltinFactory.class.getName());
-    private final static Map<String,Class> clazzMap = new HashMap<>();
+    private final static Map<String, Class> clazzMap = new HashMap<>();
 
     static {
         clazzMap.put("ABS", ABS.class);

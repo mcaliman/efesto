@@ -48,7 +48,7 @@ public final class PrefixReferenceItem extends Reference {
 
     @Override
     public String toString() {
-        return isArea()?values():prefix + reference;
+        return isArea() ? values() : prefix + reference;
     }
 
 
@@ -64,7 +64,7 @@ public final class PrefixReferenceItem extends Reference {
     }
 
     public String id() {
-        return !isArea()?getAddress(!this.singleSheet):prefix + reference;
+        return !isArea() ? getAddress(!this.singleSheet) : prefix + reference;
     }
 
     private String values() {

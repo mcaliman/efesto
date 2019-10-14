@@ -58,7 +58,7 @@ public final class RangeReference extends Reference {
     }
 
     public String id() {
-        return this.singleSheet?range.toString():sheetName + "!" + range.toString();
+        return this.singleSheet ? range.toString() : sheetName + "!" + range.toString();
     }
 
 }

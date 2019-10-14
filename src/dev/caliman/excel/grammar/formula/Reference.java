@@ -69,7 +69,7 @@ public abstract class Reference extends Formula {
     }
 
     private String toString(Object value) {
-        String string = value instanceof String?AbstractParser.quote(value.toString()):value.toString();
+        String string = value instanceof String ? AbstractParser.quote(value.toString()) : value.toString();
         return super.toString() + string;
     }
 }

@@ -61,7 +61,7 @@ public final class BOOL extends Constant {
 
     @Override
     public String toString() {
-        return value != null && value?"TRUE":"FALSE";
+        return value != null && value ? "TRUE" : "FALSE";
     }
 
 }

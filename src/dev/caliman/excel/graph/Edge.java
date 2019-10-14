@@ -47,8 +47,8 @@ class Edge {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((src == null)?0:src.hashCode());
-        result = prime * result + ((dest == null)?0:dest.hashCode());
+        result = prime * result + ((src == null) ? 0 : src.hashCode());
+        result = prime * result + ((dest == null) ? 0 : dest.hashCode());
         return result;
     }
 
