@@ -41,17 +41,17 @@ public final class PrefixReferenceItem extends Reference {
     private int lastRow;
     private int lastColumn;
 
-    public PrefixReferenceItem(Prefix prefix, String reference, RANGE tRANGE) {
+    public PrefixReferenceItem(Prefix prefix, String reference, RANGE range) {
         this.prefix = prefix;
         this.reference = reference;
-        this.range = tRANGE;
-        if(tRANGE != null) {
+        this.range = range;
+        if(this.range != null) {
             setAsArea();
-            add(tRANGE.values());
-            setFirstRow(tRANGE.getFirst().getRow());
-            setFirstColumn(tRANGE.getFirst().getColumn());
-            setLastRow(tRANGE.getLast().getRow());
-            setLastColumn(tRANGE.getLast().getColumn());
+            add(this.range.values());
+            setFirstRow(this.range.getFirst().getRow());
+            setFirstColumn(this.range.getFirst().getColumn());
+            setLastRow(this.range.getLast().getRow());
+            setLastColumn(this.range.getLast().getColumn());
         }
     }
 
@@ -76,16 +76,7 @@ public final class PrefixReferenceItem extends Reference {
         return !isArea()?getAddress(!this.singleSheet):prefix + reference;
     }
 
-    /*private boolean is_HORIZONTAL_RANGE() {
-        return firstRow == lastRow && firstColumn != lastColumn;
-    }
-
-    private boolean is_VERTICAL_RANGE() {
-        return firstColumn == lastColumn && firstRow != lastRow;
-    }*/
-
     private String values() {
-        //return values(firstRow, firstColumn, lastRow, lastColumn, vals, (is_HORIZONTAL_RANGE() || is_VERTICAL_RANGE()));
         return values(firstRow, firstColumn, lastRow, lastColumn, vals, (range.isHorizzontal() || range.isVertical()));
     }
 
