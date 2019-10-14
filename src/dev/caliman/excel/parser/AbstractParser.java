@@ -139,7 +139,7 @@ public abstract class AbstractParser {
 
     private void parse(Row row) {
         Stream<Cell> stream = StreamSupport.stream(row.spliterator(), false);
-        stream.parallel().filter(cell -> nonEmpty(cell)).forEachOrdered(this::parse);
+        stream.parallel().filter(this::nonEmpty).forEachOrdered(this::parse);
     }
 
     protected abstract void parse(Cell cell);
@@ -259,7 +259,7 @@ public abstract class AbstractParser {
         return !empty(cell);
     }
 
-    boolean empty(final Cell cell) {
+    private boolean empty(final Cell cell) {
         return emptyCell(cell) && emptyTextCell(cell);
     }
 
