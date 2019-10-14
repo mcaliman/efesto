@@ -32,15 +32,10 @@ import java.util.Objects;
  */
 public final class RangeReference extends Reference {
 
-    private CELL reference1;
-    private CELL reference2;
-
     private RANGE range;
 
     public RangeReference(RANGE range) {
         this.range = range;
-        this.reference1 = range.getFirst();
-        this.reference2 = range.getLast();
     }
 
     @Override
@@ -48,7 +43,6 @@ public final class RangeReference extends Reference {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
         RangeReference that = (RangeReference) o;
-
         return Objects.requireNonNull(that.toString()).equals(this.toString());
     }
 
@@ -58,14 +52,13 @@ public final class RangeReference extends Reference {
     }
 
     private String values() {
-        return values(reference1.getRow(), reference1.getColumn(), reference2.getRow(), reference2.getColumn(), vals, (range.isHorizzontal() || range.isVertical()));
+        return values(range.getFirst().getRow(), range.getFirst().getColumn(),
+                range.getLast().getRow(), range.getLast().getColumn(), vals,
+                (range.isHorizzontal() || range.isVertical()));
     }
 
     public String id() {
-        return this.singleSheet?
-                reference1.getAddress() + ":" + reference2.getAddress():
-                sheetName + "!" + reference1.getAddress() + ":" + reference2.getAddress();
+        return this.singleSheet?range.toString():sheetName + "!" + range.toString();
     }
-
 
 }
