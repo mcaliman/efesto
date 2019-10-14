@@ -23,7 +23,8 @@
 package dev.caliman.excel.grammar;
 
 import dev.caliman.excel.grammar.formula.reference.SHEET;
-import dev.caliman.excel.parser.AbstractParser;
+
+import static dev.caliman.excel.parser.AbstractParser.cellAddress;
 
 
 /**
@@ -80,15 +81,15 @@ public abstract class Start {
     }
 
     public String getAddress() {
-        return AbstractParser.cellAddress(getRow(), getColumn(), sheetName);
+        return cellAddress(getRow(), getColumn(), sheetName);
     }
 
     public String getAddress(boolean sheet) {
-        return sheet?AbstractParser.cellAddress(getRow(), getColumn(), sheetName):AbstractParser.cellAddress(getRow(), getColumn());
+        return sheet?cellAddress(getRow(), getColumn(), sheetName):cellAddress(getRow(), getColumn());
     }
 
     public String id() {
-        return this.singleSheet?AbstractParser.cellAddress(getRow(), getColumn()):quoteIf(sheetName) + "!" + AbstractParser.cellAddress(getRow(), getColumn());
+        return this.singleSheet?cellAddress(getRow(), getColumn()):quoteIf(sheetName) + "!" + cellAddress(getRow(), getColumn());
     }
 
     @Override
