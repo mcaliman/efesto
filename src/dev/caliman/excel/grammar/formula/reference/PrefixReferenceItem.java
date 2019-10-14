@@ -35,11 +35,6 @@ public final class PrefixReferenceItem extends Reference {
 
     private RANGE range;
 
-    private int firstRow;
-    private int firstColumn;
-
-    private int lastRow;
-    private int lastColumn;
 
     public PrefixReferenceItem(Prefix prefix, String reference, RANGE range) {
         this.prefix = prefix;
