@@ -117,7 +117,7 @@ public final class Parser extends AbstractParser {
         return start;
     }
 
-    protected void parse(Ptg p) {
+    private void parse(Ptg p) {
         verbose("parse: " + p.getClass().getSimpleName());
         try(Stream<WhatIf> stream = Stream.of(
                 new WhatIf(p, arrayPtg, (Ptg t) -> parseConstantArray((ArrayPtg) t)),
@@ -266,7 +266,7 @@ public final class Parser extends AbstractParser {
         Row row = this.sheet.getRow(t.getRow());
         if(row != null) {
             Cell cell = row.getCell(t.getColumn());
-            Object value = null;
+            Object value;
             value = this.parseCellValue(cell);
             CELL elem = new CELL(t.getRow(), t.getColumn());
             elem.setValue(value);

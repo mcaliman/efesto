@@ -207,12 +207,12 @@ public abstract class AbstractParser {
 
     }
 
-    public final static String cellAddress(final int row, final int column) {
+    public static String cellAddress(final int row, final int column) {
         String letter = AbstractParser.columnAsLetter(column);
         return (letter + (row + 1));
     }
 
-    public final static String columnAsLetter(int column) {
+    public static String columnAsLetter(int column) {
         int columnNumber = column + 1;
         StringBuilder string = new StringBuilder(2);
         int colRemain = columnNumber;
@@ -384,7 +384,7 @@ public abstract class AbstractParser {
      * AreaPtg t Specifies a rectangular area of cells A1:A4 for instance.
      */
     RANGE parseRange(Sheet sheet, AreaPtg t) {
-        RANGE range = null;
+        RANGE range;
         var rangeFirstRow = t.getFirstRow();
         var rangeFirstColumn = t.getFirstColumn();
         var rangeLastRow = t.getLastRow();
@@ -402,7 +402,7 @@ public abstract class AbstractParser {
     }
 
     private RANGE emptyRange(int rangeFirstRow, int rangeFirstColumn, int rangeLastRow, int rangeLastColumn) {
-        RANGE range = null;
+        RANGE range;
         CELL cellFirst = new CELL(rangeFirstRow, rangeFirstColumn);
         CELL cellLast = new CELL(rangeLastRow, rangeLastColumn);
         range = new RANGE(cellFirst, cellLast);
