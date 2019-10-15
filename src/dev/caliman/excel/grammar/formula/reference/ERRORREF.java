@@ -22,9 +22,14 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
+import dev.caliman.excel.grammar.annotations.LexicalTokens;
+
 /**
  * @author Massimo Caliman
  */
+@LexicalTokens(name = "ERRORREF",
+        description = "Reference error literal",
+        content = "#REF!", priority = 0)
 public final class ERRORREF extends ReferenceItem {
 
     public ERRORREF() {
