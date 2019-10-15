@@ -22,6 +22,9 @@
 
 package dev.caliman.excel.parser;
 
+/**
+ * @author Massimo Caliman
+ */
 final class UnsupportedBuiltinException extends Exception {
 
     public UnsupportedBuiltinException(String msg) {

@@ -27,6 +27,9 @@ import dev.caliman.excel.grammar.Start;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Massimo Caliman
+ */
 public final class StartList extends ArrayList<Start> implements List<Start> {
 
     public StartList() {
