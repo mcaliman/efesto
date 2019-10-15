@@ -22,6 +22,7 @@
 
 package dev.caliman.excel.grammar.formula.constant;
 
+import dev.caliman.excel.grammar.annotations.LexicalTokens;
 import dev.caliman.excel.grammar.formula.Constant;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,6 +32,7 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
+@LexicalTokens(name = "BOOL", description = "Boolean literal", content = "TRUE|FALSE", priority = 0)
 public final class BOOL extends Constant {
 
     private final Boolean value;

@@ -145,6 +145,14 @@ public abstract class AbstractParser {
         return "\"" + text + "\"";
     }
 
+    public static String quoteIf(String text) {
+        return AbstractParser.hasSpaces(text) ? "'" + text.trim() + "'" : text.trim();
+    }
+
+    private static boolean hasSpaces(String text) {
+        return text != null && text.trim().contains(" ");
+    }
+
     public String getFilename() {
         return this.filename;
     }
@@ -420,16 +428,6 @@ public abstract class AbstractParser {
         AreaReference area = new AreaReference(sheet.getSheetName() + "!" + refs, SPREADSHEET_VERSION);
         return list(area);
     }
-
-
-    public static String quoteIf(String text) {
-        return AbstractParser.hasSpaces(text) ? "'" + text.trim() + "'" : text.trim();
-    }
-
-    private static boolean hasSpaces(String text) {
-        return text != null && text.trim().contains(" ");
-    }
-
 
     class WhatIf {
 

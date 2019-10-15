@@ -22,5 +22,12 @@
 
 package dev.caliman.excel.grammar.annotations;
 
-public @interface Terminal {
+public @interface LexicalTokens {
+    String name();
+
+    String description();
+
+    String content();
+
+    int priority();
 }
