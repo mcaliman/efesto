@@ -22,9 +22,6 @@
 
 package dev.caliman.excel.grammar.annotations;
 
-
-public @interface ProductionRule {
-    String symbol();
-
-    String expression();
+public @interface Productions {
+    Production[] value();
 }

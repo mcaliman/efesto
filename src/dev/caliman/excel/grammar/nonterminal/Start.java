@@ -23,7 +23,7 @@
 package dev.caliman.excel.grammar.nonterminal;
 
 import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.annotations.ProductionRule;
+import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.annotations.StartSymbol;
 import dev.caliman.excel.grammar.lexicaltokens.SHEET;
 import dev.caliman.excel.parser.AbstractParser;
@@ -35,8 +35,9 @@ import static dev.caliman.excel.parser.AbstractParser.cellAddress;
  */
 @NonTerminal
 @StartSymbol
-@ProductionRule(symbol = "Start",
-        expression = "Constant| = Formula | ArrayFormula")
+@Production(symbol = "Start", expression = "Constant")
+@Production(symbol = "Start", expression = "=Formula")
+@Production(symbol = "Start", expression = "ArrayFormula")
 public abstract class Start {
 
     protected String sheetName;
