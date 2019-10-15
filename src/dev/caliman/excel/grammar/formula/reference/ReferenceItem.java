@@ -22,14 +22,14 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import dev.caliman.excel.grammar.formula.Reference;
+import dev.caliman.excel.grammar.nonterminal.Reference;
 
 /**
  * @author Massimo Caliman
  */
 public class ReferenceItem extends Reference {
 
-    String value;
+    public String value;
 
     private int firstRow;
     private int firstColumn;
@@ -58,23 +58,23 @@ public class ReferenceItem extends Reference {
         return firstColumn == lastColumn && firstRow != lastRow;
     }
 
-    String values() {
+    public String values() {
         return values(firstRow, firstColumn, lastRow, lastColumn, vals, (horizzontal_range() || vertical_range()));
     }
 
-    void setFirstRow(int firstRow) {
+    public void setFirstRow(int firstRow) {
         this.firstRow = firstRow;
     }
 
-    void setFirstColumn(int firstColumn) {
+    public void setFirstColumn(int firstColumn) {
         this.firstColumn = firstColumn;
     }
 
-    void setLastRow(int lastRow) {
+    public void setLastRow(int lastRow) {
         this.lastRow = lastRow;
     }
 
-    void setLastColumn(int lastColumn) {
+    public void setLastColumn(int lastColumn) {
         this.lastColumn = lastColumn;
     }
 

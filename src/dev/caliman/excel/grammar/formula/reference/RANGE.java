@@ -22,8 +22,8 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
-import dev.caliman.excel.grammar.formula.Reference;
 import dev.caliman.excel.grammar.lexicaltokens.CELL;
+import dev.caliman.excel.grammar.nonterminal.Reference;
 
 import java.util.List;
 

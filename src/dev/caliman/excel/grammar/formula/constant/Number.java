@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.grammar.formula.constant;
 
-import dev.caliman.excel.grammar.formula.Constant;
+import dev.caliman.excel.grammar.nonterminal.Constant;
 
 /**
  * @author Massimo Caliman

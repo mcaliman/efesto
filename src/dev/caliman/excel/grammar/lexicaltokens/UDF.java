@@ -23,7 +23,7 @@
 package dev.caliman.excel.grammar.lexicaltokens;
 
 import dev.caliman.excel.grammar.annotations.LexicalTokens;
-import dev.caliman.excel.grammar.formula.Reference;
+import dev.caliman.excel.grammar.nonterminal.Reference;
 
 /**
  * @author Massimo Caliman

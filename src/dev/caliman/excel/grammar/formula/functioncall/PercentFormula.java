@@ -22,8 +22,8 @@
 
 package dev.caliman.excel.grammar.formula.functioncall;
 
-import dev.caliman.excel.grammar.formula.FunctionCall;
 import dev.caliman.excel.grammar.nonterminal.Formula;
+import dev.caliman.excel.grammar.nonterminal.FunctionCall;
 
 /**
  * @author Massimo Caliman

@@ -20,34 +20,39 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula;
+package dev.caliman.excel.grammar.nonterminal;
 
-import dev.caliman.excel.grammar.nonterminal.Formula;
+
+import dev.caliman.excel.grammar.annotations.NonTerminal;
+import dev.caliman.excel.grammar.formula.reference.RANGE;
+import dev.caliman.excel.grammar.formula.reference.ReferenceItem;
 
 /**
  * @author Massimo Caliman
  */
-public class ConstantArray extends Formula {
+@NonTerminal
+public class NamedRange extends ReferenceItem {
 
-    private final Object[][] array;
-
-    public ConstantArray(Object[][] array) {
-        this.array = array;
+    public NamedRange(String value, RANGE tRANGE) {
+        this.value = value;
+        setFirstRow(tRANGE.getFirst().getRow());
+        setFirstColumn(tRANGE.getFirst().getColumn());
+        setLastRow(tRANGE.getLast().getRow());
+        setLastColumn(tRANGE.getLast().getColumn());
+        add(tRANGE.values());
+        setAsArea();
     }
 
     public String id() {
-        return this.getAddress();
+        return this.singleSheet ?
+                value :
+                sheetName + "!" + value;
     }
 
+    @Override
     public String toString() {
-        StringBuilder str = new StringBuilder();
-        str.append('{');
-        for(Object[] internal : array) {
-            str.append(internal[0]).append(',');
-        }
-        if(str.charAt(str.length() - 1) == ',') str.deleteCharAt(str.length() - 1);
-        str.append('}');
-        return str.toString();
+        return values();
     }
+
 
 }

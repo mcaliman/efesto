@@ -20,29 +20,35 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula;
+package dev.caliman.excel.grammar.nonterminal;
 
-import dev.caliman.excel.grammar.nonterminal.Formula;
-
+import dev.caliman.excel.grammar.annotations.NonTerminal;
 
 /**
  * @author Massimo Caliman
  */
-public final class ParenthesisFormula extends Formula {
+@NonTerminal
+public class ConstantArray extends Formula {
 
-    private final Formula formula;
+    private final Object[][] array;
 
-    public ParenthesisFormula(Formula formula) {
-        this.formula = formula;
+    public ConstantArray(Object[][] array) {
+        this.array = array;
     }
 
-    @Override
+    public String id() {
+        return this.getAddress();
+    }
+
     public String toString() {
-        return "(" + formula.toString() + ")";
-    }
-
-    public Formula getFormula() {
-        return formula;
+        StringBuilder str = new StringBuilder();
+        str.append('{');
+        for(Object[] internal : array) {
+            str.append(internal[0]).append(',');
+        }
+        if(str.charAt(str.length() - 1) == ',') str.deleteCharAt(str.length() - 1);
+        str.append('}');
+        return str.toString();
     }
 
 }

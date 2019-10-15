@@ -20,13 +20,30 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula;
+package dev.caliman.excel.grammar.nonterminal;
 
-import dev.caliman.excel.grammar.nonterminal.Formula;
+import dev.caliman.excel.grammar.annotations.NonTerminal;
+
 
 /**
  * @author Massimo Caliman
  */
-public abstract class FunctionCall extends Formula {
+@NonTerminal
+public final class ParenthesisFormula extends Formula {
+
+    private final Formula formula;
+
+    public ParenthesisFormula(Formula formula) {
+        this.formula = formula;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + formula.toString() + ")";
+    }
+
+    public Formula getFormula() {
+        return formula;
+    }
 
 }

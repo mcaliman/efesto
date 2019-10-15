@@ -20,34 +20,14 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.reference;
+package dev.caliman.excel.grammar.nonterminal;
 
+import dev.caliman.excel.grammar.annotations.NonTerminal;
 
 /**
  * @author Massimo Caliman
  */
-public class NamedRange extends ReferenceItem {
-
-    public NamedRange(String value, RANGE tRANGE) {
-        this.value = value;
-        setFirstRow(tRANGE.getFirst().getRow());
-        setFirstColumn(tRANGE.getFirst().getColumn());
-        setLastRow(tRANGE.getLast().getRow());
-        setLastColumn(tRANGE.getLast().getColumn());
-        add(tRANGE.values());
-        setAsArea();
-    }
-
-    public String id() {
-        return this.singleSheet ?
-                value :
-                sheetName + "!" + value;
-    }
-
-    @Override
-    public String toString() {
-        return values();
-    }
-
+@NonTerminal
+public abstract class Constant extends Formula {
 
 }

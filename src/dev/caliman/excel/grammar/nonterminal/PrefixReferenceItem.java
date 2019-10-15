@@ -20,13 +20,16 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.reference;
+package dev.caliman.excel.grammar.nonterminal;
 
-import dev.caliman.excel.grammar.formula.Reference;
+import dev.caliman.excel.grammar.annotations.NonTerminal;
+import dev.caliman.excel.grammar.formula.reference.Prefix;
+import dev.caliman.excel.grammar.formula.reference.RANGE;
 
 /**
  * @author Massimo Caliman
  */
+@NonTerminal
 public final class PrefixReferenceItem extends Reference {
 
     private final Prefix prefix;
