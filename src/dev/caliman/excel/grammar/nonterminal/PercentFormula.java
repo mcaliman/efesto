@@ -20,14 +20,14 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.functioncall;
+package dev.caliman.excel.grammar.nonterminal;
 
-import dev.caliman.excel.grammar.nonterminal.Formula;
-import dev.caliman.excel.grammar.nonterminal.FunctionCall;
+import dev.caliman.excel.grammar.annotations.NonTerminal;
 
 /**
  * @author Massimo Caliman
  */
+@NonTerminal
 public final class PercentFormula extends FunctionCall {
 
     private final Formula formula;

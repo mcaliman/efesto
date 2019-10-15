@@ -24,7 +24,7 @@ package dev.caliman.excel.grammar.lexicaltokens;
 
 
 import dev.caliman.excel.grammar.annotations.LexicalTokens;
-import dev.caliman.excel.grammar.formula.reference.Prefix;
+import dev.caliman.excel.grammar.nonterminal.Prefix;
 import dev.caliman.excel.parser.AbstractParser;
 
 /**

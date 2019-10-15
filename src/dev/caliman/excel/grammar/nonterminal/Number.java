@@ -20,12 +20,13 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.reference;
+package dev.caliman.excel.grammar.nonterminal;
+
+import dev.caliman.excel.grammar.annotations.NonTerminal;
 
 /**
  * @author Massimo Caliman
  */
-@SuppressWarnings("WeakerAccess")
-public class Prefix extends ReferenceItem {
-
+@NonTerminal
+public abstract class Number extends Constant {
 }

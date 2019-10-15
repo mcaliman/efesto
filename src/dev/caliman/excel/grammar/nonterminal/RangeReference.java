@@ -20,9 +20,10 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.reference;
+package dev.caliman.excel.grammar.nonterminal;
 
-import dev.caliman.excel.grammar.nonterminal.Reference;
+import dev.caliman.excel.grammar.annotations.NonTerminal;
+import dev.caliman.excel.grammar.formula.reference.RANGE;
 
 import java.util.Objects;
 
@@ -30,6 +31,7 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
+@NonTerminal
 public final class RangeReference extends Reference {
 
     private final RANGE range;
