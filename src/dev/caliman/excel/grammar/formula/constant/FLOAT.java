@@ -22,11 +22,16 @@
 
 package dev.caliman.excel.grammar.formula.constant;
 
+import dev.caliman.excel.grammar.annotations.LexicalTokens;
+
 import java.util.Objects;
 
 /**
  * @author Massimo Caliman
  */
+@LexicalTokens(name = "FLOAT",
+        description = "An integer, floating point or scientific notation number literal",
+        content = "[0-9]+ ,? [0-9]* (e [0-9]+)?", priority = 0)
 public final class FLOAT extends Number {
 
     private final Double value;

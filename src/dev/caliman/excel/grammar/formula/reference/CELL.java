@@ -22,6 +22,7 @@
 
 package dev.caliman.excel.grammar.formula.reference;
 
+import dev.caliman.excel.grammar.annotations.LexicalTokens;
 import dev.caliman.excel.grammar.formula.Constant;
 import dev.caliman.excel.grammar.formula.constant.*;
 
@@ -30,6 +31,7 @@ import java.util.Date;
 /**
  * @author mcaliman
  */
+@LexicalTokens(name = "CELL", description = "Cell reference", content = "$? [A-Z]+ $? [0-9]+", priority = 2)
 public final class CELL extends ReferenceItem {
 
     private final int row;

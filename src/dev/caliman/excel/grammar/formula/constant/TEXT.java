@@ -23,6 +23,7 @@
 
 package dev.caliman.excel.grammar.formula.constant;
 
+import dev.caliman.excel.grammar.annotations.LexicalTokens;
 import dev.caliman.excel.grammar.formula.Constant;
 
 import java.util.Objects;
@@ -30,6 +31,9 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
+@LexicalTokens(name = "TEXT",
+        description = "String literal",
+        content = "\" ([^ \"] j \"\")* \"", priority = 0)
 public final class TEXT extends Constant {
 
     private final String value;
