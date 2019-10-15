@@ -22,15 +22,16 @@
 
 package dev.caliman.excel.grammar;
 
+import dev.caliman.excel.grammar.annotations.NonTerminal;
 import dev.caliman.excel.grammar.lexicaltokens.SHEET;
 import dev.caliman.excel.parser.AbstractParser;
 
 import static dev.caliman.excel.parser.AbstractParser.cellAddress;
 
-
 /**
  * @author Massimo Caliman
  */
+@NonTerminal
 public abstract class Start {
 
 

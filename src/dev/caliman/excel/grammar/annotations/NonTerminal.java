@@ -20,15 +20,7 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar;
+package dev.caliman.excel.grammar.annotations;
 
-
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-
-/**
- * @author Massimo Caliman
- */
-@NonTerminal
-public abstract class Formula extends Start {
-
+public @interface NonTerminal {
 }
