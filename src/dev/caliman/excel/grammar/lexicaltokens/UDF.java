@@ -20,29 +20,28 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.reference;
+package dev.caliman.excel.grammar.lexicaltokens;
 
 import dev.caliman.excel.grammar.annotations.LexicalTokens;
+import dev.caliman.excel.grammar.formula.Reference;
 
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "ERRORREF",
-        description = "Reference error literal",
-        content = "#REF!", priority = 0)
-public final class ERRORREF extends ReferenceItem {
+@LexicalTokens(name = "UDF",
+        description = "User Defined Function",
+        content = "(_xll\\.)? [A-Z_\\][A-Z0-9_\\\\.\u00031]* (", priority = 4)
+public final class UDF extends Reference {
 
-    public ERRORREF() {
-        super("#REF");
+    private final String arguments;
+
+    public UDF(String arguments) {
+        this.arguments = arguments;
     }
 
     public String toString() {
-        return "#REF";
+        return arguments;
     }
 
-    @Deprecated
-    public String toFormula() {
-        return toString();
-    }
 
 }

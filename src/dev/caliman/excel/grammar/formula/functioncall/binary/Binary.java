@@ -26,7 +26,7 @@ import dev.caliman.excel.grammar.Formula;
 import dev.caliman.excel.grammar.formula.FunctionCall;
 import dev.caliman.excel.grammar.formula.ParenthesisFormula;
 import dev.caliman.excel.grammar.formula.functioncall.unary.Unary;
-import dev.caliman.excel.grammar.formula.reference.CELL;
+import dev.caliman.excel.grammar.lexicaltokens.CELL;
 import org.jetbrains.annotations.NotNull;
 
 /**

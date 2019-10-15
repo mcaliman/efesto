@@ -28,5 +28,5 @@ import dev.caliman.excel.grammar.formula.Constant;
  * @author Massimo Caliman
  */
 
-abstract class Number extends Constant {
+public abstract class Number extends Constant {
 }

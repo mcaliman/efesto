@@ -20,26 +20,26 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.constant;
+package dev.caliman.excel.grammar.lexicaltokens;
 
 import dev.caliman.excel.grammar.annotations.LexicalTokens;
+import dev.caliman.excel.grammar.formula.Constant;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
+
 
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "FLOAT",
-        description = "An integer, floating point or scientific notation number literal",
-        content = "[0-9]+ ,? [0-9]* (e [0-9]+)?", priority = 0)
-public final class FLOAT extends Number {
+@LexicalTokens(name = "BOOL", description = "Boolean literal", content = "TRUE|FALSE", priority = 0)
+public final class BOOL extends Constant {
 
-    private final Double value;
+    private final Boolean value;
 
-    public FLOAT(Double value) {
+    public BOOL(Boolean value) {
         this.value = value;
     }
-
 
     public boolean isTerminal() {
         return true;
@@ -48,25 +48,22 @@ public final class FLOAT extends Number {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.value);
+        hash = 37 * hash + Objects.hashCode(this.value);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if(this == obj)
-            return true;
-        if(obj == null)
-            return false;
-        if(getClass() != obj.getClass())
-            return false;
-        final FLOAT other = (FLOAT) obj;
-        return Objects.equals(this.value, other.value);
+    public boolean equals(@Nullable Object obj) {
+        if(this == obj) return true;
+        if(obj == null) return false;
+        if(getClass() != obj.getClass()) return false;
+        final BOOL that = (BOOL) obj;
+        return Objects.equals(this.value, that.value);
     }
 
     @Override
     public String toString() {
-        return value.toString();
+        return value != null && value ? "TRUE" : "FALSE";
     }
 
 }

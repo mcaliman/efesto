@@ -36,11 +36,11 @@ public class ReferenceItem extends Reference {
     private int lastRow;
     private int lastColumn;
 
-    ReferenceItem() {
+    public ReferenceItem() {
     }
 
     @SuppressWarnings("SameParameterValue")
-    ReferenceItem(String value) {
+    public ReferenceItem(String value) {
         this.value = value;
     }
 

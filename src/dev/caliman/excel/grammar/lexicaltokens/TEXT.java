@@ -20,23 +20,25 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.constant;
+
+package dev.caliman.excel.grammar.lexicaltokens;
 
 import dev.caliman.excel.grammar.annotations.LexicalTokens;
+import dev.caliman.excel.grammar.formula.Constant;
 
 import java.util.Objects;
 
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "INT",
-        description = "An integer, floating point or scientific notation number literal",
-        content = "[0-9]+ ,? [0-9]* (e [0-9]+)?", priority = 0)
-public final class INT extends Number {
+@LexicalTokens(name = "TEXT",
+        description = "String literal",
+        content = "\" ([^ \"] j \"\")* \"", priority = 0)
+public final class TEXT extends Constant {
 
-    private final Integer value;
+    private final String value;
 
-    public INT(Integer value) {
+    public TEXT(String value) {
         this.value = value;
     }
 
@@ -46,23 +48,26 @@ public final class INT extends Number {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 11 * hash + Objects.hashCode(this.value);
+        int hash = 5;
+        hash = 83 * hash + Objects.hashCode(this.value);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(this == obj) return true;
-        if(obj == null) return false;
-        if(getClass() != obj.getClass()) return false;
-        final INT other = (INT) obj;
+        if(this == obj)
+            return true;
+        if(obj == null)
+            return false;
+        if(getClass() != obj.getClass())
+            return false;
+        final TEXT other = (TEXT) obj;
         return Objects.equals(this.value, other.value);
     }
 
     @Override
     public String toString() {
-        return value.toString();
+        return '"' + value + '"';
     }
 
 }

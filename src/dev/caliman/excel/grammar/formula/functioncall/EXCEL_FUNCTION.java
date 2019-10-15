@@ -24,10 +24,10 @@ package dev.caliman.excel.grammar.formula.functioncall;
 
 import dev.caliman.excel.grammar.Formula;
 import dev.caliman.excel.grammar.formula.FunctionCall;
-import dev.caliman.excel.grammar.formula.reference.CELL;
 import dev.caliman.excel.grammar.formula.reference.NamedRange;
 import dev.caliman.excel.grammar.formula.reference.PrefixReferenceItem;
 import dev.caliman.excel.grammar.formula.reference.RangeReference;
+import dev.caliman.excel.grammar.lexicaltokens.CELL;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
