@@ -21,8 +21,8 @@
  */
 package dev.caliman.excel.grammar.formula.functioncall.builtin;
 
-import dev.caliman.excel.grammar.Formula;
 import dev.caliman.excel.grammar.formula.functioncall.EXCEL_FUNCTION;
+import dev.caliman.excel.grammar.nonterminal.Formula;
 
 public class UPPER extends EXCEL_FUNCTION {
 

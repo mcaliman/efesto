@@ -22,11 +22,11 @@
 
 package dev.caliman.excel.grammar.formula.functioncall.binary;
 
-import dev.caliman.excel.grammar.Formula;
 import dev.caliman.excel.grammar.formula.FunctionCall;
 import dev.caliman.excel.grammar.formula.ParenthesisFormula;
 import dev.caliman.excel.grammar.formula.functioncall.unary.Unary;
 import dev.caliman.excel.grammar.lexicaltokens.CELL;
+import dev.caliman.excel.grammar.nonterminal.Formula;
 import org.jetbrains.annotations.NotNull;
 
 /**

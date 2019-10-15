@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.grammar.formula.functioncall.unary;
 
-import dev.caliman.excel.grammar.Formula;
+import dev.caliman.excel.grammar.nonterminal.Formula;
 
 /**
  * @author Massimo Caliman

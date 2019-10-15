@@ -20,7 +20,7 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar;
+package dev.caliman.excel.grammar.nonterminal;
 
 import dev.caliman.excel.grammar.annotations.NonTerminal;
 import dev.caliman.excel.grammar.lexicaltokens.SHEET;

@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.grammar.formula.functioncall.binary;
 
-import dev.caliman.excel.grammar.Formula;
+import dev.caliman.excel.grammar.nonterminal.Formula;
 
 /**
  * Concat   : Formula & Formula

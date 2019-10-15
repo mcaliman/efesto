@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.grammar.formula;
 
-import dev.caliman.excel.grammar.Formula;
+import dev.caliman.excel.grammar.nonterminal.Formula;
 import dev.caliman.excel.parser.AbstractParser;
 
 import java.util.ArrayList;
