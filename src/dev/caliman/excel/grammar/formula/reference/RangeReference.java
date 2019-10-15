@@ -32,7 +32,7 @@ import java.util.Objects;
  */
 public final class RangeReference extends Reference {
 
-    private RANGE range;
+    private final RANGE range;
 
     public RangeReference(RANGE range) {
         this.range = range;

@@ -33,7 +33,7 @@ public final class PrefixReferenceItem extends Reference {
 
     private final String reference;
 
-    private RANGE range;
+    private final RANGE range;
 
 
     public PrefixReferenceItem(Prefix prefix, String reference, RANGE range) {

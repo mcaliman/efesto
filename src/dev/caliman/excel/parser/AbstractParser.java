@@ -426,7 +426,7 @@ public abstract class AbstractParser {
         return AbstractParser.hasSpaces(text) ? "'" + text.trim() + "'" : text.trim();
     }
 
-    public static boolean hasSpaces(String text) {
+    private static boolean hasSpaces(String text) {
         return text != null && text.trim().contains(" ");
     }
 
