@@ -20,34 +20,39 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.constant;
+package dev.caliman.excel.lexicaltokens;
 
-import dev.caliman.excel.grammar.lexicaltokens.INT;
+import dev.caliman.excel.grammar.lexicaltokens.BOOL;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class INTTest {
-
+/**
+ * @author Massimo Caliman
+ */
+class BOOLTest {
 
     @Test
     void testIsTerminal() {
-        INT t = new INT(12);
+        BOOL t = new BOOL(true);
         assertTrue(t.isTerminal());
     }
 
+
     @Test
     void testEquals() {
-        INT f1 = new INT(75);
-        INT f2 = new INT(36);
-        assertNotEquals(f1, f2);
-        INT f11 = new INT(75);
-        assertEquals(f1, f11);
+        BOOL tTRUE = new BOOL(true);
+        BOOL tFALSE = new BOOL(false);
+        assertNotEquals(tTRUE, tFALSE);
+        BOOL tTRUE1 = new BOOL(true);
+        assertEquals(tTRUE, tTRUE1);
     }
 
     @Test
     void testToString() {
-        INT f1 = new INT(75);
-        assertEquals("75", f1.toString());
+        BOOL tTRUE = new BOOL(true);
+        assertEquals("TRUE", tTRUE.toString());
+        BOOL tFALSE = new BOOL(false);
+        assertEquals("FALSE", tFALSE.toString());
     }
 }

@@ -20,34 +20,56 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.constant;
+package dev.caliman.excel.lexicaltokens;
 
-import dev.caliman.excel.grammar.lexicaltokens.TEXT;
+import dev.caliman.excel.grammar.lexicaltokens.DATE;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TEXTTest {
+/**
+ * TODO use LocalDate
+ */
+class DATETest {
+
+    @SuppressWarnings("unused")
+    Date convertToDateViaInstant(LocalDateTime dateToConvert) {
+        return java.util.Date
+                .from(dateToConvert.atZone(ZoneId.systemDefault())
+                        .toInstant());
+    }
 
     @Test
     void testIsTerminal() {
-        TEXT t = new TEXT("12");
+        Date date = new Date();
+        DATE t = new DATE(date);
         assertTrue(t.isTerminal());
     }
 
     @Test
     void testEquals() {
-        TEXT f1 = new TEXT("75");
-        TEXT f2 = new TEXT("36");
-        assertNotEquals(f1, f2);
-        TEXT f11 = new TEXT("75");
-        assertEquals(f1, f11);
+        Date date = new Date();
+        DATE date1 = new DATE(date);
+        DATE date2 = new DATE(date);
+        assertEquals(date1, date2);
+        Date date3 = new Date();
+        date3.setTime(date3.getTime() + 150);
+        assertNotEquals(date1, date3);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void testToString() {
-        TEXT f1 = new TEXT("75");
-        System.out.println(f1.toString());
-        assertEquals("\"75\"", f1.toString());
+        Date date = new Date(2019 - 1900, Calendar.SEPTEMBER, 17);
+        DATE date1 = new DATE(date);
+        String result = date1.toString();
+        System.out.println(result);
+        assertEquals("17/09/2019", result);
     }
+
 }

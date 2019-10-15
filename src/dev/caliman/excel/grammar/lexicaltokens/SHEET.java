@@ -20,25 +20,40 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.constant;
+package dev.caliman.excel.grammar.lexicaltokens;
 
-import dev.caliman.excel.grammar.lexicaltokens.ERROR;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import dev.caliman.excel.grammar.annotations.LexicalTokens;
+import dev.caliman.excel.grammar.formula.reference.Prefix;
+import dev.caliman.excel.parser.AbstractParser;
 
-class ERRORTest {
+/**
+ * @author Massimo Caliman
+ */
+@LexicalTokens(name = "SHEET",
+        description = "The name of a worksheet",
+        content = "\u00032+ !", priority = 5)
+public final class SHEET extends Prefix {
 
-    @Test
-    void testIsTerminal() {
-        ERROR t = new ERROR("#REF");
-        assertTrue(t.isTerminal());
+    private final String name;
+    private final int index;
+
+    public SHEET(String name, int index) {
+        this.name = name;
+        this.index = index;
     }
 
-    @Test
-    void testToString() {
-        ERROR t = new ERROR("#REF");
-        assertEquals("#REF", t.toString());
+    public String getName() {
+        return name;
     }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public String toString() {
+        return AbstractParser.quoteIf(name) + "!";
+    }
+
+
 }

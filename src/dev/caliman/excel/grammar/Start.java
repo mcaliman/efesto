@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.grammar;
 
-import dev.caliman.excel.grammar.formula.reference.SHEET;
+import dev.caliman.excel.grammar.lexicaltokens.SHEET;
 import dev.caliman.excel.parser.AbstractParser;
 
 import static dev.caliman.excel.parser.AbstractParser.cellAddress;

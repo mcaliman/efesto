@@ -20,36 +20,34 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.reference;
+package dev.caliman.excel.lexicaltokens;
+
+import dev.caliman.excel.grammar.lexicaltokens.INT;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class INTTest {
 
 
-import dev.caliman.excel.grammar.annotations.LexicalTokens;
-
-/**
- * @author Massimo Caliman
- */
-@LexicalTokens(name = "FILE",
-        description = "External file reference using number",
-        content = "\\[ [0-9]+ \\]", priority = 5)
-public final class FILE extends Prefix {
-
-    private final int ext;
-    private final SHEET sheet;
-
-
-    public FILE(int ext, SHEET sheet) {
-        this.ext = ext;
-        this.sheet = sheet;
+    @Test
+    void testIsTerminal() {
+        INT t = new INT(12);
+        assertTrue(t.isTerminal());
     }
 
-    public boolean isTerminal() {
-        return true;
+    @Test
+    void testEquals() {
+        INT f1 = new INT(75);
+        INT f2 = new INT(36);
+        assertNotEquals(f1, f2);
+        INT f11 = new INT(75);
+        assertEquals(f1, f11);
     }
 
-    @Override
-    public String toString() {
-        return "[" + ext + "]" + sheet.toString();
+    @Test
+    void testToString() {
+        INT f1 = new INT(75);
+        assertEquals("75", f1.toString());
     }
-
-
 }

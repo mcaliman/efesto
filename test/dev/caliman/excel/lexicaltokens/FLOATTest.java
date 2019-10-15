@@ -20,7 +20,7 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.formula.constant;
+package dev.caliman.excel.lexicaltokens;
 
 import dev.caliman.excel.grammar.lexicaltokens.FLOAT;
 import org.junit.jupiter.api.Test;
