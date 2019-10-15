@@ -33,8 +33,8 @@ import static dev.caliman.excel.parser.AbstractParser.cellAddress;
 /**
  * @author Massimo Caliman
  */
-@NonTerminal
 @StartSymbol
+@NonTerminal
 @Production(symbol = "Start", expression = "Constant")
 @Production(symbol = "Start", expression = "=Formula")
 @Production(symbol = "Start", expression = "ArrayFormula")

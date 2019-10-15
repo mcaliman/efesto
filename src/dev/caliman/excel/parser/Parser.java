@@ -213,7 +213,7 @@ public final class Parser extends AbstractParser {
 
 //</editor-fold>
 
-//<editor-fold desc="Constants: Constant ::= NUMBER | STRING | BOOL | ERROR">
+//<editor-fold desc="Constants: Constant ::= INT | FLOAT | TEXT | BOOL | ERROR">
 
     private void parseERROR(ErrPtg t) {
         String text = parseErrorText(t);

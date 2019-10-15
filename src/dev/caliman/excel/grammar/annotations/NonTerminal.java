@@ -23,4 +23,5 @@
 package dev.caliman.excel.grammar.annotations;
 
 public @interface NonTerminal {
+    boolean isTerminal() default false;
 }

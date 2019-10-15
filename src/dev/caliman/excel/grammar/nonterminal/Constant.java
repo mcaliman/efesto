@@ -23,11 +23,13 @@
 package dev.caliman.excel.grammar.nonterminal;
 
 import dev.caliman.excel.grammar.annotations.NonTerminal;
+import dev.caliman.excel.grammar.annotations.Production;
 
 /**
  * @author Massimo Caliman
  */
 @NonTerminal
+@Production(symbol = "Constant", expression = "NUMBER | STRING | BOOL | ERROR")
 public abstract class Constant extends Formula {
 
 }
