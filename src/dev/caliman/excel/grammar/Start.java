@@ -23,6 +23,7 @@
 package dev.caliman.excel.grammar;
 
 import dev.caliman.excel.grammar.formula.reference.SHEET;
+import dev.caliman.excel.parser.AbstractParser;
 
 import static dev.caliman.excel.parser.AbstractParser.cellAddress;
 
@@ -87,7 +88,7 @@ public abstract class Start {
     }
 
     public String id() {
-        return this.singleSheet ? cellAddress(getRow(), getColumn()) : quoteIf(sheetName) + "!" + cellAddress(getRow(), getColumn());
+        return this.singleSheet ? cellAddress(getRow(), getColumn()) : AbstractParser.quoteIf(sheetName) + "!" + cellAddress(getRow(), getColumn());
     }
 
     @Override
@@ -127,12 +128,6 @@ public abstract class Start {
     }
 
 
-    public String quoteIf(String text) {
-        return hasSpaces(text) ? "'" + text.trim() + "'" : text.trim();
-    }
 
-    private boolean hasSpaces(String text) {
-        return text != null && text.trim().contains(" ");
-    }
 
 }

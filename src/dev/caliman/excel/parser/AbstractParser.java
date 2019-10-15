@@ -421,6 +421,16 @@ public abstract class AbstractParser {
         return list(area);
     }
 
+
+    public static String quoteIf(String text) {
+        return AbstractParser.hasSpaces(text) ? "'" + text.trim() + "'" : text.trim();
+    }
+
+    public static boolean hasSpaces(String text) {
+        return text != null && text.trim().contains(" ");
+    }
+
+
     class WhatIf {
 
         final Ptg ptg;

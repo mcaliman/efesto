@@ -26,7 +26,6 @@ import dev.caliman.excel.grammar.Start;
 import dev.caliman.excel.parser.Parser;
 import dev.caliman.excel.parser.StartList;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -56,7 +55,7 @@ public class ToolkitCommand {
         this.elapsed = System.currentTimeMillis() - t;
     }
 
-    public void write(@NotNull String filename) throws IOException {
+    public void write(String filename) throws IOException {
         StartList list = parser.getList();
         try(Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
             writer.write("'' \n");

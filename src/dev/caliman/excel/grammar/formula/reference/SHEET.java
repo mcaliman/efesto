@@ -23,6 +23,8 @@
 package dev.caliman.excel.grammar.formula.reference;
 
 
+import dev.caliman.excel.parser.AbstractParser;
+
 /**
  * @author Massimo Caliman
  */
@@ -45,7 +47,7 @@ public final class SHEET extends Prefix {
     }
 
     public String toString() {
-        return this.quoteIf(name) + "!";
+        return AbstractParser.quoteIf(name) + "!";
     }
 
 
