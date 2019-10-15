@@ -142,7 +142,7 @@ public final class Parser extends AbstractParser {
                 new WhatIf(p, multiplyPtg, t -> parseMult()),
                 new WhatIf(p, namePtg, (Ptg t) -> parseNamedRange((NamePtg) t)),
                 new WhatIf(p, notEqualPtg, t -> parseNeq()),
-                new WhatIf(p, numberPtg, t -> parseFLOAT(((NumberPtg) t).getValue())),
+                new WhatIf(p, numberPtg, t -> parseNUMBER(((NumberPtg) t).getValue())),
                 new WhatIf(p, parenthesisPtg, t -> parseParenthesisFormula()),
                 new WhatIf(p, percentPtg, t -> percentFormula()),
                 new WhatIf(p, powerPtg, t -> parsePower()),
@@ -241,13 +241,18 @@ public final class Parser extends AbstractParser {
         stack.push(elem);
     }
 
+    /**
+     * It never happens .. apparently
+     */
+    @Deprecated
     private void parseINT(Integer value) {
         var elem = new INT(value);
         graph.addNode(elem);
         stack.push(elem);
+        throw new RuntimeException("E' un INT " + value);
     }
 
-    private void parseFLOAT(Double value) {
+    private void parseNUMBER(Double value) {
         var elem = new FLOAT(value);
         graph.addNode(elem);
         stack.push(elem);
