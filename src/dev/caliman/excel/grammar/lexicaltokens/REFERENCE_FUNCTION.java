@@ -20,12 +20,17 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal.referencefunction;
+package dev.caliman.excel.grammar.lexicaltokens;
 
+import dev.caliman.excel.grammar.annotations.LexicalTokens;
 import dev.caliman.excel.grammar.nonterminal.EXCEL_FUNCTION;
 
 /**
+ *
  * @author Massimo Caliman
  */
-abstract class REFERENCE_FUNCTION extends EXCEL_FUNCTION {
+@LexicalTokens(name = "REFERENCE-FUNCTION",
+        description = " Excel built-in reference function",
+        content = " (INDEX | OFFSET | INDIRECT)\\(", priority = 5)
+public abstract class REFERENCE_FUNCTION extends EXCEL_FUNCTION {
 }
