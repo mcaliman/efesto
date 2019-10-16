@@ -21,7 +21,7 @@
  */
 package dev.caliman.excel.grammar.nonterminal.builtin;
 
-import dev.caliman.excel.grammar.nonterminal.EXCEL_FUNCTION;
+import dev.caliman.excel.grammar.lexicaltokens.EXCEL_FUNCTION;
 import dev.caliman.excel.grammar.nonterminal.Formula;
 
 public class DCOUNTA extends EXCEL_FUNCTION {

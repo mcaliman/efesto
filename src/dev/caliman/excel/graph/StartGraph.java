@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.graph;
 
-import dev.caliman.excel.grammar.nonterminal.EXCEL_FUNCTION;
+import dev.caliman.excel.grammar.lexicaltokens.EXCEL_FUNCTION;
 import dev.caliman.excel.grammar.nonterminal.Formula;
 import dev.caliman.excel.grammar.nonterminal.Start;
 import dev.caliman.excel.grammar.nonterminal.binary.Binary;

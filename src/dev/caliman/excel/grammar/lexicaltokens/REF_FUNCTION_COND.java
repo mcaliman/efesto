@@ -20,13 +20,17 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal.conditionalreferencefunction;
+package dev.caliman.excel.grammar.lexicaltokens;
 
-import dev.caliman.excel.grammar.nonterminal.EXCEL_FUNCTION;
+import dev.caliman.excel.grammar.annotations.LexicalTokens;
 
 /**
  * @author Massimo Caliman
  */
-abstract class REF_FUNCTION_COND extends EXCEL_FUNCTION {
+
+@LexicalTokens(name = "REF-FUNCTION-COND",
+        description = "Excel built-in conditional reference function",
+        content = "(IF | CHOOSE)\\(", priority = 5)
+public abstract class REF_FUNCTION_COND extends EXCEL_FUNCTION {
 }
 
