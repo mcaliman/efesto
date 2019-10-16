@@ -22,10 +22,10 @@
 
 package dev.caliman.excel.graph;
 
-import dev.caliman.excel.grammar.formula.functioncall.EXCEL_FUNCTION;
-import dev.caliman.excel.grammar.formula.functioncall.binary.Binary;
+import dev.caliman.excel.grammar.nonterminal.EXCEL_FUNCTION;
 import dev.caliman.excel.grammar.nonterminal.Formula;
 import dev.caliman.excel.grammar.nonterminal.Start;
+import dev.caliman.excel.grammar.nonterminal.binary.Binary;
 import dev.caliman.excel.parser.StartList;
 import org.jetbrains.annotations.NotNull;
 
