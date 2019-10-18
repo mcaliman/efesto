@@ -22,7 +22,7 @@
 
 package dev.caliman.excel;
 
-import dev.caliman.excel.grammar.nonterminal.Start;
+import dev.caliman.excel.grammar.nonterm.Start;
 import dev.caliman.excel.parser.Parser;
 import dev.caliman.excel.parser.StartList;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;

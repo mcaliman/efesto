@@ -22,7 +22,7 @@
 
 package dev.caliman.excel.graph;
 
-import dev.caliman.excel.grammar.nonterminal.Start;
+import dev.caliman.excel.grammar.nonterm.Start;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
