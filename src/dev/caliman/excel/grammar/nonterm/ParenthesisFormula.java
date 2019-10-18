@@ -20,18 +20,33 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal;
+package dev.caliman.excel.grammar.nonterm;
 
 import dev.caliman.excel.grammar.annotations.NonTerminal;
+import dev.caliman.excel.grammar.annotations.Production;
+
 
 /**
- * hFunctionCalli ::= hFunctioni hArgumentsi ‘)’
- * | hUnOpPrefixi hFormulai
- * | hFormulai ‘%’
- * | hFormulai hBinOpi hFormulai
+ * ParenthesisFormula ::= ( Formula )
  * @author Massimo Caliman
  */
 @NonTerminal
-public abstract class FunctionCall extends Formula {
+@Production(symbol = "ParenthesisFormula", expression = "( Formula  )")
+public final class ParenthesisFormula extends Formula {
+
+    private final Formula formula;
+
+    public ParenthesisFormula(Formula formula) {
+        this.formula = formula;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + formula.toString() + ")";
+    }
+
+    public Formula getFormula() {
+        return formula;
+    }
 
 }

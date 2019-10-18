@@ -23,7 +23,7 @@
 package dev.caliman.excel.grammar.nonterminal.builtin;
 
 import dev.caliman.excel.grammar.lexicaltokens.EXCEL_FUNCTION;
-import dev.caliman.excel.grammar.nonterminal.Formula;
+import dev.caliman.excel.grammar.nonterm.Formula;
 
 /**
  * Returns the absolute value of a number. The absolute value of a number is the number without its sign. The ABS function syntax

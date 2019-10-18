@@ -20,22 +20,30 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal;
-
+package dev.caliman.excel.grammar.nonterm;
 
 import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.nonterm.Start;
+import dev.caliman.excel.grammar.annotations.Production;
 
 /**
- * hFormulai ::= hConstanti
- * | hReferencei
- * | hFunctionCalli
- * | ‘(’ hFormulai ‘)’
- * | hConstantArrayi
- * | RESERVED-NAME
+ * FunctionCall ::= Function Arguments )
+ * | UnOpPrefix hFormula
+ * | Formula %
+ * | Formula BinOp Formula
+ *
+ * internal
+ * FunctionCall ::= Function
+ *   | Unary
+ *   | PercentFormula
+ *   | Binary
+ *
  * @author Massimo Caliman
  */
 @NonTerminal
-public abstract class Formula extends Start {
+@Production(symbol = "FunctionCall", expression = "Function")
+@Production(symbol = "FunctionCall", expression = "Unary")
+@Production(symbol = "FunctionCall", expression = "PercentFormula")
+@Production(symbol = "FunctionCall", expression = "Binary")
+public abstract class FunctionCall extends Formula {
 
 }

@@ -22,7 +22,7 @@
 package dev.caliman.excel.grammar.nonterminal.referencefunction;
 
 import dev.caliman.excel.grammar.lexicaltokens.REFERENCE_FUNCTION;
-import dev.caliman.excel.grammar.nonterminal.Formula;
+import dev.caliman.excel.grammar.nonterm.Formula;
 
 /**
  * @author Massimo Caliman

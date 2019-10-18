@@ -20,32 +20,38 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal;
+package dev.caliman.excel.grammar.nonterm;
+
 
 import dev.caliman.excel.grammar.annotations.NonTerminal;
+import dev.caliman.excel.grammar.annotations.Production;
 
 /**
- * hFunctionCalli ::= hFunctioni hArgumentsi ‘)’
- * | hUnOpPrefixi hFormulai
+ * Formula ::= Constant
+ * | Reference
+ * | FunctionCalli
+ * | ( Formula )
+ * | ConstantArray
+ * | RESERVED-NAME
  *
- * | hFormulai ‘%’
+ * internal
+ * Formula ::= Constant
+ *  | Reference
+ *  | FunctionCall
+ *  | ParenthesisFormula
+ *  | ConstantArray
+ *  | RESERVED-NAME
  *
- * | hFormulai hBinOpi hFormulai
+ *
  * @author Massimo Caliman
  */
 @NonTerminal
-public final class PercentFormula extends FunctionCall {
-
-    private final Formula formula;
-
-    public PercentFormula(Formula formula) {
-        this.formula = formula;
-    }
-
-    @Override
-    public String toString() {
-        return formula.toString() + "%";
-    }
-
+@Production(symbol = "Formula", expression = "Constant")
+@Production(symbol = "Formula", expression = "Reference")
+@Production(symbol = "Formula", expression = "FunctionCall")
+@Production(symbol = "Formula", expression = "ParenthesisFormula")
+@Production(symbol = "Formula", expression = "ConstantArray")
+@Production(symbol = "Formula", expression = "RESERVED_NAME")
+public abstract class Formula extends Start {
 
 }

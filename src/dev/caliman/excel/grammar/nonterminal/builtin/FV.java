@@ -22,7 +22,7 @@
 package dev.caliman.excel.grammar.nonterminal.builtin;
 
 import dev.caliman.excel.grammar.lexicaltokens.EXCEL_FUNCTION;
-import dev.caliman.excel.grammar.nonterminal.Formula;
+import dev.caliman.excel.grammar.nonterm.Formula;
 
 /**
  * FV, one of the financial functions, calculates the future value of an

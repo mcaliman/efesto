@@ -23,9 +23,9 @@
 package dev.caliman.excel.graph;
 
 import dev.caliman.excel.grammar.lexicaltokens.EXCEL_FUNCTION;
+import dev.caliman.excel.grammar.nonterm.Formula;
 import dev.caliman.excel.grammar.nonterm.Start;
 import dev.caliman.excel.grammar.nonterm.binary.Binary;
-import dev.caliman.excel.grammar.nonterminal.Formula;
 import dev.caliman.excel.parser.StartList;
 import org.jetbrains.annotations.NotNull;
 

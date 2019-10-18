@@ -20,31 +20,28 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal;
+package dev.caliman.excel.grammar.nonterm;
 
 import dev.caliman.excel.grammar.annotations.NonTerminal;
-
+import dev.caliman.excel.grammar.annotations.Production;
 
 /**
- * ParenthesisFormula ::= ( Formula % )
  * @author Massimo Caliman
  */
 @NonTerminal
-public final class ParenthesisFormula extends Formula {
+@Production(symbol = "PercentFormula", expression = "Formula %")
+public final class PercentFormula extends FunctionCall {
 
     private final Formula formula;
 
-    public ParenthesisFormula(Formula formula) {
+    public PercentFormula(Formula formula) {
         this.formula = formula;
     }
 
     @Override
     public String toString() {
-        return "(" + formula.toString() + ")";
+        return formula.toString() + "%";
     }
 
-    public Formula getFormula() {
-        return formula;
-    }
 
 }

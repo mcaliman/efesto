@@ -23,7 +23,7 @@
 package dev.caliman.excel.grammar.nonterm.binary;
 
 import dev.caliman.excel.grammar.annotations.Production;
-import dev.caliman.excel.grammar.nonterminal.Formula;
+import dev.caliman.excel.grammar.nonterm.Formula;
 
 /**
  * ⟨Intersection⟩# ::= ⟨Reference⟩ ' ' ⟨Reference⟩
