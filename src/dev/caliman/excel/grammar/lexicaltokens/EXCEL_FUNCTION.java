@@ -25,7 +25,7 @@ package dev.caliman.excel.grammar.lexicaltokens;
 import dev.caliman.excel.grammar.annotations.LexicalTokens;
 import dev.caliman.excel.grammar.nonterm.Formula;
 import dev.caliman.excel.grammar.nonterm.FunctionCall;
-import dev.caliman.excel.grammar.nonterminal.NamedRange;
+import dev.caliman.excel.grammar.nonterm.NamedRange;
 import dev.caliman.excel.grammar.nonterminal.PrefixReferenceItem;
 import dev.caliman.excel.grammar.nonterminal.RangeReference;
 import org.jetbrains.annotations.NotNull;

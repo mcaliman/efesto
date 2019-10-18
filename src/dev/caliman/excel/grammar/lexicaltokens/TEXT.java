@@ -24,7 +24,7 @@
 package dev.caliman.excel.grammar.lexicaltokens;
 
 import dev.caliman.excel.grammar.annotations.LexicalTokens;
-import dev.caliman.excel.grammar.nonterminal.Constant;
+import dev.caliman.excel.grammar.nonterm.Constant;
 
 import java.util.Objects;
 
