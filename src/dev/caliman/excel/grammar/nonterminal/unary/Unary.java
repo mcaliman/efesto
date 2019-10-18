@@ -22,20 +22,27 @@
 
 package dev.caliman.excel.grammar.nonterminal.unary;
 
+import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.lexicaltokens.CELL;
 import dev.caliman.excel.grammar.nonterminal.Formula;
 import dev.caliman.excel.grammar.nonterminal.FunctionCall;
 
 /**
- * UnOpPrefix = + Formula | - Formula
+ * UnOpPrefix = + | -
+ *
+ * Unary = Plus  | Minus
+ * Plus ::= + Formula
+ * Minus ::= - Formula
  * @author Massimo Caliman
  */
+@Production(symbol = "Unary", expression = "Plus")
+@Production(symbol = "Unary", expression = "Minus")
 public abstract class Unary extends FunctionCall {
 
     private final Formula formula;
     private final String unOpPrefix;
 
-    Unary(String unOpPrefix, Formula formula) {
+    public Unary(String unOpPrefix, Formula formula) {
         this.unOpPrefix = unOpPrefix;
         this.formula = formula;
     }

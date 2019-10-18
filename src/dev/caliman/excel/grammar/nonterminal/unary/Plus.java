@@ -22,11 +22,13 @@
 
 package dev.caliman.excel.grammar.nonterminal.unary;
 
+import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterminal.Formula;
 
 /**
  * @author Massimo Caliman
  */
+@Production(symbol = "Plus", expression = "+ Formula")
 public final class Plus extends Unary {
 
     public Plus(Formula expr) {
