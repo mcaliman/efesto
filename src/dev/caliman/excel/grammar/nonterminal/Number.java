@@ -28,5 +28,6 @@ import dev.caliman.excel.grammar.annotations.NonTerminal;
  * @author Massimo Caliman
  */
 @NonTerminal
+@Deprecated
 public abstract class Number extends Constant {
 }
