@@ -20,17 +20,19 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal.binary;
+package dev.caliman.excel.grammar.nonterm.unary;
 
+import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterminal.Formula;
 
 /**
  * @author Massimo Caliman
  */
-public final class Leq extends Binary {
+@Production(symbol = "Minus", expression = "- Formula")
+public final class Minus extends Unary {
 
-    public Leq(Formula lFormula, Formula rFormula) {
-        super(lFormula, "<=", rFormula);
+    public Minus(Formula expr) {
+        super("-", expr);
     }
 
 }

@@ -25,7 +25,8 @@ package dev.caliman.excel.grammar.nonterminal;
 import dev.caliman.excel.grammar.annotations.NonTerminal;
 
 /**
- * hConstantArrayi ::= ‘{’ hArrayColumnsi ‘}’
+ * ConstantArray ::= { ArrayColumns }
+ *
  * @author Massimo Caliman
  */
 @NonTerminal

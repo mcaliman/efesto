@@ -20,17 +20,19 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal.binary;
+package dev.caliman.excel.grammar.nonterm.binary;
 
+import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterminal.Formula;
 
 /**
  * @author Massimo Caliman
  */
-public final class GtEq extends Binary {
+@Production(symbol = "Neq", expression = "Formula <> Formula")
+public final class Neq extends Binary {
 
-    public GtEq(Formula lFormula, Formula rFormula) {
-        super(lFormula, ">=", rFormula);
+    public Neq(Formula lFormula, Formula rFormula) {
+        super(lFormula, "<>", rFormula);
     }
 
 }

@@ -20,17 +20,22 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal.binary;
+package dev.caliman.excel.grammar.nonterm.binary;
 
+import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterminal.Formula;
 
 /**
+ * Concat   : Formula & Formula
+ * a & b -> (str a b)
+ *
  * @author Massimo Caliman
  */
-public final class Neq extends Binary {
+@Production(symbol = "Concat", expression = "Formula & Formula")
+public final class Concat extends Binary {
 
-    public Neq(Formula lFormula, Formula rFormula) {
-        super(lFormula, "<>", rFormula);
+    public Concat(Formula lFormula, Formula rFormula) {
+        super(lFormula, "&", rFormula);
     }
 
 }

@@ -20,20 +20,34 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal.binary;
+package dev.caliman.excel.grammar.nonterm.binary;
 
+import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.lexicaltokens.CELL;
+import dev.caliman.excel.grammar.nonterm.unary.Unary;
 import dev.caliman.excel.grammar.nonterminal.Formula;
 import dev.caliman.excel.grammar.nonterminal.FunctionCall;
 import dev.caliman.excel.grammar.nonterminal.ParenthesisFormula;
-import dev.caliman.excel.grammar.nonterminal.unary.Unary;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * hBinOpi = ‘+’ | ‘-’ | ‘*’ | ‘/’ | ‘^’
- * | ‘<’ | ‘>’ | ‘=’ | ‘<=’ | ‘>=’ | ‘<>’
+ * FunctionCall ::= Formula BinOp Formula
+ * BinOp ::= + | - | * | / | ^ | < | > | = | <= | >= | <>
+ *
+ * Binary ::= Add | Sub | Mult | Div | Power | Lt | Gt | Eq | Leq | GtEq | Neq
+ *
  * @author Massimo Caliman
  */
+@Production(symbol = "Binary", expression = "Add")
+@Production(symbol = "Binary", expression = "Sub")
+@Production(symbol = "Binary", expression = "Mult")
+@Production(symbol = "Binary", expression = "Div")
+@Production(symbol = "Binary", expression = "Lt")
+@Production(symbol = "Binary", expression = "Gt")
+@Production(symbol = "Binary", expression = "Eq")
+@Production(symbol = "Binary", expression = "Leq")
+@Production(symbol = "Binary", expression = "GtEq")
+@Production(symbol = "Binary", expression = "Neq")
 public abstract class Binary extends FunctionCall {
 
     private final String op;

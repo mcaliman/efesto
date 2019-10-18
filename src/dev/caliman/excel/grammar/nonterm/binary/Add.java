@@ -20,17 +20,19 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal.binary;
+package dev.caliman.excel.grammar.nonterm.binary;
 
+import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterminal.Formula;
 
 /**
  * @author Massimo Caliman
  */
-public final class Lt extends Binary {
+@Production(symbol = "Add", expression = "Formula + Formula")
+public final class Add extends Binary {
 
-    public Lt(Formula lFormula, Formula rFormula) {
-        super(lFormula, "<", rFormula);
+    public Add(Formula lFormula, Formula rFormula) {
+        super(lFormula, "+", rFormula);
     }
 
 }

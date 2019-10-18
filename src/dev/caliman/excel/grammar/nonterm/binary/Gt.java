@@ -20,7 +20,7 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal.unary;
+package dev.caliman.excel.grammar.nonterm.binary;
 
 import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterminal.Formula;
@@ -28,11 +28,11 @@ import dev.caliman.excel.grammar.nonterminal.Formula;
 /**
  * @author Massimo Caliman
  */
-@Production(symbol = "Plus", expression = "+ Formula")
-public final class Plus extends Unary {
+@Production(symbol = "Gt", expression = "Formula > Formula")
+public final class Gt extends Binary {
 
-    public Plus(Formula expr) {
-        super("+", expr);
+    public Gt(Formula lFormula, Formula rFormula) {
+        super(lFormula, ">", rFormula);
     }
 
 }

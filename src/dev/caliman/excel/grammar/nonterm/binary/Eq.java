@@ -20,18 +20,19 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal.binary;
+package dev.caliman.excel.grammar.nonterm.binary;
 
+import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterminal.Formula;
 
 /**
  * @author Massimo Caliman
  */
-public final class Sub extends Binary {
+@Production(symbol = "Eq", expression = "Formula = Formula")
+public final class Eq extends Binary {
 
-    public Sub(Formula lFormula, Formula rFormula) {
-        super(lFormula, "-", rFormula);
+    public Eq(Formula lFormula, Formula rFormula) {
+        super(lFormula, "=", rFormula);
     }
-
 
 }

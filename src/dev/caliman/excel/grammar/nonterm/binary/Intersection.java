@@ -20,17 +20,21 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal.binary;
+package dev.caliman.excel.grammar.nonterm.binary;
 
+import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterminal.Formula;
 
 /**
+ * ⟨Intersection⟩# ::= ⟨Reference⟩ ' ' ⟨Reference⟩
+ *
  * @author Massimo Caliman
  */
-public final class Power extends Binary {
+@Production(symbol = "Intersection", expression = "Formula Formula")
+public final class Intersection extends Binary {
 
-    public Power(Formula lformula, Formula rformula) {
-        super(lformula, "^", rformula);
+    public Intersection(Formula lFormula, Formula rFormula) {
+        super(lFormula, " ", rFormula);
     }
 
 }

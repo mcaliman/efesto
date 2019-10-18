@@ -20,19 +20,37 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal.unary;
+package dev.caliman.excel.grammar.nonterm.unary;
 
 import dev.caliman.excel.grammar.annotations.Production;
+import dev.caliman.excel.grammar.lexicaltokens.CELL;
 import dev.caliman.excel.grammar.nonterminal.Formula;
+import dev.caliman.excel.grammar.nonterminal.FunctionCall;
 
 /**
+ * UnOpPrefix = + | -
+ *
+ * Unary = Plus  | Minus
+ * Plus ::= + Formula
+ * Minus ::= - Formula
  * @author Massimo Caliman
  */
-@Production(symbol = "Minus", expression = "- Formula")
-public final class Minus extends Unary {
+@Production(symbol = "Unary", expression = "Plus")
+@Production(symbol = "Unary", expression = "Minus")
+public abstract class Unary extends FunctionCall {
 
-    public Minus(Formula expr) {
-        super("-", expr);
+    private final Formula formula;
+    private final String unOpPrefix;
+
+    public Unary(String unOpPrefix, Formula formula) {
+        this.unOpPrefix = unOpPrefix;
+        this.formula = formula;
+    }
+
+    @Override
+    public String toString() {
+        if(formula instanceof CELL) return unOpPrefix + ((CELL) formula).getValue();
+        else return unOpPrefix + formula.toString();
     }
 
 }
