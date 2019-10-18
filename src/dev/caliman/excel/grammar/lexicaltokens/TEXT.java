@@ -31,9 +31,7 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "TEXT",
-        description = "String literal",
-        content = "\" ([^ \"] j \"\")* \"", priority = 0)
+@LexicalTokens(name = "TEXT", description = "String literal", content = "\" ([^ \"] j \"\")* \"", priority = 0)
 public final class TEXT extends Constant {
 
     private final String value;

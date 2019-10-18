@@ -30,6 +30,14 @@ import java.util.List;
 
 
 /**
+ * hReferencei ::= hReferenceItemi
+ * | hReferencei ‘:’ hReferencei
+ * | hReferencei ‘ ’ hReferencei
+ * | ‘(’ hUnioni ‘)’
+ * | ‘(’ hReferencei ‘)’
+ * | hPrefixi hReferenceItemi
+ * | hPrefixi UDF hArgumentsi ‘)’
+ * | hDynamicDataExchangei
  * @author Massimo Caliman
  */
 @NonTerminal

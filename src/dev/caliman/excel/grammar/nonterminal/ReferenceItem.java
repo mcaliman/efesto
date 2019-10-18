@@ -25,6 +25,12 @@ package dev.caliman.excel.grammar.nonterminal;
 import dev.caliman.excel.grammar.annotations.NonTerminal;
 
 /**
+ * hReferenceItemi ::= CELL
+ * | hNamedRangei
+ * | REFERENCE-FUNCTION Arguments ‘)’
+ * | VERTICAL-RANGE
+ * | HORIZONTAL-RANGE
+ * | ERROR-REF
  * @author Massimo Caliman
  */
 @NonTerminal

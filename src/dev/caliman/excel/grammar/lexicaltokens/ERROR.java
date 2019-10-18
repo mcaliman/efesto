@@ -28,9 +28,7 @@ import dev.caliman.excel.grammar.nonterminal.Constant;
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "ERROR",
-        description = "Error literal",
-        content = "#NULL! | #DIV/0! | #VALUE! | #NAME? | #NUM! | #N/A", priority = 0)
+@LexicalTokens(name = "ERROR", description = "Error literal", content = "#NULL! | #DIV/0! | #VALUE! | #NAME? | #NUM! | #N/A", priority = 0)
 public final class ERROR extends Constant {
 
     private final String text;

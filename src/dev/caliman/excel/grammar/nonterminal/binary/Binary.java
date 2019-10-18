@@ -30,6 +30,8 @@ import dev.caliman.excel.grammar.nonterminal.unary.Unary;
 import org.jetbrains.annotations.NotNull;
 
 /**
+ * hBinOpi = ‘+’ | ‘-’ | ‘*’ | ‘/’ | ‘^’
+ * | ‘<’ | ‘>’ | ‘=’ | ‘<=’ | ‘>=’ | ‘<>’
  * @author Massimo Caliman
  */
 public abstract class Binary extends FunctionCall {

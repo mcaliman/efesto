@@ -26,6 +26,12 @@ package dev.caliman.excel.grammar.nonterminal;
 import dev.caliman.excel.grammar.annotations.NonTerminal;
 
 /**
+ * hFormulai ::= hConstanti
+ * | hReferencei
+ * | hFunctionCalli
+ * | ‘(’ hFormulai ‘)’
+ * | hConstantArrayi
+ * | RESERVED-NAME
  * @author Massimo Caliman
  */
 @NonTerminal

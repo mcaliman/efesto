@@ -28,9 +28,7 @@ import dev.caliman.excel.grammar.nonterminal.Reference;
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "UDF",
-        description = "User Defined Function",
-        content = "(_xll\\.)? [A-Z_\\][A-Z0-9_\\\\.\u00031]* (", priority = 4)
+@LexicalTokens(name = "UDF", description = "User Defined Function", content = "(_xll\\.)? [A-Z_\\][A-Z0-9_\\\\.\u00031]* (", priority = 4)
 public final class UDF extends Reference {
 
     private final String arguments;

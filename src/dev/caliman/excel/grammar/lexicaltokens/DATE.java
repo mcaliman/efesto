@@ -33,9 +33,7 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "DATE",
-        description = "An integer, floating point or scientific notation number literal",
-        content = "[0-9]+ ,? [0-9]* (e [0-9]+)?", priority = 0)
+@LexicalTokens(name = "DATE", description = "An integer, floating point or scientific notation number literal", content = "[0-9]+ ,? [0-9]* (e [0-9]+)?", priority = 0)
 public final class DATE extends Constant {
     private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
     private final Date value;

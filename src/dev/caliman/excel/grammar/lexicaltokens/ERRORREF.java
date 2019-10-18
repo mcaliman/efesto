@@ -28,9 +28,7 @@ import dev.caliman.excel.grammar.nonterminal.ReferenceItem;
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "ERRORREF",
-        description = "Reference error literal",
-        content = "#REF!", priority = 0)
+@LexicalTokens(name = "ERRORREF", description = "Reference error literal", content = "#REF!", priority = 0)
 public final class ERRORREF extends ReferenceItem {
 
     public ERRORREF() {

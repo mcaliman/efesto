@@ -28,8 +28,6 @@ import dev.caliman.excel.grammar.annotations.LexicalTokens;
  *
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "REFERENCE-FUNCTION",
-        description = " Excel built-in reference function",
-        content = " (INDEX | OFFSET | INDIRECT)\\(", priority = 5)
+@LexicalTokens(name = "REFERENCE-FUNCTION", description = " Excel built-in reference function", content = " (INDEX | OFFSET | INDIRECT)\\(", priority = 5)
 public abstract class REFERENCE_FUNCTION extends EXCEL_FUNCTION {
 }

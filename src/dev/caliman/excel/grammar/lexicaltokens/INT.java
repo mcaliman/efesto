@@ -30,9 +30,8 @@ import java.util.Objects;
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "INT",
-        description = "An integer, floating point or scientific notation number literal",
-        content = "[0-9]+ ,? [0-9]* (e [0-9]+)?", priority = 0)
+@LexicalTokens(name = "INT", description = "An integer, floating point or scientific notation number literal", content = "[0-9]+ ,? [0-9]* (e [0-9]+)?", priority = 0)
+@Deprecated
 public final class INT extends Number {
 
     private final Integer value;

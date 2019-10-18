@@ -25,6 +25,10 @@ package dev.caliman.excel.grammar.nonterminal;
 import dev.caliman.excel.grammar.annotations.NonTerminal;
 
 /**
+ * hFunctionCalli ::= hFunctioni hArgumentsi ‘)’
+ * | hUnOpPrefixi hFormulai
+ * | hFormulai ‘%’
+ * | hFormulai hBinOpi hFormulai
  * @author Massimo Caliman
  */
 @NonTerminal

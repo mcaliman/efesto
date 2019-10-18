@@ -25,6 +25,12 @@ package dev.caliman.excel.grammar.nonterminal;
 import dev.caliman.excel.grammar.annotations.NonTerminal;
 
 /**
+ * hPrefixi ::= SHEET
+ * | FILE SHEET
+ * | FILE ‘!’
+ * | QUOTED-FILE-SHEET
+ * | MULTIPLE-SHEETS
+ * | FILE MULTIPLE-SHEETS
  * @author Massimo Caliman
  */
 @NonTerminal

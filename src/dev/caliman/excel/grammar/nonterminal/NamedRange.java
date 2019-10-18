@@ -27,6 +27,8 @@ import dev.caliman.excel.grammar.annotations.NonTerminal;
 import dev.caliman.excel.grammar.lexicaltokens.RANGE;
 
 /**
+ * hNamedRangei ::= NAMED-RANGE
+ * | NAMED-RANGE-PREFIXED
  * @author Massimo Caliman
  */
 @NonTerminal

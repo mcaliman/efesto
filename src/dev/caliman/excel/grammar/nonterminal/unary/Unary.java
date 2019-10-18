@@ -27,6 +27,7 @@ import dev.caliman.excel.grammar.nonterminal.Formula;
 import dev.caliman.excel.grammar.nonterminal.FunctionCall;
 
 /**
+ * hUnOpPrefixi = ‘+’ | ‘-’
  * @author Massimo Caliman
  */
 public abstract class Unary extends FunctionCall {

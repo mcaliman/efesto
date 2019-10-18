@@ -27,10 +27,7 @@ import dev.caliman.excel.grammar.nonterminal.Reference;
 
 import java.util.List;
 
-@LexicalTokens(name = "RANGE",
-        description = "Range",
-        content = "$? [A-Z]+ : $? [A-Z]+",
-        priority = 0)
+@LexicalTokens(name = "RANGE", description = "Range", content = "$? [A-Z]+ : $? [A-Z]+", priority = 0)
 public class RANGE extends Reference {
 
     private final CELL first;

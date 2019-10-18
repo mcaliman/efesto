@@ -29,9 +29,7 @@ import dev.caliman.excel.grammar.nonterminal.Prefix;
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "FILE",
-        description = "External file reference using number",
-        content = "\\[ [0-9]+ \\]", priority = 5)
+@LexicalTokens(name = "FILE", description = "External file reference using number", content = "\\[ [0-9]+ \\]", priority = 5)
 public final class FILE extends Prefix {
 
     private final int ext;

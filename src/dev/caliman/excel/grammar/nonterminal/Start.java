@@ -31,6 +31,7 @@ import dev.caliman.excel.parser.AbstractParser;
 import static dev.caliman.excel.parser.AbstractParser.cellAddress;
 
 /**
+ *
  * @author Massimo Caliman
  */
 @StartSymbol
