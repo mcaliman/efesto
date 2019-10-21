@@ -20,17 +20,17 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal;
+package dev.caliman.excel.grammar.nonterm;
 
 import dev.caliman.excel.grammar.annotations.NonTerminal;
 
 /**
- * hReferenceItemi ::= CELL
- * | hNamedRangei
- * | REFERENCE-FUNCTION Arguments ‘)’
- * | VERTICAL-RANGE
- * | HORIZONTAL-RANGE
- * | ERROR-REF
+ * ReferenceItem ::= CELL
+ * | NamedRange
+ * | REFERENCE_FUNCTION Arguments ‘)’
+ * | VERTICAL_RANGE
+ * | HORIZONTAL_RANGE
+ * | ERROR_REF
  * @author Massimo Caliman
  */
 @NonTerminal

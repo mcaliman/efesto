@@ -20,18 +20,23 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal;
+package dev.caliman.excel.grammar.nonterm;
 
 import dev.caliman.excel.grammar.annotations.NonTerminal;
+import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.lexicaltokens.RANGE;
 
 import java.util.Objects;
 
 
 /**
+ * RangeReference::= Reference : Reference
+ * or
+ * RangeReference::= RANGE
  * @author Massimo Caliman
  */
 @NonTerminal
+@Production(symbol = "RangeReference", expression = "RANGE")
 public final class RangeReference extends Reference {
 
     private final RANGE range;

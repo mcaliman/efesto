@@ -22,6 +22,7 @@
 
 package dev.caliman.excel.grammar.nonterm.binary;
 
+import dev.caliman.excel.grammar.annotations.NonTerminal;
 import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.lexicaltokens.CELL;
 import dev.caliman.excel.grammar.nonterm.Formula;
@@ -38,6 +39,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Massimo Caliman
  */
+@NonTerminal
 @Production(symbol = "Binary", expression = "Add")
 @Production(symbol = "Binary", expression = "Sub")
 @Production(symbol = "Binary", expression = "Mult")

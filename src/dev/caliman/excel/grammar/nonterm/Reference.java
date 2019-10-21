@@ -20,10 +20,9 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal;
+package dev.caliman.excel.grammar.nonterm;
 
 import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.nonterm.Formula;
 import dev.caliman.excel.parser.AbstractParser;
 
 import java.util.ArrayList;
@@ -31,14 +30,17 @@ import java.util.List;
 
 
 /**
- * hReferencei ::= hReferenceItemi
- * | hReferencei ‘:’ hReferencei
- * | hReferencei ‘ ’ hReferencei
- * | ‘(’ hUnioni ‘)’
- * | ‘(’ hReferencei ‘)’
- * | hPrefixi hReferenceItemi
- * | hPrefixi UDF hArgumentsi ‘)’
- * | hDynamicDataExchangei
+ * Reference ::= ReferenceItem
+ * | Reference : Reference
+ * | Reference  Reference
+ * | ( Union )
+ * | ( Reference)
+ * | Prefix ReferenceItem
+ * | Prefix UDF Arguments )
+ * | DynamicDataExchange
+ *
+ *
+ *
  * @author Massimo Caliman
  */
 @NonTerminal

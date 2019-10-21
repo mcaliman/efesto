@@ -20,20 +20,21 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterminal;
+package dev.caliman.excel.grammar.nonterm;
 
 import dev.caliman.excel.grammar.annotations.NonTerminal;
+import dev.caliman.excel.grammar.annotations.Production;
 
 /**
- * hPrefixi ::= SHEET
- * | FILE SHEET
- * | FILE ‘!’
- * | QUOTED-FILE-SHEET
- * | MULTIPLE-SHEETS
- * | FILE MULTIPLE-SHEETS
+ * Prefix ::= SHEET | FILE SHEET | FILE ! | QUOTED_FILE_SHEET | MULTIPLE_SHEETS | FILE MULTIPLE_SHEETS
  * @author Massimo Caliman
  */
 @NonTerminal
+@Production(symbol = "Prefix", expression = "SHEET")
+@Production(symbol = "Prefix", expression = "FILE SHEET")
+@Production(symbol = "Prefix", expression = "QUOTED_FILE_SHEET")
+@Production(symbol = "Prefix", expression = "MULTIPLE_SHEETS")
+@Production(symbol = "Prefix", expression = "FILE MULTIPLE_SHEETS")
 public class Prefix extends ReferenceItem {
 
 }
