@@ -188,7 +188,7 @@ public abstract class AbstractParser {
         this.row = cell.getRowIndex();
         this.formulaAddress = getCellAddress();
         this.formulaPlainText = cell.getCellFormula();
-        System.out.println("Formula Plain Text: " + this.formulaAddress);
+        System.out.println("Formula Plain Text: " + this.formulaAddress + " = " + formulaPlainText);
         this.formulaPtgs = tokens();
 
     }

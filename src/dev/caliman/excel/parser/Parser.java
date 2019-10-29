@@ -54,6 +54,7 @@ import static java.lang.System.out;
 public final class Parser extends AbstractParser {
 
     private boolean verbose = false;
+    private StringBuilder raw;
     private List<Cell> ext;
     private StartList unordered;
     private StartList ordered;
@@ -62,6 +63,7 @@ public final class Parser extends AbstractParser {
 
     public Parser(String filename) throws IOException, InvalidFormatException {
         super(filename);
+        this.raw = new StringBuilder();
         this.ext = new ArrayList<>();
         this.unordered = new StartList();
         this.ordered = new StartList();
@@ -83,13 +85,13 @@ public final class Parser extends AbstractParser {
             parseCELLlinked(elem);
             this.ext.remove(cell);
         } else if(!this.ext.contains(cell) && nonEmpty(cell)) {
-            //Non è formula non è nelle celle utili collezionate
-            out.println("Cella di interesse? " + cell.toString());
+            this.raw.append("' " + cellAddress(cell.getRowIndex(), cell.getColumnIndex()) + " = " + cell.toString() + "\n");
         }
     }
 
     void parseFormula(Cell cell) {
         super.parseFormula(cell);
+        this.raw.append("' " + this.formulaAddress + " = " + formulaPlainText + "\n");
         if(this.formulaPtgs == null) {
             err("ptgs empty or null for address " + this.formulaAddress);
             parseUDF(this.formulaPlainText);
@@ -854,6 +856,11 @@ public final class Parser extends AbstractParser {
     public StartList getList() {
         return ordered;
     }
+
+    public String getRaw() {
+        return this.raw.toString();
+    }
+
 //</editor-fold>
 
 //<editor-fold desc="Setters">

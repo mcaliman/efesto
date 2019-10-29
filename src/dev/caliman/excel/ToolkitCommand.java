@@ -58,17 +58,20 @@ public class ToolkitCommand {
     public void write(String filename) throws IOException {
         StartList list = parser.getList();
         try(Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
-            writer.write("'' \n");
-            writer.write("'' Text File: " + filename + '\n');
-            writer.write("'' Excel File: " + parser.getFilename() + '\n');
-            writer.write("'' Excel Formulas Number: " + parser.getCounterFormulas() + '\n');
-            writer.write("'' Elapsed Time (parsing + topological sort): " + (elapsed / 1000 + " s. or " + (elapsed / 1000 / 60) + " min.") + '\n');
-
+            writer.write("' \n");
+            writer.write("' Text File: " + filename + '\n');
+            writer.write("' Excel File: " + parser.getFilename() + '\n');
+            writer.write("' Excel Formulas Number: " + parser.getCounterFormulas() + '\n');
+            writer.write("' Elapsed Time (parsing + topological sort): " + (elapsed / 1000 + " s. or " + (elapsed / 1000 / 60) + " min.") + '\n');
+            //As Raw Text
+            writer.write("' As Raw Text - Start\n");
+            writer.write(parser.getRaw());
+            writer.write("' As Raw Text - End\n");
             for(Start start : list) {
                 try {
                     writer.write(start.id() + " = " + start.toString());
                 } catch(Exception e) {
-                    writer.write("'' Error when compile " + start.id());
+                    writer.write("' Error when compile " + start.id());
                 }
                 writer.write("\n");
             }
