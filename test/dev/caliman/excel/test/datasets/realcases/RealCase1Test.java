@@ -24,10 +24,9 @@ package dev.caliman.excel.test.datasets.realcases;
 
 import dev.caliman.excel.ToolkitCommand;
 import dev.caliman.excel.ToolkitOptions;
-import org.junit.jupiter.api.Test;
 
 class RealCase1Test {
-    @Test
+    //@Test
     void testTest() throws Exception {
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
