@@ -3,109 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8a32ddec-a085-4cfd-9a7f-b60d1a9807ed" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/annotations/LexicalTokens.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/annotations/NonTerminal.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/annotations/Production.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/annotations/Productions.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/annotations/StartSymbol.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/BOOL.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/BOOL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/CELL.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/CELL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/DATE.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/DATE.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/ERROR.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/ERROR.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/ERRORREF.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/ERRORREF.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/EXCEL_FUNCTION.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/EXCEL_FUNCTION.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/FILE.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/FILE.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/FLOAT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/FLOAT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/INT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/INT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/RANGE.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/RANGE.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/REFERENCE_FUNCTION.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/REFERENCE_FUNCTION.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/REF_FUNCTION_COND.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/REF_FUNCTION_COND.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/SHEET.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/SHEET.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/TEXT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/TEXT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/UDF.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/UDF.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Constant.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Constant.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/ConstantArray.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/ConstantArray.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Formula.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Formula.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/FunctionCall.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/FunctionCall.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/NamedRange.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/NamedRange.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/ParenthesisFormula.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/ParenthesisFormula.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/PercentFormula.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/PercentFormula.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Prefix.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Prefix.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/PrefixReferenceItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/PrefixReferenceItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/RangeReference.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/RangeReference.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Reference.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Reference.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/ReferenceItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/ReferenceItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Start.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Start.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Add.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Add.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Binary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Binary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Concat.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Concat.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Divide.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Divide.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Eq.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Eq.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Gt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Gt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/GtEq.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/GtEq.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Intersection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Intersection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Leq.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Leq.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Lt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Lt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Mult.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Mult.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Neq.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Neq.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Power.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Power.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Sub.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Sub.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Union.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Union.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/unary/Minus.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/unary/Minus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/unary/Plus.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/unary/Plus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/unary/Unary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/unary/Unary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/realcases/RealCase1Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/realcases/RealCase1Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/annotations/LexicalTokens.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/annotations/NonTerminal.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/annotations/Production.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/annotations/Productions.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/annotations/StartSymbol.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/BOOL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/BOOL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/CELL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/CELL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/DATE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/DATE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/ERROR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/ERROR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/ERRORREF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/ERRORREF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/EXCEL_FUNCTION.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/EXCEL_FUNCTION.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/FILE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/FILE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/FLOAT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/FLOAT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/INT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/INT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/RANGE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/RANGE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/REFERENCE_FUNCTION.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/REFERENCE_FUNCTION.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/REF_FUNCTION_COND.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/REF_FUNCTION_COND.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/SHEET.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/SHEET.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/TEXT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/TEXT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/UDF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/UDF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/ConstantArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/ConstantArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/Formula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/Formula.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/FunctionCall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/FunctionCall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/NamedRange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/NamedRange.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/ParenthesisFormula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/ParenthesisFormula.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/PercentFormula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/PercentFormula.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/Prefix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/Prefix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/PrefixReferenceItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/PrefixReferenceItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/RangeReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/RangeReference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/Reference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/Reference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/ReferenceItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/ReferenceItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/Start.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Add.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Binary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Binary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Concat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Concat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Divide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Divide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Eq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Eq.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Gt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Gt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/GtEq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/GtEq.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Intersection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Intersection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Leq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Leq.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Lt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Lt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Mult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Mult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Neq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Neq.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Power.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Power.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Sub.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Sub.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Union.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/binary/Union.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/unary/Minus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/unary/Minus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/unary/Plus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/unary/Plus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/unary/Unary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/unary/Unary.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +71,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580302453344</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="init. branch v.2.0">
+      <created>1580476035915</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1580476035915</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -183,7 +87,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="init. branch v.2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="init. branch v.2.0" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -237,6 +142,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1580328203542" />
+    <state x="361" y="135" key="Vcs.Push.Dialog.v2" timestamp="1580476132127">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="135" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1580476132127" />
     <state x="93" y="93" width="1350" height="638" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1580302932600">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
