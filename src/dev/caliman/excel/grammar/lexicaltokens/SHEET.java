@@ -23,14 +23,12 @@
 package dev.caliman.excel.grammar.lexicaltokens;
 
 
-import dev.caliman.excel.grammar.annotations.LexicalTokens;
 import dev.caliman.excel.grammar.nonterm.Prefix;
 import dev.caliman.excel.parser.AbstractParser;
 
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "SHEET", description = "The name of a worksheet", content = "\u00032+ !", priority = 5)
 public final class SHEET extends Prefix {
 
     private final String name;

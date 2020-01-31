@@ -22,9 +22,6 @@
 
 package dev.caliman.excel.grammar.nonterm;
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.annotations.Production;
-
 /**
  * FunctionCall ::= Function Arguments )
  * | UnOpPrefix hFormula
@@ -39,11 +36,6 @@ import dev.caliman.excel.grammar.annotations.Production;
  *
  * @author Massimo Caliman
  */
-@NonTerminal
-@Production(symbol = "FunctionCall", expression = "Function")
-@Production(symbol = "FunctionCall", expression = "Unary")
-@Production(symbol = "FunctionCall", expression = "PercentFormula")
-@Production(symbol = "FunctionCall", expression = "Binary")
 public abstract class FunctionCall extends Formula {
 
 }

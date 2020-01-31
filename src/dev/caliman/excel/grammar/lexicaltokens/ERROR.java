@@ -22,13 +22,11 @@
 
 package dev.caliman.excel.grammar.lexicaltokens;
 
-import dev.caliman.excel.grammar.annotations.LexicalTokens;
 import dev.caliman.excel.grammar.nonterm.Constant;
 
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "ERROR", description = "Error literal", content = "#NULL! | #DIV/0! | #VALUE! | #NAME? | #NUM! | #N/A", priority = 0)
 public final class ERROR extends Constant {
 
     private final String text;

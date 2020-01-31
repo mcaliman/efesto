@@ -22,9 +22,6 @@
 
 package dev.caliman.excel.grammar.nonterm;
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.annotations.Production;
-import dev.caliman.excel.grammar.annotations.StartSymbol;
 import dev.caliman.excel.grammar.lexicaltokens.SHEET;
 import dev.caliman.excel.parser.AbstractParser;
 
@@ -34,11 +31,6 @@ import static dev.caliman.excel.parser.AbstractParser.cellAddress;
  *
  * @author Massimo Caliman
  */
-@StartSymbol
-@NonTerminal
-@Production(symbol = "Start", expression = "Constant")
-@Production(symbol = "Start", expression = "=Formula")
-@Production(symbol = "Start", expression = "ArrayFormula")
 public abstract class Start {
 
     protected String sheetName;

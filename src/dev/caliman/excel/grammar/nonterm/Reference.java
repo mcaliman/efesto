@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.nonterm;
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
 import dev.caliman.excel.parser.AbstractParser;
 
 import java.util.ArrayList;
@@ -43,7 +42,6 @@ import java.util.List;
  *
  * @author Massimo Caliman
  */
-@NonTerminal
 public abstract class Reference extends Formula {
 
     protected final List<Object> vals = new ArrayList<>();

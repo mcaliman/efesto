@@ -23,13 +23,11 @@
 package dev.caliman.excel.grammar.lexicaltokens;
 
 
-import dev.caliman.excel.grammar.annotations.LexicalTokens;
 import dev.caliman.excel.grammar.nonterm.Prefix;
 
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "FILE", description = "External file reference using number", content = "\\[ [0-9]+ \\]", priority = 5)
 public final class FILE extends Prefix {
 
     private final int ext;

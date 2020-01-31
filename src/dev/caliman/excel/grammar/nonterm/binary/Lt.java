@@ -22,13 +22,11 @@
 
 package dev.caliman.excel.grammar.nonterm.binary;
 
-import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterm.Formula;
 
 /**
  * @author Massimo Caliman
  */
-@Production(symbol = "Lt", expression = "Formula < Formula")
 public final class Lt extends Binary {
 
     public Lt(Formula lFormula, Formula rFormula) {

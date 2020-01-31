@@ -22,16 +22,11 @@
 
 package dev.caliman.excel.grammar.nonterm;
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.annotations.Production;
-
 /**
  * ConstantArray ::= { ArrayColumns }
  *
  * @author Massimo Caliman
  */
-@NonTerminal
-@Production(symbol = "ConstantArray", expression = "{ ArrayColumns }")
 public class ConstantArray extends Formula {
 
     private final Object[][] array;

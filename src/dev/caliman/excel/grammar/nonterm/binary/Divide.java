@@ -22,13 +22,11 @@
 
 package dev.caliman.excel.grammar.nonterm.binary;
 
-import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterm.Formula;
 
 /**
  * @author Massimo Caliman
  */
-@Production(symbol = "Divide", expression = "Formula / Formula")
 public final class Divide extends Binary {
 
     public Divide(Formula lFormula, Formula rFormula) {

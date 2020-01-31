@@ -22,14 +22,9 @@
 
 package dev.caliman.excel.grammar.nonterm;
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.annotations.Production;
-
 /**
  * @author Massimo Caliman
  */
-@NonTerminal
-@Production(symbol = "PercentFormula", expression = "Formula %")
 public final class PercentFormula extends FunctionCall {
 
     private final Formula formula;

@@ -22,13 +22,10 @@
 
 package dev.caliman.excel.grammar.lexicaltokens;
 
-import dev.caliman.excel.grammar.annotations.LexicalTokens;
-
 /**
  * @author Massimo Caliman
  */
 
-@LexicalTokens(name = "REF-FUNCTION-COND", description = "Excel built-in conditional reference function", content = "(IF | CHOOSE)\\(", priority = 5)
 public abstract class REF_FUNCTION_COND extends EXCEL_FUNCTION {
 }
 

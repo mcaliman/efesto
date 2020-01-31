@@ -22,13 +22,11 @@
 
 package dev.caliman.excel.grammar.nonterm.binary;
 
-import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterm.Formula;
 
 /**
  * @author Massimo Caliman
  */
-@Production(symbol = "GtEq", expression = "Formula >= Formula")
 public final class GtEq extends Binary {
 
     public GtEq(Formula lFormula, Formula rFormula) {

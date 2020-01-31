@@ -22,13 +22,11 @@
 
 package dev.caliman.excel.grammar.nonterm.binary;
 
-import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterm.Formula;
 
 /**
  * @author Massimo Caliman
  */
-@Production(symbol = "Add", expression = "Formula + Formula")
 public final class Add extends Binary {
 
     public Add(Formula lFormula, Formula rFormula) {

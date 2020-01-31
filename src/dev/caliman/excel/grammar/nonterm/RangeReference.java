@@ -22,8 +22,6 @@
 
 package dev.caliman.excel.grammar.nonterm;
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.lexicaltokens.RANGE;
 
 import java.util.Objects;
@@ -35,8 +33,6 @@ import java.util.Objects;
  * RangeReference::= RANGE
  * @author Massimo Caliman
  */
-@NonTerminal
-@Production(symbol = "RangeReference", expression = "RANGE")
 public final class RangeReference extends Reference {
 
     private final RANGE range;

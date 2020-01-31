@@ -23,8 +23,6 @@
 package dev.caliman.excel.grammar.nonterm;
 
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.lexicaltokens.RANGE;
 
 /**
@@ -32,9 +30,6 @@ import dev.caliman.excel.grammar.lexicaltokens.RANGE;
  *
  * @author Massimo Caliman
  */
-@NonTerminal
-@Production(symbol = "NamedRange", expression = "NAMED_RANGE")
-@Production(symbol = "NamedRange", expression = "NAMED_RANGE_PREFIXED")
 public class NamedRange extends ReferenceItem {
 
     public NamedRange(String value, RANGE tRANGE) {

@@ -22,13 +22,11 @@
 
 package dev.caliman.excel.grammar.nonterm.binary;
 
-import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterm.Formula;
 
 /**
  * @author Massimo Caliman
  */
-@Production(symbol = "Eq", expression = "Formula = Formula")
 public final class Eq extends Binary {
 
     public Eq(Formula lFormula, Formula rFormula) {

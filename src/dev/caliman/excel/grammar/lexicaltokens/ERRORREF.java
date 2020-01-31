@@ -22,13 +22,11 @@
 
 package dev.caliman.excel.grammar.lexicaltokens;
 
-import dev.caliman.excel.grammar.annotations.LexicalTokens;
 import dev.caliman.excel.grammar.nonterm.ReferenceItem;
 
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "ERRORREF", description = "Reference error literal", content = "#REF!", priority = 0)
 public final class ERRORREF extends ReferenceItem {
 
     public ERRORREF() {

@@ -22,8 +22,6 @@
 
 package dev.caliman.excel.grammar.nonterm.unary;
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.lexicaltokens.CELL;
 import dev.caliman.excel.grammar.nonterm.Formula;
 import dev.caliman.excel.grammar.nonterm.FunctionCall;
@@ -36,9 +34,6 @@ import dev.caliman.excel.grammar.nonterm.FunctionCall;
  * Minus ::= - Formula
  * @author Massimo Caliman
  */
-@NonTerminal
-@Production(symbol = "Unary", expression = "Plus")
-@Production(symbol = "Unary", expression = "Minus")
 public abstract class Unary extends FunctionCall {
 
     private final Formula formula;

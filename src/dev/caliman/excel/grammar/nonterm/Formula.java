@@ -23,9 +23,6 @@
 package dev.caliman.excel.grammar.nonterm;
 
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.annotations.Production;
-
 /**
  * Formula ::= Constant
  * | Reference
@@ -45,13 +42,6 @@ import dev.caliman.excel.grammar.annotations.Production;
  *
  * @author Massimo Caliman
  */
-@NonTerminal
-@Production(symbol = "Formula", expression = "Constant")
-@Production(symbol = "Formula", expression = "Reference")
-@Production(symbol = "Formula", expression = "FunctionCall")
-@Production(symbol = "Formula", expression = "ParenthesisFormula")
-@Production(symbol = "Formula", expression = "ConstantArray")
-@Production(symbol = "Formula", expression = "RESERVED_NAME")
 public abstract class Formula extends Start {
 
 }

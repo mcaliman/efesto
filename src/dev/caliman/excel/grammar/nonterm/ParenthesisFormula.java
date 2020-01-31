@@ -22,16 +22,11 @@
 
 package dev.caliman.excel.grammar.nonterm;
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.annotations.Production;
-
 
 /**
  * ParenthesisFormula ::= ( Formula )
  * @author Massimo Caliman
  */
-@NonTerminal
-@Production(symbol = "ParenthesisFormula", expression = "( Formula  )")
 public final class ParenthesisFormula extends Formula {
 
     private final Formula formula;

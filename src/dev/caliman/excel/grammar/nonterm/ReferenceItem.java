@@ -22,8 +22,6 @@
 
 package dev.caliman.excel.grammar.nonterm;
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-
 /**
  * ReferenceItem ::= CELL
  * | NamedRange
@@ -33,7 +31,6 @@ import dev.caliman.excel.grammar.annotations.NonTerminal;
  * | ERROR_REF
  * @author Massimo Caliman
  */
-@NonTerminal
 public class ReferenceItem extends Reference {
 
     public String value;

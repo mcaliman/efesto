@@ -22,13 +22,11 @@
 
 package dev.caliman.excel.grammar.nonterm.unary;
 
-import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterm.Formula;
 
 /**
  * @author Massimo Caliman
  */
-@Production(symbol = "Minus", expression = "- Formula")
 public final class Minus extends Unary {
 
     public Minus(Formula expr) {

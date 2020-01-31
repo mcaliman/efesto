@@ -22,16 +22,12 @@
 
 package dev.caliman.excel.grammar.nonterm;
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.lexicaltokens.RANGE;
 
 /**
  * PrefixReferenceItem::= Prefix ReferenceItem
  * @author Massimo Caliman
  */
-@NonTerminal
-@Production(symbol = "PrefixReferenceItem", expression = "Prefix ReferenceItem")
 public final class PrefixReferenceItem extends Reference {
 
     private final Prefix prefix;

@@ -22,18 +22,10 @@
 
 package dev.caliman.excel.grammar.nonterm;
 
-import dev.caliman.excel.grammar.annotations.NonTerminal;
-import dev.caliman.excel.grammar.annotations.Production;
-
 /**
  *
  * @author Massimo Caliman
  */
-@NonTerminal
-@Production(symbol = "Constant", expression = "FLOAT")
-@Production(symbol = "Constant", expression = "TEXT")
-@Production(symbol = "Constant", expression = "BOOL")
-@Production(symbol = "Constant", expression = "ERROR")
 public abstract class Constant extends Formula {
 
 }

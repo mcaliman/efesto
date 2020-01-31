@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.nonterm.binary;
 
-import dev.caliman.excel.grammar.annotations.Production;
 import dev.caliman.excel.grammar.nonterm.Formula;
 
 /**
@@ -30,7 +29,6 @@ import dev.caliman.excel.grammar.nonterm.Formula;
  *
  * @author Massimo Caliman
  */
-@Production(symbol = "Intersection", expression = "Formula Formula")
 public final class Intersection extends Binary {
 
     public Intersection(Formula lFormula, Formula rFormula) {

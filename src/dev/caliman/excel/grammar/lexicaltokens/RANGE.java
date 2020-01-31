@@ -22,12 +22,10 @@
 
 package dev.caliman.excel.grammar.lexicaltokens;
 
-import dev.caliman.excel.grammar.annotations.LexicalTokens;
 import dev.caliman.excel.grammar.nonterm.Reference;
 
 import java.util.List;
 
-@LexicalTokens(name = "RANGE", description = "Range", content = "$? [A-Z]+ : $? [A-Z]+", priority = 0)
 public class RANGE extends Reference {
 
     private final CELL first;

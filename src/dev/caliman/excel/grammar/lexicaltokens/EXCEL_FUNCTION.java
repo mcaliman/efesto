@@ -22,7 +22,6 @@
 
 package dev.caliman.excel.grammar.lexicaltokens;
 
-import dev.caliman.excel.grammar.annotations.LexicalTokens;
 import dev.caliman.excel.grammar.nonterm.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +30,6 @@ import org.jetbrains.annotations.Nullable;
 /**
  * @author Massimo Caliman
  */
-@LexicalTokens(name = "EXCEL-FUNCTION", description = "Excel built-in function", content = "(Any entry from the function list3) \\(", priority = 5)
 public abstract class EXCEL_FUNCTION extends FunctionCall {
 
     protected Formula[] args;
