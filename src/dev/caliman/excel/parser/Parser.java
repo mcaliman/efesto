@@ -85,13 +85,13 @@ public final class Parser extends AbstractParser {
             parseCELLlinked(elem);
             this.ext.remove(cell);
         } else if(!this.ext.contains(cell) && nonEmpty(cell)) {
-            this.raw.append("' " + cellAddress(cell.getRowIndex(), cell.getColumnIndex()) + " = " + cell.toString() + "\n");
+            this.raw.append("; " + cellAddress(cell.getRowIndex(), cell.getColumnIndex()) + " = " + cell.toString() + "\n");
         }
     }
 
     void parseFormula(Cell cell) {
         super.parseFormula(cell);
-        this.raw.append("' " + this.formulaAddress + " = " + formulaPlainText + "\n");
+        this.raw.append("; " + this.formulaAddress + " = " + formulaPlainText + "\n");
         if(this.formulaPtgs == null) {
             err("ptgs empty or null for address " + this.formulaAddress);
             parseUDF(this.formulaPlainText);
