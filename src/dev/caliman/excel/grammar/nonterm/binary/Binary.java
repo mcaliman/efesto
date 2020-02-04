@@ -52,7 +52,7 @@ public abstract class Binary extends FunctionCall {
     @NotNull
     @Override
     public String toString() {
-        return operandToFormula(lFormula) + op + operandToFormula(rFormula);
+        return "(" + operandToFormula(lFormula) + op + operandToFormula(rFormula) + ")";
     }
 
     protected String operandToFormula(Formula operand) {
