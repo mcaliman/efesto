@@ -33,4 +33,8 @@ public final class Mult extends Binary {
         super(lFormula, "*", rFormula);
     }
 
+    @Override
+    public String toString() {
+        return "(" + operandToFormula(lFormula) + op + operandToFormula(rFormula) + ")";
+    }
 }
