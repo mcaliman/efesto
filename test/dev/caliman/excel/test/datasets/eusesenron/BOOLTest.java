@@ -45,7 +45,7 @@ class BOOLTest {
                 "A4 = TRUE",
                 "A5 = \"IFTRUE\"",
                 "A6 = \"IFFALSE\"",
-                "A1 = IF(AND(A3=1,A4=TRUE),A5,A6)"
+                "A1 = IF(AND((A3=1),(A4=TRUE)),A5,A6)"
         ));
         cmd.write(output);
     }

@@ -64,4 +64,4 @@ A1
 
 IF
 
-(AND (A3=1, A4=TRUE), A5, A6)
+(AND ((A3=1), (A4=TRUE)), A5, A6)
