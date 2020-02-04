@@ -1,9 +1,0 @@
-' 
-' Text File: test/file-1.vb
-' Excel File: test/file-1.xlsx
-' Excel Formulas Number: 1
-' Elapsed Time (parsing + topological sort): 0 s. or 0 min.
-' As Raw Text - Start
-' SrcSheet!A1 = [1]DestSheet!$A$1
-' As Raw Text - End
-A1 = [1]DestSheet!$A$1

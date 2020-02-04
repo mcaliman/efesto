@@ -49,7 +49,7 @@ class Excel_902_TerminalsFormulas_Test {
                 "A7 = IF(A1,A2,A3)",
                 "A8 = IF(A1,A4,A7)"
         ));
-        toolkitCommand.write("test/902-terminals-formulas.vb");
+        toolkitCommand.write("test/902-terminals-formulas.clj");
     }
 
 }

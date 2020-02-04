@@ -37,7 +37,7 @@ class ReferenceTest {
     void testTest() throws Exception {
         String dir = "test/Datasets/EusesEnron/";
         String dataSet = dir + "Reference.xlsx";
-        String output = dir + "Reference.vb";
+        String output = dir + "Reference.clj";
         ToolkitCommand cmd = new ToolkitCommand(dataSet);
         cmd.execute();
         System.out.println("ToFormula.");

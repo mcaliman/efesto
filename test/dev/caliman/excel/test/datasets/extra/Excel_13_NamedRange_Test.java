@@ -41,6 +41,6 @@ class Excel_13_NamedRange_Test {
                 "NamedRange!slist = [ 1.0 2.0 3.0 4.0 5.0 6.0 ]",
                 "A8 = SUM(NamedRange!slist)"
         ));
-        toolkitCommand.write("test/13-NamedRange.vb");
+        toolkitCommand.write("test/13-NamedRange.clj");
     }
 }

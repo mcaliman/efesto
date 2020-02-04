@@ -35,7 +35,7 @@ class CELLTest {
     void testTest() throws Exception {
         String dir = "test/Datasets/EusesEnron/";
         String dataSet = dir + "CELL.xlsx";
-        String output = dir + "CELL.vb";
+        String output = dir + "CELL.clj";
         ToolkitCommand cmd = new ToolkitCommand(dataSet);
         cmd.execute();
         System.out.println("ToFormula.");

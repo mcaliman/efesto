@@ -37,7 +37,7 @@ class DATETest {
     void testTest() throws Exception {
         String dir = "test/Datasets/Extra/";
         String dataSet = dir + "DATE.xlsx";
-        String output = dir + "DATE.vb";
+        String output = dir + "DATE.clj";
         ToolkitOptions options = new ToolkitOptions();
         options.setVerbose(true);
         ToolkitCommand toolkitCommand = new ToolkitCommand(dataSet, options);

@@ -33,6 +33,6 @@ class Excel_Metadata_Test {
         toolkitCommand.execute();
         System.out.println("ToFunctional.");
         toolkitCommand.toFormula();
-        toolkitCommand.write("test/metadata.vb");
+        toolkitCommand.write("test/metadata.clj");
     }
 }

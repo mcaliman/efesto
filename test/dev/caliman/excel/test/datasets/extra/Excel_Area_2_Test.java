@@ -46,6 +46,6 @@ class Excel_Area_2_Test {
                 "UseArea1AndArea2!A2 = INDEX(Area1!A1:B3,2,2)",
                 "UseArea1AndArea2!A1 = INDEX(Area2!Area2Name,1,2)"
         ));
-        toolkitCommand.write("test/area-2.vb");
+        toolkitCommand.write("test/area-2.clj");
     }
 }

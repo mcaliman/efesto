@@ -43,6 +43,6 @@ class HORIZONTAL_RANGE_Test {
                 "A1:D1 = [ 1.0 3.0 6.0 8.0 ]",
                 "A3 = MATCH(3,A1:D1,0)"
         ));
-        toolkitCommand.write("test/HORIZONTAL_RANGE.vb");
+        toolkitCommand.write("test/HORIZONTAL_RANGE.clj");
     }
 }

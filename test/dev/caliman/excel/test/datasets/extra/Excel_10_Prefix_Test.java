@@ -46,6 +46,6 @@ class Excel_10_Prefix_Test {
         assertTrue(toolkitCommand.testToFormula(0,
                 "Sheet1!A1 = 78.0",
                 "Prefix!A1 = Sheet1!A1"));
-        toolkitCommand.write("test/10-Prefix.vb");
+        toolkitCommand.write("test/10-Prefix.clj");
     }
 }

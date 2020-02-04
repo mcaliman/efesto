@@ -42,6 +42,6 @@ class Excel_17_IFintoIF_Test {
                 "C1 = TRUE",
                 "A1 = IF(B1>1,0,IF(C1,\"Hello\",\"Bye\"))"
         ));
-        toolkitCommand.write("test/17-IF-into-IF.vb");
+        toolkitCommand.write("test/17-IF-into-IF.clj");
     }
 }

@@ -35,6 +35,6 @@ class RealCase1Test {
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
 
-        toolkitCommand.write("E:/RealCase1.vb");
+        toolkitCommand.write("E:/RealCase1.clj");
     }
 }

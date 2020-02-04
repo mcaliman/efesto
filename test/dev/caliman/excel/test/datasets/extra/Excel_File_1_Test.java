@@ -38,6 +38,6 @@ class Excel_File_1_Test {
         assertTrue(toolkitCommand.testToFormula(
                 0, "A1 = [1]DestSheet!$A$1"
         ));
-        toolkitCommand.write("test/file-1.vb");
+        toolkitCommand.write("test/file-1.clj");
     }
 }

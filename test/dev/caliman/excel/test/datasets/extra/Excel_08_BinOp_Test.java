@@ -52,7 +52,7 @@ class Excel_08_BinOp_Test {
                 "B2 = 3.0",
                 "B3 = B2-B1"
         ));
-        toolkitCommand.write("test/08-BinaryOp.vb");
+        toolkitCommand.write("test/08-BinaryOp.clj");
 
 
     }

@@ -41,6 +41,6 @@ class Excel_ConstantArray_Test {
         assertTrue(toolkitCommand.testToFormula(
                 0, "Foglio1!A6 = {1.0,2.0,2.0,4.0,6.0}"
         ));
-        toolkitCommand.write("test/ConstantArray.vb");
+        toolkitCommand.write("test/ConstantArray.clj");
     }
 }

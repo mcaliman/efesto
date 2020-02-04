@@ -33,4 +33,10 @@ public final class Add extends Binary {
         super(lFormula, "+", rFormula);
     }
 
+    @Override
+    public String toString() {
+        return "(" + operandToFormula(lFormula) + op + operandToFormula(rFormula) + ")";
+    }
+
+
 }

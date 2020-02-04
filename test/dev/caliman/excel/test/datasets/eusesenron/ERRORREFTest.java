@@ -36,7 +36,7 @@ class ERRORREFTest {
     void testTest() throws Exception {
         String dir = "test/Datasets/EusesEnron/";
         String dataSet = dir + "ERROR_REF.xlsx";
-        String output = dir + "ERROR_REF.vb";
+        String output = dir + "ERROR_REF.clj";
         ToolkitCommand cmd = new ToolkitCommand(dataSet);
         cmd.execute();
         System.out.println("ToFormula.");

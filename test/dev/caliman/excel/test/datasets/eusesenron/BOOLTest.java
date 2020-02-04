@@ -33,7 +33,7 @@ class BOOLTest {
     void testTest() throws Exception {
         String dir = "test/Datasets/EusesEnron/";
         String dataSet = dir + "BOOL.xlsx";
-        String output = dir + "BOOL.vb";
+        String output = dir + "BOOL.clj";
         ToolkitCommand cmd = new ToolkitCommand(dataSet);
         cmd.execute();
         System.out.println("ToFormula.");

@@ -46,6 +46,6 @@ class Excel_Area_1_Test {
                 "A1:B3 = [[11.0 21.0][12.0 22.0][13.0 23.0]]",
                 "A7 = INDEX(A1:B3,2,2)"
         ));
-        toolkitCommand.write("test/area-1.vb");
+        toolkitCommand.write("test/area-1.clj");
     }
 }

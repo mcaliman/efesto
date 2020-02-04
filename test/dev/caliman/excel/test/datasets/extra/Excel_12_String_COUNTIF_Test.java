@@ -43,6 +43,6 @@ class Excel_12_String_COUNTIF_Test {
                 "C1:E1 = [ 1.0 2.0 3.0 ]",
                 "B4 = COUNTIF(C1:E1,\">=2\")"
         ));
-        toolkitCommand.write("test/12-String-COUNTIF.vb");
+        toolkitCommand.write("test/12-String-COUNTIF.clj");
     }
 }

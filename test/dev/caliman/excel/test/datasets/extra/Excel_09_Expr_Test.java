@@ -44,6 +44,6 @@ class Excel_09_Expr_Test {
                 "A1 = 100.0",
                 "A2 = (A1*2)/2"
         ));
-        toolkitCommand.write("test/09-Expr.vb");
+        toolkitCommand.write("test/09-Expr.clj");
     }
 }

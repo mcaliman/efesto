@@ -36,14 +36,14 @@ class FormulaTest {
     void testTest() throws Exception {
         String dir = "test/Datasets/EusesEnron/";
         String dataSet = dir + "Formula.xlsx";
-        String output = dir + "Formula.vb";
+        String output = dir + "Formula.clj";
         ToolkitCommand cmd = new ToolkitCommand(dataSet);
         cmd.execute();
         System.out.println(dataSet);
         System.out.println("----------");
         cmd.toFormula();
         assertTrue(cmd.testToFormula(
-                0, "A1 = 1+2"
+                0, "A1 = (1+2)"
         ));
         cmd.write(output);
     }

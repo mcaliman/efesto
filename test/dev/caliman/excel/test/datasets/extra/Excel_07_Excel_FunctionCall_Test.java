@@ -40,6 +40,6 @@ class Excel_07_Excel_FunctionCall_Test {
                 "A1:C1 = [ 1.0 2.0 3.0 ]",
                 "A2 = SUM(A1:C1)"
         ));
-        toolkitCommand.write("test/07-FunctionCall.vb");
+        toolkitCommand.write("test/07-FunctionCall.clj");
     }
 }

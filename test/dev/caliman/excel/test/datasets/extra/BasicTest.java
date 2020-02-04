@@ -36,7 +36,7 @@ class BasicTest {
     void testTest() throws Exception {
         String dir = "test/Datasets/Extra/";
         String dataSet = dir + "Basic.xlsx";
-        String output = dir + "Basic.vb";
+        String output = dir + "Basic.clj";
         ToolkitCommand toolkitCommand = new ToolkitCommand(dataSet);
         toolkitCommand.execute();
         System.out.println("ToFormula.");
@@ -45,7 +45,7 @@ class BasicTest {
                 0,
                 "B4 = 10.0",
                 "B5 = 20.0",
-                "B1 = B5+B4"
+                "B1 = (B5+B4)"
         ));
         toolkitCommand.write(output);
     }

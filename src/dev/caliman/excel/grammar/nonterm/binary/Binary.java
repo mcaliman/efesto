@@ -32,16 +32,16 @@ import org.jetbrains.annotations.NotNull;
 /**
  * FunctionCall ::= Formula BinOp Formula
  * BinOp ::= + | - | * | / | ^ | < | > | = | <= | >= | <>
- *
+ * <p>
  * Binary ::= Add | Sub | Mult | Div | Power | Lt | Gt | Eq | Leq | GtEq | Neq
  *
  * @author Massimo Caliman
  */
 public abstract class Binary extends FunctionCall {
 
-    private final String op;
-    private final Formula lFormula;
-    private final Formula rFormula;
+    protected final String op;
+    protected final Formula lFormula;
+    protected final Formula rFormula;
 
     Binary(Formula lFormula, String op, Formula rFormula) {
         this.lFormula = lFormula;
@@ -55,14 +55,14 @@ public abstract class Binary extends FunctionCall {
         return operandToFormula(lFormula) + op + operandToFormula(rFormula);
     }
 
-    private String operandToFormula(Formula operand) {
-        if(operand instanceof CELL || operand instanceof Unary) return operand.id();
-        else if(operand instanceof ParenthesisFormula)
+    protected String operandToFormula(Formula operand) {
+        if (operand instanceof CELL || operand instanceof Unary) return operand.id();
+        else if (operand instanceof ParenthesisFormula)
             return operandToFormulaParenthesisFormula((ParenthesisFormula) operand);
         else return operand.toString();
     }
 
-    private String operandToFormulaParenthesisFormula(ParenthesisFormula operand) {
+    protected String operandToFormulaParenthesisFormula(ParenthesisFormula operand) {
         return operand.getFormula() instanceof Binary ?
                 "(" + operand.getFormula().toString() + ")" :
                 "(" + operand.getFormula().getAddress(false) + ")";

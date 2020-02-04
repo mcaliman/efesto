@@ -41,6 +41,6 @@ class UDF_Test {
         assertTrue(toolkitCommand.testToFormula(
                 0, "A2 = GetElement(A1,2,\"-\")"
         ));
-        toolkitCommand.write("test/UDF.vb");
+        toolkitCommand.write("test/UDF.clj");
     }
 }
