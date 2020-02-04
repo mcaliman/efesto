@@ -44,7 +44,7 @@ class Excel_Comments_Test {
         assertTrue(toolkitCommand.testToFormula(
                 0,
                 "A1 = 1.0",
-                "A2 = (A1+1)"
+                "A2 = (+ A1 1)"
         ));
         toolkitCommand.write("test/comments.clj");
     }

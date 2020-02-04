@@ -35,8 +35,12 @@ public final class Add extends Binary {
 
     @Override
     public String toString() {
-        return "(" + operandToFormula(lFormula) + op + operandToFormula(rFormula) + ")";
+        //return "(" + op + " " + operandToFormula(lFormula) + " " +  operandToFormula(rFormula) + ")";
+        return clojurize(op, operandToFormula(lFormula), operandToFormula(rFormula));
     }
 
+    protected String clojurize(String op, String term1, String term2) {
+        return "(" + op + " " + term1 + " " + term2 + ")";
+    }
 
 }

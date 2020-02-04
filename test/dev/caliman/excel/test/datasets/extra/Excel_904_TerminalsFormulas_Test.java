@@ -45,7 +45,7 @@ class Excel_904_TerminalsFormulas_Test {
                 "A4 = (A1-A2)",
                 "A5 = (A1*A2)",
                 "A6 = (A1/A2)",
-                "A3 = (A1+A2)",
+                "A3 = (+ A1 A2)",
                 "A8 = (A1^A2)",
                 "A7 = (A1&A2)"
         ));

@@ -45,7 +45,7 @@ class BasicTest {
                 0,
                 "B4 = 10.0",
                 "B5 = 20.0",
-                "B1 = (B5+B4)"
+                "B1 = (+ B5 B4)"
         ));
         toolkitCommand.write(output);
     }
