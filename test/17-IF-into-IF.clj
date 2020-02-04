@@ -50,4 +50,4 @@ A1
 
 IF
 
-(B1>1, 0, IF (C1, "Hello", "Bye"))
+((B1>1), 0, IF (C1, "Hello", "Bye"))
