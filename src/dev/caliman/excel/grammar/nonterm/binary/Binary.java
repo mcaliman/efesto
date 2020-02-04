@@ -27,7 +27,6 @@ import dev.caliman.excel.grammar.nonterm.Formula;
 import dev.caliman.excel.grammar.nonterm.FunctionCall;
 import dev.caliman.excel.grammar.nonterm.ParenthesisFormula;
 import dev.caliman.excel.grammar.nonterm.unary.Unary;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * FunctionCall ::= Formula BinOp Formula
@@ -49,10 +48,17 @@ public abstract class Binary extends FunctionCall {
         this.rFormula = rFormula;
     }
 
-    @NotNull
+    /*@NotNull
     @Override
     public String toString() {
         return "(" + operandToFormula(lFormula) + op + operandToFormula(rFormula) + ")";
+    }*/
+
+
+    @Override
+    public String toString() {
+        //return "(" + op + " " + operandToFormula(lFormula) + " " +  operandToFormula(rFormula) + ")";
+        return clojurize(op, operandToFormula(lFormula), operandToFormula(rFormula));
     }
 
     protected String operandToFormula(Formula operand) {
@@ -76,4 +82,7 @@ public abstract class Binary extends FunctionCall {
         return rFormula;
     }
 
+    protected String clojurize(String op, String term1, String term2) {
+        return "(" + op + " " + term1 + " " + term2 + ")";
+    }
 }

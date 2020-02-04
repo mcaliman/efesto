@@ -40,7 +40,7 @@ class Excel_17_IFintoIF_Test {
                 0,
                 "B1 = 2.0",
                 "C1 = TRUE",
-                "A1 = IF((B1>1),0,IF(C1,\"Hello\",\"Bye\"))"
+                "A1 = IF((> B1 1),0,IF(C1,\"Hello\",\"Bye\"))"
         ));
         toolkitCommand.write("test/17-IF-into-IF.clj");
     }

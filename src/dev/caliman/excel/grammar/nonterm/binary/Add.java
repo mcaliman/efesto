@@ -39,8 +39,5 @@ public final class Add extends Binary {
         return clojurize(op, operandToFormula(lFormula), operandToFormula(rFormula));
     }
 
-    protected String clojurize(String op, String term1, String term2) {
-        return "(" + op + " " + term1 + " " + term2 + ")";
-    }
 
 }
