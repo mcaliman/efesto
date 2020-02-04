@@ -47,7 +47,7 @@ class ReferenceTest {
                 0,
                 "A1 = 15.0",
                 "A2 = 100.0",
-                "A3 = A2/A1"
+                "A3 = (A2/A1)"
         ));
         cmd.write(output);
     }

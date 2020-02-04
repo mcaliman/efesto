@@ -41,7 +41,7 @@ class Excel_Xl_901_Terminals_Test {
         System.out.println("ToFunctional.");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
-                0, "A5 = 1/0"
+                0, "A5 = (1/0)"
         ));
         toolkitCommand.write("test/901-terminals.clj");
     }

@@ -36,4 +36,5 @@ public final class Concat extends Binary {
         super(lFormula, "&", rFormula);
     }
 
+
 }
