@@ -41,8 +41,8 @@ class Excel_903_TerminalsFormulas_Test {
                 "A2 = 1.838226",
                 "A3 = 24.0",
                 "A4 = \"This is a string\"",
-                "A6 = IF(A1,A2,A3)",
-                "A7 = IF(A1,A4,A3)"
+                "A6 = (if A1 A2 A3)",
+                "A7 = (if A1 A4 A3)"
         ));
         toolkitCommand.write("test/903-terminals-formulas.clj");
     }

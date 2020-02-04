@@ -34,4 +34,21 @@ public class IF extends REF_FUNCTION_COND {
         this.args = args;
     }
 
+    @Override
+    public String toString() {
+        //return getName() + "(" + argumentsToFormula() + ")";
+        return "(" + getName() + " " + argumentsToFormula() + ")";
+    }
+
+    protected String getName() {
+        return "if";
+    }
+
+    protected String argumentsToFormula() {
+        if (args == null || args.length == 0) return "Missing";
+        var buff = new StringBuilder();
+        for (Formula arg : args) buff.append(argumentToFormula(arg)).append(" ");
+        if (buff.charAt(buff.length() - 1) == ' ') buff.deleteCharAt(buff.length() - 1);
+        return buff.toString();
+    }
 }
