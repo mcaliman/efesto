@@ -70,6 +70,34 @@ public abstract class Reference extends Formula {
                     buff.append(toString(element)).append(" ");
                     index++;
                 }
+                if (buff.length() > 1) buff.deleteCharAt(buff.length() - 1);
+                buff.append("]");
+            }
+            buff.append("]");
+            return buff.toString();
+        }
+    }
+
+    /*protected String values(int fRow, int fCol, int lRow, int lCol, List<Object> list, boolean isHorizzontalOrVerticalRange) {
+        if(list.isEmpty()) return "[]";
+        if(isHorizzontalOrVerticalRange) {
+            StringBuilder buff = new StringBuilder();
+            buff.append("[").append(" ");
+            for(Object element : list) buff.append(toString(element)).append(" ");
+            if(buff.length() > 1) buff.deleteCharAt(buff.length() - 1);
+            buff.append(" ").append("]");
+            return buff.toString();
+        } else {
+            StringBuilder buff = new StringBuilder();
+            buff.append("[");
+            int index = 0;
+            for(int row = fRow; row <= lRow; row++) {
+                buff.append("[");
+                for(int col = fCol; col <= lCol; col++) {
+                    Object element = list.get(index);
+                    buff.append(toString(element)).append(" ");
+                    index++;
+                }
                 if(buff.length() > 1) buff.deleteCharAt(buff.length() - 1);
                 buff.append("]");
             }
@@ -77,6 +105,7 @@ public abstract class Reference extends Formula {
             return buff.toString();
         }
     }
+    * */
 
     private String toString(Object value) {
         String string = value instanceof String ? AbstractParser.quote(value.toString()) : value.toString();
