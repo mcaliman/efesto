@@ -45,8 +45,8 @@ class DATETest {
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(0,
-                "A1 = 01/02/2018",
-                "A2 = DAY(A1)"
+                "(def A1 01/02/2018)",
+                "(def A2 (day A1))"
         ));
         toolkitCommand.write(output);
     }

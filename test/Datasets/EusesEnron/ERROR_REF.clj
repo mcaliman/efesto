@@ -30,8 +30,4 @@
 ; BEGIN-RAW-TEXT
 ; Foglio1!A1 = #REF!
 ; END-RAW-TEXT
-A1
-
-=
-
-#REF!
+(def A1 #REF!)

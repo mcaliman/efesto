@@ -43,8 +43,8 @@ class Excel_Area_1_Test {
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0,
-                "A1:B3 = [[11.0 21.0][12.0 22.0][13.0 23.0]]",
-                "A7 = INDEX(A1:B3,2,2)"
+                "(def A1:B3 [[11.0 21.0][12.0 22.0][13.0 23.0]])",
+                "(def A7 (index A1:B3 2 2))"
         ));
         toolkitCommand.write("test/area-1.clj");
     }

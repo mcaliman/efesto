@@ -43,7 +43,7 @@ class FormulaTest {
         System.out.println("----------");
         cmd.toFormula();
         assertTrue(cmd.testToFormula(
-                0, "A1 = (+ 1 2)"
+                0, "(def A1 (+ 1 2))"
         ));
         cmd.write(output);
     }

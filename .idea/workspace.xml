@@ -3,15 +3,30 @@
   <component name="ChangeListManager">
     <list default="true" id="8a32ddec-a085-4cfd-9a7f-b60d1a9807ed" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Binary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Binary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/conditionalreferencefunction/CHOOSE.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/conditionalreferencefunction/CHOOSE.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/conditionalreferencefunction/IF.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/conditionalreferencefunction/IF.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/EXCEL_FUNCTION.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/EXCEL_FUNCTION.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/eusesenron/BOOLTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/eusesenron/BOOLTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/eusesenron/ReferenceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/eusesenron/ReferenceTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_08_BinOp_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_08_BinOp_Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_09_Expr_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_09_Expr_Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_17_IFintoIF_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_17_IFintoIF_Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Xl_901_Terminals_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Xl_901_Terminals_Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/functions/conditionalreferencefunction/IF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/functions/conditionalreferencefunction/IF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/DATETest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/DATETest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_01_HorizontalRangeIndex_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_01_HorizontalRangeIndex_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_02_VerticalRangeIndex_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_02_VerticalRangeIndex_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_03_RangeIndex_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_03_RangeIndex_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_07_Excel_FunctionCall_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_07_Excel_FunctionCall_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_12_String_COUNTIF_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_12_String_COUNTIF_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_13_NamedRange_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_13_NamedRange_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_16_Example_Range_1_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_16_Example_Range_1_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_18_Matrix_1_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_18_Matrix_1_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_902_TerminalsFormulas_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_902_TerminalsFormulas_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_903_TerminalsFormulas_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_903_TerminalsFormulas_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Area_1_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Area_1_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Area_2_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Area_2_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Multisheet1_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Multisheet1_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/HORIZONTAL_RANGE_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/HORIZONTAL_RANGE_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/UNION_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/UNION_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/ToolkitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/ToolkitCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/functions/conditionalreferencefunction/CHOOSE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/functions/conditionalreferencefunction/CHOOSE.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/EXCEL_FUNCTION.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/EXCEL_FUNCTION.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/nonterm/Start.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/BOOL.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/BOOL.clj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/CELL.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/CELL.clj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/ERROR_REF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/ERROR_REF.clj" afterDir="false" />
@@ -20,9 +35,40 @@
       <change beforePath="$PROJECT_DIR$/test/Datasets/Extra/Basic.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/Extra/Basic.clj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/Datasets/Extra/DATE.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/Extra/DATE.clj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/eusesenron/BOOLTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/eusesenron/BOOLTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/eusesenron/CELLTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/eusesenron/CELLTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/eusesenron/ERRORREFTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/eusesenron/ERRORREFTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/eusesenron/FormulaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/eusesenron/FormulaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/eusesenron/ReferenceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/eusesenron/ReferenceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/BasicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/BasicTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/DATETest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/DATETest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_01_HorizontalRangeIndex_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_01_HorizontalRangeIndex_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_02_VerticalRangeIndex_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_02_VerticalRangeIndex_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_03_RangeIndex_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_03_RangeIndex_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_07_Excel_FunctionCall_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_07_Excel_FunctionCall_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_08_BinOp_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_08_BinOp_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_09_Expr_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_09_Expr_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_10_Prefix_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_10_Prefix_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_11_UnOpPrefix_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_11_UnOpPrefix_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_12_String_COUNTIF_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_12_String_COUNTIF_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_13_NamedRange_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_13_NamedRange_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_15_Others_FUN_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_15_Others_FUN_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_16_Example_Range_1_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_16_Example_Range_1_Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_17_IFintoIF_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_17_IFintoIF_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_18_Matrix_1_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_18_Matrix_1_Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_902_TerminalsFormulas_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_902_TerminalsFormulas_Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_903_TerminalsFormulas_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_903_TerminalsFormulas_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_904_TerminalsFormulas_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_904_TerminalsFormulas_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_Area_1_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_Area_1_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_Area_2_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_Area_2_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_Comments_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_Comments_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_ConstantArray_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_ConstantArray_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_File_1_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_File_1_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_Multisheet1_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_Multisheet1_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_Xl_901_Terminals_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_Xl_901_Terminals_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/HORIZONTAL_RANGE_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/HORIZONTAL_RANGE_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/SHEET_QUOTED_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/SHEET_QUOTED_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/UDF_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/UDF_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/UNION_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/UNION_Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +93,27 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="JUnit.All in efesto">
+    <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
+      <setting name="replType" value="NREPL" />
+      <setting name="execution" value="LEININGEN" />
+      <module name="" />
+      <setting name="jvmArgs" value="" />
+      <setting name="parameters" value="" />
+      <setting name="workingDir" value="" />
+      <setting name="profiles" value="" />
+      <setting name="aliases" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="fixLineNumbers" value="false" />
+      <module name="" />
+      <method v="2" />
+    </configuration>
     <configuration name="All in efesto (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="efesto" />
       <option name="PACKAGE_NAME" value="" />
@@ -78,9 +145,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BasicTest.testTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="efesto" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.caliman.excel.test.datasets.extra.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.caliman.excel.test.datasets.extra" />
+      <option name="MAIN_CLASS_NAME" value="dev.caliman.excel.test.datasets.extra.BasicTest" />
+      <option name="METHOD_NAME" value="testTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="dev.caliman.excel in efesto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="efesto" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.caliman.excel.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.caliman.excel" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in efesto" />
+        <item itemvalue="JUnit.dev.caliman.excel in efesto" />
+        <item itemvalue="JUnit.BasicTest.testTest" />
         <item itemvalue="JUnit.All in efesto (1)" />
         <item itemvalue="JUnit.BasicTest" />
       </list>
@@ -200,7 +299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580820516246</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="clojurize">
+      <created>1580823413809</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1580823413809</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -242,38 +348,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="516" y="260" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1579906460427" />
-    <state x="516" y="16" key="CommitChangelistDialog2" timestamp="1580820511396">
+    <state x="516" y="16" key="CommitChangelistDialog2" timestamp="1580898370018">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="516" y="16" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1580820511396" />
+    <state x="516" y="16" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1580898370018" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1579675494726">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1579675494726" />
-    <state width="1493" height="254" key="GridCell.Tab.0.bottom" timestamp="1580823314676">
+    <state width="1493" height="337" key="GridCell.Tab.0.bottom" timestamp="1580897264196">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="254" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580823314676" />
-    <state width="1493" height="254" key="GridCell.Tab.0.center" timestamp="1580823314676">
+    <state width="1493" height="337" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580897264196" />
+    <state width="1493" height="337" key="GridCell.Tab.0.center" timestamp="1580897264196">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="254" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580823314676" />
-    <state width="1493" height="254" key="GridCell.Tab.0.left" timestamp="1580823314676">
+    <state width="1493" height="337" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580897264196" />
+    <state width="1493" height="337" key="GridCell.Tab.0.left" timestamp="1580897264195">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="254" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580823314676" />
-    <state width="1493" height="254" key="GridCell.Tab.0.right" timestamp="1580823314676">
+    <state width="1493" height="337" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580897264195" />
+    <state width="1493" height="337" key="GridCell.Tab.0.right" timestamp="1580897264196">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="254" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580823314676" />
+    <state width="1493" height="337" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580897264196" />
     <state x="570" y="135" key="RollbackChangesDialog" timestamp="1580302815377">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="570" y="135" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1580302815377" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1580328203542">
+    <state x="249" y="0" key="SettingsEditor" timestamp="1580839943718">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1580328203542" />
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1580839943718" />
     <state x="361" y="135" key="Vcs.Push.Dialog.v2" timestamp="1580820039991">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -282,10 +388,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1580302932600" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1580819274892">
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1580887600384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1580819274892" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1580887600384" />
     <state x="499" y="183" key="extract.method.dialog" timestamp="1580303020133">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -302,6 +408,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="209" y="34" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1580328131453" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1580836234566">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1580836234566" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580820302015">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

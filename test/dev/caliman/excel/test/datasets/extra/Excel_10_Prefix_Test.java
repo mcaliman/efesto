@@ -44,8 +44,8 @@ class Excel_10_Prefix_Test {
         System.out.println("-------------");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(0,
-                "Sheet1!A1 = 78.0",
-                "Prefix!A1 = Sheet1!A1"));
+                "(def Sheet1!A1 78.0)",
+                "(def Prefix!A1 Sheet1!A1)"));
         toolkitCommand.write("test/10-Prefix.clj");
     }
 }

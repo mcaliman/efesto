@@ -36,20 +36,6 @@
 ; A2 = 100.0
 ; Reference!A3 = A2/A1
 ; END-RAW-TEXT
-A1
-
-=
-
-15.0
-
-A2
-
-=
-
-100.0
-
-A3
-
-=
-
-(/ A2 A1)
+(def A1 15.0)
+(def A2 100.0)
+(def A3 (/ A2 A1))

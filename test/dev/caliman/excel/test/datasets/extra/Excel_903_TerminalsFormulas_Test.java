@@ -37,12 +37,12 @@ class Excel_903_TerminalsFormulas_Test {
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0,
-                "A1 = TRUE",
-                "A2 = 1.838226",
-                "A3 = 24.0",
-                "A4 = \"This is a string\"",
-                "A6 = (if A1 A2 A3)",
-                "A7 = (if A1 A4 A3)"
+                "(def A1 TRUE)",
+                "(def A2 1.838226)",
+                "(def A3 24.0)",
+                "(def A4 \"This is a string\")",
+                "(def A6 (if A1 A2 A3))",
+                "(def A7 (if A1 A4 A3))"
         ));
         toolkitCommand.write("test/903-terminals-formulas.clj");
     }

@@ -41,8 +41,8 @@ class Excel_09_Expr_Test {
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0,
-                "A1 = 100.0",
-                "A2 = (/ ((* A1 2)) 2)"
+                "(def A1 100.0)",
+                "(def A2 (/ ((* A1 2)) 2))"
         ));
         toolkitCommand.write("test/09-Expr.clj");
     }

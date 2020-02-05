@@ -36,7 +36,7 @@ class Excel_File_1_Test {
         System.out.println("ToFunctional.");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
-                0, "A1 = [1]DestSheet!$A$1"
+                0, "(def A1 [1]DestSheet!$A$1)"
         ));
         toolkitCommand.write("test/file-1.clj");
     }

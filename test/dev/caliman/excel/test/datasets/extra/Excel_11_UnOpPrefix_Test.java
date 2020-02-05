@@ -43,8 +43,8 @@ class Excel_11_UnOpPrefix_Test {
         System.out.println("-------------");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(0,
-                "UnOpPrefix!A1 = +13.0",
-                "A2 = (+ UnOpPrefix!A1 1)"
+                "(def UnOpPrefix!A1 +13.0)",
+                "(def A2 (+ UnOpPrefix!A1 1))"
         ));
         toolkitCommand.write("test/11-UnOpPrefix.clj");
     }

@@ -38,9 +38,9 @@ class Excel_17_IFintoIF_Test {
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0,
-                "B1 = 2.0",
-                "C1 = TRUE",
-                "A1 = (if (> B1 1) 0 (if C1 \"Hello\" \"Bye\"))"
+                "(def B1 2.0)",
+                "(def C1 TRUE)",
+                "(def A1 (if (> B1 1) 0 (if C1 \"Hello\" \"Bye\")))"
         ));
         toolkitCommand.write("test/17-IF-into-IF.clj");
     }

@@ -40,8 +40,8 @@ class Excel_12_String_COUNTIF_Test {
         System.out.println("-------------");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(0,
-                "C1:E1 = [ 1.0 2.0 3.0 ]",
-                "B4 = COUNTIF(C1:E1,\">=2\")"
+                "(def C1:E1 [ 1.0 2.0 3.0 ])",
+                "(def B4 (countif C1:E1 \">=2\"))"
         ));
         toolkitCommand.write("test/12-String-COUNTIF.clj");
     }

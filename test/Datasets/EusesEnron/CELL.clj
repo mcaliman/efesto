@@ -35,8 +35,4 @@
 ; F1 = 
 ; Cell!B2 = A1
 ; END-RAW-TEXT
-A1
-
-=
-
-55.0
+(def A1 55.0)

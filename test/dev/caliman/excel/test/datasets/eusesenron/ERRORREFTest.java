@@ -42,7 +42,7 @@ class ERRORREFTest {
         System.out.println("ToFormula.");
         cmd.toFormula();
         assertTrue(cmd.testToFormula(
-                0, "A1 = #REF!"
+                0, "(def A1 #REF!)"
         ));
         cmd.write(output);
     }

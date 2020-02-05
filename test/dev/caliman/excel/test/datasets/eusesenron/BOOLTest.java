@@ -41,11 +41,11 @@ class BOOLTest {
         cmd.toFormula();
         assertTrue(cmd.testToFormula(
                 0,
-                "A3 = 1.0",
-                "A4 = TRUE",
-                "A5 = \"IFTRUE\"",
-                "A6 = \"IFFALSE\"",
-                "A1 = (if AND((= A3 1),(= A4 TRUE)) A5 A6)"
+                "(def A3 1.0)",
+                "(def A4 TRUE)",
+                "(def A5 \"IFTRUE\")",
+                "(def A6 \"IFFALSE\")",
+                "(def A1 (if (and (= A3 1) (= A4 TRUE)) A5 A6))"
         ));
         cmd.write(output);
     }

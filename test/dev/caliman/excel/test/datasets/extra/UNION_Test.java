@@ -39,9 +39,9 @@ class UNION_Test {
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(0,
-                "A1:B2 = [[1.0 2.0][3.0 5.0]]",
-                "C2:C3 = [ 6.0 8.0 ]",
-                "A5 = SUM(A1:B2,C2:C3)"
+                "(def A1:B2 [[1.0 2.0][3.0 5.0]])",
+                "(def C2:C3 [ 6.0 8.0 ])",
+                "(def A5 (sum A1:B2 C2:C3))"
         ));
         toolkitCommand.write("test/UNION.clj");
     }

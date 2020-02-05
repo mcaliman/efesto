@@ -42,7 +42,7 @@ class CELLTest {
         System.out.println("-------------");
         cmd.toFormula();
         assertTrue(cmd.testToFormula(
-                0, "A1 = 55.0"
+                0, "(def A1 55.0)"
         ));
         cmd.write(output);
     }

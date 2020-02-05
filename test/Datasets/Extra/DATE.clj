@@ -31,17 +31,5 @@
 ; A1 = 01-feb-2018
 ; Foglio1!A2 = DAY(A1)
 ; END-RAW-TEXT
-A1
-
-=
-
-01/02
-
-/2018
-A2
-
-=
-
-DAY
-
-(A1)
+(def A1 01/02 /2018)
+(def A2 (day A1))

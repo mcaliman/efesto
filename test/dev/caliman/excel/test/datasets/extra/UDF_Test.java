@@ -39,7 +39,7 @@ class UDF_Test {
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
-                0, "A2 = GetElement(A1,2,\"-\")"
+                0, "(def A2 GetElement(A1,2,\"-\"))"
         ));
         toolkitCommand.write("test/UDF.clj");
     }

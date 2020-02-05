@@ -45,9 +45,9 @@ class ReferenceTest {
         cmd.toFormula();
         assertTrue(cmd.testToFormula(
                 0,
-                "A1 = 15.0",
-                "A2 = 100.0",
-                "A3 = (/ A2 A1)"
+                "(def A1 15.0)",
+                "(def A2 100.0)",
+                "(def A3 (/ A2 A1))"
         ));
         cmd.write(output);
     }

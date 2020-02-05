@@ -39,8 +39,8 @@ class Excel_Multisheet1_Test {
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(0,
-                "SheetB!A1:A3 = [ 1.0 2.0 3.0 ]",
-                "SheetA!A1 = SUM(SheetB!A1:A3)"
+                "(def SheetB!A1:A3 [ 1.0 2.0 3.0 ])",
+                "(def SheetA!A1 (sum SheetB!A1:A3))"
         ));
         toolkitCommand.write("test/multisheet-1.clj");
     }

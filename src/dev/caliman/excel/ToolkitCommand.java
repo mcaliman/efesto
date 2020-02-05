@@ -81,7 +81,8 @@ public class ToolkitCommand {
 
             for (Start start : list) {
                 try {
-                    writer.write(start.id() + " = " + start.toString());
+                    //writer.write(start.id() + " = " + start.toString());
+                    writer.write("(def " + start.id() + " " + start.toString() + ")");
                 } catch (Exception e) {
                     writer.write("; Error when compile " + start.id());
                 }
@@ -103,9 +104,10 @@ public class ToolkitCommand {
         for (Start start : getStartList()) {
             try {
                 if (start != null)
-                    System.out.println(start.id() + " = " + start.toString());
+                    //System.out.println(start.id() + " = " + start.toString());
+                    System.out.println("(def " + start.id() + " " + start.toString() + ")");
             } catch (Exception e) {
-                System.err.println("Error when transpile " + start.id());
+                System.err.println("Error when compile " + start.id());
             }
         }
     }

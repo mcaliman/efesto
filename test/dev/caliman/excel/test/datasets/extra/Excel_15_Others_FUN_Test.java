@@ -40,9 +40,9 @@ class Excel_15_Others_FUN_Test {
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0,
-                "G1 = [1]Sheet1!C5",
-                "B29 = 70.0",
-                "D7 = (/ ((* 2 (B29))) ((+ 1 B29)))"
+                "(def G1 [1]Sheet1!C5)",
+                "(def B29 70.0)",
+                "(def D7 (/ ((* 2 (B29))) ((+ 1 B29))))"
         ));
         toolkitCommand.write("test/15-Others-FUN.clj");
     }

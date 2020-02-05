@@ -43,10 +43,10 @@ class SHEET_QUOTED_Test {
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0,
-                "'Other Sheet Name With Spaces'!A1 = 30.0",
-                "'Sheet Name With Spaces'!A1 = 10.0",
-                "'Other Sheet Name With Spaces'!A2 = (+ 'Other Sheet Name With Spaces'!A1 30)",
-                "'Sheet Name With Spaces'!A2 = (+ 'Sheet Name With Spaces'!A1 10)"
+                "(def 'Other Sheet Name With Spaces'!A1 30.0)",
+                "(def 'Sheet Name With Spaces'!A1 10.0)",
+                "(def 'Other Sheet Name With Spaces'!A2 (+ 'Other Sheet Name With Spaces'!A1 30))",
+                "(def 'Sheet Name With Spaces'!A2 (+ 'Sheet Name With Spaces'!A1 10))"
         ));
         toolkitCommand.write("test/SHEET-QUOTED.clj");
     }

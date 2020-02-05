@@ -43,9 +43,9 @@ class BasicTest {
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0,
-                "B4 = 10.0",
-                "B5 = 20.0",
-                "B1 = (+ B5 B4)"
+                "(def B4 10.0)",
+                "(def B5 20.0)",
+                "(def B1 (+ B5 B4))"
         ));
         toolkitCommand.write(output);
     }

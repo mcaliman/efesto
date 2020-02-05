@@ -40,14 +40,14 @@ class Excel_902_TerminalsFormulas_Test {
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0,
-                "A1 = TRUE",
-                "A5 = \"1/0\"",
-                "A3 = 24.0",
-                "A4 = \"This is a string\"",
-                "A2 = 1.838226",
-                "A9 = (if A1 A5 A3)",
-                "A7 = (if A1 A2 A3)",
-                "A8 = (if A1 A4 A7)"
+                "(def A1 TRUE)",
+                "(def A5 \"1/0\")",
+                "(def A3 24.0)",
+                "(def A4 \"This is a string\")",
+                "(def A2 1.838226)",
+                "(def A9 (if A1 A5 A3))",
+                "(def A7 (if A1 A2 A3))",
+                "(def A8 (if A1 A4 A7))"
         ));
         toolkitCommand.write("test/902-terminals-formulas.clj");
     }

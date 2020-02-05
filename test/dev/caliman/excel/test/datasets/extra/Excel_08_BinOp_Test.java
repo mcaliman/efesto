@@ -48,9 +48,9 @@ class Excel_08_BinOp_Test {
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0,
-                "B1 = 1.0",
-                "B2 = 3.0",
-                "B3 = (- B2 B1)"
+                "(def B1 1.0)",
+                "(def B2 3.0)",
+                "(def B3 (- B2 B1))"
         ));
         toolkitCommand.write("test/08-BinaryOp.clj");
 

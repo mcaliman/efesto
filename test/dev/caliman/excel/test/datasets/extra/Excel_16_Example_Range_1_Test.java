@@ -38,8 +38,8 @@ class Excel_16_Example_Range_1_Test {
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0,
-                "D3:H3 = [ 0.0 1.0 2.0 3.0 4.0 ]",
-                "D7 = INDEX(D3:H3,2)"
+                "(def D3:H3 [ 0.0 1.0 2.0 3.0 4.0 ])",
+                "(def D7 (index D3:H3 2))"
         ));
         toolkitCommand.write("test/16-example-range-1.clj");
     }

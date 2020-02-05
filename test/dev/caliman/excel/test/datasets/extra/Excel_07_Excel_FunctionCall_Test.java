@@ -37,8 +37,8 @@ class Excel_07_Excel_FunctionCall_Test {
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0,
-                "A1:C1 = [ 1.0 2.0 3.0 ]",
-                "A2 = SUM(A1:C1)"
+                "(def A1:C1 [ 1.0 2.0 3.0 ])",
+                "(def A2 (sum A1:C1))"
         ));
         toolkitCommand.write("test/07-FunctionCall.clj");
     }
