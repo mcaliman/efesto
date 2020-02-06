@@ -19,21 +19,35 @@
  * Efesto, alternative license terms are available from Massimo Caliman
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
-package dev.caliman.excel.grammar.functions.builtin;
 
-import dev.caliman.excel.grammar.lexicaltokens.EXCEL_FUNCTION;
-import dev.caliman.excel.grammar.nonterm.Formula;
+package dataset;
 
-public class SUM extends EXCEL_FUNCTION {
+import dev.caliman.excel.ToolkitCommand;
+import org.junit.jupiter.api.Test;
 
-    public SUM(Formula... args) {
-        this.args = args;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class RangeTest {
+
+    @Test
+    void testTest() throws Exception {
+        String current = new java.io.File(".").getCanonicalPath();
+        System.out.println("Current dir:" + current);
+        ToolkitCommand cmd = new ToolkitCommand("Dataset/Range.xlsx");
+        cmd.execute();
+        System.out.println("ToFormula.");
+        System.out.println("-------------");
+        cmd.toFormula();
+
+        assertTrue(cmd.testToFormula(0,
+                "(def A1:A4 [ 1.0 2.0 3.0 4.0 ])",
+                "(def B1:E1 [ 5.0 6.0 7.0 8.0 ])",
+                "(def A7 (sum A1:A4))",
+                "(def A8 (sum B1:E1))"
+                )
+        );
+        cmd.write("Dataset/Range.clj");
+
+
     }
-
-    @Override
-    public String toString() {
-        //return "(" + getName() + " " + argumentsToFormula() + ")";
-        return "(reduce + " + argumentsToFormula() + ")";
-    }
-
 }
