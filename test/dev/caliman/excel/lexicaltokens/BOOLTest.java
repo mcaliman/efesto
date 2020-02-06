@@ -51,8 +51,8 @@ class BOOLTest {
     @Test
     void testToString() {
         BOOL tTRUE = new BOOL(true);
-        assertEquals("TRUE", tTRUE.toString());
+        assertEquals("Boolean/TRUE", tTRUE.toString());
         BOOL tFALSE = new BOOL(false);
-        assertEquals("FALSE", tFALSE.toString());
+        assertEquals("Boolean/FALSE", tFALSE.toString());
     }
 }

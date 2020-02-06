@@ -39,7 +39,7 @@ class Excel_17_IFintoIF_Test {
         assertTrue(toolkitCommand.testToFormula(
                 0,
                 "(def B1 2.0)",
-                "(def C1 TRUE)",
+                "(def C1 Boolean/TRUE)",
                 "(def A1 (if (> B1 1) 0 (if C1 \"Hello\" \"Bye\")))"
         ));
         toolkitCommand.write("test/17-IF-into-IF.clj");

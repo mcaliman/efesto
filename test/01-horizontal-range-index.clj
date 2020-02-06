@@ -25,7 +25,7 @@
 ; Text file: test/01-horizontal-range-index.clj
 ; Excel File: test/01-horizontal-range-index.xlsx
 ; Excel Formulas Number: 1
-; Elapsed Time (parsing + topological sort): 1 s. or 0 min.
+; Elapsed Time (parsing + topological sort): 0 s. or 0 min.
 ;
 ; BEGIN-RAW-TEXT
 ; B1 = 0.0

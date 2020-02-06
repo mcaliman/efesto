@@ -40,7 +40,7 @@ class Excel_902_TerminalsFormulas_Test {
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
                 0,
-                "(def A1 TRUE)",
+                "(def A1 Boolean/TRUE)",
                 "(def A5 \"1/0\")",
                 "(def A3 24.0)",
                 "(def A4 \"This is a string\")",

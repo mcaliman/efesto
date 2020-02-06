@@ -37,7 +37,7 @@
 ; Foglio1!A8 = IF(A1,A4,A7)
 ; Foglio1!A9 = IF(A1,A5,A3)
 ; END-RAW-TEXT
-(def A1 TRUE)
+(def A1 Boolean/TRUE)
 (def A5 "1/0")
 (def A3 24.0)
 (def A4 "This is a string")

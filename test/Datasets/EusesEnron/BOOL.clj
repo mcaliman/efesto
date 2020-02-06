@@ -35,7 +35,7 @@
 ; A6 = IFFALSE
 ; END-RAW-TEXT
 (def A3 1.0)
-(def A4 TRUE)
+(def A4 Boolean/TRUE)
 (def A5 "IFTRUE")
 (def A6 "IFFALSE")
-(def A1 (if (and (= A3 1) (= A4 TRUE)) A5 A6))
+(def A1 (if (and (= A3 1) (= A4 Boolean/TRUE)) A5 A6))

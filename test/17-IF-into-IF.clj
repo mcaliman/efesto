@@ -33,5 +33,5 @@
 ; C1 = TRUE
 ; END-RAW-TEXT
 (def B1 2.0)
-(def C1 TRUE)
+(def C1 Boolean/TRUE)
 (def A1 (if (> B1 1) 0 (if C1 "Hello" "Bye")))

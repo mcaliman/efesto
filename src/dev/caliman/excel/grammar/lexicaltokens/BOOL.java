@@ -29,6 +29,7 @@ import java.util.Objects;
 
 
 /**
+ *
  * @author Massimo Caliman
  */
 public final class BOOL extends Constant {
@@ -61,7 +62,7 @@ public final class BOOL extends Constant {
 
     @Override
     public String toString() {
-        return value != null && value ? "TRUE" : "FALSE";
+        return value != null && value ? "Boolean/TRUE" : "Boolean/FALSE";
     }
 
 }
