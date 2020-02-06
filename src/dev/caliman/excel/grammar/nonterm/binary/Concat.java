@@ -36,5 +36,9 @@ public final class Concat extends Binary {
         super(lFormula, "&", rFormula);
     }
 
+    @Override
+    public String toString() {
+        return clojurize("str", operandToFormula(lFormula), operandToFormula(rFormula));
+    }
 
 }

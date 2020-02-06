@@ -33,4 +33,9 @@ public final class Neq extends Binary {
         super(lFormula, "<>", rFormula);
     }
 
+    @Override
+    public String toString() {
+        //return "(" + op + " " + operandToFormula(lFormula) + " " +  operandToFormula(rFormula) + ")";
+        return clojurize("not=", operandToFormula(lFormula), operandToFormula(rFormula));
+    }
 }

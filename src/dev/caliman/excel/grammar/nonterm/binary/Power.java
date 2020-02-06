@@ -33,4 +33,8 @@ public final class Power extends Binary {
         super(lformula, "^", rformula);
     }
 
+    @Override
+    public String toString() {
+        return clojurize("Math/pow", operandToFormula(lFormula), operandToFormula(rFormula));
+    }
 }
