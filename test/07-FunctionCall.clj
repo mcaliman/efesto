@@ -36,4 +36,4 @@
 ; FunctionCall!A2 = SUM(A1:C1)
 ; END-RAW-TEXT
 (def A1:C1 [1.0 2.0 3.0])
-(def A2 (sum A1:C1))
+(def A2 (reduce + A1:C1))

@@ -34,4 +34,4 @@
 ; A3 = 3.0
 ; END-RAW-TEXT
 (def SheetB!A1:A3 [1.0 2.0 3.0])
-(def SheetA!A1 (sum SheetB!A1:A3))
+(def SheetA!A1 (reduce + SheetB!A1:A3))

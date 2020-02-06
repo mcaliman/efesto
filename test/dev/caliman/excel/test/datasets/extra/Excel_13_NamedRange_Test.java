@@ -39,7 +39,7 @@ class Excel_13_NamedRange_Test {
         assertTrue(toolkitCommand.testToFormula(
                 0,
                 "(def NamedRange!slist [ 1.0 2.0 3.0 4.0 5.0 6.0 ])",
-                "(def A8 (sum NamedRange!slist))"
+                "(def A8 (reduce + NamedRange!slist))"
         ));
         toolkitCommand.write("test/13-NamedRange.clj");
     }

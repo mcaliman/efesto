@@ -51,5 +51,5 @@
 (def A5 (* A1 A2))
 (def A6 (/ A1 A2))
 (def A3 (+ A1 A2))
-(def A8 (^A1 A2))
-(def A7 (& A1 A2))
+(def A8 (Math/pow A1 A2))
+(def A7 (str A1 A2))

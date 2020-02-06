@@ -42,8 +42,8 @@ public class RangeTest {
         assertTrue(cmd.testToFormula(0,
                 "(def A1:A4 [ 1.0 2.0 3.0 4.0 ])",
                 "(def B1:E1 [ 5.0 6.0 7.0 8.0 ])",
-                "(def A7 (sum A1:A4))",
-                "(def A8 (sum B1:E1))"
+                "(def A7 (reduce + A1:A4))",
+                "(def A8 (reduce + B1:E1))"
                 )
         );
         cmd.write("Dataset/Range.clj");
