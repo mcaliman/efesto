@@ -1,46 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a32ddec-a085-4cfd-9a7f-b60d1a9807ed" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dataset/BinaryOp.clj" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset/BinaryOp.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/01-horizontal-range-index.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/01-horizontal-range-index.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/02-vertical-range-index.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/02-vertical-range-index.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/03-range-index.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/03-range-index.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/08-BinaryOp.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/08-BinaryOp.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/09-Expr.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/09-Expr.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/10-Prefix.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/10-Prefix.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/11-UnOpPrefix.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/11-UnOpPrefix.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/12-String-COUNTIF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/12-String-COUNTIF.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/15-Others-FUN.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/15-Others-FUN.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/16-example-range-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/16-example-range-1.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/17-IF-into-IF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/17-IF-into-IF.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/18-matrix-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/18-matrix-1.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/901-terminals.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/901-terminals.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/902-terminals-formulas.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/902-terminals-formulas.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/903-terminals-formulas.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/903-terminals-formulas.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ConstantArray.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/ConstantArray.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/BOOL.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/BOOL.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/CELL.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/CELL.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/ERROR_REF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/ERROR_REF.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/Formula.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/Formula.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/Reference.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/Reference.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Datasets/Extra/Basic.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/Extra/Basic.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Datasets/Extra/DATE.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/Extra/DATE.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/HORIZONTAL_RANGE.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/HORIZONTAL_RANGE.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/SHEET-QUOTED.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/SHEET-QUOTED.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/UDF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/UDF.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/area-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/area-1.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/area-2.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/area-2.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/comments.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/comments.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/dataset/RangeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dataset/RangeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_07_Excel_FunctionCall_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_07_Excel_FunctionCall_Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_13_NamedRange_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_13_NamedRange_Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_904_TerminalsFormulas_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_904_TerminalsFormulas_Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_Multisheet1_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/Excel_Multisheet1_Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/file-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/file-1.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/metadata.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/metadata.clj" afterDir="false" />
-    </list>
+    <list default="true" id="8a32ddec-a085-4cfd-9a7f-b60d1a9807ed" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -344,7 +305,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580990784154</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="update clojure compiler">
+      <created>1581006987082</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1581006987082</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -426,10 +394,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="516" y="260" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1580976070666" />
-    <state x="516" y="16" key="CommitChangelistDialog2" timestamp="1580990780188">
+    <state x="516" y="16" key="CommitChangelistDialog2" timestamp="1581007051835">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="516" y="16" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1580990780188" />
+    <state x="516" y="16" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581007051835" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1580907070472">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
