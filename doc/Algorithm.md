@@ -4,16 +4,16 @@
 TODO
 ## Abstract
 TODO
-### A Analyzer
+## A Analyzer
 TODO
-### P Parser
+## P Parser
 TODO
-### S Topological Sorter
+## S Topological Sorter
 TODO
-### C Compiler (or Translator) 
+## C Compiler (or Translator) 
 TODO
 
-1. Constant
+### Constant
 TODO
 ⟨Constant⟩ ::= ⟨Number⟩ | TEXT | BOOL | DATETIME | ERROR  
 ⟨Number⟩::= INT | FLOAT
@@ -46,16 +46,46 @@ where
     C is cell address like A15 and #err is ERROR like #REF      
 C = #err --> (def C #err)
 
-2. Binary Operation
+---
+### Binary Operation
 TODO
 
-3. Range and Cell Reference
-TODO
 
-4. Conditional Reference Functions (IF and CHOOSE functions)
-TODO
+⟨Binary⟩   ::= ⟨Add⟩ | ⟨Sub⟩ | ⟨Mult⟩ | ⟨Divide⟩ | ⟨Lt⟩ | ⟨Gt⟩ | ⟨Eq⟩ | ⟨Leq⟩ | ⟨GtEq⟩ | ⟨Neq⟩  | ⟨Concat⟩ | ⟨Power⟩
+⟨Add⟩      ::= ⟨Formula⟩+⟨Formula⟩
+⟨Sub⟩      ::= ⟨Formula⟩-⟨Formula⟩
+⟨Mult⟩     ::= ⟨Formula⟩*⟨Formula⟩
+⟨Divide⟩   ::= ⟨Formula⟩/⟨Formula⟩
+⟨Lt⟩       ::= ⟨Formula⟩<⟨Formula⟩
+⟨Gt⟩       ::= ⟨Formula⟩>⟨Formula⟩
+⟨Eq⟩       ::= ⟨Formula⟩=⟨Formula⟩
+⟨Leq⟩      ::= ⟨Formula⟩<=⟨Formula⟩
+⟨GtEq⟩     ::= ⟨Formula⟩>=⟨Formula⟩
+⟨Neq⟩      ::= ⟨Formula⟩<>⟨Formula⟩
+⟨Concat⟩   ::= ⟨Formula⟩&⟨Formula⟩
+⟨Power⟩    ::= ⟨Formula⟩^⟨Formula⟩
 
-5. Reference Functions (IF and CHOOSE functions)
+for the subset of binary operation
+operator = + | - | * | / | < | > | <= | >= | = 
+assume C = A op B --> (def C (op A B))
+
+case operator = <> (NotEq)
+C = A <> B --> (def C (not= A B))
+
+for the operator Power ^ 
+C = A '^' B --> (def C (Math/pow A B))
+
+case operator Concat &
+C = A '&' B --> (def C (str A B))
+ 
+---
+### Range and Cell Reference
+TODO
+---
+### Conditional Reference Functions (IF and CHOOSE functions)
+TODO
+---
+### Reference Functions (IF and CHOOSE functions)
 TODO
 
 
