@@ -80,10 +80,35 @@ C = A '&' B --> (def C (str A B))
  
 ---
 ### Range and Cell Reference
-TODO
+for range like U:V where U,V are cell address like A1:A3
+
+assume A1:A4 is a range (A1,A2,A3)
+where A1:A4 is 10,20,30
+
+A1:A4 --> (def A1:A4 [10 20 30])
+so we can refer to the the range as A1:A4 (in Clojure A1:A4 is a legal name, Sheet1!A1:4 is legal name too) 
+
+similarly for area range (matrix) [ [] [] [] ]
+
+### SUM function for range
+
+C = SUM (U:V) --> (def C (reduce + U:V))
+
+ 
+
 ---
 ### Conditional Reference Functions (IF and CHOOSE functions)
 TODO
+
+for the IF function: IF ::= IF(B,T,E)
+where B is boolean expression, T the 'Then' value if B is true, E the 'Else' value if B is false.
+IF(B,T,E) --> (if B T E)
+e.g.
+A1 = IF(B1,T1,E1) --> (def A1 (if B1 T1 E1))
+
+for the CHOOSE function: CHOOSE ::= CHOOSE(index,value1,...valueN)
+e.g. CHOOSE(2,"red","blue","yellow") return "blue"
+
 ---
 ### Reference Functions (IF and CHOOSE functions)
 TODO
