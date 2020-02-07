@@ -363,7 +363,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581065168943</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="update doc">
+      <created>1581068169141</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1581068169141</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -446,10 +453,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="516" y="260" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1581007358467" />
-    <state x="516" y="16" key="CommitChangelistDialog2" timestamp="1581065166990">
+    <state x="516" y="16" key="CommitChangelistDialog2" timestamp="1581068167656">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="516" y="16" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581065166990" />
+    <state x="516" y="16" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581068167656" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1580907070472">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -482,10 +489,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581007601171" />
-    <state x="361" y="135" key="Vcs.Push.Dialog.v2" timestamp="1581067880630">
+    <state x="361" y="135" key="Vcs.Push.Dialog.v2" timestamp="1581068171488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="135" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1581067880630" />
+    <state x="361" y="135" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1581068171488" />
     <state x="546" y="147" key="VcsDiffUtil.ChangesDialog" timestamp="1580907056649">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -514,14 +521,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="209" y="34" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1580328131453" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1580976093342">
+    <state x="425" y="187" key="run.anything.popup" timestamp="1581069029999">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1580976093342" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580820302015">
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1581069029999" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1581068762490">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580820302015" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1581068762490" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
