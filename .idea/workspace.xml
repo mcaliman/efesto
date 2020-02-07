@@ -349,7 +349,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581061950529</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="update doc">
+      <created>1581062546742</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1581062546742</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -432,10 +439,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="516" y="260" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1581007358467" />
-    <state x="516" y="16" key="CommitChangelistDialog2" timestamp="1581061948522">
+    <state x="516" y="16" key="CommitChangelistDialog2" timestamp="1581062545158">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="516" y="16" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581061948522" />
+    <state x="516" y="16" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581062545158" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1580907070472">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -468,10 +475,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581007601171" />
-    <state x="361" y="135" key="Vcs.Push.Dialog.v2" timestamp="1581061952406">
+    <state x="361" y="135" key="Vcs.Push.Dialog.v2" timestamp="1581062548547">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="135" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1581061952406" />
+    <state x="361" y="135" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1581062548547" />
     <state x="546" y="147" key="VcsDiffUtil.ChangesDialog" timestamp="1580907056649">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

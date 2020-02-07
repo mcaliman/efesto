@@ -13,20 +13,14 @@ TODO
 ### C Compiler (or Translator)
 TODO
 
-Basic rules
+####1. Constant
+TODO
+####2. Binary Operation
+TODO
+####3. Range and Cell Reference
+TODO
+####4. Conditional Reference Functions (IF and CHOOSE functions)
+TODO
+####5. Reference Functions (IF and CHOOSE functions)
+TODO
 
-```
-⟨Start⟩ ::= = ⟨Formula⟩ | ⟨ArrayFormula⟩ | ⟨Metadata⟩ 
-⟨ArrayFormula⟩ ::= {= ⟨Formula⟩ }
-⟨Formula⟩ ::= ⟨Constant⟩ | ⟨Reference⟩ | ⟨FunctionCall⟩ | ⟨ParenthesisFormula⟩ | ⟨ConstantArray⟩ | RESERVED_NAME
-⟨ParenthesisFormula⟩ ::= ( ⟨Formula⟩ )
-⟨Constant⟩ ::= ⟨Number⟩ | TEXT | BOOL | DATETIME | ERROR  
-⟨Number⟩::= INT | FLOAT
-⟨FunctionCall⟩ ::=  ⟨EXCEL_FUNCTION⟩ | ⟨Unary⟩ | ⟨PercentFormula⟩ | ⟨Binary⟩
-```
-
-Constant(s)
-```
-⟨Constant⟩ ::= ⟨Number⟩ | TEXT | BOOL | DATETIME | ERROR
-⟨Number⟩::= INT | FLOAT
-```
