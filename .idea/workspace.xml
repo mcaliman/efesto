@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a32ddec-a085-4cfd-9a7f-b60d1a9807ed" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/doc/Algorithm.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Grammar.md" beforeDir="false" afterPath="$PROJECT_DIR$/doc/Grammar.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Algorithm.md" beforeDir="false" afterPath="$PROJECT_DIR$/doc/Algorithm.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -337,7 +335,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581060817139</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="update doc">
+      <created>1581061529227</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1581061529227</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -389,7 +394,8 @@
     <MESSAGE value="update" />
     <MESSAGE value="clojurize" />
     <MESSAGE value="update clojure compiler" />
-    <option name="LAST_COMMIT_MESSAGE" value="update clojure compiler" />
+    <MESSAGE value="update doc" />
+    <option name="LAST_COMMIT_MESSAGE" value="update doc" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -419,10 +425,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="516" y="260" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1581007358467" />
-    <state x="516" y="16" key="CommitChangelistDialog2" timestamp="1581060815120">
+    <state x="516" y="16" key="CommitChangelistDialog2" timestamp="1581061527430">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="516" y="16" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581060815120" />
+    <state x="516" y="16" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581061527430" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1580907070472">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -455,10 +461,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581007601171" />
-    <state x="361" y="135" key="Vcs.Push.Dialog.v2" timestamp="1581061204259">
+    <state x="361" y="135" key="Vcs.Push.Dialog.v2" timestamp="1581061531178">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="135" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1581061204259" />
+    <state x="361" y="135" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1581061531178" />
     <state x="546" y="147" key="VcsDiffUtil.ChangesDialog" timestamp="1580907056649">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
