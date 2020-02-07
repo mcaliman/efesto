@@ -69,7 +69,7 @@ class DATETest {
         DATE date1 = new DATE(date);
         String result = date1.toString();
         System.out.println(result);
-        assertEquals("17/09/2019", result);
+        assertEquals("(java.time.LocalDate/parse \"2019-09-17\")", result);
     }
 
 }

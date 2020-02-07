@@ -37,8 +37,8 @@ e.g.
 
 for DATETIME values
 C = datetime (in Excel date time value is implemented as numbers)  so we can detect this format property and 
-use a clojure macro to convert as Clojure/Java Date/Time/LocalDateTime value
-`C = datetime` --> `(def C excel-date(datetime))`
+use a clojure macro to convert as Clojure/Java Date/Time/LocalDateTime value or LocalDate Java Objects
+`C = datetime` --> `(def C (java.time.LocalDate/parse "2018-02-01"))`
 
 for ERROR type
 C = #err 

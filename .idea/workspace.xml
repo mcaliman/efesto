@@ -1,9 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SPLITTER_PROPORTION" value="0.42379957" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="8a32ddec-a085-4cfd-9a7f-b60d1a9807ed" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dataset/BinaryOp.clj" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset/BinaryOp.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dataset/Range.clj" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset/Range.clj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/Algorithm.md" beforeDir="false" afterPath="$PROJECT_DIR$/doc/Algorithm.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/DATE.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/DATE.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/lexicaltokens/DATETest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/lexicaltokens/DATETest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/DATETest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/DATETest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/DATE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dev/caliman/excel/grammar/lexicaltokens/DATE.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/01-horizontal-range-index.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/01-horizontal-range-index.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/02-vertical-range-index.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/02-vertical-range-index.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/03-range-index.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/03-range-index.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/07-FunctionCall.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/07-FunctionCall.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/08-BinaryOp.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/08-BinaryOp.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/09-Expr.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/09-Expr.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/10-Prefix.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/10-Prefix.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/11-UnOpPrefix.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/11-UnOpPrefix.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/12-String-COUNTIF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/12-String-COUNTIF.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/13-NamedRange.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/13-NamedRange.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/15-Others-FUN.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/15-Others-FUN.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/16-example-range-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/16-example-range-1.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/17-IF-into-IF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/17-IF-into-IF.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/18-matrix-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/18-matrix-1.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/901-terminals.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/901-terminals.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/902-terminals-formulas.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/902-terminals-formulas.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/903-terminals-formulas.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/903-terminals-formulas.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/904-terminals-formulas.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/904-terminals-formulas.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ConstantArray.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/ConstantArray.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/BOOL.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/BOOL.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/CELL.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/CELL.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/ERROR_REF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/ERROR_REF.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/Formula.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/Formula.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/Reference.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/Reference.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/Extra/Basic.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/Extra/Basic.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/Extra/DATE.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/Extra/DATE.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/HORIZONTAL_RANGE.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/HORIZONTAL_RANGE.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SHEET-QUOTED.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/SHEET-QUOTED.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UDF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/UDF.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UNION.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/UNION.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/area-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/area-1.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/area-2.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/area-2.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/comments.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/comments.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/lexicaltokens/DATETest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/lexicaltokens/DATETest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/DATETest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/dev/caliman/excel/test/datasets/extra/DATETest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/file-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/file-1.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/metadata.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/metadata.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/multisheet-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/multisheet-1.clj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -398,7 +445,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581077389803</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="update doc">
+      <created>1581077706458</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1581077706458</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -477,14 +531,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1580302923882" />
-    <state x="516" y="260" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1581007358467">
+    <state x="516" y="260" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1581078921640">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="516" y="260" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1581007358467" />
-    <state x="516" y="16" key="CommitChangelistDialog2" timestamp="1581077388151">
+    <state x="516" y="260" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1581078921640" />
+    <state x="516" y="16" key="CommitChangelistDialog2" timestamp="1581077704960">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="516" y="16" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581077388151" />
+    <state x="516" y="16" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581077704960" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1580907070472">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -493,22 +547,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1579675494726" />
-    <state width="1493" height="231" key="GridCell.Tab.0.bottom" timestamp="1581007371335">
+    <state width="1493" height="231" key="GridCell.Tab.0.bottom" timestamp="1581080193635">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="231" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581007371335" />
-    <state width="1493" height="231" key="GridCell.Tab.0.center" timestamp="1581007371335">
+    <state width="1493" height="231" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581080193635" />
+    <state width="1493" height="231" key="GridCell.Tab.0.center" timestamp="1581080193635">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="231" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581007371335" />
-    <state width="1493" height="231" key="GridCell.Tab.0.left" timestamp="1581007371335">
+    <state width="1493" height="231" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581080193635" />
+    <state width="1493" height="231" key="GridCell.Tab.0.left" timestamp="1581080193634">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="231" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581007371335" />
-    <state width="1493" height="231" key="GridCell.Tab.0.right" timestamp="1581007371335">
+    <state width="1493" height="231" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581080193634" />
+    <state width="1493" height="231" key="GridCell.Tab.0.right" timestamp="1581080193635">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="231" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581007371335" />
+    <state width="1493" height="231" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581080193635" />
     <state x="570" y="135" key="RollbackChangesDialog" timestamp="1580302815377">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -517,10 +571,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581007601171" />
-    <state x="361" y="135" key="Vcs.Push.Dialog.v2" timestamp="1581077391357">
+    <state x="361" y="135" key="Vcs.Push.Dialog.v2" timestamp="1581077708460">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="135" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1581077391357" />
+    <state x="361" y="135" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1581077708460" />
     <state x="546" y="147" key="VcsDiffUtil.ChangesDialog" timestamp="1580907056649">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

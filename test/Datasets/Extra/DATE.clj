@@ -31,5 +31,5 @@
 ; A1 = 01-feb-2018
 ; Foglio1!A2 = DAY(A1)
 ; END-RAW-TEXT
-(def A1 01/02 /2018)
+(def A1 (java.time.LocalDate/parse "2018-02-01"))
 (def A2 (day A1))

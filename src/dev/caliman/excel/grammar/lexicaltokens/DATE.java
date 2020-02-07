@@ -33,7 +33,7 @@ import java.util.Objects;
  * @author Massimo Caliman
  */
 public final class DATE extends Constant {
-    private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+    private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private final Date value;
 
     @SuppressWarnings("unused")
@@ -69,7 +69,9 @@ public final class DATE extends Constant {
         return format(value);
     }
 
+    //(java.time.LocalDate/parse "2015-02-13")
     private String format(final Date date) {
-        return date == null ? "" : DATE_FORMAT.format(date);
+        //return date == null ? "" : "\""+DATE_FORMAT.format(date)+"\"";
+        return date == null ? "" : "(java.time.LocalDate/parse \"" + DATE_FORMAT.format(date) + "\")";
     }
 }

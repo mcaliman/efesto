@@ -45,7 +45,7 @@ class DATETest {
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(0,
-                "(def A1 01/02/2018)",
+                "(def A1 (java.time.LocalDate/parse \"2018-02-01\"))",
                 "(def A2 (day A1))"
         ));
         toolkitCommand.write(output);
