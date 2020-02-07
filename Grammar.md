@@ -10,7 +10,7 @@
 ⟨FunctionCall⟩ ::=  ⟨EXCEL_FUNCTION⟩ | ⟨Unary⟩ | ⟨PercentFormula⟩ | ⟨Binary⟩
 ```
 
-Clojure BOOL 
+
 
 
 ## Functions arguments
@@ -46,6 +46,11 @@ EXCEL_FUNCTION(Formula... args)
 ⟨Concat⟩   ::= ⟨Formula⟩&⟨Formula⟩
 ⟨Power⟩    ::= ⟨Formula⟩^⟨Formula⟩
 ```
+
+Traduzione in Clojure
+
+
+
 
 ```
 ⟨PercentFormula⟩ ::= ⟨Formula⟩%
