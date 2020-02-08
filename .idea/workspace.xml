@@ -5,448 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a32ddec-a085-4cfd-9a7f-b60d1a9807ed" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/ README-Template.md" beforeDir="false" afterPath="$PROJECT_DIR$/README-Template.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/efesto.iml" beforeDir="false" afterPath="$PROJECT_DIR$/efesto.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/ToolkitCommand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/ToolkitOptions.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ACCRINT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ACCRINTM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ACOS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ACOSH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ADDRESS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/AMORDEGRC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/AMORLINC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/AREAS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ASC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ASIN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ASINH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ATAN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ATAN2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ATANH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/AVEDEV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/AVERAGE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/AVERAGEA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/AVERAGEIF.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/AVERAGEIFS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/BAHTTEXT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/BESSELI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/BESSELJ.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/BESSELK.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/BESSELY.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/BETADIST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/BETAINV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/BIN2DEC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/BIN2HEX.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/BIN2OCT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/BINOMDIST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CALL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CEILING.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CELL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CHAR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CHIDIST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CHIINV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CHITEST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CLEAN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CODE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COLUMN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COLUMNS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COMBIN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COMPLEX.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CONCATENATE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CONFIDENCE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CONVERT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CORREL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COSH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COUNT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COUNTA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COUNTBLANK.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COUNTIF.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COUNTIFS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COUPDAYBS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COUPDAYS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COUPDAYSNC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COUPNCD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COUPNUM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COUPPCD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/COVAR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CRITBINOM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CUBEKPIMEMBER.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CUBEMEMBER.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CUBEMEMBERPROPERTY.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CUBERANKEDMEMBER.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CUBESET.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CUBESETCOUNT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CUBEVALUE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CUMIPMT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/CUMPRINC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DATE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DATEVALUE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DAVERAGE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DAY.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DAYS360.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DCOUNT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DCOUNTA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DDB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DEC2BIN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DEC2HEX.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DEC2OCT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DEGREES.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DELTA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DEVSQ.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DGET.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DISC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DMAX.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DMIN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DOLLAR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DOLLARDE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DOLLARFR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DPRODUCT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DSTDEV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DSTDEVP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DSUM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DURATION.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DVAR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/DVARP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/EDATEEFFECT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/EOMONTH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ERF.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ERFC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ERROR_TYPE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/EUROCONVERT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/EVEN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/EXACT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/EXP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/EXPONDIST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FACT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FACTDOUBLE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FDIST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FIND.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FINV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FISHER.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FISHERINV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FIXED.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FLOOR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FORECAST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FREQUENCY.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FTEST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/FVSCHEDULE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/GAMMADIST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/GAMMAINV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/GAMMALN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/GCD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/GEOMEAN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/GESTEP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/GETPIVOTDATA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/GROWTH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/HARMEAN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/HEX2BIN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/HEX2DEC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/HEX2OCT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/HLOOKUP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/HOUR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/HYPERLINK.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/HYPGEOMDIST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IFERROR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMABS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMAGINARY.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMARGUMENT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMCONJUGATE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMCOS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMDIV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMEXP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMLN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMLOG10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMLOG2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMPOWER.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMPRODUCT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMREAL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMSIN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMSQRT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMSUB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IMSUM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/INFO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/INT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/INTERCEPT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/INTRATE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IPMT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IRR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/IS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ISB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ISBLANK.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ISERROR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ISNA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ISNUMBER.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ISPMT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/JIS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/KURT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LARGE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LCM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LEFT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LEFTB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LEN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LENB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LINEST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LOG.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LOG10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LOGEST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LOGINV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LOGNORMDIST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LOOKUP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/LOWER.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MATCH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MAX.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MAXA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MDETERM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MDURATION.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MEDIAN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MID.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MIDB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MIN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MINA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MINUTE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MINVERSE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MIRR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MMULT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MOD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MODE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MONTH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MROUND.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/MULTINOMIAL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/N.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/NA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/NEGBINOMDIST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/NETWORKDAYS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/NOMINAL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/NORMDIST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/NORMINV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/NORMSDIST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/NORMSINV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/NOW.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/NPER.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/NPV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/OCT2BIN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/OCT2DEC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/OCT2HEX.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ODD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ODDFPRICE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ODDFYIELD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ODDLPRICE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ODDLYIELD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PEARSON.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PERCENTILE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PERCENTRANK.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PERMUT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PHONETIC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PMT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/POISSON.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/POWER.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PPMT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PRICE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PRICEDISC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PRICEMAT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PROB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PRODUCT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PROPER.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/PV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/QUOTIENT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/RADIANS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/RAND.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/RANDBETWEEN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/RANK.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/RATE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/RECEIVED.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/REGISTER_ID.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/REPLACE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/REPLACEB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/REPT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/RIGHT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/RIGHTB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ROMAN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ROUND.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ROUNDDOWN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ROUNDUP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ROW.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ROWS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/RSQ.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/RTD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SEARCH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SEARCHB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SECOND.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SERIESSUM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SIGN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SIN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SINH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SKEW.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SLN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SLOPE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SMALL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SQL_REQUEST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SQRT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SQRTPI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/STANDARDIZE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/STDEV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/STDEVA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/STDEVP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/STDEVPA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/STEYX.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SUBSTITUTE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SUBTOTAL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SUM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SUMIF.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SUMIFS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SUMPRODUCT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SUMSQ.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SUMX2MY2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SUMX2PY2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SUMXMY2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/SYD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/T.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TAN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TANH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TBILLEQ.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TBILLPRICE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TBILLYIELD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TDIST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TEXT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TIME.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TIMEVALUE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TINV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TODAY.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TRANSPOSE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TREND.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TRIM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TRIMMEAN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TRUNC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TTEST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/TYPE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/UPPER.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/VALUE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/VAR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/VARA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/VARP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/VARPA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/VDB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/VLOOKUP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/WEEKDAY.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/WEEKNUM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/WEIBULL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/WORKDAY.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/XIRR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/XNPV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/YEAR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/YEARFRAC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/YIELD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/YIELDDISC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/YIELDMAT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/builtin/ZTEST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/conditionalreferencefunction/CHOOSE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/conditionalreferencefunction/IF.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/referencefunction/INDEX.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/referencefunction/INDIRECT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/functions/referencefunction/OFFSET.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/BOOL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/CELL.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/DATE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/ERROR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/ERRORREF.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/FILE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/FLOAT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/INT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/RANGE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/REFERENCE_FUNCTION.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/REF_FUNCTION_COND.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/SHEET.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/TEXT.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/lexicaltokens/UDF.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Constant.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/ConstantArray.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/NamedRange.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/ParenthesisFormula.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/PercentFormula.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Prefix.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/PrefixReferenceItem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/RangeReference.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Reference.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/ReferenceItem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/Start.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Add.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Binary.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Concat.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Divide.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Eq.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Gt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/GtEq.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Intersection.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Leq.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Lt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Mult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Neq.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Power.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Sub.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/binary/Union.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/unary/Minus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/unary/Plus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/grammar/nonterm/unary/Unary.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/graph/Edge.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/graph/Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/graph/StartGraph.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/parser/AbstractParser$WhatIf.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/parser/AbstractParser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/parser/BuiltinFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/parser/Parser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/parser/StartList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/efesto/dev/caliman/excel/parser/UnsupportedBuiltinException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dataset/BinaryOpTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dataset/RangeTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/lexicaltokens/BOOLTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/lexicaltokens/DATETest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/lexicaltokens/ERRORTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/lexicaltokens/FLOATTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/lexicaltokens/INTTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/lexicaltokens/TEXTTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/ExcelHelperTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/eusesenron/BOOLTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/eusesenron/CELLTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/eusesenron/ERRORREFTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/eusesenron/FormulaTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/eusesenron/ReferenceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/BasicTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/DATETest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_01_HorizontalRangeIndex_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_02_VerticalRangeIndex_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_03_RangeIndex_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_07_Excel_FunctionCall_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_08_BinOp_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_09_Expr_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_10_Prefix_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_11_UnOpPrefix_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_12_String_COUNTIF_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_13_NamedRange_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_15_Others_FUN_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_16_Example_Range_1_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_17_IFintoIF_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_18_Matrix_1_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_902_TerminalsFormulas_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_903_TerminalsFormulas_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_904_TerminalsFormulas_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Area_1_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Area_2_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Comments_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_ConstantArray_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_File_1_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Metadata_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Multisheet1_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/Excel_Xl_901_Terminals_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/HORIZONTAL_RANGE_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/SHEET_QUOTED_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/UDF_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/extra/UNION_Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/efesto/dev/caliman/excel/test/datasets/realcases/RealCase1Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dataset/BinaryOp.clj" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset/BinaryOp.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dataset/Range.clj" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset/Range.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/01-horizontal-range-index.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/01-horizontal-range-index.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/02-vertical-range-index.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/02-vertical-range-index.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/03-range-index.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/03-range-index.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/07-FunctionCall.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/07-FunctionCall.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/08-BinaryOp.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/08-BinaryOp.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/09-Expr.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/09-Expr.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/10-Prefix.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/10-Prefix.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/11-UnOpPrefix.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/11-UnOpPrefix.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/12-String-COUNTIF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/12-String-COUNTIF.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/13-NamedRange.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/13-NamedRange.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/15-Others-FUN.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/15-Others-FUN.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/16-example-range-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/16-example-range-1.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/17-IF-into-IF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/17-IF-into-IF.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/18-matrix-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/18-matrix-1.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/901-terminals.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/901-terminals.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/902-terminals-formulas.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/902-terminals-formulas.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/903-terminals-formulas.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/903-terminals-formulas.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/904-terminals-formulas.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/904-terminals-formulas.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ConstantArray.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/ConstantArray.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/BOOL.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/BOOL.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/CELL.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/CELL.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/ERROR_REF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/ERROR_REF.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/Formula.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/Formula.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/EusesEnron/Reference.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/EusesEnron/Reference.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/Extra/Basic.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/Extra/Basic.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Datasets/Extra/DATE.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Datasets/Extra/DATE.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/HORIZONTAL_RANGE.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/HORIZONTAL_RANGE.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SHEET-QUOTED.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/SHEET-QUOTED.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UDF.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/UDF.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UNION.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/UNION.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/area-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/area-1.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/area-2.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/area-2.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/comments.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/comments.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/file-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/file-1.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/metadata.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/metadata.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/multisheet-1.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/multisheet-1.clj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -495,7 +93,7 @@
       <recent name="C:\Users\mcaliman\IdeaProjects\efesto\doc" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BoolConstantTest.testBuiltinLogicalFunction">
+  <component name="RunManager" selected="JUnit.All in efesto">
     <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
       <setting name="replType" value="NREPL" />
       <setting name="execution" value="LEININGEN" />
@@ -590,8 +188,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BoolConstantTest.testBuiltinLogicalFunction" />
         <item itemvalue="JUnit.All in efesto" />
+        <item itemvalue="JUnit.BoolConstantTest.testBuiltinLogicalFunction" />
         <item itemvalue="JUnit.BuiltinFunction.testBuiltinLogicalFunction" />
         <item itemvalue="JUnit.Excel_ConstantArray_Test.testTest" />
         <item itemvalue="JUnit.RangeTest" />
@@ -866,7 +464,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581159381905</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="update doc">
+      <created>1581160525320</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1581160525320</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -965,34 +570,34 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="82" y="194" width="438" height="468" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581160403843" />
-    <state width="1493" height="230" key="GridCell.Tab.0.bottom" timestamp="1581159956768">
+    <state width="1493" height="230" key="GridCell.Tab.0.bottom" timestamp="1581160764133">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="230" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581159956768" />
-    <state width="1493" height="230" key="GridCell.Tab.0.center" timestamp="1581159956767">
+    <state width="1493" height="230" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581160764133" />
+    <state width="1493" height="230" key="GridCell.Tab.0.center" timestamp="1581160764133">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="230" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581159956767" />
-    <state width="1493" height="230" key="GridCell.Tab.0.left" timestamp="1581159956767">
+    <state width="1493" height="230" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581160764133" />
+    <state width="1493" height="230" key="GridCell.Tab.0.left" timestamp="1581160764133">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="230" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581159956767" />
-    <state width="1493" height="230" key="GridCell.Tab.0.right" timestamp="1581159956768">
+    <state width="1493" height="230" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581160764133" />
+    <state width="1493" height="230" key="GridCell.Tab.0.right" timestamp="1581160764133">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="230" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581159956768" />
+    <state width="1493" height="230" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581160764133" />
     <state x="570" y="135" key="RollbackChangesDialog" timestamp="1581159976796">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="570" y="135" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1581159976796" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1581160411238">
+    <state x="249" y="0" key="SettingsEditor" timestamp="1581177685889">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581160411238" />
-    <state x="361" y="135" key="Vcs.Push.Dialog.v2" timestamp="1581159423299">
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581177685889" />
+    <state x="361" y="135" key="Vcs.Push.Dialog.v2" timestamp="1581177846179">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="135" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1581159423299" />
+    <state x="361" y="135" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1581177846179" />
     <state x="546" y="147" key="VcsDiffUtil.ChangesDialog" timestamp="1580907056649">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -1005,10 +610,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1580302932600" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1581007700376">
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1581177649596">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1581007700376" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1581177649596" />
     <state x="499" y="183" key="extract.method.dialog" timestamp="1580303020133">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
