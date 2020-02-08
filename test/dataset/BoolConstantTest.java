@@ -19,14 +19,27 @@
  * Efesto, alternative license terms are available from Massimo Caliman
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
-package dev.caliman.excel.grammar.functions.builtin;
 
-import dev.caliman.excel.grammar.lexicaltokens.EXCEL_FUNCTION;
-import dev.caliman.excel.grammar.nonterm.Formula;
+package dataset;
 
-public class NOT extends EXCEL_FUNCTION {
+import dev.caliman.excel.ToolkitCommand;
+import org.junit.jupiter.api.Test;
 
-    public NOT(Formula... args) {
-        this.args = args;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class BoolConstantTest {
+
+    @Test
+    void testBuiltinLogicalFunction() throws Exception {
+        ToolkitCommand cmd = new ToolkitCommand("Dataset/bool-constant-test.xlsx");
+        cmd.execute();
+        System.out.println("ToFormula.");
+        System.out.println("-------------");
+        cmd.toFormula();
+
+        assertTrue(cmd.testToFormula(0, "(def A2 Boolean/TRUE)", "(def B1 Boolean/TRUE)", "(def A2 (and A1 B1))"));
+        cmd.write("Dataset/bool-constant-test.clj");
+
+
     }
 }

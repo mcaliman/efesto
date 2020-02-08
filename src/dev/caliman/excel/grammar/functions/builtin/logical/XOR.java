@@ -20,34 +20,15 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.nonterm;
+package dev.caliman.excel.grammar.functions.builtin.logical;
 
-/**
- * ConstantArray ::= { ArrayColumns }
- *
- * @author Massimo Caliman
- */
-public class ConstantArray extends Formula {
+import dev.caliman.excel.grammar.lexicaltokens.EXCEL_FUNCTION;
+import dev.caliman.excel.grammar.nonterm.Formula;
 
-    private final Object[][] array;
+public class XOR extends EXCEL_FUNCTION {
 
-    public ConstantArray(Object[][] array) {
-        this.array = array;
-    }
-
-    public String id() {
-        return this.getAddress();
-    }
-
-    public String toString() {
-        StringBuilder str = new StringBuilder();
-        str.append('[');
-        for (Object[] internal : array) {
-            str.append(internal[0]).append(' ');
-        }
-        if (str.charAt(str.length() - 1) == ' ') str.deleteCharAt(str.length() - 1);
-        str.append(']');
-        return str.toString();
+    public XOR(Formula... args) {
+        this.args = args;
     }
 
 }

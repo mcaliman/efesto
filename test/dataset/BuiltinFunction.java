@@ -20,14 +20,35 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.functions.builtin;
+package dataset;
 
-import dev.caliman.excel.grammar.lexicaltokens.EXCEL_FUNCTION;
-import dev.caliman.excel.grammar.nonterm.Formula;
+import dev.caliman.excel.ToolkitCommand;
+import org.junit.jupiter.api.Test;
 
-public class TRUE extends EXCEL_FUNCTION {
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-    public TRUE(Formula... args) {
-        this.args = args;
+public class BuiltinFunction {
+    @Test
+    void testBuiltinLogicalFunction() throws Exception {
+        String current = new java.io.File(".").getCanonicalPath();
+        System.out.println("Current dir:" + current);
+        ToolkitCommand cmd = new ToolkitCommand("Dataset/builtin-logical-function-test.xlsx");
+        cmd.execute();
+        System.out.println("ToFormula.");
+        System.out.println("-------------");
+        cmd.toFormula();
+
+        assertTrue(cmd.testToFormula(0,
+                "(def A2 Boolean/TRUE)",
+                "(def B2 Boolean/FALSE)",
+                "(def C2 (not A2))",
+                "(def C3 (or A2 B2))",
+                "(def C2 (and A2 B2))"
+                //"(def C2 (xor A2 B2))",
+
+        ));
+        cmd.write("Dataset/builtin-logical-function-test.clj");
+
+
     }
 }

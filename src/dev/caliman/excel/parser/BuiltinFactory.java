@@ -23,6 +23,7 @@
 package dev.caliman.excel.parser;
 
 import dev.caliman.excel.grammar.functions.builtin.*;
+import dev.caliman.excel.grammar.functions.builtin.logical.*;
 import dev.caliman.excel.grammar.functions.conditionalreferencefunction.CHOOSE;
 import dev.caliman.excel.grammar.functions.conditionalreferencefunction.IF;
 import dev.caliman.excel.grammar.functions.referencefunction.INDEX;
@@ -382,6 +383,7 @@ final class BuiltinFactory {
         clazzMap.put("WEEKNUM", WEEKNUM.class);
         clazzMap.put("WEIBULL", WEIBULL.class);
         clazzMap.put("WORKDAY", WORKDAY.class);
+        clazzMap.put("XOR", XOR.class);
         clazzMap.put("XIRR", XIRR.class);
         clazzMap.put("XNPV", XNPV.class);
         clazzMap.put("YEAR", YEAR.class);

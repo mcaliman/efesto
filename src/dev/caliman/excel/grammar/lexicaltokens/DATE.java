@@ -69,9 +69,7 @@ public final class DATE extends Constant {
         return format(value);
     }
 
-    //(java.time.LocalDate/parse "2015-02-13")
     private String format(final Date date) {
-        //return date == null ? "" : "\""+DATE_FORMAT.format(date)+"\"";
         return date == null ? "" : "(java.time.LocalDate/parse \"" + DATE_FORMAT.format(date) + "\")";
     }
 }

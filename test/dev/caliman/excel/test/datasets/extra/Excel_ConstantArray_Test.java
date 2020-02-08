@@ -39,7 +39,7 @@ class Excel_ConstantArray_Test {
         System.out.println("ToFormula.");
         toolkitCommand.toFormula();
         assertTrue(toolkitCommand.testToFormula(
-                0, "(def Foglio1!A6 {1.0,2.0,2.0,4.0,6.0})"
+                0, "(def Foglio1!A6 [1.0 2.0 2.0 4.0 6.0])"
         ));
         toolkitCommand.write("test/ConstantArray.clj");
     }

@@ -91,7 +91,7 @@
 ; D12 = c=a&b
 ; E12 = ⟨Concat⟩   ::= ⟨Formula⟩&⟨Formula⟩
 ; F12 = c=a&b
-; G12 = (def c (join a b))
+; G12 = (def c (str a b))
 ; Foglio1!C13 = A2^B2
 ; D13 = c=a^b
 ; E13 = ⟨Power⟩    ::= ⟨Formula⟩^⟨Formula⟩

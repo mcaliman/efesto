@@ -20,15 +20,14 @@
  * please direct inquiries about Efesto licensing to mcaliman@gmail.com
  */
 
-package dev.caliman.excel.grammar.functions.builtin;
+package dev.caliman.excel.grammar.functions.builtin.logical;
 
 import dev.caliman.excel.grammar.lexicaltokens.EXCEL_FUNCTION;
 import dev.caliman.excel.grammar.nonterm.Formula;
 
-public class FALSE extends EXCEL_FUNCTION {
+public class TRUE extends EXCEL_FUNCTION {
 
-    public FALSE(Formula... args) {
+    public TRUE(Formula... args) {
         this.args = args;
     }
-
 }

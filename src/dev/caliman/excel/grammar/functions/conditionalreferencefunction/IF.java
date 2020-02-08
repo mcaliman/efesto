@@ -36,7 +36,6 @@ public class IF extends REF_FUNCTION_COND {
 
     @Override
     public String toString() {
-        //return getName() + "(" + argumentsToFormula() + ")";
         return "(" + getName() + " " + argumentsToFormula() + ")";
     }
 

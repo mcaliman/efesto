@@ -1,20 +1,15 @@
 # Algorithm
 
-## Title
-TODO
-## Abstract
-TODO
-## A Analyzer
-TODO
-## P Parser
-TODO
-## S Topological Sorter
-TODO
-## C Compiler (or Translator) 
-TODO
+
+TODO ⟨ConstantArray⟩ 
+ConstantArray ::= { ArrayColumns }
+ArrayColumns ::= ArrayRows | ArrayRows ; ArrayColumns
+ArrayRows ::= ArrayConstant ArrayConstant , ArrayRows
+ArrayConstant ::= Constant | UnOpPrefix NUMBER | ERROR-REF
+e.g. `Foglio1!A6 = {1;2;2;4;6}` --> `(def Foglio1!A6 [1.0 2.0 2.0 4.0 6.0])`
+
 
 ### Constant
-TODO
 ⟨Constant⟩ ::= ⟨Number⟩ | `TEXT` | `BOOL` | `DATETIME` | `ERROR`  
 ⟨Number⟩::= `INT` | `FLOAT`
 
@@ -117,7 +112,7 @@ the macro is thus defined TODO
 --> `(choose index  v1 v2 &val)`
 
 ---
-### Reference Functions (IF and CHOOSE functions)
+### Reference Functions (INDEX,INDIRECT and OFFESET functions)
 TODO
 
 
