@@ -30,4 +30,10 @@ public class TRUE extends EXCEL_FUNCTION {
     public TRUE(Formula... args) {
         this.args = args;
     }
+
+    @Override
+    public String toString() {
+        System.out.println("TRUE FUNCTION");
+        return "(" + getName() + " " + argumentsToFormula() + ")";
+    }
 }

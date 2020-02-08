@@ -31,4 +31,9 @@ public class FALSE extends EXCEL_FUNCTION {
         this.args = args;
     }
 
+    @Override
+    public String toString() {
+        System.out.println("FALSE FUNCTION");
+        return "(" + getName() + " " + argumentsToFormula() + ")";
+    }
 }
