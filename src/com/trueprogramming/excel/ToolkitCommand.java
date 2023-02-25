@@ -1,0 +1,102 @@
+/*
+ * Efesto - Excel Formula Extractor System and Topological Ordering algorithm.
+ * Copyright (C) 2017 Massimo Caliman mcaliman@gmail.com
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * If AGPL Version 3.0 terms are incompatible with your use of
+ * Efesto, alternative license terms are available from Massimo Caliman
+ * please direct inquiries about Efesto licensing to mcaliman@gmail.com
+ */
+
+package com.trueprogramming.excel;
+
+import com.trueprogramming.excel.parser.Parser;
+import com.trueprogramming.excel.parser.StartList;
+import com.trueprogramming.excel.grammar.nonterm.Start;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+
+public class ToolkitCommand {
+
+    private final Parser parser;
+
+    private long elapsed = 0;
+
+    public ToolkitCommand(String name) throws IOException, InvalidFormatException {
+        ToolkitOptions options = new ToolkitOptions();
+        parser = new Parser(name);
+        parser.setVerbose(options.isVerbose());
+    }
+
+    public ToolkitCommand(String name, ToolkitOptions options) throws IOException, InvalidFormatException {
+        parser = new Parser(name);
+        parser.setVerbose(options.isVerbose());
+    }
+
+
+    public void execute() {
+        long t = System.currentTimeMillis();
+        this.parser.parse();
+        this.parser.sort();
+        this.elapsed = System.currentTimeMillis() - t;
+    }
+
+    public void write(String filename) throws IOException {
+        StartList list = parser.getList();
+        try(Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
+            writer.write("' \n");
+            writer.write("' Text File: " + filename + '\n');
+            writer.write("' Excel File: " + parser.getFilename() + '\n');
+            writer.write("' Excel Formulas Number: " + parser.getCounterFormulas() + '\n');
+            writer.write("' Elapsed Time (parsing + topological sort): " + (elapsed / 1000 + " s. or " + (elapsed / 1000 / 60) + " min.") + '\n');
+            //As Raw Text
+            writer.write("' As Raw Text - Start\n");
+            writer.write(parser.getRaw());
+            writer.write("' As Raw Text - End\n");
+            for(Start start : list) {
+                try {
+                    writer.write(start.id() + " = " + start);
+                } catch(Exception e) {
+                    writer.write("' Error when compile " + start.id());
+                }
+                writer.write("\n");
+            }
+        }
+    }
+
+
+    private StartList getStartList() {
+        return parser.getList();
+    }
+
+    public boolean testToFormula(int offset, String... text) {
+        return getStartList().testToFunctional(offset, text);
+    }
+
+    public void toFormula() {
+        for(Start start : getStartList()) {
+            try {
+                if(start != null)
+                    System.out.println(start.id() + " = " + start);
+            } catch(Exception e) {
+                System.err.println("Error when transpile " + start.id());
+            }
+        }
+    }
+
+
+}
